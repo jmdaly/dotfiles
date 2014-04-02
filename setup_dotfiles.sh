@@ -18,4 +18,4 @@ ln -s ~/git/dotfiles/gitconfig ~/.gitconfig
 mv ~/.tmux.conf ~/.dotfiles_backup
 ln -s ~/git/dotfiles/tmux.conf ~/.tmux.conf
 
-source ~/.zshrc
+cd && source .zshrc
