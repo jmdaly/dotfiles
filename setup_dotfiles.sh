@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
