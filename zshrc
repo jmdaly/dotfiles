@@ -22,3 +22,4 @@ antigen apply
 # Adjust the path
 export PATH="${HOME}/bin:$PATH"
 
+export EDITOR=vim
