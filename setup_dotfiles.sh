@@ -18,4 +18,9 @@ ln -s ~/git/dotfiles/gitconfig ~/.gitconfig
 mv ~/.tmux.conf ~/.dotfiles_backup
 ln -s ~/git/dotfiles/tmux.conf ~/.tmux.conf
 
+mv ~/.pathrc ~/.dotfiles_backup
+# Since paths are site-specific, we just copy the
+# default one instead of symlinking it:
+cp ~/git/dotfiles/pathrc ~/.pathrc
+
 cd && source .zshrc

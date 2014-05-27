@@ -19,9 +19,8 @@ antigen theme blinks
 # Tell antigen that you're done.
 antigen apply
 
-# Adjust the path
-export PATH="${HOME}/bin:$PATH"
-
-export PATH="$PATH:${HOME}/local/node-v0.10.28-linux-x64/bin"
-
 export EDITOR=vim
+
+# Adjust the path
+source ~/.pathrc
+
