@@ -3,6 +3,11 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
+# First ensure that the submodules in this repo
+# are available and up to date:
+GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git submodule init
+GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git submodule update
+
 # Create a backup directory:
 mkdir -p ~/.dotfiles_backup
 
