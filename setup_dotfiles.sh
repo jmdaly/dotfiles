@@ -5,8 +5,10 @@
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git submodule init
-GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git submodule update
+cd ~/git/dotfiles
+git submodule init
+git submodule update
+cd -
 
 # Create a backup directory:
 mkdir -p ~/.dotfiles_backup
