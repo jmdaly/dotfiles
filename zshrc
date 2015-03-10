@@ -24,3 +24,20 @@ export EDITOR=vim
 # Adjust the path
 source ~/.pathrc
 
+# Alises
+source ~/.bash_aliases
+
+# Modules
+case "$0" in
+          -sh|sh|*/sh)	modules_shell=sh ;;
+       -ksh|ksh|*/ksh)	modules_shell=ksh ;;
+       -zsh|zsh|*/zsh)	modules_shell=zsh ;;
+    -bash|bash|*/bash)	modules_shell=bash ;;
+esac
+export MODULEPATH=/home/matt/.modulefiles
+# System
+#export MODULEPATH=/usr/share/modules/modulefiles
+
+#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+
