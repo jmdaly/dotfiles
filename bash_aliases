@@ -1,0 +1,7 @@
+alias less="less -I"
+alias screen="screen -e^Ff"
+alias df="df -h"
+alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
+alias ls="ls --color=auto -lhtr"
+#alias gvim="gvim -f"
+alias gst="git status -uno"
