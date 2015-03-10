@@ -5,10 +5,12 @@
 
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
-	exit 1;
+	declare base=$(dirname $(realpath $0))
+#	exit 1;
+else
+	declare base=/home/$(whoami)/dotfiles
 fi;
 
-declare base=$(dirname $(realpath $0))
 
 # First ensure that the submodules in this repo
 # are available and up to date:
