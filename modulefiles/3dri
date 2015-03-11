@@ -12,12 +12,16 @@ proc ModulesHelp { } {
 
 module-whatis	"loads the 3DRF environment"
 
-set		BASE		${HOME}/workspace/opal2/
-set		src		${BASE}/3dri
-set		run		${BASE}/build-3dri-release
+set BASE   "~/workspace/opal2"
+set src    ${BASE}/3dri
+set bld    ${BASE}/build-3dri-release
+
+setenv src    ${src}
+setenv bld    ${bld}
 
 # Web Scheduler
-setenv          ws_src		${src}/Applications/OPAL2/3DRiWebScheduler
-setenv          ws_run_dir	${run}//Applications/OPAL2/3DRiWebScheduler
+setenv  ws_src		${src}/Applications/OPAL2/3DRiWebScheduler
+set     ws_run_dir	${bld}/Applications/OPAL2/3DRiWebScheduler
+setenv  ws_run_dir	${ws_run_dir}
 set-alias ws_run "${ws_run_dir} --docroot . --http-address 0.0.0.0 --http-port 8080"
 
