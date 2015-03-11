@@ -7,33 +7,33 @@ au BufNewFile,BufRead *.html.base set filetype=html
 " ftn90 = fortran
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
-
-" let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
-
-" The following are examples of different formats supported.
-" Keep bundle commands between here and filetype plugin indent on.
-" scripts on GitHub repos
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-rails.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" scripts from http://vim-scripts.org/vim/scripts.html
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-" scripts not on GitHub
-Bundle 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Bundle 'file:///home/gmarik/path/to/plugin'
-" ...
+"" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+"" alternatively, pass a path where Vundle should install bundles
+""let path = '~/some/path/here'
+""call vundle#rc(path)
+"
+"" let Vundle manage Vundle, required
+"Bundle 'gmarik/vundle'
+"
+"" The following are examples of different formats supported.
+"" Keep bundle commands between here and filetype plugin indent on.
+"" scripts on GitHub repos
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'tpope/vim-rails.git'
+"" The sparkup vim script is in a subdirectory of this repo called vim.
+"" Pass the path to set the runtimepath properly.
+"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+"" scripts from http://vim-scripts.org/vim/scripts.html
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
+"" scripts not on GitHub
+"Bundle 'git://git.wincent.com/command-t.git'
+"" git repos on your local machine (i.e. when working on your own plugin)
+"Bundle 'file:///home/gmarik/path/to/plugin'
+"" ...
 
 filetype plugin indent on     " required
 "
@@ -70,7 +70,7 @@ set hlsearch
 "
 "
 " Pathogen stuff
-execute pathogen#infect()
+"execute pathogen#infect()
 
 
 "
