@@ -1,0 +1,28 @@
+#%Module1.0#####################################################################
+##
+## modules GEMMACH
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+
+module-whatis	"loads GEMMACH as though you're on Pontus using the share on Sahand"
+
+# for Tcl script use only
+set	version		3.2.9
+
+if [ module-info mode load ] {
+	puts stderr "Loading GEMMACH in /Volumes/matt/gm/paul.2012-08-02"
+}
+if [ module-info mode remove ] {
+	puts stderr "Unloading GEMMACH"
+}
+
+set GEMMACH_BASE_DIR /Volumes/matt/gm/paul.2012-08-02/ccc/
+
+if [ module-info mode load ] {
+	setenv GEMMACH_BASE_DIR $GEMMACH_BASE_DIR
+	module load gm/general
+} elseif [ module-info mode remove ] {
+	unsetenv GEMMACH_BASE_DIR $GEMMACH_BASE_DIR
+	module rm gm/general
+}

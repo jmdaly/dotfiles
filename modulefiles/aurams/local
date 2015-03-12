@@ -1,0 +1,32 @@
+#%Module1.0#####################################################################
+##
+## modules aurams
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+
+module-whatis	"loads AURAMS"
+
+# for Tcl script use only
+set	version		3.2.9
+
+if [ module-info mode load ] {
+	puts stderr "Loading AURAMS"
+}
+if [ module-info mode remove ] {
+	puts stderr "Unloading AURAMS"
+}
+
+
+set AURAMS_BASE_DIR ~matt/aurams/trunk
+
+if [ module-info mode load ] {
+	#puts stderr "Loading general"
+	setenv AURAMS_BASE_DIR $AURAMS_BASE_DIR
+	module load aurams/general
+} elseif [ module-info mode remove ] {
+	#puts stderr "Unloading general"
+	unsetenv AURAMS_BASE_DIR $AURAMS_BASE_DIR
+	module rm aurams/general
+	unsetenv AURAMS_BASE_DIR $AURAMS_BASE_DIR
+}

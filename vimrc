@@ -90,3 +90,7 @@ set grepprg=grep\ -nH\ $*
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+" Indent with tabs, align with spaces
+" http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
+set noet ci pi sts=0 sw=4 ts=4 

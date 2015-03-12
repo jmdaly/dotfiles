@@ -1,0 +1,26 @@
+#%Module1.0#####################################################################
+##
+## modules armnlib
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "GYS -  Loads development env for GetYourSHot site"
+}
+
+
+module-whatis	"loads GYS env"
+
+# for Tcl script use only
+set	version		3.2.10
+
+set GYS_DIR "/www/getyourshot/"
+setenv gys "${GYS_DIR}"
+setenv app "${GYS_DIR}/app"
+setenv dist "${GYS_DIR}/dist"
+
+set-alias fixperms "sudo chmod o+r /var/log/apache2/getyourshot*.log /var/log/apache2/{error.log,tmp1-access.log}"
+
+set-alias editvh "sudo vi /etc/apache2/sites-available/gys.conf"
