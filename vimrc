@@ -93,3 +93,7 @@ let g:tex_flavor='latex'
 
 " Colour scheme
 colorscheme desert
+
+" Indent with tabs, align with spaces
+" http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
+set noet ci pi sts=0 sw=4 ts=4 

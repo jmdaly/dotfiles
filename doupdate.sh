@@ -3,6 +3,9 @@
 cd $(dirname $(realpath $0))
 
 now=$(date +%s)
+if [[ ! -e last_check ]]; then
+	echo 0 > last_check
+fi
 last_update=$(cat last_check)
 if [[ $last_update == "" ]]; then
 	last_update=0

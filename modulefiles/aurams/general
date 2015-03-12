@@ -1,0 +1,66 @@
+#%Module1.0#####################################################################
+##
+## modules aurams
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+
+module-whatis	"loads AURAMS"
+
+set pgi_loaded [ is-loaded pgi ]
+if { $pgi_loaded == 1 } {
+	# gotta learn how to do if not
+} else {
+	#puts stderr "[module:aurams:general]: I don't think the is-loaded check is working."
+	module load pgi
+}
+
+if [ expr {$env(MODULES_HOST) eq "sahand"} ] {
+	if [ is-loaded armnlib ] {
+		# gotta learn how to do if not
+	} else {
+		module load armnlib
+	}
+}
+
+if {[ info exists env(AURAMS_BASE_DIR) ]} {
+#	puts stderr "AURAMS_BASE_DIR is defined."
+} else {
+	puts stderr "AURAMS_BASE_DIR is _NOT_ defined."
+	break
+}
+
+# AURAMS
+set AURAMS          $env(AURAMS_BASE_DIR)
+set AURAMS_versions $AURAMS/versions
+setenv run          $AURAMS/RUNS/
+setenv tlm          $AURAMS/tapenade_test/cam/out/
+setenv alpha        $AURAMS_versions/aurams141/src
+setenv alphabfem    $AURAMS_versions/aurams141small-bfem/src
+setenv alphas       $AURAMS_versions/aurams141small/src
+setenv alphasc      $AURAMS_versions/aurams141small_newcam/src
+setenv beta         $AURAMS_versions/beta/src
+setenv delta        $AURAMS_versions/delta/src
+
+setenv kappa01      $AURAMS_versions/kappa01/src
+setenv kappa02      $AURAMS_versions/kappa02/src
+setenv kappa03      $AURAMS_versions/kappa03/src
+setenv kappa04      $AURAMS_versions/kappa04/src
+setenv kappa05      $AURAMS_versions/kappa05/src
+setenv kappa06      $AURAMS_versions/kappa06/src
+setenv kappa07      $AURAMS_versions/kappa07/src
+setenv kappa08      $AURAMS_versions/kappa08/src
+setenv kappa09      $AURAMS_versions/kappa09/src
+setenv kappa10      $AURAMS_versions/kappa10/src
+setenv kappa12      $AURAMS_versions/kappa12/src
+setenv kappa13      $AURAMS_versions/kappa13/src
+setenv kappa14      $AURAMS_versions/kappa14/src
+setenv kappa15      $AURAMS_versions/kappa15/src
+setenv kappa        $AURAMS_versions/kappac13/src
+
+setenv final        $AURAMS_versions/final/src
+setenv aero         $AURAMS_versions/aero/src
+setenv AURAMS_INCLUDE_DIR $AURAMS/include
+setenv aurams_inc   $AURAMS/include
+prepend-path PATH   "${AURAMS}/bin"
+

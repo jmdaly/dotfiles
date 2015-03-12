@@ -1,0 +1,25 @@
+#%Module1.0#####################################################################
+##
+## modules armnlib
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "Bona -  Loads development env for Bona site"
+}
+
+
+module-whatis	"loads BONA env"
+
+# for Tcl script use only
+set	version		3.2.10
+
+set OLD_BONA_DIR "/www/bona/batch_transforms/batch.2014-10"
+setenv obona "${OLD_BONA_DIR}/htdocs"
+set BONA_DIR "/www/bona/batch_transforms/batch.2015-01"
+setenv bona "${BONA_DIR}/htdocs"
+
+#set-alias fixperms "sudo chmod o+r /var/log/apache2/mayofest*.log /var/log/apache2/{error.log,tmp1-access.log}"
+#set-alias logs "tail -f /tmp/mayofest.log /var/log/apache2/mayofest.org-error.log &"
