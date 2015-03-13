@@ -32,13 +32,14 @@ HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 
-
+#echo "111 $(date +%s)"
 source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# These all take about a second to load
 antigen bundle git
 antigen bundle heroku
 antigen bundle pip
