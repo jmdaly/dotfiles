@@ -153,6 +153,8 @@ elif [[ $(hostname) = dena* ]]; then
 	export PGI_DEFAULT=2015
 	module load pgi slurm
 
-	# Admin modules
-	module load cmsh cmgui
+	if [[ $(hostname) == "dena" ]]; then
+		# Admin modules
+		module load cmsh cmgui
+	fi
 fi;
