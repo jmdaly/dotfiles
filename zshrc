@@ -142,10 +142,9 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module load modules
 
 	module load 3dri
-elif [[ $(hostname) == "dena" ]]; then
+elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
-	module use /opt/local/Modules/default/modulefiles
-
+	module use /cm/shared/denaModules
 
 	# defaults
 	module load shared modules
