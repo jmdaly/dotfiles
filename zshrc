@@ -3,6 +3,8 @@
 
 # Uncomment if I want history shared across all terminals
 # setopt histignorealldups sharehistory
+setopt no_share_history
+#unsetopt share_history
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
