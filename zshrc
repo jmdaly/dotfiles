@@ -34,13 +34,14 @@ HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 
-
+#echo "111 $(date +%s)"
 source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# These all take about a second to load
 antigen bundle git
 antigen bundle heroku
 antigen bundle pip
@@ -59,8 +60,42 @@ antigen apply
 
 export EDITOR=vim
 
+
+# Autocompletion with an arrow-key driven interface
+zstyle ':completion:*' menu select
+
+# Autocompletion of command line switches for aliases
+setopt completealiases
+
+
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
+
+###########################################################
+# Define some keys ( http://zshwiki.org/home/zle/bindkeys )
+# 
+# Not sure if these are still needed.  I had only implemented
+# them on dena
+# #
+typeset -A key
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+
+# Setting up more key bindings
+bindkey '' beginning-of-line
+bindkey '' end-of-line
+bindkey '' history-incremental-search-backward
+bindkey "${key[Delete]}" delete-char
+###########################################################
+
 
 # Adjust the path
 source ~/.pathrc
@@ -71,19 +106,24 @@ if [ -e ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
-# Environmental Modules
-case "$0" in
-          -sh|sh|*/sh)	modules_shell=sh ;;
-       -ksh|ksh|*/ksh)	modules_shell=ksh ;;
-       -zsh|zsh|*/zsh)	modules_shell=zsh ;;
-    -bash|bash|*/bash)	modules_shell=bash ;;
-esac
-export MODULEPATH=/home/matt/.modulefiles
-# System
-#export MODULEPATH=/usr/share/modules/modulefiles
+declare -f module > /dev/null;
+if [[ $? == 1 ]]; then
+	# Environmental Modules
+	case "$0" in
+          	  -sh|sh|*/sh)	modules_shell=sh ;;
+       	   -ksh|ksh|*/ksh)	modules_shell=ksh ;;
+       	   -zsh|zsh|*/zsh)	modules_shell=zsh ;;
+    	-bash|bash|*/bash)	modules_shell=bash ;;
+	esac
 
-#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+	export MODULEPATH=/usr/share/modules/modulefiles
+
+	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
 module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+fi;
+
+
+module use /home/matt/.modulefiles
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/share/modules/versions
 	module use /usr/local/Modules/default/modulefiles/
@@ -104,4 +144,19 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module load modules
 
 	module load 3dri
+elif [[ $(hostname) = dena* ]]; then
+	# This should be a system "module use"!
+	module use /cm/shared/denaModules
+
+	# defaults
+	module load shared modules
+	
+	# Development
+	export PGI_DEFAULT=2015
+	module load pgi slurm
+
+	if [[ $(hostname) == "dena" ]]; then
+		# Admin modules
+		module load cmsh cmgui
+	fi
 fi;

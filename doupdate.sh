@@ -8,7 +8,7 @@ if [[ ! -e last_check ]]; then
 fi
 last_update=$(cat last_check)
 if [[ $last_update == "" ]]; then
-	last_update=0
+	last_check=0
 fi;
 # Three days
 s=$(expr $last_update + 259200)
@@ -17,5 +17,5 @@ if [[ $now > $s ]]; then
 	GIT_DIR=~/dotfiles/.git GIT_WORK_TREE=~/dotfiles git pull
 	echo $now > last_check
 else
-	echo "Checking for update to dotfiles...."
+	#echo "Not checking for update to dotfiles...."
 fi;
