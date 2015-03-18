@@ -143,7 +143,7 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load 3dri
+	module load neptec 3dri
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
