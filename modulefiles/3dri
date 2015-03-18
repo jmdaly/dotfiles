@@ -36,8 +36,10 @@ set     wsb         ${appb}/3DRiWebScheduler
 set     wsb_debug   ${appb_debug}/3DRiWebScheduler
 setenv  wsb   ${wsb}
 
-set ws_args " --docroot . --http-address 0.0.0.0 --http-port 8181 --accesslog access.log -c resources/ntcConfig.xml"
+set ws_args " --docroot . --http-address 0.0.0.0 --http-port 8181 -c resources/ntcConfig.xml --accesslog access.log"
 set-alias wsl "tail -f 3dri.log"
-set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args}; wsl"
-set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args}; wsl"
+set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
+set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args};"
 
+# Examples
+setenv wte /usr/lib/Wt/examples
