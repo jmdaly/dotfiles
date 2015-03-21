@@ -1,3 +1,7 @@
+" Needed for Vundles
+set shell=/bin/bash
+
+" Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 
 
@@ -7,12 +11,15 @@ au BufNewFile,BufRead *.html.base set filetype=html
 " ftn90 = fortran
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
 
+"
+" Vundle.  use :PluginInstall to install all these plugins
+"
 
 " set the runtime path to include Vundle and initialize
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/dotfiles/vundle/
-call vundle#rc()
+call vundle#begin("~/.vim/bundles")
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
@@ -26,7 +33,26 @@ Bundle 'tpope/vim-surround'
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
 "Bundle 'Lokaltog/vim-easymotion'
 
+"
+" Ultrasnips
+"
+" Track the engine.
+Plugin 'SirVer/ultisnips'
 
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+
+call vundle#end()             " required
 filetype plugin indent on     " required
 "
 " Brief help
@@ -38,8 +64,10 @@ filetype plugin indent on     " required
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
 
-
 " END OF VUNDLE SETTINGS
+
+
+
 
 filetype on
 syntax on
