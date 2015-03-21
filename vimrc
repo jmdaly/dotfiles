@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+let hostname = substitute(system('hostname'), '\n', '', '')
+
 
 " Read .html.base files as .html, this is used in Mayofest
 au BufNewFile,BufRead *.html.base set filetype=html
@@ -7,33 +7,25 @@ au BufNewFile,BufRead *.html.base set filetype=html
 " ftn90 = fortran
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
 
-"" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-"" alternatively, pass a path where Vundle should install bundles
-""let path = '~/some/path/here'
-""call vundle#rc(path)
-"
-"" let Vundle manage Vundle, required
-"Bundle 'gmarik/vundle'
-"
-"" The following are examples of different formats supported.
-"" Keep bundle commands between here and filetype plugin indent on.
-"" scripts on GitHub repos
-"Bundle 'tpope/vim-fugitive'
+
+" set the runtime path to include Vundle and initialize
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set rtp+=~/dotfiles/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle, required
+Bundle 'gmarik/vundle'
+
+" Add Git stuff, Gedit Gvsplit Gsplit https://github.com/tpope/vim-fugitive
+Bundle 'tpope/vim-fugitive'
+
+" Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
+Bundle 'tpope/vim-surround'
+
+" Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
 "Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'tpope/vim-rails.git'
-"" The sparkup vim script is in a subdirectory of this repo called vim.
-"" Pass the path to set the runtimepath properly.
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"" scripts from http://vim-scripts.org/vim/scripts.html
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-"" scripts not on GitHub
-"Bundle 'git://git.wincent.com/command-t.git'
-"" git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///home/gmarik/path/to/plugin'
-"" ...
+
 
 filetype plugin indent on     " required
 "
@@ -49,6 +41,7 @@ filetype plugin indent on     " required
 
 " END OF VUNDLE SETTINGS
 
+filetype on
 syntax on
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
@@ -56,8 +49,11 @@ let fortran_free_source=1
 let fortran_have_tabs=1
 set number
 set ignorecase
-set tabstop=4
-set shiftwidth=0
+
+" Indent with tabs, align with spaces
+" http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
+set noet ci pi sts=0 sw=3 ts=3 
+
 
 " SHOULD IMPORT THIS: http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
 
@@ -66,11 +62,6 @@ set shiftwidth=0
 
 set ruler
 set hlsearch
-
-"
-"
-" Pathogen stuff
-"execute pathogen#infect()
 
 
 "
@@ -91,9 +82,24 @@ set grepprg=grep\ -nH\ $*
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
-" Colour scheme
-colorscheme desert
 
-" Indent with tabs, align with spaces
-" http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
-set noet ci pi sts=0 sw=4 ts=4 
+" Colour scheme
+if has("gui_running")
+	"colorscheme desert
+	colorscheme oceandeep
+	set mousemodel=popup
+endif
+
+" OS Detection
+if has('win32')
+	behave xterm
+	set ffs=unix
+"elseif has('mac')
+"    ......
+"elseif has('unix')
+"    ......
+endif
+
+if hostname == "laptop"
+	"cd 
+endif
