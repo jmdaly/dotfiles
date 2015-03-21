@@ -8,7 +8,8 @@ if [[ "$(which realpath)" == "" ]]; then
 	declare base=$(dirname $(realpath $0))
 #	exit 1;
 else
-	declare base=/home/$(whoami)/dotfiles
+	#declare base=/home/$(whoami)/dotfiles
+	declare base=${HOME}/dotfiles
 fi;
 
 
