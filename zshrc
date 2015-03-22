@@ -1,7 +1,7 @@
 # Update the dotfiles repo to make sure we have all changes:
 GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git pull
 
-source ~/git/dotfiles/antigen/antigen.zsh
+source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
