@@ -17,7 +17,7 @@ fi;
 cd ${base}
 git submodule init
 git submodule update
-cd -
+cd ~
 
 files=(.zshrc .vimrc .tmux.conf .gitconfig .pathrc)
 
