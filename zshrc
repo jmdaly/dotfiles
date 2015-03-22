@@ -1,5 +1,5 @@
 # Update the dotfiles repo to make sure we have all changes:
-GIT_DIR=~/git/dotfiles/.git GIT_WORK_TREE=~/git/dotfiles git pull
+~/dotfiles/doupdate.sh
 
 source ~/dotfiles/antigen/antigen.zsh
 
