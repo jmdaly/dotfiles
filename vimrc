@@ -67,7 +67,7 @@ if has("gui_running")
 endif
 
 " Set up Ctrl-P shortcut key for Ctrl-P:
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
