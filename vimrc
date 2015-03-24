@@ -65,3 +65,7 @@ if has("gui_running")
 	set background=dark
 	colorscheme solarized
 endif
+
+" Set up Ctrl-P shortcut key for Ctrl-P:
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
