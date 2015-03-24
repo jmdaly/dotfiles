@@ -9,6 +9,13 @@ else
 	h=$1
 fi;
 
+if [[ "$2" == "" ]]; then
+	copy=0
+else
+	copy=1
+fi;
+
+
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base=$(dirname $(realpath $0))
@@ -47,7 +54,13 @@ for f in $files; do
 		fi
 		if [[ -e ${base}/${src} ]]; then
 			#echo "Installing $f"
-			ln -s ${base}/${src} $f
+			if [[ "$copy" == 1 ]]; then
+				# On cygwin, symlinks when used through gvim
+				# can be an issue
+				cp ${base}/${src} $f;
+			else
+				ln -s ${base}/${src} $f
+			fi;
 		fi
 	else
 		echo "Skipping synlink $f"
