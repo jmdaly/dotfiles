@@ -69,3 +69,17 @@ endif
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
+let g:cpp_class_scope_highlight = 1
+
+" Tell vim to set the current directory to the directory
+" of the file being opened:
+set autochdir
+
+" Tell vim to look for a tags file in the current
+" directory, and all the way up until it finds one:
+set tags=tags
+
+" Let YouCompleteMe use tag files for completion as well:
+let g:ycm_collect_identifiers_from_tags_files = 1
