@@ -35,6 +35,15 @@ Plugin 'Valloric/YouCompleteMe'
 " YCMGenerator - generates configs for YouCompleteMe
 Plugin 'rdnetto/YCM-Generator'
 
+" NERD Tree - file explorer for vim
+Plugin 'scrooloose/nerdtree'
+
+" Ctrl-P - fuzzy file finder
+Plugin 'kien/ctrlp.vim'
+
+" Better C++ Syntax Highlighting:
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
