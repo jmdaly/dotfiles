@@ -3,13 +3,18 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
+if [[ "$1" == "" ]]; then
+	h=${HOME}
+else
+	h=$1
+fi;
+
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base=$(dirname $(realpath $0))
 #	exit 1;
 else
-	#declare base=/home/$(whoami)/dotfiles
-	declare base=${HOME}/dotfiles
+	declare base=${h}/dotfiles
 fi;
 
 
@@ -18,15 +23,16 @@ fi;
 cd ${base}
 git submodule init
 git submodule update
-cd ~
+cd ${h}
+
 
 files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .gvimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit)
 # .config/autokey
 
-declare backup_dir=~/.dotfiles_backup
+declare backup_dir=${h}/.dotfiles_backup
 
 # Create a backup directory:
-mkdir -p ~/.dotfiles_backup
+mkdir -p ${h}/.dotfiles_backup
 
 for f in $files; do
 	if [[ $f =~ ".*" ]]; then
@@ -34,10 +40,10 @@ for f in $files; do
 	else
 		src=$f
 	fi;
-	if [[ ! -h ~/$f ]]; then
-		if [[ -e ~/$f && -e ${base}/${src} ]]; then
+	if [[ ! -h ${h}/$f ]]; then
+		if [[ -e ${h}/$f && -e ${base}/${src} ]]; then
 			echo "Backing up $f"
-			mv ~/$f ${backup_dir}/$f
+			mv ${h}/$f ${backup_dir}/$f
 		fi
 		if [[ -e ${base}/${src} ]]; then
 			#echo "Installing $f"
@@ -48,4 +54,4 @@ for f in $files; do
 	fi
 done;
 
-cd && source .zshrc
+cd ${h} && source .zshrc
