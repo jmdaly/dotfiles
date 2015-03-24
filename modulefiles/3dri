@@ -12,12 +12,14 @@ proc ModulesHelp { } {
 
 module-whatis	"loads the 3DRF environment"
 
+set ARCH       [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
+
 set BASE       "~/workspace/opal2"
 set src        ${BASE}/3dri
 set app_rel    Applications/OPAL2
-set bld        ${BASE}/build-3dri-release
-set bld_debug  ${BASE}/build-3dri-debug
-set bldw       ${BASE}/3dri-build-win64
+set bld        ${BASE}/build-3dri-${ARCH}-release
+set bld_debug  ${BASE}/build-3dri-${ARCH}-debug
+set bldw       ${BASE}/3dri-build-winx64-release
 
 set apps        ${src}/${app_rel}
 set appb        ${bld}/${app_rel}
@@ -34,9 +36,10 @@ setenv appb_debug   ${appb_debug}
 setenv  wss         ${apps}/3DRiWebScheduler
 set     wsb         ${appb}/3DRiWebScheduler
 set     wsb_debug   ${appb_debug}/3DRiWebScheduler
-setenv  wsb   ${wsb}
+setenv  wsb         ${wsb}
+setenv  wsb_debug   ${wsb_debug}
 
-set ws_args " --docroot . --http-address 0.0.0.0 --http-port 8181 -c resources/ntcConfig.xml --accesslog access.log"
+set ws_args " --docroot . --http-address 0.0.0.0 --http-port 8181 -c ntcConfig.xml --accesslog access.log"
 set-alias wsl "tail -f 3dri.log"
 set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
 set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args};"
