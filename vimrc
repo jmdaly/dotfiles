@@ -50,6 +50,10 @@ Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
+" tagbar - allows browsing tags of the current source file
+" from ctags. Good for seeing functions, variables, etc.
+Plugin 'majutsushi/tagbar'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -85,7 +89,7 @@ set autochdir
 
 " Tell vim to look for a tags file in the current
 " directory, and all the way up until it finds one:
-set tags=tags
+set tags=./tags;/
 
 " Let YouCompleteMe use tag files for completion as well:
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -98,3 +102,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" tagbar config. Enable it using this key map:
+nmap <F8> :TagbarToggle<CR>
