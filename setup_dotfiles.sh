@@ -33,7 +33,7 @@ git submodule update
 cd ${h}
 
 
-files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .gvimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit)
+files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .gvimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .screenrc)
 # .config/autokey
 
 declare backup_dir=${h}/.dotfiles_backup
