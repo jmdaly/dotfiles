@@ -54,6 +54,14 @@ Plugin 'honza/vim-snippets'
 " from ctags. Good for seeing functions, variables, etc.
 Plugin 'majutsushi/tagbar'
 
+" vim-sleuth - heuristically determines spacing in terms
+" of tabs, spaces, etc. based on what's in use in the
+" current file and the file around it:
+Plugin 'tpope/vim-sleuth'
+
+" vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
+Plugin 'bling/vim-airline'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -79,6 +87,7 @@ endif
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
+map <c-m> :CtrlPTag<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -94,6 +103,9 @@ set tags=./tags;/
 " Let YouCompleteMe use tag files for completion as well:
 let g:ycm_collect_identifiers_from_tags_files = 1
 
+" Turn off prompting to load .ycm_extra_conf.py:
+let g:ycm_confirm_extra_conf = 0
+
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -103,5 +115,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" For vim-airline, ensure the status line is always displayed:
+set laststatus=2
+
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>
+
+" Shortcut key to open NERDTree:
+map <F5> :NERDTreeToggle<CR>
