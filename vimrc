@@ -122,6 +122,7 @@ endif
 if has('win32')
 	behave xterm
 	set ffs=unix
+	set backspace=2
 "elseif has('mac')
 "    ......
 "elseif has('unix')
