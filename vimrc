@@ -26,6 +26,7 @@ Bundle 'gmarik/vundle'
 
 " Add Git stuff, Gedit Gvsplit Gsplit https://github.com/tpope/vim-fugitive
 Bundle 'tpope/vim-fugitive'
+set diffopt+=vertical
 
 " Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
 Bundle 'tpope/vim-surround'
