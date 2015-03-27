@@ -141,3 +141,6 @@ map <F5> :NERDTreeToggle<CR>
 " cscope keyboard mapping:
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
+
+" A key map to run ctags:
+nnoremap <leader>ct :!ctags .<CR>
