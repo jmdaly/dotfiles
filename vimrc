@@ -59,6 +59,10 @@ Plugin 'majutsushi/tagbar'
 " current file and the file around it:
 Plugin 'tpope/vim-sleuth'
 
+" fugitive - a Git wrapper for vim. Also allows current
+" git branch to be shown by vim-airline:
+Plugin 'tpope/vim-fugitive'
+
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
