@@ -36,19 +36,61 @@ Bundle 'tpope/vim-surround'
 "
 " Ultrasnips
 "
-" Track the engine.
-Plugin 'SirVer/ultisnips'
+"" Track the engine.
+"Plugin 'SirVer/ultisnips'
+"
+"" Snippets are separated from the engine. Add this if you want them:
+"Plugin 'honza/vim-snippets'
+"
+"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Solarized colour scheme
+Plugin 'altercation/vim-colors-solarized.git'
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" YouCompleteMe
+Plugin 'Valloric/YouCompleteMe'
+
+" YCMGenerator - generates configs for YouCompleteMe
+Plugin 'rdnetto/YCM-Generator'
+
+" NERD Tree - file explorer for vim
+Plugin 'scrooloose/nerdtree'
+
+" Ctrl-P - fuzzy file finder
+Plugin 'kien/ctrlp.vim'
+" Set up Ctrl-P shortcut key for Ctrl-P:
+let g:ctrlp_map = '<c-k>'
+let g:ctrlp_cmd = 'CtrlP'
+map <c-m> :CtrlPTag<CR>
+
+" Better C++ Syntax Highlighting:
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" tagbar - allows browsing tags of the current source file
+" from ctags. Good for seeing functions, variables, etc.
+Plugin 'majutsushi/tagbar'
+
+" vim-sleuth - heuristically determines spacing in terms
+" of tabs, spaces, etc. based on what's in use in the
+" current file and the file around it:
+Plugin 'tpope/vim-sleuth'
+
+" vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
+Plugin 'bling/vim-airline'
+
+" A plugin to manage cscope - a tool to help navigate
+" a codebase.
+Plugin 'brookhong/cscope.vim'
+
+" Switch between header and source files:
+Plugin 'vim-scripts/a.vim'
 
 
 
@@ -80,7 +122,7 @@ set ignorecase
 
 " Indent with tabs, align with spaces
 " http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
-set noet ci pi sts=0 sw=3 ts=3 
+"set noet ci pi sts=0 sw=3 ts=3 
 
 
 " SHOULD IMPORT THIS: http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
@@ -92,30 +134,33 @@ set ruler
 set hlsearch
 
 
+""
+"" Some vim-latex stuff
+"" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+"filetype plugin on
 "
-" Some vim-latex stuff
-" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-filetype plugin on
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-
-" OPTIONAL: This enables automatic indentation as you type.
-"filetype indent on
-
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
+"" IMPORTANT: grep will sometimes skip displaying the file name if you
+"" search in a singe file. This will confuse Latex-Suite. Set your grep
+"" program to always generate a file-name.
+"set grepprg=grep\ -nH\ $*
+"
+"" OPTIONAL: This enables automatic indentation as you type.
+""filetype indent on
+"
+"" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+"" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+"" The following changes the default filetype back to 'tex':
+"let g:tex_flavor='latex'
 
 
 " Colour scheme
 if has("gui_running")
-	"colorscheme desert
-	colorscheme oceandeep
 	set mousemodel=popup
+
+	"colorscheme desert
+	"colorscheme oceandeep
+	set background=dark
+	colorscheme solarized
 endif
 
 " OS Detection
