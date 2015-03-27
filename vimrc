@@ -66,6 +66,13 @@ Plugin 'tpope/vim-fugitive'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
+" A plugin to manage cscope - a tool to help navigate
+" a codebase.
+Plugin 'brookhong/cscope.vim'
+
+" Switch between header and source files:
+Plugin 'vim-scripts/a.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -127,3 +134,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
+
+" cscope keyboard mapping:
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
