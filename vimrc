@@ -95,6 +95,9 @@ if has("gui_running")
 	colorscheme solarized
 endif
 
+" Turn line numbers on:
+set number
+
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
