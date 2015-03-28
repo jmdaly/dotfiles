@@ -55,11 +55,11 @@ Bundle 'tpope/vim-surround'
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
 
-"" YouCompleteMe
-"Plugin 'Valloric/YouCompleteMe'
+" YouCompleteMe
+Plugin 'Valloric/YouCompleteMe'
 
-"" YCMGenerator - generates configs for YouCompleteMe
-"Plugin 'rdnetto/YCM-Generator'
+" YCMGenerator - generates configs for YouCompleteMe
+Plugin 'rdnetto/YCM-Generator'
 
 " NERD Tree - file explorer for vim
 Plugin 'scrooloose/nerdtree'
@@ -88,7 +88,7 @@ Plugin 'bling/vim-airline'
 
 " A plugin to manage cscope - a tool to help navigate
 " a codebase.
-"Plugin 'brookhong/cscope.vim'
+Plugin 'brookhong/cscope.vim'
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
