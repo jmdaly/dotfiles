@@ -119,13 +119,12 @@ if [[ $? == 1 ]]; then
 	export MODULEPATH=/usr/share/modules/modulefiles
 
 	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+	module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+	module use /home/matt/.modulefiles
 fi;
 
 
-module use /home/matt/.modulefiles
 if [[ $(hostname) == "khea" ]]; then
-	module use /usr/share/modules/versions
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
