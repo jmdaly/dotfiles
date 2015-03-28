@@ -19,7 +19,7 @@ au BufNewFile,BufRead *.ftn90 set filetype=fortran
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/dotfiles/vundle/
-call vundle#begin("~/.vim/bundles")
+call vundle#begin("~/dotfiles/vundle/bundles")
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
