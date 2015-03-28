@@ -26,6 +26,7 @@ Bundle 'gmarik/vundle'
 
 " Add Git stuff, Gedit Gvsplit Gsplit https://github.com/tpope/vim-fugitive
 Bundle 'tpope/vim-fugitive'
+set diffopt+=vertical
 
 " Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
 Bundle 'tpope/vim-surround'
@@ -54,11 +55,11 @@ Bundle 'tpope/vim-surround'
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
 
-" YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+"" YouCompleteMe
+"Plugin 'Valloric/YouCompleteMe'
 
-" YCMGenerator - generates configs for YouCompleteMe
-Plugin 'rdnetto/YCM-Generator'
+"" YCMGenerator - generates configs for YouCompleteMe
+"Plugin 'rdnetto/YCM-Generator'
 
 " NERD Tree - file explorer for vim
 Plugin 'scrooloose/nerdtree'
@@ -87,7 +88,7 @@ Plugin 'bling/vim-airline'
 
 " A plugin to manage cscope - a tool to help navigate
 " a codebase.
-Plugin 'brookhong/cscope.vim'
+"Plugin 'brookhong/cscope.vim'
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
@@ -108,7 +109,27 @@ filetype plugin indent on     " required
 
 " END OF VUNDLE SETTINGS
 
+" For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
+let g:cpp_class_scope_highlight = 1
 
+"""""""""""""""""""""" YCM Config """"""""""""""""""""""""
+"" Let YouCompleteMe use tag files for completion as well:
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"
+"" Turn off prompting to load .ycm_extra_conf.py:
+"let g:ycm_confirm_extra_conf = 0
+"""""""""""""""""""""" /YCM Config """"""""""""""""""""""""
+
+
+"""""""""""""""""""" Airline Config """"""""""""""""""""""
+" For vim-airline, ensure the status line is always displayed:
+set laststatus=2
+"""""""""""""""""""" /Airline Config """"""""""""""""""""""
+
+"""""""""""""""""""" Tagbar Config """"""""""""""""""""""
+" tagbar config. Enable it using this key map:
+nmap <F8> :TagbarToggle<CR>
+"""""""""""""""""""" /Tagbar Config """"""""""""""""""""""
 
 
 filetype on
@@ -124,8 +145,6 @@ set ignorecase
 " http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
 "set noet ci pi sts=0 sw=3 ts=3 
 
-
-" SHOULD IMPORT THIS: http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
 
 " Put a colourbar at 72 chars
 "set colorcolumn=72
