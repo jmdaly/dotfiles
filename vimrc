@@ -63,6 +63,9 @@ Plugin 'tpope/vim-sleuth'
 " git branch to be shown by vim-airline:
 Plugin 'tpope/vim-fugitive'
 
+" Plugin to assist with commenting out blocks of text:
+Plugin 'tomtom/tcomment_vim'
+
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
