@@ -19,7 +19,7 @@ au BufNewFile,BufRead *.ftn90 set filetype=fortran
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/dotfiles/vundle/
-call vundle#begin("~/dotfiles/vundle/bundles")
+call vundle#begin("~/dotfiles/vundle/bundles") " This always fails the second time around
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
@@ -88,7 +88,7 @@ Plugin 'bling/vim-airline'
 
 " A plugin to manage cscope - a tool to help navigate
 " a codebase.
-Plugin 'brookhong/cscope.vim'
+"Plugin 'brookhong/cscope.vim'
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
@@ -144,6 +144,7 @@ set ignorecase
 " Indent with tabs, align with spaces
 " http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
 "set noet ci pi sts=0 sw=3 ts=3 
+set ts=3
 
 
 " Put a colourbar at 72 chars
@@ -177,9 +178,10 @@ if has("gui_running")
 	set mousemodel=popup
 
 	"colorscheme desert
-	"colorscheme oceandeep
-	set background=dark
-	colorscheme solarized
+	colorscheme oceandeep
+
+	"set background=light
+	"colorscheme solarized
 endif
 
 " OS Detection
