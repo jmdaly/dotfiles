@@ -127,10 +127,12 @@ if hostname == "laptop"
 	"cd 
 endif
 
+""""""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+"""""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -143,13 +145,15 @@ set autochdir
 " directory, and all the way up until it finds one:
 set tags=./tags;/
 
+""""""""""""""""""""""" YCM Config """"""""""""""""""""""""
 " Let YouCompleteMe use tag files for completion as well:
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
+"""""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
-" Ultisnips config:
+"""""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -157,22 +161,38 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+""""""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
+
+""""""""""""""""""""" Airline Config """"""""""""""""""""""
 " For vim-airline, ensure the status line is always displayed:
 set laststatus=2
+"""""""""""""""""""" /Airline Config """"""""""""""""""""""
 
+
+""""""""""""""""""""" Tagbar Config """"""""""""""""""""""
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>
+"""""""""""""""""""" /Tagbar Config """"""""""""""""""""""
 
+
+""""""""""""""""""""" NERDTree """"""""""""""""""""""
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
+"""""""""""""""""""" /NERDTree """"""""""""""""""""""
 
+
+""""""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
+"""""""""""""""""""" /cscope """"""""""""""""""""""
 
+
+"""""""""""""""""""" ctags """""""""""""""""""""""
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
+"""""""""""""""""""" /ctags """"""""""""""""""""""
 
 " JsHints
 "JSHintToggle
