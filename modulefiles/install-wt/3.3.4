@@ -1,0 +1,33 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\t3drf - loads install for Wt"
+}
+
+module-whatis	"loads install env for Wt"
+
+set os [exec uname -s]
+if {$os == "Linux"} {
+	set arch_dir o2linux64
+} else {
+	puts stderr "Not set up for [exec uname -s]"
+}
+
+set base ~/workspace/opal2/${arch_dir}/Libs
+
+set boost_version 1.56
+set boost_dir $base/boost/${boost_version}
+
+set wt_version 3.3.4
+set wt_dir $base/Wt/${wt_version}
+
+puts stderr "Run from source directory:"
+puts stderr "cmake ../ -DBOOST_PREFIX=${boost_dir} -DCMAKE_INSTALL_PREFIX=${wt_dir}"
+puts stderr " "
+puts stderr "Then, make, make install"
