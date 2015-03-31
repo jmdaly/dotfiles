@@ -155,6 +155,26 @@ set hlsearch
 "let g:tex_flavor='latex'
 
 
+""
+"" Random Function
+"" http://mo.morsi.org/blog/node/299
+"function! s:Rand(max)
+"y a         
+"redir @b    
+"ruby << EOF
+"	rmax = VIM::evaluate("a:max")
+"	rmax = nil if rmax == ""
+"	printf rand(rmax).to_s
+"EOF
+"redir END 
+"let @a = strpart(@a, 0, strlen(@a) - 1)
+"let @b = strpart(@b, 1, strlen(@b) - 1)
+"let @c = @a . @b
+".s/.*/\=@c/g
+"endfunction
+"command! -nargs=? Rand :call <SID>Rand(<q-args>)
+
+
 " Colour scheme
 if has("gui_running")
 	set mousemodel=popup
