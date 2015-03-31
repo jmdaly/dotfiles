@@ -39,10 +39,16 @@ set     wsb_debug   ${appb_debug}/3DRiWebScheduler
 setenv  wsb         ${wsb}
 setenv  wsb_debug   ${wsb_debug}
 
-set ws_args " --docroot . --http-address 0.0.0.0 --http-port 8181 -c ntcConfig.xml --accesslog access.log"
+set port 8181
+
+# Putting shell code in this goes directly against the point of Env Mods
+set-alias cwt "if [[ \"\$(lsof | grep ${port} | grep LISTEN | wc -l\)\" > 0 ]]; then echo \"Warning: Port ${port} in use\"; fi;";
+
+set ws_args " --docroot . --http-address 0.0.0.0 --http-port ${port} -c ntcConfig.xml --accesslog access.log"
 set-alias wsl "tail -f 3dri.log"
+
 set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
-set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args};"
+set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args};"
 
 # Examples
 setenv wte /usr/lib/Wt/examples
