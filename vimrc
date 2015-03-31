@@ -113,7 +113,7 @@ if has("gui_running")
 endif
 
 " OS Detection
-if has('win32')
+if has('win32')||has("win32unix")
 	behave xterm
 	set ffs=unix
 	set backspace=2
