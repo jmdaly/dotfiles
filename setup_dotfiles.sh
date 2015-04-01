@@ -57,7 +57,7 @@ for f in $files; do
 			if [[ "$copy" == 1 ]]; then
 				# On cygwin, symlinks when used through gvim
 				# can be an issue
-				cp ${base}/${src} $f;
+				cp -r ${base}/${src} $f;
 			else
 				ln -s ${base}/${src} $f
 			fi;
