@@ -28,6 +28,6 @@ set wt_version 3.3.4
 set wt_dir $base/Wt/${wt_version}
 
 puts stderr "Run from source directory:"
-puts stderr "cmake ../ -DBOOST_PREFIX=${boost_dir} -DCMAKE_INSTALL_PREFIX=${wt_dir}"
+puts stderr "cmake ../ -DBOOST_PREFIX=${boost_dir} -DCMAKE_INSTALL_PREFIX=${wt_dir} CMAKE_BUILD_TYPE=Release WT_CPP_11_MODE=\"-std=c++11\""
 puts stderr " "
 puts stderr "Then, make, make install"
