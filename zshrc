@@ -73,7 +73,7 @@ setopt completealiases
 
 ###########################################################
 # Define some keys ( http://zshwiki.org/home/zle/bindkeys )
-# 
+#
 # Not sure if these are still needed.  I had only implemented
 # them on dena
 # #
@@ -128,7 +128,7 @@ if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
-	#module load mayofest 
+	module load mayofest
 	module load bona
 	module load youtuber
 	#module load gys
@@ -149,7 +149,7 @@ elif [[ $(hostname) = dena* ]]; then
 
 	# defaults
 	module load shared modules
-	
+
 	# Development
 	export PGI_DEFAULT=2015
 	module load pgi slurm
