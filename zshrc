@@ -58,7 +58,9 @@ antigen theme blinks
 # Tell antigen that you're done.
 antigen apply
 
+# Use VIM wherever possible.  The latter fixes colours in non-gvim
 export EDITOR=vim
+export TERM=xterm-256color
 
 
 # Autocompletion with an arrow-key driven interface
