@@ -4,6 +4,12 @@ set shell=/bin/bash
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 
+if has("win32")||has("win32unix")
+	let is_win=1
+else
+	let is_win=0
+endif
+
 
 " Read .html.base files as .html, this is used in Mayofest
 au BufNewFile,BufRead *.html.base set filetype=html
@@ -29,18 +35,20 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-Bundle 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-easymotion'
 
 
 
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
 
-" YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+if is_win==0
+	" YouCompleteMe
+	Plugin 'Valloric/YouCompleteMe'
 
-" YCMGenerator - generates configs for YouCompleteMe
-Plugin 'rdnetto/YCM-Generator'
+	" YCMGenerator - generates configs for YouCompleteMe
+	Plugin 'rdnetto/YCM-Generator'
+endif
 
 " NERD Tree - file explorer for vim
 Plugin 'scrooloose/nerdtree'
@@ -51,11 +59,13 @@ Plugin 'kien/ctrlp.vim'
 " Better C++ Syntax Highlighting:
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
-" Track the ultisnips engine.
-Plugin 'SirVer/ultisnips'
+if is_win==0
+	" Track the ultisnips engine.
+	Plugin 'SirVer/ultisnips'
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+	" Snippets are separated from the engine. Add this if you want them:
+	Plugin 'honza/vim-snippets'
+endif
 
 " tagbar - allows browsing tags of the current source file
 " from ctags. Good for seeing functions, variables, etc.
@@ -77,9 +87,11 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-" A plugin to manage cscope - a tool to help navigate
-" a codebase.
-Plugin 'brookhong/cscope.vim'
+if is_win==0
+	" A plugin to manage cscope - a tool to help navigate
+	" a codebase.
+	Plugin 'brookhong/cscope.vim'
+endif
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
@@ -106,21 +118,21 @@ if has("gui_running")
 	set mousemodel=popup
 
 	"colorscheme desert
-	colorscheme oceandeep
+	"colorscheme oceandeep
 
-	"set background=light
-	"colorscheme solarized
+	set background=light
+	colorscheme solarized
 endif
 
 " OS Detection
-if has('win32')||has("win32unix")
+if has("win32")||has("win32unix")
 	behave xterm
 	set ffs=unix
 	set backspace=2
 "elseif has('mac')
 "    ......
 "elseif has('unix')
-"    ......
+"	let matt="is_unix"
 endif
 
 if hostname == "laptop"
@@ -146,21 +158,25 @@ set autochdir
 set tags=./tags;/
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-" Let YouCompleteMe use tag files for completion as well:
-let g:ycm_collect_identifiers_from_tags_files = 1
+if has('unix')
+	" Let YouCompleteMe use tag files for completion as well:
+	let g:ycm_collect_identifiers_from_tags_files = 1
 
-" Turn off prompting to load .ycm_extra_conf.py:
-let g:ycm_confirm_extra_conf = 0
+	" Turn off prompting to load .ycm_extra_conf.py:
+	let g:ycm_confirm_extra_conf = 0
+endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+if is_win==0
+	let g:UltiSnipsExpandTrigger="<c-j>"
+	let g:UltiSnipsJumpForwardTrigger="<c-j>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
 
@@ -208,7 +224,6 @@ set ignorecase
 set ts=3
 
 
-set ruler
+"set ruler
 set hlsearch
-
 
