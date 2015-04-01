@@ -139,12 +139,13 @@ if has("gui_running")
 	"colorscheme desert
 	"colorscheme oceandeep
 
-	set background=light
+	"set background=light
+	set background=dark
 	colorscheme solarized
 endif
 
 " OS Detection
-if has("win32")||has("win32unix")
+if is_win
 	behave xterm
 	set ffs=unix
 	set backspace=2
