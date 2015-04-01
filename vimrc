@@ -76,6 +76,9 @@ Plugin 'brookhong/cscope.vim'
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
 
+" Plugin to help manage vim buffers:
+Plugin 'jeetsukumaran/vim-buffergator'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -134,6 +137,12 @@ let g:UltiSnipsEditSplit="vertical"
 
 " For vim-airline, ensure the status line is always displayed:
 set laststatus=2
+"
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>
