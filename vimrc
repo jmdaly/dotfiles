@@ -22,34 +22,15 @@ set rtp+=~/dotfiles/vundle/
 call vundle#begin("~/dotfiles/vundle/bundles") " This always fails the second time around
 
 " let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-" Add Git stuff, Gedit Gvsplit Gsplit https://github.com/tpope/vim-fugitive
-Bundle 'tpope/vim-fugitive'
-set diffopt+=vertical
 
 " Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
-Bundle 'tpope/vim-surround'
+"Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
 
-"
-" Ultrasnips
-"
-"" Track the engine.
-"Plugin 'SirVer/ultisnips'
-"
-"" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
-"
-"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
-"" If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
 
 
 " Solarized colour scheme
@@ -66,13 +47,15 @@ Plugin 'scrooloose/nerdtree'
 
 " Ctrl-P - fuzzy file finder
 Plugin 'kien/ctrlp.vim'
-" Set up Ctrl-P shortcut key for Ctrl-P:
-let g:ctrlp_map = '<c-k>'
-let g:ctrlp_cmd = 'CtrlP'
-map <c-m> :CtrlPTag<CR>
 
 " Better C++ Syntax Highlighting:
 Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" Track the ultisnips engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 
 " tagbar - allows browsing tags of the current source file
 " from ctags. Good for seeing functions, variables, etc.
@@ -83,79 +66,41 @@ Plugin 'majutsushi/tagbar'
 " current file and the file around it:
 Plugin 'tpope/vim-sleuth'
 
+" fugitive - a Git wrapper for vim. Also allows current
+" git branch to be shown by vim-airline:
+Plugin 'tpope/vim-fugitive'
+set diffopt+=vertical
+
+" Plugin to assist with commenting out blocks of text:
+Plugin 'tomtom/tcomment_vim'
+
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
 " A plugin to manage cscope - a tool to help navigate
 " a codebase.
-"Plugin 'brookhong/cscope.vim'
+Plugin 'brookhong/cscope.vim'
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
 
-
-
-call vundle#end()             " required
-filetype plugin indent on     " required
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
-
-" END OF VUNDLE SETTINGS
-
-
-
-
-filetype on
-syntax on
-map <S-Insert> <MiddleMouse>
-map! <S-Insert> <MiddleMouse>
-let fortran_free_source=1
-let fortran_have_tabs=1
-set number
-set ignorecase
-
-" Indent with tabs, align with spaces
-" http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
-"set noet ci pi sts=0 sw=3 ts=3 
-set ts=3
-
-
-" SHOULD IMPORT THIS: http://vim.wikia.com/wiki/Indent_with_tabs,_align_with_spaces
-
-" Put a colourbar at 72 chars
-"set colorcolumn=72
-
-set ruler
-set hlsearch
-
-
-""
-"" Some vim-latex stuff
-"" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
-"" IMPORTANT: grep will sometimes skip displaying the file name if you
-"" search in a singe file. This will confuse Latex-Suite. Set your grep
-"" program to always generate a file-name.
-"set grepprg=grep\ -nH\ $*
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-"" OPTIONAL: This enables automatic indentation as you type.
-""filetype indent on
-"
-"" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-"" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-"" The following changes the default filetype back to 'tex':
-"let g:tex_flavor='latex'
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 
-""
+
 "" Random Function
 "" http://mo.morsi.org/blog/node/299
 "function! s:Rand(max)
@@ -200,3 +145,89 @@ endif
 if hostname == "laptop"
 	"cd 
 endif
+
+""""""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
+" Set up Ctrl-P shortcut key for Ctrl-P:
+let g:ctrlp_map = '<c-k>'
+let g:ctrlp_cmd = 'CtrlP'
+map <c-m> :CtrlPTag<CR>
+"""""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
+
+" For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
+let g:cpp_class_scope_highlight = 1
+
+" Tell vim to set the current directory to the directory
+" of the file being opened:
+set autochdir
+
+" Tell vim to look for a tags file in the current
+" directory, and all the way up until it finds one:
+set tags=./tags;/
+
+""""""""""""""""""""""" YCM Config """"""""""""""""""""""""
+" Let YouCompleteMe use tag files for completion as well:
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+" Turn off prompting to load .ycm_extra_conf.py:
+let g:ycm_confirm_extra_conf = 0
+"""""""""""""""""""""" /YCM Config """"""""""""""""""""""""
+
+"""""""""""""""""""" Ultisnips config """"""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+""""""""""""""""""" /Ultisnips config """"""""""""""""""""""
+
+
+""""""""""""""""""""" Airline Config """"""""""""""""""""""
+" For vim-airline, ensure the status line is always displayed:
+set laststatus=2
+"""""""""""""""""""" /Airline Config """"""""""""""""""""""
+
+
+""""""""""""""""""""" Tagbar Config """"""""""""""""""""""
+" tagbar config. Enable it using this key map:
+nmap <F8> :TagbarToggle<CR>
+"""""""""""""""""""" /Tagbar Config """"""""""""""""""""""
+
+
+""""""""""""""""""""" NERDTree """"""""""""""""""""""
+" Shortcut key to open NERDTree:
+map <F5> :NERDTreeToggle<CR>
+"""""""""""""""""""" /NERDTree """"""""""""""""""""""
+
+
+""""""""""""""""""""" cscope """"""""""""""""""""""
+" cscope keyboard mapping:
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+"""""""""""""""""""" /cscope """"""""""""""""""""""
+
+
+"""""""""""""""""""" ctags """""""""""""""""""""""
+" A key map to run ctags:
+nnoremap <leader>ct :!ctags .<CR>
+"""""""""""""""""""" /ctags """"""""""""""""""""""
+
+" JsHints
+"JSHintToggle
+
+filetype on
+syntax on
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
+let fortran_free_source=1
+let fortran_have_tabs=1
+set number
+set ignorecase
+set ts=3
+
+
+set ruler
+set hlsearch
+
+
