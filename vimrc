@@ -4,6 +4,15 @@ set shell=/bin/bash
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 
+if hostname == "pof"
+	let domain="neptec"
+elseif hostname == "dena" || hostname == "sahand" || hostname == "pontus"
+	let domain="school"
+else
+   let domain="home"
+endif
+"echo "Using domain " . domain
+
 if has("win32")||has("win32unix")
 	let is_win=1
 else
@@ -17,6 +26,10 @@ au BufNewFile,BufRead *.html.base set filetype=html
 " ftn90 = fortran
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
 
+" This is true for Drupal, be more selective if ever there's a conflict
+" .module files are PHP
+au BufNewFile,BufRead *.module set filetype=php
+
 "
 " Vundle.  use :PluginInstall to install all these plugins
 "
@@ -24,8 +37,8 @@ au BufNewFile,BufRead *.ftn90 set filetype=fortran
 " set the runtime path to include Vundle and initialize
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set rtp+=~/dotfiles/vundle/
-call vundle#begin("~/dotfiles/vundle/bundles") " This always fails the second time around
+set rtp+=~/dotfiles/Vundle.vim
+call vundle#begin("~/dotfiles/bundles") " This always fails the second time around
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -87,7 +100,7 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-if is_win==0
+if is_win==0 && domain=="neptec"
 	" A plugin to manage cscope - a tool to help navigate
 	" a codebase.
 	Plugin 'brookhong/cscope.vim'
@@ -112,7 +125,26 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-"
+
+"" Random Function
+"" http://mo.morsi.org/blog/node/299
+"function! s:Rand(max)
+"y a
+"redir @b
+"ruby << EOF
+"	rmax = VIM::evaluate("a:max")
+"	rmax = nil if rmax == ""
+"	printf rand(rmax).to_s
+"EOF
+"redir END
+"let @a = strpart(@a, 0, strlen(@a) - 1)
+"let @b = strpart(@b, 1, strlen(@b) - 1)
+"let @c = @a . @b
+".s/.*/\=@c/g
+"endfunction
+"command! -nargs=? Rand :call <SID>Rand(<q-args>)
+
+
 " Colour scheme
 if has("gui_running")
 	set mousemodel=popup
@@ -120,12 +152,13 @@ if has("gui_running")
 	"colorscheme desert
 	"colorscheme oceandeep
 
-	set background=light
+	"set background=light
+	set background=dark
 	colorscheme solarized
 endif
 
 " OS Detection
-if has("win32")||has("win32unix")
+if is_win
 	behave xterm
 	set ffs=unix
 	set backspace=2
@@ -136,7 +169,7 @@ if has("win32")||has("win32unix")
 endif
 
 if hostname == "laptop"
-	"cd 
+	"cd
 endif
 
 """"""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
@@ -206,8 +239,10 @@ map <F5> :NERDTreeToggle<CR>
 
 """"""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
+if is_win==0 && domain=="neptec"
+	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+	nnoremap <leader>l :call ToggleLocationList()<CR>
+endif
 """""""""""""""""""" /cscope """"""""""""""""""""""
 
 
