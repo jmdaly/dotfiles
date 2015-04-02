@@ -37,8 +37,8 @@ au BufNewFile,BufRead *.module set filetype=php
 " set the runtime path to include Vundle and initialize
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set rtp+=~/dotfiles/vundle/
-call vundle#begin("~/dotfiles/vundle/bundles") " This always fails the second time around
+set rtp+=~/dotfiles/Vundle.vim
+call vundle#begin("~/dotfiles/bundles") " This always fails the second time around
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -233,8 +233,10 @@ map <F5> :NERDTreeToggle<CR>
 
 """"""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
+if is_win==0 && domain=="neptec"
+	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+	nnoremap <leader>l :call ToggleLocationList()<CR>
+endif
 """""""""""""""""""" /cscope """"""""""""""""""""""
 
 
