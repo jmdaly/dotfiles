@@ -100,7 +100,7 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-if is_win==0 && domain=="neptec"
+if is_win==0 && (domain=="neptec" || domain=="home")
 	" A plugin to manage cscope - a tool to help navigate
 	" a codebase.
 	Plugin 'brookhong/cscope.vim'
