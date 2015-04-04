@@ -103,6 +103,7 @@ Plugin 'bling/vim-airline'
 if is_win==0 && domain=="neptec"
 	" A plugin to manage cscope - a tool to help navigate
 	" a codebase.
+	" Make sure cscope & ctags are installed (through apt)
 	Plugin 'brookhong/cscope.vim'
 endif
 
