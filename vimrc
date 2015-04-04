@@ -57,7 +57,7 @@ Plugin 'gmarik/Vundle.vim'
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
 
-if is_win==0
+if is_win==0 && domain!="school"
 	" YouCompleteMe
 	Plugin 'Valloric/YouCompleteMe'
 
