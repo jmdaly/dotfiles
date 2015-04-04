@@ -108,6 +108,11 @@ if [ -e ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
+# Dir colours, used by solarized
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
 	# Environmental Modules
