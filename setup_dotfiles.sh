@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
@@ -34,9 +34,9 @@ cd ${h}
 
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
-	files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
+	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
 else
-	files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit)
+	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit)
 fi
 
 # .config/autokey
@@ -46,8 +46,9 @@ declare backup_dir=${h}/.dotfiles_backup
 # Create a backup directory:
 mkdir -p ${h}/.dotfiles_backup
 
-for f in $files; do
-	if [[ $f =~ ".*" ]]; then
+for f in ${files[@]}; do
+	# Local file in dotfile fir
+	if [[ $f =~ .* ]]; then
 		src=${f/.//}
 	else
 		src=$f
@@ -58,7 +59,7 @@ for f in $files; do
 			mv ${h}/$f ${backup_dir}/$f
 		fi
 		if [[ -e ${base}/${src} ]]; then
-			#echo "Installing $f"
+			echo "Installing $f"
 			if [[ "$copy" == 1 ]]; then
 				# On cygwin, symlinks when used through gvim
 				# can be an issue
@@ -72,4 +73,6 @@ for f in $files; do
 	fi
 done;
 
-cd ${h} && source .zshrc
+if [[ "${TRUE_HOST}" == "" ]]; then
+	cd ${h} && source .zshrc
+fi
