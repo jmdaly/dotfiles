@@ -8,8 +8,10 @@ if hostname == "pof"
 	let domain="neptec"
 elseif hostname == "dena" || hostname == "sahand" || hostname == "pontus"
 	let domain="school"
+elseif $TRUE_HOST != ""
+	let domain="school"
 else
-   let domain="home"
+	let domain="home"
 endif
 "echo "Using domain " . domain
 
@@ -35,8 +37,8 @@ au BufNewFile,BufRead *.module set filetype=php
 "
 
 " set the runtime path to include Vundle and initialize
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible				  " be iMproved, required
+filetype off						" required
 set rtp+=~/dotfiles/Vundle.vim
 call vundle#begin("~/dotfiles/bundles") " This always fails the second time around
 
@@ -80,9 +82,11 @@ if is_win==0
 	Plugin 'honza/vim-snippets'
 endif
 
-" tagbar - allows browsing tags of the current source file
-" from ctags. Good for seeing functions, variables, etc.
-Plugin 'majutsushi/tagbar'
+if is_win==0 && (domain=="neptec" || domain=="home")
+	" tagbar - allows browsing tags of the current source file
+	" from ctags. Good for seeing functions, variables, etc.
+	Plugin 'majutsushi/tagbar'
+endif
 
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
@@ -110,16 +114,16 @@ endif
 Plugin 'vim-scripts/a.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()				" required
+filetype plugin indent on	 " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginList		 - lists configured plugins
+" :PluginInstall	 - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginClean		- confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
@@ -163,7 +167,7 @@ if is_win
 	set ffs=unix
 	set backspace=2
 "elseif has('mac')
-"    ......
+"	 ......
 "elseif has('unix')
 "	let matt="is_unix"
 endif
