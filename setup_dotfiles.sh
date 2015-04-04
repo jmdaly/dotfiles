@@ -32,8 +32,13 @@ git submodule init
 git submodule update
 cd ${h}
 
+if [[ "${TRUE_HOST}" != "" ]]; then
+	# We're on env can machines
+	files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
+else
+	files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit)
+fi
 
-files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .gvimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .screenrc)
 # .config/autokey
 
 declare backup_dir=${h}/.dotfiles_backup
