@@ -59,7 +59,7 @@ for f in ${files[@]}; do
 			mv ${h}/$f ${backup_dir}/$f
 		fi
 		if [[ -e ${base}/${src} ]]; then
-			echo "Installing $f"
+			#echo "Installing $f"
 			if [[ "$copy" == 1 ]]; then
 				# On cygwin, symlinks when used through gvim
 				# can be an issue
@@ -73,6 +73,7 @@ for f in ${files[@]}; do
 	fi
 done;
 
-if [[ "${TRUE_HOST}" == "" ]]; then
-	cd ${h} && source .zshrc
-fi
+# Can no longer to this as I'm typically using zsh
+# and this is writting in bash.  I have to keep it
+# in bash in order to have it on CMC machines
+#cd ${h} && source .zshrc
