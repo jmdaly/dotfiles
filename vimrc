@@ -152,6 +152,8 @@ nmap <F8> :TagbarToggle<CR>
 
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
+let NERDTreeChDirMode = 2
+nnoremap <leader>n :NERDTree .<CR>
 
 " cscope keyboard mapping:
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
