@@ -114,6 +114,9 @@ endif
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
 
+" Plugin to help manage vim buffers:
+Plugin 'jeetsukumaran/vim-buffergator'
+
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
 filetype plugin indent on	 " required
@@ -223,7 +226,7 @@ endif
 set laststatus=2
 
 " Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -239,15 +242,16 @@ nmap <F8> :TagbarToggle<CR>
 """"""""""""""""""""" NERDTree """"""""""""""""""""""
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
+let NERDTreeChDirMode = 2
+nnoremap <leader>n :NERDTree .<CR>
 """""""""""""""""""" /NERDTree """"""""""""""""""""""
 
 
+if is_win==0 && domain=="neptec"
 """"""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
-if is_win==0 && domain=="neptec"
 	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 	nnoremap <leader>l :call ToggleLocationList()<CR>
-endif
 """""""""""""""""""" /cscope """"""""""""""""""""""
 
 
@@ -255,6 +259,15 @@ endif
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
 """""""""""""""""""" /ctags """"""""""""""""""""""
+
+""""""""""""""""""""" a.vim """"""""""""""""""""""
+nmap ,h :find %:t:r.h<CR>
+nmap ,H :sf %:t:r.h<CR>
+""""""""""""""""""""" /a.vim """""""""""""""""""""
+
+
+endif
+
 
 " JsHints
 "JSHintToggle
@@ -269,6 +282,11 @@ set number
 set ignorecase
 set ts=3
 
+" Ignore whitespace on vimdiff
+if &diff
+	" diff mode
+	set diffopt+=iwhite
+endif
 
 "set ruler
 set hlsearch
