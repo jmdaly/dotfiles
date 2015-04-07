@@ -1,0 +1,30 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+priority -50
+
+snippet build_bat "Generic Windows cmake build script"
+REM This script is used to generate the build configuration
+REM for $1 in Windows. It must be run from the root of the source
+REM directory.
+
+REM Build type: (Debug, Release, etc.):
+SET BUILD_TYPE=%1
+
+REM Vendor directory location:
+SET VENDOR=%2
+
+REM $1 version:
+SET $1_VERSION="$2"
+
+REM Set the generator to use ex: "Visual Studio 12 2013 Win64":
+SET GENERATOR="${3:Visual Studio 12 2013 Win64}"
+
+mkdir build-%BUILD_TYPE%
+cd build-%BUILD_TYPE%
+
+cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DCMAKE_INSTALL_PREFIX=%VENDOR%/Libs/$1/%$1_VERSION% ..
+endsnippet
+
+# vim:ft=snippets:

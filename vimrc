@@ -94,6 +94,10 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" Add to the runtime path so that custom
+" snippets can be found:
+set rtp+=~/dotfiles
+
 " Set a colour scheme for vim:
 if has("gui_running")
 	syntax enable
