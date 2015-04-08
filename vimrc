@@ -205,18 +205,26 @@ if has('unix')
 
 	" Turn off prompting to load .ycm_extra_conf.py:
 	let g:ycm_confirm_extra_conf = 0
+
+	" Map GetType to an easier key combination:
+	nnoremap <leader>ty :YcmCompleter GetType<CR>
+
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0
+if is_win==0 && 1==0
 	let g:UltiSnipsExpandTrigger="<c-j>"
 	let g:UltiSnipsJumpForwardTrigger="<c-j>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
 	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
+	"let g:UltiSnipsEditSplit="vertical"
+
+	" Add to the runtime path so that custom
+	" snippets can be found:
+	set rtp+=~/dotfiles
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
@@ -250,6 +258,7 @@ nnoremap <leader>n :NERDTree .<CR>
 if is_win==0 && domain=="neptec"
 """"""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
+	let g:cscope_silent=1
 	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 	nnoremap <leader>l :call ToggleLocationList()<CR>
 """""""""""""""""""" /cscope """"""""""""""""""""""
@@ -259,13 +268,6 @@ if is_win==0 && domain=="neptec"
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
 """""""""""""""""""" /ctags """"""""""""""""""""""
-
-""""""""""""""""""""" a.vim """"""""""""""""""""""
-nmap ,h :find %:t:r.h<CR>
-nmap ,H :sf %:t:r.h<CR>
-""""""""""""""""""""" /a.vim """""""""""""""""""""
-
-
 endif
 
 
