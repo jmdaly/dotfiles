@@ -130,6 +130,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
 
+map <F2> :YcmCompleter GoTo<CR>
+
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
 
