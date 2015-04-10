@@ -225,6 +225,9 @@ if is_win==0 && 1==0
 	" If you want :UltiSnipsEdit to split your window.
 	"let g:UltiSnipsEditSplit="vertical"
 
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+
 	" Add to the runtime path so that custom
 	" snippets can be found:
 	set rtp+=~/dotfiles
