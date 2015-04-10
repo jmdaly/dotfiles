@@ -290,6 +290,12 @@ set number
 set ignorecase
 set ts=3
 
+if domain=="neptec"
+	set ts=4
+	set sw=4
+	set expandtab
+endif
+
 " Ignore whitespace on vimdiff
 if &diff
 	" diff mode
