@@ -167,6 +167,9 @@ nnoremap <leader>n :NERDTree .<CR>
 " cscope keyboard mapping:
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
+" Turn off the notification that the cscope db is getting
+" updated automatically:
+let g:cscope_silent = 1
 
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
