@@ -36,7 +36,7 @@ if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
 	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
 else
-	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .dircolors)
+	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .dircolors .sqliterc)
 fi
 
 # .config/autokey

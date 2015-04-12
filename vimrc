@@ -55,7 +55,7 @@ Plugin 'Lokaltog/vim-easymotion'
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
 
-if is_win==0
+if is_win==0 && domain!="school"
 	" YouCompleteMe
 	Plugin 'Valloric/YouCompleteMe'
 
@@ -111,6 +111,12 @@ endif
 
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
+
+" Plugin to help manage vim buffers:
+Plugin 'jeetsukumaran/vim-buffergator'
+
+" Plugin to highlight the variable under the cursor:
+Plugin 'OrelSokolov/HiCursorWords'
 
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
@@ -200,18 +206,32 @@ if has('unix')
 
 	" Turn off prompting to load .ycm_extra_conf.py:
 	let g:ycm_confirm_extra_conf = 0
+
+	" Map GetType to an easier key combination:
+	nnoremap <leader>ty :YcmCompleter GetType<CR>
+
+	" F2 will jump to a variable/method definition
+	map <F2> :YcmCompleter GoTo<CR>
+
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0
+if is_win==0 && 1==0
 	let g:UltiSnipsExpandTrigger="<c-j>"
 	let g:UltiSnipsJumpForwardTrigger="<c-j>"
 	let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
 	" If you want :UltiSnipsEdit to split your window.
+	"let g:UltiSnipsEditSplit="vertical"
+
+	" If you want :UltiSnipsEdit to split your window.
 	let g:UltiSnipsEditSplit="vertical"
+
+	" Add to the runtime path so that custom
+	" snippets can be found:
+	set rtp+=~/dotfiles
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
@@ -221,7 +241,7 @@ endif
 set laststatus=2
 
 " Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -237,15 +257,17 @@ nmap <F8> :TagbarToggle<CR>
 """"""""""""""""""""" NERDTree """"""""""""""""""""""
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
+let NERDTreeChDirMode = 2
+nnoremap <leader>n :NERDTree .<CR>
 """""""""""""""""""" /NERDTree """"""""""""""""""""""
 
 
+if is_win==0 && domain=="neptec"
 """"""""""""""""""""" cscope """"""""""""""""""""""
 " cscope keyboard mapping:
-if is_win==0 && domain=="neptec"
+	let g:cscope_silent=1
 	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 	nnoremap <leader>l :call ToggleLocationList()<CR>
-endif
 """""""""""""""""""" /cscope """"""""""""""""""""""
 
 
@@ -255,6 +277,8 @@ if is_win==0 && domain=="neptec"
 	nnoremap <leader>ct :!ctags .<CR>
 endif
 """""""""""""""""""" /ctags """"""""""""""""""""""
+endif
+
 
 " JsHints
 "JSHintToggle
@@ -273,6 +297,17 @@ set tabstop=3
 set shiftwidth=3
 set noexpandtab
 
+if domain=="neptec"
+	set ts=4
+	set sw=4
+	set expandtab
+endif
+
+" Ignore whitespace on vimdiff
+if &diff
+	" diff mode
+	set diffopt+=iwhite
+endif
 
 "set ruler
 set hlsearch

@@ -12,4 +12,5 @@ if [[ "${TRUE_HOST}" != "" ]]; then
 	alias gl="git pull"
 	alias gp="git push"
 	alias glog="git log --name-status"
+	alias gco="git checkout"
 fi
