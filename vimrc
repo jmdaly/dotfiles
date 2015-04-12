@@ -45,13 +45,11 @@ call vundle#begin("~/dotfiles/bundles") " This always fails the second time arou
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-
 " Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
 "Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-"Plugin 'Lokaltog/vim-easymotion'
-
+Plugin 'Lokaltog/vim-easymotion'
 
 
 " Solarized colour scheme
@@ -91,7 +89,7 @@ endif
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
 " current file and the file around it:
-Plugin 'tpope/vim-sleuth'
+"Plugin 'tpope/vim-sleuth'
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
@@ -253,7 +251,9 @@ endif
 
 """""""""""""""""""" ctags """""""""""""""""""""""
 " A key map to run ctags:
-nnoremap <leader>ct :!ctags .<CR>
+if is_win==0 && domain=="neptec"
+	nnoremap <leader>ct :!ctags .<CR>
+endif
 """""""""""""""""""" /ctags """"""""""""""""""""""
 
 " JsHints
@@ -267,7 +267,11 @@ let fortran_free_source=1
 let fortran_have_tabs=1
 set number
 set ignorecase
-set ts=3
+
+" http://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim
+set tabstop=3
+set shiftwidth=3
+set noexpandtab
 
 
 "set ruler
