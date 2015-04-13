@@ -18,12 +18,12 @@ fi;
 
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
-	declare base=$(dirname $(realpath $0))
-#	exit 1;
+	declare base=${h}/dotfiles
+	#exit 1;
 else
+	declare base=$(dirname $(realpath $0))
 	declare base=${h}/dotfiles
 fi;
-
 
 # First ensure that the submodules in this repo
 # are available and up to date:
@@ -54,7 +54,7 @@ for f in ${files[@]}; do
 		src=$f
 	fi;
 	if [[ ! -h ${h}/$f ]]; then
-		if [[ -e ${h}/$f && -e ${base}/${src} ]]; then
+		if [[ -e ${h}/$f && -e ${base}/${src} && ! -h ${h}/${f} ]]; then
 			echo "Backing up $f"
 			mv ${h}/$f ${backup_dir}/$f
 		fi
