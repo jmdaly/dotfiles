@@ -9,6 +9,13 @@
 # Set it with:
 # gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/background_color" --type string "#FFFFFEB7B69C"
 
+# GTK uses 16 bit colour channels. #rgb, #rrggbb, and #rrrrggggbbbb are accepted.
+
+# Some notes on solarized
+# Original text-colour: #65657B7B8383, changed to: #7c96a0
+# Palette  #2: String colour in VI
+# Palette #11: Prompt colour on shell
+
 echo "# Exporting $(hostname) terminal profiles." > profiles.dot
 echo " " > profiles.dot
 

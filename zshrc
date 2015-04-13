@@ -34,7 +34,6 @@ HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 
-#echo "111 $(date +%s)"
 source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
@@ -69,6 +68,8 @@ zstyle ':completion:*' menu select
 # Autocompletion of command line switches for aliases
 setopt completealiases
 
+# Ignore untracked files for showing status on prompt
+export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
