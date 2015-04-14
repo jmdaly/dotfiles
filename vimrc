@@ -174,6 +174,7 @@ if is_win
 	behave xterm
 	set ffs=unix
 	set backspace=2
+	" options: set backspace=indent,eol,start
 "elseif has('mac')
 "	 ......
 "elseif has('unix')
