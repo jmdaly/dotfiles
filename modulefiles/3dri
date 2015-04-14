@@ -47,5 +47,7 @@ set-alias wsl "tail -f 3dri.log"
 set-alias runWS "cwt; ${wsb}/3DRiWebScheduler ${ws_args};"
 set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args};"
 
+set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
+
 # Examples
 setenv wte /usr/lib/Wt/examples
