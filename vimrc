@@ -287,7 +287,9 @@ endif
 " let g:dbext_default_profile_<profile_name> = '<connection string>'
 " https://github.com/vim-scripts/dbext.vim
 let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
-"let g:dbext_default_profile_matt = "type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db"
+let g:dbext_default_profile_mysql_mayofest = 'type=MYSQL:user=www:password=hyper:dbname=mayofest'
+
+let g:dbext_default_profile = '3dri'
 """""""""""""""""""" /DBext """"""""""""""""""""""
 
 
