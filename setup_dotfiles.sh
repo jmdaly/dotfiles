@@ -38,8 +38,8 @@ for f in $files; do
 			mv ~/$f ${backup_dir}/$f
 		fi
 		if [[ -e ${base}/${src} ]]; then
-			#echo "Installing $f"
-			ln -s ${base}/${src} $f
+			echo "Installing $f"
+			ln -s ${base}${src} $f
 		fi
 	else
 		echo "Skipping synlink $f"
