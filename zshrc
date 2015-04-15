@@ -21,6 +21,8 @@ antigen apply
 
 export EDITOR=vim
 
+export TERM="xterm-256color"
+
 # Adjust the path
 source ~/.pathrc
 
