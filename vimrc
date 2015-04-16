@@ -270,20 +270,22 @@ nnoremap <leader>n :NERDTree .<CR>
 
 
 if is_win==0 && domain=="neptec"
-""""""""""""""""""""" cscope """"""""""""""""""""""
-" cscope keyboard mapping:
+
+	""""""""""""""""""""" cscope """"""""""""""""""""""
+	" cscope keyboard mapping:
 	let g:cscope_silent=1
 	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 	nnoremap <leader>l :call ToggleLocationList()<CR>
-"""""""""""""""""""" /cscope """"""""""""""""""""""
+	"""""""""""""""""""" /cscope """"""""""""""""""""""
 
 
-"""""""""""""""""""" ctags """""""""""""""""""""""
-" A key map to run ctags:
-if is_win==0 && domain=="neptec"
-	nnoremap <leader>ct :!ctags .<CR>
-endif
-"""""""""""""""""""" /ctags """"""""""""""""""""""
+	"""""""""""""""""""" ctags """""""""""""""""""""""
+	" A key map to run ctags:
+	if is_win==0 && domain=="neptec"
+		nnoremap <leader>ct :!ctags .<CR>
+	endif
+	"""""""""""""""""""" /ctags """"""""""""""""""""""
+
 endif
 
 
