@@ -190,6 +190,9 @@ endif
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+
+" Unmap center/<CR> from launching CTRL-P, because it's annoying
+unmap <CR>
 """""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
