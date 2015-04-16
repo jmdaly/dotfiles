@@ -294,6 +294,10 @@ let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal
 let g:dbext_default_profile_mysql_mayofest = 'type=MYSQL:user=www:password=hyper:dbname=mayofest'
 
 let g:dbext_default_profile = '3dri'
+
+nnoremap <leader>sel :DBListConnections<CR>
+nnoremap <leader>dep :DBProfilesRefresh<CR>
+
 """""""""""""""""""" /DBext """"""""""""""""""""""
 
 
