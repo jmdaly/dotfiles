@@ -121,6 +121,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Database client
 Plugin 'vim-scripts/dbext.vim'
 
+" JsHints
+Plugin 'wookiehangover/jshint.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
 filetype plugin indent on	 " required
@@ -294,7 +297,6 @@ let g:dbext_default_profile = '3dri'
 """""""""""""""""""" /DBext """"""""""""""""""""""
 
 
-" JsHints
 "JSHintToggle
 
 filetype on
