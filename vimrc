@@ -190,6 +190,7 @@ endif
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+unmap <CR>
 """""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
