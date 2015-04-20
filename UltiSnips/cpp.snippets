@@ -13,4 +13,16 @@ snippet ml "vim modeline"
 /* vim: set ts=4 sw=4 expandtab : */
 endsnippet
 
+# Double namespace. We often begin our classes two namespaces
+# deep.
+snippet dns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+namespace${2/.+/ /m}${2:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}${0}
+}${2/.+/ \/* /m}$2${2/.+/ *\/ /m}
+}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+endsnippet
+
 # vim:ft=snippets:
