@@ -121,6 +121,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Database client
 Plugin 'vim-scripts/dbext.vim'
 
+" XML helper
+Plugin 'othree/xml.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
 filetype plugin indent on	 " required
