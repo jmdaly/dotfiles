@@ -122,7 +122,7 @@ Plugin 'OrelSokolov/HiCursorWords'
 Plugin 'vim-scripts/dbext.vim'
 
 " JsHints
-Plugin 'wookiehangover/jshint.vim'
+"Plugin 'wookiehangover/jshint.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
