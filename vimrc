@@ -121,6 +121,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Database client
 Plugin 'vim-scripts/dbext.vim'
 
+" XML helper
+Plugin 'othree/xml.vim'
+
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
@@ -193,6 +196,9 @@ endif
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+
+" Unmap center/<CR> from launching CTRL-P, because it's annoying
+unmap <CR>
 """""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
@@ -270,20 +276,22 @@ nnoremap <leader>n :NERDTree .<CR>
 
 
 if is_win==0 && domain=="neptec"
-""""""""""""""""""""" cscope """"""""""""""""""""""
-" cscope keyboard mapping:
+
+	""""""""""""""""""""" cscope """"""""""""""""""""""
+	" cscope keyboard mapping:
 	let g:cscope_silent=1
 	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 	nnoremap <leader>l :call ToggleLocationList()<CR>
-"""""""""""""""""""" /cscope """"""""""""""""""""""
+	"""""""""""""""""""" /cscope """"""""""""""""""""""
 
 
-"""""""""""""""""""" ctags """""""""""""""""""""""
-" A key map to run ctags:
-if is_win==0 && domain=="neptec"
-	nnoremap <leader>ct :!ctags .<CR>
-endif
-"""""""""""""""""""" /ctags """"""""""""""""""""""
+	"""""""""""""""""""" ctags """""""""""""""""""""""
+	" A key map to run ctags:
+	if is_win==0 && domain=="neptec"
+		nnoremap <leader>ct :!ctags .<CR>
+	endif
+	"""""""""""""""""""" /ctags """"""""""""""""""""""
+
 endif
 
 
@@ -294,6 +302,10 @@ let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal
 let g:dbext_default_profile_mysql_mayofest = 'type=MYSQL:user=www:password=hyper:dbname=mayofest'
 
 let g:dbext_default_profile = '3dri'
+
+nnoremap <leader>sel :DBListConnections<CR>
+nnoremap <leader>dep :DBProfilesRefresh<CR>
+
 """""""""""""""""""" /DBext """"""""""""""""""""""
 
 
