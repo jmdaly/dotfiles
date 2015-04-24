@@ -115,6 +115,8 @@ set number
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+" Unmap center/<CR> from launching CTRL-P
+unmap <CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
