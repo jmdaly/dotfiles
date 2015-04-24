@@ -287,9 +287,7 @@ if is_win==0 && domain=="neptec"
 
 	"""""""""""""""""""" ctags """""""""""""""""""""""
 	" A key map to run ctags:
-	if is_win==0 && domain=="neptec"
-		nnoremap <leader>ct :!ctags .<CR>
-	endif
+	nnoremap <leader>ct :!ctags .<CR>
 	"""""""""""""""""""" /ctags """"""""""""""""""""""
 
 endif
