@@ -318,16 +318,8 @@ let fortran_have_tabs=1
 set number
 set ignorecase
 
-" http://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim
-set tabstop=3
-set shiftwidth=3
-set noexpandtab
-
-if domain=="neptec"
-	set ts=4
-	set sw=4
-	set expandtab
-endif
+" Remove trailing space
+nnoremap <leader>rt :%s/\s\s*$//<CR>
 
 " Ignore whitespace on vimdiff
 if &diff
