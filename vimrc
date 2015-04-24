@@ -4,7 +4,7 @@ set shell=/bin/bash
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 
-if hostname == "pof"
+if hostname == "pof" || hostname == "tinder"
 	let domain="neptec"
 elseif hostname == "dena" || hostname == "sahand" || hostname == "pontus"
 	let domain="school"
