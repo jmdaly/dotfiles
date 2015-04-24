@@ -89,7 +89,7 @@ endif
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
 " current file and the file around it:
-"Plugin 'tpope/vim-sleuth'
+Plugin 'tpope/vim-sleuth'
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
@@ -305,7 +305,6 @@ nnoremap <leader>sel :DBListConnections<CR>
 nnoremap <leader>dep :DBProfilesRefresh<CR>
 
 """""""""""""""""""" /DBext """"""""""""""""""""""
-
 
 "JSHintToggle
 
