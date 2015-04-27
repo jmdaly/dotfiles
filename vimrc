@@ -15,10 +15,15 @@ else
 endif
 "echo "Using domain " . domain
 
+let is_win=0
+let is_mac=0
+let is_nix=1
 if has("win32")||has("win32unix")
 	let is_win=1
+elseif has("mac")
+	let is_mac=1
 else
-	let is_win=0
+	let is_nix=1
 endif
 
 
@@ -185,10 +190,6 @@ if is_win
 "	 ......
 "elseif has('unix')
 "	let matt="is_unix"
-endif
-
-if hostname == "laptop"
-	"cd
 endif
 
 """"""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
