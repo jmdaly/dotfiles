@@ -69,10 +69,6 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-" A plugin to manage cscope - a tool to help navigate
-" a codebase.
-Plugin 'brookhong/cscope.vim'
-
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
 
@@ -81,6 +77,10 @@ Plugin 'jeetsukumaran/vim-buffergator'
 
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
+
+" A plugin to use rtags in vim. (rtags allows for
+" code following, some refactoring, etc.)
+Plugin 'lyuts/vim-rtags'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -118,6 +118,8 @@ set diffopt+=vertical
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+" Unmap center/<CR> from launching CTRL-P
+unmap <CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -166,13 +168,6 @@ nmap <F8> :TagbarToggle<CR>
 map <F5> :NERDTreeToggle<CR>
 let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
-
-" cscope keyboard mapping:
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
-" Turn off the notification that the cscope db is getting
-" updated automatically:
-let g:cscope_silent = 1
 
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
