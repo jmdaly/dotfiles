@@ -318,6 +318,10 @@ let fortran_have_tabs=1
 set number
 set ignorecase
 
+" Easy save
+noremap ^S :w<CR>
+" map alt/apple or something-S for khea
+
 " Remove trailing space
 nnoremap <leader>rt :%s/\s\s*$//<CR>
 
