@@ -247,12 +247,22 @@ if has('unix')
 		\ 'vim'       : 1,
 		\ 'gitcommit' : 1,
 		\ 'gitrebase' : 1,
+		\ 'cmake'     : 1,
 		\ 'mail'      : 1
 	\}
 
+	let g:ycm_filetype_whitelist = {
+		\ 'css'    : 1,
+		\ 'cpp'    : 1,
+		\ 'php'    : 1,
+		\ 'fortran': 1,
+		\ 'xml'    : 1,
+		\ 'html'   : 1,
+	\}
+
 	" Ignore large files (BONA db's for instance)
-	g:ycm_disable_for_files_larger_than_kb = 300
-	
+	let g:ycm_disable_for_files_larger_than_kb = 300
+
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
