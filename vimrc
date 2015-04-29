@@ -249,6 +249,10 @@ if has('unix')
 		\ 'gitrebase' : 1,
 		\ 'mail'      : 1
 	\}
+
+	" Ignore large files (BONA db's for instance)
+	g:ycm_disable_for_files_larger_than_kb = 300
+	
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
