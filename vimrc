@@ -107,13 +107,6 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-if is_win==0 && (domain=="neptec" || domain=="home")
-	" A plugin to manage cscope - a tool to help navigate
-	" a codebase.
-	" Make sure cscope & ctags are installed (through apt)
-	Plugin 'brookhong/cscope.vim'
-endif
-
 " Switch between header and source files:
 Plugin 'vim-scripts/a.vim'
 
@@ -286,13 +279,6 @@ nnoremap <leader>n :NERDTree .<CR>
 
 
 if is_win==0 && domain=="neptec"
-
-	""""""""""""""""""""" cscope """"""""""""""""""""""
-	" cscope keyboard mapping:
-	let g:cscope_silent=1
-	nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-	nnoremap <leader>l :call ToggleLocationList()<CR>
-	"""""""""""""""""""" /cscope """"""""""""""""""""""
 
 
 	"""""""""""""""""""" ctags """""""""""""""""""""""
