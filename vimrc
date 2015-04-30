@@ -116,6 +116,10 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
+" A plugin to use rtags in vim. (rtags allows for
+" code following, some refactoring, etc.)
+Plugin 'lyuts/vim-rtags'
+
 " Database client
 Plugin 'vim-scripts/dbext.vim'
 
