@@ -224,6 +224,37 @@ if has('unix')
 	map <F2> :YcmCompleter GoTo<CR>
 
 	nnoremap <leader>diag YcmDiag<CR>
+
+	" Ignore some files
+	let g:ycm_filetype_blacklist = {
+		\ 'tagbar'    : 1,
+		\ 'qf'        : 1,
+		\ 'notes'     : 1,
+		\ 'markdown'  : 1,
+		\ 'unite'     : 1,
+		\ 'text'      : 1,
+		\ 'vimwiki'   : 1,
+		\ 'pandoc'    : 1,
+		\ 'infolog'   : 1,
+		\ 'vim'       : 1,
+		\ 'gitcommit' : 1,
+		\ 'gitrebase' : 1,
+		\ 'cmake'     : 1,
+		\ 'mail'      : 1
+	\}
+
+	let g:ycm_filetype_whitelist = {
+		\ 'css'    : 1,
+		\ 'cpp'    : 1,
+		\ 'php'    : 1,
+		\ 'fortran': 1,
+		\ 'xml'    : 1,
+		\ 'html'   : 1,
+	\}
+
+	" Ignore large files (BONA db's for instance)
+	let g:ycm_disable_for_files_larger_than_kb = 300
+
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
@@ -299,28 +330,28 @@ nnoremap <leader>dep :DBProfilesRefresh<CR>
 
 
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
-    let g:rainbow_conf = {
-    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-    \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-    \   'operators': '_,_',
-    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-    \   'separately': {
-    \       '*': {},
-    \       'tex': {
-    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-    \       },
-    \       'lisp': {
-    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-    \       },
-    \       'vim': {
-    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-    \       },
-    \       'html': {
-    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-    \       },
-    \       'css': 0,
-    \   }
-    \}
+	let g:rainbow_conf = {
+	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	\   'operators': '_,_',
+	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	\   'separately': {
+	\	   '*': {},
+	\	   'tex': {
+	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	\	   },
+	\	   'lisp': {
+	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	\	   },
+	\	   'vim': {
+	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	\	   },
+	\	   'html': {
+	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	\	   },
+	\	   'css': 0,
+	\   }
+	\}
 """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
 "JSHintToggle
@@ -350,3 +381,4 @@ endif
 "set ruler
 set hlsearch
 
+" vim: ts=3 sts=3 sw=3 noet :
