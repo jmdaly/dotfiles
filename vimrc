@@ -27,14 +27,9 @@ else
 endif
 
 
-" Read .html.base files as .html, this is used in Mayofest
+" Configure some unconventional filetypes
 au BufNewFile,BufRead *.html.base set filetype=html
-
-" ftn90 = fortran
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
-
-" This is true for Drupal, be more selective if ever there's a conflict
-" .module files are PHP
 au BufNewFile,BufRead *.module set filetype=php
 
 "
