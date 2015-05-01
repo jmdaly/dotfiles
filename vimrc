@@ -31,6 +31,7 @@ endif
 au BufNewFile,BufRead *.html.base set filetype=html
 au BufNewFile,BufRead *.ftn90 set filetype=fortran
 au BufNewFile,BufRead *.module set filetype=php
+au BufNewFile,BufRead *.gs set filetype=javascript
 
 "
 " Vundle.  use :PluginInstall to install all these plugins
@@ -244,6 +245,8 @@ if has('unix')
 	\}
 
 	let g:ycm_filetype_whitelist = {
+		\ 'javascript': 1,
+		\ 'python' : 1,
 		\ 'css'    : 1,
 		\ 'cpp'    : 1,
 		\ 'php'    : 1,
