@@ -13,11 +13,13 @@ proc ModulesHelp { } {
 module-whatis	"loads some neptec utilities"
 
 # Open a reverse tunnel to khea on khea:5555 to pof
+# 5555 = tinder
+# 5556 = pof
 # 9090 = gitlab
 # 7777 = Gitlab SSH (git clone)
 # 6666 = Git vender repos
 # 8181 = Usual Wt port I use
-set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:localhost:22 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 khea"
+set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:tinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 khea"
 
 # Open a remote desktop to a windows box
 set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
