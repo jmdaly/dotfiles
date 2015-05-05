@@ -112,8 +112,11 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
-" A plugin to use rtags in vim. (rtags allows for
-" code following, some refactoring, etc.)
+" A plugin to use rtags in vim. (rtags allows for code following,
+" some refactoring, etc.)
+" Ensure to run the following in the build directory that uses rtags
+"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+" And have the rdm service running somewhere in the background.
 Plugin 'lyuts/vim-rtags'
 
 " Database client
