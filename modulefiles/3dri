@@ -15,6 +15,7 @@ module-whatis	"loads the 3DRF environment"
 set ARCH       [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 
 set BASE       "~/workspace/opal2"
+set VENDOR     ${BASE}/o2linux64
 set src        ${BASE}/3dri
 set app_rel    Applications/OPAL2
 set bld        ${BASE}/build-3dri-${ARCH}-release
@@ -48,6 +49,10 @@ set-alias runWS "cwt; ${wsb}/3DRiWebScheduler ${ws_args};"
 set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args};"
 
 set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
+
+set-alias LcmSpy   "cd ${VENDOR}/lcm; ./RunLcmSpy.sh"
+set-alias Opal2Gui "cd ${appb}/Opal2Gui; ./Opal2Gui"
+set-alias LcmLogPlayer "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
 
 # Examples
 setenv wte /usr/lib/Wt/examples
