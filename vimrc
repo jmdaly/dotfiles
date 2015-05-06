@@ -116,6 +116,7 @@ Plugin 'OrelSokolov/HiCursorWords'
 " some refactoring, etc.)
 " Ensure to run the following in the build directory that uses rtags
 "    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+"    rc -J .
 " And have the rdm service running somewhere in the background.
 Plugin 'lyuts/vim-rtags'
 
