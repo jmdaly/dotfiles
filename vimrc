@@ -165,7 +165,7 @@ filetype plugin indent on	 " required
 "redir @b
 "php << EOF
 "	<?php
-"	print rand(0,10);
+"	print rand(0,500); // figure out how many I have..
 "EOF
 "redir END
 "let @a = strpart(@a, 0, strlen(@a) - 1)
