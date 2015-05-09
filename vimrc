@@ -379,6 +379,9 @@ let fortran_have_tabs=1
 set number
 set ignorecase
 
+" Hide mouse when typing
+set mousehide
+
 " Easy save
 noremap ^S :w<CR>
 " map alt/apple or something-S for khea
