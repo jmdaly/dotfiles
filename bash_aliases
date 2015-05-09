@@ -11,6 +11,6 @@ alias gd="git diff -w --color"
 if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gl="git pull"
 	alias gp="git push"
-	alias glog="git log --name-status"
 	alias gco="git checkout"
 fi
+alias glog="git log --follow --name-status"
