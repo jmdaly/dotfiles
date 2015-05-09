@@ -138,6 +138,12 @@ Plugin 'othree/xml.vim'
 Plugin 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
+" Tabular, align equals
+Plugin 'godlygeek/tabular'
+
+" Work with editorconfig files
+"Plugin 'editorconfig-vim'
+
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
@@ -378,6 +384,9 @@ let fortran_free_source=1
 let fortran_have_tabs=1
 set number
 set ignorecase
+
+" Hide mouse when typing
+set mousehide
 
 " Easy save
 noremap ^S :w<CR>
