@@ -164,34 +164,25 @@ filetype plugin indent on	 " required
 
 
 
-"" Random Function
-"" http://mo.morsi.org/blog/node/299
-"function! s:Rand(max)
-"y a
-"redir @b
-"php << EOF
-"	<?php
-"	print rand(0,500); // figure out how many I have..
-"EOF
-"redir END
-"let @a = strpart(@a, 0, strlen(@a) - 1)
-"let @b = strpart(@b, 1, strlen(@b) - 1)
-"let @c = @a . @b
-".s/.*/\=@c/g
-"endfunction
-"command! -nargs=? Rand :call <SID>Rand(<q-args>)
+" Random Colorscheme
+function! s:RandColorScheme()
+	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
+	"echo "Loading colorscheme " s:scheme
+	execute ':colorscheme '.s:scheme
+endfunction
+:map <Leader>rcs :call <SID>RandColorScheme()<CR>
 
+" Execute PHP lines http://stackoverflow.com/a/5622258/1861346
+":autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
 
 " Colour scheme
 if has("gui_running")
 	set mousemodel=popup
 
-	"colorscheme desert
-	"colorscheme oceandeep
-
 	"set background=light
 	set background=dark
-	colorscheme solarized
+	"colorscheme solarized
+	call <SID>RandColorScheme()
 endif
 
 " OS Detection
