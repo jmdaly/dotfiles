@@ -173,8 +173,10 @@ endfunction
 if has("gui_running")
 	set mousemodel=popup
 
+	" TODO Write a command to toggle this
 	"set background=light
 	set background=dark
+
 	"colorscheme solarized
 	call <SID>RandColorScheme()
 endif
