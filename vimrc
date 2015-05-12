@@ -292,6 +292,9 @@ set laststatus=2
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Certain number of spaces are allowed after a tab (so, /**\n* comments can work
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 """""""""""""""""""" /Airline Config """"""""""""""""""""""
 
 
@@ -327,6 +330,7 @@ let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal
 let g:dbext_default_profile_mysql_mayofest = 'type=MYSQL:user=www:password=hyper:dbname=mayofest'
 
 let g:dbext_default_profile = '3dri'
+"let g:dbext_default_profile = 'mayofest'
 
 nnoremap <leader>sel :DBListConnections<CR>
 nnoremap <leader>dep :DBProfilesRefresh<CR>
