@@ -161,8 +161,8 @@ filetype plugin indent on	 " required
 " Random Colorscheme
 function! s:RandColorScheme()
 	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
-	"echo "Loading colorscheme " s:scheme
 	execute ':colorscheme '.s:scheme
+	echom "Loading colorscheme " s:scheme
 endfunction
 :map <Leader>rcs :call <SID>RandColorScheme()<CR>
 

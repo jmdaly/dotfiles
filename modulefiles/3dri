@@ -14,13 +14,15 @@ module-whatis	"loads the 3DRF environment"
 
 set ARCH       [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 
-set BASE       "~/workspace/opal2"
-set VENDOR     ${BASE}/o2linux64
-set src        ${BASE}/3dri
-set app_rel    Applications/OPAL2
-set bld        ${BASE}/build-3dri-${ARCH}-release
-set bld_debug  ${BASE}/build-3dri-${ARCH}-debug
-set bldw       ${BASE}/3dri-build-winx64-release
+set HOME        $::env(HOME)
+set BASE        "${HOME}/workspace/opal2"
+set VENDOR      ${BASE}/o2linux64
+set src         ${BASE}/3dri
+set app_rel     Applications/OPAL2
+set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
+set bld_release ${BASE}/build-3dri-${ARCH}-release
+set bld         ${bld_debug}
+set bldw        ${BASE}/3dri-build-winx64-release
 
 set apps        ${src}/${app_rel}
 set appb        ${bld}/${app_rel}
@@ -34,7 +36,9 @@ setenv appb         ${appb}
 setenv appb_debug   ${appb_debug}
 
 # Web Scheduler
-setenv  wss         ${apps}/3DRiWebScheduler
+set     ws_base     ${apps}/3DRiWebScheduler
+set     wst         ${ws_base}/test
+setenv  wss         ${ws_base}/src
 set     wsb         ${appb}/3DRiWebScheduler
 set     wsb_debug   ${appb_debug}/3DRiWebScheduler
 setenv  wsb         ${wsb}
@@ -46,7 +50,7 @@ set ws_args " --docroot . --http-address 0.0.0.0 --http-port ${port} -c ntcConfi
 set-alias wsl "tail -f 3dri.log"
 
 set-alias runWS "cwt; ${wsb}/3DRiWebScheduler ${ws_args};"
-set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args};"
+set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=${ws_base};"
 
 set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
 
@@ -56,3 +60,9 @@ set-alias LcmLogPlayer "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
 
 # Examples
 setenv wte /usr/lib/Wt/examples
+
+# Put 3DRi install in my path
+prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
+
+# Rebuilt rtags.  Run from $bld or $bld_debug
+set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
