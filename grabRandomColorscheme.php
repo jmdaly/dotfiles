@@ -15,6 +15,7 @@ $blacklist = array(
 	'256-grayvim',
 	'zephyr', 'miko',
 	'golded',
+	'colorscheme_template',
 );
 
 // Not yet used, but a place to save the ones
@@ -26,6 +27,12 @@ $whitelist = array(
 	'herald',
 	'swamplight',
 	'summerfruits256',
+	'desertedoceanburnt',
+	'eclipse',
+	'lingodirector',
+	'dusk',
+	'PapayaWhip',
+	'nicotine',
 );
 
 // TODO not used yet
