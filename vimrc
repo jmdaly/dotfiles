@@ -165,6 +165,9 @@ filetype plugin indent on	 " required
 
 
 " Random Colorscheme
+" TODO Add 'go to last colorschem'
+" TODO Add 'mark as terrible colorscheme'
+" TODO Add 'mark as good colorscheme'
 function! s:RandColorScheme()
 	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
 	execute ':colorscheme '.s:scheme
