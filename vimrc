@@ -111,6 +111,9 @@ endif
 " Turn line numbers on:
 set number
 
+" Make searching case-insensitive:
+set ignorecase
+
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
 
