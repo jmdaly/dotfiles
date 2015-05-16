@@ -132,7 +132,7 @@ Plugin 'lyuts/vim-rtags'
 Plugin 'vim-scripts/dbext.vim'
 
 " XML helper
-Plugin 'othree/xml.vim'
+"Plugin 'othree/xml.vim'
 
 " Folding
 Plugin 'luochen1990/rainbow'

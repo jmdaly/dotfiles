@@ -15,6 +15,7 @@ $blacklist = array(
 	'256-grayvim',
 	'zephyr', 'miko',
 	'golded',
+	'potts',
 );
 
 // Not yet used, but a place to save the ones
@@ -26,6 +27,7 @@ $whitelist = array(
 	'herald',
 	'swamplight',
 	'summerfruits256',
+	'moss',
 );
 
 // TODO not used yet
