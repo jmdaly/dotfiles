@@ -17,6 +17,7 @@ $blacklist = array(
 	'golded',
 	'potts',
 	'colorscheme_template',
+	'rcg_term',
 );
 
 // Not yet used, but a place to save the ones
@@ -35,6 +36,10 @@ $whitelist = array(
 	'dusk',
 	'PapayaWhip',
 	'nicotine',
+	'mud',
+	'mopkai',
+	'fruity',
+	'pspad',
 );
 
 // TODO not used yet
