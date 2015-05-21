@@ -42,6 +42,7 @@ $whitelist = array(
 	'pspad',
 	'kalisi',
 	'smp',
+	'desertedoceanburnt',
 );
 
 // TODO not used yet
