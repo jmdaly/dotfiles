@@ -40,6 +40,8 @@ $whitelist = array(
 	'mopkai',
 	'fruity',
 	'pspad',
+	'kalisi',
+	'smp',
 );
 
 // TODO not used yet
