@@ -18,6 +18,8 @@ $blacklist = array(
 	'potts',
 	'colorscheme_template',
 	'rcg_term',
+	'pic',
+	'dark-ruby',
 );
 
 // Not yet used, but a place to save the ones
@@ -43,6 +45,10 @@ $whitelist = array(
 	'kalisi',
 	'smp',
 	'guardian',
+	'mellow',
+	'sand',
+	'selenitic',
+	'underwater',
 );
 
 // TODO not used yet
