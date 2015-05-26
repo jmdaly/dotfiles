@@ -49,6 +49,7 @@ $whitelist = array(
 	'sand',
 	'selenitic',
 	'underwater',
+	'desertedoceanburnt',
 );
 
 // TODO not used yet
