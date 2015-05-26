@@ -4,6 +4,7 @@ alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias ls="ls --color=auto -lhtrF"
 #alias gvim="gvim -f"
+alias grep="grep --color=always"
 
 # Env Can doesn't have zsh..
 alias gst="git status -uno"

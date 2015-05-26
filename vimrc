@@ -72,6 +72,9 @@ if is_win==0 && domain!="school"
 	Plugin 'rdnetto/YCM-Generator'
 endif
 
+" PHP Complete
+Plugin 'shawncplus/phpcomplete.vim'
+
 " NERD Tree - file explorer for vim
 Plugin 'scrooloose/nerdtree'
 
@@ -270,6 +273,13 @@ if has('unix')
 
 	" Ignore large files (BONA db's for instance)
 	let g:ycm_disable_for_files_larger_than_kb = 300
+
+	" Shut off preview window on PHP files
+	if (&ft=='php')
+		let g:ycm_add_preview_to_completeopt=0
+	endif
+	" Alternatively..
+	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""

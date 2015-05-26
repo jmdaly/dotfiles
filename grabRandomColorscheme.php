@@ -18,6 +18,8 @@ $blacklist = array(
 	'potts',
 	'colorscheme_template',
 	'rcg_term',
+	'pic',
+	'dark-ruby',
 );
 
 // Not yet used, but a place to save the ones
@@ -40,11 +42,18 @@ $whitelist = array(
 	'sf',
 	'mud',
 	'mopkai',
+	'base16-ateliersulphurpool',
 	'fruity',
 	'pspad',
 	'kalisi',
 	'smp',
+	'guardian',
+	'mellow',
+	'sand',
+	'selenitic',
+	'underwater',
 	'desertedoceanburnt',
+	'inkpot',
 );
 
 // TODO not used yet
