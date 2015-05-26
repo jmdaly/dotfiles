@@ -8,6 +8,11 @@ $dirs = array(
 	"$home/.vim/colors",
 );
 
+// Script example.php
+$opts = getopt("w");
+$use_whitelist=array_key_exists('w', $opts);
+
+
 // Colour schemes that are just awefule
 $blacklist = array(
 	'adobe',
@@ -61,17 +66,21 @@ $mode = array(
 	'256-grayvim'=>'dark',
 );
 
-// Build cache
-$files = '';
-exec("find ". join(' ', $dirs) ." -type f -iname '*.vim' -exec basename \{\} \;", $files);
-//print_r($files);
+if ($use_whitelist) {
+	$scheme=$whitelist[rand(0, count($whitelist)-1)];
+} else {
+	// Build cache
+	$files = '';
+	exec("find ". join(' ', $dirs) ." -type f -iname '*.vim' -exec basename \{\} \;", $files);
+	//print_r($files);
 
-$scheme = '';
-while (true) {
-	$scheme=$files[rand(0, count($files)-1)];
-	$scheme = preg_replace('/\.vim$/', '', $scheme);
-	$scheme = trim($scheme);
-	if (array_search($scheme, $blacklist) === false) break;
+	$scheme = '';
+	while (true) {
+		$scheme=$files[rand(0, count($files)-1)];
+		$scheme = preg_replace('/\.vim$/', '', $scheme);
+		$scheme = trim($scheme);
+		if (array_search($scheme, $blacklist) === false) break;
+	}
 }
 
 print $scheme;

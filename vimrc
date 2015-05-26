@@ -178,6 +178,14 @@ function! s:RandColorScheme()
 endfunction
 :map <Leader>rcs :call <SID>RandColorScheme()<CR>
 
+" Grab a random whitelisted colour scheme
+function! s:RandWhiteListColorScheme()
+	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php -w')
+	execute ':colorscheme '.s:scheme
+	echom "Loading whitelist colorscheme " s:scheme
+endfunction
+:map <Leader>wcs :call <SID>RandWhiteListColorScheme()<CR>
+
 " Execute PHP lines http://stackoverflow.com/a/5622258/1861346
 ":autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
 
