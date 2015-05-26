@@ -36,6 +36,8 @@ $whitelist = array(
 	'dusk',
 	'PapayaWhip',
 	'nicotine',
+	'abra',
+	'sf',
 	'mud',
 	'mopkai',
 	'fruity',
