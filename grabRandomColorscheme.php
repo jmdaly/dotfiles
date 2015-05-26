@@ -40,6 +40,7 @@ $whitelist = array(
 	'nicotine',
 	'mud',
 	'mopkai',
+	'base16-ateliersulphurpool',
 	'fruity',
 	'pspad',
 	'kalisi',
@@ -50,6 +51,7 @@ $whitelist = array(
 	'selenitic',
 	'underwater',
 	'desertedoceanburnt',
+	'inkpot',
 );
 
 // TODO not used yet
