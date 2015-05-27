@@ -69,8 +69,8 @@ Plugin 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plugin 'bling/vim-airline'
 
-" Switch between header and source files:
-Plugin 'vim-scripts/a.vim'
+" A plugin to switch between header and source files:
+Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
 Plugin 'jeetsukumaran/vim-buffergator'
@@ -171,6 +171,10 @@ nmap <F8> :TagbarToggle<CR>
 map <F5> :NERDTreeToggle<CR>
 let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
+
+" Mapping for fswitch, to switch between header
+" and source:
+nmap <silent> <Leader>of :FSHere<cr>
 
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
