@@ -115,7 +115,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 
 " Switch between header and source files:
-Plugin 'vim-scripts/a.vim'
+Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
 Plugin 'jeetsukumaran/vim-buffergator'
