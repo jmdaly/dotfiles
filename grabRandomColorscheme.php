@@ -40,6 +40,7 @@ $whitelist = array(
 	'desertedoceanburnt',
 	'eclipse',
 	'lingodirector',
+	'busybee',
 	'dusk',
 	'PapayaWhip',
 	'nicotine',
