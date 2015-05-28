@@ -61,6 +61,8 @@ antigen apply
 export EDITOR=vim
 export TERM=xterm-256color
 
+# This doesn't seem to be applying when at the top
+setopt no_share_history
 
 # Autocompletion with an arrow-key driven interface
 zstyle ':completion:*' menu select
@@ -137,6 +139,7 @@ if [[ $(hostname) == "khea" ]]; then
 	module load modules
 
 	module load mayofest
+	module load diplomacy
 	module load bona
 	module load youtuber
 	#module load gys

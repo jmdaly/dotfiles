@@ -1,0 +1,39 @@
+#%Module1.0#####################################################################
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+        puts stderr "diplomacy -  Loads development env for the diplomacy game"
+}
+
+module-whatis	"loads Diplomacy"
+
+# for Tcl script use only
+set           version    3.2.9
+
+set           BASE_DIR   "/home/matt/diplomacy-engine"
+
+set           PROPEL_BIN "${BASE_DIR}/vendor/propel/propel/bin"
+prepend-path  PATH       "${PROPEL_BIN}"
+#set-alias     propel     "${PROPEL_BIN}/propel.php"
+
+setenv        orm        "${BASE_DIR}/orm/classes/DiplomacyOrm"
+set           api        "${BASE_DIR}/api"
+setenv        api        $api
+setenv        rest       $api
+setenv        oauth      "${BASE_DIR}/htdocs/oauth"
+setenv        listen     "${BASE_DIR}/htdocs/listeners"
+
+# probably change to webapp later
+setenv        diplomacy  "${BASE_DIR}/src"
+
+set-alias     db         "mysql -u www -phyper diplomacy"
+
+#set  log_dir "/var/log/apache2/"
+set  log_dir "${BASE_DIR}/logs/"
+#set logs "${log_dir}/{access,error}.log"
+set logs "${log_dir}/error.log"
+
+set-alias fixperms "sudo chmod o+r ${logs}; sudo chmod 777 /tmp/diplomacy.log"
+set-alias logs "tail -f /tmp/diplomacy.log ${logs} &"
