@@ -18,10 +18,12 @@ set           PROPEL_BIN "${BASE_DIR}/vendor/propel/propel/bin"
 prepend-path  PATH       "${PROPEL_BIN}"
 #set-alias     propel     "${PROPEL_BIN}/propel.php"
 
+prepend-path  PATH       "${BASE_DIR}/bin"
+
 setenv        orm        "${BASE_DIR}/orm/classes/DiplomacyOrm"
 set           api        "${BASE_DIR}/api"
 setenv        api        $api
-setenv        rest       $api
+setenv        rest       "${BASE_DIR}/lib/DiplomacyEngineRestApi/v1"
 setenv        oauth      "${BASE_DIR}/htdocs/oauth"
 setenv        listen     "${BASE_DIR}/htdocs/listeners"
 
