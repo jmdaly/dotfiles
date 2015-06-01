@@ -123,6 +123,9 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
+" Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
+Plugin 'yegappan/mru'
+
 " A plugin to use rtags in vim. (rtags allows for code following,
 " some refactoring, etc.)
 " Ensure to run the following in the build directory that uses rtags
@@ -355,15 +358,16 @@ endif
 """""""""""""""""""" DBext """""""""""""""""""""""
 " let g:dbext_default_profile_<profile_name> = '<connection string>'
 " https://github.com/vim-scripts/dbext.vim
+" https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
 let g:dbext_default_profile_mysql_mayofest = 'type=MYSQL:user=www:password=hyper:dbname=mayofest'
 
 let g:dbext_default_profile = '3dri'
+map <leader>lt :DBListTable<CR>
 "let g:dbext_default_profile = 'mayofest'
 
 nnoremap <leader>sel :DBListConnections<CR>
 nnoremap <leader>dep :DBProfilesRefresh<CR>
-
 """""""""""""""""""" /DBext """"""""""""""""""""""
 
 
