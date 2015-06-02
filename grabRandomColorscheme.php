@@ -16,6 +16,7 @@ $use_whitelist=array_key_exists('w', $opts);
 // Colour schemes that are just awefule
 $blacklist = array(
 	'adobe',
+	'bw',
 	'nerv-ous',
 	'256-grayvim',
 	'zephyr', 'miko',
@@ -34,6 +35,7 @@ $whitelist = array(
 	'gor',
 	'ecostation',
 	'herald',
+	'selenitic',
 	'swamplight',
 	'summerfruits256',
 	'moss',
@@ -56,9 +58,8 @@ $whitelist = array(
 	'guardian',
 	'mellow',
 	'sand',
-	'selenitic',
 	'underwater',
-	'desertedoceanburnt',
+	'desertedocean',
 	'inkpot',
 );
 
