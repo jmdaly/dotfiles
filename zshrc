@@ -154,6 +154,12 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module load modules
 
 	module load neptec 3dri
+
+	# Set up ninja tab completion:
+	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		source /usr/share/zsh/functions/Completion/_ninja
+	fi;
+
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
