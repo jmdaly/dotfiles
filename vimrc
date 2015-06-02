@@ -137,7 +137,7 @@ Plugin 'vim-scripts/dbext.vim'
 " XML helper
 "Plugin 'othree/xml.vim'
 
-" Folding
+" Colour coding nests
 Plugin 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
