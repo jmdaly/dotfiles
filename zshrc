@@ -120,10 +120,10 @@ declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
 	# Environmental Modules
 	case "$0" in
-          	  -sh|sh|*/sh)	modules_shell=sh ;;
-       	   -ksh|ksh|*/ksh)	modules_shell=ksh ;;
-       	   -zsh|zsh|*/zsh)	modules_shell=zsh ;;
-    	-bash|bash|*/bash)	modules_shell=bash ;;
+	-sh|sh|*/sh)	modules_shell=sh ;;
+	-ksh|ksh|*/ksh)	modules_shell=ksh ;;
+	-zsh|zsh|*/zsh)	modules_shell=zsh ;;
+	-bash|bash|*/bash)	modules_shell=bash ;;
 	esac
 
 	export MODULEPATH=/usr/share/modules/modulefiles
@@ -170,3 +170,5 @@ elif [[ $(hostname) = dena* ]]; then
 		module load cmsh cmgui
 	fi
 fi;
+
+# vim: sw=4 sts=0 ts=4 noet :
