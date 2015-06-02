@@ -23,6 +23,9 @@ export EDITOR=vim
 
 export TERM="xterm-256color"
 
+# Set up ninja tab completion:
+source ~/dotfiles/ninja/_ninja
+
 # Adjust the path
 source ~/.pathrc
 
