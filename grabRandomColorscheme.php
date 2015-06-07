@@ -41,6 +41,7 @@ $whitelist = array(
 	'desertedoceanburnt',
 	'eclipse',
 	'lingodirector',
+	'made_of_code',
 	'busybee',
 	'dusk',
 	'PapayaWhip',
