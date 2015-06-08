@@ -28,6 +28,7 @@ $blacklist = array(
 	'rcg_term',
 	'pic',
 	'dark-ruby',
+	'enzyme',
 );
 
 // Not yet used, but a place to save the ones
@@ -44,6 +45,7 @@ $whitelist = array(
 	'desertedoceanburnt',
 	'eclipse',
 	'lingodirector',
+	'made_of_code',
 	'busybee',
 	'rdark',
 	'dusk',
@@ -66,6 +68,7 @@ $whitelist = array(
 	'sand',
 	'underwater',
 	'desertedocean',
+	'caramel',
 	'inkpot',
 );
 
