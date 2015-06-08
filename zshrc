@@ -120,10 +120,10 @@ declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
 	# Environmental Modules
 	case "$0" in
-          	  -sh|sh|*/sh)	modules_shell=sh ;;
-       	   -ksh|ksh|*/ksh)	modules_shell=ksh ;;
-       	   -zsh|zsh|*/zsh)	modules_shell=zsh ;;
-    	-bash|bash|*/bash)	modules_shell=bash ;;
+	-sh|sh|*/sh)	modules_shell=sh ;;
+	-ksh|ksh|*/ksh)	modules_shell=ksh ;;
+	-zsh|zsh|*/zsh)	modules_shell=zsh ;;
+	-bash|bash|*/bash)	modules_shell=bash ;;
 	esac
 
 	export MODULEPATH=/usr/share/modules/modulefiles
@@ -154,6 +154,12 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module load modules
 
 	module load neptec 3dri
+
+	# Set up ninja tab completion:
+	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		source /usr/share/zsh/functions/Completion/_ninja
+	fi;
+
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
@@ -170,3 +176,5 @@ elif [[ $(hostname) = dena* ]]; then
 		module load cmsh cmgui
 	fi
 fi;
+
+# vim: sw=4 sts=0 ts=4 noet :
