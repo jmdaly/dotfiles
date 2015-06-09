@@ -66,3 +66,6 @@ prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
 
 # Rebuilt rtags.  Run from $bld or $bld_debug
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
+
+# PCL Binary lib paths
+prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.48/lib:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.56/lib"
