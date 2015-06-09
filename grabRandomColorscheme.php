@@ -52,6 +52,7 @@ $whitelist = array(
 	'PapayaWhip',
 	'nicotine',
 	'abra',
+	'two2tango',
 	'sf',
 	'mud',
 	'guepardo',
