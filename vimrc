@@ -115,6 +115,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'bling/vim-airline'
 
 " Switch between header and source files:
+" TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
 Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
