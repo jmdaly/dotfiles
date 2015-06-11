@@ -49,6 +49,7 @@ $whitelist = array(
 	'busybee',
 	'rdark',
 	'dusk',
+	'3dglasses',
 	'PapayaWhip',
 	'nicotine',
 	'abra',
