@@ -153,6 +153,9 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " Tabular, align equals
 Plugin 'godlygeek/tabular'
 
+" Show markers
+Plugin 'kshenoy/vim-signature'
+
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
 
