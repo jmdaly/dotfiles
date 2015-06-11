@@ -30,4 +30,10 @@ if { ${hostname} == "pof" } {
 # Open a remote desktop to a windows box
 set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
 
+# Put 3DRi install in my path
+prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
+
+# A LAS/PCD/VTK viewer
+prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
+
 # vim: ts=3 sts=0 sw=3 noet :

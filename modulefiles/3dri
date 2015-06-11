@@ -61,9 +61,6 @@ set-alias LcmLogPlayer "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
 # Examples
 setenv wte /usr/lib/Wt/examples
 
-# Put 3DRi install in my path
-prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
-
 # Rebuilt rtags.  Run from $bld or $bld_debug
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 
