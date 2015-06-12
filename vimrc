@@ -111,6 +111,9 @@ endif
 " Turn line numbers on:
 set number
 
+" Turn syntax on:
+syntax on
+
 " Make searching case-insensitive:
 set ignorecase
 
@@ -178,3 +181,6 @@ nmap <silent> <Leader>of :FSHere<cr>
 
 " A key map to run ctags:
 nnoremap <leader>ct :!ctags .<CR>
+
+" Key mappings for clang-format, to format source code:
+map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
