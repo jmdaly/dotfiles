@@ -13,6 +13,11 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
+# Plugin to check if a 256 colour terminal
+# is available, and enable all colours if
+# it is
+antigen bundle chrissicool/zsh-256color
+
 # Load the theme.
 antigen theme blinks
 
@@ -20,8 +25,6 @@ antigen theme blinks
 antigen apply
 
 export EDITOR=vim
-
-export TERM="xterm-256color"
 
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
