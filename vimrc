@@ -82,6 +82,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 " code following, some refactoring, etc.)
 Plugin 'lyuts/vim-rtags'
 
+" kalisi colour scheme:
+Plugin 'freeo/vim-kalisi'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,11 +105,10 @@ filetype plugin indent on    " required
 set rtp+=~/dotfiles
 
 " Set a colour scheme for vim:
-if has("gui_running")
-	syntax enable
-	set background=dark
-	colorscheme solarized
-endif
+syntax enable
+set background=dark
+colorscheme kalisi
+set t_Co=256
 
 " Turn line numbers on:
 set number
