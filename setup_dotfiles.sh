@@ -73,6 +73,9 @@ for f in ${files[@]}; do
 	fi
 done;
 
+cd $h
+ln -s .vimrc .nvimrc
+
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
 # in bash in order to have it on CMC machines
