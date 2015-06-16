@@ -69,7 +69,7 @@ for f in ${files[@]}; do
 			fi;
 		fi
 	else
-		echo "Skipping synlink $f"
+		echo "Skipping symlink $f"
 	fi
 done;
 
