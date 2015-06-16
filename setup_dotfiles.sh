@@ -80,3 +80,5 @@ ln -s .vimrc .nvimrc
 # and this is writting in bash.  I have to keep it
 # in bash in order to have it on CMC machines
 #cd ${h} && source .zshrc
+
+# vim: ts=3 sw=3 sts=0 noet :
