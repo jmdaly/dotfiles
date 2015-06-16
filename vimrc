@@ -122,6 +122,9 @@ set ignorecase
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
 
+" Enable the mouse, even in non-GUI:
+set mouse+=a
+
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -171,6 +174,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>
+" Have it autofocus on open:
+let g:tagbar_autofocus = 1
 
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
