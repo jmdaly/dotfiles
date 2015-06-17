@@ -1,10 +1,10 @@
 [user]
-	name = John M. Daly
-	email = jmdaly@gmail.com
+	name = Matthew Russell
+	email = mrussell@neptec.com
 [color]
 	ui = auto
 
 [alias]
 lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [credential]
-	helper = cache --timeout=28800
+	helper = cache --timeout=288000

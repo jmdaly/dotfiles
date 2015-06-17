@@ -1,0 +1,25 @@
+#%Module1.0#####################################################################
+##
+## modules armnlib
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "mayofest -  Loads development env for YouTuber stuff"
+}
+
+
+module-whatis	"loads YouTuber env"
+
+# for Tcl script use only
+set	version		3.2.9
+
+set YT_DIR "/home/matt/youtuber"
+
+#set-alias propel-gen "${YT_DIR}/master/Propel/generator/bin/propel-gen"
+#prepend-path PATH "${YT_DIR}
+
+setenv yt $YT_DIR
+setenv ozone "${YT_DIR}/ozone"

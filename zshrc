@@ -3,6 +3,8 @@
 
 # Uncomment if I want history shared across all terminals
 # setopt histignorealldups sharehistory
+setopt no_share_history
+#unsetopt share_history
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
@@ -32,13 +34,13 @@ HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 
-
 source ~/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
+# These all take about a second to load
 antigen bundle git
 antigen bundle heroku
 antigen bundle pip
@@ -55,10 +57,50 @@ antigen theme blinks
 # Tell antigen that you're done.
 antigen apply
 
+# Use VIM wherever possible.  The latter fixes colours in non-gvim
 export EDITOR=vim
+export TERM=xterm-256color
+
+# This doesn't seem to be applying when at the top
+setopt no_share_history
+
+# Autocompletion with an arrow-key driven interface
+zstyle ':completion:*' menu select
+
+# Autocompletion of command line switches for aliases
+setopt completealiases
+
+# Ignore untracked files for showing status on prompt
+export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
+
+###########################################################
+# Define some keys ( http://zshwiki.org/home/zle/bindkeys )
+#
+# Not sure if these are still needed.  I had only implemented
+# them on dena
+# #
+typeset -A key
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Delete]=${terminfo[kdch1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+
+# Setting up more key bindings
+bindkey '' beginning-of-line
+bindkey '' end-of-line
+bindkey '' history-incremental-search-backward
+bindkey "${key[Delete]}" delete-char
+###########################################################
+
 
 # Adjust the path
 source ~/.pathrc
@@ -69,25 +111,35 @@ if [ -e ~/.bash_aliases ]; then
 	source ~/.bash_aliases
 fi
 
-# Environmental Modules
-case "$0" in
-          -sh|sh|*/sh)	modules_shell=sh ;;
-       -ksh|ksh|*/ksh)	modules_shell=ksh ;;
-       -zsh|zsh|*/zsh)	modules_shell=zsh ;;
-    -bash|bash|*/bash)	modules_shell=bash ;;
-esac
-export MODULEPATH=/home/matt/.modulefiles
-# System
-#export MODULEPATH=/usr/share/modules/modulefiles
+# Dir colours, used by solarized
+if [ -x /usr/bin/dircolors ]; then
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
 
-#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+declare -f module > /dev/null;
+if [[ $? == 1 ]]; then
+	# Environmental Modules
+	case "$0" in
+	-sh|sh|*/sh)	modules_shell=sh ;;
+	-ksh|ksh|*/ksh)	modules_shell=ksh ;;
+	-zsh|zsh|*/zsh)	modules_shell=zsh ;;
+	-bash|bash|*/bash)	modules_shell=bash ;;
+	esac
+
+	export MODULEPATH=/usr/share/modules/modulefiles
+
+	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+	module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
+	module use /home/matt/.modulefiles
+fi;
+
+
 if [[ $(hostname) == "khea" ]]; then
-	module use /usr/share/modules/versions
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
-	#module load mayofest 
+	module load mayofest
+	module load diplomacy
 	module load bona
 	module load youtuber
 	#module load gys
@@ -101,5 +153,28 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load 3dri
+	module load neptec 3dri
+
+	# Set up ninja tab completion:
+	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		source /usr/share/zsh/functions/Completion/_ninja
+	fi;
+
+elif [[ $(hostname) = dena* ]]; then
+	# This should be a system "module use"!
+	module use /cm/shared/denaModules
+
+	# defaults
+	module load shared modules
+
+	# Development
+	export PGI_DEFAULT=2015
+	module load pgi slurm
+
+	if [[ $(hostname) == "dena" ]]; then
+		# Admin modules
+		module load cmsh cmgui
+	fi
 fi;
+
+# vim: sw=4 sts=0 ts=4 noet :
