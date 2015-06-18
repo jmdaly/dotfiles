@@ -162,6 +162,9 @@ Plugin 'kshenoy/vim-signature'
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
+" Concurrent Editing
+Plugin 'floobits/floobits-neovim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
 filetype plugin indent on	 " required
