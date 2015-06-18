@@ -323,6 +323,10 @@ if is_win==0
 	" Add to the runtime path so that custom
 	" snippets can be found:
 	set rtp+=~/dotfiles
+
+	if domain=="neptec"
+		set rtp+=~/workspace/ScriptsAndTools
+	endif
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
