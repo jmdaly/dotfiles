@@ -69,11 +69,16 @@ for f in ${files[@]}; do
 			fi;
 		fi
 	else
-		echo "Skipping synlink $f"
+		echo "Skipping symlink $f"
 	fi
 done;
+
+cd $h
+ln -s .vimrc .nvimrc
 
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
 # in bash in order to have it on CMC machines
 #cd ${h} && source .zshrc
+
+# vim: ts=3 sw=3 sts=0 noet :

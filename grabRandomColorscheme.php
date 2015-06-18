@@ -36,6 +36,7 @@ $blacklist = array(
 $whitelist = array(
 	'doorhinge',
 	'gor',
+	'darkdot',
 	'ecostation',
 	'herald',
 	'selenitic',

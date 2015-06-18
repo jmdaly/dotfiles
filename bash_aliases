@@ -2,7 +2,7 @@ alias less="less -I --tabs=3"
 alias screen="screen -e^Ff"
 alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
-alias ls="ls --color=auto -lhtrF"
+alias ls="ls --color=auto -lAhtrF"
 #alias gvim="gvim -f"
 alias grep="grep --color=always"
 
