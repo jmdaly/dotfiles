@@ -37,6 +37,7 @@ $whitelist = array(
 	'doorhinge',
 	'gor',
 	'darkdot',
+	'flatland',
 	'ecostation',
 	'herald',
 	'selenitic',
