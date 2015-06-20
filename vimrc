@@ -373,10 +373,24 @@ endif
 " https://github.com/vim-scripts/dbext.vim
 " https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
+let g:dbext_default_profile_ademir = 'type=SQLITE:dbname=/home/matt/tabletopics/ademir.db'
 let g:dbext_default_profile_mayofest = 'type=MYSQL:user=www:passwd=hyper:dbname=mayofest'
 
 "let g:dbext_default_profile = '3dri'
+"let g:dbext_default_profile = 'ademir'
 let g:dbext_default_profile = 'mayofest'
+
+augroup neptec
+	au!
+	autocmd BufRead */3dri/* DBSetOption profile='3dri'
+augroup end
+
+augroup mayofest
+	au!
+	autocmd BufRead */mayofest/* DBSetOption profile=mayofest
+augroup end
+
+
 map <leader>lt :DBListTable<CR>
 
 nnoremap <leader>sel :DBListConnections<CR>
