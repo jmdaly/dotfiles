@@ -116,6 +116,10 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
+if [[ -e ~/bin ]]; then
+	PATH=~/bin:$PATH
+fi;
+
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
 	# Environmental Modules
