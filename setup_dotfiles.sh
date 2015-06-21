@@ -32,7 +32,10 @@ git submodule init
 git submodule update
 cd ${h}
 
-if [[ "${TRUE_HOST}" != "" ]]; then
+if [[ "${TRUE_HOST}" == "dena" ]]; then
+	# On Dena, but on an env can profile
+	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .dircolors .sqliterc .ctags)
+elif [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
 	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
 else
