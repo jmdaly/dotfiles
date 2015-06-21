@@ -4,4 +4,5 @@ module-whatis	"loads linux brew"
 # for Tcl script use only
 set	version		3.2.9
 
+set HOME        $::env(HOME)
 prepend-path PATH ${HOME}/.linuxbrew/bin
