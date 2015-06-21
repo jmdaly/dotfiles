@@ -36,3 +36,10 @@ setenv gm            $GEMMACH
 #setenv GEMMACH_INCLUDE_DIR $GEMMACH/include
 #setenv GEMMACH_inc   $GEMMACH/include
 
+# This probably should be here, look at it again later.
+set ARCH Linux_x86-64_pgi10xx
+setenv ARCH $ARCH
+setenv EC_ARCH $ARCH
+setenv BASE_ARCH $ARCH
+
+setenv MODEL_PATH /home/matt/gm/paul.2012-08-02.2/ccc/GEM/gem3.3.6/GEMDM_shared+/v_3.3.6/
