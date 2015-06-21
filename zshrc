@@ -169,7 +169,7 @@ elif [[ $(hostname) = dena* ]]; then
 
 	# Development
 	export PGI_DEFAULT=2015
-	module load pgi slurm
+	module load pgi slurm brew
 
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules
