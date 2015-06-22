@@ -364,7 +364,6 @@ nnoremap <leader>n :NERDTree .<CR>
 
 if is_win==0 && domain ==? 'neptec'
 
-
 	"""""""""""""""""""" ctags """""""""""""""""""""""
 	" A key map to run ctags:
 	nnoremap <leader>ct :!ctags .<CR>
@@ -446,10 +445,6 @@ endif
 set hlsearch
 
 " try to automatically fold xml
-"set foldmethod=syntax
-"set foldlevelstart=1
-"set foldlevel=1
-"set foldnestmax=2
 let xml_syntax_folding=1
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
