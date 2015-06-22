@@ -19,3 +19,5 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gco="git checkout"
 fi
 alias glog="git log --follow --name-status"
+
+# vim : ts=3 sts=0 shiftwidth=3 noet ft=bash ffs=unix :

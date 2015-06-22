@@ -181,4 +181,4 @@ elif [[ $(hostname) = dena* ]]; then
 	fi
 fi;
 
-# vim: sw=4 sts=0 ts=4 noet :
+# vim: sw=4 sts=0 ts=4 noet ffs=unix :
