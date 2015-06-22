@@ -1,0 +1,17 @@
+#%Module1.0#####################################################################
+##
+## modules pgi
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+
+module-whatis	"Matt's user module file"
+
+# for Tcl script use only
+set	version		3.2.9
+
+# Set the user level
+module-user exp
+module-log debug stderr
+
+module use -a $HOME/.modulefiles/

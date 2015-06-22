@@ -75,6 +75,9 @@ done;
 
 cd $h
 ln -s .vimrc .nvimrc
+if [[ -e .modulefiles ]]; then
+	ln -s .modulefiles/.modulerc ./
+fi
 
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
