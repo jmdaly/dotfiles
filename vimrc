@@ -51,8 +51,6 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-Plugin 'Lokaltog/vim-easymotion'
-
 
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
@@ -146,9 +144,6 @@ endif
 " Database client
 Plugin 'vim-scripts/dbext.vim'
 
-" XML helper
-"Plugin 'othree/xml.vim'
-
 " Colour coding nests
 Plugin 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -158,6 +153,9 @@ Plugin 'godlygeek/tabular'
 
 " Show markers
 Plugin 'kshenoy/vim-signature'
+
+" XML helper
+"Plugin 'othree/xml.vim'
 
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
@@ -424,6 +422,7 @@ let fortran_have_tabs=1
 set number
 set ignorecase
 set noincsearch
+set hlsearch
 
 " Hide mouse when typing
 set mousehide
@@ -440,9 +439,6 @@ if &diff
 	" diff mode
 	set diffopt+=iwhite
 endif
-
-"set ruler
-set hlsearch
 
 " try to automatically fold xml
 let xml_syntax_folding=1
