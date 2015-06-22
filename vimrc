@@ -167,7 +167,6 @@ Plugin 'kshenoy/vim-signature'
 
 if domain !=? 'school'
 	" Concurrent Editing
-	echom "floobits"
 	Plugin 'floobits/floobits-neovim'
 endif
 
