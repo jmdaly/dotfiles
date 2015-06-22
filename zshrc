@@ -133,8 +133,14 @@ if [[ $? == 1 ]]; then
 	export MODULEPATH=/usr/share/modules/modulefiles
 
 	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-	module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
-	module use /home/matt/.modulefiles
+	if [[ $(hostname) == "pontus.cee.carleton.ca" ]]; then
+		modulecmd=/usr/local/Modules/3.2.9/bin/modulecmd
+	else
+		modulecmd=/usr/bin/modulecmd
+	fi
+	module() { eval `${modulecmd} $modules_shell $*`; }
+
+	#module use ${HOST}/.modulefiles
 fi;
 
 
@@ -179,6 +185,9 @@ elif [[ $(hostname) = dena* ]]; then
 		# Admin modules
 		module load cmsh cmgui
 	fi
+
+elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
+	module load pontus
 fi;
 
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
