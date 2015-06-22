@@ -133,13 +133,15 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
 Plugin 'yegappan/mru'
 
-" A plugin to use rtags in vim. (rtags allows for code following,
-" some refactoring, etc.)
-" Ensure to run the following in the build directory that uses rtags
-"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-"    rc -J .
-" And have the rdm service running somewhere in the background.
-Plugin 'lyuts/vim-rtags'
+if domain !=? 'school'
+	" A plugin to use rtags in vim. (rtags allows for code following,
+	" some refactoring, etc.)
+	" Ensure to run the following in the build directory that uses rtags
+	"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+	"    rc -J .
+	" And have the rdm service running somewhere in the background.
+	Plugin 'lyuts/vim-rtags'
+endif
 
 " Database client
 Plugin 'vim-scripts/dbext.vim'
@@ -163,8 +165,9 @@ Plugin 'kshenoy/vim-signature'
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
-if domain !=? 'pontus'
+if domain !=? 'school'
 	" Concurrent Editing
+	echom "floobits"
 	Plugin 'floobits/floobits-neovim'
 endif
 
@@ -312,7 +315,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0 && domain !=? 'pontus'
+if is_win==0 && domain !=? 'school'
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
