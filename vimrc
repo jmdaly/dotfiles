@@ -425,6 +425,7 @@ let fortran_free_source=1
 let fortran_have_tabs=1
 set number
 set ignorecase
+set noincsearch
 
 " Hide mouse when typing
 set mousehide
