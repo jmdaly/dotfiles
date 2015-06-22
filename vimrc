@@ -7,7 +7,7 @@ let hostname = substitute(system('hostname'), '\n', '', '')
 
 if hostname ==? 'pof' || hostname ==? 'tinder'
 	let domain='neptec'
-elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus'
+elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
 elseif $TRUE_HOST !=? ''
 	let domain='school'
@@ -85,7 +85,7 @@ Plugin 'kien/ctrlp.vim'
 " Better C++ Syntax Highlighting:
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
-if is_win==0
+if is_win==0 && domain !=? 'school'
 	" Track the ultisnips engine.
 	Plugin 'SirVer/ultisnips'
 
@@ -163,8 +163,10 @@ Plugin 'kshenoy/vim-signature'
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
-" Concurrent Editing
-Plugin 'floobits/floobits-neovim'
+if domain !=? 'pontus'
+	" Concurrent Editing
+	Plugin 'floobits/floobits-neovim'
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
@@ -310,7 +312,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0
+if is_win==0 && domain !=? 'pontus'
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
