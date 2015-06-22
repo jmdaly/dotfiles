@@ -5,7 +5,7 @@ alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 if [[ "$(hostname)" != "pontus.cee.carleton.ca" ]]; then
 	alias ls="ls --color=auto -lAhtrF"
 else
-	alias ls="ls -lAhtrF"
+	alias ls="ls -lAhtrFG"
 fi
 #alias gvim="gvim -f"
 alias grep="grep --color=always"
