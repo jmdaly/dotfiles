@@ -51,6 +51,7 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
+" Plugin 'Lokaltog/vim-easymotion'
 
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
@@ -105,7 +106,7 @@ endif
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
 " current file and the file around it:
-Plugin 'tpope/vim-sleuth'
+" Plugin 'tpope/vim-sleuth'
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
@@ -120,10 +121,10 @@ Plugin 'bling/vim-airline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-Plugin 'derekwyatt/vim-fswitch'
+" Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
-Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'jeetsukumaran/vim-buffergator'
 
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
@@ -163,10 +164,10 @@ Plugin 'kshenoy/vim-signature'
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
-if domain !=? 'school'
-	" Concurrent Editing
-	Plugin 'floobits/floobits-neovim'
-endif
+"if domain !=? 'school'
+"	" Concurrent Editing
+"	Plugin 'floobits/floobits-neovim'
+"endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
