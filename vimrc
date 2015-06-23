@@ -128,9 +128,8 @@ set mouse+=a
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
-map <c-m> :CtrlPTag<CR>
-" Unmap center/<CR> from launching CTRL-P
-unmap <CR>
+map <leader>m :CtrlPMRU<CR>
+map <leader><Tab> :CtrlPBuffer<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
