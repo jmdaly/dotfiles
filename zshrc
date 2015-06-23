@@ -107,7 +107,6 @@ source ~/.pathrc
 
 # Alises
 if [ -e ~/.bash_aliases ]; then
-	#echo "Sourcing bash_aliases"
 	source ~/.bash_aliases
 fi
 
@@ -116,9 +115,14 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-if [[ -e ~/bin ]]; then
-	PATH=~/bin:$PATH
-fi;
+local -a dirs;
+dirs=(bin utils .linuxbrew/bin);
+for d in $dirs; do
+	dir=~/${d};
+	if [[ -e $dir ]]; then
+		export PATH=~/${dir}:${PATH}
+	fi;
+done
 
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
