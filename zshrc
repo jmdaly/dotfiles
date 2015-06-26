@@ -107,7 +107,6 @@ source ~/.pathrc
 
 # Alises
 if [ -e ~/.bash_aliases ]; then
-	#echo "Sourcing bash_aliases"
 	source ~/.bash_aliases
 fi
 
@@ -115,6 +114,15 @@ fi
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
+
+local -a dirs;
+dirs=(bin utils .linuxbrew/bin);
+for d in $dirs; do
+	dir=~/${d};
+	if [[ -e $dir ]]; then
+		export PATH=~/${dir}:${PATH}
+	fi;
+done
 
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
@@ -129,8 +137,14 @@ if [[ $? == 1 ]]; then
 	export MODULEPATH=/usr/share/modules/modulefiles
 
 	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-	module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
-	module use /home/matt/.modulefiles
+	if [[ $(hostname) == "pontus.cee.carleton.ca" ]]; then
+		modulecmd=/usr/local/Modules/3.2.9/bin/modulecmd
+	else
+		modulecmd=/usr/bin/modulecmd
+	fi
+	module() { eval `${modulecmd} $modules_shell $*`; }
+
+	#module use ${HOST}/.modulefiles
 fi;
 
 
@@ -169,12 +183,15 @@ elif [[ $(hostname) = dena* ]]; then
 
 	# Development
 	export PGI_DEFAULT=2015
-	module load pgi slurm
+	module load pgi slurm brew
 
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules
 		module load cmsh cmgui
 	fi
+
+elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
+	module load pontus
 fi;
 
-# vim: sw=4 sts=0 ts=4 noet :
+# vim: sw=4 sts=0 ts=4 noet ffs=unix :

@@ -39,6 +39,7 @@ setenv appb_debug   ${appb_debug}
 set     ws_base     ${apps}/3DRiWebScheduler
 set     wst         ${ws_base}/test
 setenv  wss         ${ws_base}/src
+setenv  wsi         ${ws_base}/include/3DRiWebScheduler
 set     wsb         ${appb}/3DRiWebScheduler
 set     wsb_debug   ${appb_debug}/3DRiWebScheduler
 setenv  wsb         ${wsb}

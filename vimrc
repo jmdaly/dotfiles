@@ -1,3 +1,4 @@
+
 " Needed for Vundles
 set shell=/bin/bash
 
@@ -6,7 +7,7 @@ let hostname = substitute(system('hostname'), '\n', '', '')
 
 if hostname ==? 'pof' || hostname ==? 'tinder'
 	let domain='neptec'
-elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus'
+elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
 elseif $TRUE_HOST !=? ''
 	let domain='school'
@@ -29,9 +30,9 @@ endif
 
 " Configure some unconventional filetypes
 au BufNewFile,BufRead *.html.base set filetype=html
-au BufNewFile,BufRead *.ftn90 set filetype=fortran
-au BufNewFile,BufRead *.module set filetype=php
-au BufNewFile,BufRead *.gs set filetype=javascript
+au BufNewFile,BufRead *.ftn90     set filetype=fortran
+au BufNewFile,BufRead *.module    set filetype=php
+au BufNewFile,BufRead *.gs        set filetype=javascript
 
 "
 " Vundle.  use :PluginInstall to install all these plugins
@@ -50,8 +51,7 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'tpope/vim-surround'
 
 " Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-Plugin 'Lokaltog/vim-easymotion'
-
+" Plugin 'Lokaltog/vim-easymotion'
 
 " Solarized colour scheme
 Plugin 'altercation/vim-colors-solarized.git'
@@ -84,7 +84,7 @@ Plugin 'kien/ctrlp.vim'
 " Better C++ Syntax Highlighting:
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
-if is_win==0
+if is_win==0 && domain !=? 'school'
 	" Track the ultisnips engine.
 	Plugin 'SirVer/ultisnips'
 
@@ -106,7 +106,7 @@ endif
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
 " current file and the file around it:
-Plugin 'tpope/vim-sleuth'
+" Plugin 'tpope/vim-sleuth'
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
@@ -121,10 +121,10 @@ Plugin 'bling/vim-airline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-Plugin 'derekwyatt/vim-fswitch'
+" Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
-Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'jeetsukumaran/vim-buffergator'
 
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
@@ -132,19 +132,18 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
 Plugin 'yegappan/mru'
 
-" A plugin to use rtags in vim. (rtags allows for code following,
-" some refactoring, etc.)
-" Ensure to run the following in the build directory that uses rtags
-"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-"    rc -J .
-" And have the rdm service running somewhere in the background.
-Plugin 'lyuts/vim-rtags'
+if domain !=? 'school'
+	" A plugin to use rtags in vim. (rtags allows for code following,
+	" some refactoring, etc.)
+	" Ensure to run the following in the build directory that uses rtags
+	"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+	"    rc -J .
+	" And have the rdm service running somewhere in the background.
+	Plugin 'lyuts/vim-rtags'
+endif
 
 " Database client
 Plugin 'vim-scripts/dbext.vim'
-
-" XML helper
-"Plugin 'othree/xml.vim'
 
 " Colour coding nests
 Plugin 'luochen1990/rainbow'
@@ -156,14 +155,19 @@ Plugin 'godlygeek/tabular'
 " Show markers
 Plugin 'kshenoy/vim-signature'
 
+" XML helper
+"Plugin 'othree/xml.vim'
+
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
 
 " JsHints
 "Plugin 'wookiehangover/jshint.vim'
 
-" Concurrent Editing
-Plugin 'floobits/floobits-neovim'
+"if domain !=? 'school'
+"	" Concurrent Editing
+"	Plugin 'floobits/floobits-neovim'
+"endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()				" required
@@ -309,7 +313,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0
+if is_win==0 && domain !=? 'school'
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
@@ -358,7 +362,6 @@ nnoremap <leader>n :NERDTree .<CR>
 
 
 if is_win==0 && domain ==? 'neptec'
-
 
 	"""""""""""""""""""" ctags """""""""""""""""""""""
 	" A key map to run ctags:
@@ -430,6 +433,8 @@ let fortran_free_source=1
 let fortran_have_tabs=1
 set number
 set ignorecase
+set noincsearch
+set hlsearch
 
 " Hide mouse when typing
 set mousehide
@@ -447,14 +452,7 @@ if &diff
 	set diffopt+=iwhite
 endif
 
-"set ruler
-set hlsearch
-
 " try to automatically fold xml
-"set foldmethod=syntax
-"set foldlevelstart=1
-"set foldlevel=1
-"set foldnestmax=2
 let xml_syntax_folding=1
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
