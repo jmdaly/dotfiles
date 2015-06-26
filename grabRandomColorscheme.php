@@ -42,6 +42,7 @@ $whitelist = array(
 	'herald',
 	'selenitic',
 	'swamplight',
+	'PapayaWhip',
 	'summerfruits256',
 	'moss',
 	'desertedoceanburnt',
