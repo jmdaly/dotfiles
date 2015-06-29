@@ -155,6 +155,9 @@ Plugin 'godlygeek/tabular'
 " Show markers
 Plugin 'kshenoy/vim-signature'
 
+" Suppose to make closing splits better (less window resizing)
+Plugin 'moll/vim-bbye.git'
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
@@ -360,6 +363,9 @@ let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
 """""""""""""""""""" /NERDTree """"""""""""""""""""""
 
+""""""""""""""""""""" BBye """"""""""""""""""""""
+:nnoremap <Leader>q :Bdelete<CR>
+""""""""""""""""""""" /BBye """"""""""""""""""""""
 
 if is_win==0 && domain ==? 'neptec'
 
