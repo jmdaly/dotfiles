@@ -165,8 +165,10 @@ Plugin 'kshenoy/vim-signature'
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
 
-" JsHints
-"Plugin 'wookiehangover/jshint.vim'
+" Javascript plugins to try
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'scrooloose/syntastic' " <-- using jshint for syntax
 
 "if domain !=? 'school'
 "	" Concurrent Editing
