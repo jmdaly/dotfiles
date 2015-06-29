@@ -113,6 +113,10 @@ endif
 Plugin 'tpope/vim-fugitive'
 set diffopt+=vertical
 
+" gitgutter - Shows [git] status of each line in a file
+" Toggle with :GitGutterToggle
+Plugin 'airblade/vim-gitgutter'
+
 " Plugin to assist with commenting out blocks of text:
 Plugin 'tomtom/tcomment_vim'
 
@@ -231,6 +235,17 @@ if is_win
 "elseif has('unix')
 "	let matt='is_unix'
 endif
+
+""""""""""""""""""""" Git-Gutter """"""""""""""""""""""""
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+" stage the hunk with <Leader>hs or
+" revert it with <Leader>hr.
+
+" It appears I have to double toggle it to get git gutter to work
+"GitGutterToggle
+"GitGutterToggle
+""""""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
 """"""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
 " Set up Ctrl-P shortcut key for Ctrl-P:
