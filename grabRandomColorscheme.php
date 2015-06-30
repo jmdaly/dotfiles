@@ -23,6 +23,7 @@ $blacklist = array(
 	'golded',
 	'256-jungle',
 	'thestars',
+	'busierbee',
 	'potts',
 	'colorscheme_template',
 	'rcg_term',
