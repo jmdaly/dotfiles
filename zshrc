@@ -120,7 +120,7 @@ dirs=(bin utils .linuxbrew/bin);
 for d in $dirs; do
 	dir=~/${d};
 	if [[ -e $dir ]]; then
-		export PATH=~/${dir}:${PATH}
+		export PATH=${dir}:${PATH}
 	fi;
 done
 
