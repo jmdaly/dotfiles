@@ -19,6 +19,7 @@ $blacklist = array(
 	'bluez',
 	'bw',
 	'nerv-ous',
+	'charged-256',
 	'256-grayvim',
 	'zephyr', 'miko',
 	'golded',
