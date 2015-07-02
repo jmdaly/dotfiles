@@ -227,6 +227,9 @@ if has('gui_running')
 
 	"colorscheme solarized
 	call <SID>RandColorScheme()
+
+	" Map CTRL-Tab to change tab
+	noremap <C-Tab> <Esc>:tabnext<CR>
 endif
 
 " OS Detection
