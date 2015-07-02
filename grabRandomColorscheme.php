@@ -16,6 +16,7 @@ $use_whitelist=array_key_exists('w', $opts);
 // Colour schemes that are just awefule
 $blacklist = array(
 	'adobe',
+	'd8g_01',
 	'bw',
 	'nerv-ous',
 	'256-grayvim',
