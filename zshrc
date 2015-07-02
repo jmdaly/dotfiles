@@ -153,7 +153,7 @@ if [[ $(hostname) == "khea" ]]; then
 	module load modules
 
 	module load mayofest
-	module load diplomacy
+	#module load diplomacy
 	module load bona
 	module load youtuber
 	#module load gys

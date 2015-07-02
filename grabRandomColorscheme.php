@@ -17,8 +17,10 @@ $use_whitelist=array_key_exists('w', $opts);
 $blacklist = array(
 	'adobe',
 	'd8g_01',
+	'bluez',
 	'bw',
 	'nerv-ous',
+	'charged-256',
 	'256-grayvim',
 	'zephyr', 'miko',
 	'golded',
