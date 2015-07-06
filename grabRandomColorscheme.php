@@ -27,6 +27,7 @@ $blacklist = array(
 	'dark-ruby',
 	'enzyme',
 	'golded',
+	'impact',
 	'nerv-ous',
 	'pic',
 	'potts',
