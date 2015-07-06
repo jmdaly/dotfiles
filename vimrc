@@ -229,6 +229,7 @@ if has('gui_running')
 	call <SID>RandColorScheme()
 
 	" Map CTRL-Tab to change tab
+	noremap <C-S-Tab> <Esc>:tabprev<CR>
 	noremap <C-Tab> <Esc>:tabnext<CR>
 endif
 
