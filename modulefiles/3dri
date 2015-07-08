@@ -48,7 +48,7 @@ setenv  wsb_debug   ${wsb_debug}
 set port 8181
 
 set ws_args " --docroot ${ws_base} --http-address 0.0.0.0 --http-port ${port} -c ${ws_base}/ntcConfig.xml --accesslog ${ws_base}/access.log"
-set-alias wsl "tail -f 3dri.log"
+set-alias wsl "tail -f ${ws_base}/3dri.log"
 
 set-alias runWS "cwt; ${wsb}/3DRiWebScheduler ${ws_args};"
 set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=${ws_base};"
