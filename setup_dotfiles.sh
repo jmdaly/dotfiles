@@ -91,7 +91,9 @@ for f in ${files[@]}; do
 done;
 
 cd $h
-ln -s .vimrc .nvimrc
+if [[ -e .vimrc ]]; then
+	ln -s .vimrc .nvimrc
+fi
 if [[ -e .modulefiles ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
