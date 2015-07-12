@@ -155,11 +155,8 @@ if [[ $(hostname) == "khea" ]]; then
 	module load mayofest
 	#module load diplomacy
 	module load bona
-	module load youtuber
+	#module load youtuber
 	#module load gys
-
-	# Adjust the path
-	export PATH="${HOME}/utils:$PATH"
 
 	# Ruby I think?
 	export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
