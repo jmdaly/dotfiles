@@ -17,6 +17,9 @@ $use_whitelist=array_key_exists('w', $opts);
 $blacklist = array(
 	'256-grayvim',
 	'256-jungle',
+	'd8g_04',
+	'devbox-dark-256',
+	'xmaslights',
 	'adobe',
 	'bluez',
 	'busierbee',
