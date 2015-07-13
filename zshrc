@@ -18,6 +18,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # it is
 antigen bundle chrissicool/zsh-256color
 
+# z - awesome directory switching plugin
+antigen bundle rupa/z
+
 # Load the theme.
 antigen theme blinks
 
