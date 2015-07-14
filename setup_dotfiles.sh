@@ -34,9 +34,26 @@ cd ${h}
 
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
-	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
+	declare -a files=(.bash_aliases .pathrc .vncrc .gdbinit)
 else
-	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .dircolors .sqliterc .ctags)
+	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+fi
+
+# Check if our environment supports these
+if [[ "$(which vim)" != "" ]]; then
+	files+=('.vimrc')
+fi
+if [[ "$(which tmux)" != "" ]]; then
+	files+=('.tmux.conf')
+fi
+if [[ "$(which screen)" != "" ]]; then
+	files+=('.screenrc')
+fi
+if [[ "$(which sqlite3)" != "" ]]; then
+	files+=('.sqliterc')
+fi
+if [[ "$(which ctags)" != "" ]]; then
+	files+=('.ctags')
 fi
 
 # .config/autokey
@@ -69,11 +86,21 @@ for f in ${files[@]}; do
 			fi;
 		fi
 	else
-		echo "Skipping synlink $f"
+		echo "Skipping symlink $f"
 	fi
 done;
+
+cd $h
+if [[ -e .vimrc ]]; then
+	ln -s .vimrc .nvimrc
+fi
+if [[ -e .modulefiles ]]; then
+	ln -s .modulefiles/.modulerc ./
+fi
 
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
 # in bash in order to have it on CMC machines
 #cd ${h} && source .zshrc
+
+# vim: ts=3 sw=3 sts=0 noet :
