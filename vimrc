@@ -211,6 +211,8 @@ if has("gui_running")
 
 	"colorscheme solarized
 	call <SID>RandColorScheme()
+else
+	set mouse+=a
 endif
 
 " OS Detection
