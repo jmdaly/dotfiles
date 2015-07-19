@@ -231,6 +231,8 @@ if has('gui_running')
 	" Map CTRL-Tab to change tab
 	noremap <C-S-Tab> <Esc>:tabprev<CR>
 	noremap <C-Tab> <Esc>:tabnext<CR>
+else
+	set mouse+=a
 endif
 
 " OS Detection
