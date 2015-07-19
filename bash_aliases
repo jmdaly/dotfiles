@@ -19,6 +19,7 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gsta="git stash"
 	alias gstp="git stash pop"
 	alias gba="git branch -vr"
+	alias ga="git add"
 fi
 #alias glog="git log --follow --name-status"
 
