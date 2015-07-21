@@ -91,6 +91,7 @@ $whitelist = array(
 	'summerfruits',
 	'summerfruits256',
 	'swamplight',
+	'herald',
 	'two2tango',
 	'underwater',
 	'underwater-mod',
