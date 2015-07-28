@@ -81,6 +81,7 @@ $whitelist = array(
 	'mud',
 	'nicotine',
 	'nightVision',
+	'olive',
 	'pspad',
 	'radicalgoodspeed',
 	'rdark',
