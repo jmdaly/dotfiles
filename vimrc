@@ -534,6 +534,13 @@ noremap <C-Tab> <Esc>:tabnext<CR>
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
 
+" PHP Artisan commands
+if (&ft ==? 'php')
+	abbrev gm !php artisan generate:model
+	abbrev gc !php artisan generate:controller
+	abbrev gmig !php artisan generate:migration
+endif
+
 " try to automatically fold xml
 let xml_syntax_folding=1
 
