@@ -231,9 +231,6 @@ if has('gui_running')
 	"colorscheme solarized
 	call <SID>RandColorScheme()
 
-	" Map CTRL-Tab to change tab
-	noremap <C-S-Tab> <Esc>:tabprev<CR>
-	noremap <C-Tab> <Esc>:tabnext<CR>
 else
 	set mouse+=a
 endif
@@ -523,6 +520,9 @@ if &diff
 	set diffopt+=iwhite
 endif
 
+" Map CTRL-Tab to change tab
+noremap <C-S-Tab> <Esc>:tabprev<CR>
+noremap <C-Tab> <Esc>:tabnext<CR>
 " try to automatically fold xml
 let xml_syntax_folding=1
 
