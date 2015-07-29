@@ -510,7 +510,7 @@ set hlsearch
 set mousehide
 
 " Easy save
-noremap ^S :w<CR>
+noremap <leader>w :w<CR>
 " map alt/apple or something-S for khea
 
 " Remove trailing space
