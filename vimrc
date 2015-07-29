@@ -530,6 +530,10 @@ endif
 " Map CTRL-Tab to change tab
 noremap <C-S-Tab> <Esc>:tabprev<CR>
 noremap <C-Tab> <Esc>:tabnext<CR>
+
+" Faster vertical expansion
+nmap <C-v> :vertical resize +5<cr>
+
 " try to automatically fold xml
 let xml_syntax_folding=1
 
