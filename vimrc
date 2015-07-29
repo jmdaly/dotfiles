@@ -162,6 +162,9 @@ Plugin 'kshenoy/vim-signature'
 " Suppose to make closing splits better (less window resizing)
 Plugin 'moll/vim-bbye.git'
 
+" Zoom into splits with <c-w>o
+Plugin 'vim-scripts/ZoomWin'
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
