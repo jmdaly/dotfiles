@@ -162,6 +162,9 @@ Plugin 'kshenoy/vim-signature'
 " Suppose to make closing splits better (less window resizing)
 Plugin 'moll/vim-bbye.git'
 
+" Zoom into splits with <c-w>o
+Plugin 'vim-scripts/ZoomWin'
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
@@ -228,9 +231,6 @@ if has('gui_running')
 	"colorscheme solarized
 	call <SID>RandColorScheme()
 
-	" Map CTRL-Tab to change tab
-	noremap <C-S-Tab> <Esc>:tabprev<CR>
-	noremap <C-Tab> <Esc>:tabnext<CR>
 else
 	set mouse+=a
 endif
@@ -263,6 +263,8 @@ nmap [h <Plug>GitGutterPrevHunk
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+
+set wildignore+="*/vendor/**
 
 " Unmap center/<CR> from launching CTRL-P, because it's annoying
 unmap <CR>
@@ -508,11 +510,16 @@ set hlsearch
 set mousehide
 
 " Easy save
-noremap ^S :w<CR>
+noremap <leader>w :w<CR>
 " map alt/apple or something-S for khea
 
 " Remove trailing space
 nnoremap <leader>rt :%s/\s\s*$//<CR>
+" TODO: Can I condense this?
+autocmd BufWritePre *.php :%s/\s\+$//e
+autocmd BufWritePre *.js :%s/\s\+$//e
+autocmd BufWritePre *.cpp :%s/\s\+$//e
+autocmd BufWritePre *.h :%s/\s\+$//e
 
 " Ignore whitespace on vimdiff
 if &diff
@@ -520,7 +527,26 @@ if &diff
 	set diffopt+=iwhite
 endif
 
+" Map CTRL-Tab to change tab
+noremap <C-S-Tab> <Esc>:tabprev<CR>
+noremap <C-Tab> <Esc>:tabnext<CR>
+
+" Faster vertical expansion
+nmap <C-v> :vertical resize +5<cr>
+
+" PHP Artisan commands
+if (&ft ==? 'php')
+	abbrev gm !php artisan generate:model
+	abbrev gc !php artisan generate:controller
+	abbrev gmig !php artisan generate:migration
+endif
+
 " try to automatically fold xml
 let xml_syntax_folding=1
+
+"
+" Abbreviations
+ab laster laser
+ab jsut just
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
