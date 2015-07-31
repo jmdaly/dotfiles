@@ -103,11 +103,6 @@ if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 endif
 
-" vim-sleuth - heuristically determines spacing in terms
-" of tabs, spaces, etc. based on what's in use in the
-" current file and the file around it:
-" Plugin 'tpope/vim-sleuth'
-
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
 Plugin 'tpope/vim-fugitive'
