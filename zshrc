@@ -116,7 +116,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 local -a dirs;
-dirs=(bin utils .linuxbrew/bin ~/.composer/vendor/bin);
+dirs=(bin utils .linuxbrew/bin .composer/vendor/bin);
 for d in $dirs; do
 	dir=~/${d};
 	if [[ -e $dir ]]; then
