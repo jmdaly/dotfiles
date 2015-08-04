@@ -26,5 +26,6 @@ fi
 if [[ -e ~/.bash_aliases.local ]]; then
 	source ~/.bash_aliases.local
 fi
+alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
 # vim : ts=3 sts=0 shiftwidth=3 noet ft=bash ffs=unix :
