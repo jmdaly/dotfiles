@@ -101,10 +101,6 @@ bindkey '' history-incremental-search-backward
 bindkey "${key[Delete]}" delete-char
 ###########################################################
 
-
-# Adjust the path
-source ~/.pathrc
-
 # Alises
 if [ -e ~/.bash_aliases ]; then
 	source ~/.bash_aliases
@@ -113,6 +109,12 @@ fi
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+
+# Adjust the path
+if [[ -e ~/.pathrc ]]; then
+	source ~/.pathrc
 fi
 
 local -a dirs;

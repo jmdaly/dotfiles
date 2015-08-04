@@ -23,4 +23,8 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 fi
 #alias glog="git log --follow --name-status"
 
+if [[ -e ~/.bash_aliases.local ]]; then
+	source ~/.bash_aliases.local
+fi
+
 # vim : ts=3 sts=0 shiftwidth=3 noet ft=bash ffs=unix :
