@@ -510,11 +510,8 @@ noremap <leader>w :w<CR>
 
 " Remove trailing space
 nnoremap <leader>rt :%s/\s\s*$//<CR>
-" TODO: Can I condense this?
-autocmd BufWritePre *.php :%s/\s\+$//e
-autocmd BufWritePre *.js :%s/\s\+$//e
-autocmd BufWritePre *.cpp :%s/\s\+$//e
-autocmd BufWritePre *.h :%s/\s\+$//e
+let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
+autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
 " Ignore whitespace on vimdiff
 if &diff
