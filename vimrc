@@ -526,6 +526,9 @@ noremap <C-Tab> <Esc>:tabnext<CR>
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
 
+" Remove search results
+noremap H :noh<cr>
+
 " Replace highlighted content with content of register 0
 noremap pp ciw<Esc>"0p
 
