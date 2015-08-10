@@ -58,7 +58,11 @@ set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
 
 set-alias LcmSpy   "cd ${VENDOR}/lcm; ./RunLcmSpy.sh"
 set-alias Opal2Gui "cd ${appb}/Opal2Gui; ./Opal2Gui"
+set-alias ForegroundSegmenter "cd ${appb}/DataProcessor/ForegroundSegmenter; ./ForegroundSegmenter"
+set-alias SensorManager "cd ${appb}/SensorManager; ./SensorManager"
 set-alias LcmLogPlayer "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
+
+prepend-path PATH ${wsb_debug}
 
 # Examples
 setenv wte /usr/lib/Wt/examples
