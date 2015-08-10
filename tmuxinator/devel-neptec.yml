@@ -9,8 +9,7 @@ windows:
     root: ~/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler
   - debug: gdb --args /home/matt/workspace/opal2/build-3dri-Linux3x86_64-debug/Applications/OPAL2/3DRiWebScheduler/3DRiWebScheduler --docroot /home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler --http-address 0.0.0.0 --http-port 8181 -c /home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/ntcConfig.xml --accesslog /home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/access.log --approot=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler
     root: ~/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler
-  - log: wsl
-    root: ~/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler
+  - log: tail -f ~/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler
 
 
 # vim: ts=2 sw=2 sts=2 expandtab ffs=unix :
