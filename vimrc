@@ -530,7 +530,7 @@ nmap <C-v> :vertical resize +5<cr>
 noremap H :noh<cr>
 
 " Replace highlighted content with content of register 0
-noremap pp ciw<Esc>"0p
+noremap <C-p> ciw<Esc>"0p
 
 " PHP Artisan commands
 if (&ft ==? 'php')
