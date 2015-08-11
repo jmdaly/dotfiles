@@ -46,4 +46,8 @@ for f in $files; do
 	fi
 done;
 
+# Set up symlinks for tmux plugins:
+mkdir -p ~/.tmux/plugins
+ln -s ~/dotfiles/tpm ~/.tmux/plugins/tpm
+
 cd && source .zshrc

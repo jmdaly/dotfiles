@@ -85,6 +85,10 @@ Plugin 'lyuts/vim-rtags'
 " kalisi colour scheme:
 Plugin 'freeo/vim-kalisi'
 
+" Plugin to to smart search and replace, easy
+" changes from camelCase to snake_case, etc.
+Plugin 'tpope/vim-abolish'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
