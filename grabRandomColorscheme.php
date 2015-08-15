@@ -43,6 +43,7 @@ $blacklist = array(
 	'xmaslights',
 	'yaml',
 	'zephyr', 'miko',
+	'zen',
 );
 
 // Not yet used, but a place to save the ones
