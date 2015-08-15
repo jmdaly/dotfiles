@@ -160,6 +160,9 @@ Plugin 'moll/vim-bbye.git'
 " Zoom into splits with <c-w>o
 Plugin 'vim-scripts/ZoomWin'
 
+" Python Syntax highlighting (the default is pretty bad)
+Plugin 'Hdima/python-syntax'
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
@@ -487,6 +490,11 @@ function! Wipeout()
 	endtry
 endfunction
 """""""""""""""" /Whipeout """""""""""""""""""
+
+
+"""""""""""""" python-syntax """""""""""""""""
+" No options yet..
+""""""""""""" /python-syntax """""""""""""""""
 
 "JSHintToggle
 
