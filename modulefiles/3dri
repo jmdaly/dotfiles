@@ -76,7 +76,8 @@ set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.48/lib:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.56/lib"
 
 # Building 3DRi
-set     QT_DIR      "/opt/Qt/5.3/gcc_64"
-set     BUILD_TYPE  "Debug"
-setenv  CXX         "ccache /usr/bin/g++"
-set-alias build3dri "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
+set     QT_DIR        "/opt/Qt/5.3/gcc_64"
+set     BUILD_TYPE    "Debug"
+setenv  CCACHE_PREFIX "distcc"
+setenv  CXX           "ccache /usr/bin/g++"
+set-alias build3dri  "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
