@@ -103,11 +103,6 @@ if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 endif
 
-" vim-sleuth - heuristically determines spacing in terms
-" of tabs, spaces, etc. based on what's in use in the
-" current file and the file around it:
-" Plugin 'tpope/vim-sleuth'
-
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
 Plugin 'tpope/vim-fugitive'
@@ -161,6 +156,12 @@ Plugin 'kshenoy/vim-signature'
 
 " Suppose to make closing splits better (less window resizing)
 Plugin 'moll/vim-bbye.git'
+
+" Zoom into splits with <c-w>o
+Plugin 'vim-scripts/ZoomWin'
+
+" Python Syntax highlighting (the default is pretty bad)
+Plugin 'Hdima/python-syntax'
 
 " XML helper
 "Plugin 'othree/xml.vim'
@@ -228,9 +229,8 @@ if has('gui_running')
 	"colorscheme solarized
 	call <SID>RandColorScheme()
 
-	" Map CTRL-Tab to change tab
-	noremap <C-S-Tab> <Esc>:tabprev<CR>
-	noremap <C-Tab> <Esc>:tabnext<CR>
+else
+	set mouse+=a
 endif
 
 " OS Detection
@@ -261,6 +261,8 @@ nmap [h <Plug>GitGutterPrevHunk
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
+
+set wildignore+="*/vendor/**
 
 " Unmap center/<CR> from launching CTRL-P, because it's annoying
 unmap <CR>
@@ -450,6 +452,50 @@ nnoremap <leader>dep :DBProfilesRefresh<CR>
 	\}
 """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
+
+"""""""""""""""" Whipeout """""""""""""""""""
+" Source: http://stackoverflow.com/a/1536094/1861346
+" @breif Remove all buffers not currently being displayed
+
+function! Wipeout()
+	" list of *all* buffer numbers
+	let l:buffers = range(1, bufnr('$'))
+
+	" what tab page are we in?
+	let l:currentTab = tabpagenr()
+	try
+		" go through all tab pages
+		let l:tab = 0
+		while l:tab < tabpagenr('$')
+			let l:tab += 1
+
+			" go through all windows
+			let l:win = 0
+			while l:win < winnr('$')
+				let l:win += 1
+				" whatever buffer is in this window in this tab, remove it from
+				" l:buffers list
+				let l:thisbuf = winbufnr(l:win)
+				call remove(l:buffers, index(l:buffers, l:thisbuf))
+			endwhile
+		endwhile
+
+		" if there are any buffers left, delete them
+		if len(l:buffers)
+			execute 'bwipeout' join(l:buffers)
+		endif
+	finally
+		" go back to our original tab page
+		execute 'tabnext' l:currentTab
+	endtry
+endfunction
+"""""""""""""""" /Whipeout """""""""""""""""""
+
+
+"""""""""""""" python-syntax """""""""""""""""
+" No options yet..
+""""""""""""" /python-syntax """""""""""""""""
+
 "JSHintToggle
 
 filetype on
@@ -467,11 +513,13 @@ set hlsearch
 set mousehide
 
 " Easy save
-noremap ^S :w<CR>
+noremap <leader>w :w<CR>
 " map alt/apple or something-S for khea
 
 " Remove trailing space
 nnoremap <leader>rt :%s/\s\s*$//<CR>
+let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
+autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
 " Ignore whitespace on vimdiff
 if &diff
@@ -479,7 +527,32 @@ if &diff
 	set diffopt+=iwhite
 endif
 
+" Map CTRL-Tab to change tab
+noremap <C-S-Tab> <Esc>:tabprev<CR>
+noremap <C-Tab> <Esc>:tabnext<CR>
+
+" Faster vertical expansion
+nmap <C-v> :vertical resize +5<cr>
+
+" Remove search results
+noremap H :noh<cr>
+
+" Replace highlighted content with content of register 0
+noremap <C-p> ciw<Esc>"0p
+
+" PHP Artisan commands
+if (&ft ==? 'php')
+	abbrev gm !php artisan generate:model
+	abbrev gc !php artisan generate:controller
+	abbrev gmig !php artisan generate:migration
+endif
+
 " try to automatically fold xml
 let xml_syntax_folding=1
+
+"
+" Abbreviations
+ab laster laser
+ab jsut just
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :

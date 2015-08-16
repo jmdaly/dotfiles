@@ -101,10 +101,6 @@ bindkey '' history-incremental-search-backward
 bindkey "${key[Delete]}" delete-char
 ###########################################################
 
-
-# Adjust the path
-source ~/.pathrc
-
 # Alises
 if [ -e ~/.bash_aliases ]; then
 	source ~/.bash_aliases
@@ -115,8 +111,14 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
+
+# Adjust the path
+if [[ -e ~/.pathrc ]]; then
+	source ~/.pathrc
+fi
+
 local -a dirs;
-dirs=(bin utils .linuxbrew/bin);
+dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin);
 for d in $dirs; do
 	dir=~/${d};
 	if [[ -e $dir ]]; then
@@ -152,17 +154,13 @@ if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
-	module load mayofest
+	#module load mayofest
 	#module load diplomacy
 	module load bona
-	module load youtuber
-	#module load gys
+	#module load youtuber
 
-	# Adjust the path
-	export PATH="${HOME}/utils:$PATH"
-
-	# Ruby I think?
-	export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+	# CMC
+	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
 elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
