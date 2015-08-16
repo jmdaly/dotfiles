@@ -554,5 +554,6 @@ let xml_syntax_folding=1
 " Abbreviations
 ab laster laser
 ab jsut just
+ab eticket etiket
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
