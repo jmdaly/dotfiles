@@ -54,6 +54,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Themes: robbyrussell, daveverwer candy clean pygalion, etc..
 antigen theme blinks
 
+# Auto update
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+
 # Tell antigen that you're done.
 antigen apply
 
