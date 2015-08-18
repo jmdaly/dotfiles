@@ -118,7 +118,7 @@ if [[ -e ~/.pathrc ]]; then
 fi
 
 local -a dirs;
-dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin);
+dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin);
 for d in $dirs; do
 	dir=~/${d};
 	if [[ -e $dir ]]; then
@@ -153,6 +153,8 @@ fi;
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
+
+	module load khea
 
 	#module load mayofest
 	#module load diplomacy
