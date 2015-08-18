@@ -154,6 +154,8 @@ if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
+	module load khea
+
 	#module load mayofest
 	#module load diplomacy
 	module load bona
