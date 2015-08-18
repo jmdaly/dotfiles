@@ -39,4 +39,4 @@ prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
 
 set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
 
-# vim: ts=3 sts=0 sw=3 noet :
+# vim: ts=3 sts=0 sw=3 noet ft=tcl :
