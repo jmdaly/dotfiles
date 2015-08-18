@@ -32,5 +32,5 @@ startup_window: logs
 
 windows:
   - devel: cd ~/gm/utils/
-  - OS2p5km: cd /data/gm/output/cmc/gm_OS2p5km_20130815.20150628
-  - OS1km: cd /data/gm/output/cmc/gm_OS1kmcasc_20130815.318x324.20150630
+  - OS2p5km: cd /data/gm/output/cmc/gm_OS2p5km_20130815.20150816
+  - OS1km: cd /data/gm/output/cmc/gm_OS1km_20130815.20150816
