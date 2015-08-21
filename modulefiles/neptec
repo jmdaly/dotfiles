@@ -24,7 +24,8 @@ if { ${hostname} == "pof" } {
 	# 7777 = Gitlab SSH (git clone)
 	# 6666 = Git vender repos
 	# 8181 = Usual Wt port I use
-	set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:tinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 khea"
+	# 3579 = Power bar admin
+	set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:tinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 3579:10.10.9.51:80 khea"
 }
 
 # Open a remote desktop to a windows box
@@ -38,4 +39,4 @@ prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
 
 set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
 
-# vim: ts=3 sts=0 sw=3 noet :
+# vim: ts=3 sts=0 sw=3 noet ft=tcl :

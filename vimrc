@@ -453,7 +453,7 @@ nnoremap <leader>dep :DBProfilesRefresh<CR>
 """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
 
-"""""""""""""""" Whipeout """""""""""""""""""
+"""""""""""""""" Wipeout """""""""""""""""""
 " Source: http://stackoverflow.com/a/1536094/1861346
 " @breif Remove all buffers not currently being displayed
 
@@ -489,7 +489,7 @@ function! Wipeout()
 		execute 'tabnext' l:currentTab
 	endtry
 endfunction
-"""""""""""""""" /Whipeout """""""""""""""""""
+"""""""""""""""" /Wipeout """""""""""""""""""
 
 
 """""""""""""" python-syntax """""""""""""""""
@@ -554,5 +554,6 @@ let xml_syntax_folding=1
 " Abbreviations
 ab laster laser
 ab jsut just
+ab eticket etiket
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
