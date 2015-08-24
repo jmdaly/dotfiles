@@ -91,6 +91,8 @@ if is_win==0 && domain !=? 'school'
 	" Snippets are separated from the engine. Add this if you want them:
 	Plugin 'honza/vim-snippets'
 endif
+" Rename
+Plugin 'danro/rename.vim'
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" tagbar - allows browsing tags of the current source file
@@ -115,8 +117,8 @@ Plugin 'airblade/vim-gitgutter'
 " Plugin to assist with commenting out blocks of text:
 Plugin 'tomtom/tcomment_vim'
 
-" vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
-Plugin 'bling/vim-airline'
+" Status bar
+Plugin 'powerline/powerline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
