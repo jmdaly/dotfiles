@@ -30,6 +30,7 @@ $blacklist = array(
 	'dark-ruby',
 	'devbox-dark-256',
 	'enzyme',
+	'oceanblack256',
 	'golded',
 	'impact',
 	'mango',
