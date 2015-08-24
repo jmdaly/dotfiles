@@ -38,12 +38,13 @@ $blacklist = array(
 	'potts',
 	'rcg_term',
 	'rdark-terminal',
+	'textmate16',
 	'thestars',
 	'visualstudio',
 	'xmaslights',
 	'yaml',
-	'zephyr', 'miko',
 	'zen',
+	'zephyr', 'miko',
 );
 
 // Not yet used, but a place to save the ones
