@@ -91,6 +91,7 @@ if is_win==0 && domain !=? 'school'
 	" Snippets are separated from the engine. Add this if you want them:
 	Plugin 'honza/vim-snippets'
 endif
+
 " Rename
 Plugin 'danro/rename.vim'
 
