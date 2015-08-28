@@ -23,7 +23,7 @@ declare -a string_keys;
 declare -a bool_keys;
 string_keys=(visible_name palette foreground_color background_color);
 bool_keys=(use_theme_background use_theme_colors);
-for prof in Default Profile{0,1,2,3,4,5,6,7,8,9,10}; do
+for prof in Default Profile{0,1,2,3,4,5,6,7,8,9,10,11}; do
 	echo "# $prof" >> profiles.dot
 	for k in $string_keys; do
 		echo "gconftool-2 --set \"/apps/gnome-terminal/profiles/$prof/$k\" --type string \"$(gconftool-2 -g /apps/gnome-terminal/profiles/$prof/$k)\"" >> profiles.dot

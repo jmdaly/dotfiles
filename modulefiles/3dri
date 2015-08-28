@@ -14,13 +14,15 @@ module-whatis	"loads the 3DRF environment"
 
 set ARCH       [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 
-set BASE       "~/workspace/opal2"
-set VENDOR     ${BASE}/o2linux64
-set src        ${BASE}/3dri
-set app_rel    Applications/OPAL2
-set bld        ${BASE}/build-3dri-${ARCH}-release
-set bld_debug  ${BASE}/build-3dri-${ARCH}-debug
-set bldw       ${BASE}/3dri-build-winx64-release
+set HOME        $::env(HOME)
+set BASE        "${HOME}/workspace/opal2"
+set VENDOR      ${BASE}/o2linux64
+set src         ${BASE}/3dri
+set app_rel     Applications/OPAL2
+set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
+set bld_release ${BASE}/build-3dri-${ARCH}-release
+set bld         ${bld_debug}
+set bldw        ${BASE}/3dri-build-winx64-release
 
 set apps        ${src}/${app_rel}
 set appb        ${bld}/${app_rel}
@@ -34,7 +36,10 @@ setenv appb         ${appb}
 setenv appb_debug   ${appb_debug}
 
 # Web Scheduler
-setenv  wss         ${apps}/3DRiWebScheduler
+set     ws_base     ${apps}/3DRiWebScheduler
+set     wst         ${ws_base}/test
+setenv  wss         ${ws_base}/src
+setenv  wsi         ${ws_base}/include/3DRiWebScheduler
 set     wsb         ${appb}/3DRiWebScheduler
 set     wsb_debug   ${appb_debug}/3DRiWebScheduler
 setenv  wsb         ${wsb}
@@ -42,17 +47,37 @@ setenv  wsb_debug   ${wsb_debug}
 
 set port 8181
 
-set ws_args " --docroot . --http-address 0.0.0.0 --http-port ${port} -c ntcConfig.xml --accesslog access.log"
-set-alias wsl "tail -f 3dri.log"
+set ws_args " --docroot ${ws_base} --http-address 0.0.0.0 --http-port ${port} -c ${ws_base}/ntcConfig.xml --accesslog ${ws_base}/access.log"
+set-alias wsl "tail -f ${ws_base}/3dri.log | grep -v WebRequest"
 
-set-alias runWS "cwt; ${wsb}/3DRiWebScheduler ${ws_args};"
-set-alias runWSd "cwt; ${wsb_debug}/3DRiWebScheduler ${ws_args};"
+# removed cwt call
+set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
+set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=${ws_base};"
 
 set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
 
-set-alias LcmSpy   "cd ${VENDOR}/lcm; ./RunLcmSpy.sh"
+set-alias LcmSpy   "cd ${bld_debug}/lcm; ./RunLcmSpy.sh"
 set-alias Opal2Gui "cd ${appb}/Opal2Gui; ./Opal2Gui"
+set-alias ForegroundSegmenter "cd ${appb}/DataProcessor/ForegroundSegmenter; ./ForegroundSegmenter"
+set-alias ContourMapper "cd ${appb}/DataProcessor/ContourMapper; ./ContourMapper"
+set-alias StockpileMonitor "cd ${appb}/DataProcessor/StockpileMonitor; ./StockpileMonitor"
+set-alias SensorManager "cd ${appb}/SensorManager; ./SensorManager"
 set-alias LcmLogPlayer "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
+
+prepend-path PATH ${wsb_debug}
 
 # Examples
 setenv wte /usr/lib/Wt/examples
+
+# Rebuilt rtags.  Run from $bld or $bld_debug
+set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
+
+# PCL Binary lib paths
+prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.48/lib:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.56/lib"
+
+# Building 3DRi
+set     QT_DIR        "/opt/Qt/5.3/gcc_64"
+set     BUILD_TYPE    "Debug"
+setenv  CCACHE_PREFIX "distcc"
+setenv  CXX           "ccache /usr/bin/g++"
+set-alias build3dri  "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
