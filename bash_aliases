@@ -8,9 +8,14 @@ alias ls="ls --color=auto -lhtrF"
 # Env Can doesn't have zsh..
 alias gst="git status -uno"
 alias gd="git diff -w --color"
+
+# A better test would be whether I'm running zsh..
 if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gl="git pull"
 	alias gp="git push"
+	alias ga="git add"
 	alias gco="git checkout"
+	alias gba="git branch -v"
+	alias gcp="git cherry-pick"
 fi
 alias glog="git log --follow --name-status"
