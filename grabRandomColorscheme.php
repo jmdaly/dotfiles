@@ -76,6 +76,7 @@ $whitelist = array(
 	'guardian',
 	'guepardo',
 	'herald',
+	'kib_darktango',
 	'inkpot',
 	'kalisi',
 	'kib_darktango',
