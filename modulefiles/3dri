@@ -5,12 +5,12 @@
 ## modulefiles/modules.  Generated from modules.in by configure.
 ##
 proc ModulesHelp { } {
-        global version prefix
+	global version prefix
 
-        puts stderr "\t3drf - loads the 3DRF build and run env"
+  	puts stderr "\t3drf - loads the 3DRi build and run env"
 }
 
-module-whatis	"loads the 3DRF environment"
+module-whatis	"loads the 3DRi environment"
 
 set ARCH       [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 
