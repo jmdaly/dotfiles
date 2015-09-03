@@ -89,6 +89,9 @@ Plugin 'freeo/vim-kalisi'
 " changes from camelCase to snake_case, etc.
 Plugin 'tpope/vim-abolish'
 
+" Plugin to generate doxygen documentation strings:
+Plugin 'mrtazz/DoxygenToolkit.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
