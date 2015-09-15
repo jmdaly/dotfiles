@@ -558,5 +558,6 @@ let xml_syntax_folding=1
 ab laster laser
 ab jsut just
 ab eticket etiket
+ab breif brief
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
