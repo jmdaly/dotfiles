@@ -540,6 +540,10 @@ noremap <C-Tab> <Esc>:tabnext<CR>
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
 
+" Swap splits to vertical
+noremap <C-w>th <C-W>t<ctrl-w>H
+noremap <C-w>tv <C-W>t<ctrl-w>K
+
 " Remove search results
 noremap H :noh<cr>
 
