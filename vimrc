@@ -550,6 +550,9 @@ noremap H :noh<cr>
 " Replace highlighted content with content of register 0
 noremap <C-p> ciw<Esc>"0p
 
+" Un-indent current line by one tab stop
+imap <S-Tab> <C-o><<
+
 " PHP Artisan commands
 if (&ft ==? 'php')
 	abbrev gm !php artisan generate:model
