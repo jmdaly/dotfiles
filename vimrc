@@ -134,6 +134,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 " Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
 Plugin 'yegappan/mru'
 
+" Doxygen
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+
 if domain !=? 'school'
 	" A plugin to use rtags in vim. (rtags allows for code following,
 	" some refactoring, etc.)
