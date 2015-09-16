@@ -92,6 +92,9 @@ if is_win==0 && domain !=? 'ec'
 	Plugin 'honza/vim-snippets'
 endif
 
+" Rename
+Plugin 'danro/rename.vim'
+
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" tagbar - allows browsing tags of the current source file
 	" from ctags. Good for seeing functions, variables, etc.
@@ -115,8 +118,8 @@ Plugin 'airblade/vim-gitgutter'
 " Plugin to assist with commenting out blocks of text:
 Plugin 'tomtom/tcomment_vim'
 
-" vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
-Plugin 'bling/vim-airline'
+" Status bar
+Plugin 'powerline/powerline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
@@ -130,6 +133,9 @@ Plugin 'OrelSokolov/HiCursorWords'
 
 " Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
 Plugin 'yegappan/mru'
+
+" Doxygen
+Plugin 'vim-scripts/DoxygenToolkit.vim'
 
 if domain !=? 'school' && domain !=? 'ec'
 	" A plugin to use rtags in vim. (rtags allows for code following,
@@ -534,11 +540,18 @@ noremap <C-Tab> <Esc>:tabnext<CR>
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
 
+" Swap splits to vertical
+noremap <C-w>th <C-W>t<ctrl-w>H
+noremap <C-w>tv <C-W>t<ctrl-w>K
+
 " Remove search results
 noremap H :noh<cr>
 
 " Replace highlighted content with content of register 0
 noremap <C-p> ciw<Esc>"0p
+
+" Un-indent current line by one tab stop
+imap <S-Tab> <C-o><<
 
 " PHP Artisan commands
 if (&ft ==? 'php')
@@ -555,5 +568,6 @@ let xml_syntax_folding=1
 ab laster laser
 ab jsut just
 ab eticket etiket
+ab breif brief
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
