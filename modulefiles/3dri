@@ -84,7 +84,7 @@ if { ${hostname} == "pof" } {
 }
 set     BUILD_TYPE    "Debug"
 setenv  CCACHE_PREFIX "distcc"
-setenv  CXX           "ccache /usr/bin/g++"
+setenv  CXX           "CXX='ccache /home/jdaly/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang++"
 set-alias build3dri  "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
 
 # vim: ts=3 sw=3 sts=0 noet
