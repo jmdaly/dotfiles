@@ -131,9 +131,6 @@ Plugin 'powerline/powerline'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
-" Most Recently Used: http://www.vim.org/scripts/script.php?script_id=521
-Plugin 'yegappan/mru'
-
 " Doxygen
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 
