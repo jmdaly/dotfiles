@@ -89,6 +89,7 @@ $whitelist = array(
 	'mopkai',
 	'moss',
 	'mud',
+	'nefertiti',
 	'nicotine',
 	'nightVision',
 	'olive',
