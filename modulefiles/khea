@@ -1,0 +1,19 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+##
+## modulefiles/modules.  Generated from modules.in by configure.
+##
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tkhea - Some misc functions that are useful on khea"
+}
+
+module-whatis	"loads some khea utilities"
+
+set hostname [info hostname]
+
+set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
+
+# vim: ts=3 sts=0 sw=3 noet ft=tcl :

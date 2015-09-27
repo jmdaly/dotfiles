@@ -54,6 +54,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # Themes: robbyrussell, daveverwer candy clean pygalion, etc..
 antigen theme blinks
 
+# Auto update
+antigen bundle unixorn/autoupdate-antigen.zshplugin
+
 # Tell antigen that you're done.
 antigen apply
 
@@ -101,13 +104,8 @@ bindkey '' history-incremental-search-backward
 bindkey "${key[Delete]}" delete-char
 ###########################################################
 
-
-# Adjust the path
-source ~/.pathrc
-
 # Alises
 if [ -e ~/.bash_aliases ]; then
-	#echo "Sourcing bash_aliases"
 	source ~/.bash_aliases
 fi
 
@@ -116,9 +114,20 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-if [[ -e ~/bin ]]; then
-	PATH=~/bin:$PATH
-fi;
+
+# Adjust the path
+if [[ -e ~/.pathrc ]]; then
+	source ~/.pathrc
+fi
+
+local -a dirs;
+dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin);
+for d in $dirs; do
+	dir=~/${d};
+	if [[ -e $dir ]]; then
+		export PATH=${dir}:${PATH}
+	fi;
+done
 
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
@@ -133,8 +142,14 @@ if [[ $? == 1 ]]; then
 	export MODULEPATH=/usr/share/modules/modulefiles
 
 	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-	module() { eval `/usr/bin/modulecmd $modules_shell $*`; }
-	module use /home/matt/.modulefiles
+	if [[ $(hostname) == "pontus.cee.carleton.ca" ]]; then
+		modulecmd=/usr/local/Modules/3.2.9/bin/modulecmd
+	else
+		modulecmd=/usr/bin/modulecmd
+	fi
+	module() { eval `${modulecmd} $modules_shell $*`; }
+
+	#module use ${HOST}/.modulefiles
 fi;
 
 
@@ -142,17 +157,15 @@ if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
 
-	module load mayofest
-	module load diplomacy
+	module load khea
+
+	#module load mayofest
+	#module load diplomacy
 	module load bona
-	module load youtuber
-	#module load gys
+	#module load youtuber
 
-	# Adjust the path
-	export PATH="${HOME}/utils:$PATH"
-
-	# Ruby I think?
-	export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+	# CMC
+	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
 elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
@@ -179,6 +192,9 @@ elif [[ $(hostname) = dena* ]]; then
 		# Admin modules
 		module load cmsh cmgui
 	fi
+
+elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
+	module load pontus
 fi;
 
-# vim: sw=4 sts=0 ts=4 noet :
+# vim: sw=4 sts=0 ts=4 noet ffs=unix :

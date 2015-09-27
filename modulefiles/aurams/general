@@ -56,11 +56,18 @@ setenv kappa12      $AURAMS_versions/kappa12/src
 setenv kappa13      $AURAMS_versions/kappa13/src
 setenv kappa14      $AURAMS_versions/kappa14/src
 setenv kappa15      $AURAMS_versions/kappa15/src
-setenv kappa        $AURAMS_versions/kappac13/src
+setenv kappa20      $AURAMS_versions/kappa20/src
+setenv kappa21      $AURAMS_versions/kappa21/src
+setenv kappa22      $AURAMS_versions/kappa22/src
+setenv kappa        $AURAMS_versions/kappa20/src
 
 setenv final        $AURAMS_versions/final/src
 setenv aero         $AURAMS_versions/aero/src
 setenv AURAMS_INCLUDE_DIR $AURAMS/include
 setenv aurams_inc   $AURAMS/include
 prepend-path PATH   "${AURAMS}/bin"
+
+#if [ expr {$env(MODULES_HOST) eq "pontus"} ] {
+	prepend-path PATH $AURAMS/web/php/php_local/bin
+#}
 
