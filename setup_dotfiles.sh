@@ -45,9 +45,9 @@ if [[ "$(which vim)" != "" ]]; then
 fi
 if [[ "$(which tmux)" != "" ]]; then
 	files+=('.tmux.conf')
-	if [[ ! -e ~/.tmux ]]; then
-		git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-	fi;
+	if [[ ! -e ${h}/.tmux ]]; then
+		git clone https://github.com/tmux-plugins/tpm ${h}/.tmux/plugins/tpm
+	fi
 fi
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
