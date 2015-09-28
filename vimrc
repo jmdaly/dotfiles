@@ -157,6 +157,9 @@ let g:ycm_confirm_extra_conf = 0
 
 map <F2> :YcmCompleter GoTo<CR>
 
+" Map to get documentation on a symbol:
+map <F1> :YcmCompleter GetDoc<CR>
+
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
 
