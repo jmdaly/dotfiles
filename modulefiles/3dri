@@ -53,7 +53,7 @@ set-alias wsl "tail -f ${ws_base}/3dri.log | grep -v WebRequest"
 
 # removed cwt call
 set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
-set-alias runWSd "${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=.;"
+set-alias runWSd "cd $ws_base; ${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=.; popd"
 
 set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
 
