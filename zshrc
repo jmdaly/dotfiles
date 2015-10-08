@@ -153,6 +153,10 @@ if [[ $? == 1 ]]; then
 fi;
 
 
+if [[ -e $(which fuck) ]]; then
+	eval "$(thefuck --alias)"
+fi
+
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module load modules
