@@ -75,6 +75,7 @@ $whitelist = array(
 	'fruity',
 	'gor',
 	'greens',
+	'gotham',
 	'guardian',
 	'guepardo',
 	'herald',
