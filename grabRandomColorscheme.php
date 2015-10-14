@@ -101,6 +101,8 @@ $whitelist = array(
 	'sand',
 	'selenitic',
 	'sf',
+	'shadesofamber',
+	'softbluev2',
 	'smp',
 	'summerfruits',
 	'summerfruits256',
