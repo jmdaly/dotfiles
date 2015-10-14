@@ -132,17 +132,11 @@ set diffopt+=vertical
 " Enable the mouse, even in non-GUI:
 set mouse+=a
 
-" Ensure that line endings are handled correctly
-" for both unix and dos files:
-set fileformats=unix,dos
-
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>m :CtrlPMRU<CR>
 map <leader><Tab> :CtrlPBuffer<CR>
-" Order matching files top to bottom:
-let g:ctrlp_match_window = 'bottom,order:ttb'
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
