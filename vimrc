@@ -249,7 +249,7 @@ if has('gui_running')
 	call <SID>RandColorScheme()
 
 else
-	set mouse+=a
+	"set mouse+=a
 endif
 
 " OS Detection
