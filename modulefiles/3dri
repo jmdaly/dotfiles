@@ -18,6 +18,8 @@ set ARCH        [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
 set VENDOR      ${BASE}/o2linux64
+set BOOST_VERSION 1.56
+set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
 set app_rel     Applications/OPAL2
 set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
@@ -75,7 +77,10 @@ setenv wte /usr/lib/Wt/examples
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 
 # PCL Binary lib paths
-prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.48/lib:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.56/lib"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release"
+prepend-path LD_LIBRARY_PATH "${BOOST_ROOT}/lib"
 
 # Building 3DRi
 if { ${hostname} == "pof" } {
