@@ -14,7 +14,7 @@ SAVEHIST=1000
 HISTFILE=${HOME}/.zsh_history
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 
 if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
