@@ -1,15 +1,15 @@
 # Update the dotfiles repo to make sure we have all changes:
-~/dotfiles/doupdate.sh
+${HOME}/dotfiles/doupdate.sh
 
 # Uncomment if I want history shared across all terminals
 # setopt histignorealldups sharehistory
 setopt no_share_history
 #unsetopt share_history
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+# Keep 1000 lines of history within the shell and save it to ${HOME}/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
+HISTFILE=${HOME}/.zsh_history
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
@@ -19,7 +19,7 @@ HISTFILE=~/.zsh_history
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 
-source ~/dotfiles/antigen/antigen.zsh
+source ${HOME}/dotfiles/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -90,25 +90,25 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # ###########################################################
 
 # Alises
-if [ -e ~/.bash_aliases ]; then
-	source ~/.bash_aliases
+if [ -e ${HOME}/.bash_aliases ]; then
+	source ${HOME}/.bash_aliases
 fi
 
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 
 # Adjust the path
-if [[ -e ~/.pathrc ]]; then
-	source ~/.pathrc
+if [[ -e ${HOME}/.pathrc ]]; then
+	source ${HOME}/.pathrc
 fi
 
 local -a dirs;
 dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin);
 for d in $dirs; do
-	dir=~/${d};
+	dir=${HOME}/${d};
 	if [[ -e $dir ]]; then
 		export PATH=${dir}:${PATH}
 	fi;
