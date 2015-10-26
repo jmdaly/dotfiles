@@ -139,8 +139,8 @@ for d in $dirs; do
 	fi;
 done
 
-declare -f module > /dev/null;
 declare modules_enabled=0
+declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
 	modules_enabled=1;
 
