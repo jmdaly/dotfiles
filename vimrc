@@ -420,31 +420,34 @@ if is_win==0 && domain ==? 'neptec'
 endif
 
 
-"""""""""""""""""""" DBext """""""""""""""""""""""
-" let g:dbext_default_profile_<profile_name> = '<connection string>'
-" https://github.com/vim-scripts/dbext.vim
-" https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
-let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
-let g:dbext_default_profile_ademirs = 'type=SQLITE:dbname=/home/matt/tabletopics/ademir.db'
-let g:dbext_default_profile_ademirm = 'type=MYSQL:user=ademir:passwd=ademir:dbname=ademir'
-let g:dbext_default_profile_mayofest = 'type=MYSQL:user=www:passwd=hyper:dbname=mayofest'
+if is_win==0 && domain !=? 'neptec_small'
 
-augroup neptec
-	au!
-	autocmd BufRead */3dri/* DBSetOption profile='3dri'
-augroup end
+	"""""""""""""""""""" DBext """""""""""""""""""""""
+	" let g:dbext_default_profile_<profile_name> = '<connection string>'
+	" https://github.com/vim-scripts/dbext.vim
+	" https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
+	let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
+	let g:dbext_default_profile_ademirs = 'type=SQLITE:dbname=/home/matt/tabletopics/ademir.db'
+	let g:dbext_default_profile_ademirm = 'type=MYSQL:user=ademir:passwd=ademir:dbname=ademir'
+	let g:dbext_default_profile_mayofest = 'type=MYSQL:user=www:passwd=hyper:dbname=mayofest'
 
-augroup mayofest
-	au!
-	autocmd BufRead */mayofest/* DBSetOption profile=mayofest
-augroup end
+	augroup neptec
+		au!
+		autocmd BufRead */3dri/* DBSetOption profile='3dri'
+	augroup end
+
+	augroup mayofest
+		au!
+		autocmd BufRead */mayofest/* DBSetOption profile=mayofest
+	augroup end
 
 
-map <leader>lt :DBListTable<CR>
+	map <leader>lt :DBListTable<CR>
 
-nnoremap <leader>sel :DBListConnections<CR>
-nnoremap <leader>dep :DBProfilesRefresh<CR>
-"""""""""""""""""""" /DBext """"""""""""""""""""""
+	nnoremap <leader>sel :DBListConnections<CR>
+	nnoremap <leader>dep :DBProfilesRefresh<CR>
+	"""""""""""""""""""" /DBext """"""""""""""""""""""
+endif
 
 
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
