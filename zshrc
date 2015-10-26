@@ -1,5 +1,7 @@
-# Update the dotfiles repo to make sure we have all changes:
-${HOME}/dotfiles/doupdate.sh
+if [[ -e ${HOME}/dotfiles/doupdate.sh ]]; then
+	# Update the dotfiles repo to make sure we have all changes:
+	${HOME}/dotfiles/doupdate.sh
+fi
 
 # Uncomment if I want history shared across all terminals
 # setopt histignorealldups sharehistory
