@@ -16,36 +16,35 @@ HISTFILE=${HOME}/.zsh_history
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 
+if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
+	source ${HOME}/dotfiles/antigen/antigen.zsh
 
-source ${HOME}/dotfiles/antigen/antigen.zsh
+	# Load the oh-my-zsh's library.
+	antigen use oh-my-zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+	# Bundles from the default repo (robbyrussell's oh-my-zsh).
+	# These all take about a second to load
+	antigen bundle git
+	antigen bundle heroku
+	antigen bundle pip
+	antigen bundle lein
+	antigen bundle command-not-found
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-# These all take about a second to load
-antigen bundle git
-antigen bundle heroku
-antigen bundle pip
-antigen bundle lein
-antigen bundle command-not-found
+	# Syntax highlighting bundle.
+	antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+	# Load the theme.
+	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
+	antigen theme blinks
 
-# Load the theme.
-# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-antigen theme blinks
+	# Auto update
+	antigen bundle unixorn/autoupdate-antigen.zshplugin
 
-# Auto update
-antigen bundle unixorn/autoupdate-antigen.zshplugin
+	# Tell antigen that you're done.
+	antigen apply
 
-# Tell antigen that you're done.
-antigen apply
+fi
 
 # Use VIM wherever possible.  The latter fixes colours in non-gvim
 export EDITOR=vim
