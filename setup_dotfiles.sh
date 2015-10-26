@@ -43,7 +43,7 @@ if [[ "${TRUE_HOST}" != "" ]]; then
 	files+=(.pathrc .vncrc .gdbinit)
 elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	# Do nothing
-	files+=()
+	files+=(.zshrc)
 else
 	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 fi

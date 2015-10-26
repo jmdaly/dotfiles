@@ -140,7 +140,10 @@ for d in $dirs; do
 done
 
 declare -f module > /dev/null;
+declare modules_enabled=0
 if [[ $? == 1 ]]; then
+	modules_enabled=1;
+
 	# Environmental Modules
 	case "$0" in
 	-sh|sh|*/sh)	modules_shell=sh ;;
@@ -209,6 +212,19 @@ elif [[ $(hostname) = dena* ]]; then
 
 elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
 	module load pontus
+
+elif [[ "$(uname -o)" == "Cygwin" ]]; then
+	# This targets windows laptop at Neptec
+
+	# Modules isn't available here, so duplicate the most common aliases
+	if [[ "${modules_enabled}" == "0" ]]; then
+		base=${HOME}/workspace/opal2
+		ARCH=o2win64
+		export bld=${base}/build-3dri-${ARCH}-release
+		ws=${base}/3dri/Applications/OPAL2/3DRiWebScheduler
+		export wss=${ws}/src
+		export wsi=${ws}/include/3DRiWebScheduler
+	fi
 fi;
 
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
