@@ -27,16 +27,24 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-cd ${base}
-git submodule init
-git submodule update
+if [[ "$(uname -o)" != "Cygwin" ]]; then
+	cd ${base}
+	git submodule init
+	git submodule update
+fi
 cd ${h}
 
+#
+# Declare the files that we always want to copy over.
+declare -a files;
+files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
-	declare -a files=(.bash_aliases .pathrc .vncrc .gdbinit)
+	files+=(.pathrc .vncrc .gdbinit)
+elif [[ "$(uname -o)" == "Cygwin" ]]; then
+	# Do nothing
 else
-	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 fi
 
 # Check if our environment supports these

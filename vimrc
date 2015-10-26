@@ -4,6 +4,7 @@ set shell=/bin/bash
 
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
+let hostos = substitute(system('uname -o'), '\n', '', '')
 
 if hostname ==? 'pof' || hostname ==? 'tinder'
 	let domain='neptec'
@@ -11,7 +12,7 @@ elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || 
 	let domain='school'
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
-elseif hostname ==? 'tegra-ubuntu'
+elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 	let domain='neptec-small'
 else
 	let domain='home'
