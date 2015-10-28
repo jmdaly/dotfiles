@@ -149,6 +149,10 @@ set autochdir
 " directory, and all the way up until it finds one:
 set tags=./tags;/
 
+" Tell vim that fileformat might be unix or dos.
+" This helps with printing DOS line ending properly:
+set ffs=unix,dos
+
 " Let YouCompleteMe use tag files for completion as well:
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -159,6 +163,9 @@ map <F2> :YcmCompleter GoTo<CR>
 
 " Map to get documentation on a symbol:
 map <F1> :YcmCompleter GetDoc<CR>
+
+" Map to apply quick fix:
+map <F3> :YcmCompleter FixIt<CR>
 
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
