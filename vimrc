@@ -125,6 +125,9 @@ syntax on
 
 " Make searching case-insensitive:
 set ignorecase
+" When an upper case letter is in the search
+" make it case sensitive
+set smartcase
 
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
