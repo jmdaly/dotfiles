@@ -183,6 +183,9 @@ if domain !=? 'neptec-small'
 	Plugin 'Hdima/python-syntax'
 endif
 
+" Undo tree
+Plugin 'sjl/gundo.vim.git'
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
