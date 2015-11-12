@@ -135,6 +135,12 @@ set diffopt+=vertical
 " Enable the mouse, even in non-GUI:
 set mouse+=a
 
+" Set the make program to be ninja:
+set makeprg=ninja
+" A shortcut key to change to the build directory
+" and build the project:
+map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
+
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_cmd = 'CtrlP'
