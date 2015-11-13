@@ -458,6 +458,11 @@ if is_win==0 && domain !=? 'neptec_small'
 endif
 
 
+""""""""""""""""""""""" Gundo """"""""""""""""""""""""""
+nnoremap <F6> :GundoToggle<CR>
+""""""""""""""""""""""" /Gundo """""""""""""""""""""""""
+
+
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
 	let g:rainbow_conf = {
 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
