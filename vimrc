@@ -186,6 +186,11 @@ endif
 " Undo tree
 Plugin 'sjl/gundo.vim.git'
 
+if hostname ==? 'pof'
+	" Manage font size
+	Plugin 'drmikehenry/vim-fontsize'
+endif
+
 " XML helper
 "Plugin 'othree/xml.vim'
 
