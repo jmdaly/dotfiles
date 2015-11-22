@@ -204,12 +204,14 @@ elif [[ $(hostname) = dena* ]]; then
 		module use /software/arch/amd64/modules/all
 	fi
 
+	# PGI
+	module use /cm/shared/apps/pgi/modulefiles
+
 	# defaults
 	module load shared modules
 
 	# Development
-	export PGI_DEFAULT=2013
-	module load pgi slurm
+	module load pgi64/2013 slurm
 
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules
