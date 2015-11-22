@@ -166,7 +166,7 @@ if [[ $? == 1 ]]; then
 fi;
 
 
-if [[ -e $(which fuck) ]]; then
+if [[ -e $(which fuck 2>/dev/null) ]]; then
 	eval "$(thefuck --alias)"
 fi
 
