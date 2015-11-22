@@ -142,8 +142,10 @@ Plugin 'powerline/powerline'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
-" Doxygen
-Plugin 'vim-scripts/DoxygenToolkit.vim'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
+	" Doxygen
+	Plugin 'vim-scripts/DoxygenToolkit.vim'
+endif
 
 if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	" A plugin to use rtags in vim. (rtags allows for code following,
@@ -190,9 +192,6 @@ if hostname ==? 'pof'
 	" Manage font size
 	Plugin 'drmikehenry/vim-fontsize'
 endif
-
-" XML helper
-"Plugin 'othree/xml.vim'
 
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
