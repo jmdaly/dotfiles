@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-#%Module1.0
-
-module use $::env(HOME)/.modulefiles
-=======
 #%Module1.0#####################################################################
 ##
 ## modules pgi
@@ -20,4 +15,4 @@ module-user exp
 module-log debug stderr
 
 module use -a $HOME/.modulefiles/
->>>>>>> a072b9b4fbe856114da85ea63fc7943a2bf93da9
+module use $::env(HOME)/.modulefiles
