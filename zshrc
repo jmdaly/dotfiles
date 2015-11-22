@@ -1,65 +1,75 @@
-# Update the dotfiles repo to make sure we have all changes:
-~/dotfiles/doupdate.sh
+if [[ -e ${HOME}/dotfiles/doupdate.sh ]]; then
+	# Update the dotfiles repo to make sure we have all changes:
+	${HOME}/dotfiles/doupdate.sh
+fi
 
 # Uncomment if I want history shared across all terminals
 # setopt histignorealldups sharehistory
 setopt no_share_history
 #unsetopt share_history
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+# Keep 1000 lines of history within the shell and save it to ${HOME}/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=~/.zsh_history
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+HISTFILE=${HOME}/.zsh_history
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
+COMPLETION_WAITING_DOTS="true"
 
 
-source ~/dotfiles/antigen/antigen.zsh
+if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
+	source ${HOME}/dotfiles/antigen/antigen.zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+	# Load the oh-my-zsh's library.
+	antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-# These all take about a second to load
-antigen bundle git
-antigen bundle heroku
-antigen bundle pip
-antigen bundle lein
-antigen bundle command-not-found
+	# Bundles from the default repo (robbyrussell's oh-my-zsh).
+	# These all take about a second to load
+	antigen bundle git
+	antigen bundle heroku
+	antigen bundle pip
+	antigen bundle lein
+	antigen bundle command-not-found
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+	# Syntax highlighting bundle.
+	antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Load the theme.
-# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-antigen theme blinks
+	# Load the theme.
+	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
+	antigen theme blinks
 
-# Auto update
-antigen bundle unixorn/autoupdate-antigen.zshplugin
+	# Auto update
+	antigen bundle unixorn/autoupdate-antigen.zshplugin
 
-# Tell antigen that you're done.
-antigen apply
+	# Tell antigen that you're done.
+	antigen apply
 
+
+elif [[ -e ${HOME}/.oh-my-zsh ]]; then
+	# Used with babun in cygwin.  Should attempt to merge with Antigen
+	# one day
+
+	# Path to your oh-my-zsh installation.
+	export ZSH=${HOME}/.oh-my-zsh
+	
+	# Set name of the theme to load.
+	# Look in ~/.oh-my-zsh/themes/
+	# Optionally, if you set this to "random", it'll load a random theme each
+	# time that oh-my-zsh is loaded.
+	ZSH_THEME="babun"
+
+	# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+	# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+	# Example format: plugins=(rails git textmate ruby lighthouse)
+	# Add wisely, as too many plugins slow down shell startup.
+	plugins=(git)
+
+	export PATH=$HOME/bin:/usr/local/bin:$PATH
+	
+	source $ZSH/oh-my-zsh.sh
+
+fi
+	
 # Use VIM wherever possible.  The latter fixes colours in non-gvim
 export EDITOR=vim
 export TERM=xterm-256color
@@ -79,58 +89,61 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
 
-###########################################################
-# Define some keys ( http://zshwiki.org/home/zle/bindkeys )
-#
-# Not sure if these are still needed.  I had only implemented
-# them on dena
+# ###########################################################
+# # Define some keys ( http://zshwiki.org/home/zle/bindkeys )
 # #
-typeset -A key
-key[Home]=${terminfo[khome]}
-key[End]=${terminfo[kend]}
-key[Insert]=${terminfo[kich1]}
-key[Delete]=${terminfo[kdch1]}
-key[Up]=${terminfo[kcuu1]}
-key[Down]=${terminfo[kcud1]}
-key[Left]=${terminfo[kcub1]}
-key[Right]=${terminfo[kcuf1]}
-key[PageUp]=${terminfo[kpp]}
-key[PageDown]=${terminfo[knp]}
-
-# Setting up more key bindings
-bindkey '' beginning-of-line
-bindkey '' end-of-line
-bindkey '' history-incremental-search-backward
-bindkey "${key[Delete]}" delete-char
-###########################################################
+# # Not sure if these are still needed.  I had only implemented
+# # them on dena
+# # #
+# typeset -A key
+# key[Home]=${terminfo[khome]}
+# key[End]=${terminfo[kend]}
+# key[Insert]=${terminfo[kich1]}
+# key[Delete]=${terminfo[kdch1]}
+# key[Up]=${terminfo[kcuu1]}
+# key[Down]=${terminfo[kcud1]}
+# key[Left]=${terminfo[kcub1]}
+# key[Right]=${terminfo[kcuf1]}
+# key[PageUp]=${terminfo[kpp]}
+# key[PageDown]=${terminfo[knp]}
+#
+# # Setting up more key bindings
+# bindkey '' beginning-of-line
+# bindkey '' end-of-line
+# bindkey '' history-incremental-search-backward
+# bindkey "${key[Delete]}" delete-char
+# ###########################################################
 
 # Alises
-if [ -e ~/.bash_aliases ]; then
-	source ~/.bash_aliases
+if [ -e ${HOME}/.bash_aliases ]; then
+	source ${HOME}/.bash_aliases
 fi
 
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 
 # Adjust the path
-if [[ -e ~/.pathrc ]]; then
-	source ~/.pathrc
+if [[ -e ${HOME}/.pathrc ]]; then
+	source ${HOME}/.pathrc
 fi
 
 local -a dirs;
-dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin);
+dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
 for d in $dirs; do
-	dir=~/${d};
+	dir=${HOME}/${d};
 	if [[ -e $dir ]]; then
 		export PATH=${dir}:${PATH}
 	fi;
 done
 
+declare modules_enabled=0
 declare -f module > /dev/null;
 if [[ $? == 1 ]]; then
+	modules_enabled=1;
+
 	# Environmental Modules
 	case "$0" in
 	-sh|sh|*/sh)	modules_shell=sh ;;
@@ -152,6 +165,10 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
+
+if [[ -e $(which fuck 2>/dev/null) ]]; then
+	eval "$(thefuck --alias)"
+fi
 
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
@@ -181,12 +198,20 @@ elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
 
+	if [[ $(hostname) = dena[5-6] ]]; then
+		module use /software/arch/intel64/modules/all
+	else
+		module use /software/arch/amd64/modules/all
+	fi
+
+	# PGI
+	module use /cm/shared/apps/pgi/modulefiles
+
 	# defaults
 	module load shared modules
 
 	# Development
-	export PGI_DEFAULT=2015
-	module load pgi slurm brew
+	module load pgi64/2013 slurm
 
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules
@@ -195,6 +220,19 @@ elif [[ $(hostname) = dena* ]]; then
 
 elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
 	module load pontus
+
+elif [[ "$(uname -o)" == "Cygwin" ]]; then
+	# This targets windows laptop at Neptec
+
+	# Modules isn't available here, so duplicate the most common aliases
+	if [[ "${modules_enabled}" == "0" ]]; then
+		base=${HOME}/workspace/opal2
+		ARCH=o2win64
+		export bld=${base}/build-3dri-${ARCH}-release
+		ws=${base}/3dri/Applications/OPAL2/3DRiWebScheduler
+		export wss=${ws}/src
+		export wsi=${ws}/include/3DRiWebScheduler
+	fi
 fi;
 
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
