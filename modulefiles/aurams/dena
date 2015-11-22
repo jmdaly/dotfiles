@@ -10,14 +10,13 @@ module-whatis	"loads AURAMS as though you're on Pontus using the share on Sahand
 # for Tcl script use only
 set	version		3.2.9
 
+set AURAMS_BASE_DIR /Volumes/matt-1/aurams/trunk
 if [ module-info mode load ] {
-	puts stderr "Loading AURAMS in /Volumes/matt/aurams"
+	puts stderr "Loading AURAMS in ${AURAMS_BASE_DIR}"
 }
 if [ module-info mode remove ] {
 	puts stderr "Unloading AURAMS"
 }
-
-set AURAMS_BASE_DIR /Volumes/matt/aurams/trunk
 
 if [ module-info mode load ] {
 	setenv AURAMS_BASE_DIR $AURAMS_BASE_DIR

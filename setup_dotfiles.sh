@@ -27,16 +27,45 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-cd ${base}
-git submodule init
-git submodule update
+if [[ "$(uname -o)" != "Cygwin" ]]; then
+	cd ${base}
+	git submodule init
+	git submodule update
+fi
 cd ${h}
 
+#
+# Declare the files that we always want to copy over.
+declare -a files;
+files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
-	declare -a files=(.bash_aliases .vimrc .tmux.conf .screenrc .pathrc .vncrc .gdbinit)
+	files+=(.pathrc .vncrc .gdbinit)
+elif [[ "$(uname -o)" == "Cygwin" ]]; then
+	# Do nothing
+	files+=(.zshrc)
 else
-	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .vimrc .tmux.conf .screenrc .pathrc .modulefiles .vncrc .gdbinit .dircolors .sqliterc .ctags)
+	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+fi
+
+# Check if our environment supports these
+if [[ "$(which vim)" != "" ]]; then
+	files+=('.vimrc')
+fi
+if [[ "$(which tmux)" != "" ]]; then
+	files+=('.tmux.conf')
+	if [[ ! -e ${h}/.tmux ]]; then
+		git clone https://github.com/tmux-plugins/tpm ${h}/.tmux/plugins/tpm
+	fi
+fi
+if [[ "$(which screen)" != "" ]]; then
+	files+=('.screenrc')
+fi
+if [[ "$(which sqlite3)" != "" ]]; then
+	files+=('.sqliterc')
+fi
+if [[ "$(which ctags)" != "" ]]; then
+	files+=('.ctags')
 fi
 
 # .config/autokey
@@ -74,7 +103,12 @@ for f in ${files[@]}; do
 done;
 
 cd $h
-ln -s .vimrc .nvimrc
+if [[ -e .vimrc ]]; then
+	ln -s .vimrc .nvimrc
+fi
+if [[ -e .modulefiles ]]; then
+	ln -s .modulefiles/.modulerc ./
+fi
 
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
