@@ -602,4 +602,13 @@ ab jsut just
 ab eticket etiket
 ab breif brief
 
+" Weird issues on dena, ideally mapping these keys will make these characters
+" stop appearing.
+if domain ==? 'school'
+	map ^[0A <up>
+	map ^[OB <down>
+	map ^[OC <right>
+	map ^[OD <left>
+endif
+
 " vim: ts=3 sts=3 sw=3 noet nowrap :
