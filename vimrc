@@ -17,7 +17,7 @@ elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 else
 	let domain='home'
 endif
-"echo 'Using domain ' . domain
+" echo 'Using domain ' . domain
 
 let is_win=0
 let is_mac=0
