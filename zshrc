@@ -168,11 +168,18 @@ elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
 
+	if [[ $(hostname) = dena[1-4] || $(hostname) == "dena" ]]; then
+		module use /software/arch/amd64/modules/all
+	elif
+		# dena[5-6]
+		module use /software/arch/intel64/modules/all
+	fi
+
 	# defaults
 	module load shared modules
 
 	# Development
-	export PGI_DEFAULT=2015
+	export PGI_DEFAULT=2013
 	module load pgi slurm brew
 
 	if [[ $(hostname) == "dena" ]]; then
