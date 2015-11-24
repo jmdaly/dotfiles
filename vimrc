@@ -604,6 +604,9 @@ ab laster laser
 ab jsut just
 ab eticket etiket
 ab breif brief
+ab OPL2 OPAL2
+ab unqiue unique
+ab unique unique
 
 " Weird issues on dena, ideally mapping these keys will make these characters
 " stop appearing.
