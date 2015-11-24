@@ -25,7 +25,6 @@ set app_rel     Applications/OPAL2
 set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
 set bld_release ${BASE}/build-3dri-${ARCH}-release
 set bld         ${bld_debug}
-set bldw        ${BASE}/3dri-build-winx64-release
 
 set apps        ${src}/${app_rel}
 set appb        ${bld}/${app_rel}
