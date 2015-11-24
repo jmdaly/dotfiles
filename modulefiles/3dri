@@ -65,7 +65,7 @@ set-alias ForegroundSegmenter "cd ${appb}/DataProcessor/ForegroundSegmenter; ./F
 set-alias ContourMapper       "cd ${appb}/DataProcessor/ContourMapper; ./ContourMapper"
 set-alias StockpileMonitor    "cd ${appb}/DataProcessor/StockpileMonitor; ./StockpileMonitor"
 set-alias SensorManager       "cd ${appb}/SensorManager; ./SensorManager"
-set-alias LcmLogPlayer        "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
+set-alias LcmLogPlayer        "cd ${bld_debug}/lcm; ./RunLcmLogPlayer.sh"
 
 prepend-path PATH ${wsb_debug}
 
