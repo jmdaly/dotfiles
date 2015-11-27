@@ -125,12 +125,21 @@ syntax on
 
 " Make searching case-insensitive:
 set ignorecase
+" When an upper case letter is in the search
+" make it case sensitive
+set smartcase
 
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
 
 " Enable the mouse, even in non-GUI:
 set mouse+=a
+
+" Set the make program to be ninja:
+set makeprg=ninja
+" A shortcut key to change to the build directory
+" and build the project:
+map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
 
 " Set up Ctrl-P shortcut key for Ctrl-P:
 let g:ctrlp_map = '<c-k>'
@@ -149,6 +158,10 @@ set autochdir
 " directory, and all the way up until it finds one:
 set tags=./tags;/
 
+" Tell vim that fileformat might be unix or dos.
+" This helps with printing DOS line ending properly:
+set ffs=unix,dos
+
 " Let YouCompleteMe use tag files for completion as well:
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -156,6 +169,12 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 
 map <F2> :YcmCompleter GoTo<CR>
+
+" Map to get documentation on a symbol:
+map <F1> :YcmCompleter GetDoc<CR>
+
+" Map to apply quick fix:
+map <F3> :YcmCompleter FixIt<CR>
 
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
