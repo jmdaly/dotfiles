@@ -31,7 +31,7 @@ set $base0F #fcc09e
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:System San Francisco Display 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -112,7 +112,7 @@ bindsym $mod+a focus parent
 
 set $workspace1 "1: Editor  "
 set $workspace2 "2: Chrome  "
-set $workspace3 "3: Project"
+set $workspace3 "3: Project  "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1

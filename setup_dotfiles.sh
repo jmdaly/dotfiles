@@ -71,4 +71,11 @@ if [ ! -f ~/.fonts/fontawesome-webfont.ttf ]; then
 	curl -fLo ~/.fonts/fontawesome-webfont.ttf --create-dirs https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf
 fi
 
+# Get the Yosemite system font
+if [ ! -f ~/.fonts/System\ San\ Francisco\ Display\ Regular.ttf ]; then
+	curl -fLo /tmp/sanfrancisco.zip https://github.com/supermarin/YosemiteSanFranciscoFont/archive/master.zip
+	cd /tmp && unzip sanfrancisco.zip
+	cp /tmp/YosemiteSanFranciscoFont-master/*.ttf ~/.fonts
+fi
+
 cd && source .zshrc
