@@ -52,12 +52,6 @@ call vundle#begin('~/dotfiles/bundles') " This always fails the second time arou
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
-"Plugin 'tpope/vim-surround'
-
-" Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-" Plugin 'Lokaltog/vim-easymotion'
-
 if domain !=? 'neptec-small'
 	" Solarized colour scheme
 	Plugin 'altercation/vim-colors-solarized.git'
