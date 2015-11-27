@@ -48,6 +48,27 @@ done;
 
 # Set up symlinks for tmux plugins:
 mkdir -p ~/.tmux/plugins
-ln -s ~/dotfiles/tpm ~/.tmux/plugins/tpm
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+	ln -s ~/dotfiles/tpm ~/.tmux/plugins/tpm
+fi
+
+# Set up symlinks for files that don't go
+# in the home directory:
+mkdir -p ~/.config/i3
+if [ ! -f ~/.config/i3/config ]; then
+	ln -s ~/dotfiles/i3 ~/.config/i3/config
+fi
+
+mkdir -p ~/.config/nvim
+if [ ! -f ~/.config/nvim/init.vim ]; then
+	ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
+fi
+
+# Set up fonts
+
+# Download fonts if we need them:
+if [ ! -f ~/.fonts/fontawesome-webfont.ttf ]; then
+	curl -fLo ~/.fonts/fontawesome-webfont.ttf --create-dirs https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf
+fi
 
 cd && source .zshrc
