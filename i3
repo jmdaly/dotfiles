@@ -212,6 +212,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Startup applications:
 exec google-chrome
 exec --no-startup-id nm-applet
-
-# Set some colours for the titles and bar:
+# Start up terminals on multiple workspaces. Since we
+# launch the same application on multiple workspaces like
+# this, we need to use i3-msg and explicitly switch
+# workspaces
+exec --no-startup-id i3-msg 'workspace $workspace1; exec i3-sensible-terminal' 
+exec --no-startup-id i3-msg 'workspace $workspace3; exec i3-sensible-terminal' 
 
