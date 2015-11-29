@@ -37,6 +37,7 @@ au BufNewFile,BufRead *.ftn90     set filetype=fortran
 au BufNewFile,BufRead *.module    set filetype=php
 au BufNewFile,BufRead *.gs        set filetype=javascript
 au BufNewFile,BufRead .exper_cour set filetype=sh
+au BufNewFile,BufRead Common_Compiler* set filetype=sh
 
 "
 " Vundle.  use :PluginInstall to install all these plugins
