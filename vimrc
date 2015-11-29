@@ -125,9 +125,14 @@ endif
 Plugin 'tpope/vim-fugitive'
 set diffopt+=vertical
 
-" gitgutter - Shows [git] status of each line in a file
-" Toggle with :GitGutterToggle
-Plugin 'airblade/vim-gitgutter'
+if domain !=? 'school'
+	" gitgutter - Shows [git] status of each line in a file
+	" On Dena, this injects annoying arroy key characters everywhere (e.g. ^[0D
+	" ^[0B ^[0A ^[0C)
+
+	" Toggle with :GitGutterToggle
+	Plugin 'airblade/vim-gitgutter'
+endif
 
 " Plugin to assist with commenting out blocks of text:
 Plugin 'tomtom/tcomment_vim'
@@ -601,14 +606,5 @@ ab laster laser
 ab jsut just
 ab eticket etiket
 ab breif brief
-
-" Weird issues on dena, ideally mapping these keys will make these characters
-" stop appearing.
-if domain ==? 'school'
-	map ^[0A <up>
-	map ^[OB <down>
-	map ^[OC <right>
-	map ^[OD <left>
-endif
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
