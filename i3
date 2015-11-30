@@ -110,6 +110,9 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# shortcut to move a workspace to a monitor to the right
+bindsym $mod+m move workspace to output right
+
 set $workspace1 "1: Editor  "
 set $workspace2 "2: Chrome  "
 set $workspace3 "3: Project  "
