@@ -78,4 +78,3 @@ if [ ! -f ~/.fonts/System\ San\ Francisco\ Display\ Regular.ttf ]; then
 	cp /tmp/YosemiteSanFranciscoFont-master/*.ttf ~/.fonts
 fi
 
-cd && source .zshrc
