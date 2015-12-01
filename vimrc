@@ -8,7 +8,7 @@ let hostos = substitute(system('uname -o'), '\n', '', '')
 
 if hostname ==? 'pof' || hostname ==? 'tinder'
 	let domain='neptec'
-elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
+elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
