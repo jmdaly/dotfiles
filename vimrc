@@ -76,6 +76,10 @@ Plug 'tpope/vim-abolish'
 " Plug to generate doxygen documentation strings:
 Plug 'mrtazz/DoxygenToolkit.vim'
 
+" Install fzf, the fuzzy searcher
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -87,7 +91,6 @@ call plug#end()            " required
 set rtp+=~/dotfiles
 
 " Set a colour scheme for vim:
-syntax enable
 set background=dark
 colorscheme kalisi
 set t_Co=256
@@ -116,11 +119,10 @@ set makeprg=ninja
 " and build the project:
 map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
 
-" Set up Ctrl-P shortcut key for Ctrl-P:
-let g:ctrlp_map = '<c-k>'
-let g:ctrlp_cmd = 'CtrlP'
-map <leader>m :CtrlPMRU<CR>
-map <leader><Tab> :CtrlPBuffer<CR>
+" Set up keyboard shortbuts for fzf, the fuzzy finder
+" This one searches all the files in the current git repo:
+map <c-k> :GitFiles<CR>
+map <leader><Tab> :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
