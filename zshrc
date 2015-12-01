@@ -41,3 +41,5 @@ source ~/dotfiles/ninja/_ninja
 # Adjust the path
 source ~/.pathrc
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
