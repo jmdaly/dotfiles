@@ -58,6 +58,7 @@ $whitelist = array(
 	'PapayaWhip',
 	'abra',
 	'base16-ateliersulphurpool',
+	'blackboard',
 	'busybee',
 	'caramel',
 	'bluechia',
