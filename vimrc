@@ -324,6 +324,9 @@ if has('unix')
 	" Map GetType to an easier key combination:
 	nnoremap <leader>ty :YcmCompleter GetType<CR>
 
+	" Compile the file
+	nnoremap <leader>y :YcmDiag<CR>
+
 	" F2 will jump to a variable/method definition
 	map <F2> :YcmCompleter GoTo<CR>
 
