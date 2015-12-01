@@ -1,109 +1,84 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/dotfiles/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
-" Solarized colour scheme
-Plugin 'altercation/vim-colors-solarized.git'
+" Solarized colour scheme. For some reason, vim-plug was
+" giving authentication errors when the short form of
+" the repository was used. Speicyfing the full URL
+" seems to work
+Plug 'https://github.com/altercation/vim-colors-solarized.git'
 
 " YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
 " YCMGenerator - generates configs for YouCompleteMe
-Plugin 'rdnetto/YCM-Generator'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 " NERD Tree - file explorer for vim
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Ctrl-P - fuzzy file finder
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " Better C++ Syntax Highlighting:
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Track the ultisnips engine.
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 " tagbar - allows browsing tags of the current source file
 " from ctags. Good for seeing functions, variables, etc.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
 " current file and the file around it:
-Plugin 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-" Plugin to assist with commenting out blocks of text:
-Plugin 'tomtom/tcomment_vim'
+" Plug to assist with commenting out blocks of text:
+Plug 'tomtom/tcomment_vim'
 
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
 " A plugin to switch between header and source files:
-Plugin 'derekwyatt/vim-fswitch'
+Plug 'derekwyatt/vim-fswitch'
 
-" Plugin to help manage vim buffers:
-Plugin 'jeetsukumaran/vim-buffergator'
+" Plug to help manage vim buffers:
+Plug 'jeetsukumaran/vim-buffergator'
 
-" Plugin to highlight the variable under the cursor:
-Plugin 'OrelSokolov/HiCursorWords'
+" Plug to highlight the variable under the cursor:
+Plug 'OrelSokolov/HiCursorWords'
 
 " A plugin to use rtags in vim. (rtags allows for
 " code following, some refactoring, etc.)
-Plugin 'lyuts/vim-rtags'
+Plug 'lyuts/vim-rtags'
 
 " kalisi colour scheme:
-Plugin 'freeo/vim-kalisi'
+Plug 'freeo/vim-kalisi'
 
-" Plugin to to smart search and replace, easy
+" Plug to to smart search and replace, easy
 " changes from camelCase to snake_case, etc.
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
-" Plugin to generate doxygen documentation strings:
-Plugin 'mrtazz/DoxygenToolkit.vim'
+" Plug to generate doxygen documentation strings:
+Plug 'mrtazz/DoxygenToolkit.vim'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
+call plug#end()            " required
+
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
