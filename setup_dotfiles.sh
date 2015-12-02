@@ -52,11 +52,26 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
 	ln -s ~/dotfiles/tpm ~/.tmux/plugins/tpm
 fi
 
+# Get vim-plug, the plugin manager I use
+# for vim:
+if [ ! -f ~/.vim/autoload/plug.vim ]; then
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+if [ ! -f ~/.config/nvim/autoload/plug.vim ]; then
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 # Set up symlinks for files that don't go
 # in the home directory:
 mkdir -p ~/.config/i3
 if [ ! -f ~/.config/i3/config ]; then
 	ln -s ~/dotfiles/i3 ~/.config/i3/config
+fi
+
+mkdir -p ~/.config/i3blocks
+if [ ! -f ~/.config/i3blocks/config ]; then
+	ln -s ~/dotfiles/i3blocks.conf ~/.config/i3blocks/config
 fi
 
 mkdir -p ~/.config/nvim
