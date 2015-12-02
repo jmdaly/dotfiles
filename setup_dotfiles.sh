@@ -69,6 +69,11 @@ if [ ! -f ~/.config/i3/config ]; then
 	ln -s ~/dotfiles/i3 ~/.config/i3/config
 fi
 
+mkdir -p ~/.config/i3blocks
+if [ ! -f ~/.config/i3/i3blocks.conf ]; then
+	ln -s ~/dotfiles/i3blocks.conf ~/.config/i3blocks/config
+fi
+
 mkdir -p ~/.config/nvim
 if [ ! -f ~/.config/nvim/init.vim ]; then
 	ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
