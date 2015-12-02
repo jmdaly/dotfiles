@@ -70,7 +70,7 @@ if [ ! -f ~/.config/i3/config ]; then
 fi
 
 mkdir -p ~/.config/i3blocks
-if [ ! -f ~/.config/i3/i3blocks.conf ]; then
+if [ ! -f ~/.config/i3blocks/config ]; then
 	ln -s ~/dotfiles/i3blocks.conf ~/.config/i3blocks/config
 fi
 
