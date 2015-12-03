@@ -29,6 +29,9 @@ antigen apply
 
 export EDITOR=vim
 
+# Set the terminal to urxvt, for i3wm:
+export TERMINAL=urxvt
+
 # Set ccache to use distcc:
 export CCACHE_PREFIX="distcc"
 
