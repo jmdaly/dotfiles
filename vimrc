@@ -94,7 +94,7 @@ set rtp+=~/dotfiles
 " tell solarized to use degraded 256 colors. Necessary
 " with terminal vim, when the terminal pallette is
 " not set to solarized
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 colorscheme solarized
 set background=dark
 
