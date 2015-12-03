@@ -2,7 +2,7 @@
 !! solarized dark colours. The original is found here
 !! https://github.com/solarized/xresources
 !! but it contains preprocessor directives that Ubuntu
-!! couldn't parse. I replaced the preprocessor values
+!! could not parse. I replaced the preprocessor values
 !! with the actual hex codes here, and that seems to
 !! work
 *background:            #002b36
@@ -43,3 +43,8 @@
 !! white dark/light
 *color7:                #eee8d5
 *color15:               #fdf6e3
+
+! urxvt config
+URxvt.scrollBar: false
+URxvt.font:     xft:bitstream vera sans mono:size=11:antialias=true
+URxvt.boldFont: xft:bitstream vera sans mono:bold:size=11:antialias=true
