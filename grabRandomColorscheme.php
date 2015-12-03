@@ -93,10 +93,12 @@ $whitelist = array(
 	'moss',
 	'mud',
 	'nefertiti',
+	'northland',
 	'nicotine',
 	'nightVision',
 	'olive',
 	'onedark', // Not in dir list above
+	'paintbox',
 	'phd',
 	'playroom',
 	'pspad',
