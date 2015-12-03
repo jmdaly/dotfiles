@@ -48,7 +48,9 @@ font pango:System San Francisco Display 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+set $terminal urxvt
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -218,6 +220,6 @@ exec --no-startup-id nm-applet
 # launch the same application on multiple workspaces like
 # this, we need to use i3-msg and explicitly switch
 # workspaces
-exec --no-startup-id i3-msg 'workspace $workspace1; exec i3-sensible-terminal' 
-exec --no-startup-id i3-msg 'workspace $workspace3; exec i3-sensible-terminal' 
+exec --no-startup-id i3-msg 'workspace $workspace1; exec $terminal' 
+exec --no-startup-id i3-msg 'workspace $workspace3; exec $terminal' 
 
