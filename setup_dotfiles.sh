@@ -19,7 +19,7 @@ git submodule init
 git submodule update
 cd ~
 
-files=(.zshrc .vimrc .tmux.conf .gitconfig .pathrc .ctags)
+files=(.zshrc .vimrc .tmux.conf .gitconfig .pathrc .ctags .Xresources)
 
 declare backup_dir=~/.dotfiles_backup
 
