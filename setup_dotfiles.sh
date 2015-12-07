@@ -79,6 +79,14 @@ if [ ! -f ~/.config/nvim/init.vim ]; then
 	ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
 fi
 
+# Get the Base16 colour schemes
+mkdir -p ~/.config
+if [ ! -d ~/.config/base16-shell ]; then
+	git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+fi
+cd ~/.config/base16-shell
+git pull
+
 # Set up fonts
 
 # Download fonts if we need them:
