@@ -30,14 +30,22 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen bundle pip
 	antigen bundle lein
 	antigen bundle command-not-found
+	antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
 
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 
 	# Load the theme.
+	# The prezto theme uses a bunch of glyphs that don't show in putty.  If I'm
+	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
+	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	antigen theme blinks
+	if [[ $(hostname) == "pof" ]]; then
+		antigen theme blinks
+	else
+		antigen theme prezto
+	fi
 
 	# Auto update
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
