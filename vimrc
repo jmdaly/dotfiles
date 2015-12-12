@@ -83,6 +83,10 @@ Plug 'junegunn/fzf.vim'
 " Base16 color schemes
 Plug 'chriskempson/base16-vim'
 
+" Plugin to wrap all the various grep tools, and provide
+" some more advanced search functionality
+Plug 'mhinz/vim-grepper'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -208,3 +212,9 @@ nnoremap <leader>ct :!ctags .<CR>
 
 " Key mappings for clang-format, to format source code:
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
+
+" Grepper key bindings:
+" Define an operator that takes any motion and
+" uses it to populate the search prompt:
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
