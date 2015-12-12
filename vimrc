@@ -8,7 +8,7 @@ let hostos = substitute(system('uname -o'), '\n', '', '')
 
 if hostname ==? 'pof' || hostname ==? 'tinder'
 	let domain='neptec'
-elseif hostname ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
+elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
@@ -17,7 +17,7 @@ elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 else
 	let domain='home'
 endif
-"echo 'Using domain ' . domain
+" echo 'Using domain ' . domain
 
 let is_win=0
 let is_mac=0
@@ -36,6 +36,9 @@ au BufNewFile,BufRead *.html.base set filetype=html
 au BufNewFile,BufRead *.ftn90     set filetype=fortran
 au BufNewFile,BufRead *.module    set filetype=php
 au BufNewFile,BufRead *.gs        set filetype=javascript
+au BufNewFile,BufRead .exper_cour set filetype=sh
+au BufNewFile,BufRead Common_Compiler* set filetype=sh
+au BufNewFile,BufRead */Wt/W*     set filetype=cpp
 
 "
 " Vundle.  use :PluginInstall to install all these plugins
@@ -50,12 +53,6 @@ call vundle#begin('~/dotfiles/bundles') " This always fails the second time arou
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Sourrounds paranthesis and stuff https://github.com/tpope/vim-surround
-"Plugin 'tpope/vim-surround'
-
-" Navigate around numbers easier.. https://github.com/Lokaltog/vim-easymotion
-" Plugin 'Lokaltog/vim-easymotion'
-
 if domain !=? 'neptec-small'
 	" Solarized colour scheme
 	Plugin 'altercation/vim-colors-solarized.git'
@@ -67,9 +64,12 @@ if domain !=? 'neptec-small'
 	" Full of colour schemes:
 	Plugin 'flazz/vim-colorschemes'
 	" Tomorrow Tomorrow-Night Tomorrow-Night-Eighties Tomorrow-Night-Bright Tomorrow-Night-Blue SlateDark PapayaWhip MountainDew Monokai Monokai-chris DevC++ c colorscheme_template colorful colorful256 colorer coldgreen coffee codeschool CodeFactoryv3 codeburn codeblocks_dark cobalt cobaltish clue cloudy clearance cleanroom cleanphp clarity ciscoacl chrysoprase chocolate ChocolatePapaya ChocolateLiquor chlordane chela_light Chasing_Logic charon charged-256 chance-of-storm cascadia carvedwood carvedwoodcool carrot caramel candy candyman candycode campfire camo calmar256-light cake16 C64 bw bvemu buttercream busybee busierbee burnttoast256 bubblegum brown brookstream breeze borland bog bocau bmichaelsen blugrine bluez blue blueshift blueprint bluegreen bluedrake bluechia blink blazer BlackSea blacklight blackdust blackboard blackbeauty black_angus biogoo billw bensday beauty256 beachcomber bclear bayQua baycomb basic base16-atelierdune badwolf babymate256 autumn autumnleaf automation atom asu1dark astronaut asmanian_blood ashen aqua apprentice ansi_blows anotherdark aiseered af advantage adrian adobe adaryn adam abra 3dglasses 256-jungle 256-grayvim 0x7A69_dark heliotrope habiLight h80 guepardo guardian gruvbox grishin greyblue grey2 greenvision greens grb256 graywh gravity grape gothic gotham gotham256 gor google golden golded gobo github getfresh getafe gentooish gemcolors gardener fu fruity fruit fruidle frood freya forneus fokus fog fnaqevan flatui flattr flatland flatlandia flatcolor fine_blue felipec far evening_2 enzyme emacs elrodeo elisex elise elda.vim* ekvoli ekinivim ego edo_sea editplus ecostation eclm_wombat eclipse earth earthburn earendel dusk dull dual doriath doorhinge donbass django distinguished disciple developer deveiate devbox-dark-256 detailed desert desertEx desertedocean desertedoceanburnt desert256 desert256v2 derefined denim delphi delek dawn darth darkZ darkzen darktango darkspectrum darkslategray dark-ruby darkroom darkrobot darkocean darker-robin darkerdesert darkeclipse darkdot darkburn darkbone darkBlue darkblue2 darkblack dante d8g_04 d8g_03 d8g_02 d8g_01 custom cthulhian corporation corn cool contrasty colorzone navajo-night nature native mustang muon mud mrpink mrkn256 motus moss moria mopkai mophiaSmoke mophiaDark montz monokain molokai mod_tcsoft mizore mint miko midnight midnight2 metacosm mellow mdark mayansmoke matrix martin_krischik mars maroloccio marklar manxome manuscript mango made_of_code mac_classic luna luinnar lucius louver lodestone lizard lizard256 literal_tango liquidcarbon lingodirector lilypink lilydjwg_green lilydjwg_dark lilac lightcolors leya lettuce less leo leglight2 legiblelight lazarus last256 landscape kyle kruby kolor kkruby kiss kib_plastic kib_darktango khaki kellys kate kalt kaltex kalisi jiks jhlight jhdark jellyx jellybeans jelleybeans jammy ironman ir_black inkpot ingretu industry industrial impact impactG iceberg icansee ibmedit iangenzo hybrid hybrid-light hornet holokai herokudoc herokudoc-gvim herald hemisu softblue softbluev2 smyck smp skittles_dark skittles_berry simplewhite simple_b simpleandfriendly simple256 silent sift sienna shobogenzo shadesofamber sf sexy-railscasts settlemyer seoul seoul256 seoul256-light selenitic sea seashell sean scite scala saturn satori sand rtl rootwater robinhood revolutions reloaded reliable relaxedgreen refactor redstring redblack rdark rdark-terminal rcg_term rcg_gui rastafari random rainbow_neon rainbow_fruit rainbow_fine_blue railscasts radicalgoodspeed quagmire python pyte pw putty psql pspad proton professional prmths print_bw potts pleasant playroom pink pic phpx phphaxor phd pf_earth perfect peppers pencil peaksea paintbox pacific otaku osx_like orange olive oceanlight oceandeep oceanblack oceanblack256 obsidian obsidian2 nuvola nour norwaytoday northsky northland no_quarter nightwish nightVision night_vision night nightsky nightshimmer nightflight nightflight2 nicotine newsprint newspaper nevfn neverness neverland neverland-darker neverland2 neverland2-darker neutron nerv-ous neon nefertiti nedit nedit2 nazca navajo zmrok zephyr zen zenesque zenburn zazen yeller yaml xterm16 xoria256 xmaslights xian xemacs wuye wood wombat wombat256 wombat256mod wombat256i winter wintersday win9xblueback widower whitedust whitebox watermark warm_grey wargrey vylight vydark void vj vividchalk visualstudio vilight vibrantink vexorian vc vcbc vanzan_color up underwater underwater-mod understated umber-green ubloh two2tango twitchy twilight twilight256 tutticolori turbo trogdor trivial256 transparent torte toothpik tony_light tomatosoup tolerable tir_black tidy tibet thor thestars thegoodluck textmate16 tetragrammaton tesla telstar tcsoft tchaba tchaba2 taqua tangoX tango tangoshady tango-morning tango-desert tango2 tabula synic symfony swamplight surveyor summerfruit summerfruit256 strawimodo strange stingray stackoverflow spring spiderhawk spectro southwest-fog southernlights soso sorcerer sonoma sonofobsidian sol sol-term solarized softlight
+
+	" One-dark
+	Plugin 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school'
 	" YouCompleteMe
 	Plugin 'Valloric/YouCompleteMe'
 
@@ -77,7 +77,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small'
 	Plugin 'rdnetto/YCM-Generator'
 endif
 
-if domain !=? 'neptec-small'
+if domain !=? 'neptec-small' && domain !=? 'school'
 	" PHP Complete
 	Plugin 'shawncplus/phpcomplete.vim'
 endif
@@ -92,8 +92,10 @@ if domain !=? 'neptec-small'
 	Plugin 'kien/ctrlp.vim'
 endif
 
-" Better C++ Syntax Highlighting:
-Plugin 'octol/vim-cpp-enhanced-highlight'
+if is_win==0 && domain !=? 'ec' && domain !=? 'school'
+	" Better C++ Syntax Highlighting:
+	Plugin 'octol/vim-cpp-enhanced-highlight'
+endif
 
 if is_win==0 && domain !=? 'ec'
 	" Track the ultisnips engine.
@@ -122,9 +124,14 @@ endif
 Plugin 'tpope/vim-fugitive'
 set diffopt+=vertical
 
-" gitgutter - Shows [git] status of each line in a file
-" Toggle with :GitGutterToggle
-Plugin 'airblade/vim-gitgutter'
+if domain !=? 'school'
+	" gitgutter - Shows [git] status of each line in a file
+	" On Dena, this injects annoying arroy key characters everywhere (e.g. ^[0D
+	" ^[0B ^[0A ^[0C)
+
+	" Toggle with :GitGutterToggle
+	Plugin 'airblade/vim-gitgutter'
+endif
 
 " Plugin to assist with commenting out blocks of text:
 Plugin 'tomtom/tcomment_vim'
@@ -142,8 +149,10 @@ Plugin 'powerline/powerline'
 " Plugin to highlight the variable under the cursor:
 Plugin 'OrelSokolov/HiCursorWords'
 
-" Doxygen
-Plugin 'vim-scripts/DoxygenToolkit.vim'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
+	" Doxygen
+	Plugin 'vim-scripts/DoxygenToolkit.vim'
+endif
 
 if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	" A plugin to use rtags in vim. (rtags allows for code following,
@@ -160,7 +169,7 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	Plugin 'vim-scripts/dbext.vim'
 endif
 
-if domain !=? 'neptec-small'
+if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
 	" Colour coding nests
 	Plugin 'luochen1990/rainbow'
 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -183,8 +192,13 @@ if domain !=? 'neptec-small'
 	Plugin 'Hdima/python-syntax'
 endif
 
-" XML helper
-"Plugin 'othree/xml.vim'
+" Undo tree
+Plugin 'sjl/gundo.vim.git'
+
+if hostname ==? 'pof'
+	" Manage font size
+	Plugin 'drmikehenry/vim-fontsize'
+endif
 
 " Work with editorconfig files
 "Plugin 'editorconfig-vim'
@@ -309,6 +323,9 @@ if has('unix')
 
 	" Map GetType to an easier key combination:
 	nnoremap <leader>ty :YcmCompleter GetType<CR>
+
+	" Compile the file
+	nnoremap <leader>y :YcmDiag<CR>
 
 	" F2 will jump to a variable/method definition
 	map <F2> :YcmCompleter GoTo<CR>
@@ -452,6 +469,11 @@ if is_win==0 && domain !=? 'neptec_small'
 endif
 
 
+""""""""""""""""""""""" Gundo """"""""""""""""""""""""""
+nnoremap <F6> :GundoToggle<CR>
+""""""""""""""""""""""" /Gundo """""""""""""""""""""""""
+
+
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
 	let g:rainbow_conf = {
 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -588,5 +610,8 @@ ab laster laser
 ab jsut just
 ab eticket etiket
 ab breif brief
+ab OPL2 OPAL2
+ab unqiue unique
+ab unique unique
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :

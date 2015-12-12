@@ -30,13 +30,22 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen bundle pip
 	antigen bundle lein
 	antigen bundle command-not-found
+	antigen bundle sorin-ionescu/prezto
+	antigen bundle RobSis/zsh-reentry-hook
 
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 
 	# Load the theme.
+	# The prezto theme uses a bunch of glyphs that don't show in putty.  If I'm
+	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
+	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	antigen theme blinks
+	if [[ $(hostname) == "pof" ]]; then
+		antigen theme blinks
+	else
+		antigen theme prezto
+	fi
 
 	# Auto update
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
@@ -166,7 +175,7 @@ if [[ $? == 1 ]]; then
 fi;
 
 
-if [[ -e $(which fuck) ]]; then
+if [[ -e $(which fuck 2>/dev/null) ]]; then
 	eval "$(thefuck --alias)"
 fi
 
@@ -198,12 +207,20 @@ elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
 
+	if [[ $(hostname) = dena[5-6] ]]; then
+		module use /software/arch/intel64/modules/all
+	else
+		module use /software/arch/amd64/modules/all
+	fi
+
+	# PGI
+	module use /cm/shared/apps/pgi/modulefiles
+
 	# defaults
 	module load shared modules
 
 	# Development
-	export PGI_DEFAULT=2015
-	module load pgi slurm brew
+	module load pgi64/2013 slurm
 
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules

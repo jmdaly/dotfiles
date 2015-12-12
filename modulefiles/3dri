@@ -18,12 +18,13 @@ set ARCH        [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
 set VENDOR      ${BASE}/o2linux64
+set BOOST_VERSION 1.56
+set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
 set app_rel     Applications/OPAL2
 set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
 set bld_release ${BASE}/build-3dri-${ARCH}-release
 set bld         ${bld_debug}
-set bldw        ${BASE}/3dri-build-winx64-release
 
 set apps        ${src}/${app_rel}
 set appb        ${bld}/${app_rel}
@@ -64,7 +65,7 @@ set-alias ForegroundSegmenter "cd ${appb}/DataProcessor/ForegroundSegmenter; ./F
 set-alias ContourMapper       "cd ${appb}/DataProcessor/ContourMapper; ./ContourMapper"
 set-alias StockpileMonitor    "cd ${appb}/DataProcessor/StockpileMonitor; ./StockpileMonitor"
 set-alias SensorManager       "cd ${appb}/SensorManager; ./SensorManager"
-set-alias LcmLogPlayer        "cd ${VENDOR}/lcm; ./RunLcmLogPlayer.sh"
+set-alias LcmLogPlayer        "cd ${bld_debug}/lcm; ./RunLcmLogPlayer.sh"
 
 prepend-path PATH ${wsb_debug}
 
@@ -75,7 +76,10 @@ setenv wte /usr/lib/Wt/examples
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 
 # PCL Binary lib paths
-prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.48/lib:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug:/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release:/home/matt/workspace/opal2/o2linux64/Libs/boost/1.56/lib"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug"
+# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release"
+prepend-path LD_LIBRARY_PATH "${BOOST_ROOT}/lib"
 
 # Building 3DRi
 if { ${hostname} == "pof" } {
@@ -88,8 +92,11 @@ set     BUILD_TYPE    "Debug"
 if { ${hostname} == "khea" } {
 	setenv  CXX           "ccache clang++-3.7"
 } else {
-	setenv  CXX           "ccache /home/jdaly/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang++"
-	setenv  CCACHE_PREFIX "distcc"
+	setenv  CXX            "ccache /home/jdaly/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang++"
+	setenv  CCACHE_PREFIX  "distcc"
+	setenv  CCACHE_DIR     /media/ccache
+	setenv  CCACHE_UMASK   002
+	setenv  CCACHE_BASEDIR $bld
 }
 set-alias build3dri   "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
 
