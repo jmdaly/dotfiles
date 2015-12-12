@@ -30,7 +30,6 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen bundle pip
 	antigen bundle lein
 	antigen bundle command-not-found
-	antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
 
 	# Syntax highlighting bundle.
@@ -41,11 +40,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
 	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	if [[ $(hostname) == "pof" ]]; then
-		antigen theme blinks
-	else
-		antigen theme prezto
-	fi
+	antigen theme blinks
 
 	# Auto update
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
