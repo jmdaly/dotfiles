@@ -371,9 +371,11 @@ if is_win==0 && domain !=? 'school'
 	" snippets can be found:
 	set rtp+=~/dotfiles
 
-	if domain ==? 'neptec'
-		set rtp+=~/workspace/ScriptsAndTools
-	endif
+	augroup neptec-ultisnips
+		au!
+		autocmd BufRead */3dri/* :set rtp+=~/workspace/ScriptsAndTools
+	augroup end
+
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
@@ -431,7 +433,7 @@ if is_win==0 && domain !=? 'neptec_small'
 	let g:dbext_default_profile_ademirm = 'type=MYSQL:user=ademir:passwd=ademir:dbname=ademir'
 	let g:dbext_default_profile_mayofest = 'type=MYSQL:user=www:passwd=hyper:dbname=mayofest'
 
-	augroup neptec
+	augroup neptec-db
 		au!
 		autocmd BufRead */3dri/* DBSetOption profile='3dri'
 	augroup end
