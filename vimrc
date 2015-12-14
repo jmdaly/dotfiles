@@ -87,6 +87,9 @@ Plug 'chriskempson/base16-vim'
 " some more advanced search functionality
 Plug 'mhinz/vim-grepper'
 
+" Plugin to provide a useful start screen in vim:
+Plug 'mhinz/vim-startify'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
