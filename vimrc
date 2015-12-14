@@ -218,3 +218,8 @@ map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 " uses it to populate the search prompt:
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
+
+" Have git grep perform searches throughout the whole repo
+" regardless of the directory we are currently in:
+let g:grepper           = {}
+let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
