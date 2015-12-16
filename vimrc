@@ -300,6 +300,8 @@ set wildignore+="*/vendor/**
 
 " Unmap center/<CR> from launching CTRL-P, because it's annoying
 unmap <CR>
+
+noremap <c-b> :CtrlPBuffer<CR>
 """""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
