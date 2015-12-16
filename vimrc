@@ -195,6 +195,14 @@ endif
 " Undo tree
 Plugin 'sjl/gundo.vim.git'
 
+
+if domain !=? 'neptec-small'
+	" Plugin to wrap all the various grep tools, and provide
+	" some more advanced search functionality
+	Plugin 'mhinz/vim-grepper'
+endif
+
+
 if hostname ==? 'pof'
 	" Manage font size
 	Plugin 'drmikehenry/vim-fontsize'
@@ -469,6 +477,19 @@ if is_win==0 && domain !=? 'neptec_small'
 	nnoremap <leader>dep :DBProfilesRefresh<CR>
 	"""""""""""""""""""" /DBext """"""""""""""""""""""
 endif
+
+""""""""""""""""""""""" Grepper """"""""""""""""""""""""""
+" Grepper key bindings:
+" Define an operator that takes any motion and
+" uses it to populate the search prompt:
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+
+" Have git grep perform searches throughout the whole repo
+" regardless of the directory we are currently in:
+let g:grepper           = {}
+let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
+""""""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
 """"""""""""""""""""""" Gundo """"""""""""""""""""""""""
