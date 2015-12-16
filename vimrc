@@ -141,7 +141,7 @@ Plugin 'powerline/powerline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-" Plugin 'derekwyatt/vim-fswitch'
+Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
 " Plugin 'jeetsukumaran/vim-buffergator'
@@ -487,6 +487,13 @@ xmap gs  <plug>(GrepperOperator)
 let g:grepper           = {}
 let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
 """"""""""""""""""""""" /Grepper """""""""""""""""""""""""
+
+
+""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
+" Mapping for fswitch, to switch between header
+" and source:
+nmap <silent> <Leader>of :FSHere<cr>
+""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
 
 
 """"""""""""""""""""""" Gundo """"""""""""""""""""""""""
