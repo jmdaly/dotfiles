@@ -575,6 +575,7 @@ set number
 set ignorecase
 set noincsearch
 set hlsearch
+set ffs=unix,dos
 
 " Hide mouse when typing
 set mousehide
