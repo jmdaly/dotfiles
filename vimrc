@@ -312,6 +312,10 @@ let g:cpp_class_scope_highlight = 1
 " of the file being opened:
 set autochdir
 
+" Have vim reload a file if it has changed outside
+" of vim:
+set autoread
+
 " Tell vim to look for a tags file in the current
 " directory, and all the way up until it finds one:
 set tags=./tags;/
