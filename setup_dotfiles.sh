@@ -110,7 +110,7 @@ if [[ -e vimrc ]]; then
 fi
 
 cd $h
-if [[ -e .modulefiles ]]; then
+if [[ -e .modulefiles && ! -e .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
 
