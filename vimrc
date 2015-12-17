@@ -90,6 +90,9 @@ Plug 'mhinz/vim-grepper'
 " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-startify'
 
+" Distraction-free writing:
+Plug 'junegunn/goyo.vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
