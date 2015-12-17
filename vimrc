@@ -90,6 +90,10 @@ endif
 if domain !=? 'neptec-small'
 	" Ctrl-P - fuzzy file finder
 	Plugin 'kien/ctrlp.vim'
+
+	" " Install fzf, the fuzzy searcher
+	" " Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	" Plugin 'junegunn/fzf.vim'
 endif
 
 if is_win==0 && domain !=? 'ec' && domain !=? 'school'
@@ -141,7 +145,7 @@ Plugin 'powerline/powerline'
 
 " Switch between header and source files:
 " TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-" Plugin 'derekwyatt/vim-fswitch'
+Plugin 'derekwyatt/vim-fswitch'
 
 " Plugin to help manage vim buffers:
 " Plugin 'jeetsukumaran/vim-buffergator'
@@ -194,6 +198,14 @@ endif
 
 " Undo tree
 Plugin 'sjl/gundo.vim.git'
+
+
+if domain !=? 'neptec-small'
+	" Plugin to wrap all the various grep tools, and provide
+	" some more advanced search functionality
+	Plugin 'mhinz/vim-grepper'
+endif
+
 
 if hostname ==? 'pof'
 	" Manage font size
@@ -292,15 +304,24 @@ nmap [h <Plug>GitGutterPrevHunk
 
 """"""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
 " Set up Ctrl-P shortcut key for Ctrl-P:
-let g:ctrlp_map = '<c-k>'
+let g:ctrlp_map = '<c-m>'
 let g:ctrlp_cmd = 'CtrlP'
 map <c-m> :CtrlPTag<CR>
 
 set wildignore+="*/vendor/**
 
 " Unmap center/<CR> from launching CTRL-P, because it's annoying
-unmap <CR>
+" unmap <CR>
+
+noremap <c-b> :CtrlPBuffer<CR>
 """""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
+
+" """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
+" " Set up keyboard shortbuts for fzf, the fuzzy finder
+" " This one searches all the files in the current git repo:
+" map <c-k> :GitFiles<CR>
+" map <c-m> :Buffers<CR>
+" """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -401,9 +422,6 @@ endif
 " For vim-airline, ensure the status line is always displayed:
 set laststatus=2
 
-" Enable the list of buffers
-"let g:airline#extensions#tabline#enabled = 1
-
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
@@ -467,6 +485,26 @@ if is_win==0 && domain !=? 'neptec_small'
 	nnoremap <leader>dep :DBProfilesRefresh<CR>
 	"""""""""""""""""""" /DBext """"""""""""""""""""""
 endif
+
+""""""""""""""""""""""" Grepper """"""""""""""""""""""""""
+" Grepper key bindings:
+" Define an operator that takes any motion and
+" uses it to populate the search prompt:
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+
+" Have git grep perform searches throughout the whole repo
+" regardless of the directory we are currently in:
+let g:grepper           = {}
+let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
+""""""""""""""""""""""" /Grepper """""""""""""""""""""""""
+
+
+""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
+" Mapping for fswitch, to switch between header
+" and source:
+nmap <silent> <Leader>of :FSHere<cr>
+""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
 
 
 """"""""""""""""""""""" Gundo """"""""""""""""""""""""""
@@ -555,6 +593,7 @@ set number
 set ignorecase
 set noincsearch
 set hlsearch
+set ffs=unix,dos
 
 " Hide mouse when typing
 set mousehide
