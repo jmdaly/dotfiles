@@ -39,16 +39,9 @@ au BufNewFile,BufRead .exper_cour set filetype=sh
 au BufNewFile,BufRead Common_Compiler* set filetype=sh
 au BufNewFile,BufRead */Wt/W*     set filetype=cpp
 
-"
-" Vundle.  use :PluginInstall to install all these plugins
-"
-
-" set the runtime path to include Vundle and initialize
 set nocompatible             " be iMproved, required
 filetype off                 " required
-" set rtp+=~/dotfiles/Vundle.vim
 call plug#begin('~/dotfiles/bundles')
-" call vundle#begin('~/dotfiles/bundles') " This always fails the second time around
 
 " let Vundle manage Vundle, required
 Plug 'gmarik/Vundle.vim'
@@ -89,7 +82,7 @@ endif
 
 if domain !=? 'neptec-small'
 	" Ctrl-P - fuzzy file finder
-	Plugin 'kien/ctrlp.vim'
+	Plug 'kien/ctrlp.vim'
 
 	" " Install fzf, the fuzzy searcher
 	" " Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
