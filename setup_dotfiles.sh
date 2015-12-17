@@ -106,7 +106,7 @@ cd $h
 if [[ -e .vimrc ]]; then
 	ln -s .vimrc .nvimrc
 fi
-if [[ -e .modulefiles ]]; then
+if [[ -e modulefiles ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
 
