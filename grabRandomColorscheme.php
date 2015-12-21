@@ -96,7 +96,7 @@ $whitelist = array(
 	'northland',
 	'nicotine',
 	'nightVision',
-	'olive',
+	// 'olive',
 	'onedark', // Not in dir list above
 	'paintbox',
 	'phd',
