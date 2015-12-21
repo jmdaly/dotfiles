@@ -81,12 +81,10 @@ if domain !=? 'neptec-small'
 endif
 
 if domain !=? 'neptec-small'
-	" Ctrl-P - fuzzy file finder
-	Plug 'kien/ctrlp.vim'
 
-	" " Install fzf, the fuzzy searcher
-	" " Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	" Plugin 'junegunn/fzf.vim'
+	" Install fzf, the fuzzy searcher
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'
 endif
 
 if is_win==0 && domain !=? 'ec' && domain !=? 'school'
@@ -283,27 +281,18 @@ nmap [h <Plug>GitGutterPrevHunk
 "GitGutterToggle
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
-""""""""""""""""""""""" Ctrl-P """"""""""""""""""""""""
-" Set up Ctrl-P shortcut key for Ctrl-P:
-let g:ctrlp_map = '<c-m>'
-let g:ctrlp_cmd = 'CtrlP'
-map <c-m> :CtrlPTag<CR>
-
-set wildignore+="*/vendor/**
-
-" Unmap center/<CR> from launching CTRL-P, because it's annoying
-" unmap <CR>
-
-noremap <c-b> :CtrlPBuffer<CR>
-"""""""""""""""""""""" /Ctrl-P """"""""""""""""""""""""
 
 
-" """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-" " Set up keyboard shortbuts for fzf, the fuzzy finder
-" " This one searches all the files in the current git repo:
-" map <c-k> :GitFiles<CR>
-" map <c-m> :Buffers<CR>
-" """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
+"""""""""""""""""""""""""" fzf """""""""""""""""""""""""""
+" Set up keyboard shortbuts for fzf, the fuzzy finder
+" This one searches all the files in the current git repo:
+map <c-k> :GitFiles<CR>
+map <c-m> :Buffers<CR>
+
+" Unmap center/<CR> from launching fzf which appears to be mapped by default.
+unmap <CR>
+
+""""""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1

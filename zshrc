@@ -241,4 +241,6 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	fi
 fi;
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
