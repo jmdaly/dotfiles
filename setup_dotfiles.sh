@@ -113,8 +113,14 @@ if [[ "" != "$(which nvim)" ]]; then
 	fi
 
 	# Install vim Plug
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	if [[ ! -e ${h}/.config/nvim/autoload/plug.vim ]]; then
+		curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	fi
+	if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
+		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+			 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	fi
 fi
 
 if [[ -e .modulefiles && ! -e .modulerc ]]; then
