@@ -102,14 +102,14 @@ for f in ${files[@]}; do
 	fi
 done;
 
-if [[ -e vimrc ]]; then
+cd $h
+if [[ -e ${h}/.vimrc ]]; then
 	if [[ ! -e "${h}/.config/nvim" ]]; then
 		mkdir -p "${h}/.config/nvim"
 	fi
-	ln -s $(pwd)/vimrc ${h}/.config/nvim/init.vim
+	ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
 fi
 
-cd $h
 if [[ -e .modulefiles && ! -e .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
