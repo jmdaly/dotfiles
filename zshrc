@@ -30,7 +30,9 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen bundle pip
 	antigen bundle lein
 	antigen bundle command-not-found
+	# antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
+	antigen bundle jocelynmallon/zshmarks
 
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
