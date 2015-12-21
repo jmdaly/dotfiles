@@ -465,13 +465,18 @@ endif
 " Grepper key bindings:
 " Define an operator that takes any motion and
 " uses it to populate the search prompt:
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
 
 " Have git grep perform searches throughout the whole repo
 " regardless of the directory we are currently in:
-let g:grepper           = {}
-let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
+let g:grepper     = {
+	\ 'open':    1,
+	\ 'jump':    0,
+	\ 'switch':  1,
+	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
+   \ }
+
 """"""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
