@@ -103,11 +103,18 @@ for f in ${files[@]}; do
 done;
 
 cd $h
-if [[ -e ${h}/.vimrc ]]; then
+if [[ "" != "$(which nvim)" ]]; then
+	# neovim is installed
 	if [[ ! -e "${h}/.config/nvim" ]]; then
 		mkdir -p "${h}/.config/nvim"
 	fi
-	ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
+	if [[ -e ${h}/.vimrc ]]; then
+		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
+	fi
+
+	# Install vim Plug
+	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 if [[ -e .modulefiles && ! -e .modulerc ]]; then
