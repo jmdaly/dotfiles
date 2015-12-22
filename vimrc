@@ -4,15 +4,6 @@ call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plug 'gmarik/Vundle.vim'
-
-" Solarized colour scheme. For some reason, vim-plug was
-" giving authentication errors when the short form of
-" the repository was used. Speicyfing the full URL
-" seems to work
-Plug 'https://github.com/altercation/vim-colors-solarized.git'
-
 " YouCompleteMe
 Plug 'Valloric/YouCompleteMe'
 
@@ -21,9 +12,6 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 " NERD Tree - file explorer for vim
 Plug 'scrooloose/nerdtree'
-
-" Ctrl-P - fuzzy file finder
-Plug 'kien/ctrlp.vim'
 
 " Better C++ Syntax Highlighting:
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -65,9 +53,6 @@ Plug 'OrelSokolov/HiCursorWords'
 " A plugin to use rtags in vim. (rtags allows for
 " code following, some refactoring, etc.)
 Plug 'lyuts/vim-rtags'
-
-" kalisi colour scheme:
-Plug 'freeo/vim-kalisi'
 
 " Plug to to smart search and replace, easy
 " changes from camelCase to snake_case, etc.
@@ -215,9 +200,6 @@ nnoremap <leader>n :NERDTree .<CR>
 " Mapping for fswitch, to switch between header
 " and source:
 nmap <silent> <Leader>of :FSHere<cr>
-
-" A key map to run ctags:
-nnoremap <leader>ct :!ctags .<CR>
 
 " Key mappings for clang-format, to format source code:
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
