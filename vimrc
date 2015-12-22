@@ -90,6 +90,9 @@ Plug 'mhinz/vim-grepper'
 " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-startify'
 
+" Plugin to make it easy to delete a buffer and close the file:
+Plug 'mhinz/vim-sayonara'
+
 " Distraction-free writing:
 Plug 'junegunn/goyo.vim'
 
@@ -226,6 +229,11 @@ nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 
 " Have git grep perform searches throughout the whole repo
-" regardless of the directory we are currently in:
-let g:grepper           = {}
-let g:grepper.git = { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`' }
+" regardless of the directory we are currently in, and also set
+" jumping and opening settings
+let g:grepper     = {
+	\ 'open':    1,
+	\ 'jump':    0,
+	\ 'switch':  1,
+	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
+   \ }
