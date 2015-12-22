@@ -117,10 +117,10 @@ if [[ "" != "$(which nvim)" ]]; then
 		curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	fi
-	if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
-		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-			 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	fi
+fi
+if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 if [[ -e .modulefiles && ! -e .modulerc ]]; then
