@@ -127,6 +127,12 @@ if [[ -e .modulefiles && ! -e .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
 
+# Install fzf
+if [[ ! -e ${h}/.fzf ]]; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
+	${h}/.fzf/install
+fi
+
 # Can no longer to this as I'm typically using zsh
 # and this is writting in bash.  I have to keep it
 # in bash in order to have it on CMC machines
