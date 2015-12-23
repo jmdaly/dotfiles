@@ -81,6 +81,9 @@ Plug 'mhinz/vim-sayonara'
 " Distraction-free writing:
 Plug 'junegunn/goyo.vim'
 
+" Plugin for syntax highlighting of plain text notes:
+Plug 'junegunn/vim-journal'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
