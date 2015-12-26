@@ -16,6 +16,7 @@ alias gd="git diff -w --color"
 # A better test would be whether I'm running zsh..
 if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias ga="git add"
+	alias gb="git branch"
 	alias gba="git branch -v"
 	alias gco="git checkout"
 	alias gcp="git cherry-pick"
