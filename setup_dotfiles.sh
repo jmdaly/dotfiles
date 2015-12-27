@@ -27,16 +27,25 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-cd ${base}
-git submodule init
-git submodule update
+if [[ "$(uname -o)" != "Cygwin" ]]; then
+	cd ${base}
+	git submodule init
+	git submodule update
+fi
 cd ${h}
 
+#
+# Declare the files that we always want to copy over.
+declare -a files;
+files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on env can machines
-	declare -a files=(.bash_aliases .pathrc .vncrc .gdbinit)
+	files+=(.pathrc .vncrc .gdbinit)
+elif [[ "$(uname -o)" == "Cygwin" ]]; then
+	# Do nothing
+	files+=(.zshrc)
 else
-	declare -a files=(.zshrc .bashrc .bash_aliases .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 fi
 
 # Check if our environment supports these
@@ -45,6 +54,9 @@ if [[ "$(which vim)" != "" ]]; then
 fi
 if [[ "$(which tmux)" != "" ]]; then
 	files+=('.tmux.conf')
+	if [[ ! -e ${h}/.tmux ]]; then
+		git clone https://github.com/tmux-plugins/tpm ${h}/.tmux/plugins/tpm
+	fi
 fi
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
@@ -91,11 +103,34 @@ for f in ${files[@]}; do
 done;
 
 cd $h
-if [[ -e .vimrc ]]; then
-	ln -s .vimrc .nvimrc
+if [[ "" != "$(which nvim)" ]]; then
+	# neovim is installed
+	if [[ ! -e "${h}/.config/nvim" ]]; then
+		mkdir -p "${h}/.config/nvim"
+	fi
+	if [[ -e ${h}/.vimrc ]]; then
+		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
+	fi
+
+	# Install vim Plug
+	if [[ ! -e ${h}/.config/nvim/autoload/plug.vim ]]; then
+		curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	fi
 fi
-if [[ -e .modulefiles ]]; then
+if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+if [[ -e .modulefiles && ! -e .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
+fi
+
+# Install fzf
+if [[ ! -e ${h}/.fzf ]]; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
+	${h}/.fzf/install
 fi
 
 # Can no longer to this as I'm typically using zsh

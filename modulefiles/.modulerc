@@ -15,3 +15,4 @@ module-user exp
 module-log debug stderr
 
 module use -a $HOME/.modulefiles/
+module use $::env(HOME)/.modulefiles
