@@ -119,7 +119,7 @@ endif
 Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
 
-if domain !=? 'school'
+if domain !=? 'school' && domain !=? 'ec'
 	" gitgutter - Shows [git] status of each line in a file
 	" On Dena, this injects annoying arroy key characters everywhere (e.g. ^[0D
 	" ^[0B ^[0A ^[0C)
