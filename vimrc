@@ -84,6 +84,10 @@ Plug 'junegunn/goyo.vim'
 " Plugin for syntax highlighting of plain text notes:
 Plug 'junegunn/vim-journal'
 
+" Plugin to allow easy alignment around various symbols (e.g.
+" line up a number of lines with equal signs on the equal signs)
+Plug 'junegunn/vim-easy-align'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -206,6 +210,16 @@ nmap <silent> <Leader>of :FSHere<cr>
 
 " Key mappings for clang-format, to format source code:
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
+
+" Mapping to close the file in the current buffer:
+nnoremap <leader>q :Sayonara!<CR>
+
+" Mapping for easy aligning on symbols:
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Grepper key bindings:
 " Define an operator that takes any motion and
