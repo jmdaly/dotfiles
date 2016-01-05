@@ -17,7 +17,7 @@ alias gd="git diff -w --color"
 if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias ga="git add"
 	alias gb="git branch"
-	alias gba="git branch -v"
+	alias gba="git branch -vr"
 	alias gco="git checkout"
 	alias gcp="git cherry-pick"
 	alias gl="git pull"
