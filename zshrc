@@ -21,6 +21,11 @@ antigen bundle chrissicool/zsh-256color
 # z - awesome directory switching plugin
 antigen bundle rupa/z
 
+# fzf-marks - a plugin to allow bookmarking
+# directories, and then fuzzy searching through
+# the bookmarks using fzf
+antigen bundle uvaes/fzf-marks
+
 # Load the theme.
 antigen theme blinks
 
