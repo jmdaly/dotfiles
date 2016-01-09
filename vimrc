@@ -205,8 +205,16 @@ let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
 
 " Mapping for fswitch, to switch between header
-" and source:
+" and source and load it into the current window:
 nmap <silent> <Leader>of :FSHere<cr>
+" Switch to the file and load it into the window on the right >
+nmap <silent> <Leader>ol :FSRight<cr>
+" Switch to the file and load it into a new window split on the right >
+nmap <silent> <Leader>oL :FSSplitRight<cr>
+" Switch to the file and load it into the window on the left >
+nmap <silent> <Leader>oh :FSLeft<cr>
+" Switch to the file and load it into a new window split on the left >
+nmap <silent> <Leader>oH :FSSplitLeft<cr>
 
 " Key mappings for clang-format, to format source code:
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
