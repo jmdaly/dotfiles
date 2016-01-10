@@ -69,7 +69,7 @@ floating_modifier $mod
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 set $terminal urxvt
-bindsym $mod+Return exec $terminal
+bindsym $mod+Return exec $terminal -e tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
