@@ -225,6 +225,9 @@ bindsym $mod+shift+x exec i3lock
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# Note, I had to add the -- to the command below to get this to
+# work in Ubuntu 14.04. From what I read online, this may have to be
+# removed for newer versions of Ubuntu.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -- -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
