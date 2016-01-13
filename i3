@@ -31,22 +31,40 @@ set $mod Mod4
 # set $base0F #fcc09e
 
 # base16-default dark
-set $base00 #181818
-set $base01 #282828
-set $base02 #383838
-set $base03 #585858
-set $base04 #b8b8b8
-set $base05 #d8d8d8
-set $base06 #e8e8e8
-set $base07 #f8f8f8
-set $base08 #ab4642
-set $base09 #dc9656
-set $base0A #f7ca88
-set $base0B #a1b56c
-set $base0C #86c1b9
-set $base0D #7cafc2
-set $base0E #ba8baf
-set $base0F #a16946
+# set $base00 #181818
+# set $base01 #282828
+# set $base02 #383838
+# set $base03 #585858
+# set $base04 #b8b8b8
+# set $base05 #d8d8d8
+# set $base06 #e8e8e8
+# set $base07 #f8f8f8
+# set $base08 #ab4642
+# set $base09 #dc9656
+# set $base0A #f7ca88
+# set $base0B #a1b56c
+# set $base0C #86c1b9
+# set $base0D #7cafc2
+# set $base0E #ba8baf
+# set $base0F #a16946
+
+# base16-flat dark
+set $base00 #2C3E50
+set $base01 #34495E
+set $base02 #7F8C8D
+set $base03 #95A5A6
+set $base04 #BDC3C7
+set $base05 #e0e0e0
+set $base06 #f5f5f5
+set $base07 #ECF0F1
+set $base08 #E74C3C
+set $base09 #E67E22
+set $base0A #F1C40F
+set $base0B #2ECC71
+set $base0C #1ABC9C
+set $base0D #3498DB
+set $base0E #9B59B6
+set $base0F #be643c
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.

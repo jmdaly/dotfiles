@@ -3,4 +3,4 @@ URxvt.scrollBar: false
 URxvt.font:     xft:bitstream vera sans mono:size=11:antialias=true
 URxvt.boldFont: xft:bitstream vera sans mono:bold:size=11:antialias=true
 ! background color  
-URxvt*background:         #282828
+URxvt*background:         #34495E
