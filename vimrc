@@ -105,7 +105,7 @@ set rtp+=~/dotfiles
 " let g:solarized_termcolors=256
 " Let vim know we are using a 256 colour base16 theme
 let base16colorspace=256
-colorscheme base16-default
+colorscheme base16-flat
 set background=dark
 
 " Turn line numbers on:
