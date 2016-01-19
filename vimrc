@@ -88,6 +88,10 @@ Plug 'junegunn/vim-journal'
 " line up a number of lines with equal signs on the equal signs)
 Plug 'junegunn/vim-easy-align'
 
+" A plugin to make it easier to use motions to jump
+" to words and characters:
+Plug 'easymotion/vim-easymotion'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -244,3 +248,11 @@ let g:grepper     = {
 	\ 'switch':  1,
 	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
    \ }
+
+" Easy motion mappings to allow searching for two characters:
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
