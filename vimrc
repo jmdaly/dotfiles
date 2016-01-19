@@ -249,9 +249,10 @@ let g:grepper     = {
 	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
    \ }
 
-" Easy motion mappings to allow searching for two characters:
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+" Easy motion mappings to allow searching for one character:
+" s{char}to move to {char}
+nmap s <Plug>(easymotion-f)
+nmap <Leader>s <Plug>(easymotion-F)
 
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
