@@ -44,9 +44,6 @@ Plug 'bling/vim-airline'
 " A plugin to switch between header and source files:
 Plug 'derekwyatt/vim-fswitch'
 
-" Plug to help manage vim buffers:
-Plug 'jeetsukumaran/vim-buffergator'
-
 " Plug to highlight the variable under the cursor:
 Plug 'OrelSokolov/HiCursorWords'
 
@@ -140,6 +137,7 @@ map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
 " This one searches all the files in the current git repo:
 map <c-k> :GitFiles<CR>
 map <leader><Tab> :Buffers<CR>
+map <leader>b :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
