@@ -27,7 +27,7 @@ antigen bundle rupa/z
 antigen bundle uvaes/fzf-marks
 
 # Load the theme.
-antigen theme blinks
+antigen theme agnoster
 
 # Tell antigen that you're done.
 antigen apply
