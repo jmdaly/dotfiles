@@ -224,7 +224,8 @@ nmap <silent> <Leader>oH :FSSplitLeft<cr>
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 
 " Mapping to close the file in the current buffer:
-nnoremap <leader>q :Sayonara!<CR>
+nnoremap <leader>q :Sayonara<cr>
+nnoremap <leader>Q :Sayonara!<cr>
 
 " Mapping for easy aligning on symbols:
 " Start interactive EasyAlign in visual mode (e.g. vipga)
