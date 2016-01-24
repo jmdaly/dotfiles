@@ -1,5 +1,3 @@
-set nocompatible              " be iMproved, required
-
 call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -195,6 +193,10 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Don't show trailing whitespace warning:
 let g:airline_section_warning = ''
+
+" Use the powerline font symbols, for a nicer
+" look:
+let g:airline_powerline_fonts = 1
 
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>

@@ -101,3 +101,8 @@ if [ ! -f ~/.fonts/System\ San\ Francisco\ Display\ Regular.ttf ]; then
 	cp /tmp/YosemiteSanFranciscoFont-master/*.ttf ~/.fonts
 fi
 
+# Get the Meslo font, used by the terminal:
+if [ ! -f ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf ]; then
+	curl -fLo ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf
+	fc-cache -vf ~/.fonts/
+fi
