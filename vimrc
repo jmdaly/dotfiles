@@ -87,6 +87,11 @@ Plug 'junegunn/vim-easy-align'
 " to words and characters:
 Plug 'easymotion/vim-easymotion'
 
+" A plugin to apply vim-airline's theme to tmux, and then
+" to snapshot the theme so that it can be loaded up into
+" tmux:
+Plug 'edkolev/tmuxline.vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
