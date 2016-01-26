@@ -130,6 +130,12 @@ set diffopt+=vertical
 " Enable the mouse, even in non-GUI:
 set mouse+=a
 
+" If we are using neovim, add a mapping to escape out
+" of terminal mode:
+if exists(':tnoremap')
+   tnoremap <Leader>e <C-\><C-n>
+endif
+
 " Set the make program to be ninja:
 set makeprg=ninja
 " A shortcut key to change to the build directory
