@@ -12,13 +12,16 @@ alias grep="grep --color=always"
 # Env Can doesn't have zsh..
 alias gst="git status -uno"
 alias gd="git diff -w --color"
+
+# A better test would be whether I'm running zsh..
 if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
-	alias gl="git pull"
-	alias gp="git push"
+	alias ga="git add"
+	alias gb="git branch"
+	alias gba="git branch -vr"
 	alias gco="git checkout"
 	alias gcp="git cherry-pick"
-	alias ga="git add"
-	alias gba="git branch -vr"
+	alias gl="git pull"
+	alias gp="git push"
 	alias gsta="git stash"
 	alias gstp="git stash pop"
 fi
@@ -27,6 +30,7 @@ fi
 if [[ -e ~/.bash_aliases.local ]]; then
 	source ~/.bash_aliases.local
 fi
+
 alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
 # vim : ts=3 sts=0 shiftwidth=3 noet ft=bash ffs=unix :

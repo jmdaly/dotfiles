@@ -16,7 +16,7 @@ set hostname [info hostname]
 
 # Open a reverse tunnel to khea
 if { ${hostname} == "pof" } {
-	set-alias open_reverse_tunnel "autossh -M 20000 -R 5557:localhost:22 -R 8182:localhost:8181 khea"
+	set-alias open_reverse_tunnel "autossh -M 20006 -R 5557:localhost:22 -R 8182:localhost:8181 khea"
 } else {
 	# 5555 = tinder
 	# 5556 = pof

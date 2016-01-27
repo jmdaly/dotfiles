@@ -1,12 +1,55 @@
 <?php
-$home    = '/home/matt';
+$home    = $_SERVER['HOME'];
 $bundles = $home.'/dotfiles/bundles';
 
-$dirs = array(
-	"$bundles/vim-colorschemes/colors",
-	"$bundles/vim-colors_atelier-schemes/colors",
-	"$home/.vim/colors",
-);
+function getColourDirs($base) {
+	$dirs = array();
+	$d = dir($base);
+	while (false !== ($entry = $d->read())) {
+		$path = $base . '/' . $entry;
+		$cpath = $path . '/colors';
+		if (is_dir($cpath))
+			$dirs[] = $cpath;
+	}
+	return $dirs;
+}
+
+function findAllColourSchemes(array $dirs = array()) {
+	$files = array();
+
+	// MUCH faster than shelling out to find (confirmed in benchmark).  Likely
+	// not as fast as building an sqlite cache though
+	foreach ($dirs as $dir) {
+		$d = dir($dir);
+		while (false !== ($entry = $d->read())) {
+			$path = $dir . '/' . $entry;
+			if (is_file($path))
+				$files[] = $path;
+		}
+	}
+
+	// Files is now an array of paths to colour schemes
+	return $files;
+}
+
+function pathToScheme($path) {
+	$scheme = preg_replace('/\.vim$/', '', basename($path));
+	$scheme = trim($scheme);
+	return $scheme;
+}
+
+function grabRandomColourScheme($use_whitelist = false, array $files = array(), array $whitelist = array(), array $blacklist = array()) {
+	$scheme = '/dev/null';
+	if ($use_whitelist) {
+		$scheme=$whitelist[rand(0, count($whitelist)-1)];
+	} else {
+		for ($i=5; $i>0; $i++) { // Limit attempts
+			$scheme=pathToScheme($files[rand(0, count($files)-1)]);
+			if (array_search($scheme, $blacklist) === false) break;
+		}
+	}
+	return $scheme;
+}
 
 // Script example.php
 $opts = getopt("w");
@@ -128,20 +171,15 @@ $mode = array(
 	'256-grayvim'=>'dark',
 );
 
-if ($use_whitelist) {
-	$scheme=$whitelist[rand(0, count($whitelist)-1)];
-} else {
-	// Build cache
-	$files = '';
-	exec("find ". join(' ', $dirs) ." -type f -iname '*.vim' -exec basename \{\} \;", $files);
-	//print_r($files);
-
-	$scheme = '';
-	while (true) {
-		$scheme=$files[rand(0, count($files)-1)];
-		$scheme = preg_replace('/\.vim$/', '', $scheme);
-		$scheme = trim($scheme);
-		if (array_search($scheme, $blacklist) === false) break;
+// Get colour directories
+$dirs = getColourDirs($bundles);
+$files = findAllColourSchemes($dirs);
+$scheme = '';
+for ($i = 3; $i>0; $i--) { // Limit number of attempts
+	$scheme = grabRandomColourScheme($use_whitelist, $files, $whitelist, $blacklist);
+	// Make sure this scheme exists.
+	foreach ($files as $f) {
+		if (strstr($f, $scheme)) break 2;
 	}
 }
 

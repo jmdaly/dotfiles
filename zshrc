@@ -33,6 +33,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
 	antigen bundle jocelynmallon/zshmarks
+	antigen bundle uvaes/fzf-marks
 
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
