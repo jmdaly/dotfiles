@@ -29,6 +29,7 @@ $blacklist = array(
 	'dark-ruby',
 	'devbox-dark-256',
 	'developer',
+	'derefined',
 	'enzyme',
 	'golded',
 	'impact',
@@ -54,6 +55,7 @@ $blacklist = array(
 // I find interesting
 $whitelist = array(
 	'3dglasses',
+	'asuldark',
 	'ChocolateLiquor',
 	'PapayaWhip',
 	'abra',
