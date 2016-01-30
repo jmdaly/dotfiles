@@ -39,6 +39,9 @@ Plug 'tomtom/tcomment_vim'
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plug 'bling/vim-airline'
 
+" themes for vim-airline:
+Plug 'vim-airline/vim-airline-themes'
+
 " A plugin to switch between header and source files:
 Plug 'derekwyatt/vim-fswitch'
 
