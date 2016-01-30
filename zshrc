@@ -47,6 +47,7 @@ export GTEST_COLOR=yes
 export BULLETTRAIN_CONTEXT_SHOW=true
 export BULLETTRAIN_TIME_SHOW=false
 export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+export BULLETTRAIN_RUBY_SHOW=false
 
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
