@@ -27,7 +27,7 @@ antigen bundle rupa/z
 antigen bundle uvaes/fzf-marks
 
 # Load the theme.
-antigen theme agnoster
+antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
 # Tell antigen that you're done.
 antigen apply
@@ -42,6 +42,11 @@ export CCACHE_PREFIX="distcc"
 
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
+
+# Set some preferences for the bullet train theme:
+export BULLETTRAIN_CONTEXT_SHOW=true
+export BULLETTRAIN_TIME_SHOW=false
+export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
 
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
