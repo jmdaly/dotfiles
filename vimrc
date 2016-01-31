@@ -221,6 +221,9 @@ let g:airline_section_warning = ''
 " look:
 let g:airline_powerline_fonts = 1
 
+" Set airline theme:
+let g:airline_theme='base16'
+
 " tagbar config. Enable it using this key map:
 nmap <F8> :TagbarToggle<CR>
 " Have it autofocus on open:
