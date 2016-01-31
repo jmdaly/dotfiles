@@ -265,6 +265,14 @@ nmap ga <Plug>(EasyAlign)
 " uses it to populate the search prompt:
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
+" A mapping to search for all occurrences of the word under
+" the cursor in the current file
+nnoremap <leader>gf   :Grepper -tool search_in_file -cword -noprompt<cr>
+" A mapping to search for all occurrences of the word the user enters
+" at the prompt in the current file:
+nnoremap <leader>h   :Grepper -tool search_in_file<cr>
+" A mapping to search for the user-supplied string using git grep:
+nnoremap <leader>gi   :Grepper -tool git<cr>
 
 " Configure grepper. Of note, we configure git grep
 " to perform searches throughout the whole repo
