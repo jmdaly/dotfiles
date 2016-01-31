@@ -95,6 +95,10 @@ Plug 'easymotion/vim-easymotion'
 " tmux:
 Plug 'edkolev/tmuxline.vim'
 
+" An asynchronous plugin for linting various
+" file types:
+Plug 'benekastah/neomake'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -144,6 +148,11 @@ set makeprg=ninja
 " A shortcut key to change to the build directory
 " and build the project:
 map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
+
+" Disable Neomake for C and C++ files, since we use
+" YouCompleteMe for them:
+let g:neomake_cpp_enabled_makers = []
+let g:neomake_c_enabled_makers = []
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 " This one searches all the files in the current git repo:
