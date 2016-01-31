@@ -3,7 +3,7 @@
 
 # This block comes from the following repo: https://github.com/Anachron/i3blocks
 
-API_KEY="2de143494c0b295cca9337e1e96b00e0"
+API_KEY="ee5bed2b75a21a42c9e3769b742c0576"
 
 # Check on http://openweathermap.org/find
 CITY_ID="7626289"
