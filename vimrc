@@ -266,15 +266,23 @@ nmap ga <Plug>(EasyAlign)
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 
-" Have git grep perform searches throughout the whole repo
-" regardless of the directory we are currently in, and also set
-" jumping and opening settings
+" Configure grepper. Of note, we configure git grep
+" to perform searches throughout the whole repo
+" regardless of the directory we are currently in. We also set
+" jumping and opening settings. Finally, we define an additional
+" tool, which performs grep only on the current file.
 let g:grepper     = {
-	\ 'open':    1,
-	\ 'jump':    0,
-	\ 'switch':  1,
-	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
-   \ }
+	 \ 'tools': ['ag', 'git', 'grep', 'search_in_file'],
+	 \ 'open':    1,
+	 \ 'jump':    0,
+	 \ 'switch':  1,
+	 \ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
+	 \ 'search_in_file': {
+	 \   'grepprg':    'grep -Hn $* $.',
+	 \   'grepformat': '%f:%l:%m',
+	 \   'escape':     '\$.*[]%#',
+	 \ },
+	 \ }
 
 " Easy motion mappings to allow searching for one character:
 " s{char}to move to {char}
