@@ -154,6 +154,28 @@ map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
 let g:neomake_cpp_enabled_makers = []
 let g:neomake_c_enabled_makers = []
 
+" Set the Neomake warning and error markers to be
+" similar to YouCompleteMe:
+let g:neomake_error_sign = {
+        \ 'text': '>>',
+        \ 'texthl': 'Error',
+        \ }
+
+let g:neomake_warning_sign = {
+        \ 'text': '>>',
+        \ 'texthl': 'PreProc',
+        \ }
+
+let g:neomake_informational_sign = {
+        \ 'text': '>>',
+        \ 'texthl': 'PreProc',
+        \ }
+
+let g:neomake_message_sign = {
+        \ 'text': '>>',
+        \ 'texthl': 'MoreMsg',
+        \ }
+
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 " This one searches all the files in the current git repo:
 map <c-k> :GitFiles<CR>
