@@ -52,10 +52,6 @@ Plug 'OrelSokolov/HiCursorWords'
 " code following, some refactoring, etc.)
 Plug 'lyuts/vim-rtags'
 
-" Plug to to smart search and replace, easy
-" changes from camelCase to snake_case, etc.
-Plug 'tpope/vim-abolish'
-
 " Plug to generate doxygen documentation strings:
 Plug 'mrtazz/DoxygenToolkit.vim'
 
