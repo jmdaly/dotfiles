@@ -202,11 +202,28 @@ if hostname ==? 'pof'
 	Plug 'drmikehenry/vim-fontsize'
 endif
 
+Plug 'mhinz/vim-startify'
+
 " Work with editorconfig files
 "Plug 'editorconfig-vim'
 
 " Javascript plugins to try
-" Plug 'pangloss/vim-javascript'
+if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
+	Plug 'pangloss/vim-javascript'
+
+	" General conceal settings. Will keep things concealed
+	" even when your cursor is on top of them.
+	Plug 'Wolfy87/vim-syntax-expand'
+	set conceallevel=1
+	set concealcursor=nvic
+
+	" vim-javascript conceal settings.
+	let g:javascript_conceal_function = "λ"
+	let g:javascript_conceal_this = "@"
+	let g:javascript_conceal_return = "<"
+	let g:javascript_conceal_prototype = "#"
+endif
+
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
