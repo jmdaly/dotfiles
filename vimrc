@@ -631,8 +631,8 @@ imap <S-Tab> <C-o><<
 
 " PHP Artisan commands
 if (&ft ==? 'php')
-	abbrev gm !php artisan generate:model
-	abbrev gc !php artisan generate:controller
+	abbrev gm !php artisan   generate:model
+	abbrev gc !php artisan   generate:controller
 	abbrev gmig !php artisan generate:migration
 endif
 
