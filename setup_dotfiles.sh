@@ -114,12 +114,12 @@ if [[ "" != "$(which nvim)" ]]; then
 
 	# Install vim Plug
 	if [[ ! -e ${h}/.config/nvim/autoload/plug.vim ]]; then
-		curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+		curl -fLo ${h}/.config/nvim/autoload/plug.vim --create-dirs \
 			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	fi
 fi
 if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	curl -fLo ${h}/.vim/autoload/plug.vim --create-dirs \
 		 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
