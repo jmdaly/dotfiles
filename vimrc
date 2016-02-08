@@ -181,9 +181,6 @@ Plug 'kshenoy/vim-signature'
 " Suppose to make closing splits better (less window resizing)
 Plug 'moll/vim-bbye'
 
-" Zoom into splits with <c-w>o
-Plug 'vim-scripts/ZoomWin'
-
 if domain !=? 'neptec-small' && domain !=? 'ec'
 	" Python Syntax highlighting (the default is pretty bad)
 	Plug 'Hdima/python-syntax'
