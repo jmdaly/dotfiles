@@ -107,7 +107,6 @@ $whitelist = array(
 	'bluechia',
 	'busybee',
 	'camo',
-	'caramel',
 	'cobalt',
 	'cool',
 	'darkdot',
