@@ -44,8 +44,6 @@ set nocompatible             " be iMproved, required
 filetype off                 " required
 call plug#begin('~/dotfiles/bundles')
 
-" let Vundle manage Vundle, required
-Plug 'gmarik/Vundle.vim'
 
 if domain !=? 'neptec-small'
 	" Solarized colour scheme
