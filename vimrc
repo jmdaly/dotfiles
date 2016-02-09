@@ -102,9 +102,6 @@ if is_win==0 && domain !=? 'ec'
 	Plug 'honza/vim-snippets'
 endif
 
-" Rename
-Plug 'danro/rename.vim'
-
 " Easy motion
 Plug 'easymotion/vim-easymotion'
 
