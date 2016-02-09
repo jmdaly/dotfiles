@@ -105,6 +105,9 @@ endif
 " Rename
 Plug 'danro/rename.vim'
 
+" Easy motion
+Plug 'easymotion/vim-easymotion'
+
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home') && domain !=? 'ec'
 	" tagbar - allows browsing tags of the current source file
 	" from ctags. Good for seeing functions, variables, etc.
