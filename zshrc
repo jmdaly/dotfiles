@@ -218,6 +218,9 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
 
 	module load neptec 3dri
 
+	# Ensure Google Test tests always show colour output:
+	export GTEST_COLOR=yes
+
 	# Set up ninja tab completion:
 	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
 		source /usr/share/zsh/functions/Completion/_ninja
