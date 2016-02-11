@@ -574,7 +574,6 @@ endfunction
 " No options yet..
 """"""""""""" /python-syntax """""""""""""""""
 
-"JSHintToggle
 
 filetype on
 syntax on
