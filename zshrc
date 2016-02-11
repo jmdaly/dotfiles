@@ -50,14 +50,25 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
 	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	antigen theme blinks
+	if [[ $(which urxvt 2>/dev/null) != "" ]]; then
+		# Set some preferences for the bullet train theme:
+		export BULLETTRAIN_CONTEXT_SHOW=true
+		export BULLETTRAIN_TIME_SHOW=false
+		export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+		export BULLETTRAIN_RUBY_SHOW=false
+		export BULLETTRAIN_GIT_BG="green"
+		export BULLETTRAIN_DIR_FG="black"
+
+		antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+	else
+		antigen theme blinks
+	fi
 
 	# Auto update
 	antigen bundle unixorn/autoupdate-antigen.zshplugin
 
 	# Tell antigen that you're done.
 	antigen apply
-
 
 elif [[ -e ${HOME}/.oh-my-zsh ]]; then
 	# Used with babun in cygwin.  Should attempt to merge with Antigen
@@ -84,9 +95,13 @@ elif [[ -e ${HOME}/.oh-my-zsh ]]; then
 
 fi
 	
+if [[ $(which urxvt 2>/dev/null) != "" ]]; then
+	# Set the terminal to urxvt, for i3wm:
+	export TERMINAL=urxvt
+fi
+
 # Use VIM wherever possible.  The latter fixes colours in non-gvim
 export EDITOR=vim
-export TERM=xterm-256color
 
 # This doesn't seem to be applying when at the top
 setopt no_share_history
