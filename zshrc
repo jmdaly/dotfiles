@@ -35,6 +35,13 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen bundle jocelynmallon/zshmarks
 	antigen bundle uvaes/fzf-marks
 
+	# Plugin to check if a 256 colour terminal
+	# is available, and enable all colours if
+	# it is
+	antigen bundle chrissicool/zsh-256color
+
+
+
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 
