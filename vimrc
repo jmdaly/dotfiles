@@ -196,11 +196,8 @@ if domain !=? 'neptec-small'
 	Plug 'mhinz/vim-grepper'
 endif
 
-
-if hostname ==? 'pof'
-	" Manage font size
-	Plug 'drmikehenry/vim-fontsize'
-endif
+" Manage font size
+Plug 'drmikehenry/vim-fontsize'
 
 Plug 'mhinz/vim-startify'
 
