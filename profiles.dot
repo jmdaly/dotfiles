@@ -1,9 +1,10 @@
+
 # Default
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/visible_name" --type string "Solarized (Default)"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/foreground_color" --type string "#7C7C9696A0A0"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/background_color" --type string "#00002B2B3636"
-gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_background" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Default/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Default/use_theme_colors" --type bool "false"
 
 # Profile0
@@ -11,82 +12,106 @@ gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/visible_name" --type s
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/foreground_color" --type string "#000000000000"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/background_color" --type string "#FFFFFEB7B69C"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/font" --type string "Monospace 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile0/use_system_font" --type bool "false"
 
 # Profile1
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/visible_name" --type string "Cherry"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/foreground_color" --type string "#FFFFFFC2F257"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/background_color" --type string "#4A3D20AA20AA"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile1/use_system_font" --type bool "false"
 
 # Profile2
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/visible_name" --type string "Dark Orange"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/foreground_color" --type string "#FFFFFFC2F257"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/background_color" --type string "#57092FB90B50"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile2/use_system_font" --type bool "false"
 
 # Profile3
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/visible_name" --type string "Green"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/foreground_color" --type string "#FFFFFFC2F257"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/background_color" --type string "#0B98385107E2"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile3/use_system_font" --type bool "false"
 
 # Profile4
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/visible_name" --type string "Blue"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/foreground_color" --type string "#FFFFFFC2F257"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/background_color" --type string "#1ABC1B1C5036"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile4/use_system_font" --type bool "false"
 
 # Profile5
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/visible_name" --type string "Teal"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/foreground_color" --type string "#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/background_color" --type string "#1AE845FC4962"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile5/use_system_font" --type bool "false"
 
 # Profile6
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/visible_name" --type string "Black"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/foreground_color" --type string "#FFFFFFFFDDDD"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/background_color" --type string "#000000000000"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile6/use_system_font" --type bool "false"
 
 # Profile7
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/visible_name" --type string "Purple"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/foreground_color" --type string "#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/background_color" --type string "#40D324684444"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile7/use_system_font" --type bool "false"
 
 # Profile8
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/visible_name" --type string "dark-blue"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/foreground_color" --type string "#FFFFFFFFDDDD"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/background_color" --type string "#03EC1FED3333"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile8/use_system_font" --type bool "false"
 
 # Profile9
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/visible_name" --type string "Default"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/palette" --type string "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/foreground_color" --type string "#000000000000"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/background_color" --type string "#FFFFFFFFDDDD"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/use_theme_colors" --type bool "true"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile9/use_system_font" --type bool "false"
 
 # Profile10
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/visible_name" --type string "orange-text"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#F3325E0E578C:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/foreground_color" --type string "#FCFCAFAF3E3E"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/background_color" --type string "#01EC120E162F"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/font" --type string "Meslo LG S for Powerline 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile10/use_system_font" --type bool "false"
 
 # Profile11
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/visible_name" --type string "green-text"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/palette" --type string "#070736364242:#D3D301010202:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#F3325E0E578C:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/foreground_color" --type string "#4E4792C56B64"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/background_color" --type string "#29D0157D042E"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/font" --type string "Monospace 12"
 gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/use_theme_colors" --type bool "false"
+gconftool-2 --set "/apps/gnome-terminal/profiles/Profile11/use_system_font" --type bool "false"
 
