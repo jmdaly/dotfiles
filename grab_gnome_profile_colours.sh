@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+# Copy values out of gconf.  Note, for Ubuntu 15.04+, gnome-terminal finally
+# switched to using dconf, so this will have to be modified/expanded.
+#
+# To see values in dconf, do `dconf dump / | less`, there is also a dconf-editor
+# The other commands are probably similar, but I haven't yet explored them.
+
 # Solarized
 #http://michaelheap.com/getting-solarized-working-on-ubuntu/
 # Note, the dircolors are loaded here already with a git submodule
