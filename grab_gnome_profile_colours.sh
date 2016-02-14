@@ -27,8 +27,8 @@ echo " " > profiles.dot
 
 declare -a string_keys;
 declare -a bool_keys;
-string_keys=(visible_name palette foreground_color background_color);
-bool_keys=(use_theme_background use_theme_colors);
+string_keys=(visible_name palette foreground_color background_color font);
+bool_keys=(use_theme_colors use_system_font);
 for prof in Default Profile{0,1,2,3,4,5,6,7,8,9,10,11}; do
 	echo "# $prof" >> profiles.dot
 	for k in $string_keys; do
