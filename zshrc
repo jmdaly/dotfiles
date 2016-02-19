@@ -60,8 +60,8 @@ source ~/.pathrc
 # Aliases
 alias nv='nvim'
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-flat.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# Script to adjust colour palette in the terminal for gruvbox:
+GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+[[ -s $GRUVBOX_PALETTE ]] && source $GRUVBOX_PALETTE
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -95,6 +95,9 @@ Plug 'edkolev/tmuxline.vim'
 " file types:
 Plug 'benekastah/neomake'
 
+" gruvbox colour scheme:
+Plug 'morhetz/gruvbox'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -106,13 +109,7 @@ call plug#end()            " required
 set rtp+=~/dotfiles
 
 " Set a colour scheme for vim:
-" tell solarized to use degraded 256 colors. Necessary
-" with terminal vim, when the terminal pallette is
-" not set to solarized
-" let g:solarized_termcolors=256
-" Let vim know we are using a 256 colour base16 theme
-let base16colorspace=256
-colorscheme base16-flat
+colorscheme gruvbox
 set background=dark
 
 " Turn line numbers on:
