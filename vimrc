@@ -268,7 +268,9 @@ if has('gui_running')
 	call <SID>RandColorScheme()
 
 else
-	"set mouse+=a
+	if domain ==? 'ec'
+		colorscheme onedark
+	end
 endif
 
 " OS Detection
