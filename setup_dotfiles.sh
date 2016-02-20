@@ -15,7 +15,6 @@ else
 	copy=1
 fi;
 
-
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base=${h}/dotfiles
@@ -46,6 +45,14 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	files+=(.zshrc)
 else
 	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+
+	# Install fonts
+	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" < 3 ]]; then
+		git clone https://github.com/powerline/fonts.git /tmp/powerline_fonts
+		/tmp/powerline_fonts/install.sh
+	fi
+	# apt-get install ttf-ancient-fonts -y
+	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install 
 fi
 
 # Check if our environment supports these
