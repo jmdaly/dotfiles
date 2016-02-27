@@ -49,22 +49,42 @@ set $mod Mod4
 # set $base0F #a16946
 
 # base16-flat dark
-set $base00 #2C3E50
-set $base01 #34495E
-set $base02 #7F8C8D
-set $base03 #95A5A6
-set $base04 #BDC3C7
-set $base05 #e0e0e0
-set $base06 #f5f5f5
-set $base07 #ECF0F1
-set $base08 #E74C3C
-set $base09 #E67E22
-set $base0A #F1C40F
-set $base0B #2ECC71
-set $base0C #1ABC9C
-set $base0D #3498DB
-set $base0E #9B59B6
-set $base0F #be643c
+# set $base00 #2C3E50
+# set $base01 #34495E
+# set $base02 #7F8C8D
+# set $base03 #95A5A6
+# set $base04 #BDC3C7
+# set $base05 #e0e0e0
+# set $base06 #f5f5f5
+# set $base07 #ECF0F1
+# set $base08 #E74C3C
+# set $base09 #E67E22
+# set $base0A #F1C40F
+# set $base0B #2ECC71
+# set $base0C #1ABC9C
+# set $base0D #3498DB
+# set $base0E #9B59B6
+# set $base0F #be643c
+
+# gruvbox dark
+set $background  #282828
+set $foreground  #ebdbb2
+set $black       #282828
+set $darkgrey    #928374
+set $darkred     #cc241d
+set $red         #fb4934
+set $darkgreen   #98971a
+set $green       #b8bb26
+set $darkyellow  #d79921
+set $yellow      #fabd2f
+set $darkblue    #458588
+set $blue        #83a598
+set $darkmagenta #b16286
+set $magenta     #d3869b
+set $darkcyan    #689d6a
+set $cyan        #8ec07c
+set $lightgrey   #a89984
+set $white       #ebdbb2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -217,25 +237,25 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Widow Colours
-#                         border  background text    indicator
-  client.focused          $base01 $base01    $base07 $base0F
-  client.focused_inactive $base02 $base02    $base03 $base0F
-  client.unfocused        $base02 $base02    $base03 $base0F
-  client.urgent           $base02 $base08    $base00 $base0F
+#                       border  background text    indicator
+client.focused          $foreground $foreground $background $foreground
+client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
+client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
+client.urgent           $red $red $background $red
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3blocks
         colors {
-              separator $base03
-              background $base01
-              statusline $base05
-        #                        border  background text
-              focused_workspace  $base01 $base01    $base07
-              active_workspace   $base01 $base02    $base03
-              inactive_workspace $base01 $base01    $base03
-              urgent_workspace   $base01 $base01    $base08
+          background $background
+          statusline $foreground
+          separator $darkgrey
+
+          focused_workspace  $background $background $foreground
+          active_workspace   $background $background $foreground
+          inactive_workspace $background $background $darkgrey
+          urgent_workspace   $background $background $red
          }
 }
 
