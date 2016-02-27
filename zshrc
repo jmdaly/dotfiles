@@ -60,6 +60,12 @@ source ~/.pathrc
 # Aliases
 alias nv='nvim'
 
+# Enable true colour in neovim if we're using a true
+# colour terminal:
+if [ "$TERM" = "st-256color" ]; then
+	export NVIM_TUI_ENABLE_TRUE_COLOR=1
+fi
+
 # Script to adjust colour palette in the terminal for gruvbox:
 GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 [[ -s $GRUVBOX_PALETTE ]] && source $GRUVBOX_PALETTE
