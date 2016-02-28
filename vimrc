@@ -75,9 +75,6 @@ Plug 'mhinz/vim-sayonara'
 " Distraction-free writing:
 Plug 'junegunn/goyo.vim'
 
-" Plugin for syntax highlighting of plain text notes:
-Plug 'junegunn/vim-journal'
-
 " Plugin to allow easy alignment around various symbols (e.g.
 " line up a number of lines with equal signs on the equal signs)
 Plug 'junegunn/vim-easy-align'
@@ -88,8 +85,11 @@ Plug 'easymotion/vim-easymotion'
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
-" tmux:
-Plug 'edkolev/tmuxline.vim'
+" tmux. This doesn't seem to work when running with
+" neovim in a truecolour terminal. I'm commenting it out,
+" so that next time I need to update my tmux theme, I can
+" re-enable this and use it in a 256 colour terminal.
+" Plug 'edkolev/tmuxline.vim'
 
 " An asynchronous plugin for linting various
 " file types:
