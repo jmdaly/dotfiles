@@ -106,7 +106,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-set $terminal urxvt
+set $terminal st
 bindsym $mod+Return exec $terminal
 
 # kill focused window
