@@ -266,13 +266,11 @@ if has('gui_running')
 	"set background=light
 	set background=dark
 
-	"colorscheme solarized
 	call <SID>RandColorScheme()
-
 else
-	if domain ==? 'ec'
+	if domain ==? 'school' || domain ==? 'ec'
 		colorscheme onedark
-	end
+	endif
 endif
 
 " OS Detection
