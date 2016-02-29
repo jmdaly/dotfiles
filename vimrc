@@ -31,14 +31,16 @@ endif
 
 
 " Configure some unconventional filetypes
-au BufNewFile,BufRead *.html.base set filetype=html
-au BufNewFile,BufRead *.ftn90     set filetype=fortran
-au BufNewFile,BufRead *.module    set filetype=php
-au BufNewFile,BufRead *.dot       set filetype=sh
-au BufNewFile,BufRead *.gs        set filetype=javascript
-au BufNewFile,BufRead .exper_cour set filetype=sh
+au BufNewFile,BufRead *.html.base      set filetype=html
+au BufNewFile,BufRead *.ftn90          set filetype=fortran
+au BufNewFile,BufRead *.module         set filetype=php
+au BufNewFile,BufRead *.dot            set filetype=sh
+au BufNewFile,BufRead *.gs             set filetype=javascript
+au BufNewFile,BufRead .exper_cour      set filetype=sh
 au BufNewFile,BufRead Common_Compiler* set filetype=sh
-au BufNewFile,BufRead */Wt/W*     set filetype=cpp
+au BufNewFile,BufRead */Wt/W*          set filetype=cpp
+au BufNewFile,BufRead *recettes        set filetype=make
+au BufNewFile,BufRead *cibles          set filetype=make
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
@@ -53,6 +55,9 @@ if domain !=? 'neptec-small'
 		" Atelier color scheme
 		Plug 'atelierbram/vim-colors_atelier-schemes'
 		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
+
+		" Duotones
+		Plug 'atelierbram/vim-colors_duotones'
 
 		" Full of colour schemes:
 		Plug 'flazz/vim-colorschemes'
@@ -264,13 +269,11 @@ if has('gui_running')
 	"set background=light
 	set background=dark
 
-	"colorscheme solarized
 	call <SID>RandColorScheme()
-
 else
-	if domain ==? 'ec'
+	if domain ==? 'school' || domain ==? 'ec'
 		colorscheme onedark
-	end
+	endif
 endif
 
 " OS Detection

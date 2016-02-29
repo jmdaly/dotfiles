@@ -98,10 +98,10 @@ $blacklist = array(
 // I find interesting
 $whitelist = array(
 	'3dglasses',
-	'asuldark',
 	'ChocolateLiquor',
 	'PapayaWhip',
 	'abra',
+	'asuldark',
 	'base16-ateliersulphurpool',
 	'blackboard',
 	'bluechia',
@@ -119,6 +119,7 @@ $whitelist = array(
 	'flatland',
 	'fruidle',
 	'fruity',
+	'gemcolors',
 	'golden',
 	'gor',
 	'gotham',
@@ -137,9 +138,11 @@ $whitelist = array(
 	'moss',
 	'mud',
 	'nefertiti',
-	'northland',
 	'nicotine',
 	'nightVision',
+	'northland',
+	'seoul-256',
+	'seoul-256-light',
 	// 'olive',
 	'onedark', // Not in dir list above
 	'paintbox',
