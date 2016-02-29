@@ -40,8 +40,6 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# it is
 	antigen bundle chrissicool/zsh-256color
 
-
-
 	# Syntax highlighting bundle.
 	antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -50,7 +48,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
 	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	if [[ $(which urxvt 2>/dev/null) != "" ]]; then
+	if [[ $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
 		# Set some preferences for the bullet train theme:
 		export BULLETTRAIN_CONTEXT_SHOW=true
 		export BULLETTRAIN_TIME_SHOW=false
@@ -212,7 +210,7 @@ if [[ $(hostname) == "khea" ]]; then
 
 	# CMC
 	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
-elif [[ $(hostname) == "pof" || $(hostname) == "tinder" ]]; then
+elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
