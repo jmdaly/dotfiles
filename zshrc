@@ -71,3 +71,7 @@ GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 [[ -s $GRUVBOX_PALETTE ]] && source $GRUVBOX_PALETTE
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Check if there's a local zsh file to source, and source it
+# if it exists:
+[ -f ~/.localzshrc ] && source ~/.localzshrc
