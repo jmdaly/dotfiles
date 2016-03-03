@@ -10,3 +10,5 @@ lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen
 	helper = cache --timeout=28800
 [push]
 	default = simple
+[core]
+	excludesfile = ~/dotfiles/gitignore
