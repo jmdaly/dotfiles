@@ -592,9 +592,6 @@ set noincsearch
 set hlsearch
 set ffs=unix,dos
 
-" Hide mouse when typing
-set mousehide
-
 " Easy save
 noremap <leader>w :w<CR>
 " map alt/apple or something-S for khea
