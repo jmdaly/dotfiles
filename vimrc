@@ -261,6 +261,18 @@ nmap <silent> <Leader>oh :FSLeft<cr>
 " Switch to the file and load it into a new window split on the left >
 nmap <silent> <Leader>oH :FSSplitLeft<cr>
 
+" Set up fswitch to work with the directory structures
+" I'm currently using:
+augroup fswitch_cpp
+   au!
+   au BufEnter *.h let b:fswitchdst  = 'cpp,hpp,cc,c'
+   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,reg:|include/quanergy|src|,impl'
+   au BufEnter *.cpp let b:fswitchdst  = 'hpp,h'
+   au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include'
+   au BufEnter *.hpp let b:fswitchdst  = 'cpp,h'
+   au BufEnter *.hpp let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,..'
+augroup END
+
 " Key mappings for clang-format, to format source code:
 map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 
