@@ -266,7 +266,7 @@ nmap <silent> <Leader>oH :FSSplitLeft<cr>
 augroup fswitch_cpp
    au!
    au BufEnter *.h let b:fswitchdst  = 'cpp,hpp,cc,c'
-   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,reg:|include/quanergy|src|,impl'
+   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,reg:|include/\w\+|src|,impl'
    au BufEnter *.cpp let b:fswitchdst  = 'hpp,h'
    au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include'
    au BufEnter *.hpp let b:fswitchdst  = 'h,cpp'
