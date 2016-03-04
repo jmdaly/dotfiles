@@ -46,6 +46,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 else
 	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 
+	mkdir -p ${h}/.local/share/fonts
 	# Install fonts
 	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" < 3 ]]; then
 		git clone https://github.com/powerline/fonts.git /tmp/powerline_fonts
