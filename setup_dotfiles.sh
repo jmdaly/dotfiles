@@ -3,14 +3,7 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
-if [[ "$(which realpath)" == "" ]]; then
-	echo "Cannot find realpath.  Use apt-get to install it"
-	declare base=$(dirname $(realpath $0))
-#	exit 1;
-else
-	#declare base=/home/$(whoami)/dotfiles
-	declare base=${HOME}/dotfiles
-fi;
+declare base=${HOME}/dotfiles
 
 # First ensure that the submodules in this repo
 # are available and up to date:

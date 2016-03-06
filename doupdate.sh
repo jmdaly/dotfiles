@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-cd $(dirname $(realpath $0))
+cd ${HOME}/dotfiles
 
 now=$(date +%s)
 if [[ ! -e last_check ]]; then
