@@ -264,6 +264,7 @@ endfunction
 " Colour scheme
 if has('gui_running')
 	set mousemodel=popup
+	set nomousehide
 
 	" TODO Write a command to toggle this
 	"set background=light
