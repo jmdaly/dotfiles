@@ -108,6 +108,12 @@ call plug#end()            " required
 " snippets can be found:
 set rtp+=~/dotfiles
 
+" If we're in neovim, enable true colour
+" support:
+if has("nvim")
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 " Set a colour scheme for vim:
 colorscheme gruvbox
 set background=dark
