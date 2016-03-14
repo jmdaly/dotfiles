@@ -13,17 +13,21 @@ proc ModulesHelp { } {
 module-whatis	"loads the 3DRi environment"
 
 regsub {\..*$} [info hostname] "" hostname
-set ARCH        [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
+if { [ regexp {_64} [exec uname -m] ] } {
+	set ARCH "o2linux64"
+} else {
+	set ARCH "o2linux"
+}
 
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
-set VENDOR      ${BASE}/o2linux64
+set VENDOR      ${BASE}/${ARCH}
 set BOOST_VERSION 1.56
 set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
 set app_rel     Applications/OPAL2
-set bld_debug   ${BASE}/build-3dri-${ARCH}-debug
-set bld_release ${BASE}/build-3dri-${ARCH}-release
+set bld_debug   ${BASE}/bld-3dri-${ARCH}-debug
+set bld_release ${BASE}/bld-3dri-${ARCH}-release
 set bld         ${bld_debug}
 
 set apps        ${src}/${app_rel}
