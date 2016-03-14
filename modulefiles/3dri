@@ -12,7 +12,7 @@ proc ModulesHelp { } {
 
 module-whatis	"loads the 3DRi environment"
 
-set hostname    [info hostname]
+regsub {\..*$} [info hostname] "" hostname
 set ARCH        [exec uname -s][exec uname -r | cut -d. -f1][exec uname -m]
 
 set HOME        $::env(HOME)
