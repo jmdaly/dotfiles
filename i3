@@ -243,10 +243,24 @@ client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
 client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
 client.urgent           $red $red $background $red
 
+# Disable window titlebars. Necessary for i3-gaps:
+for_window [class="^.*"] border pixel 0
+# Set gaps:
+set $default_gaps_inner 10
+set $default_gaps_outer 5
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+# For workspaces that are generally one full screen
+# window, there's no need for gaps:
+workspace $workspace2 gaps inner 0
+workspace $workspace2 gaps outer 0
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3blocks
+        position top
         colors {
           background $background
           statusline $foreground
@@ -290,3 +304,5 @@ exec --no-startup-id i3-msg 'workspace $workspace1; exec $terminal'
 # command:
 exec --no-startup-id sleep 0.1 && i3-msg 'workspace $workspace3; exec $terminal' 
 
+# Set wallpaper:
+exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.png

@@ -99,3 +99,8 @@ if [ ! -f ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf ]; then
 	curl -fLo ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf
 	fc-cache -vf ~/.fonts/
 fi
+
+# Wallpapers for the window manager:
+if [ ! -f ~/.config/wallpapers/wall.png ]; then
+	curl -fLo ~/.config/wallpapers/wall.png --create-dirs http://jmdaly.ca/media/wall.png
+fi
