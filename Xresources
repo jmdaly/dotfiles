@@ -35,7 +35,8 @@ rofi.bw: 0
 rofi.location: 0
 rofi.padding: 100
 rofi.fuzzy: false
-!
+rofi.terminal: st
+
 ! hard contrast: *background: #1d2021
 *background: #282828
 ! soft contrast: *background: #32302f
