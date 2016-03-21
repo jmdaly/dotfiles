@@ -14,6 +14,28 @@ URxvt.boldFont: xft:Meslo LG S for Powerline:style=RegularForPowerline:bold:size
 ! Last Modified: 6 Sep 2014
 ! -----------------------------------------------------------------------------
 
+! rofi
+rofi.modi: run,ssh
+rofi.font: System San Francisco Display 15
+rofi.width: 100
+rofi.lines: 5
+rofi.columns: 1
+rofi.opacity: 80
+! rofi.color-enabled: true
+!              bg       fg      altbg    hlbg     hlfg
+! rofi.normal: #1d2021, #ebdbb2, #1d2021, #ebdbb2, #1d2021
+! rofi.urgent: #1d2021, #ebdbb2, #1d2021, #ebdbb2, #1d2021
+! rofi.active: #1d2021, #ebdbb2, #1d2021, #ebdbb2, #1d2021
+! rofi.color-window: #1d2021, #1d2021
+rofi.fg: #ebdbb2
+rofi.bg: #282828
+rofi.hlfg: #282828
+rofi.hlbg: #ebdbb2
+rofi.bw: 0
+rofi.location: 0
+rofi.padding: 100
+rofi.fuzzy: false
+!
 ! hard contrast: *background: #1d2021
 *background: #282828
 ! soft contrast: *background: #32302f
