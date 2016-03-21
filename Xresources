@@ -17,7 +17,7 @@ URxvt.boldFont: xft:Meslo LG S for Powerline:style=RegularForPowerline:bold:size
 ! rofi
 rofi.modi: run,ssh
 rofi.font: System San Francisco Display 15
-rofi.width: 100
+rofi.width: 60
 rofi.lines: 5
 rofi.columns: 1
 rofi.opacity: 80
