@@ -192,11 +192,6 @@ set $default_gaps_outer 5
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
 
-# For workspaces that are generally one full screen
-# window, there's no need for gaps:
-workspace $workspace2 gaps inner 0
-workspace $workspace2 gaps outer 0
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
