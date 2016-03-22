@@ -187,6 +187,21 @@ for ($i = 3; $i>0; $i--) { // Limit number of attempts
 	}
 }
 
+//
+// Save this
+$log = __DIR__ . '/colourschemes.log';
+if (file_exists($log))
+	$lines = file($log);
+else
+	$lines = array();
+array_unshift($lines, $scheme);
+if (count($lines) > 50) array_splice($lines, 50);
+$fp = fopen($log, 'w');
+fwrite($fp, join("\n", $lines));
+fclose($fp);
+// /Save this
+
+
 print $scheme;
 
 // vim: sw=4 ts=4 noet :
