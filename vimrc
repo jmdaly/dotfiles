@@ -46,7 +46,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'derekwyatt/vim-fswitch'
 
 " Plug to highlight the variable under the cursor:
-Plug 'OrelSokolov/HiCursorWords'
+Plug 'ihacklog/HiCursorWords'
 
 " A plugin to use rtags in vim. (rtags allows for
 " code following, some refactoring, etc.)
