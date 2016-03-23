@@ -73,7 +73,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'schoo
 	Plug 'Valloric/YouCompleteMe'
 
 	" YCMGenerator - generates configs for YouCompleteMe
-	Plug 'rdnetto/YCM-Generator'
+	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 endif
 
 if domain !=? 'neptec-small' && domain !=? 'school'
