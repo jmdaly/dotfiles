@@ -75,6 +75,7 @@ $blacklist = array(
 	'derefined',
 	'enzyme',
 	'golded',
+	'heroku-terminal',
 	'impact',
 	'mango',
 	'nerv-ous',
