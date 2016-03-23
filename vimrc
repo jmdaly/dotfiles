@@ -149,7 +149,8 @@ endif
 " Plug 'jeetsukumaran/vim-buffergator'
 
 " Plug to highlight the variable under the cursor:
-Plug 'OrelSokolov/HiCursorWords'
+" Appears to have been deleted off GitHub, still available at: http://www.vim.org/scripts/script.php?script_id=4306
+" Plug 'OrelSokolov/HiCursorWords'
 
 if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	" Doxygen
