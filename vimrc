@@ -264,6 +264,7 @@ endfunction
 " Colour scheme
 if has('gui_running')
 	set mousemodel=popup
+	set nomousehide
 
 	" TODO Write a command to toggle this
 	"set background=light
@@ -591,9 +592,6 @@ set ignorecase
 set noincsearch
 set hlsearch
 set ffs=unix,dos
-
-" Hide mouse when typing
-set mousehide
 
 " Easy save
 noremap <leader>w :w<CR>

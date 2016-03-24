@@ -18,7 +18,7 @@ set hostname [info hostname]
 if { ${hostname} == "pof" } {
 	set-alias open_reverse_tunnel "autossh -M 20006 -R 5557:localhost:22 -R 8182:localhost:8181 khea"
 } else {
-	# 5555 = tinder
+	# 5555 = grinder
 	# 5556 = pof
 	# 9090 = gitlab
 	# 7777 = Gitlab SSH (git clone)
@@ -26,7 +26,7 @@ if { ${hostname} == "pof" } {
 	# 8181 = Usual Wt port I use
 	# 3579 = Power bar admin
 	# 8888 = Jenkins
-	set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:tinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 -R 3579:10.10.9.51:80 -R 8888:ntcjenkins:8080 khea"
+	set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:grinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 -R 3579:10.10.9.51:80 -R 8888:ntcjenkins:8080 khea"
 }
 
 # Open a remote desktop to a windows box

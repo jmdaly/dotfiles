@@ -82,6 +82,7 @@ $blacklist = array(
 	'pic',
 	'potts',
 	'psql',
+	'otaku',
 	'rcg_term',
 	'rdark-terminal',
 	'textmate16',

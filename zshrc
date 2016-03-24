@@ -157,12 +157,32 @@ if [[ -e ${HOME}/.pathrc ]]; then
 	source ${HOME}/.pathrc
 fi
 
+export LINUXBREWHOME=${HOME}/.linuxbrew
+if [[ -e "${LINUXBREWHOME}" ]]; then
+	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
+	# See: https://github.com/Homebrew/linuxbrew/issues/47
+	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
+	# Setup linux brew
+	export PKG_CONFIG_PATH=$LINUXBREWHOME/lib64/pkgconfig:$LINUXBREWHOME/lib/pkgconfig:$PKG_CONFIG_PATH
+	export LD_LIBRARY_PATH=$LINUXBREWHOME/lib64:$LINUXBREWHOME/lib:$LD_LIBRARY_PATH
+fi
+
+# Build PATH
 local -a dirs;
-dirs=(bin utils .linuxbrew/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
 for d in $dirs; do
 	dir=${HOME}/${d};
-	if [[ -e $dir ]]; then
+	if [[ -e "${dir}" ]]; then
 		export PATH=${dir}:${PATH}
+	fi;
+done
+
+# Build MAN path
+dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
+for d in $dirs; do
+	dir=${HOME}/${d}/man;
+	if [[ -e "${dir}" ]]; then
+		export MANPATH=${dir}:${MANPATH}
 	fi;
 done
 
