@@ -135,6 +135,7 @@ $whitelist = array(
 	'kib_darktango',
 	'lingodirector',
 	'made_of_code',
+	'madeofcode',
 	'maroloccio',
 	// 'mellow',
 	'mopkai',
