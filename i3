@@ -144,6 +144,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Program workspaces
 assign [class="google-chrome"] $workspace2
 
+# Ensure certain programs always start floating:
+for_window [class="zoom"] floating enable
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
