@@ -48,7 +48,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
 	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	if [[ $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
+	if [[ "$(hostname)" == "tinder" || "$(hostname)" == "grinder" || "$(hostname)" == khea* ]]; then
 		# Set some preferences for the bullet train theme:
 		export BULLETTRAIN_CONTEXT_SHOW=true
 		export BULLETTRAIN_TIME_SHOW=false
