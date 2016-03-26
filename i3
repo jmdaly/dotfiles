@@ -233,6 +233,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Startup applications:
 exec google-chrome
 exec --no-startup-id nm-applet
+# Launch compton, to allow transparency:
+exec --no-startup-id compton
 # Start up terminals on multiple workspaces. Since we
 # launch the same application on multiple workspaces like
 # this, we need to use i3-msg and explicitly switch
