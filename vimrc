@@ -331,7 +331,7 @@ nmap s <Plug>(easymotion-bd-f)
 xmap s <Plug>(easymotion-bd-f)
 
 " Easymotion mapping to search for two characters
-nmap <Leader>s <Plug>(easymotion-s2)
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
 xmap <Leader>s <Plug>(easymotion-s2)
 
 " Move to line
