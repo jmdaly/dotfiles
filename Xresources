@@ -28,6 +28,7 @@ rofi.location: 0
 rofi.padding: 100
 rofi.fuzzy: false
 rofi.terminal: st
+rofi.separator-style: none
 
 ! The following colours come from the morhetz/gruvbox-contrib repo on Github
 ! and set the terminal up for a gruvbox theme
