@@ -72,6 +72,11 @@ if [ ! -f ~/.config/nvim/init.vim ]; then
 	ln -s ~/dotfiles/vimrc ~/.config/nvim/init.vim
 fi
 
+mkdir -p ~/.config/rofi-pass
+if [ ! -f ~/.config/rofi-pass/config ]; then
+	ln -s ~/dotfiles/rofi-pass.config ~/.config/rofi-pass/config
+fi
+
 # Get the Base16 colour schemes
 mkdir -p ~/.config
 if [ ! -d ~/.config/base16-shell ]; then
