@@ -77,6 +77,11 @@ if [ ! -f ~/.config/rofi-pass/config ]; then
 	ln -s ~/dotfiles/rofi-pass.config ~/.config/rofi-pass/config
 fi
 
+mkdir -p ~/.gnupg
+if [ ! -f ~/.gnupg/gpg.conf ]; then
+	ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
+fi
+
 # Get the Base16 colour schemes
 mkdir -p ~/.config
 if [ ! -d ~/.config/base16-shell ]; then
