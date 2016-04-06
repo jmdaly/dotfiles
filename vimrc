@@ -266,6 +266,14 @@ nmap <silent> <Leader>oL :FSSplitRight<cr>
 nmap <silent> <Leader>oh :FSLeft<cr>
 " Switch to the file and load it into a new window split on the left >
 nmap <silent> <Leader>oH :FSSplitLeft<cr>
+" Switch to the file and load it into the window above >
+nmap <silent> <Leader>ok :FSAbove<cr>
+" Switch to the file and load it into a new window split above >
+nmap <silent> <Leader>oK :FSSplitAbove<cr>
+" Switch to the file and load it into the window below >
+nmap <silent> <Leader>oj :FSBelow<cr>
+" Switch to the file and load it into a new window split below >
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 " Set up fswitch to work with the directory structures
 " I'm currently using:
@@ -335,5 +343,5 @@ nmap <Leader>s <Plug>(easymotion-overwin-f2)
 xmap <Leader>s <Plug>(easymotion-s2)
 
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
