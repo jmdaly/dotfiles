@@ -31,6 +31,7 @@ if { ${hostname} == "pof" } {
 
 # Open a remote desktop to a windows box
 set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
+set-alias tinder "rdesktop -g 1920x1080 tinder"
 
 # Put 3DRi install in my path
 prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
