@@ -37,6 +37,7 @@ au BufNewFile,BufRead *.module         set filetype=php
 au BufNewFile,BufRead *.dot            set filetype=sh
 au BufNewFile,BufRead *.gs             set filetype=javascript
 au BufNewFile,BufRead .exper_cour      set filetype=sh
+au BufNewFile,BufRead *.lcm            set filetype=c
 au BufNewFile,BufRead Common_Compiler* set filetype=sh
 au BufNewFile,BufRead */Wt/W*          set filetype=cpp
 au BufNewFile,BufRead *recettes        set filetype=make
