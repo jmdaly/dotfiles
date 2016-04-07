@@ -143,6 +143,7 @@ $whitelist = array(
 	'mud',
 	'nefertiti',
 	// 'nicotine',
+	'newsprint',
 	'nightVision',
 	'northland',
 	'seoul-256',
