@@ -247,7 +247,7 @@ exec --no-startup-id i3-msg 'workspace $workspace1; exec $terminal'
 # On faster computers this sleep seems necessary to get the terminal
 # to load on a workspace that's different from the one in the previous
 # command:
-exec --no-startup-id sleep 0.1 && i3-msg 'workspace $workspace3; exec $terminal' 
+exec --no-startup-id sleep 0.1 && i3-msg 'workspace $workspace3; exec $terminal; split h; exec $terminal'
 
 # Set wallpaper:
 exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.png
