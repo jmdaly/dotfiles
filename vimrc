@@ -5,6 +5,7 @@ set shell=/bin/bash
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos = substitute(system('uname -o'), '\n', '', '')
 
+
 if hostname ==? 'pof' || hostname ==? 'tinder' || hostname ==? 'grinder'
 	let domain='neptec'
 elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
@@ -13,6 +14,9 @@ elseif $TRUE_HOST !=? ''
 	let domain='ec'
 elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 	let domain='neptec-small'
+elseif match(hostname, 'siteground')
+	" Siteground is an exception because it uses vim 7.0
+	let domain='siteground'
 else
 	let domain='home'
 endif
@@ -69,7 +73,7 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
@@ -82,7 +86,7 @@ if domain !=? 'neptec-small' && domain !=? 'school'
 	Plug 'shawncplus/phpcomplete.vim'
 endif
 
-if domain !=? 'neptec-small' && domain !=? 'ec'
+if domain !=? 'neptec-small' && domain !=? 'ec' && domain != 'siteground'
 	" NERD Tree - file explorer for vim
 	Plug 'scrooloose/nerdtree'
 endif
@@ -98,7 +102,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'school'
 	Plug 'octol/vim-cpp-enhanced-highlight'
 endif
 
-if is_win==0 && domain !=? 'ec'
+if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
 	" Track the ultisnips engine.
 	Plug 'SirVer/ultisnips'
 
@@ -158,7 +162,7 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	Plug 'vim-scripts/DoxygenToolkit.vim'
 endif
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
 	" A Plug to use rtags in vim. (rtags allows for code following,
 	" some refactoring, etc.)
 	" Ensure to run the following in the build directory that uses rtags
@@ -168,7 +172,7 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
 	Plug 'lyuts/vim-rtags'
 endif
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
 	" Database client
 	Plug 'vim-scripts/dbext.vim'
 endif
@@ -206,13 +210,15 @@ endif
 " Manage font size
 Plug 'drmikehenry/vim-fontsize'
 
-Plug 'mhinz/vim-startify'
+if domain !=? 'siteground'
+	Plug 'mhinz/vim-startify'
+endif
 
 " Work with editorconfig files
 "Plug 'editorconfig-vim'
 
 " Javascript plugins to try
-if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
+if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
 	Plug 'pangloss/vim-javascript'
 
 	" General conceal settings. Will keep things concealed
@@ -320,7 +326,9 @@ let g:cpp_class_scope_highlight = 1
 
 " Tell vim to set the current directory to the directory
 " of the file being opened:
-set autochdir
+if domain !=? 'siteground'
+	set autochdir
+endif
 
 " Have vim reload a file if it has changed outside
 " of vim:
