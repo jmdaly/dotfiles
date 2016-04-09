@@ -32,6 +32,13 @@ import os
 import ycm_core
 
 flags = [
+    '-Wall',
+    '-Wextra',
+    '-Werror',
+    '-std=c++11',
+    '-xc++',
+    '-I/usr/lib/',
+    '-I/usr/include/'
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
@@ -128,11 +135,13 @@ def FlagsForFile( filename, **kwargs ):
     # python list, but a "list-like" StringVec object
     compilation_info = GetCompilationInfoForFile( filename )
     if not compilation_info:
-      return None
+      relative_to = DirectoryOfThisScript()
+      final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
-    final_flags = MakeRelativePathsInFlagsAbsolute(
-      compilation_info.compiler_flags_,
-      compilation_info.compiler_working_dir_ )
+    else:
+      final_flags = MakeRelativePathsInFlagsAbsolute(
+        compilation_info.compiler_flags_,
+        compilation_info.compiler_working_dir_ )
 
   else:
     relative_to = DirectoryOfThisScript()
