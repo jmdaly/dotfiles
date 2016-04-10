@@ -75,6 +75,7 @@ $blacklist = array(
 	'derefined',
 	'enzyme',
 	'golded',
+	'heroku-terminal',
 	'impact',
 	'mango',
 	'nerv-ous',
@@ -134,6 +135,7 @@ $whitelist = array(
 	'kib_darktango',
 	'lingodirector',
 	'made_of_code',
+	'madeofcode',
 	'maroloccio',
 	// 'mellow',
 	'mopkai',
@@ -141,6 +143,7 @@ $whitelist = array(
 	'mud',
 	'nefertiti',
 	// 'nicotine',
+	'newsprint',
 	'nightVision',
 	'northland',
 	'seoul-256',
@@ -186,6 +189,22 @@ for ($i = 3; $i>0; $i--) { // Limit number of attempts
 		if (strstr($f, $scheme)) break 2;
 	}
 }
+
+//
+// Save this
+$log = __DIR__ . '/colourschemes.log';
+if (file_exists($log))
+	$lines = file($log);
+else
+	$lines = array();
+array_unshift($lines, $scheme."\n");
+$limit=50; // Number of schemes to remember
+if (count($lines) > $limit) array_splice($lines, $limit);
+$fp = fopen($log, 'w');
+fwrite($fp, join('', $lines));
+fclose($fp);
+// /Save this
+
 
 print $scheme;
 

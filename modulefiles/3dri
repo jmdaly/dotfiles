@@ -26,8 +26,8 @@ set BOOST_VERSION 1.56
 set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
 set app_rel     Applications/OPAL2
-set bld_debug   ${BASE}/bld-3dri-${ARCH}-debug
-set bld_release ${BASE}/bld-3dri-${ARCH}-release
+set bld_debug   ${BASE}/bld-3dri-${ARCH}-clang-debug
+set bld_release ${BASE}/bld-3dri-${ARCH}-clang-release
 set bld         ${bld_debug}
 
 set apps        ${src}/${app_rel}
