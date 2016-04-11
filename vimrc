@@ -295,11 +295,18 @@ let g:grepper     = {
 " s{char}to move to {char}
 nmap s <Plug>(easymotion-bd-f)
 xmap s <Plug>(easymotion-bd-f)
-
 " Easymotion mapping to search for two characters
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
 xmap <Leader>s <Plug>(easymotion-s2)
-
 " Move to line
 map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
+
+" Startify options
+" Write state of session on exit or loading of
+" another session:
+let g:startify_session_persistence = 1
+" Set startify to not switch directories when
+" opening a file. This lets us stay in the directory
+" we opened the editor in:
+let g:startify_change_to_dir = 0
