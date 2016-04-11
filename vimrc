@@ -1,6 +1,4 @@
 call plug#begin('~/.vim/plugged')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " YouCompleteMe
 Plug 'Valloric/YouCompleteMe'
@@ -19,10 +17,6 @@ Plug 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-
-" tagbar - allows browsing tags of the current source file
-" from ctags. Good for seeing functions, variables, etc.
-Plug 'majutsushi/tagbar'
 
 " vim-sleuth - heuristically determines spacing in terms
 " of tabs, spaces, etc. based on what's in use in the
@@ -101,9 +95,6 @@ Plug 'morhetz/gruvbox'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
 " Add to the runtime path so that custom
 " snippets can be found:
 set rtp+=~/dotfiles
@@ -142,12 +133,6 @@ if exists(':tnoremap')
    tnoremap <Leader>e <C-\><C-n>
 endif
 
-" Set the make program to be ninja:
-set makeprg=ninja
-" A shortcut key to change to the build directory
-" and build the project:
-map <F7> :execute "cd ".g:build_dir<CR> :make<CR>
-
 " Disable Neomake for C and C++ files, since we use
 " YouCompleteMe for them:
 let g:neomake_cpp_enabled_makers = []
@@ -177,42 +162,27 @@ let g:neomake_message_sign = {
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 " This one searches all the files in the current git repo:
-map <c-k> :GitFiles<CR>
+map <c-k> :Files<CR>
 map <leader><Tab> :Buffers<CR>
-map <leader>b :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
-
-" Tell vim to set the current directory to the directory
-" of the file being opened:
-set autochdir
 
 " Have vim reload a file if it has changed outside
 " of vim:
 set autoread
 
-" Tell vim to look for a tags file in the current
-" directory, and all the way up until it finds one:
-set tags=./tags;/
-
 " Tell vim that fileformat might be unix or dos.
 " This helps with printing DOS line ending properly:
 set ffs=unix,dos
 
-" Let YouCompleteMe use tag files for completion as well:
-let g:ycm_collect_identifiers_from_tags_files = 1
-
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
-
-map <F2> :YcmCompleter GoTo<CR>
-
+nnoremap <F2> :YcmCompleter GoTo<CR>
 " Map to get documentation on a symbol:
-map <F1> :YcmCompleter GetDoc<CR>
-
+nnoremap <F1> :YcmCompleter GetDoc<CR>
 " Map to apply quick fix:
-map <F3> :YcmCompleter FixIt<CR>
+nnoremap <F3> :YcmCompleter FixIt<CR>
 
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
@@ -228,32 +198,21 @@ let g:UltiSnipsEditSplit="vertical"
 
 " For vim-airline, ensure the status line is always displayed:
 set laststatus=2
-"
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-
 " Don't show trailing whitespace warning:
 let g:airline_section_warning = ''
-
 " Use the powerline font symbols, for a nicer
 " look:
 let g:airline_powerline_fonts = 1
-
 " Set airline theme:
 let g:airline_theme='gruvbox'
-
-" tagbar config. Enable it using this key map:
-nmap <F8> :TagbarToggle<CR>
-" Have it autofocus on open:
-let g:tagbar_autofocus = 1
 
 " Shortcut key to open NERDTree:
 map <F5> :NERDTreeToggle<CR>
 let NERDTreeChDirMode = 2
-nnoremap <leader>n :NERDTree .<CR>
 
 " Mapping for fswitch, to switch between header
 " and source and load it into the current window:
@@ -297,7 +256,6 @@ nnoremap <leader>Q :Sayonara!<cr>
 " Mapping for easy aligning on symbols:
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
