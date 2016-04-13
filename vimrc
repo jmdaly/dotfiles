@@ -27,6 +27,9 @@ Plug 'tpope/vim-sleuth'
 " git branch to be shown by vim-airline:
 Plug 'tpope/vim-fugitive'
 
+" A plugin containing handy pairs of bracket mapping:
+Plug 'https://github.com/tpope/vim-unimpaired'
+
 " Plug to assist with commenting out blocks of text:
 Plug 'tomtom/tcomment_vim'
 
@@ -272,6 +275,8 @@ nnoremap <leader>gw   :Grepper -tool search_in_file -cword -noprompt<cr>
 nnoremap <leader>gf   :Grepper -tool search_in_file<cr>
 " A mapping to search for the user-supplied string using git grep:
 nnoremap <leader>gg   :Grepper -tool git<cr>
+" A mapping to search using ag:
+nnoremap <leader>ag :Grepper -tool ag<cr>
 
 " Configure grepper. Of note, we configure git grep
 " to perform searches throughout the whole repo
