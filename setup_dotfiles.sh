@@ -82,6 +82,10 @@ if [ ! -f ~/.gnupg/gpg.conf ]; then
 	ln -s ~/dotfiles/gpg.conf ~/.gnupg/gpg.conf
 fi
 
+if [ ! -f ~/.gnupg/gpg-agent.conf ]; then
+	ln -s ~/dotfiles/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+fi
+
 # Get the Base16 colour schemes
 mkdir -p ~/.config
 if [ ! -d ~/.config/base16-shell ]; then
