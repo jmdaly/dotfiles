@@ -6,8 +6,8 @@ Plug 'Valloric/YouCompleteMe'
 " YCMGenerator - generates configs for YouCompleteMe
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
-" NERD Tree - file explorer for vim
-Plug 'scrooloose/nerdtree'
+" Path navigator for vim
+Plug 'justinmk/vim-dirvish'
 
 " Better C++ Syntax Highlighting:
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -28,7 +28,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
 
 " A plugin containing handy pairs of bracket mapping:
-Plug 'https://github.com/tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
 " Plug to assist with commenting out blocks of text:
 Plug 'tomtom/tcomment_vim'
@@ -212,10 +212,6 @@ let g:airline_section_warning = ''
 let g:airline_powerline_fonts = 1
 " Set airline theme:
 let g:airline_theme='gruvbox'
-
-" Shortcut key to open NERDTree:
-map <F5> :NERDTreeToggle<CR>
-let NERDTreeChDirMode = 2
 
 " Mapping for fswitch, to switch between header
 " and source and load it into the current window:
