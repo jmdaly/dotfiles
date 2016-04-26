@@ -294,7 +294,7 @@ let g:grepper     = {
 
 " Easy motion mappings to allow searching for one character:
 " s{char}to move to {char}
-nmap s <Plug>(easymotion-bd-f)
+nmap s <Plug>(easymotion-overwin-f)
 xmap s <Plug>(easymotion-bd-f)
 " Easymotion mapping to search for two characters
 nmap <Leader>s <Plug>(easymotion-overwin-f2)
