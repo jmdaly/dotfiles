@@ -22,7 +22,7 @@ BinPackParameters: true
 BinPackArguments: true
 ColumnLimit:     80
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
-ConstructorInitializerIndentWidth: 4
+ConstructorInitializerIndentWidth: 2
 DerivePointerAlignment: true
 ExperimentalAutoDetectBinPacking: false
 IndentCaseLabels: true
