@@ -248,6 +248,8 @@ exec --no-startup-id i3-msg 'workspace $workspace1; exec $terminal'
 # to load on a workspace that's different from the one in the previous
 # command:
 exec --no-startup-id sleep 0.1 && i3-msg 'workspace $workspace3; exec $terminal; split h; exec $terminal'
+# Set the screens to turn off after 600 seconds of inactivity:
+exec "xset dpms 600"
 
 # Set wallpaper:
 exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.png
