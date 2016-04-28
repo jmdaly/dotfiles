@@ -37,8 +37,8 @@ export EDITOR=vim
 # Set the terminal to st, for i3wm:
 export TERMINAL=st
 
-# Set ccache to use distcc:
-export CCACHE_PREFIX="distcc"
+# Set ccache to use distcc if distcc is available:
+[ -f distcc ] && export CCACHE_PREFIX="distcc"
 
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
