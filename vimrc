@@ -30,6 +30,9 @@ Plug 'tpope/vim-fugitive'
 " A plugin containing handy pairs of bracket mapping:
 Plug 'tpope/vim-unimpaired'
 
+" Sensible defaults that everyone can agree on:
+Plug 'tpope/vim-sensible'
+
 " Plug to assist with commenting out blocks of text:
 Plug 'tomtom/tcomment_vim'
 
@@ -102,11 +105,11 @@ call plug#end()            " required
 " snippets can be found:
 set rtp+=~/dotfiles
 
-" If we're in neovim, enable true colour
-" support:
+" Enable true colour support:
 if has("nvim")
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+set termguicolors
 
 " Set a colour scheme for vim:
 colorscheme gruvbox
