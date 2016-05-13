@@ -32,7 +32,7 @@ antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 # Tell antigen that you're done.
 antigen apply
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # Set the terminal to st, for i3wm:
 export TERMINAL=st
@@ -54,8 +54,8 @@ export BULLETTRAIN_DIR_FG="black"
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
 
-# Adjust the path
-source ~/.pathrc
+# Adjust the path for any local path requirements
+[ -f ~/.pathrc ] && source ~/.pathrc
 
 # Aliases
 alias nv='nvim'
