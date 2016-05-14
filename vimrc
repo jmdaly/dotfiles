@@ -106,9 +106,6 @@ call plug#end()            " required
 set rtp+=~/dotfiles
 
 " Enable true colour support:
-if has("nvim")
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
 set termguicolors
 
 " Set a colour scheme for vim:
