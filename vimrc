@@ -106,7 +106,9 @@ call plug#end()            " required
 set rtp+=~/dotfiles
 
 " Enable true colour support:
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
 
 " Set a colour scheme for vim:
 colorscheme gruvbox
