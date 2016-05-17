@@ -38,7 +38,9 @@ export EDITOR=nvim
 export TERMINAL=st
 
 # Set ccache to use distcc if distcc is available:
-[ -f distcc ] && export CCACHE_PREFIX="distcc"
+if type distcc > /dev/null; then
+  export CCACHE_PREFIX="distcc"
+fi
 
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
