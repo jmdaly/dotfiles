@@ -80,9 +80,6 @@ setenv wte /usr/lib/Wt/examples
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 
 # PCL Binary lib paths
-# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/VTK/5.8/lib/Release"
-# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.7.0/lib/Debug"
-# prepend-path LD_LIBRARY_PATH "/home/matt/workspace/opal2/o2linux64/Libs/PCL/1.6.0/lib/Release"
 prepend-path LD_LIBRARY_PATH "${BOOST_ROOT}/lib"
 
 # Building 3DRi
