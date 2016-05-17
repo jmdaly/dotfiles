@@ -121,7 +121,7 @@ endif
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" Key mappings for clang-format, to format source code:
-	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
+	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<CR>
 endif
 
 " fugitive - a Git wrapper for vim. Also allows current
