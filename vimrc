@@ -34,7 +34,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-sensible'
 
 " Plug to assist with commenting out blocks of text:
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plug 'bling/vim-airline'
@@ -245,6 +245,13 @@ augroup fswitch_cpp
    au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include'
    au BufEnter *.hpp let b:fswitchdst  = 'h,cpp'
    au BufEnter *.hpp let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,..'
+augroup END
+
+" Set the comment string for certain filetypes to
+" double slashes (used for vim-commentary):
+augroup FTOptions 
+    autocmd!
+    autocmd FileType c,cpp,cs,java          setlocal commentstring=//\ %s
 augroup END
 
 " Key mappings for clang-format, to format source code:
