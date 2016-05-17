@@ -234,6 +234,11 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
+if !has('gui_running')
+	" Plugin to get gvim colourschemes work better in terminal vim
+	Plug 'godlygeek/csapprox'
+endif
+
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
@@ -254,7 +259,9 @@ call plug#end()          " required
 function! s:RandColorScheme()
 	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
 	execute ':colorscheme '.s:scheme
-	echom 'Loading colorscheme ' s:scheme
+	if has('gui_running')
+		echom 'Loading colorscheme ' s:scheme
+	endif
 endfunction
 :map <Leader>rcs :call <SID>RandColorScheme()<CR>
 
@@ -277,12 +284,12 @@ if has('gui_running')
 	" TODO Write a command to toggle this
 	"set background=light
 	set background=dark
+endif
 
-	call <SID>RandColorScheme()
+if domain ==? 'school' || domain ==? 'ec'
+	colorscheme onedark
 else
-	if domain ==? 'school' || domain ==? 'ec'
-		colorscheme onedark
-	endif
+	call <SID>RandColorScheme()
 endif
 
 " OS Detection
