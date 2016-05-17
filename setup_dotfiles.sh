@@ -48,7 +48,7 @@ else
 
 	mkdir -p ${h}/.local/share/fonts
 	# Install fonts
-	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" < 3 ]]; then
+	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
 		git clone https://github.com/powerline/fonts.git /tmp/powerline_fonts
 		/tmp/powerline_fonts/install.sh
 	fi
