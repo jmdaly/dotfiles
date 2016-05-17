@@ -645,6 +645,9 @@ noremap <C-p> ciw<Esc>"0p
 " Un-indent current line by one tab stop
 imap <S-Tab> <C-o><<
 
+" Match <> brackets
+set matchpairs+=<:>
+
 " PHP Artisan commands
 if (&ft ==? 'php')
 	abbrev gm !php artisan   generate:model
