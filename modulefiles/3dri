@@ -93,7 +93,7 @@ set     BUILD_TYPE    "Debug"
 if { ${hostname} == "khea" } {
 	setenv  CXX           "ccache clang++-3.7"
 } else {
-	setenv  CXX            "ccache /home/jdaly/clang+llvm-3.7.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang++"
+	setenv  CXX            "ccache clang++"
 	setenv  CCACHE_PREFIX  "distcc"
 	# setenv  CCACHE_DIR     /media/ccache
 	setenv  CCACHE_UMASK   002
