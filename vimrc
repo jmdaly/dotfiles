@@ -36,6 +36,9 @@ Plug 'tpope/vim-sensible'
 " Plug to assist with commenting out blocks of text:
 Plug 'tpope/vim-commentary'
 
+" Plugin for working with surroundings of words:
+Plug 'tpope/vim-surround'
+
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plug 'bling/vim-airline'
 
