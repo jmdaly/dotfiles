@@ -84,7 +84,7 @@ Plug 'junegunn/vim-easy-align'
 
 " A plugin to make it easier to use motions to jump
 " to words and characters:
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -304,16 +304,9 @@ let g:grepper     = {
 	 \ },
 	 \ }
 
-" Easy motion mappings to allow searching for one character:
-" s{char}to move to {char}
-nmap s <Plug>(easymotion-overwin-f)
-xmap s <Plug>(easymotion-bd-f)
-" Easymotion mapping to search for two characters
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
-xmap <Leader>s <Plug>(easymotion-s2)
-" Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
+" vim-sneak options to use streak mode, to minimize the numbers
+" of steps to get to a location:
+let g:sneak#streak = 1
 
 " Startify options
 " Write state of session on exit or loading of
