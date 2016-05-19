@@ -190,7 +190,6 @@ Plug 'godlygeek/tabular'
 Plug 'kshenoy/vim-signature'
 
 " Suppose to make closing splits better (less window resizing)
-Plug 'moll/vim-bbye'
 
 if domain !=? 'neptec-small' && domain !=? 'ec'
 	" Python Syntax highlighting (the default is pretty bad)
@@ -198,8 +197,6 @@ if domain !=? 'neptec-small' && domain !=? 'ec'
 endif
 
 " Undo tree
-Plug 'sjl/gundo.vim'
-
 
 if domain !=? 'neptec-small'
 	" Plug to wrap all the various grep tools, and provide
@@ -454,9 +451,6 @@ let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
 """""""""""""""""""" /NERDTree """"""""""""""""""""""
 
-""""""""""""""""""""" BBye """"""""""""""""""""""
-:nnoremap <Leader>q :Bdelete<CR>
-""""""""""""""""""""" /BBye """"""""""""""""""""""
 
 if is_win==0 && domain ==? 'neptec'
 
@@ -522,10 +516,6 @@ let g:grepper     = {
 nmap <silent> <Leader>of :FSHere<cr>
 """"""""""""""""""""""" /fswitch """""""""""""""""""""""""
 
-
-""""""""""""""""""""""" Gundo """"""""""""""""""""""""""
-nnoremap <F6> :GundoToggle<CR>
-""""""""""""""""""""""" /Gundo """""""""""""""""""""""""
 
 
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
