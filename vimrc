@@ -636,6 +636,11 @@ noremap <C-p> ciw<Esc>"0p
 " Un-indent current line by one tab stop
 imap <S-Tab> <C-o><<
 
+" Stay in visual mode when indenting. You will never have to run gv after
+" performing an indentation.
+vnoremap < <gv
+vnoremap > >gv
+
 " Match <> brackets
 set matchpairs+=<:>
 
