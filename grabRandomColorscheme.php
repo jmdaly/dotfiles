@@ -119,6 +119,7 @@ $whitelist = array(
 	'dusk',
 	'eclipse',
 	'ecostation',
+	'evolution',
 	'flatland',
 	'fruidle',
 	'fruity',
