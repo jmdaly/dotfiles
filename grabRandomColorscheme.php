@@ -120,6 +120,7 @@ $whitelist = array(
 	'eclipse',
 	'ecostation',
 	'evolution',
+	'forneus',
 	'flatland',
 	'fruidle',
 	'fruity',

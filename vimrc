@@ -122,7 +122,7 @@ endif
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" Key mappings for clang-format, to format source code:
-	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
+	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<CR>
 endif
 
 " fugitive - a Git wrapper for vim. Also allows current
@@ -191,7 +191,6 @@ Plug 'godlygeek/tabular'
 Plug 'kshenoy/vim-signature'
 
 " Suppose to make closing splits better (less window resizing)
-Plug 'moll/vim-bbye'
 
 if domain !=? 'neptec-small' && domain !=? 'ec'
 	" Python Syntax highlighting (the default is pretty bad)
@@ -199,8 +198,6 @@ if domain !=? 'neptec-small' && domain !=? 'ec'
 endif
 
 " Undo tree
-Plug 'sjl/gundo.vim'
-
 
 if domain !=? 'neptec-small'
 	" Plug to wrap all the various grep tools, and provide
@@ -235,6 +232,11 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
+if !has('gui_running')
+	" Plugin to get gvim colourschemes work better in terminal vim
+	Plug 'godlygeek/csapprox'
+endif
+
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
@@ -255,7 +257,9 @@ call plug#end()          " required
 function! s:RandColorScheme()
 	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
 	execute ':colorscheme '.s:scheme
-	echom 'Loading colorscheme ' s:scheme
+	if has('gui_running')
+		echom 'Loading colorscheme ' s:scheme
+	endif
 endfunction
 :map <Leader>rcs :call <SID>RandColorScheme()<CR>
 
@@ -278,12 +282,12 @@ if has('gui_running')
 	" TODO Write a command to toggle this
 	"set background=light
 	set background=dark
+endif
 
-	call <SID>RandColorScheme()
+if domain ==? 'school' || domain ==? 'ec'
+	colorscheme onedark
 else
-	if domain ==? 'school' || domain ==? 'ec'
-		colorscheme onedark
-	endif
+	call <SID>RandColorScheme()
 endif
 
 " OS Detection
@@ -448,9 +452,6 @@ let NERDTreeChDirMode = 2
 nnoremap <leader>n :NERDTree .<CR>
 """""""""""""""""""" /NERDTree """"""""""""""""""""""
 
-""""""""""""""""""""" BBye """"""""""""""""""""""
-:nnoremap <Leader>q :Bdelete<CR>
-""""""""""""""""""""" /BBye """"""""""""""""""""""
 
 if is_win==0 && domain ==? 'neptec'
 
@@ -516,10 +517,6 @@ let g:grepper     = {
 nmap <silent> <Leader>of :FSHere<cr>
 """"""""""""""""""""""" /fswitch """""""""""""""""""""""""
 
-
-""""""""""""""""""""""" Gundo """"""""""""""""""""""""""
-nnoremap <F6> :GundoToggle<CR>
-""""""""""""""""""""""" /Gundo """""""""""""""""""""""""
 
 
 """""""""""""""" Rainbow (foldering) """""""""""""""""""
@@ -625,10 +622,11 @@ noremap <C-Tab> <Esc>:tabnext<CR>
 
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
+nmap <C-b> :above resize +5<cr>
 
 " Swap splits to vertical
-noremap <C-w>th <C-W>t<ctrl-w>H
-noremap <C-w>tv <C-W>t<ctrl-w>K
+noremap <C-w>th <C-W>t<c-w>H
+noremap <C-w>tv <C-W>t<c-w>K
 
 " Remove search results
 noremap H :noh<cr>
@@ -638,6 +636,14 @@ noremap <C-p> ciw<Esc>"0p
 
 " Un-indent current line by one tab stop
 imap <S-Tab> <C-o><<
+
+" Stay in visual mode when indenting. You will never have to run gv after
+" performing an indentation.
+vnoremap < <gv
+vnoremap > >gv
+
+" Match <> brackets
+set matchpairs+=<:>
 
 " PHP Artisan commands
 if (&ft ==? 'php')
