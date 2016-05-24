@@ -39,10 +39,10 @@ for f in $files; do
 	fi
 done;
 
-# Set up symlinks for tmux plugins:
+# Set up tmux plugin manager:
 mkdir -p ~/.tmux/plugins
 if [ ! -d ~/.tmux/plugins/tpm ]; then
-	ln -s ~/dotfiles/tpm ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 # Get vim-plug, the plugin manager I use
