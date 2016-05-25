@@ -120,6 +120,9 @@ set background=dark
 " Turn line numbers on:
 set number
 
+" Turn relative line numbers on:
+set relativenumber
+
 " Turn syntax on:
 syntax on
 
