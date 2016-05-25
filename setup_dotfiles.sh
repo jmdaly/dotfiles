@@ -45,6 +45,12 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Set up antigen, the zsh plugin manager:
+mkdir -p ~/git
+if [ ! -d ~/git/antigen ]; then
+	git clone https://github.com/zsh-users/antigen ~/git/antigen
+fi
+
 # Get vim-plug, the plugin manager I use
 # for vim:
 if [ ! -f ~/.vim/autoload/plug.vim ]; then

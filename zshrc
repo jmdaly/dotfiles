@@ -1,7 +1,7 @@
 # Update the dotfiles repo to make sure we have all changes:
 ~/dotfiles/doupdate.sh
 
-source ~/dotfiles/antigen/antigen.zsh
+source ~/git/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
