@@ -17,9 +17,14 @@ if [[ $now -gt $s ]]; then
 	GIT_DIR=~/dotfiles/.git GIT_WORK_TREE=~/dotfiles git pull
 	GIT_DIR=~/dotfiles/.git GIT_WORK_TREE=~/dotfiles git submodule update --remote --merge
 
+	# Update the password manager if it's set up on the current account:
+	if type pass > /dev/null && [ -d ~/.password-store ]; then
+		echo "Update password store..."
+		pass git pull
+		pass git push
+	fi
+
 	# Re-run setup in case there are new files to handle:
 	~/dotfiles/setup_dotfiles.sh
 	echo $now > last_check
-else
-	#echo "Not checking for update to dotfiles...."
 fi;
