@@ -248,7 +248,7 @@ augroup fswitch_cpp
    au BufEnter *.h let b:fswitchdst  = 'cpp,hpp,cc,c'
    au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,reg:|include/\w\+|src|,impl'
    au BufEnter *.cpp let b:fswitchdst  = 'hpp,h'
-   au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include'
+   au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include,reg:|src/\(\w\+\)/src|src/\1/include/**|'
    au BufEnter *.hpp let b:fswitchdst  = 'h,cpp'
    au BufEnter *.hpp let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,..'
 augroup END
