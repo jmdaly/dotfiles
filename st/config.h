@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char font[] = "Meslo LG S for Powerline:style=RegularForPowerline:size=14:antialias=true:autohint=false";
+static char font[] = "Hack:style=Regular:size=14:antialias=true:autohint=false";
 static int borderpx = 2;
 static char shell[] = "/bin/zsh";
 static char *utmp = NULL;
