@@ -120,6 +120,14 @@ if [ ! -f ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf ]; then
 	fc-cache -vf ~/.fonts/
 fi
 
+# Get the Hack font, another good terminal/code font:
+if [ ! -f ~/.fonts/Hack-Regular.ttf ]; then
+	curl -fLo /tmp/hack/hack.zip --create-dirs https://github.com/chrissimpkins/Hack/releases/download/v2.020/Hack-v2_020-ttf.zip
+	cd /tmp/hack && unzip hack.zip
+	cp *.ttf ~/.fonts
+	fc-cache -vf ~/.fonts/
+fi
+
 # Wallpapers for the window manager:
 if [ ! -f ~/.config/wallpapers/wall.png ]; then
 	curl -fLo ~/.config/wallpapers/wall.png --create-dirs http://jmdaly.ca/media/wall.png
