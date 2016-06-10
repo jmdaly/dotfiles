@@ -254,10 +254,11 @@ bar {
           statusline $foreground
           separator $darkgrey
 
+#                            BORDER      BACKGROUND  TEXT
           focused_workspace  $background $background $foreground
           active_workspace   $background $background $foreground
           inactive_workspace $background $background $darkgrey
-          urgent_workspace   $background $background $red
+          urgent_workspace   $background $background $darkred
          }
 }
 
