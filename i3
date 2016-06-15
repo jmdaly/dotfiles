@@ -119,9 +119,9 @@ bindsym $mod+a focus parent
 # shortcut to move a workspace to a monitor to the right
 bindsym $mod+m move workspace to output right
 
-set $workspace1 "1: Editor "
-set $workspace2 "2: Chrome "
-set $workspace3 "3: Project "
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -202,6 +202,7 @@ set $default_gaps_inner 10
 set $default_gaps_outer 5
 gaps inner $default_gaps_inner
 gaps outer $default_gaps_outer
+smart_borders no_gaps
 
 set $mode_gaps gaps
 set $mode_gaps_outer outer gaps
