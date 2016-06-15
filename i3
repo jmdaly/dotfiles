@@ -30,6 +30,8 @@ set $darkcyan    #689d6a
 set $cyan        #8ec07c
 set $lightgrey   #a89984
 set $white       #ebdbb2
+# Use custom colors for black
+set $darkblack   #1d2021
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -185,11 +187,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Widow Colours
-#                       border  background text    indicator
-client.focused          $foreground $foreground $background $foreground
-client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
-client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
-client.urgent           $red $red $background $red
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $black      $black      $lightgrey  $darkblack  $darkblack
+client.unfocused        $black      $black      $white      $darkblack  $darkblack
+client.focused_inactive $black      $black      $white      $darkblack  $darkblack
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+client.background       $black
+
 
 # Disable window titlebars. Necessary for i3-gaps:
 for_window [class="^.*"] border pixel 0
