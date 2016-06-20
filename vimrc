@@ -223,6 +223,8 @@ let g:airline_section_warning = ''
 let g:airline_powerline_fonts = 1
 " Set airline theme:
 let g:airline_theme='gruvbox'
+" Turn on integration with vim-obsession
+let g:airline#extensions#obsession#enabled = 1
 
 " Mapping for fswitch, to switch between header
 " and source and load it into the current window:
