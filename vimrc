@@ -315,9 +315,6 @@ let g:grepper     = {
 let g:sneak#streak = 1
 
 " Startify options
-" Write state of session on exit or loading of
-" another session:
-let g:startify_session_persistence = 1
 " Set startify to not switch directories when
 " opening a file. This lets us stay in the directory
 " we opened the editor in:
