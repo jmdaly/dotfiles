@@ -39,6 +39,9 @@ Plug 'tpope/vim-commentary'
 " Plugin for working with surroundings of words:
 Plug 'tpope/vim-surround'
 
+" Plugin to help manage sessions
+Plug 'tpope/vim-obsession'
+
 " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
 Plug 'bling/vim-airline'
 
