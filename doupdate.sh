@@ -21,7 +21,6 @@ if [[ $now -gt $s ]]; then
 	if type pass > /dev/null && [ -d ~/.password-store ]; then
 		echo "Update password store..."
 		pass git pull
-		pass git push
 	fi
 
 	# Re-run setup in case there are new files to handle:
