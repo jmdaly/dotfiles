@@ -5,6 +5,15 @@
 
 declare base=${HOME}/dotfiles
 
+# Check for required dependencies before continuing:
+hash git 2>/dev/null || { echo "Error: git is not installed. Please install git first."; exit 1;}
+
+hash curl 2>/dev/null || { echo "Error: curl is not installed. Please install curl first."; exit 1;}
+
+hash stow 2>/dev/null || { echo "Error: stow is not installed. Please install stow first."; exit 1;}
+
+hash unzip 2>/dev/null || { echo "Error: unzip is not installed. Please install unzip first."; exit 1;}
+
 # Set up all of the configs:
 cd ${base}/stow
 
