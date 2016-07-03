@@ -33,7 +33,7 @@ border_right=0
 border_bottom=4
 
 [weather]
-command=~/dotfiles/i3blocks/weather
+command=~/dotfiles/status-blocks/weather
 interval=60
 border=#cc241d
 
