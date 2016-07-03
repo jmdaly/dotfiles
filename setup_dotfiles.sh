@@ -5,13 +5,15 @@
 
 declare base=${HOME}/dotfiles
 
-cd ${base}
-
 # Set up all of the configs:
-apps=(git gnupg i3 i3blocks neovim rofi-pass tmux vim xorg zsh)
+cd ${base}/stow
 
-for app in $apps; do
-	stow $app
+# This for loop loops throw all directories
+# contained in the stow directory. This makes
+# it easy to add configurations for new applications
+# without having to modify this script.
+for app in */; do
+	stow -t ${HOME} $app
 done;
 
 # Set up tmux plugin manager:
