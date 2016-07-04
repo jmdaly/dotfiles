@@ -14,17 +14,6 @@ hash stow 2>/dev/null || { echo "Error: stow is not installed. Please install st
 
 hash unzip 2>/dev/null || { echo "Error: unzip is not installed. Please install unzip first."; exit 1;}
 
-# Set up all of the configs:
-cd ${base}/stow
-
-# This for loop loops throw all directories
-# contained in the stow directory. This makes
-# it easy to add configurations for new applications
-# without having to modify this script.
-for app in */; do
-	stow -t ${HOME} $app
-done;
-
 # Set up tmux plugin manager:
 mkdir -p ~/.tmux/plugins
 if [ ! -d ~/.tmux/plugins/tpm ]; then
@@ -87,3 +76,14 @@ fi
 if [ ! -f ~/.config/wallpapers/wall.png ]; then
 	curl -fLo ~/.config/wallpapers/wall.png --create-dirs http://jmdaly.ca/media/wall.png
 fi
+
+# Set up all of the configs:
+cd ${base}/stow
+
+# This for loop loops throw all directories
+# contained in the stow directory. This makes
+# it easy to add configurations for new applications
+# without having to modify this script.
+for app in */; do
+	stow -t ${HOME} $app
+done;
