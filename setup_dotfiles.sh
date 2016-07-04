@@ -80,7 +80,7 @@ fi
 # Set up all of the configs:
 cd ${base}/stow
 
-# This for loop loops throw all directories
+# This for loop iterates through all directories
 # contained in the stow directory. This makes
 # it easy to add configurations for new applications
 # without having to modify this script.
