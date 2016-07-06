@@ -104,6 +104,9 @@ Plug 'benekastah/neomake'
 " gruvbox colour scheme:
 Plug 'morhetz/gruvbox'
 
+" A plugin to facilitate navigating between vim and tmux
+Plug 'christoomey/vim-tmux-navigator'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -175,9 +178,8 @@ let g:neomake_message_sign = {
         \ }
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
-" This one searches all the files in the current git repo:
-map <c-k> :Files<CR>
-map <leader><Tab> :Buffers<CR>
+nnoremap <leader>z :Files<CR>
+nnoremap <leader><Tab> :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -193,8 +195,6 @@ set ffs=unix,dos
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
 nnoremap <F2> :YcmCompleter GoTo<CR>
-" Map to get documentation on a symbol:
-nnoremap <F1> :YcmCompleter GetDoc<CR>
 " Map to apply quick fix:
 nnoremap <F3> :YcmCompleter FixIt<CR>
 
