@@ -131,6 +131,7 @@ $whitelist = array(
 	'greens',
 	'guardian',
 	'guepardo',
+	'herokudoc',
 	'herald',
 	'inkpot',
 	'kalisi',
