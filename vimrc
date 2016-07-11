@@ -620,6 +620,8 @@ endif
 " Map CTRL-Tab to change tab
 noremap <C-S-Tab> <Esc>:tabprev<CR>
 noremap <C-Tab> <Esc>:tabnext<CR>
+noremap <leader>tp <Esc>:tabprev<CR>
+noremap <leader>tn <Esc>:tabnext<CR>
 
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
