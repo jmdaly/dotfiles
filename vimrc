@@ -645,6 +645,11 @@ imap <S-Tab> <C-o><<
 vnoremap < <gv
 vnoremap > >gv
 
+" ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
+" now (might fix it better elsewhere)
+map <F1> x
+imap <F1> <DEL>
+
 " Match <> brackets
 set matchpairs+=<:>
 
