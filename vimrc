@@ -313,18 +313,6 @@ nmap [h <Plug>GitGutterPrevHunk
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
 
-
-"""""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-" Set up keyboard shortbuts for fzf, the fuzzy finder
-" This one searches all the files in the current git repo:
-map <c-k> :GitFiles<CR>
-map <c-m> :Buffers<CR>
-
-" Unmap center/<CR> from launching fzf which appears to be mapped by default.
-unmap <CR>
-
-""""""""""""""""""""""""" /fzf """""""""""""""""""""""""""
-
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
 
@@ -586,6 +574,20 @@ endfunction
 """""""""""""" python-syntax """""""""""""""""
 " No options yet..
 """"""""""""" /python-syntax """""""""""""""""
+
+
+"""""""""""""""""""""""""" fzf """""""""""""""""""""""""""
+" Set up keyboard shortbuts for fzf, the fuzzy finder
+" This one searches all the files in the current git repo:
+noremap <c-k> :GitFiles<CR>
+noremap <leader><Tab> :Buffers<CR>
+
+" Unmap center/<CR> from launching fzf which appears to be mapped by default.
+" unmap <CR>
+
+""""""""""""""""""""""""" /fzf """""""""""""""""""""""""""
+
+
 
 
 filetype on
