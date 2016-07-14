@@ -141,9 +141,6 @@ set smartcase
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
 
-" Enable the mouse, even in non-GUI:
-set mouse+=a
-
 " If we are using neovim, add a mapping to escape out
 " of terminal mode:
 if exists(':tnoremap')
