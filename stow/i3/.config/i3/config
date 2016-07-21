@@ -61,6 +61,8 @@ bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show run
+# start rofi in window switcher mode
+bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 # start rofi-pass, a password manager that
 # uses rofi:
