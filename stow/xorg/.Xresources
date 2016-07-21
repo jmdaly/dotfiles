@@ -19,7 +19,7 @@ rofi.color-enabled: true
 rofi.color-window: #282828, #282828, #ebdbb2
 rofi.color-normal: #282828, #ebdbb2, #282828, #ebdbb2, #282828
 rofi.color-active: #ebdbb2, #458588, #ebdbb2, #458588, #ebdbb2
-rofi.color-urgent: #282828, #cc241d, #282828, #dc322f, #ebdbb2
+rofi.color-urgent: #282828, #cc241d, #282828, #cc241d, #ebdbb2
 
 rofi.bw: 0
 rofi.location: 0
