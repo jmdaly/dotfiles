@@ -156,6 +156,11 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # Program workspaces
 assign [class="google-chrome"] $workspace2
+# We want terminals to appear on specific workspaces,
+# so we will give them different classes, based on
+# the workspace we want them on:
+assign [class="st-256color" instance="term-ws1"] $workspace1
+assign [class="st-256color" instance="term-ws3"] $workspace3
 
 # Ensure certain programs always start floating:
 for_window [class="zoom"] floating enable
@@ -195,9 +200,9 @@ bindsym $mod+r mode "resize"
 
 # Widow Colours
 #                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused          $black      $black      $lightgrey  $darkblack  $darkblack
-client.unfocused        $black      $black      $white      $darkblack  $darkblack
-client.focused_inactive $black      $black      $white      $darkblack  $darkblack
+client.focused          $black      $black      $lightgrey  $darkblack  $darkblue
+client.unfocused        $black      $black      $white      $darkblack  $darkblue
+client.focused_inactive $black      $black      $white      $darkblack  $darkblue
 client.urgent           $darkred    $darkred    $black      $darkred    $darkred
 client.background       $black
 
@@ -296,15 +301,17 @@ exec google-chrome
 exec --no-startup-id nm-applet
 # Launch compton, to allow transparency:
 exec --no-startup-id compton
-# Start up terminals on multiple workspaces. Since we
-# launch the same application on multiple workspaces like
-# this, we need to use i3-msg and explicitly switch
-# workspaces
-exec --no-startup-id i3-msg 'workspace $workspace1; exec $terminal' 
-# On faster computers this sleep seems necessary to get the terminal
-# to load on a workspace that's different from the one in the previous
-# command:
-exec --no-startup-id sleep 0.1 && i3-msg 'workspace $workspace3; exec $terminal; split h; exec $terminal'
+# Start up terminals on multiple workspaces. We use classes
+# to control which terminal opens on which workspace, with
+# the -c flag
+exec $terminal -c term-ws1 
+exec $terminal -c term-ws3
+exec $terminal -c term-ws3
+# Start up a terminal and move it to the scratchpad:
+exec $terminal -c term-scratchpad
+for_window [class="st-256color" instance="term-scratchpad"] move scratchpad
+for_window [class="st-256color" instance="term-scratchpad"] border pixel 1
+
 # Set the screens to turn off after 600 seconds of inactivity:
 exec "xset dpms 600"
 
