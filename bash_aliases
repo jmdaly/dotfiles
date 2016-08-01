@@ -24,6 +24,7 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gp="git push"
 	alias gsta="git stash"
 	alias gstp="git stash pop"
+	alias grh="git reset HEAD"
 fi
 #alias glog="git log --follow --name-status"
 
