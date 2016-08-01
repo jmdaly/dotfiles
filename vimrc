@@ -41,6 +41,7 @@ au BufNewFile,BufRead *.cdk*           set filetype=fortran
 au BufNewFile,BufRead *.module         set filetype=php
 au BufNewFile,BufRead *.dot            set filetype=sh
 au BufNewFile,BufRead *.gs             set filetype=javascript
+au BufNewFile,BufRead *.spi            set filetype=tcl
 au BufNewFile,BufRead .exper_cour      set filetype=sh
 au BufNewFile,BufRead *.lcm            set filetype=c
 au BufNewFile,BufRead Common_Compiler* set filetype=sh

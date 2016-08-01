@@ -48,7 +48,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
 	# only use blinks on pof.  Or figure out how to detect putty.
 	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	if [[ $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
+	if [[ "$(hostname)" == "tinder" || "$(hostname)" == "grinder" || "$(hostname)" == khea* ]]; then
 		# Set some preferences for the bullet train theme:
 		export BULLETTRAIN_CONTEXT_SHOW=true
 		export BULLETTRAIN_TIME_SHOW=false
@@ -163,8 +163,9 @@ if [[ -e "${LINUXBREWHOME}" ]]; then
 	# See: https://github.com/Homebrew/linuxbrew/issues/47
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
 	# Setup linux brew
-	export PKG_CONFIG_PATH=$LINUXBREWHOME/lib64/pkgconfig:$LINUXBREWHOME/lib/pkgconfig:$PKG_CONFIG_PATH
-	export LD_LIBRARY_PATH=$LINUXBREWHOME/lib64:$LINUXBREWHOME/lib:$LD_LIBRARY_PATH
+	export PKG_CONFIG_PATH=${LINUXBREWHOME}/lib64/pkgconfig:${LINUXBREWHOME}/lib/pkgconfig:$PKG_CONFIG_PATH
+	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
+	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
 fi
 
 # Build PATH
