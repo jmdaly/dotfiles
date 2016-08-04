@@ -67,7 +67,6 @@ border=#b16286
 [iface]
 #instance=wlan0
 label= 
-color=#00FF00
 interval=10
 separator=false
 border=#98971a
