@@ -141,6 +141,7 @@ $whitelist = array(
 	'made_of_code',
 	'madeofcode',
 	'maroloccio',
+	'MountainDew',
 	// 'mellow',
 	'mopkai',
 	// 'moss',
