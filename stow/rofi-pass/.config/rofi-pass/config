@@ -1,11 +1,13 @@
 # permanently set alternative root dir
 # root=/path/to/root
 
-# optional rofi parameters:
-# keep in mind that 0.15.7 has different arguments compared to
-# latest git. for rofi-pass this means that "-i" will not work with
-# 0.15.7.
-rofiopts="-i -no-levenshtein-sort"
+# rofi command. Make sure to have "$@" as last argument
+_rofi () {
+    rofi -i -width 700 -no-levenshtein-sort "$@"
+}
+
+# keyboard layout (set this to your actual layout. E.g. keyboard="de us"
+#keyboard=us
 
 # fields to be used
 URL_field='url'
@@ -17,21 +19,16 @@ delay=2
 
 ## Programs to be used
 # Editor
-EDITOR='nvim'
+EDITOR='gvim -f'
 
 # Browser
 BROWSER='chromium'
 
 ## Misc settings
 
-default_do='autopass' # copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
+default_do='menu' # menu, autotype, copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
 auto_enter='false'
 notify='false'
-passlength='20'
-
-# seconds to wait before re-opening showEntry-menu
-# after autotyping an entry. Set to "off" to disable
-count=2
 
 # color of the help messages
 # leave empty for autodetection
@@ -40,6 +37,11 @@ help_color="#b8bb26"
 # Clipboard settings
 # Possible options: primary, clipboard, both
 clip=both
+
+# Options for generating new password entries
+default_user=john_doe
+default_user2=mary_ann
+password_length=12
 
 # Custom Keybindings
 autotype="Alt+1"
@@ -57,3 +59,4 @@ action_menu="Alt+a"
 type_menu="Alt+t"
 help="Alt+h"
 switch="Alt+x"
+insert_pass="Alt+n"
