@@ -171,6 +171,7 @@ $whitelist = array(
 	'softbluev2',
 	'summerfruit',
 	'summerfruit256',
+	'Sunburst',
 	'swamplight',
 	'two2tango',
 	'Tomorrow-Night-Eighties',
