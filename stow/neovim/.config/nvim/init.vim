@@ -126,9 +126,6 @@ set number
 " Turn relative line numbers on:
 set relativenumber
 
-" Turn syntax on:
-syntax on
-
 " Make searching case-insensitive:
 set ignorecase
 " When an upper case letter is in the search
@@ -155,10 +152,6 @@ nnoremap <leader><Tab> :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
-
-" Have vim reload a file if it has changed outside
-" of vim:
-set autoread
 
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
