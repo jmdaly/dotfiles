@@ -65,9 +65,6 @@ Plug 'mrtazz/DoxygenToolkit.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Base16 color schemes
-Plug 'chriskempson/base16-vim'
-
 " Plugin to wrap all the various grep tools, and provide
 " some more advanced search functionality
 Plug 'mhinz/vim-grepper'
@@ -152,28 +149,6 @@ endif
 let g:neomake_cpp_enabled_makers = []
 let g:neomake_c_enabled_makers = []
 
-" Set the Neomake warning and error markers to be
-" similar to YouCompleteMe:
-let g:neomake_error_sign = {
-        \ 'text': '>>',
-        \ 'texthl': 'Error',
-        \ }
-
-let g:neomake_warning_sign = {
-        \ 'text': '>>',
-        \ 'texthl': 'PreProc',
-        \ }
-
-let g:neomake_informational_sign = {
-        \ 'text': '>>',
-        \ 'texthl': 'PreProc',
-        \ }
-
-let g:neomake_message_sign = {
-        \ 'text': '>>',
-        \ 'texthl': 'MoreMsg',
-        \ }
-
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
@@ -185,16 +160,11 @@ let g:cpp_class_scope_highlight = 1
 " of vim:
 set autoread
 
-" Tell vim that fileformat might be unix or dos.
-" This helps with printing DOS line ending properly:
-set ffs=unix,dos
-
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
 nnoremap <F2> :YcmCompleter GoTo<CR>
 " Map to apply quick fix:
 nnoremap <F3> :YcmCompleter FixIt<CR>
-
 " Map GetType to an easier key combination:
 nnoremap <leader>ty :YcmCompleter GetType<CR>
 
@@ -280,33 +250,17 @@ nmap ga <Plug>(EasyAlign)
 " uses it to populate the search prompt:
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
-" A mapping to search for all occurrences of the word under
-" the cursor in the current file
-nnoremap <leader>gw   :Grepper -tool search_in_file -cword -noprompt<cr>
-" A mapping to search for all occurrences of the word the user enters
-" at the prompt in the current file:
-nnoremap <leader>gf   :Grepper -tool search_in_file<cr>
 " A mapping to search for the user-supplied string using git grep:
 nnoremap <leader>gg   :Grepper -tool git<cr>
 " A mapping to search using ag:
 nnoremap <leader>ag :Grepper -tool ag<cr>
 
-" Configure grepper. Of note, we configure git grep
-" to perform searches throughout the whole repo
-" regardless of the directory we are currently in. We also set
-" jumping and opening settings. Finally, we define an additional
-" tool, which performs grep only on the current file.
+" Configure grepper
 let g:grepper     = {
-	 \ 'tools': ['ag', 'git', 'grep', 'search_in_file'],
+	 \ 'tools': ['ag', 'git', 'grep'],
 	 \ 'open':    1,
 	 \ 'jump':    0,
 	 \ 'switch':  1,
-	 \ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
-	 \ 'search_in_file': {
-	 \   'grepprg':    'grep -Hn $* $.',
-	 \   'grepformat': '%f:%l:%m',
-	 \   'escape':     '\$.*[]%#',
-	 \ },
 	 \ }
 
 " vim-sneak options to use streak mode, to minimize the numbers
