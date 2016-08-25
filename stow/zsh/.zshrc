@@ -56,9 +56,6 @@ export BULLETTRAIN_DIR_FG="black"
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
 
-# Adjust the path for any local path requirements
-[ -f ~/.pathrc ] && source ~/.pathrc
-
 # Aliases
 alias nv='nvim'
 
