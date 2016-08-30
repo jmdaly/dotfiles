@@ -1,10 +1,9 @@
 call plug#begin('~/.vim/plugged')
 
-" YouCompleteMe
-Plug 'Valloric/YouCompleteMe'
-
-" YCMGenerator - generates configs for YouCompleteMe
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+" Plugins for deoplete completion:
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neoinclude.vim' " Include file completion
+Plug 'zchee/deoplete-clang' " C++ semantic completion
 
 " Path navigator for vim
 Plug 'justinmk/vim-dirvish'
@@ -141,10 +140,21 @@ if exists(':tnoremap')
    tnoremap <Leader>e <C-\><C-n>
 endif
 
-" Disable Neomake for C and C++ files, since we use
-" YouCompleteMe for them:
-let g:neomake_cpp_enabled_makers = []
-let g:neomake_c_enabled_makers = []
+" clang configuration
+let g:clang_path = "/home/jmdaly/clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-14.04"
+
+" deoplete configuration
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = g:clang_path . "/lib/libclang.so"
+let g:deoplete#sources#clang#clang_header = g:clang_path . "/lib/clang"
+
+" neomake configuration
+let g:neomake_cpp_enabled_makers = ['clangcheck']
+let g:neomake_cpp_clangcheck_maker = {
+   \ 'exe': g:clang_path . '/bin/clang-check',
+   \}
+" Run neomake on buffer write:
+autocmd! BufWritePost * Neomake
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
@@ -152,14 +162,6 @@ nnoremap <leader><Tab> :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
-
-" Turn off prompting to load .ycm_extra_conf.py:
-let g:ycm_confirm_extra_conf = 0
-nnoremap <F2> :YcmCompleter GoTo<CR>
-" Map to apply quick fix:
-nnoremap <F3> :YcmCompleter FixIt<CR>
-" Map GetType to an easier key combination:
-nnoremap <leader>ty :YcmCompleter GetType<CR>
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
