@@ -141,7 +141,7 @@ if exists(':tnoremap')
 endif
 
 " clang configuration
-let g:clang_path = "/home/jmdaly/clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-14.04"
+let g:clang_path = "/home/jdaly/clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-14.04"
 
 " deoplete configuration
 let g:deoplete#enable_at_startup = 1
