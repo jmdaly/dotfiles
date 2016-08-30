@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim' " Include file completion
 Plug 'zchee/deoplete-clang' " C++ semantic completion
+Plug 'LuXuryPro/deoplete-rtags' " C++ completion using rtags
 
 " Path navigator for vim
 Plug 'justinmk/vim-dirvish'
