@@ -233,7 +233,7 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
-if !has('gui_running')
+if !has('gui_running') && !is_win
 	" Plugin to get gvim colourschemes work better in terminal vim
 	Plug 'godlygeek/csapprox'
 endif
@@ -256,19 +256,23 @@ call plug#end()          " required
 " TODO Add 'mark as terrible colorscheme'
 " TODO Add 'mark as good colorscheme'
 function! s:RandColorScheme()
-	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
-	execute ':colorscheme '.s:scheme
-	if has('gui_running')
-		echom 'Loading colorscheme ' s:scheme
+	if filereadable("/usr/bin/php")
+		let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
+		execute ':colorscheme '.s:scheme
+		if has('gui_running')
+			echom 'Loading colorscheme ' s:scheme
+		endif
 	endif
 endfunction
 :map <Leader>rcs :call <SID>RandColorScheme()<CR>
 
 " Grab a random whitelisted colour scheme
 function! s:RandWhiteListColorScheme()
-	let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php -w')
-	execute ':colorscheme '.s:scheme
-	echom 'Loading whitelist colorscheme ' s:scheme
+	if filereadable("/usr/bin/php")
+		let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php -w')
+		execute ':colorscheme '.s:scheme
+		echom 'Loading whitelist colorscheme ' s:scheme
+	endif
 endfunction
 :map <Leader>wcs :call <SID>RandWhiteListColorScheme()<CR>
 
@@ -285,7 +289,7 @@ if has('gui_running')
 	set background=dark
 endif
 
-if domain ==? 'school' || domain ==? 'ec'
+if domain ==? 'school' || domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
 else
 	call <SID>RandColorScheme()
