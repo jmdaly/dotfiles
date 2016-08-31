@@ -4,7 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim' " Include file completion
 Plug 'zchee/deoplete-clang' " C++ semantic completion
-Plug 'LuXuryPro/deoplete-rtags' " C++ completion using rtags
 
 " Path navigator for vim
 Plug 'justinmk/vim-dirvish'
@@ -142,12 +141,13 @@ if exists(':tnoremap')
 endif
 
 " clang configuration
-let g:clang_path = "/home/jdaly/clang+llvm-3.6.2-x86_64-linux-gnu-ubuntu-14.04"
+let g:clang_path = "/home/jdaly/clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-14.04"
 
 " deoplete configuration
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = g:clang_path . "/lib/libclang.so"
 let g:deoplete#sources#clang#clang_header = g:clang_path . "/lib/clang"
+let g:deoplete#sources#clang#sort_algo = 'priority'
 
 " neomake configuration
 let g:neomake_cpp_enabled_makers = ['clangcheck']
