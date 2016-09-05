@@ -1,9 +1,10 @@
 call plug#begin('~/.vim/plugged')
 
-" Plugins for deoplete completion:
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neoinclude.vim' " Include file completion
-Plug 'zchee/deoplete-clang' " C++ semantic completion
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe'
+
+" YCMGenerator - generates configs for YouCompleteMe
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
 " Path navigator for vim
 Plug 'justinmk/vim-dirvish'
@@ -140,22 +141,22 @@ if exists(':tnoremap')
    tnoremap <Leader>e <C-\><C-n>
 endif
 
-" clang configuration
-let g:clang_path = "/home/jdaly/clang+llvm-3.8.1-x86_64-linux-gnu-ubuntu-14.04"
-
-" deoplete configuration
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = g:clang_path . "/lib/libclang.so"
-let g:deoplete#sources#clang#clang_header = g:clang_path . "/lib/clang"
-let g:deoplete#sources#clang#sort_algo = 'priority'
+" Location of clang
+let g:clang_path = "/opt/llvm"
 
 " neomake configuration
-let g:neomake_cpp_enabled_makers = ['clangcheck']
-let g:neomake_cpp_clangcheck_maker = {
-   \ 'exe': g:clang_path . '/bin/clang-check',
+let g:neomake_cpp_enabled_makers = ['clangtidy']
+let g:neomake_cpp_clangtidy_maker = {
+   \ 'exe': g:clang_path . '/bin/clang-tidy',
+   \ 'args': ['-checks=*' ],
    \}
-" Run neomake on buffer write:
-autocmd! BufWritePost * Neomake
+" Set up map for running Neomake:
+nnoremap <leader>n :Neomake<CR>
+
+" Key mappings for clang-format, to format source code.
+" map <expr> allows expansion of the variable for the
+" clang path.
+map <expr> <leader>f ":pyf " . g:clang_path . "/share/clang/clang-format.py<CR>"
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
@@ -163,6 +164,14 @@ nnoremap <leader><Tab> :Buffers<CR>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
+
+" Turn off prompting to load .ycm_extra_conf.py:
+let g:ycm_confirm_extra_conf = 0
+nnoremap <F2> :YcmCompleter GoTo<CR>
+" Map to apply quick fix:
+nnoremap <F3> :YcmCompleter FixIt<CR>
+" Map GetType to an easier key combination:
+nnoremap <leader>ty :YcmCompleter GetType<CR>
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -227,9 +236,6 @@ augroup FTOptions
     autocmd!
     autocmd FileType c,cpp,cs,java          setlocal commentstring=//\ %s
 augroup END
-
-" Key mappings for clang-format, to format source code:
-map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<CR>
 
 " Mapping to close the file in the current buffer:
 nnoremap <leader>q :Sayonara<cr>
