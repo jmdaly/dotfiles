@@ -149,6 +149,8 @@ let g:neomake_c_enabled_makers = []
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
+" A mapping to search using ag:
+nnoremap <leader>ag :Ag 
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -245,8 +247,6 @@ nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 " A mapping to search for the user-supplied string using git grep:
 nnoremap <leader>gg   :Grepper -tool git<cr>
-" A mapping to search using ag:
-nnoremap <leader>ag :Grepper -tool ag<cr>
 
 " Configure grepper
 let g:grepper     = {
