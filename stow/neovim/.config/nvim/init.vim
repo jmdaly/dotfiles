@@ -162,7 +162,7 @@ map <expr> <leader>f ":pyf " . g:clang_path . "/share/clang/clang-format.py<CR>"
 nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
 " A mapping to search using ag:
-nnoremap <leader>ag :Ag 
+nnoremap <leader>ag :Ag<space>
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
