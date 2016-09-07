@@ -65,10 +65,6 @@ Plug 'mrtazz/DoxygenToolkit.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Plugin to wrap all the various grep tools, and provide
-" some more advanced search functionality
-Plug 'mhinz/vim-grepper'
-
 " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-startify'
 
@@ -248,22 +244,6 @@ nnoremap <leader>Q :Sayonara!<cr>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-" Grepper key bindings:
-" Define an operator that takes any motion and
-" uses it to populate the search prompt:
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
-" A mapping to search for the user-supplied string using git grep:
-nnoremap <leader>gg   :Grepper -tool git<cr>
-
-" Configure grepper
-let g:grepper     = {
-	 \ 'tools': ['ag', 'git', 'grep'],
-	 \ 'open':    1,
-	 \ 'jump':    0,
-	 \ 'switch':  1,
-	 \ }
 
 " vim-sneak options to use streak mode, to minimize the numbers
 " of steps to get to a location:
