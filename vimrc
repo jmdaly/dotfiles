@@ -174,11 +174,6 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain
 	Plug 'lyuts/vim-rtags'
 endif
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
-	" Database client
-	Plug 'vim-scripts/dbext.vim'
-endif
-
 if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
 	" Colour coding nests
 	Plug 'luochen1990/rainbow'
@@ -472,35 +467,6 @@ if is_win==0 && domain ==? 'neptec'
 
 endif
 
-
-if is_win==0 && domain !=? 'neptec_small'
-
-	"""""""""""""""""""" DBext """""""""""""""""""""""
-	" let g:dbext_default_profile_<profile_name> = '<connection string>'
-	" https://github.com/vim-scripts/dbext.vim
-	" https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
-	let g:dbext_default_profile_3dri = 'type=SQLITE:dbname=/home/matt/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/scan_schedule.db'
-	let g:dbext_default_profile_ademirs = 'type=SQLITE:dbname=/home/matt/tabletopics/ademir.db'
-	let g:dbext_default_profile_ademirm = 'type=MYSQL:user=ademir:passwd=ademir:dbname=ademir'
-	let g:dbext_default_profile_mayofest = 'type=MYSQL:user=www:passwd=hyper:dbname=mayofest'
-
-	augroup neptec-db
-		au!
-		autocmd BufRead */3dri/* DBSetOption profile='3dri'
-	augroup end
-
-	augroup mayofest
-		au!
-		autocmd BufRead */mayofest/* DBSetOption profile=mayofest
-	augroup end
-
-
-	map <leader>lt :DBListTable<CR>
-
-	nnoremap <leader>sel :DBListConnections<CR>
-	nnoremap <leader>dep :DBProfilesRefresh<CR>
-	"""""""""""""""""""" /DBext """"""""""""""""""""""
-endif
 
 """"""""""""""""""""""" Grepper """"""""""""""""""""""""""
 " Grepper key bindings:
