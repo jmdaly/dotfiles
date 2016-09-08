@@ -228,6 +228,10 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
+if domain ==? 'neptec'
+	Plug 'calincru/qml.vim'
+endif
+
 " Vim sugar for the UNIX shell commands that need it the most. Features include:
 " :Remove: Delete a buffer and the file on disk simultaneously.
 " :Unlink: Like :Remove, but keeps the now empty buffer.
