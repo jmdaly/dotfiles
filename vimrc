@@ -244,6 +244,8 @@ Plug 'tpope/vim-eunuch'
 
 " Handle auto-calling mksession
 Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+
 
 if !has('gui_running') && !is_win
 	" Plugin to get gvim colourschemes work better in terminal vim
