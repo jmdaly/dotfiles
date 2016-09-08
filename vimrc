@@ -204,10 +204,6 @@ endif
 " Manage font size
 Plug 'drmikehenry/vim-fontsize'
 
-if domain !=? 'siteground'
-	Plug 'mhinz/vim-startify'
-endif
-
 " Work with editorconfig files
 "Plug 'editorconfig-vim'
 
