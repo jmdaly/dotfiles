@@ -304,11 +304,11 @@ exec --no-startup-id compton
 # Start up terminals on multiple workspaces. We use classes
 # to control which terminal opens on which workspace, with
 # the -c flag
-exec $terminal -c term-ws1 
-exec $terminal -c term-ws3
-exec $terminal -c term-ws3
+exec $terminal -n term-ws1 
+exec $terminal -n term-ws3
+exec $terminal -n term-ws3
 # Start up a terminal and move it to the scratchpad:
-exec $terminal -c term-scratchpad
+exec $terminal -n term-scratchpad
 for_window [class="st-256color" instance="term-scratchpad"] move scratchpad
 for_window [class="st-256color" instance="term-scratchpad"] border pixel 1
 
