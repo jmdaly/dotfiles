@@ -204,10 +204,6 @@ endif
 " Manage font size
 Plug 'drmikehenry/vim-fontsize'
 
-if domain !=? 'siteground'
-	Plug 'mhinz/vim-startify'
-endif
-
 " Work with editorconfig files
 "Plug 'editorconfig-vim'
 
@@ -228,6 +224,10 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
+if domain ==? 'neptec'
+	Plug 'calincru/qml.vim'
+endif
+
 " Vim sugar for the UNIX shell commands that need it the most. Features include:
 " :Remove: Delete a buffer and the file on disk simultaneously.
 " :Unlink: Like :Remove, but keeps the now empty buffer.
@@ -244,6 +244,8 @@ Plug 'tpope/vim-eunuch'
 
 " Handle auto-calling mksession
 Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+
 
 if !has('gui_running') && !is_win
 	" Plugin to get gvim colourschemes work better in terminal vim
@@ -466,7 +468,6 @@ if is_win==0 && domain ==? 'neptec'
 	"""""""""""""""""""" /ctags """"""""""""""""""""""
 
 endif
-
 
 
 """"""""""""""""""""""" Grepper """"""""""""""""""""""""""

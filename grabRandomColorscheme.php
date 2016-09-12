@@ -135,6 +135,7 @@ $whitelist = array(
 	'guepardo',
 	'herokudoc',
 	'herald',
+	'hybrid_reverse',
 	'inkpot',
 	'kalisi',
 	'kib_darktango',
