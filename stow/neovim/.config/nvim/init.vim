@@ -160,6 +160,12 @@ nnoremap <leader><Tab> :Buffers<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
 
+" Use The Silver Searcher for grep, if available:
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
 
