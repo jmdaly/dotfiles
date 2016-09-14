@@ -580,6 +580,10 @@ noremap <leader><Tab> :Buffers<CR>
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
 
+"""""""""""""""""""""" prosession  """"""""""""""""""""""""
+" Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
+
+"""""""""""""""""""""" /prosession """"""""""""""""""""""""
 
 
 filetype on
