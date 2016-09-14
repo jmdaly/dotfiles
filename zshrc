@@ -116,31 +116,6 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
 
-# ###########################################################
-# # Define some keys ( http://zshwiki.org/home/zle/bindkeys )
-# #
-# # Not sure if these are still needed.  I had only implemented
-# # them on dena
-# # #
-# typeset -A key
-# key[Home]=${terminfo[khome]}
-# key[End]=${terminfo[kend]}
-# key[Insert]=${terminfo[kich1]}
-# key[Delete]=${terminfo[kdch1]}
-# key[Up]=${terminfo[kcuu1]}
-# key[Down]=${terminfo[kcud1]}
-# key[Left]=${terminfo[kcub1]}
-# key[Right]=${terminfo[kcuf1]}
-# key[PageUp]=${terminfo[kpp]}
-# key[PageDown]=${terminfo[knp]}
-#
-# # Setting up more key bindings
-# bindkey '' beginning-of-line
-# bindkey '' end-of-line
-# bindkey '' history-incremental-search-backward
-# bindkey "${key[Delete]}" delete-char
-# ###########################################################
-
 # Alises
 if [ -e ${HOME}/.bash_aliases ]; then
 	source ${HOME}/.bash_aliases
