@@ -230,12 +230,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 
 	# Modules isn't available here, so duplicate the most common aliases
 	if [[ "${modules_enabled}" == "0" ]]; then
-		base=${HOME}/workspace/opal2
-		ARCH=o2win64
-		export bld=${base}/build-3dri-${ARCH}-release
-		ws=${base}/3dri/Applications/OPAL2/3DRiWebScheduler
-		export wss=${ws}/src
-		export wsi=${ws}/include/3DRiWebScheduler
+		export ARCH=o2win64
 	fi
 fi;
 
