@@ -85,10 +85,8 @@ setopt no_share_history
 zstyle ':completion:*' menu select
 
 # This option allows me to tab complete branch names with the oh-my-zsh git aliases.
+# http://zsh.sourceforge.net/Doc/Release/Options.html#index-COMPLETEALIASES
 setopt nocomplete_aliases
-
-# Autocompletion of command line switches for aliases
-setopt completealiases
 
 # Ignore untracked files for showing status on prompt
 export DISABLE_UNTRACKED_FILES_DIRTY=true
