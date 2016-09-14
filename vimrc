@@ -59,7 +59,7 @@ if domain !=? 'neptec-small'
 	" Solarized colour scheme
 	Plug 'altercation/vim-colors-solarized'
 
-  	if domain !=? 'ec'
+	if domain !=? 'ec' && domain !=? 'neptec-small'
 		" Atelier color scheme
 		Plug 'atelierbram/vim-colors_atelier-schemes'
 		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
