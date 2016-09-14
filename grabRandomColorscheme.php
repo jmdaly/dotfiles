@@ -188,7 +188,8 @@ $mode = array(
 	'256-grayvim'=>'dark',
 );
 
-// Get colour directories
+// Get colour directories.
+// TODO cache these
 $dirs = getColourDirs($bundles);
 $files = findAllColourSchemes($dirs);
 $scheme = '';
