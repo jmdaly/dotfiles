@@ -84,6 +84,9 @@ setopt no_share_history
 # Autocompletion with an arrow-key driven interface
 zstyle ':completion:*' menu select
 
+# This option allows me to tab complete branch names with the oh-my-zsh git aliases.
+setopt nocomplete_aliases
+
 # Autocompletion of command line switches for aliases
 setopt completealiases
 
