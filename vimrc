@@ -48,6 +48,7 @@ au BufNewFile,BufRead Common_Compiler* set filetype=sh
 au BufNewFile,BufRead */Wt/W*          set filetype=cpp
 au BufNewFile,BufRead *recettes        set filetype=make
 au BufNewFile,BufRead *cibles          set filetype=make
+au BufNewFile,BufRead *.qml            set filetype=qml
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
