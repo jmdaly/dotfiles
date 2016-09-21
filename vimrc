@@ -669,5 +669,6 @@ ab breif brief
 ab OPL2 OPAL2
 ab unqiue unique
 ab unique unique
+ab AdditionaInputs AdditionalInputs
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
