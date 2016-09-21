@@ -146,6 +146,8 @@ let g:neomake_cpp_clangtidy_maker = {
    \ 'exe': g:clang_path . '/bin/clang-tidy',
    \ 'args': ['-checks=*' ],
    \}
+" Open error list automatically:
+let g:neomake_open_list = 2
 " Set up map for running Neomake:
 nnoremap <leader>n :Neomake<CR>
 
