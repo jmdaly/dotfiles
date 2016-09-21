@@ -600,6 +600,7 @@ set ffs=unix,dos
 
 " Easy save
 noremap <leader>w :w<CR>
+inoremap <C-S> <Esc>:w<CR>
 " map alt/apple or something-S for khea
 
 " Remove trailing space
