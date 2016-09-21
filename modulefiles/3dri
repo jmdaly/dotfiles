@@ -102,4 +102,6 @@ if { ${hostname} == "khea" } {
 }
 set-alias build3dri   "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
 
+set-alias buildYcm    "/home/matt/dotfiles/bundles/YCM-Generator/config_gen.py -v -b cmake --qt-version 5 --configure_opts=-DQT_DIR=/opt/Qt5.3.2/5.3/gcc_64 ${src}"
+
 # vim: ts=3 sw=3 sts=0 noet :
