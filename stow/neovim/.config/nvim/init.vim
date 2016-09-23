@@ -161,8 +161,6 @@ nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
 
 " Use The Silver Searcher for grep, if available:
 if executable('ag')
