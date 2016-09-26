@@ -161,6 +161,11 @@ nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
+" A command to enable case-insensitive search with Ag:
+command! -bang -nargs=* Agi
+  \ call fzf#vim#grep('ag --nogroup --column --color -i '.shellescape(<q-args>), 0, <bang>0)
+" A mapping to do case-insensitive search using ag:
+nnoremap <leader>ai :Agi<space>
 
 " Use The Silver Searcher for grep, if available:
 if executable('ag')
