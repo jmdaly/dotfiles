@@ -1,86 +1,34 @@
 call plug#begin('~/.vim/plugged')
 
-" YouCompleteMe
-Plug 'Valloric/YouCompleteMe'
-
-" YCMGenerator - generates configs for YouCompleteMe
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-
-" Path navigator for vim
-Plug 'justinmk/vim-dirvish'
-
-" Better C++ Syntax Highlighting:
-Plug 'octol/vim-cpp-enhanced-highlight'
-
-" Track the ultisnips engine.
-Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-
-" vim-sleuth - heuristically determines spacing in terms
-" of tabs, spaces, etc. based on what's in use in the
-" current file and the file around it:
-Plug 'tpope/vim-sleuth'
-
-" fugitive - a Git wrapper for vim. Also allows current
-" git branch to be shown by vim-airline:
-Plug 'tpope/vim-fugitive'
-
-" A plugin containing handy pairs of bracket mapping:
-Plug 'tpope/vim-unimpaired'
-
-" Sensible defaults that everyone can agree on:
-Plug 'tpope/vim-sensible'
-
-" Plug to assist with commenting out blocks of text:
-Plug 'tpope/vim-commentary'
-
-" Plugin for working with surroundings of words:
-Plug 'tpope/vim-surround'
-
-" Plugin to help manage sessions
-Plug 'tpope/vim-obsession'
-
-" vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
-Plug 'bling/vim-airline'
-
-" themes for vim-airline:
-Plug 'vim-airline/vim-airline-themes'
-
-" A plugin to switch between header and source files:
-Plug 'derekwyatt/vim-fswitch'
-
-" Plug to highlight the variable under the cursor:
-Plug 'ihacklog/HiCursorWords'
-
-" A plugin to use rtags in vim. (rtags allows for
-" code following, some refactoring, etc.)
-Plug 'lyuts/vim-rtags'
-
-" Plug to generate doxygen documentation strings:
-Plug 'mrtazz/DoxygenToolkit.vim'
-
-" Install fzf, the fuzzy searcher
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'Valloric/YouCompleteMe' " YouCompleteMe
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " YCMGenerator - generates configs for YouCompleteMe
+Plug 'justinmk/vim-dirvish' " Path navigator for vim
+Plug 'octol/vim-cpp-enhanced-highlight' " Better C++ Syntax Highlighting:
+Plug 'SirVer/ultisnips' " Track the ultisnips engine.
+Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+Plug 'tpope/vim-sleuth' " heuristically determine spacing to use when tabbing
+Plug 'tpope/vim-fugitive' " git wrapper for vim
+Plug 'tpope/vim-unimpaired' " A plugin containing handy pairs of bracket mapping:
+Plug 'tpope/vim-sensible' " Sensible defaults that everyone can agree on:
+Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
+Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
+Plug 'tpope/vim-obsession' " Plugin to help manage sessions
+Plug 'bling/vim-airline' " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
+Plug 'vim-airline/vim-airline-themes' " themes for vim-airline:
+Plug 'derekwyatt/vim-fswitch' " A plugin to switch between header and source files:
+Plug 'ihacklog/HiCursorWords' " Plug to highlight the variable under the cursor:
+Plug 'lyuts/vim-rtags' " Plugin to integrate rtags with vim (C++ tags)
+Plug 'mrtazz/DoxygenToolkit.vim' " Plug to generate doxygen documentation strings:
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " The fuzzy searcher
 Plug 'junegunn/fzf.vim'
-
-" Plugin to provide a useful start screen in vim:
-Plug 'mhinz/vim-startify'
-
-" Plugin to make it easy to delete a buffer and close the file:
-Plug 'mhinz/vim-sayonara'
-
-" Distraction-free writing:
-Plug 'junegunn/goyo.vim'
-
-" Plugin to allow easy alignment around various symbols (e.g.
-" line up a number of lines with equal signs on the equal signs)
-Plug 'junegunn/vim-easy-align'
-
-" A plugin to make it easier to use motions to jump
-" to words and characters:
-Plug 'justinmk/vim-sneak'
+Plug 'mhinz/vim-startify' " Plugin to provide a useful start screen in vim:
+Plug 'mhinz/vim-sayonara' " Plugin to make it easy to delete a buffer and close the file:
+Plug 'junegunn/goyo.vim' " Distraction-free writing:
+Plug 'junegunn/vim-easy-align' " Easily align around various symbols
+Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occurences
+Plug 'benekastah/neomake' " Asynchronous linting
+Plug 'morhetz/gruvbox' " gruvbox colour scheme:
+Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -90,17 +38,6 @@ Plug 'justinmk/vim-sneak'
 " re-enable this and use it in a 256 colour terminal.
 " Plug 'edkolev/tmuxline.vim'
 
-" An asynchronous plugin for linting various
-" file types:
-Plug 'benekastah/neomake'
-
-" gruvbox colour scheme:
-Plug 'morhetz/gruvbox'
-
-" A plugin to facilitate navigating between vim and tmux
-Plug 'christoomey/vim-tmux-navigator'
-
-" All of your Plugins must be added before the following line
 call plug#end()            " required
 
 " Add to the runtime path so that custom
@@ -189,9 +126,6 @@ nnoremap <leader>ty :YcmCompleter GetType<CR>
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " For vim-airline, ensure the status line is always displayed:
 set laststatus=2
