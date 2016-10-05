@@ -205,8 +205,9 @@ endif
 " Manage font size
 Plug 'drmikehenry/vim-fontsize'
 
-" Work with editorconfig files
-"Plug 'editorconfig-vim'
+" Plugin to change the current directory to a project's root (so, look for
+" .git or something)
+Plug 'airblade/vim-rooter'
 
 " Javascript plugins to try
 if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
