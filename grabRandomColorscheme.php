@@ -211,12 +211,14 @@ if (file_exists($log))
 	$lines = file($log);
 else
 	$lines = array();
-array_unshift($lines, $scheme."\n");
-$limit=50; // Number of schemes to remember
-if (count($lines) > $limit) array_splice($lines, $limit);
-$fp = fopen($log, 'w');
-fwrite($fp, join('', $lines));
-fclose($fp);
+if (is_writable($log)) {
+	array_unshift($lines, $scheme."\n");
+	$limit=50; // Number of schemes to remember
+	if (count($lines) > $limit) array_splice($lines, $limit);
+	$fp = fopen($log, 'w');
+	fwrite($fp, join('', $lines));
+	fclose($fp);
+}
 // /Save this
 
 
