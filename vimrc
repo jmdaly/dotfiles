@@ -430,7 +430,7 @@ if is_win==0 && domain !=? 'school'
 
 	augroup neptec-ultisnips
 		au!
-		autocmd BufRead */3dri/* :set rtp+=~/workspace/ScriptsAndTools
+		autocmd BufRead */3dri* :set rtp+=~/workspace/ScriptsAndTools
 	augroup end
 
 endif
