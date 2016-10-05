@@ -410,6 +410,7 @@ if has('unix')
 	" Alternatively..
 	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
+	map <F9> :YcmCompleter FixIt<CR>
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
