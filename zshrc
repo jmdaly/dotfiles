@@ -188,7 +188,7 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grind
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load neptec 3dri
+	module load qt neptec 3dri
 
 	# Ensure Google Test tests always show colour output:
 	export GTEST_COLOR=yes

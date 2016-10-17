@@ -41,9 +41,4 @@ prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
 
 set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
 
-set QT_VERSION       5.6.1
-set QT_SHORT_VERSION 5.6
-prepend-path PATH /opt/Qt${QT_VERSION}/${QT_SHORT_VERSION}/gcc_64/bin
-prepend-path PATH /opt/Qt${QT_VERSION}/Tools/QtCreator/bin
-
 # vim: ts=3 sts=0 sw=3 noet ft=tcl :
