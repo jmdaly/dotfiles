@@ -119,6 +119,7 @@ $whitelist = array(
 	'darkdot',
 	'desertedocean',
 	'desertedoceanburnt',
+	'distinguished',
 	'doorhinge',
 	'dusk',
 	'eclipse',
