@@ -182,6 +182,7 @@ augroup END
 augroup FTOptions 
     autocmd!
     autocmd FileType c,cpp,cs,java          setlocal commentstring=//\ %s
+    autocmd FileType cmake                  setlocal commentstring=#\ %s
 augroup END
 
 " Mapping to close the file in the current buffer:
