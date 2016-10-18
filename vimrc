@@ -205,8 +205,9 @@ endif
 " Manage font size
 Plug 'drmikehenry/vim-fontsize'
 
-" Work with editorconfig files
-"Plug 'editorconfig-vim'
+" Plugin to change the current directory to a project's root (so, look for
+" .git or something)
+Plug 'airblade/vim-rooter'
 
 " Javascript plugins to try
 if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
@@ -409,6 +410,7 @@ if has('unix')
 	" Alternatively..
 	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
+	map <F9> :YcmCompleter FixIt<CR>
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
@@ -428,7 +430,7 @@ if is_win==0 && domain !=? 'school'
 
 	augroup neptec-ultisnips
 		au!
-		autocmd BufRead */3dri/* :set rtp+=~/workspace/ScriptsAndTools
+		autocmd BufRead */3dri* :set rtp+=~/workspace/ScriptsAndTools
 	augroup end
 
 endif

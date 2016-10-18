@@ -25,7 +25,7 @@ set VENDOR      ${BASE}/${ARCH}
 set BOOST_VERSION 1.56
 set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
-set app_rel     Applications/OPAL2
+set app_rel     Apps/OPAL2
 set bld_debug   ${BASE}/bld-3dri-${ARCH}-clang-debug
 set bld_release ${BASE}/bld-3dri-${ARCH}-clang-release
 set bld         ${bld_debug}
@@ -53,13 +53,9 @@ setenv  wsb_debug   ${wsb_debug}
 
 set port 8181
 
-# set ws_args " --docroot ${ws_base} --http-address 0.0.0.0 --http-port ${port} -c ${ws_base}/ntcConfig.xml --accesslog ${ws_base}/access.log"
-set ws_args " --docroot . --http-address 0.0.0.0 --http-port ${port} -c ntcConfig.xml --accesslog access.log"
 set-alias wsl "tail -f ${ws_base}/3dri.log | grep -v WebRequest"
 
 # removed cwt call
-set-alias runWS "${wsb}/3DRiWebScheduler ${ws_args};"
-set-alias runWSd "cd $ws_base; ${wsb_debug}/3DRiWebScheduler ${ws_args} --approot=.; popd"
 
 set-alias db "sqlite3 ${apps}/3DRiWebScheduler/scan_schedule.db"
 
@@ -71,8 +67,6 @@ set-alias StockpileMonitor    "cd ${appb}/DataProcessor/StockpileMonitor; ./Stoc
 set-alias SensorManager       "cd ${appb}/SensorManager; ./SensorManager"
 set-alias LcmLogPlayer        "cd ${bld_debug}/lcm; ./RunLcmLogPlayer.sh"
 
-prepend-path PATH ${wsb_debug}
-
 # Examples
 setenv wte /usr/lib/Wt/examples
 
@@ -83,23 +77,18 @@ set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 prepend-path LD_LIBRARY_PATH "${BOOST_ROOT}/lib"
 
 # Building 3DRi
-if { ${hostname} == "tinder" } {
-	set QT_DIR "/opt/Qt/5.3/gcc_64"
-} else {
-	set QT_DIR "/opt/Qt5.3.2/5.3/gcc_64"
-}
-set     BUILD_TYPE    "Debug"
+set QT_DIR "/opt/Qt5.3.2/5.3/gcc_64"
+
+set     BUILD_TYPE    "Release"
 # Use clang.  To use g++, change the path to $(which g++)
-if { ${hostname} == "khea" } {
-	setenv  CXX           "ccache clang++-3.7"
-} else {
-	setenv  CXX            "ccache clang++"
-	setenv  CCACHE_PREFIX  "distcc"
-	# setenv  CCACHE_DIR     /media/ccache
-	setenv  CCACHE_UMASK   002
-	# setenv  CCACHE_BASEDIR $bld # This should be set by autoenv or something
-	setenv  CCACHE_LOGFILE /tmp/ccache.log
-}
+
+setenv  CXX            "ccache clang++"
+setenv  CCACHE_PREFIX  "distcc"
+# setenv  CCACHE_DIR     /media/ccache
+setenv  CCACHE_UMASK   002
+# setenv  CCACHE_BASEDIR $bld # This should be set by autoenv or something
+setenv  CCACHE_LOGFILE /tmp/ccache.log
+
 set-alias build3dri   "cd ${bld}; cmake -GNinja -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DQT_DIR=${QT_DIR} ../3dri"
 
 set-alias buildYcm    "/home/matt/dotfiles/bundles/YCM-Generator/config_gen.py -v -b cmake --qt-version 5 --configure_opts=-DQT_DIR=/opt/Qt5.3.2/5.3/gcc_64 ${src}"
