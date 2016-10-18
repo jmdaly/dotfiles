@@ -96,6 +96,8 @@ map <expr> <leader>f ":pyf " . g:clang_path . "/share/clang/clang-format.py<CR>"
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
+nnoremap <leader>h :History:<CR>
+nnoremap <leader>/ :History/<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
 " A command to enable case-insensitive search with Ag:
