@@ -13,11 +13,6 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Plugin to check if a 256 colour terminal
-# is available, and enable all colours if
-# it is
-antigen bundle chrissicool/zsh-256color
-
 # z - awesome directory switching plugin
 antigen bundle rupa/z
 
