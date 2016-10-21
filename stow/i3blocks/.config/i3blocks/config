@@ -49,7 +49,7 @@ instance=Master
 #instance=PCM
 interval=once
 signal=10
-border=#d79921
+border=#98971a
 
 # Memory usage
 #
@@ -58,7 +58,7 @@ border=#d79921
 label= 
 # separator=false
 interval=30
-border=#b16286
+border=#d79921
 
 # Network interface monitoring
 #
@@ -69,7 +69,7 @@ border=#b16286
 label= 
 interval=10
 separator=false
-border=#98971a
+border=#458588
 
 # CPU usage
 #
@@ -80,7 +80,7 @@ label= 
 interval=10
 min_width= 100.00%
 align=center
-border=#458588
+border=#b16286
 #separator=false
 
 # [load_average]
@@ -95,7 +95,7 @@ label= 
 #label=⚡
 #instance=1
 interval=30
-border=#928374
+border=#689d6a
 
 # Date Time
 #
@@ -103,4 +103,4 @@ border=#928374
 label= 
 command=echo "`date +'%a %b %d'` `date +'%T'`"
 interval=5
-border=#689d6a
+border=#a89984
