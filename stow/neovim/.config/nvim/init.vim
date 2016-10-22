@@ -23,7 +23,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " The fuzzy se
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify' " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-sayonara' " Plugin to make it easy to delete a buffer and close the file:
-Plug 'junegunn/goyo.vim' " Distraction-free writing:
 Plug 'junegunn/vim-easy-align' " Easily align around various symbols
 Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occurences
 Plug 'benekastah/neomake' " Asynchronous linting
