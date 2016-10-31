@@ -158,6 +158,7 @@ $whitelist = array(
 	'nefertiti',
 	// 'nicotine',
 	'newsprint',
+	'neverland-darker',
 	// 'nightVision',
 	'northland',
 	'seoul-256',
