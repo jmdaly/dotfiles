@@ -672,5 +672,6 @@ ab OPL2 OPAL2
 ab unqiue unique
 ab unique unique
 ab AdditionaInputs AdditionalInputs
+ab cosnt const
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
