@@ -1,0 +1,18 @@
+#%Module1.0#####################################################################
+##
+## modules modulefile
+
+proc ModulesHelp { } {
+        global version prefix
+
+        puts stderr "\tQt - Load QT"
+}
+
+module-whatis	"loads Qt 5.3"
+
+set QT_VERSION       5.3.2
+set QT_SHORT_VERSION 5.3
+prepend-path PATH /opt/Qt${QT_VERSION}/${QT_SHORT_VERSION}/gcc_64/bin
+prepend-path PATH /opt/Qt${QT_VERSION}/Tools/QtCreator/bin
+
+# vim: ts=3 sts=0 sw=3 noet ft=tcl :
