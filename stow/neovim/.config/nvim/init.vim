@@ -28,6 +28,7 @@ Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occure
 Plug 'benekastah/neomake' " Asynchronous linting
 Plug 'morhetz/gruvbox' " gruvbox colour scheme:
 Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
+Plug 'wellle/targets.vim' " A plugin for additional text objects
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
