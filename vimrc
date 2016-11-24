@@ -673,5 +673,7 @@ ab unqiue unique
 ab unique unique
 ab AdditionaInputs AdditionalInputs
 ab cosnt const
+ab horizonal horizontal
+ab appraoch approach
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
