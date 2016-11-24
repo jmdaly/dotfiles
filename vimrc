@@ -10,17 +10,19 @@ if hostname ==? 'pof' || hostname ==? 'tinder' || hostname ==? 'grinder'
 	let domain='neptec'
 elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
+
+" Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
 elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 	let domain='neptec-small'
-elseif match(hostname, 'siteground')
+elseif match(hostname, 'siteground') >= 0
 	" Siteground is an exception because it uses vim 7.0
 	let domain='siteground'
 else
 	let domain='home'
 endif
-" echo 'Using domain ' . domain
+" echo 'Using domain ' . domain . ', hostname=' . hostname
 
 let is_win=0
 let is_mac=0
