@@ -78,12 +78,16 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground' && &ft !=? 'tex'
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
 	" YCMGenerator - generates configs for YouCompleteMe
 	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+
+	" tagbar - allows browsing tags of the current source file
+	" from ctags. Good for seeing functions, variables, etc.
+	Plug 'majutsushi/tagbar'
 endif
 
 if domain !=? 'neptec-small' && domain !=? 'school'
@@ -116,13 +120,6 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
 endif
 
 " Easy motion
-Plug 'easymotion/vim-easymotion'
-
-if is_win==0 && (domain ==? 'neptec' || domain ==? 'home') && domain !=? 'ec'
-	" tagbar - allows browsing tags of the current source file
-	" from ctags. Good for seeing functions, variables, etc.
-	Plug 'majutsushi/tagbar'
-endif
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" Key mappings for clang-format, to format source code:
