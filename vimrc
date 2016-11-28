@@ -10,17 +10,19 @@ if hostname ==? 'pof' || hostname ==? 'tinder' || hostname ==? 'grinder'
 	let domain='neptec'
 elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
 	let domain='school'
+
+" Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
 elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 	let domain='neptec-small'
-elseif match(hostname, 'siteground')
+elseif match(hostname, 'siteground') >= 0
 	" Siteground is an exception because it uses vim 7.0
 	let domain='siteground'
 else
 	let domain='home'
 endif
-" echo 'Using domain ' . domain
+" echo 'Using domain ' . domain . ', hostname=' . hostname
 
 let is_win=0
 let is_mac=0
@@ -76,12 +78,16 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground' && &ft !=? 'tex'
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
 	" YCMGenerator - generates configs for YouCompleteMe
 	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
+
+	" tagbar - allows browsing tags of the current source file
+	" from ctags. Good for seeing functions, variables, etc.
+	Plug 'majutsushi/tagbar'
 endif
 
 if domain !=? 'neptec-small' && domain !=? 'school'
@@ -110,17 +116,11 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
 endif
 
 " Easy motion
-Plug 'easymotion/vim-easymotion'
-
-if is_win==0 && (domain ==? 'neptec' || domain ==? 'home') && domain !=? 'ec'
-	" tagbar - allows browsing tags of the current source file
-	" from ctags. Good for seeing functions, variables, etc.
-	Plug 'majutsushi/tagbar'
-endif
+" Plug 'easymotion/vim-easymotion'
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" Key mappings for clang-format, to format source code:
-	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.8.py<CR>
+	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
 endif
 
 " fugitive - a Git wrapper for vim. Also allows current
@@ -427,6 +427,7 @@ if is_win==0 && domain !=? 'school'
 	augroup neptec-ultisnips
 		au!
 		autocmd BufRead */3dri* :set rtp+=~/workspace/ScriptsAndTools
+		autocmd BufRead */pointcloud/* :set rtp+=~/workspace/ScriptsAndTools
 	augroup end
 
 endif
@@ -663,5 +664,7 @@ ab unqiue unique
 ab unique unique
 ab AdditionaInputs AdditionalInputs
 ab cosnt const
+ab horizonal horizontal
+ab appraoch approach
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
