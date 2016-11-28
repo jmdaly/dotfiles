@@ -121,12 +121,34 @@ endif
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" Key mappings for clang-format, to format source code:
 	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
+
+	" neomake configuration
+	let g:neomake_cpp_enabled_makers = ['clangtidy']
+	let g:neomake_cpp_clangtidy_maker = {
+		\ 'exe': '/usr/bin/clang-tidy',
+		\ 'args': ['-checks=*' ],
+		\}
+	" Open error list automatically:
+	let g:neomake_open_list = 2
+	" Set up map for running Neomake:
+	nnoremap <leader>n :Neomake<CR>
+
 endif
+
+
 
 " fugitive - a Git wrapper for vim. Also allows current
 " git branch to be shown by vim-airline:
 Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
+" command GdiffOld exe "Gdiff develop:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
+" command Gdiff1352n exe "Gdiff 1352-2-merge_in_gf:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
+" command Gdiff1352o exe "Gdiff 1352_sdf_w_ground:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
+command Gdiffo exe "Gdiff v2.4.1:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
+command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), '/3dri/', '/3dri-2.4.0/', 'g'), '/Apps/', 'Applications', 'g')
+
+" Used for navigating the quickfix window better.  Recommended by fugitive
+Plug 'tpope/vim-unimpaired'
 
 if domain !=? 'school' && domain !=? 'ec'
 	" gitgutter - Shows [git] status of each line in a file
@@ -224,6 +246,8 @@ endif
 
 if domain ==? 'neptec'
 	Plug 'calincru/qml.vim'
+
+	Plug 'benekastah/neomake' " Asynchronous linting
 endif
 
 " Vim sugar for the UNIX shell commands that need it the most. Features include:
@@ -245,10 +269,10 @@ Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 
 
-if !has('gui_running') && !is_win
-	" Plugin to get gvim colourschemes work better in terminal vim
-	Plug 'godlygeek/csapprox'
-endif
+" if !has('gui_running') && !is_win
+" 	" Plugin to get gvim colourschemes work better in terminal vim
+" 	Plug 'godlygeek/csapprox'
+" endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
@@ -262,7 +286,7 @@ endif
 call plug#end()          " required
 
 
-
+" TODO Put these in a pluggin
 " Random Colorscheme
 " TODO Add 'go to last colorschem'
 " TODO Add 'mark as terrible colorscheme'
@@ -405,6 +429,8 @@ if has('unix')
 	endif
 	" Alternatively..
 	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
+
+	" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 	map <F9> :YcmCompleter FixIt<CR>
 endif
@@ -577,6 +603,24 @@ noremap <leader><Tab> :Buffers<CR>
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
 
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
+
+" Command to format Neptec's XML into valid XML
+function! FixXML()
+	exe "%s/<\\zs3/THREE/g"
+	exe "%s#</\\zs3#THREE#g"
+
+	exe '%s/\v(\w)\/(\w)/\1HHH\2/g'
+	exe "%s/(/BBB/g"
+	exe "%s/)/CCC/g"
+endfunction
+function! RevertXML()
+	exe "%s/THREE/3/g"
+	exe "%s#HHH#\/#g"
+	exe "%s/BBB/(/g"
+	exe "%s/CCC/)/g"
+endfunction
+
+
 
 
 filetype on
