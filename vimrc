@@ -89,10 +89,6 @@ if domain !=? 'neptec-small' && domain !=? 'school'
 	Plug 'shawncplus/phpcomplete.vim'
 endif
 
-if domain !=? 'neptec-small' && domain !=? 'ec' && domain != 'siteground'
-	" NERD Tree - file explorer for vim
-	Plug 'scrooloose/nerdtree'
-endif
 
 if domain !=? 'neptec-small'
 	" Install fzf, the fuzzy searcher
@@ -455,12 +451,6 @@ nmap <F8> :TagbarToggle<CR>
 """""""""""""""""""" /Tagbar Config """"""""""""""""""""""
 
 
-""""""""""""""""""""" NERDTree """"""""""""""""""""""
-" Shortcut key to open NERDTree:
-map <F5> :NERDTreeToggle<CR>
-let NERDTreeChDirMode = 2
-nnoremap <leader>n :NERDTree .<CR>
-"""""""""""""""""""" /NERDTree """"""""""""""""""""""
 
 
 if is_win==0 && domain ==? 'neptec'
