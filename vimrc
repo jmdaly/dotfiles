@@ -265,9 +265,10 @@ endif
 " :SudoEdit:  Edit a privileged file with sudo.
 Plug 'tpope/vim-eunuch'
 
+" These are getting annoying, and aren't helping with tmux anyways
 " Handle auto-calling mksession
-Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
+" Plug 'tpope/vim-obsession'
+" Plug 'dhruvasagar/vim-prosession'
 
 
 " if !has('gui_running') && !is_win
