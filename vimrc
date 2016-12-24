@@ -245,6 +245,9 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
+" This should iprove Git Fugitive and Git Gutter
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 if domain ==? 'neptec'
 	Plug 'calincru/qml.vim'
 
