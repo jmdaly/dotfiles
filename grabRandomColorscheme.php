@@ -121,6 +121,7 @@ $whitelist = array(
 	'cobalt',
 	'cool',
 	'darkdot',
+	'duotone-darkearth', // set background=dark  .. need to implement this ability
 	'desertedocean',
 	'desertedoceanburnt',
 	'distinguished',
@@ -151,6 +152,7 @@ $whitelist = array(
 	'lingodirector',
 	'made_of_code',
 	'madeofcode',
+	'materialvim',
 	'maroloccio',
 	'midnight2',
 	'MountainDew',
@@ -158,6 +160,7 @@ $whitelist = array(
 	'mopkai',
 	// 'moss',
 	'mud',
+	'neonwave',
 	'nefertiti',
 	// 'nicotine',
 	'newsprint',
