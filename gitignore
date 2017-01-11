@@ -1,2 +1,3 @@
 .clang-format
 .ycm_extra_conf.*
+compile_commands.json
