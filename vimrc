@@ -52,6 +52,7 @@ au BufNewFile,BufRead *recettes        set filetype=make
 au BufNewFile,BufRead *cibles          set filetype=make
 au BufNewFile,BufRead *.qml            set filetype=qml
 au BufNewFile,BufRead *.qrc            set filetype=xml
+au BufNewFile,BufRead *.pro            set filetype=make
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
@@ -150,6 +151,9 @@ command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), 
 
 " Used for navigating the quickfix window better.  Recommended by fugitive
 Plug 'tpope/vim-unimpaired'
+
+" Adding this so I can search/replace and preserve letter case
+Plug 'tpope/vim-abolish'
 
 if domain !=? 'school' && domain !=? 'ec'
 	" gitgutter - Shows [git] status of each line in a file
@@ -707,7 +711,8 @@ endif
 let xml_syntax_folding=1
 
 "
-" Abbreviations
+" Abbreviations.  Check https://github.com/tpope/vim-abolish for how to make
+" these case insensitive (if I need it)
 ab laster laser
 ab jsut just
 ab eticket etiket
@@ -719,5 +724,6 @@ ab AdditionaInputs AdditionalInputs
 ab cosnt const
 ab horizonal horizontal
 ab appraoch approach
+ab yeild yield
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
