@@ -278,10 +278,10 @@ if has('nvim')
 endif
 
 
-" if !has('gui_running') && !is_win
-" 	" Plugin to get gvim colourschemes work better in terminal vim
-" 	Plug 'godlygeek/csapprox'
-" endif
+if !has('gui_running') && !is_win
+	" Plugin to get gvim colourschemes work better in terminal vim
+	Plug 'godlygeek/csapprox'
+endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
