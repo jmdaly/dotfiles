@@ -287,6 +287,8 @@ if !has('gui_running') && !is_win
 	Plug 'godlygeek/csapprox'
 endif
 
+Plug 'tikhomirov/vim-glsl'
+
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
