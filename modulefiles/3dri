@@ -22,8 +22,6 @@ if { [ regexp {_64} [exec uname -m] ] } {
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
 set VENDOR      ${BASE}/${ARCH}
-set BOOST_VERSION 1.56
-set BOOST_ROOT  ${VENDOR}/Libs/boost/${BOOST_VERSION}
 set src         ${BASE}/3dri
 set app_rel     Apps/OPAL2
 set bld_debug   ${BASE}/bld-${ARCH}-clang-debug
@@ -73,8 +71,6 @@ setenv wte /usr/lib/Wt/examples
 # Rebuilt rtags.  Run from $bld or $bld_debug
 set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 
-# PCL Binary lib paths
-prepend-path LD_LIBRARY_PATH "${BOOST_ROOT}/lib"
 
 # Building 3DRi
 set QT_DIR "/opt/Qt5.3.2/5.3/gcc_64"
