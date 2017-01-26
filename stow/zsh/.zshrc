@@ -48,6 +48,20 @@ export BULLETTRAIN_RUBY_SHOW=false
 export BULLETTRAIN_GIT_BG="green"
 export BULLETTRAIN_DIR_FG="black"
 
+BULLETTRAIN_PROMPT_ORDER=(
+  status 
+  custom 
+  context 
+  dir 
+  perl 
+  ruby 
+  virtualenv 
+  go 
+  git 
+  hg 
+  cmd_exec_time
+)
+
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
 
