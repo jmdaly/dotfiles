@@ -297,6 +297,12 @@ Plug 'tikhomirov/vim-glsl'
 "	Plug 'floobits/floobits-neovim'
 "endif
 
+" Have vim reload a file if it has changed outside
+" of vim:
+if has('nvim')
+	Plug 'TheZoq2/neovim-auto-autoread'
+endif
+
 " All of your Plugins must be added before the following line
 call plug#end()          " required
 
@@ -381,7 +387,9 @@ endif
 
 " Have vim reload a file if it has changed outside
 " of vim:
-set autoread
+if !has('nvim')
+	set autoread
+endif
 
 " Tell vim to look for a tags file in the current
 " directory, and all the way up until it finds one:
