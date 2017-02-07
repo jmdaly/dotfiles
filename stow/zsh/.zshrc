@@ -13,9 +13,6 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# z - awesome directory switching plugin
-antigen bundle rupa/z
-
 # fzf-marks - a plugin to allow bookmarking
 # directories, and then fuzzy searching through
 # the bookmarks using fzf
@@ -47,6 +44,7 @@ export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
 export BULLETTRAIN_RUBY_SHOW=false
 export BULLETTRAIN_GIT_BG="green"
 export BULLETTRAIN_DIR_FG="black"
+export BULLETTRAIN_PROMPT_CHAR="$ "
 
 BULLETTRAIN_PROMPT_ORDER=(
   status 
