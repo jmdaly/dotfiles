@@ -34,6 +34,11 @@ if type distcc > /dev/null; then
   export CCACHE_PREFIX="distcc"
 fi
 
+# Set fzf to use ag if ag is available:
+if type ag > /dev/null; then
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+fi
+
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
 
