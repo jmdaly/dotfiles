@@ -9,6 +9,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
 antigen bundle command-not-found
+antigen bundle vi-mode
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -70,6 +71,10 @@ source ~/dotfiles/ninja/_ninja
 
 # Aliases
 alias nv='nvim'
+
+# When switching to normal mode for vi key bindings,
+# make the timeout small:
+export KEYTIMEOUT=1
 
 # Script to adjust colour palette in the terminal for gruvbox:
 GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
