@@ -35,4 +35,10 @@ fi
 
 alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
-# vim : ts=3 sts=0 shiftwidth=3 noet ft=bash ffs=unix :
+function catjson() {
+	cat $1                        \
+		| python -m json.tool      \
+		| pygmentize -l javascript
+}
+
+# vim: ts=3 sts=0 sw=3 noet ft=sh ffs=unix :
