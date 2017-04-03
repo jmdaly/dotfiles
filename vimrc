@@ -344,6 +344,8 @@ if has('gui_running')
 	" TODO Write a command to toggle this
 	"set background=light
 	set background=dark
+else
+	set mouse+=a
 endif
 
 if domain ==? 'school' || domain ==? 'ec' || !filereadable("/usr/bin/php")
