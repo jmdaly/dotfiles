@@ -177,6 +177,7 @@ $whitelist = array(
 	'pspad',
 	'radicalgoodspeed',
 	'rdark',
+	'strawimodo',
 	'sand',
 	'scite',
 	'selenitic',
