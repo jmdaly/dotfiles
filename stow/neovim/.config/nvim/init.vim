@@ -9,7 +9,12 @@ Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if 
 Plug 'tpope/vim-sleuth' " heuristically determine spacing to use when tabbing
 Plug 'tpope/vim-fugitive' " git wrapper for vim
 Plug 'tpope/vim-unimpaired' " A plugin containing handy pairs of bracket mapping:
-Plug 'tpope/vim-sensible' " Sensible defaults that everyone can agree on:
+
+if !has('nvim')
+  " Neovim has these sensible defaults already
+  Plug 'tpope/vim-sensible' " Sensible defaults that everyone can agree on
+endif
+
 Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
 Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
 Plug 'tpope/vim-obsession' " Plugin to help manage sessions
