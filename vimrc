@@ -164,8 +164,10 @@ if domain !=? 'school' && domain !=? 'ec'
 	Plug 'airblade/vim-gitgutter'
 endif
 
-" Plug to assist with commenting out blocks of text:
-Plug 'tomtom/tcomment_vim'
+if domain !=? 'siteground'
+	" Plug to assist with commenting out blocks of text:
+	Plug 'tomtom/tcomment_vim'
+endif
 
 " Status bar
 Plug 'powerline/powerline'
@@ -183,7 +185,7 @@ endif
 " Appears to have been deleted off GitHub, still available at: http://www.vim.org/scripts/script.php?script_id=4306
 " Plug 'OrelSokolov/HiCursorWords'
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
 	" Doxygen
 	Plug 'vim-scripts/DoxygenToolkit.vim'
 endif
@@ -214,10 +216,9 @@ Plug 'kshenoy/vim-signature'
 
 if domain !=? 'neptec-small' && domain !=? 'ec'
 	" Python Syntax highlighting (the default is pretty bad)
+	" For some reason this helps syntax highlighting in general though
 	Plug 'Hdima/python-syntax'
 endif
-
-" Undo tree
 
 if domain !=? 'neptec-small'
 	" Plug to wrap all the various grep tools, and provide
@@ -226,11 +227,15 @@ if domain !=? 'neptec-small'
 endif
 
 " Manage font size
-Plug 'drmikehenry/vim-fontsize'
+if domain !=? 'neptec-small' && domain !=? 'ec' && domain !=? 'siteground'
+	Plug 'drmikehenry/vim-fontsize'
+endif
 
 " Plugin to change the current directory to a project's root (so, look for
 " .git or something)
-Plug 'airblade/vim-rooter'
+if domain !=? 'siteground'
+	Plug 'airblade/vim-rooter'
+endif
 
 " Javascript plugins to try
 if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
@@ -282,7 +287,7 @@ if has('nvim')
 endif
 
 
-if !has('gui_running') && !is_win
+if !has('gui_running') && !is_win && domain !=? 'siteground'
 	" Plugin to get gvim colourschemes work better in terminal vim
 	Plug 'godlygeek/csapprox'
 endif
