@@ -53,6 +53,9 @@ au BufNewFile,BufRead *cibles          set filetype=make
 au BufNewFile,BufRead *.qml            set filetype=qml
 au BufNewFile,BufRead *.qrc            set filetype=xml
 au BufNewFile,BufRead *.pro            set filetype=make
+au BufNewFile,BufRead *.vert           set filetype=glsl
+au BufNewFile,BufRead *.geo            set filetype=glsl
+au BufNewFile,BufRead *.frag           set filetype=glsl
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
