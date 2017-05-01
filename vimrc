@@ -436,7 +436,10 @@ if has('unix')
 		\ 'gitcommit' : 1,
 		\ 'gitrebase' : 1,
 		\ 'cmake'     : 1,
-		\ 'mail'      : 1
+		\ 'mail'      : 1,
+		\ 'frag'      : 1,
+		\ 'vert'      : 1,
+		\ 'comp'      : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
