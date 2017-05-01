@@ -1,11 +1,11 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe' " YouCompleteMe
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'} " YCMGenerator - generates configs for YouCompleteMe
 Plug 'justinmk/vim-dirvish' " Path navigator for vim
 Plug 'octol/vim-cpp-enhanced-highlight' " Better C++ Syntax Highlighting:
 Plug 'SirVer/ultisnips' " Track the ultisnips engine.
 Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
+Plug 'dawikur/algorithm-mnemonics.vim' " C++ algorithm snippets for Ultisnips
 Plug 'tpope/vim-sleuth' " heuristically determine spacing to use when tabbing
 Plug 'tpope/vim-fugitive' " git wrapper for vim
 Plug 'tpope/vim-unimpaired' " A plugin containing handy pairs of bracket mapping:
