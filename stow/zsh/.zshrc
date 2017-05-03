@@ -87,7 +87,7 @@ GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 [ -f ~/.localzshrc ] && source ~/.localzshrc
 
 # fbr - checkout git branch (including remote branches)
-fbr() {
+b() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
