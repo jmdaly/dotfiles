@@ -194,12 +194,6 @@ augroup END
 nnoremap <leader>q :Sayonara<cr>
 nnoremap <leader>Q :Sayonara!<cr>
 
-" Mapping for easy aligning on symbols:
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
 " vim-sneak options to use streak mode, to minimize the numbers
 " of steps to get to a location:
 let g:sneak#streak = 1
