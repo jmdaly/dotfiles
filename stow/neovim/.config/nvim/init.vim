@@ -203,3 +203,7 @@ let g:sneak#streak = 1
 " opening a file. This lets us stay in the directory
 " we opened the editor in:
 let g:startify_change_to_dir = 0
+
+" mappings for fugitive:
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gd :Gdiff<cr>
