@@ -207,3 +207,4 @@ let g:startify_change_to_dir = 0
 " mappings for fugitive:
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
