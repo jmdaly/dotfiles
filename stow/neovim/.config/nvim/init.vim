@@ -105,11 +105,11 @@ nnoremap <leader>h :History:<CR>
 nnoremap <leader>/ :History/<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
-" A command to enable case-insensitive search with Ag:
-command! -bang -nargs=* Agi
-  \ call fzf#vim#grep('ag --nogroup --column --color -i '.shellescape(<q-args>), 0, <bang>0)
+" A command to enable case-sensitive search with Ag:
+command! -bang -nargs=* Ags
+  \ call fzf#vim#grep('ag --nogroup --column --color -s '.shellescape(<q-args>), 0, <bang>0)
 " A mapping to do case-insensitive search using ag:
-nnoremap <leader>ai :Agi<space>
+nnoremap <leader>as :Ags<space>
 
 " Use The Silver Searcher for grep, if available:
 if executable('ag')
