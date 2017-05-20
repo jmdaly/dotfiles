@@ -443,7 +443,8 @@ if has('unix')
 		\ 'mail'      : 1,
 		\ 'frag'      : 1,
 		\ 'vert'      : 1,
-		\ 'comp'      : 1
+		\ 'comp'      : 1,
+		\ 'qml'       : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
