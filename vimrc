@@ -123,9 +123,23 @@ endif
 " Easy motion
 " Plug 'easymotion/vim-easymotion'
 
+
+
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
+
+	""""""""""""""""""" vim-clang-format """""""""""""""""""""
+	Plug 'rhysd/vim-clang-format'
+
+	" Detect clang-format file
+	let g:clang_format#detect_style_file = 1
+	""""""""""""""""""" /vim-clang-format """"""""""""""""""""
+
 	" Key mappings for clang-format, to format source code:
-	map <leader>f :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
+	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
+	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+	autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+
+	nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 	" neomake configuration
 	let g:neomake_cpp_enabled_makers = ['clangtidy']
