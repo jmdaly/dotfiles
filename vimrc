@@ -382,6 +382,11 @@ if is_win
 	behave xterm
 	set ffs=unix
 	set backspace=2
+
+	" Typically windows is used with remote desktop from a smaller screen, so
+	" the font is too big..
+	GuiFont! Consolas:h10
+
 	" options: set backspace=indent,eol,start
 "elseif has('mac')
 "	 ......
