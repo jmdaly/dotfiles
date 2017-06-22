@@ -184,7 +184,7 @@ if [[ $(hostname) == "khea" ]]; then
 
 	# CMC
 	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
-elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
+elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
