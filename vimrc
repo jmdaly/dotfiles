@@ -309,7 +309,9 @@ if !has('gui_running') && !is_win && domain !=? 'siteground'
 	Plug 'godlygeek/csapprox'
 endif
 
-Plug 'tikhomirov/vim-glsl'
+if domain !=? 'school'
+	Plug 'tikhomirov/vim-glsl'
+endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
