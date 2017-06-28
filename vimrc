@@ -112,7 +112,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'school'
 	Plug 'octol/vim-cpp-enhanced-highlight'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
+if is_win==0 && domain !=? 'ec' && domain !=? 'siteground' && &ft !=? 'qml'
 	" Track the ultisnips engine.
 	Plug 'SirVer/ultisnips'
 
