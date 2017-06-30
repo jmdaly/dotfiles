@@ -71,6 +71,9 @@ if domain !=? 'neptec-small'
 		Plug 'atelierbram/vim-colors_atelier-schemes'
 		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
 
+		" material
+		Plug 'kristijanhusak/vim-hybrid-material'
+
 		" Duotones
 		Plug 'atelierbram/vim-colors_duotones'
 

@@ -146,6 +146,7 @@ $whitelist = array(
 	'herokudoc',
 	'herald',
 	'hybrid_reverse',
+	'hybrid_material',
 	'inkpot',
 	'kalisi',
 	'kib_darktango',
