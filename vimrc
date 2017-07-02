@@ -40,6 +40,7 @@ endif
 au BufNewFile,BufRead *.html.base      set filetype=html
 au BufNewFile,BufRead *.ftn90          set filetype=fortran
 au BufNewFile,BufRead *.cdk*           set filetype=fortran
+au BufNewFile,BufRead *.nml            set filetype=fortran
 au BufNewFile,BufRead *.module         set filetype=php
 au BufNewFile,BufRead *.dot            set filetype=sh
 au BufNewFile,BufRead *.gs             set filetype=javascript
