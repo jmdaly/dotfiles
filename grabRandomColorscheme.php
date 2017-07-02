@@ -110,6 +110,7 @@ $whitelist = array(
 	'base16-ateliersulphurpool',
 	'blackboard',
 	'blackdust',
+	'blacklight',
 	'blue',
 	'bluechia',
 	'busybee',
@@ -146,6 +147,7 @@ $whitelist = array(
 	'herokudoc',
 	'herald',
 	'hybrid_reverse',
+	'hybrid_material',
 	'inkpot',
 	'kalisi',
 	'kib_darktango',
@@ -171,6 +173,7 @@ $whitelist = array(
 	'seoul-256-light',
 	// 'olive',
 	'onedark', // Not in dir list above
+	'openbsd',
 	'paintbox',
 	'phd',
 	'playroom',

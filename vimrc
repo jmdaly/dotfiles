@@ -72,6 +72,9 @@ if domain !=? 'neptec-small'
 		Plug 'atelierbram/vim-colors_atelier-schemes'
 		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
 
+		" material
+		Plug 'kristijanhusak/vim-hybrid-material'
+
 		" Duotones
 		Plug 'atelierbram/vim-colors_duotones'
 
@@ -113,7 +116,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'school'
 	Plug 'octol/vim-cpp-enhanced-highlight'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
+if is_win==0 && domain !=? 'ec' && domain !=? 'siteground' && &ft !=? 'qml'
 	" Track the ultisnips engine.
 	Plug 'SirVer/ultisnips'
 
@@ -310,7 +313,9 @@ if !has('gui_running') && !is_win && domain !=? 'siteground'
 	Plug 'godlygeek/csapprox'
 endif
 
-Plug 'tikhomirov/vim-glsl'
+if domain !=? 'school'
+	Plug 'tikhomirov/vim-glsl'
+endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
