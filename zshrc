@@ -173,6 +173,7 @@ fi
 
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
+	module use /opt/pgi/modulefiles
 	module load modules
 
 	module load khea
