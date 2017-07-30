@@ -104,6 +104,7 @@ $whitelist = array(
 	'3dglasses',
 	'ChocolateLiquor',
 	'PapayaWhip',
+	'anotherdark',
 	'abra',
 	'abbott',
 	'asuldark',
@@ -179,6 +180,7 @@ $whitelist = array(
 	'onedark', // Not in dir list above
 	'openbsd',
 	'paintbox',
+	'predawn',
 	'phd',
 	'playroom',
 	'pspad',
@@ -197,6 +199,7 @@ $whitelist = array(
 	'summerfruit256',
 	'Sunburst',
 	'swamplight',
+	'taqua',
 	'two2tango',
 	'Tomorrow-Night-Eighties',
 	'underwater',
