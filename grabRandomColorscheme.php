@@ -200,6 +200,8 @@ $whitelist = array(
 	'two2tango',
 	'Tomorrow-Night-Eighties',
 	'underwater',
+	'umber-green', // better with background=light, in dark the blue is annoying
+	'VIvid',
 	'underwater-mod',
 	//'default',
 );
