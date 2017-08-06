@@ -377,7 +377,7 @@ else
 endif
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
-if domain ==? 'school' || domain ==? 'ec' || !filereadable("/usr/bin/php")
+if domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
 else
 	call <SID>RandColorScheme()
