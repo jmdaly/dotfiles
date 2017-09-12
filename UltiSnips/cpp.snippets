@@ -28,4 +28,8 @@ namespace${2/.+/ /m}${2:`!p snip.rv = snip.basename or "name"`}
 }${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
 endsnippet
 
+snippet cpr "comment parameter"
+/* ${1:${VISUAL:param}} */
+endsnippet
+
 # vim:ft=snippets:
