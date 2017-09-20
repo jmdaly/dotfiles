@@ -18,8 +18,7 @@ endif
 Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
 Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
 Plug 'tpope/vim-obsession' " Plugin to help manage sessions
-Plug 'bling/vim-airline' " vim-airline: 'Lean & mean status/tabline for vim that's light as air.'
-Plug 'vim-airline/vim-airline-themes' " themes for vim-airline:
+Plug 'itchyny/lightline.vim' " Status line plugin
 Plug 'derekwyatt/vim-fswitch' " A plugin to switch between header and source files:
 Plug 'ihacklog/HiCursorWords' " Plug to highlight the variable under the cursor:
 Plug 'lyuts/vim-rtags' " Plugin to integrate rtags with vim (C++ tags)
@@ -134,8 +133,56 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 
-" For vim-airline, ensure the status line is always displayed:
+" Ensure the status line is always displayed:
 set laststatus=2
+
+let g:lightline = {
+        \ 'colorscheme': 'gruvbox',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+        \   'right': [ [ 'lineinfo' ],
+        \            [ 'obsession', 'percent' ],
+        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] 
+        \ },
+        \ 'component': {
+        \   'lineinfo': ' %3l:%-2v',
+        \ },
+        \ 'component_function': {
+        \   'readonly': 'LightlineReadonly',
+        \   'fugitive': 'LightlineFugitive',
+        \   'obsession': 'ObsessionStatus',
+        \ },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' }
+        \ }
+function! LightlineReadonly()
+        return &readonly ? '' : ''
+endfunction
+" This function is taken from vim-airline, to shorten
+" the branch name when appropriate.
+function! LightlineShorten(text, winwidth, minwidth, ...)
+  if winwidth(0) < a:winwidth && len(split(a:text, '\zs')) > a:minwidth
+    if get(a:000, 0, 0)
+      " shorten from tail
+      return '…'.matchstr(a:text, '.\{'.a:minwidth.'}$')
+    else
+      " shorten from beginning of string
+      return matchstr(a:text, '^.\{'.a:minwidth.'}').'…'
+    endif
+  else
+    return a:text
+  endif
+endfunction
+function! LightlineFugitive()
+        if exists('*fugitive#head')
+                let branch = fugitive#head(7)
+                let branch = branch !=# '' ? ' '.branch : ''
+                return LightlineShorten(branch, 120, 15)
+        endif
+        return ''
+endfunction
+
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
