@@ -85,7 +85,7 @@ let g:clang_path = "/opt/llvm"
 let g:neomake_cpp_enabled_makers = ['clangtidy']
 let g:neomake_cpp_clangtidy_maker = {
    \ 'exe': g:clang_path . '/bin/clang-tidy',
-   \ 'args': ['-checks=*' ],
+   \ 'args': ['-checks=clang-analyzer-*,modernize-*,performance-*,readability-*' ],
    \}
 " Open error list automatically:
 let g:neomake_open_list = 2
@@ -118,6 +118,8 @@ endif
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
+" And highlight member variables:
+let g:cpp_member_variable_highlight = 1
 
 " Turn off prompting to load .ycm_extra_conf.py:
 let g:ycm_confirm_extra_conf = 0
