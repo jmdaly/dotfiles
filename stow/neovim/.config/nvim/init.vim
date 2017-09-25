@@ -183,20 +183,6 @@ function! LightlineFugitive()
         return ''
 endfunction
 
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-" Don't show trailing whitespace warning:
-let g:airline_section_warning = ''
-" Use the powerline font symbols, for a nicer
-" look:
-let g:airline_powerline_fonts = 1
-" Set airline theme:
-let g:airline_theme='gruvbox'
-" Turn on integration with vim-obsession
-let g:airline#extensions#obsession#enabled = 1
-
 " Mapping for fswitch, to switch between header
 " and source and load it into the current window:
 nmap <silent> <Leader>of :FSHere<cr>
