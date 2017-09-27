@@ -87,7 +87,7 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground' && &ft !=? 'tex'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
@@ -116,7 +116,7 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'school'
 	Plug 'octol/vim-cpp-enhanced-highlight'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'siteground' && &ft !=? 'qml'
+if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
 	" Track the ultisnips engine.
 	Plug 'SirVer/ultisnips'
 
@@ -470,6 +470,7 @@ if has('unix')
 		\ 'vert'      : 1,
 		\ 'comp'      : 1,
 		\ 'qml'       : 1
+		\ 'tex'       : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
@@ -487,11 +488,7 @@ if has('unix')
 	let g:ycm_disable_for_files_larger_than_kb = 300
 
 	" Shut off preview window on PHP files
-	if (&ft ==? 'php')
-		let g:ycm_add_preview_to_completeopt=0
-	endif
-	" Alternatively..
-	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
+	au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
 	" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
@@ -750,12 +747,12 @@ imap <F1> <DEL>
 " Match <> brackets
 set matchpairs+=<:>
 
-" PHP Artisan commands
-if (&ft ==? 'php')
-	abbrev gm !php artisan   generate:model
-	abbrev gc !php artisan   generate:controller
-	abbrev gmig !php artisan generate:migration
-endif
+" " PHP Artisan commands
+" if (&ft ==? 'php')
+" 	abbrev gm !php artisan   generate:model
+" 	abbrev gc !php artisan   generate:controller
+" 	abbrev gmig !php artisan generate:migration
+" endif
 
 " try to automatically fold xml
 let xml_syntax_folding=1

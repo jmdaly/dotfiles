@@ -205,6 +205,7 @@ $whitelist = array(
 	'turbo',
 	'two2tango',
 	'Tomorrow-Night-Eighties',
+	'twilight256',
 	'underwater',
 	'umber-green', // better with background=light, in dark the blue is annoying
 	'VIvid',
