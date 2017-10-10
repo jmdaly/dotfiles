@@ -199,6 +199,11 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 		source /usr/share/zsh/functions/Completion/_ninja
 	fi;
 
+	# Don't tab complete on shares
+	source ~/dotfiles/restrict_tab_completion.sh
+	zle -N restricted-expand-or-complete
+	bindkey "^I" restricted-expand-or-complete
+
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
