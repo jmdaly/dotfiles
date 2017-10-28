@@ -102,6 +102,8 @@ nnoremap <leader>z :Files<CR>
 nnoremap <leader><Tab> :Buffers<CR>
 nnoremap <leader>h :History:<CR>
 nnoremap <leader>/ :History/<CR>
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>bc :BCommits<CR>
 " A mapping to search using ag:
 nnoremap <leader>ag :Ag<space>
 " A command to enable case-sensitive search with Ag:
