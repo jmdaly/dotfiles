@@ -117,7 +117,7 @@ $whitelist = array(
 	'busybee',
 	'bvemu',
 	'camo',
-	'clue',
+	'clue', // good for diff
 	'colorzone',
 	'candycode',
 	'chance-of-storm',
@@ -128,7 +128,7 @@ $whitelist = array(
 	'duotone-darkearth', // set background=dark  .. need to implement this ability
 	'desertedocean',
 	'desertedoceanburnt',
-	'distinguished',
+	'distinguished', // good for diff
 	'doorhinge',
 	'dusk',
 	'eclipse',
