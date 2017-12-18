@@ -469,7 +469,7 @@ if has('unix')
 		\ 'frag'      : 1,
 		\ 'vert'      : 1,
 		\ 'comp'      : 1,
-		\ 'qml'       : 1
+		\ 'qml'       : 1,
 		\ 'tex'       : 1
 	\}
 
@@ -481,7 +481,7 @@ if has('unix')
 		\ 'php'    : 1,
 		\ 'fortran': 1,
 		\ 'xml'    : 1,
-		\ 'html'   : 1,
+		\ 'html'   : 1
 	\}
 
 	" Ignore large files (BONA db's for instance)
