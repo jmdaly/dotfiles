@@ -11,7 +11,7 @@ fi
 alias grep="grep --color=always"
 
 # Env Can doesn't have zsh..
-alias gst="git status -uno"
+alias gst="git status -uno -sb"
 alias gd="git diff -w --color"
 
 # A better test would be whether I'm running zsh..
