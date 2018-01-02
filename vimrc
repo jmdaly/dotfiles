@@ -58,6 +58,10 @@ au BufNewFile,BufRead *.vert           set filetype=glsl
 au BufNewFile,BufRead *.geo            set filetype=glsl
 au BufNewFile,BufRead *.frag           set filetype=glsl
 
+" Set python
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
 set nocompatible             " be iMproved, required
 filetype off                 " required
 call plug#begin('~/dotfiles/bundles')
@@ -116,13 +120,13 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'school'
 	Plug 'octol/vim-cpp-enhanced-highlight'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
-	" Track the ultisnips engine.
-	Plug 'SirVer/ultisnips'
-
-	" Snippets are separated from the engine. Add this if you want them:
-	Plug 'honza/vim-snippets'
-endif
+" if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
+" 	" Track the ultisnips engine.
+" 	Plug 'SirVer/ultisnips'
+"
+" 	" Snippets are separated from the engine. Add this if you want them:
+" 	Plug 'honza/vim-snippets'
+" endif
 
 " Easy motion
 " Plug 'easymotion/vim-easymotion'
@@ -221,11 +225,11 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain
 	Plug 'lyuts/vim-rtags'
 endif
 
-if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
-	" Colour coding nests
-	Plug 'luochen1990/rainbow'
-	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-endif
+" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
+" 	" Colour coding nests
+" 	Plug 'luochen1990/rainbow'
+" 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+" endif
 
 " Tabular, align equals
 Plug 'godlygeek/tabular'
@@ -260,19 +264,21 @@ endif
 
 " Javascript plugins to try
 if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
-	Plug 'pangloss/vim-javascript'
+	" Plug 'pangloss/vim-javascript'
+   "
+	" " General conceal settings. Will keep things concealed
+	" " even when your cursor is on top of them.
+	" Plug 'Wolfy87/vim-syntax-expand'
+	" set conceallevel=1
+	" set concealcursor=nvic
+   "
+	" " vim-javascript conceal settings.
+	" let g:javascript_conceal_function = "λ"
+	" let g:javascript_conceal_this = "@"
+	" let g:javascript_conceal_return = "<"
+	" let g:javascript_conceal_prototype = "#"
 
-	" General conceal settings. Will keep things concealed
-	" even when your cursor is on top of them.
-	Plug 'Wolfy87/vim-syntax-expand'
-	set conceallevel=1
-	set concealcursor=nvic
-
-	" vim-javascript conceal settings.
-	let g:javascript_conceal_function = "λ"
-	let g:javascript_conceal_this = "@"
-	let g:javascript_conceal_return = "<"
-	let g:javascript_conceal_prototype = "#"
+	Plug 'elzr/vim-json'
 endif
 
 " This should iprove Git Fugitive and Git Gutter
@@ -577,30 +583,30 @@ nmap <silent> <Leader>of :FSHere<cr>
 
 
 
-"""""""""""""""" Rainbow (foldering) """""""""""""""""""
-	let g:rainbow_conf = {
-	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-	\   'operators': '_,_',
-	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-	\   'separately': {
-	\	   '*': {},
-	\	   'tex': {
-	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-	\	   },
-	\	   'lisp': {
-	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-	\	   },
-	\	   'vim': {
-	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-	\	   },
-	\	   'html': {
-	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-	\	   },
-	\	   'css': 0,
-	\   }
-	\}
-"""""""""""""""" /Rainbow (foldering) """""""""""""""""""
+" """""""""""""""" Rainbow (foldering) """""""""""""""""""
+" 	let g:rainbow_conf = {
+" 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+" 	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+" 	\   'operators': '_,_',
+" 	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+" 	\   'separately': {
+" 	\	   '*': {},
+" 	\	   'tex': {
+" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+" 	\	   },
+" 	\	   'cpp': {
+" 	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+" 	\	   },
+" 	\	   'vim': {
+" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+" 	\	   },
+" 	\	   'html': {
+" 	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+" 	\	   },
+" 	\	   'css': 0,
+" 	\   }
+" 	\}
+" """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
 
 """""""""""""""" Wipeout """""""""""""""""""
