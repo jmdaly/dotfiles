@@ -96,6 +96,9 @@ $blacklist = array(
 	'yaml',
 	'zen',
 	'zephyr', 'miko',
+
+	# Simply don't work
+	'corn', 'manuscript',
 );
 
 // Not yet used, but a place to save the ones
@@ -114,6 +117,7 @@ $whitelist = array(
 	'blacklight',
 	'blue',
 	'bluechia',
+	'bocau',
 	'busybee',
 	'bvemu',
 	'camo',
@@ -122,6 +126,7 @@ $whitelist = array(
 	'candycode',
 	'chance-of-storm',
 	'cobalt',
+	'cobalt2',
 	'colorsbox-steighties',
 	'cool',
 	'darkdot',
@@ -188,6 +193,7 @@ $whitelist = array(
 	'radicalgoodspeed',
 	'rdark',
 	'radicalgoodspeed',
+	'Revolution',
 	'strawimodo',
 	'sand',
 	'scite',

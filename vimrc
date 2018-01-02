@@ -760,6 +760,7 @@ let xml_syntax_folding=1
 "
 " Abbreviations.  Check https://github.com/tpope/vim-abolish for how to make
 " these case insensitive (if I need it)
+ab flaot float
 ab laster laser
 ab jsut just
 ab eticket etiket
@@ -772,5 +773,6 @@ ab cosnt const
 ab horizonal horizontal
 ab appraoch approach
 ab yeild yield
+ab lsit list
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :
