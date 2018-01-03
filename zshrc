@@ -195,7 +195,11 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 	export GTEST_COLOR=yes
 
 	# Set up ninja tab completion:
-	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+	if [[ -e /usr/local/src/ninja/misc/zsh-completion ]]; then
+		# Installed from system-setup-scripts
+		source /usr/local/src/ninja/misc/zsh-completion
+	elif [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		# Installed from apt
 		source /usr/share/zsh/functions/Completion/_ninja
 	fi;
 
