@@ -197,7 +197,7 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 	# Set up ninja tab completion:
 	if [[ -e /usr/local/src/ninja/misc/zsh-completion ]]; then
 		# Installed from system-setup-scripts
-		source /usr/local/src/ninja/misc/zsh-completion
+		fpath+=/usr/local/src/ninja/misc/
 	elif [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
 		# Installed from apt
 		source /usr/share/zsh/functions/Completion/_ninja
