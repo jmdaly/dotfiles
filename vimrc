@@ -58,6 +58,10 @@ au BufNewFile,BufRead *.vert           set filetype=glsl
 au BufNewFile,BufRead *.geo            set filetype=glsl
 au BufNewFile,BufRead *.frag           set filetype=glsl
 
+" Set python
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
 set nocompatible             " be iMproved, required
 filetype off                 " required
 call plug#begin('~/dotfiles/bundles')
