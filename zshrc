@@ -123,7 +123,7 @@ fi
 
 # Build PATH
 local -a dirs;
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin AppData/Roaming/Python/Scripts);
 for d in $dirs; do
 	dir=${HOME}/${d};
 	if [[ -e "${dir}" ]]; then
