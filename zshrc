@@ -166,11 +166,6 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
-
-if [[ -e $(which fuck 2>/dev/null) ]]; then
-	eval "$(thefuck --alias)"
-fi
-
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module use /opt/pgi/modulefiles
