@@ -750,6 +750,9 @@ vnoremap > >gv
 map <F1> x
 imap <F1> <DEL>
 
+" Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
+vnoremap // y/<C-R>"<CR>
+
 " Match <> brackets
 set matchpairs+=<:>
 

@@ -123,7 +123,7 @@ fi
 
 # Build PATH
 local -a dirs;
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin AppData/Roaming/Python/Scripts);
 for d in $dirs; do
 	dir=${HOME}/${d};
 	if [[ -e "${dir}" ]]; then
@@ -166,11 +166,6 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
-
-if [[ -e $(which fuck 2>/dev/null) ]]; then
-	eval "$(thefuck --alias)"
-fi
-
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
 	module use /opt/pgi/modulefiles
@@ -195,7 +190,11 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 	export GTEST_COLOR=yes
 
 	# Set up ninja tab completion:
-	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+	if [[ -e /usr/local/src/ninja/misc/zsh-completion ]]; then
+		# Installed from system-setup-scripts
+		fpath+=/usr/local/src/ninja/misc/
+	elif [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		# Installed from apt
 		source /usr/share/zsh/functions/Completion/_ninja
 	fi;
 
