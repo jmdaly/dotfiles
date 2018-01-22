@@ -16,6 +16,7 @@ HISTFILE=${HOME}/.zsh_history
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	source ${HOME}/dotfiles/antigen/antigen.zsh
@@ -33,7 +34,11 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
 	antigen bundle jocelynmallon/zshmarks
-	antigen bundle uvaes/fzf-marks
+
+	outp=$(which fzf)
+	if [[ 0 == $?  ]]; then
+		antigen bundle uvaes/fzf-marks
+	fi
 
 	# Plugin to check if a 256 colour terminal
 	# is available, and enable all colours if
@@ -238,7 +243,5 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 		export ARCH=o2win64
 	fi
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
