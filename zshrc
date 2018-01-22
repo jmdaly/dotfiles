@@ -69,7 +69,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen apply
 
 fi
-	
+
 if [[ $(which urxvt 2>/dev/null) != "" ]]; then
 	# Set the terminal to urxvt, for i3wm:
 	export TERMINAL=urxvt
@@ -237,7 +237,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	if [[ "${modules_enabled}" == "0" ]]; then
 		export ARCH=o2win64
 	fi
-fi;
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
