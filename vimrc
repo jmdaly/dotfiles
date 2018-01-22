@@ -19,8 +19,10 @@ elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 elseif match(hostname, 'siteground') >= 0
 	" Siteground is an exception because it uses vim 7.0
 	let domain='siteground'
-else
+elseif match(hostname, 'khea') >= 0
 	let domain='home'
+else
+	let domain='any'
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
 
@@ -91,7 +93,7 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
+if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
