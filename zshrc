@@ -16,7 +16,29 @@ HISTFILE=${HOME}/.zsh_history
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Adjust the path
+if [[ -e ${HOME}/.pathrc ]]; then
+	source ${HOME}/.pathrc
+fi
+
+# Build Run PATH
+local -a dirs;
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin);
+for d in $dirs; do
+	dir=${HOME}/${d};
+	if [[ -e "${dir}" ]]; then
+		export PATH=${dir}:${PATH}
+	fi;
+done
+
+# Build MAN path
+dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
+for d in $dirs; do
+	dir=${HOME}/${d}/man;
+	if [[ -e "${dir}" ]]; then
+		export MANPATH=${dir}:${MANPATH}
+	fi;
+done
 
 if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	source ${HOME}/dotfiles/antigen/antigen.zsh
@@ -109,12 +131,6 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-
-# Adjust the path
-if [[ -e ${HOME}/.pathrc ]]; then
-	source ${HOME}/.pathrc
-fi
-
 export LINUXBREWHOME=${HOME}/.linuxbrew
 if [[ -e "${LINUXBREWHOME}" ]]; then
 	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
@@ -125,25 +141,6 @@ if [[ -e "${LINUXBREWHOME}" ]]; then
 	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
 	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
 fi
-
-# Build PATH
-local -a dirs;
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin AppData/Roaming/Python/Scripts);
-for d in $dirs; do
-	dir=${HOME}/${d};
-	if [[ -e "${dir}" ]]; then
-		export PATH=${dir}:${PATH}
-	fi;
-done
-
-# Build MAN path
-dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
-for d in $dirs; do
-	dir=${HOME}/${d}/man;
-	if [[ -e "${dir}" ]]; then
-		export MANPATH=${dir}:${MANPATH}
-	fi;
-done
 
 declare modules_enabled=0
 declare -f module > /dev/null;
@@ -243,5 +240,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 		export ARCH=o2win64
 	fi
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim: sw=4 sts=0 ts=4 noet ffs=unix :
