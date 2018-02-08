@@ -383,7 +383,7 @@ if has('gui_running')
 else
 	set mouse+=a
 endif
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+set guicursor=
 
 if domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
