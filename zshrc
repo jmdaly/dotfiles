@@ -32,6 +32,7 @@ for d in $dirs; do
 done
 
 # Build MAN path
+export LINUXBREWHOME=${HOME}/.linuxbrew
 dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
 for d in $dirs; do
 	dir=${HOME}/${d}/man;
@@ -131,7 +132,6 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-export LINUXBREWHOME=${HOME}/.linuxbrew
 if [[ -e "${LINUXBREWHOME}" ]]; then
 	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
 	# See: https://github.com/Homebrew/linuxbrew/issues/47
