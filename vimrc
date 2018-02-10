@@ -339,6 +339,8 @@ if has('nvim')
 	Plug 'TheZoq2/neovim-auto-autoread'
 endif
 
+Plug 'editorconfig/editorconfig-vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()          " required
 
@@ -383,7 +385,7 @@ if has('gui_running')
 else
 	set mouse+=a
 endif
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+set guicursor=
 
 if domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
