@@ -22,7 +22,9 @@ if [[ -e ${HOME}/.pathrc ]]; then
 fi
 
 # Build Run PATH
+# TODO See if I can replace this and the MANPATH with Environmental Modules.  They're finally being updated again.
 local -a dirs;
+export LINUXBREWHOME=${HOME}/.linuxbrew
 dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin);
 for d in $dirs; do
 	dir=${HOME}/${d};
@@ -32,7 +34,6 @@ for d in $dirs; do
 done
 
 # Build MAN path
-export LINUXBREWHOME=${HOME}/.linuxbrew
 dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
 for d in $dirs; do
 	dir=${HOME}/${d}/man;
