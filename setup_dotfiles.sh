@@ -102,7 +102,9 @@ for f in ${files[@]}; do
 				# can be an issue
 				cp -r ${base}/${src} $f;
 			else
-				ln -s ${base}/${src} $f
+				if [[ ! -L $f ]]; then
+					ln -s ${base}/${src} $f
+				fi
 			fi;
 		fi
 	else
@@ -131,7 +133,7 @@ if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
 		 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if [[ -e .modulefiles && ! -e .modulerc ]]; then
+if [[ -e .modulefiles && ! -L .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
 
