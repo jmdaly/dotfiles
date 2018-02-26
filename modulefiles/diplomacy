@@ -39,3 +39,5 @@ set logs "${log_dir}/error.log"
 
 set-alias fixperms "sudo chmod o+r ${logs}; sudo chmod 777 /tmp/diplomacy.log"
 set-alias logs "tail -f /tmp/diplomacy.log ${logs} &"
+
+set-alias refreshModel "cd ${BASE_DIR}/config/Propel; propel sql:build --overwrite; propel sql:insert; propel model:build;"

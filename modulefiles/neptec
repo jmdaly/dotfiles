@@ -5,9 +5,9 @@
 ## modulefiles/modules.  Generated from modules.in by configure.
 ##
 proc ModulesHelp { } {
-        global version prefix
+	global version prefix
 
-        puts stderr "\tneptec - Some misc functions that are useful at neptec"
+	puts stderr "\tneptec - Some misc functions that are useful at neptec"
 }
 
 module-whatis	"loads some neptec utilities"
@@ -15,27 +15,26 @@ module-whatis	"loads some neptec utilities"
 set hostname [info hostname]
 
 # Open a reverse tunnel to khea
-if { ${hostname} == "pof" } {
-	set-alias open_reverse_tunnel "autossh -M 20000 -R 5556:pof:22 -R 8182:localhost:8181 khea"
-} else {
-	# 5555 = tinder
-	# 5556 = pof
-	# 9090 = gitlab
-	# 7777 = Gitlab SSH (git clone)
-	# 6666 = Git vender repos
-	# 8181 = Usual Wt port I use
-	set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:tinder:22 -R 5556:pof:22 -R 8181:localhost:8181 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 khea"
-}
+# 5555 = grinder
+# 5556 = pofdd
+# 9090 = gitlab
+# 7777 = Gitlab SSH (git clone)
+# 6666 = Git vender repos
+# 3579 = Power bar admin
+# 8080 = Jenkins
+set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:grinder:22 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 -R 3579:10.10.9.51:80 -R 8080:ntcjenkins:8080 khea -R 8888:ntcjenkins:8080"
 
 # Open a remote desktop to a windows box
 set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
+set-alias tinder "rdesktop -g 1920x1040 tinder"
+set-alias surface "xfreerdp -u mrussell -g 1920x1040 10.10.1.106"
 
 # Put 3DRi install in my path
-prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
+# prepend-path PATH /usr/local/OPAL_3DRi_Software-2.1.0-Linux/3DRi
 
 # A LAS/PCD/VTK viewer
-prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
+# prepend-path PATH /usr/local/ParaView-4.3.1-Linux-64bit/bin
 
 set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
 
-# vim: ts=3 sts=0 sw=3 noet :
+# vim: ts=3 sts=0 sw=3 noet ft=tcl :

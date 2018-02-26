@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+# Copy values out of gconf.  Note, for Ubuntu 15.04+, gnome-terminal finally
+# switched to using dconf, so this will have to be modified/expanded.
+#
+# To see values in dconf, do `dconf dump / | less`, there is also a dconf-editor
+# The other commands are probably similar, but I haven't yet explored them.
+
 # Solarized
 #http://michaelheap.com/getting-solarized-working-on-ubuntu/
 # Note, the dircolors are loaded here already with a git submodule
@@ -21,8 +27,8 @@ echo " " > profiles.dot
 
 declare -a string_keys;
 declare -a bool_keys;
-string_keys=(visible_name palette foreground_color background_color);
-bool_keys=(use_theme_background use_theme_colors);
+string_keys=(visible_name palette foreground_color background_color font);
+bool_keys=(use_theme_colors use_system_font);
 for prof in Default Profile{0,1,2,3,4,5,6,7,8,9,10,11}; do
 	echo "# $prof" >> profiles.dot
 	for k in $string_keys; do
@@ -36,3 +42,5 @@ for prof in Default Profile{0,1,2,3,4,5,6,7,8,9,10,11}; do
 	done;
 	echo " " >> profiles.dot
 done;
+
+# vim: ts=3 sw=3 sts=0 noet :
