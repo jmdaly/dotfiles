@@ -82,7 +82,9 @@ for f in ${files[@]}; do
 				# can be an issue
 				cp -r ${base}/${src} $f;
 			else
-				ln -s ${base}/${src} $f
+				if [[ ! -L $f ]]; then
+					ln -s ${base}/${src} $f
+				fi
 			fi;
 		fi
 	else
@@ -94,7 +96,7 @@ cd $h
 if [[ -e .vimrc ]]; then
 	ln -s .vimrc .nvimrc
 fi
-if [[ -e .modulefiles ]]; then
+if [[ -e .modulefiles && ! -L .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
 fi
 
