@@ -57,7 +57,7 @@ else
 fi
 
 # Check if our environment supports these
-if [[ "$(which vim)" != "" ]]; then
+if [[ "$(which vi)" != "" ]]; then
 	files+=('.vimrc')
 fi
 if [[ "$(which tmux)" != "" ]]; then
