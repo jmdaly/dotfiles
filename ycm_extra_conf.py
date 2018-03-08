@@ -147,6 +147,12 @@ def FlagsForFile( filename, **kwargs ):
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
 
+  # Add a flag so that clang doesn't stop compiling once an
+  # error limit is reached. This is necessary so that some
+  # files that contain a lot of errors, as reported by clang,
+  # can still get completions.
+  final_flags.append('-ferror-limit=0')
+
   return {
     'flags': final_flags,
     'do_cache': True
