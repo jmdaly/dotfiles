@@ -1,3 +1,6 @@
+" Use space as leader:
+let mapleader = "\<Space>"
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe' " YouCompleteMe
@@ -29,10 +32,10 @@ Plug 'mhinz/vim-startify' " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-sayonara' " Plugin to make it easy to delete a buffer and close the file:
 Plug 'tommcdo/vim-lion' " Easily align around various symbols
 Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occurences
-Plug 'benekastah/neomake' " Asynchronous linting
 Plug 'morhetz/gruvbox' " gruvbox colour scheme:
 Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
 Plug 'wellle/targets.vim' " A plugin for additional text objects
+Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -81,16 +84,15 @@ endif
 " Location of clang
 let g:clang_path = "/opt/llvm"
 
-" neomake configuration
-let g:neomake_cpp_enabled_makers = ['clangtidy']
-let g:neomake_cpp_clangtidy_maker = {
-   \ 'exe': g:clang_path . '/bin/clang-tidy',
-   \ 'args': ['-checks=clang-analyzer-*,modernize-*,performance-*,readability-*' ],
-   \}
-" Open error list automatically:
-let g:neomake_open_list = 2
-" Set up map for running Neomake:
-nnoremap <leader>n :Neomake<CR>
+" ALE configuration
+let g:ale_linters = {
+\   'cpp': ['clangtidy'],
+\}
+let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*']
+let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
 
 " Key mappings for clang-format, to format source code.
 " map <expr> allows expansion of the variable for the
