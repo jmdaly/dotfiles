@@ -14,11 +14,6 @@ antigen bundle vi-mode
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# fzf-marks - a plugin to allow bookmarking
-# directories, and then fuzzy searching through
-# the bookmarks using fzf
-antigen bundle uvaes/fzf-marks
-
 # Load the theme.
 antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
