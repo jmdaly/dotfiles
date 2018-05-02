@@ -57,8 +57,9 @@ fi
 # Set up fonts
 
 # Download fonts if we need them:
-if [ ! -f ~/.fonts/fontawesome-webfont.ttf ]; then
-	curl -fLo ~/.fonts/fontawesome-webfont.ttf --create-dirs https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf
+if [ ! -f ~/.fonts/Font\ Awesome\ 5\ Free-Regular-400.otf ]; then
+	git clone https://github.com/FortAwesome/Font-Awesome.git /tmp/Font-Awesome
+	cp /tmp/Font-Awesome/use-on-desktop/*.otf ~/.fonts
 fi
 
 # Get the Yosemite system font
