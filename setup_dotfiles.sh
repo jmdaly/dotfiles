@@ -6,13 +6,25 @@
 declare base=${HOME}/dotfiles
 
 # Check for required dependencies before continuing:
-hash git 2>/dev/null || { echo "Error: git is not installed. Please install git first."; exit 1;}
+if [[ ! -a $(which git) ]]; then
+  echo "Error: git is not installed. Please install git first."
+  exit 1
+fi
 
-hash curl 2>/dev/null || { echo "Error: curl is not installed. Please install curl first."; exit 1;}
+if [[ ! -a $(which curl) ]]; then
+  echo "Error: curl is not installed. Please install curl first."
+  exit 1
+fi
 
-hash stow 2>/dev/null || { echo "Error: stow is not installed. Please install stow first."; exit 1;}
+if [[ ! -a $(which stow) ]]; then
+  echo "Error: stow is not installed. Please install stow first."
+  exit 1
+fi
 
-hash unzip 2>/dev/null || { echo "Error: unzip is not installed. Please install unzip first."; exit 1;}
+if [[ ! -a $(which unzip) ]]; then
+  echo "Error: unzip is not installed. Please install unzip first."
+  exit 1
+fi
 
 # Set up tmux plugin manager:
 mkdir -p ~/.tmux/plugins
