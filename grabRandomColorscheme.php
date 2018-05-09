@@ -153,6 +153,7 @@ $whitelist = array(
 	'gotham',
 	'greens',
 	'greenvision',
+	'gryffin',
 	'guardian',
 	'guepardo',
 	'herokudoc',
@@ -184,6 +185,7 @@ $whitelist = array(
 	'seoul-256-light',
 	// 'olive',
 	'onedark', // Not in dir list above
+	'oxeded',
 	'openbsd',
 	'paintbox',
 	'predawn',
