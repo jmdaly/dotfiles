@@ -94,8 +94,9 @@ endif
 " let g:LanguageClient_loadSettings = 1
 " let g:LanguageClient_settingsPath = '/home/jdaly/.config/nvim/settings.json'
 " nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <leader>rf :LanguageClient#textDocument_references()<CR>
+" nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 " nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 
 if executable('cquery')
    au User lsp_setup call lsp#register_server({
@@ -112,6 +113,7 @@ let g:lsp_signs_enabled = 1         " enable signs
 nnoremap <leader>ty :LspHover<CR>
 nnoremap <leader>rf :LspReferences<CR>
 nnoremap <leader>rj :LspDefinition<CR>
+nnoremap <leader>rw :LspRename<CR>
 
 " Location of clang
 let g:clang_path = "/opt/llvm"
@@ -120,7 +122,7 @@ let g:clang_path = "/opt/llvm"
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \}
-let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*']
+let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 " Set up mapping to move between errors
 nmap <silent> [w <Plug>(ale_previous_wrap)
