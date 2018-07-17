@@ -22,7 +22,6 @@ Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
 Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
 Plug 'tpope/vim-obsession' " Plugin to help manage sessions
 Plug 'itchyny/lightline.vim' " Status line plugin
-Plug 'derekwyatt/vim-fswitch' " A plugin to switch between header and source files:
 Plug 'ihacklog/HiCursorWords' " Plug to highlight the variable under the cursor:
 Plug 'mrtazz/DoxygenToolkit.vim' " Plug to generate doxygen documentation strings:
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " The fuzzy searcher
@@ -221,37 +220,27 @@ function! LightlineFugitive()
         return ''
 endfunction
 
-" Mapping for fswitch, to switch between header
-" and source and load it into the current window:
-nmap <silent> <Leader>of :FSHere<cr>
-" Switch to the file and load it into the window on the right >
-nmap <silent> <Leader>ol :FSRight<cr>
-" Switch to the file and load it into a new window split on the right >
-nmap <silent> <Leader>oL :FSSplitRight<cr>
-" Switch to the file and load it into the window on the left >
-nmap <silent> <Leader>oh :FSLeft<cr>
-" Switch to the file and load it into a new window split on the left >
-nmap <silent> <Leader>oH :FSSplitLeft<cr>
-" Switch to the file and load it into the window above >
-nmap <silent> <Leader>ok :FSAbove<cr>
-" Switch to the file and load it into a new window split above >
-nmap <silent> <Leader>oK :FSSplitAbove<cr>
-" Switch to the file and load it into the window below >
-nmap <silent> <Leader>oj :FSBelow<cr>
-" Switch to the file and load it into a new window split below >
-nmap <silent> <Leader>oJ :FSSplitBelow<cr>
-
-" Set up fswitch to work with the directory structures
-" I'm currently using:
-augroup fswitch_cpp
-   au!
-   au BufEnter *.h let b:fswitchdst  = 'cpp,hpp,cc,c'
-   au BufEnter *.h let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,reg:|include/\w\+|src|,impl'
-   au BufEnter *.cpp let b:fswitchdst  = 'hpp,h'
-   au BufEnter *.cpp let b:fswitchlocs = 'reg:/src/include/,reg:|src|include/**|,../include,reg:|src/\(\w\+\)/src|src/\1/include/**|'
-   au BufEnter *.hpp let b:fswitchdst  = 'h,cpp'
-   au BufEnter *.hpp let b:fswitchlocs = 'reg:/include/src/,reg:/include.*/src/,../src,..'
-augroup END
+" Function, courtesy of Marc Gallant, to make it easy
+" to switch between C and C++ header and source files
+" using fzf.
+function! FZFSameName(sink, pre_command, post_command)
+    let current_file_no_extension = expand("%:t:r")
+    let current_file_with_extension = expand("%:t")
+    execute a:pre_command
+    call fzf#run(fzf#wrap({
+          \ 'source': 'find -name ' . current_file_no_extension . '.* | grep -Ev *' . current_file_with_extension . '$',
+          \ 'options': '--select-1', 'sink': a:sink}))
+    execute a:post_command
+endfunction
+nnoremap <leader>of :call FZFSameName('e', '', '')<CR>
+nnoremap <leader>oh :call FZFSameName('e', 'wincmd h', '')<CR>
+nnoremap <leader>ol :call FZFSameName('e', 'wincmd l', '')<CR>
+nnoremap <leader>ok :call FZFSameName('e', 'wincmd k', '')<CR>
+nnoremap <leader>oj :call FZFSameName('e', 'wincmd j', '')<CR>
+nnoremap <leader>oH :call FZFSameName('leftabove vsplit', '', 'wincmd h')<CR>
+nnoremap <leader>oL :call FZFSameName('rightbelow vsplit', '', 'wincmd l')<CR>
+nnoremap <leader>oK :call FZFSameName('leftabove split', '', 'wincmd k')<CR>
+nnoremap <leader>oJ :call FZFSameName('rightbelow split', '', 'wincmd j')<CR>
 
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):
