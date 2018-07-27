@@ -1,24 +1,37 @@
 # Update the dotfiles repo to make sure we have all changes:
 ~/dotfiles/doupdate.sh
 
-source ~/git/antigen/antigen.zsh
+# Check if z-plug is installed or not. If not, install it:
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+if [[ ! -d ~/.zplug ]]; then
+  echo "z-plug not installed. Installing it."
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
+source ~/.zplug/init.zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle command-not-found
-antigen bundle vi-mode
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/vi-mode", from:oh-my-zsh
 
 # Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # Load the theme.
-antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+setopt prompt_subst # Make sure prompt is able to be generated properly.
+zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3 # defer until other plugins like oh-my-zsh is loaded
 
-# Tell antigen that you're done.
-antigen apply
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
 
 export EDITOR=nvim
 
