@@ -10,10 +10,15 @@ fi
 
 source ~/.zplug/init.zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
+# Bundles from robbyrussell's oh-my-zsh.
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
+zplug "lib/completion", from:oh-my-zsh # Better tab completion
+zplug "lib/directories", from:oh-my-zsh # Provides the directory stack
+zplug "lib/history", from:oh-my-zsh # Provides history management
+zplug "lib/completion", from:oh-my-zsh # Provides completion of dot directories
+zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
 # Syntax highlighting bundle.
 zplug "zsh-users/zsh-syntax-highlighting"
