@@ -42,46 +42,6 @@ if [ ! -f ~/.config/nvim/autoload/plug.vim ]; then
 	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# Get the Base16 colour schemes
-mkdir -p ~/.config
-if [ ! -d ~/.config/base16-shell ]; then
-	git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-fi
-
-# Set up fonts
-
-# Download fonts if we need them:
-if [ ! -f ~/.fonts/Font\ Awesome\ 5\ Free-Regular-400.otf ]; then
-	git clone https://github.com/FortAwesome/Font-Awesome.git /tmp/Font-Awesome
-	cp /tmp/Font-Awesome/use-on-desktop/*.otf ~/.fonts
-fi
-
-# Get the Yosemite system font
-if [ ! -f ~/.fonts/System\ San\ Francisco\ Display\ Regular.ttf ]; then
-	curl -fLo /tmp/sanfrancisco.zip https://github.com/supermarin/YosemiteSanFranciscoFont/archive/master.zip
-	cd /tmp && unzip sanfrancisco.zip
-	cp /tmp/YosemiteSanFranciscoFont-master/*.ttf ~/.fonts
-fi
-
-# Get the Meslo font, used by the terminal:
-if [ ! -f ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf ]; then
-	curl -fLo ~/.fonts/Meslo\ LG\ S\ Regular\ for\ Powerline.otf https://github.com/powerline/fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf
-	fc-cache -vf ~/.fonts/
-fi
-
-# Get the Hack font, another good terminal/code font:
-if [ ! -f ~/.fonts/Hack-Regular.ttf ]; then
-	curl -fLo /tmp/hack/hack.zip --create-dirs https://github.com/chrissimpkins/Hack/releases/download/v2.020/Hack-v2_020-ttf.zip
-	cd /tmp/hack && unzip hack.zip
-	cp *.ttf ~/.fonts
-	fc-cache -vf ~/.fonts/
-fi
-
-# Wallpapers for the window manager:
-if [ ! -f ~/.config/wallpapers/wall.png ]; then
-	curl -fLo ~/.config/wallpapers/wall.png --create-dirs http://jmdaly.ca/media/wall.png
-fi
-
 # Set up all of the configs:
 cd ${base}/stow
 
