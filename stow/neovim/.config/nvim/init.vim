@@ -63,7 +63,7 @@ if has('termguicolors')
 endif
 
 " Set a colour scheme for vim:
-colorscheme gruvbox
+silent! colorscheme gruvbox
 set background=dark
 
 " Turn line numbers on:
