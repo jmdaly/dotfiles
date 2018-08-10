@@ -780,6 +780,7 @@ let xml_syntax_folding=1
 " Abbreviations.  Check https://github.com/tpope/vim-abolish for how to make
 " these case insensitive (if I need it)
 ab flaot float
+ab boid void
 ab laster laser
 ab jsut just
 ab eticket etiket
