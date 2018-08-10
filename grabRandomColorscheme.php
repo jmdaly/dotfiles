@@ -171,6 +171,7 @@ $whitelist = array(
 	'midnight2',
 	'MountainDew',
 	// 'mellow',
+	'monokai-chris',
 	'mopkai',
 	// 'moss',
 	'mud',
