@@ -22,7 +22,7 @@ Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
 Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
 Plug 'tpope/vim-obsession' " Plugin to help manage sessions
 Plug 'itchyny/lightline.vim' " Status line plugin
-Plug 'ihacklog/HiCursorWords' " Plug to highlight the variable under the cursor:
+Plug 'RRethy/vim-illuminate' " Plugin to highlight the word under the cursor
 Plug 'mrtazz/DoxygenToolkit.vim' " Plug to generate doxygen documentation strings:
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " The fuzzy searcher
 Plug 'junegunn/fzf.vim'
