@@ -43,8 +43,7 @@ border=#cc241d
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label= 
-#label=♪
+label=
 instance=Master
 #instance=PCM
 interval=once
@@ -55,7 +54,7 @@ border=#98971a
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label= 
+label= 
 # separator=false
 interval=30
 border=#d79921
