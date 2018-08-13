@@ -30,7 +30,7 @@ Plug 'mhinz/vim-startify' " Plugin to provide a useful start screen in vim:
 Plug 'mhinz/vim-sayonara' " Plugin to make it easy to delete a buffer and close the file:
 Plug 'tommcdo/vim-lion' " Easily align around various symbols
 Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occurences
-Plug 'morhetz/gruvbox' " gruvbox colour scheme:
+Plug 'arcticicestudio/nord-vim' " nord colour scheme
 Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
 Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
@@ -63,7 +63,7 @@ if has('termguicolors')
 endif
 
 " Set a colour scheme for vim:
-silent! colorscheme gruvbox
+silent! colorscheme nord
 set background=dark
 
 " Turn line numbers on:
@@ -174,7 +174,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 set laststatus=2
 
 let g:lightline = {
-        \ 'colorscheme': 'gruvbox',
+        \ 'colorscheme': 'nord',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
