@@ -74,8 +74,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/dotfiles/bundles')
+" Enable true colour support:
+if has('termguicolors')
+  set termguicolors
+endif
 
+
+call plug#begin('~/dotfiles/bundles')
 
 if domain !=? 'neptec-small'
 	" Solarized colour scheme
@@ -99,6 +104,9 @@ if domain !=? 'neptec-small'
 
 	" One-dark
 	Plug 'joshdick/onedark.vim'
+
+	" Nord
+	Plug 'arcticicestudio/nord-vim'
 endif
 
 if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
