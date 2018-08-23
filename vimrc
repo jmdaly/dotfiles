@@ -19,8 +19,10 @@ elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
 elseif match(hostname, 'siteground') >= 0
 	" Siteground is an exception because it uses vim 7.0
 	let domain='siteground'
-else
+elseif match(hostname, 'khea') >= 0
 	let domain='home'
+else
+	let domain='any'
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
 
@@ -40,6 +42,7 @@ endif
 au BufNewFile,BufRead *.html.base      set filetype=html
 au BufNewFile,BufRead *.ftn90          set filetype=fortran
 au BufNewFile,BufRead *.cdk*           set filetype=fortran
+au BufNewFile,BufRead *.nml            set filetype=fortran
 au BufNewFile,BufRead *.module         set filetype=php
 au BufNewFile,BufRead *.dot            set filetype=sh
 au BufNewFile,BufRead *.gs             set filetype=javascript
@@ -57,10 +60,27 @@ au BufNewFile,BufRead *.vert           set filetype=glsl
 au BufNewFile,BufRead *.geo            set filetype=glsl
 au BufNewFile,BufRead *.frag           set filetype=glsl
 
+" Set python
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
 set nocompatible             " be iMproved, required
 filetype off                 " required
-call plug#begin('~/dotfiles/bundles')
 
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+	   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Enable true colour support:
+if has('termguicolors')
+  set termguicolors
+endif
+
+
+call plug#begin('~/dotfiles/bundles')
 
 if domain !=? 'neptec-small'
 	" Solarized colour scheme
@@ -70,6 +90,9 @@ if domain !=? 'neptec-small'
 		" Atelier color scheme
 		Plug 'atelierbram/vim-colors_atelier-schemes'
 		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
+
+		" material
+		Plug 'kristijanhusak/vim-hybrid-material'
 
 		" Duotones
 		Plug 'atelierbram/vim-colors_duotones'
@@ -81,9 +104,12 @@ if domain !=? 'neptec-small'
 
 	" One-dark
 	Plug 'joshdick/onedark.vim'
+
+	" Nord
+	Plug 'arcticicestudio/nord-vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground' && &ft !=? 'tex'
+if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
@@ -163,8 +189,8 @@ set diffopt+=vertical
 " command GdiffOld exe "Gdiff develop:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
 " command Gdiff1352n exe "Gdiff 1352-2-merge_in_gf:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
 " command Gdiff1352o exe "Gdiff 1352_sdf_w_ground:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-command Gdiffo exe "Gdiff v2.4.1:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), '/3dri/', '/3dri-2.4.0/', 'g'), '/Apps/', 'Applications', 'g')
+" command Gdiffo exe "Gdiff v2.4.1:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
+" command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), '/3dri/', '/3dri-2.4.0/', 'g'), '/Apps/', 'Applications', 'g')
 
 " Used for navigating the quickfix window better.  Recommended by fugitive
 Plug 'tpope/vim-unimpaired'
@@ -271,7 +297,7 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	let g:javascript_conceal_prototype = "#"
 endif
 
-" This should iprove Git Fugitive and Git Gutter
+" This should improve Git Fugitive and Git Gutter
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 if domain ==? 'neptec'
@@ -309,7 +335,9 @@ if !has('gui_running') && !is_win && domain !=? 'siteground'
 	Plug 'godlygeek/csapprox'
 endif
 
-Plug 'tikhomirov/vim-glsl'
+if domain !=? 'school'
+	Plug 'tikhomirov/vim-glsl'
+endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
@@ -324,6 +352,8 @@ Plug 'tikhomirov/vim-glsl'
 if has('nvim')
 	Plug 'TheZoq2/neovim-auto-autoread'
 endif
+
+Plug 'editorconfig/editorconfig-vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()          " required
@@ -369,9 +399,9 @@ if has('gui_running')
 else
 	set mouse+=a
 endif
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
+set guicursor=
 
-if domain ==? 'school' || domain ==? 'ec' || !filereadable("/usr/bin/php")
+if domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
 else
 	call <SID>RandColorScheme()
@@ -465,7 +495,8 @@ if has('unix')
 		\ 'frag'      : 1,
 		\ 'vert'      : 1,
 		\ 'comp'      : 1,
-		\ 'qml'       : 1
+		\ 'qml'       : 1,
+		\ 'tex'       : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
@@ -476,18 +507,14 @@ if has('unix')
 		\ 'php'    : 1,
 		\ 'fortran': 1,
 		\ 'xml'    : 1,
-		\ 'html'   : 1,
+		\ 'html'   : 1
 	\}
 
 	" Ignore large files (BONA db's for instance)
 	let g:ycm_disable_for_files_larger_than_kb = 300
 
 	" Shut off preview window on PHP files
-	if (&ft ==? 'php')
-		let g:ycm_add_preview_to_completeopt=0
-	endif
-	" Alternatively..
-	"au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
+	au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
 	" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
@@ -743,15 +770,18 @@ vnoremap > >gv
 map <F1> x
 imap <F1> <DEL>
 
+" Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
+vnoremap // y/<C-R>"<CR>
+
 " Match <> brackets
 set matchpairs+=<:>
 
-" PHP Artisan commands
-if (&ft ==? 'php')
-	abbrev gm !php artisan   generate:model
-	abbrev gc !php artisan   generate:controller
-	abbrev gmig !php artisan generate:migration
-endif
+" " PHP Artisan commands
+" if (&ft ==? 'php')
+" 	abbrev gm !php artisan   generate:model
+" 	abbrev gc !php artisan   generate:controller
+" 	abbrev gmig !php artisan generate:migration
+" endif
 
 " try to automatically fold xml
 let xml_syntax_folding=1
@@ -759,6 +789,8 @@ let xml_syntax_folding=1
 "
 " Abbreviations.  Check https://github.com/tpope/vim-abolish for how to make
 " these case insensitive (if I need it)
+ab flaot float
+ab boid void
 ab laster laser
 ab jsut just
 ab eticket etiket
@@ -771,5 +803,6 @@ ab cosnt const
 ab horizonal horizontal
 ab appraoch approach
 ab yeild yield
+ab lsit list
 
 " vim: ts=3 sts=3 sw=3 noet nowrap :

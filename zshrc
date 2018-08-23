@@ -16,6 +16,31 @@ HISTFILE=${HOME}/.zsh_history
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
+# Adjust the path
+if [[ -e ${HOME}/.pathrc ]]; then
+	source ${HOME}/.pathrc
+fi
+
+# Build Run PATH
+# TODO See if I can replace this and the MANPATH with Environmental Modules.  They're finally being updated again.
+local -a dirs;
+export LINUXBREWHOME=${HOME}/.linuxbrew
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin);
+for d in $dirs; do
+	dir=${HOME}/${d};
+	if [[ -e "${dir}" ]]; then
+		export PATH=${dir}:${PATH}
+	fi;
+done
+
+# Build MAN path
+dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
+for d in $dirs; do
+	dir=${HOME}/${d}/man;
+	if [[ -e "${dir}" ]]; then
+		export MANPATH=${dir}:${MANPATH}
+	fi;
+done
 
 if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	source ${HOME}/dotfiles/antigen/antigen.zsh
@@ -33,7 +58,11 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	# antigen bundle sorin-ionescu/prezto
 	antigen bundle RobSis/zsh-reentry-hook
 	antigen bundle jocelynmallon/zshmarks
-	antigen bundle uvaes/fzf-marks
+
+	outp=$(which fzf)
+	if [[ 0 == $?  ]]; then
+		antigen bundle uvaes/fzf-marks
+	fi
 
 	# Plugin to check if a 256 colour terminal
 	# is available, and enable all colours if
@@ -69,7 +98,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	antigen apply
 
 fi
-	
+
 if [[ $(which urxvt 2>/dev/null) != "" ]]; then
 	# Set the terminal to urxvt, for i3wm:
 	export TERMINAL=urxvt
@@ -104,13 +133,6 @@ if [ -x /usr/bin/dircolors ]; then
 	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-
-# Adjust the path
-if [[ -e ${HOME}/.pathrc ]]; then
-	source ${HOME}/.pathrc
-fi
-
-export LINUXBREWHOME=${HOME}/.linuxbrew
 if [[ -e "${LINUXBREWHOME}" ]]; then
 	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
 	# See: https://github.com/Homebrew/linuxbrew/issues/47
@@ -120,25 +142,6 @@ if [[ -e "${LINUXBREWHOME}" ]]; then
 	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
 	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
 fi
-
-# Build PATH
-local -a dirs;
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin clang+llvm-3.6.1-x86_64-linux-gnu/bin AppData/Roaming/Python/Scripts);
-for d in $dirs; do
-	dir=${HOME}/${d};
-	if [[ -e "${dir}" ]]; then
-		export PATH=${dir}:${PATH}
-	fi;
-done
-
-# Build MAN path
-dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
-for d in $dirs; do
-	dir=${HOME}/${d}/man;
-	if [[ -e "${dir}" ]]; then
-		export MANPATH=${dir}:${MANPATH}
-	fi;
-done
 
 declare modules_enabled=0
 declare -f module > /dev/null;
@@ -166,13 +169,9 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
-
-if [[ -e $(which fuck 2>/dev/null) ]]; then
-	eval "$(thefuck --alias)"
-fi
-
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles/
+	module use /opt/pgi/modulefiles
 	module load modules
 
 	module load khea
@@ -184,19 +183,28 @@ if [[ $(hostname) == "khea" ]]; then
 
 	# CMC
 	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
-elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
+elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load qt neptec 3dri
+	module load neptec 3dri
 
 	# Ensure Google Test tests always show colour output:
 	export GTEST_COLOR=yes
 
 	# Set up ninja tab completion:
-	if [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+	if [[ -e /usr/local/src/ninja/misc/zsh-completion ]]; then
+		# Installed from system-setup-scripts
+		fpath+=/usr/local/src/ninja/misc/
+	elif [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
+		# Installed from apt
 		source /usr/share/zsh/functions/Completion/_ninja
 	fi;
+
+	# Don't tab complete on shares
+	source ~/dotfiles/restrict_tab_completion.sh
+	zle -N restricted-expand-or-complete
+	bindkey "^I" restricted-expand-or-complete
 
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
@@ -232,7 +240,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	if [[ "${modules_enabled}" == "0" ]]; then
 		export ARCH=o2win64
 	fi
-fi;
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

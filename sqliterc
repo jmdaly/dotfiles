@@ -1,1 +1,3 @@
 .explain on
+.headers on
+.mode col
