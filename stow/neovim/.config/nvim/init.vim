@@ -35,13 +35,13 @@ Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating betwee
 Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
 
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -87,32 +87,35 @@ if exists(':tnoremap')
    tnoremap <Leader>e <C-\><C-n>
 endif
 
-" let g:LanguageClient_serverCommands = {
-" \ 'cpp': ['cquery', '--log-file=/tmp/cq.log']
-" \ }
-" let g:LanguageClient_loadSettings = 1
-" let g:LanguageClient_settingsPath = '/home/jdaly/.config/nvim/settings.json'
-" nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-" nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+let g:LanguageClient_serverCommands = {
+\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+\ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+" Limits how often the LanguageClient talks to the
+" server, so it reduces CPU load and flashing.
+let g:LanguageClient_changeThrottle = 0.5
+nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-      \ })
-endif
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = '/tmp/vim-lsp.log'
-let g:lsp_signs_enabled = 1         " enable signs
-nnoremap <leader>ty :LspHover<CR>
-nnoremap <leader>rf :LspReferences<CR>
-nnoremap <leader>rj :LspDefinition<CR>
-nnoremap <leader>rw :LspRename<CR>
+" if executable('cquery')
+"    au User lsp_setup call lsp#register_server({
+"       \ 'name': 'cquery',
+"       \ 'cmd': {server_info->['cquery']},
+"       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+"       \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery' },
+"       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"       \ })
+" endif
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = '/tmp/vim-lsp.log'
+" let g:lsp_signs_enabled = 1         " enable signs
+" nnoremap <leader>ty :LspHover<CR>
+" nnoremap <leader>rf :LspReferences<CR>
+" nnoremap <leader>rj :LspDefinition<CR>
+" nnoremap <leader>rw :LspRename<CR>
 
 " Location of clang
 let g:clang_path = "/opt/llvm"
