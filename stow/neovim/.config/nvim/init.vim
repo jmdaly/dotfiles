@@ -95,6 +95,7 @@ let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
 " Limits how often the LanguageClient talks to the
 " server, so it reduces CPU load and flashing.
 let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
