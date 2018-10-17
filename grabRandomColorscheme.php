@@ -114,6 +114,7 @@ $whitelist = array(
 	'abbott',
 	'asuldark',
 	'atom',
+	'argonaut',
 	'base16-ateliersulphurpool',
 	'blackboard',
 	'blackdust',
@@ -133,6 +134,7 @@ $whitelist = array(
 	'colorsbox-steighties',
 	'colorzone',
 	'cool',
+	'darkBlue',
 	'darkdot',
 	'darkspectrum', // good for diff
 	'darktango',
@@ -164,7 +166,9 @@ $whitelist = array(
 	'guepardo',
 	'h80',
 	'herokudoc',
+	'herokudoc-gvim',
 	'herald',
+	'hotpot',
 	'hybrid_reverse',
 	'hybrid_material',
 	'inkpot',
@@ -212,6 +216,7 @@ $whitelist = array(
 	'sf',
 	'shadesofamber',
 	'silent',
+	'sonofobsidian',
 	'smp',
 	'summerfruit',
 	'summerfruit256',
@@ -228,6 +233,7 @@ $whitelist = array(
 	'umber-green', // better with background=light, in dark the blue is annoying
 	'VIvid',
 	'underwater-mod',
+	'watermark',
 	//'default',
 );
 
