@@ -22,16 +22,23 @@ if [[ -e ${HOME}/.pathrc ]]; then
 fi
 
 # Build Run PATH
-# TODO See if I can replace this and the MANPATH with Environmental Modules.  They're finally being updated again.
+# TODO See if I can replace this and the MANPATH with Environmental Modules.
+#      They're finally being updated again.
 local -a dirs;
 export LINUXBREWHOME=${HOME}/.linuxbrew
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin);
+dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin);
 for d in $dirs; do
 	dir=${HOME}/${d};
 	if [[ -e "${dir}" ]]; then
 		export PATH=${dir}:${PATH}
 	fi;
 done
+
+# If pyenv exists, initialise it
+if [[ -e "${HOME}/.pyenv/bin" ]]; then
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
 
 # Build MAN path
 dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
