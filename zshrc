@@ -237,13 +237,10 @@ elif [[ $(hostname) = dena* ]]; then
 		module load cmsh cmgui
 	fi
 
-elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
-	module load pontus
-
 elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	# This targets windows laptop at Neptec
 
-	# Modules isn't available here, so duplicate the most common aliases
+	# Modules aren't available here, so duplicate the most common aliases
 	if [[ "${modules_enabled}" == "0" ]]; then
 		export ARCH=o2win64
 	fi
