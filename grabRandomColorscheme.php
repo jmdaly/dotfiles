@@ -123,7 +123,7 @@ $whitelist = array(
 	'bluechia',
 	'bocau',
 	'busybee',
-	'bvemu',
+	'bvemu', // good for diff
 	'camo',
 	'candycode',
 	'chance-of-storm',
