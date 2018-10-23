@@ -134,6 +134,7 @@ $whitelist = array(
 	'colorsbox-steighties',
 	'colorzone',
 	'cool',
+	'DimSlateBG',
 	'darkBlue',
 	'darkdot',
 	'darkspectrum', // good for diff
@@ -192,6 +193,7 @@ $whitelist = array(
 	// 'nicotine',
 	'newsprint',
 	'neverland-darker',
+	'nightflight2',
 	// 'nightVision',
 	'nord',
 	'northland',
