@@ -190,7 +190,7 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load neptec 3dri
+	module load neptec 3dri clang
 
 	# Ensure Google Test tests always show colour output:
 	export GTEST_COLOR=yes
