@@ -115,6 +115,7 @@ $whitelist = array(
 	'asuldark',
 	'atom',
 	'argonaut',
+	'autumn', // good for diff
 	'base16-ateliersulphurpool',
 	'blackboard',
 	'blackdust',
