@@ -13,16 +13,10 @@ proc ModulesHelp { } {
 module-whatis	"loads the 3DRi environment"
 
 regsub {\..*$} [info hostname] "" hostname
-if { [ regexp {_64} [exec uname -m] ] } {
-	set ARCH "o2linux64"
-} else {
-	set ARCH "o2linux"
-}
 
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
 set src         "${BASE}/3dri"
-set VENDOR      ${BASE}/${ARCH}
 
 set port 8181
 

@@ -166,11 +166,7 @@ if [[ $? == 1 ]]; then
 	export MODULEPATH=/usr/share/modules/modulefiles
 
 	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-	if [[ $(hostname) == "pontus.cee.carleton.ca" ]]; then
-		modulecmd=/usr/local/Modules/3.2.9/bin/modulecmd
-	else
-		modulecmd=/usr/bin/modulecmd
-	fi
+	modulecmd=/usr/bin/modulecmd
 	module() { eval `${modulecmd} $modules_shell $*`; }
 
 	#module use ${HOST}/.modulefiles
@@ -194,7 +190,7 @@ elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "g
 	module use /usr/share/modules/modulefiles
 	module load modules
 
-	module load neptec 3dri
+	module load neptec 3dri clang
 
 	# Ensure Google Test tests always show colour output:
 	export GTEST_COLOR=yes

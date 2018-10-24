@@ -115,6 +115,7 @@ $whitelist = array(
 	'asuldark',
 	'atom',
 	'argonaut',
+	'autumn', // good for diff
 	'base16-ateliersulphurpool',
 	'blackboard',
 	'blackdust',
@@ -134,6 +135,7 @@ $whitelist = array(
 	'colorsbox-steighties',
 	'colorzone',
 	'cool',
+	'DimSlateBG',
 	'darkBlue',
 	'darkdot',
 	'darkspectrum', // good for diff
@@ -192,6 +194,7 @@ $whitelist = array(
 	// 'nicotine',
 	'newsprint',
 	'neverland-darker',
+	'nightflight2',
 	// 'nightVision',
 	'nord',
 	'northland',
