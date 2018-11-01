@@ -13,16 +13,10 @@ proc ModulesHelp { } {
 module-whatis	"loads the 3DRi environment"
 
 regsub {\..*$} [info hostname] "" hostname
-if { [ regexp {_64} [exec uname -m] ] } {
-	set ARCH "o2linux64"
-} else {
-	set ARCH "o2linux"
-}
 
 set HOME        $::env(HOME)
 set BASE        "${HOME}/workspace/opal2"
 set src         "${BASE}/3dri"
-set VENDOR      ${BASE}/${ARCH}
 
 set port 8181
 
@@ -32,7 +26,6 @@ set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 set     BUILD_TYPE    "Release"
 # Use clang.  To use g++, change the path to $(which g++)
 
-setenv  CXX            "ccache clang++"
 setenv  CCACHE_PREFIX  "distcc"
 # setenv  CCACHE_DIR     /media/ccache
 setenv  CCACHE_UMASK   002

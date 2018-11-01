@@ -22,7 +22,7 @@ set hostname [info hostname]
 # 6666 = Git vender repos
 # 3579 = Power bar admin
 # 8080 = Jenkins
-set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:grinder:22 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 -R 3579:10.10.9.51:80 -R 8080:ntcjenkins:8080 khea -R 8888:ntcjenkins:8080"
+set-alias open_reverse_tunnel "autossh -M 20000 -R 5555:grinder:22 -R 9090:ntctrac:9090 -R 7777:ntctrac:22 -R 6666:ntctrac:80 -R 3579:10.10.9.51:80 -R 8080:ntcjenkins:8080 khea -R 8888:ntcjenkins:8080 -R 9300:conan-ntc:9300 -R 9400:software-cache:80"
 
 # Open a remote desktop to a windows box
 set-alias outlook "rdesktop -g 1310x768 10.10.0.20"

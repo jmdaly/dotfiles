@@ -7,3 +7,6 @@
 [submodule "gdb-dashboard"]
 	path = gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard.git
+[submodule "ssh-find-agent"]
+	path = ssh-find-agent
+	url = https://github.com/wwalker/ssh-find-agent
