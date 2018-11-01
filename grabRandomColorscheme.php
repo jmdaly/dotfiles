@@ -138,6 +138,7 @@ $whitelist = array(
 	'DimSlateBG',
 	'darkBlue',
 	'darkdot',
+	'darkslategray',
 	'darkspectrum', // good for diff
 	'darktango',
 	'desertedocean',
@@ -180,6 +181,7 @@ $whitelist = array(
 	// 'made_of_code',
 	'madeofcode',
 	'materialvim',
+	'materialtheme',
 	'maroloccio',
 	'midnight2',
 	'mint',
