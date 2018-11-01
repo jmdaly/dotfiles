@@ -233,7 +233,7 @@ if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain
 	Plug 'vim-scripts/DoxygenToolkit.vim'
 endif
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
+if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground' && !is_win
 	" A Plug to use rtags in vim. (rtags allows for code following,
 	" some refactoring, etc.)
 	" Ensure to run the following in the build directory that uses rtags
