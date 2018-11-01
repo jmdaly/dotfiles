@@ -17,9 +17,9 @@ proc getIssue { } {
 	return $issue
 }
 
-module-whatis	"loads Clang 6"
+module-whatis	"loads Clang 7"
 
-set CLANG_VERSION    6.0.1
+set CLANG_VERSION    7.0.0
 set CLANG_BASE       /usr/local/clang+llvm-${CLANG_VERSION}-x86_64-linux-gnu-ubuntu-[getIssue]
 prepend-path PATH ${CLANG_BASE}/bin
 prepend-path LD_LIBRARY_PATH ${CLANG_BASE}/lib
