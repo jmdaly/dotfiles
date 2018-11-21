@@ -161,7 +161,6 @@ if v:version > 800 || has('nvim')
 		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
-		call dein#add('lyuts/vim-rtags', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
