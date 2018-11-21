@@ -1,10 +1,6 @@
 " Needed for Vundles
 set shell=/bin/bash
 
-" Done with Plug, now try dein
-let HOME='/home/matt'
-
-
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos = substitute(system('uname -o'), '\n', '', '')
@@ -85,47 +81,8 @@ if has('termguicolors')
 endif
 
 
-call plug#begin('~/dotfiles/bundles')
-
-
-
-if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
-
-	""""""""""""""""""" vim-clang-format """""""""""""""""""""
-	Plug 'rhysd/vim-clang-format'
-
-	" Detect clang-format file
-	let g:clang_format#detect_style_file = 1
-	""""""""""""""""""" /vim-clang-format """"""""""""""""""""
-
-	" Key mappings for clang-format, to format source code:
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
-	autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
-
-	nmap <Leader>C :ClangFormatAutoToggle<CR>
-
-	" neomake configuration
-	let g:neomake_cpp_enabled_makers = ['clangtidy']
-	let g:neomake_cpp_clangtidy_maker = {
-		\ 'exe': '/usr/bin/clang-tidy',
-		\ 'args': ['-checks=*' ],
-		\}
-	" Open error list automatically:
-	let g:neomake_open_list = 2
-	" Set up map for running Neomake:
-	nnoremap <leader>n :Neomake<CR>
-
-endif
-
-
-
-" command GdiffOld exe "Gdiff develop:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
-" command Gdiff1352n exe "Gdiff 1352-2-merge_in_gf:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
-" command Gdiff1352o exe "Gdiff 1352_sdf_w_ground:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-" command Gdiffo exe "Gdiff v2.4.1:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-" command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), '/3dri/', '/3dri-2.4.0/', 'g'), '/Apps/', 'Applications', 'g')
-
+" call plug#begin('~/dotfiles/bundles')
+"
 
 " if domain !=? 'ec' && domain !=? 'school'
 " 	" Switch between header and source files:
@@ -150,7 +107,7 @@ endif
 " endif
 
 " Javascript plugins to try
-if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
+" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
 	" Plug 'pangloss/vim-javascript'
    "
 	" " General conceal settings. Will keep things concealed
@@ -164,8 +121,7 @@ if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain
 	" let g:javascript_conceal_this = "@"
 	" let g:javascript_conceal_return = "<"
 	" let g:javascript_conceal_prototype = "#"
-endif
-
+" endif
 
 
 " These are getting annoying, and aren't helping with tmux anyways
@@ -187,9 +143,8 @@ endif
 "	Plug 'floobits/floobits-neovim'
 "endif
 
-" All of your Plugins must be added before the following line
-call plug#end()          " required
-
+" " All of your Plugins must be added before the following line
+" call plug#end()          " required
 
 
 if v:version > 800 || has('nvim')
@@ -198,15 +153,15 @@ if v:version > 800 || has('nvim')
 	" which is compatible with earlier versions of vim, so we check
 	" compatibility before each)
 
-	let &runtimepath.=',' . HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim'
+	let &runtimepath.=',' . $HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim'
 
 	" Required:
-	if dein#load_state(string(HOME . '/dotfiles/bundles/dein'))
-		call dein#begin(HOME . '/dotfiles/bundles/dein')
+	if dein#load_state(string($HOME . '/dotfiles/bundles/dein'))
+		call dein#begin($HOME . '/dotfiles/bundles/dein')
 
 		" Let dein manage dein
 		" Required:
-		call dein#add(HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
+		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
 		call dein#add('lyuts/vim-rtags', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
@@ -219,6 +174,7 @@ if v:version > 800 || has('nvim')
 		" Lazy-load on python
 		call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
 
+		" fugitive - a Git wrapper for vim. Also allows current
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
@@ -259,10 +215,17 @@ if v:version > 800 || has('nvim')
 		" Grep through repo
 		call dein#add('mhinz/vim-grepper')
 
+		call dein#add('elzr/vim-json')
+
 		" Status bar
 		call dein#add('powerline/powerline')
 
-		Plug 'airblade/vim-gitgutter'
+		call dein#add('rhysd/vim-clang-format')
+
+		" A plugin for asynchronous linting while you type
+		call dein#add('w0rp/ale')
+
+		call dein#add('airblade/vim-gitgutter')
 
 		" Asynchronous linting
 		call dein#add('benekastah/neomake') " Asynchronous linting
@@ -292,6 +255,13 @@ if v:version > 800 || has('nvim')
 
 		if has('nvim')
 			call dein#add('vimlab/split-term.vim')
+
+			call dein#add('autozimu/LanguageClient-neovim',
+				 \ {
+				 \	'rev': 'next',
+				 \	'build': 'bash install.sh',
+				 \ }
+			\ )
 		endif
 
 		" Install fzf, the fuzzy searcher
@@ -421,12 +391,43 @@ nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 " stage the hunk with <Leader>hs or
 " revert it with <Leader>hr.
-
-" It appears I have to double toggle it to get git gutter to work
-"GitGutterToggle
-"GitGutterToggle
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
+""""""""""""""""""" vim-clang-format """""""""""""""""""""
+" Detect clang-format file
+let g:clang_format#detect_style_file = 1
+
+" Key mappings for clang-format, to format source code:
+autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
+autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+
+" map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
+
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+
+" " neomake configuration
+" let g:neomake_cpp_enabled_makers = ['clangtidy']
+" let g:neomake_cpp_clangtidy_maker = {
+" 	\ 'exe': '/usr/bin/clang-tidy',
+" 	\ 'args': ['-checks=*' ],
+" 	\}
+" " Open error list automatically:
+" let g:neomake_open_list = 2
+" " Set up map for running Neomake:
+" nnoremap <leader>n :Neomake<CR>
+
+" ALE configuration
+let g:ale_linters = {
+\   'cpp': ['clangtidy'],
+\}
+let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
+let g:ale_cpp_clangtidy_executable = '/usr/bin/clang-tidy'
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
+
+""""""""""""""""""" /vim-clang-format """"""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -455,8 +456,8 @@ if has('unix')
 	" Turn off prompting to load .ycm_extra_conf.py:
 	let g:ycm_confirm_extra_conf = 0
 
-	" Map GetType to an easier key combination:
-	nnoremap <leader>ty :YcmCompleter GetType<CR>
+	" " Map GetType to an easier key combination:
+	" nnoremap <leader>ty :YcmCompleter GetType<CR>
 
 	" Compile the file
 	nnoremap <leader>y :YcmDiag<CR>
@@ -511,6 +512,23 @@ if has('unix')
 	map <F9> :YcmCompleter FixIt<CR>
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
+
+""""""""""""""""" LanguageClient Config """""""""""""""""""
+let g:LanguageClient_serverCommands = {
+	\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+\ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+" Limits how often the LanguageClient talks to the
+" server, so it reduces CPU load and flashing.
+let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_diagnosticsEnable = 0
+nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rt :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+""""""""""""""""" /LanguageClient Config """"""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
