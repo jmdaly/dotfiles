@@ -1,6 +1,3 @@
-" Needed for Vundles
-set shell=/bin/bash
-
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos = substitute(system('uname -o'), '\n', '', '')
