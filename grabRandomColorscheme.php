@@ -128,6 +128,7 @@ $whitelist = array(
 	'camo',
 	'candycode',
 	'chance-of-storm',
+	'clarity',
 	'clue', // good for diff
 	'cobalt',
 	'cobalt2',
