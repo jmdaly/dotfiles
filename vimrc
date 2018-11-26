@@ -199,10 +199,6 @@ if v:version > 800 || has('nvim')
 		" This should improve Git Fugitive and Git Gutter
 		call dein#add('tmux-plugins/vim-tmux-focus-events')
 
-		" Works with TPM vim-tmux-navigator to enable "seemless" integration or
-		" something
-		call dein#add('christoomey/vim-tmux-navigator')
-
 		" Plug to assist with commenting out blocks of text:
 		call dein#add('tomtom/tcomment_vim')
 
