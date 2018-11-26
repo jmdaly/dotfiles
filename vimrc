@@ -526,7 +526,7 @@ let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rt :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
 nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 """"""""""""""""" /LanguageClient Config """"""""""""""""""
 
