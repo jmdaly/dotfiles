@@ -3,12 +3,12 @@ alias screen="screen -e^Ff"
 alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
-if [[ "$(hostname)" != "pontus.cee.carleton.ca" ]]; then
-	alias ls="ls --color=auto -lAhtrF"
-else
-	alias ls="ls -lAhtrFG"
-fi
+alias ls="ls -lAhtrFG"
 alias grep="grep --color=always"
+
+if [[ -e /usr/bin/ag ]]; then
+	alias ag="ag -iU --color-line-number 34 --color-path 31"
+fi
 
 # Env Can doesn't have zsh..
 alias gst="git status -uno -sb"
@@ -26,6 +26,7 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gsta="git stash"
 	alias gstp="git stash pop"
 	alias grh="git reset HEAD"
+	alias gf="git fetch"
 fi
 #alias glog="git log --follow --name-status"
 
