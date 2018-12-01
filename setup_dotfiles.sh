@@ -122,10 +122,10 @@ if [[ "" != "$(which nvim)" ]]; then
 		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
 	fi
 
-	# Install vim Plug
-	if [[ ! -e ${h}/.config/nvim/autoload/plug.vim ]]; then
-		curl -fLo ${h}/.config/nvim/autoload/plug.vim --create-dirs \
-			https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	# Install dein
+	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
+		sh /tmp/installer.sh ~/dotfiles/bundles/dein
 	fi
 fi
 if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
