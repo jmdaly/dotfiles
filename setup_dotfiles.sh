@@ -128,10 +128,6 @@ if [[ "" != "$(which nvim)" ]]; then
 		sh /tmp/installer.sh ~/dotfiles/bundles/dein
 	fi
 fi
-if [[ ! -e ${h}/.vim/autoload/plug.vim ]]; then
-	curl -fLo ${h}/.vim/autoload/plug.vim --create-dirs \
-		 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
 
 if [[ -e .modulefiles && ! -L .modulerc ]]; then
 	ln -s .modulefiles/.modulerc ./
