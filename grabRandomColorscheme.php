@@ -144,6 +144,7 @@ $whitelist = array(
 	'darkslategray',
 	'darkspectrum', // good for diff
 	'darktango',
+	'deveiate',
 	'desertedocean',
 	'desertedoceanburnt',
 	'distinguished', // good for diff
