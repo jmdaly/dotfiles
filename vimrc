@@ -66,11 +66,6 @@ set nocompatible             " be iMproved, required
 filetype off                 " required
 
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 " Enable true colour support:
 if has('termguicolors')
@@ -514,7 +509,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
 \ }
 let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+let g:LanguageClient_settingsPath = $HOME.'/dotfiles/settings.json'
 " Limits how often the LanguageClient talks to the
 " server, so it reduces CPU load and flashing.
 let g:LanguageClient_changeThrottle = 0.5
