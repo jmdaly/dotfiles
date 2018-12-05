@@ -122,6 +122,7 @@ $whitelist = array(
 	'blacklight',
 	'blue',
 	'bluechia',
+	'breeze',
 	'bocau',
 	'busybee',
 	'bvemu', // good for diff
@@ -136,6 +137,7 @@ $whitelist = array(
 	'colorsbox-steighties',
 	'colorzone',
 	'cool',
+	'corporation',
 	'DimSlateBG',
 	'darkBlue',
 	'darkdot',
@@ -177,6 +179,7 @@ $whitelist = array(
 	'hotpot',
 	'hybrid_reverse',
 	'hybrid_material',
+	'hydrangea',
 	'inkpot',
 	'kalisi',
 	'kib_darktango',
