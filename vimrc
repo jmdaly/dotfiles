@@ -1,6 +1,3 @@
-" Needed for Vundles
-set shell=/bin/bash
-
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos = substitute(system('uname -o'), '\n', '', '')
@@ -69,11 +66,6 @@ set nocompatible             " be iMproved, required
 filetype off                 " required
 
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 " Enable true colour support:
 if has('termguicolors')
@@ -81,269 +73,59 @@ if has('termguicolors')
 endif
 
 
-call plug#begin('~/dotfiles/bundles')
+" call plug#begin('~/dotfiles/bundles')
+"
 
-if domain !=? 'neptec-small'
-	" Solarized colour scheme
-	Plug 'altercation/vim-colors-solarized'
-
-	if domain !=? 'ec' && domain !=? 'neptec-small'
-		" Atelier color scheme
-		Plug 'atelierbram/vim-colors_atelier-schemes'
-		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
-
-		" material
-		Plug 'kristijanhusak/vim-hybrid-material'
-
-		" Duotones
-		Plug 'atelierbram/vim-colors_duotones'
-
-		" Full of colour schemes:
-		Plug 'flazz/vim-colorschemes'
-		" Tomorrow Tomorrow-Night Tomorrow-Night-Eighties Tomorrow-Night-Bright Tomorrow-Night-Blue SlateDark PapayaWhip MountainDew Monokai Monokai-chris DevC++ c colorscheme_template colorful colorful256 colorer coldgreen coffee codeschool CodeFactoryv3 codeburn codeblocks_dark cobalt cobaltish clue cloudy clearance cleanroom cleanphp clarity ciscoacl chrysoprase chocolate ChocolatePapaya ChocolateLiquor chlordane chela_light Chasing_Logic charon charged-256 chance-of-storm cascadia carvedwood carvedwoodcool carrot caramel candy candyman candycode campfire camo calmar256-light cake16 C64 bw bvemu buttercream busybee busierbee burnttoast256 bubblegum brown brookstream breeze borland bog bocau bmichaelsen blugrine bluez blue blueshift blueprint bluegreen bluedrake bluechia blink blazer BlackSea blacklight blackdust blackboard blackbeauty black_angus biogoo billw bensday beauty256 beachcomber bclear bayQua baycomb basic base16-atelierdune badwolf babymate256 autumn autumnleaf automation atom asu1dark astronaut asmanian_blood ashen aqua apprentice ansi_blows anotherdark aiseered af advantage adrian adobe adaryn adam abra 3dglasses 256-jungle 256-grayvim 0x7A69_dark heliotrope habiLight h80 guepardo guardian gruvbox grishin greyblue grey2 greenvision greens grb256 graywh gravity grape gothic gotham gotham256 gor google golden golded gobo github getfresh getafe gentooish gemcolors gardener fu fruity fruit fruidle frood freya forneus fokus fog fnaqevan flatui flattr flatland flatlandia flatcolor fine_blue felipec far evening_2 enzyme emacs elrodeo elisex elise elda.vim* ekvoli ekinivim ego edo_sea editplus ecostation eclm_wombat eclipse earth earthburn earendel dusk dull dual doriath doorhinge donbass django distinguished disciple developer deveiate devbox-dark-256 detailed desert desertEx desertedocean desertedoceanburnt desert256 desert256v2 derefined denim delphi delek dawn darth darkZ darkzen darktango darkspectrum darkslategray dark-ruby darkroom darkrobot darkocean darker-robin darkerdesert darkeclipse darkdot darkburn darkbone darkBlue darkblue2 darkblack dante d8g_04 d8g_03 d8g_02 d8g_01 custom cthulhian corporation corn cool contrasty colorzone navajo-night nature native mustang muon mud mrpink mrkn256 motus moss moria mopkai mophiaSmoke mophiaDark montz monokain molokai mod_tcsoft mizore mint miko midnight midnight2 metacosm mellow mdark mayansmoke matrix martin_krischik mars maroloccio marklar manxome manuscript mango made_of_code mac_classic luna luinnar lucius louver lodestone lizard lizard256 literal_tango liquidcarbon lingodirector lilypink lilydjwg_green lilydjwg_dark lilac lightcolors leya lettuce less leo leglight2 legiblelight lazarus last256 landscape kyle kruby kolor kkruby kiss kib_plastic kib_darktango khaki kellys kate kalt kaltex kalisi jiks jhlight jhdark jellyx jellybeans jelleybeans jammy ironman ir_black inkpot ingretu industry industrial impact impactG iceberg icansee ibmedit iangenzo hybrid hybrid-light hornet holokai herokudoc herokudoc-gvim herald hemisu softblue softbluev2 smyck smp skittles_dark skittles_berry simplewhite simple_b simpleandfriendly simple256 silent sift sienna shobogenzo shadesofamber sf sexy-railscasts settlemyer seoul seoul256 seoul256-light selenitic sea seashell sean scite scala saturn satori sand rtl rootwater robinhood revolutions reloaded reliable relaxedgreen refactor redstring redblack rdark rdark-terminal rcg_term rcg_gui rastafari random rainbow_neon rainbow_fruit rainbow_fine_blue railscasts radicalgoodspeed quagmire python pyte pw putty psql pspad proton professional prmths print_bw potts pleasant playroom pink pic phpx phphaxor phd pf_earth perfect peppers pencil peaksea paintbox pacific otaku osx_like orange olive oceanlight oceandeep oceanblack oceanblack256 obsidian obsidian2 nuvola nour norwaytoday northsky northland no_quarter nightwish nightVision night_vision night nightsky nightshimmer nightflight nightflight2 nicotine newsprint newspaper nevfn neverness neverland neverland-darker neverland2 neverland2-darker neutron nerv-ous neon nefertiti nedit nedit2 nazca navajo zmrok zephyr zen zenesque zenburn zazen yeller yaml xterm16 xoria256 xmaslights xian xemacs wuye wood wombat wombat256 wombat256mod wombat256i winter wintersday win9xblueback widower whitedust whitebox watermark warm_grey wargrey vylight vydark void vj vividchalk visualstudio vilight vibrantink vexorian vc vcbc vanzan_color up underwater underwater-mod understated umber-green ubloh two2tango twitchy twilight twilight256 tutticolori turbo trogdor trivial256 transparent torte toothpik tony_light tomatosoup tolerable tir_black tidy tibet thor thestars thegoodluck textmate16 tetragrammaton tesla telstar tcsoft tchaba tchaba2 taqua tangoX tango tangoshady tango-morning tango-desert tango2 tabula synic symfony swamplight surveyor summerfruit summerfruit256 strawimodo strange stingray stackoverflow spring spiderhawk spectro southwest-fog southernlights soso sorcerer sonoma sonofobsidian sol sol-term solarized softlight
-	endif
-
-	" Other..
-	Plug 'joshdick/onedark.vim'
-	Plug 'arcticicestudio/nord-vim'
-	Plug 'drewtempelmeyer/palenight.vim'
-	Plug 'morhetz/gruvbox'
-	Plug 'mhartington/oceanic-next'
-
-	Plug 'ayu-theme/ayu-vim'
-	let ayucolor="mirage"
-
-endif
-
-if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
-	" YouCompleteMe
-	Plug 'Valloric/YouCompleteMe'
-
-	" YCMGenerator - generates configs for YouCompleteMe
-	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
-
-	" tagbar - allows browsing tags of the current source file
-	" from ctags. Good for seeing functions, variables, etc.
-	Plug 'majutsushi/tagbar'
-endif
-
-if domain !=? 'neptec-small' && domain !=? 'school'
-	" PHP Complete
-	Plug 'shawncplus/phpcomplete.vim'
-endif
-
-
-if domain !=? 'neptec-small'
-	" Install fzf, the fuzzy searcher
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
-endif
-
-if is_win==0 && domain !=? 'ec' && domain !=? 'school'
-	" Better C++ Syntax Highlighting:
-	Plug 'octol/vim-cpp-enhanced-highlight'
-endif
-
-if is_win==0 && domain !=? 'ec' && domain !=? 'siteground'
-	" Track the ultisnips engine.
-	Plug 'SirVer/ultisnips'
-
-	" Snippets are separated from the engine. Add this if you want them:
-	Plug 'honza/vim-snippets'
-endif
-
-" Easy motion
-" Plug 'easymotion/vim-easymotion'
-
-
-
-if is_win==0 && (domain ==? 'neptec' || domain ==? 'home')
-
-	""""""""""""""""""" vim-clang-format """""""""""""""""""""
-	Plug 'rhysd/vim-clang-format'
-
-	" Detect clang-format file
-	let g:clang_format#detect_style_file = 1
-	""""""""""""""""""" /vim-clang-format """"""""""""""""""""
-
-	" Key mappings for clang-format, to format source code:
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/vim/addons/syntax/clang-format.py<CR>
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
-	autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
-
-	nmap <Leader>C :ClangFormatAutoToggle<CR>
-
-	" neomake configuration
-	let g:neomake_cpp_enabled_makers = ['clangtidy']
-	let g:neomake_cpp_clangtidy_maker = {
-		\ 'exe': '/usr/bin/clang-tidy',
-		\ 'args': ['-checks=*' ],
-		\}
-	" Open error list automatically:
-	let g:neomake_open_list = 2
-	" Set up map for running Neomake:
-	nnoremap <leader>n :Neomake<CR>
-
-endif
-
-
-
-" fugitive - a Git wrapper for vim. Also allows current
-" git branch to be shown by vim-airline:
-Plug 'tpope/vim-fugitive'
-set diffopt+=vertical
-" command GdiffOld exe "Gdiff develop:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
-" command Gdiff1352n exe "Gdiff 1352-2-merge_in_gf:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Applications', 'Apps', 'g')
-" command Gdiff1352o exe "Gdiff 1352_sdf_w_ground:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-" command Gdiffo exe "Gdiff v2.4.1:" . substitute(expand('%:p'), '/home/matt/workspace/opal2/3dri/Apps', 'Applications', 'g')
-" command! Diffo exe "vertical diffsplit " . substitute(substitute(expand('%:p'), '/3dri/', '/3dri-2.4.0/', 'g'), '/Apps/', 'Applications', 'g')
-
-" Used for navigating the quickfix window better.  Recommended by fugitive
-Plug 'tpope/vim-unimpaired'
-
-" Adding this so I can search/replace and preserve letter case
-Plug 'tpope/vim-abolish'
-
-if domain !=? 'school' && domain !=? 'ec'
-	" gitgutter - Shows [git] status of each line in a file
-	" On Dena, this injects annoying arroy key characters everywhere (e.g. ^[0D
-	" ^[0B ^[0A ^[0C)
-
-	" Toggle with :GitGutterToggle
-	Plug 'airblade/vim-gitgutter'
-endif
-
-if domain !=? 'siteground'
-	" Plug to assist with commenting out blocks of text:
-	Plug 'tomtom/tcomment_vim'
-endif
-
-" Status bar
-Plug 'powerline/powerline'
-
-if domain !=? 'ec' && domain !=? 'school'
-	" Switch between header and source files:
-	" TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-	Plug 'derekwyatt/vim-fswitch'
-endif
-
-" Plug to help manage vim buffers:
-" Plug 'jeetsukumaran/vim-buffergator'
+" if domain !=? 'ec' && domain !=? 'school'
+" 	" Switch between header and source files:
+" 	" TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
+" 	Plug 'derekwyatt/vim-fswitch'
+" endif
 
 " Plug to highlight the variable under the cursor:
 " Appears to have been deleted off GitHub, still available at: http://www.vim.org/scripts/script.php?script_id=4306
 " Plug 'OrelSokolov/HiCursorWords'
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground'
-	" Doxygen
-	Plug 'vim-scripts/DoxygenToolkit.vim'
-endif
+" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
+" 	" Colour coding nests
+" 	Plug 'luochen1990/rainbow'
+" 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+" endif
 
-if domain !=? 'school' && domain !=? 'ec' && domain !=? 'neptec-small' && domain !=? 'siteground' && !is_win
-	" A Plug to use rtags in vim. (rtags allows for code following,
-	" some refactoring, etc.)
-	" Ensure to run the following in the build directory that uses rtags
-	"    cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-	"    rc -J .
-	" And have the rdm service running somewhere in the background.
-	Plug 'lyuts/vim-rtags'
-endif
 
-if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
-	" Colour coding nests
-	Plug 'luochen1990/rainbow'
-	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-endif
-
-" Tabular, align equals
-Plug 'godlygeek/tabular'
-
-" Show markers
-Plug 'kshenoy/vim-signature'
-
-" Suppose to make closing splits better (less window resizing)
-
-if domain !=? 'neptec-small' && domain !=? 'ec'
-	" Python Syntax highlighting (the default is pretty bad)
-	" For some reason this helps syntax highlighting in general though
-	Plug 'Hdima/python-syntax'
-endif
-
-if domain !=? 'neptec-small'
-	" Plug to wrap all the various grep tools, and provide
-	" some more advanced search functionality
-	Plug 'mhinz/vim-grepper'
-endif
-
-" Manage font size
-if domain !=? 'neptec-small' && domain !=? 'ec' && domain !=? 'siteground'
-	Plug 'drmikehenry/vim-fontsize'
-endif
-
-" Plugin to change the current directory to a project's root (so, look for
-" .git or something)
-if domain !=? 'siteground'
-	Plug 'airblade/vim-rooter'
-endif
+" " Manage font size
+" if domain !=? 'neptec-small' && domain !=? 'ec' && domain !=? 'siteground'
+" 	Plug 'drmikehenry/vim-fontsize'
+" endif
 
 " Javascript plugins to try
-if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
-	Plug 'pangloss/vim-javascript'
+" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
+	" Plug 'pangloss/vim-javascript'
+   "
+	" " General conceal settings. Will keep things concealed
+	" " even when your cursor is on top of them.
+	" Plug 'Wolfy87/vim-syntax-expand'
+	" set conceallevel=1
+	" set concealcursor=nvic
+   "
+	" " vim-javascript conceal settings.
+	" let g:javascript_conceal_function = "λ"
+	" let g:javascript_conceal_this = "@"
+	" let g:javascript_conceal_return = "<"
+	" let g:javascript_conceal_prototype = "#"
+" endif
 
-	" General conceal settings. Will keep things concealed
-	" even when your cursor is on top of them.
-	Plug 'Wolfy87/vim-syntax-expand'
-	set conceallevel=1
-	set concealcursor=nvic
-
-	" vim-javascript conceal settings.
-	let g:javascript_conceal_function = "λ"
-	let g:javascript_conceal_this = "@"
-	let g:javascript_conceal_return = "<"
-	let g:javascript_conceal_prototype = "#"
-endif
-
-" This should improve Git Fugitive and Git Gutter
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
-if domain ==? 'neptec'
-	Plug 'calincru/qml.vim'
-
-	Plug 'benekastah/neomake' " Asynchronous linting
-endif
-
-" Vim sugar for the UNIX shell commands that need it the most. Features include:
-" :Remove: Delete a buffer and the file on disk simultaneously.
-" :Unlink: Like :Remove, but keeps the now empty buffer.
-" :Move:   Rename a buffer and the file on disk simultaneously.
-" :Rename: Like :Move, but relative to the current file's containing directory.
-" :Chmod:  Change the permissions of the current file.
-" :Mkdir:  Create a directory, defaulting to the parent of the current file.
-" :Find:   Run find and load the results into the quickfix list.
-" :Locate: Run locate and load the results into the quickfix list.
-" :Wall:   Write every open window. Handy for kicking off tools like guard.
-" :SudoWrite: Write a privileged file with sudo.
-" :SudoEdit:  Edit a privileged file with sudo.
-Plug 'tpope/vim-eunuch'
 
 " These are getting annoying, and aren't helping with tmux anyways
 " Handle auto-calling mksession
 " Plug 'tpope/vim-obsession'
 " Plug 'dhruvasagar/vim-prosession'
 
-if has('nvim')
-	Plug 'vimlab/split-term.vim'
-endif
 
-
-if !has('gui_running') && !is_win && domain !=? 'siteground'
-	" Plugin to get gvim colourschemes work better in terminal vim
-	Plug 'godlygeek/csapprox'
-endif
-
-if domain !=? 'school'
-	Plug 'tikhomirov/vim-glsl'
-endif
+" if !has('gui_running') && !is_win && domain !=? 'siteground'
+" 	" Plugin to get gvim colourschemes work better in terminal vim
+" 	Plug 'godlygeek/csapprox'
+" endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
@@ -353,16 +135,181 @@ endif
 "	Plug 'floobits/floobits-neovim'
 "endif
 
-" Have vim reload a file if it has changed outside
-" of vim:
-if has('nvim')
-	Plug 'TheZoq2/neovim-auto-autoread'
+" " All of your Plugins must be added before the following line
+" call plug#end()          " required
+
+
+if v:version > 800 || has('nvim')
+	" Switching to dein.  In this section we assume if we're using dein, then
+	" we're on a good enough vim to load any of these plugins (unlike with Plug
+	" which is compatible with earlier versions of vim, so we check
+	" compatibility before each)
+
+	let &runtimepath.=',' . $HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim'
+
+	" Required:
+	if dein#load_state(string($HOME . '/dotfiles/bundles/dein'))
+		call dein#begin($HOME . '/dotfiles/bundles/dein')
+
+		" Let dein manage dein
+		" Required:
+		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
+
+		" Lazy-load on C++
+		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+
+		" Lazy-load on PHP
+		call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
+
+		" Lazy-load on python
+		call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
+
+		" fugitive - a Git wrapper for vim. Also allows current
+		call dein#add('tpope/vim-fugitive')
+		set diffopt+=vertical
+
+		call dein#add('Valloric/YouCompleteMe',
+			\ {
+			\ 	'rev': 'auto',
+			\	'build': 'bash ./install.py --clang-completer --clang-tidy'
+			\ }
+		\ )
+
+		" call dein#add('majutsushi/tagbar')
+
+		" Plugin to change the current directory to a project's root (so, look for
+		" .git or something)
+		call dein#add('airblade/vim-rooter')
+
+		call dein#add('SirVer/ultisnips')
+		call dein#add('honza/vim-snippets')
+
+		" Adding this so I can search/replace and preserve letter case
+		call dein#add('tpope/vim-abolish')
+
+		" Used for navigating the quickfix window better.  Recommended by fugitive
+		call dein#add('tpope/vim-unimpaired')
+
+		" This should improve Git Fugitive and Git Gutter
+		call dein#add('tmux-plugins/vim-tmux-focus-events')
+
+		" Plug to assist with commenting out blocks of text:
+		call dein#add('tomtom/tcomment_vim')
+
+		" Tabular, align equals
+		call dein#add('godlygeek/tabular')
+
+		" Show markers
+		call dein#add('kshenoy/vim-signature')
+
+		" Grep through repo
+		call dein#add('mhinz/vim-grepper')
+
+		call dein#add('elzr/vim-json')
+
+		" Status bar
+		call dein#add('powerline/powerline')
+
+		call dein#add('rhysd/vim-clang-format')
+
+		" A plugin for asynchronous linting while you type
+		call dein#add('w0rp/ale')
+
+		call dein#add('airblade/vim-gitgutter')
+
+		" Asynchronous linting
+		call dein#add('benekastah/neomake') " Asynchronous linting
+
+		" call dein#add('editorconfig/editorconfig-vim')
+
+		" Vim sugar for the UNIX shell commands that need it the most. Features include:
+		" :Remove: Delete a buffer and the file on disk simultaneously.
+		" :Unlink: Like :Remove, but keeps the now empty buffer.
+		" :Move:   Rename a buffer and the file on disk simultaneously.
+		" :Rename: Like :Move, but relative to the current file's containing directory.
+		" :Chmod:  Change the permissions of the current file.
+		" :Mkdir:  Create a directory, defaulting to the parent of the current file.
+		" :Find:   Run find and load the results into the quickfix list.
+		" :Locate: Run locate and load the results into the quickfix list.
+		" :Wall:   Write every open window. Handy for kicking off tools like guard.
+		" :SudoWrite: Write a privileged file with sudo.
+		" :SudoEdit:  Edit a privileged file with sudo.
+		call dein#add('tpope/vim-eunuch')
+
+		if has('nvim')
+			" Have vim reload a file if it has changed outside of vim:
+			" Note: this queries every 2 seconds, this might be what I had issues
+			" with
+			call dein#add('TheZoq2/neovim-auto-autoread')
+		endif
+
+		if has('nvim')
+			call dein#add('vimlab/split-term.vim')
+
+			call dein#add('autozimu/LanguageClient-neovim',
+				 \ {
+				 \	'rev': 'next',
+				 \	'build': 'bash install.sh',
+				 \ }
+			\ )
+		endif
+
+		" Install fzf, the fuzzy searcher
+		call dein#add('junegunn/fzf', {'build': './install --all' } )
+		call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
+
+		" aall dein#add('calincru/qml.vim')
+		" call dein#add('tikhomirov/vim-glsl')
+
+		"
+		" Colourschemes
+		" Solarized colour scheme
+		call dein#add('altercation/vim-colors-solarized')
+
+		" Atelier color scheme
+		call dein#add('atelierbram/vim-colors_atelier-schemes')
+		" base16-atelierforest base16-atelierplateau base16-atelierheath base16-ateliercave base16-ateliersulphurpool base16-atelierlakeside base16-ateliersavanna base16-atelierseaside base16-atelierdune base16-atelierestuary
+
+		" material
+		call dein#add('kristijanhusak/vim-hybrid-material')
+
+		" Duotones
+		call dein#add('atelierbram/vim-colors_duotones')
+
+		" Full of colour schemes:
+		call dein#add('flazz/vim-colorschemes')
+		" Tomorrow Tomorrow-Night Tomorrow-Night-Eighties Tomorrow-Night-Bright Tomorrow-Night-Blue SlateDark PapayaWhip MountainDew Monokai Monokai-chris DevC++ c colorscheme_template colorful colorful256 colorer coldgreen coffee codeschool CodeFactoryv3 codeburn codeblocks_dark cobalt cobaltish clue cloudy clearance cleanroom cleanphp clarity ciscoacl chrysoprase chocolate ChocolatePapaya ChocolateLiquor chlordane chela_light Chasing_Logic charon charged-256 chance-of-storm cascadia carvedwood carvedwoodcool carrot caramel candy candyman candycode campfire camo calmar256-light cake16 C64 bw bvemu buttercream busybee busierbee burnttoast256 bubblegum brown brookstream breeze borland bog bocau bmichaelsen blugrine bluez blue blueshift blueprint bluegreen bluedrake bluechia blink blazer BlackSea blacklight blackdust blackboard blackbeauty black_angus biogoo billw bensday beauty256 beachcomber bclear bayQua baycomb basic base16-atelierdune badwolf babymate256 autumn autumnleaf automation atom asu1dark astronaut asmanian_blood ashen aqua apprentice ansi_blows anotherdark aiseered af advantage adrian adobe adaryn adam abra 3dglasses 256-jungle 256-grayvim 0x7A69_dark heliotrope habiLight h80 guepardo guardian gruvbox grishin greyblue grey2 greenvision greens grb256 graywh gravity grape gothic gotham gotham256 gor google golden golded gobo github getfresh getafe gentooish gemcolors gardener fu fruity fruit fruidle frood freya forneus fokus fog fnaqevan flatui flattr flatland flatlandia flatcolor fine_blue felipec far evening_2 enzyme emacs elrodeo elisex elise elda.vim* ekvoli ekinivim ego edo_sea editplus ecostation eclm_wombat eclipse earth earthburn earendel dusk dull dual doriath doorhinge donbass django distinguished disciple developer deveiate devbox-dark-256 detailed desert desertEx desertedocean desertedoceanburnt desert256 desert256v2 derefined denim delphi delek dawn darth darkZ darkzen darktango darkspectrum darkslategray dark-ruby darkroom darkrobot darkocean darker-robin darkerdesert darkeclipse darkdot darkburn darkbone darkBlue darkblue2 darkblack dante d8g_04 d8g_03 d8g_02 d8g_01 custom cthulhian corporation corn cool contrasty colorzone navajo-night nature native mustang muon mud mrpink mrkn256 motus moss moria mopkai mophiaSmoke mophiaDark montz monokain molokai mod_tcsoft mizore mint miko midnight midnight2 metacosm mellow mdark mayansmoke matrix martin_krischik mars maroloccio marklar manxome manuscript mango made_of_code mac_classic luna luinnar lucius louver lodestone lizard lizard256 literal_tango liquidcarbon lingodirector lilypink lilydjwg_green lilydjwg_dark lilac lightcolors leya lettuce less leo leglight2 legiblelight lazarus last256 landscape kyle kruby kolor kkruby kiss kib_plastic kib_darktango khaki kellys kate kalt kaltex kalisi jiks jhlight jhdark jellyx jellybeans jelleybeans jammy ironman ir_black inkpot ingretu industry industrial impact impactG iceberg icansee ibmedit iangenzo hybrid hybrid-light hornet holokai herokudoc herokudoc-gvim herald hemisu softblue softbluev2 smyck smp skittles_dark skittles_berry simplewhite simple_b simpleandfriendly simple256 silent sift sienna shobogenzo shadesofamber sf sexy-railscasts settlemyer seoul seoul256 seoul256-light selenitic sea seashell sean scite scala saturn satori sand rtl rootwater robinhood revolutions reloaded reliable relaxedgreen refactor redstring redblack rdark rdark-terminal rcg_term rcg_gui rastafari random rainbow_neon rainbow_fruit rainbow_fine_blue railscasts radicalgoodspeed quagmire python pyte pw putty psql pspad proton professional prmths print_bw potts pleasant playroom pink pic phpx phphaxor phd pf_earth perfect peppers pencil peaksea paintbox pacific otaku osx_like orange olive oceanlight oceandeep oceanblack oceanblack256 obsidian obsidian2 nuvola nour norwaytoday northsky northland no_quarter nightwish nightVision night_vision night nightsky nightshimmer nightflight nightflight2 nicotine newsprint newspaper nevfn neverness neverland neverland-darker neverland2 neverland2-darker neutron nerv-ous neon nefertiti nedit nedit2 nazca navajo zmrok zephyr zen zenesque zenburn zazen yeller yaml xterm16 xoria256 xmaslights xian xemacs wuye wood wombat wombat256 wombat256mod wombat256i winter wintersday win9xblueback widower whitedust whitebox watermark warm_grey wargrey vylight vydark void vj vividchalk visualstudio vilight vibrantink vexorian vc vcbc vanzan_color up underwater underwater-mod understated umber-green ubloh two2tango twitchy twilight twilight256 tutticolori turbo trogdor trivial256 transparent torte toothpik tony_light tomatosoup tolerable tir_black tidy tibet thor thestars thegoodluck textmate16 tetragrammaton tesla telstar tcsoft tchaba tchaba2 taqua tangoX tango tangoshady tango-morning tango-desert tango2 tabula synic symfony swamplight surveyor summerfruit summerfruit256 strawimodo strange stingray stackoverflow spring spiderhawk spectro southwest-fog southernlights soso sorcerer sonoma sonofobsidian sol sol-term solarized softlight
+
+		" Other..
+		call dein#add('joshdick/onedark.vim')
+		call dein#add('arcticicestudio/nord-vim')
+		call dein#add('drewtempelmeyer/palenight.vim')
+		call dein#add('morhetz/gruvbox')
+		call dein#add('mhartington/oceanic-next')
+
+		call dein#add('ayu-theme/ayu-vim')
+		let ayucolor="mirage"
+		"
+		" /Colourschemes
+
+	  " Required:
+	  call dein#end()
+	  call dein#save_state()
+	endif
+
+	" Required:
+	filetype plugin indent on
+	syntax enable
+
+	" If you want to install not installed plugins on startup.
+	if dein#check_install()
+	 call dein#install()
+	endif
+
+	"End dein Scripts-------------------------
 endif
 
-Plug 'editorconfig/editorconfig-vim'
-
-" All of your Plugins must be added before the following line
-call plug#end()          " required
 
 
 " TODO Put these in a pluggin
@@ -437,12 +384,43 @@ nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 " stage the hunk with <Leader>hs or
 " revert it with <Leader>hr.
-
-" It appears I have to double toggle it to get git gutter to work
-"GitGutterToggle
-"GitGutterToggle
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
+""""""""""""""""""" vim-clang-format """""""""""""""""""""
+" Detect clang-format file
+let g:clang_format#detect_style_file = 1
+
+" Key mappings for clang-format, to format source code:
+autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
+autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+
+" map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
+
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+
+" " neomake configuration
+" let g:neomake_cpp_enabled_makers = ['clangtidy']
+" let g:neomake_cpp_clangtidy_maker = {
+" 	\ 'exe': '/usr/bin/clang-tidy',
+" 	\ 'args': ['-checks=*' ],
+" 	\}
+" " Open error list automatically:
+" let g:neomake_open_list = 2
+" " Set up map for running Neomake:
+" nnoremap <leader>n :Neomake<CR>
+
+" ALE configuration
+let g:ale_linters = {
+\   'cpp': ['clangtidy'],
+\}
+let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
+let g:ale_cpp_clangtidy_executable = '/usr/bin/clang-tidy'
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
+
+""""""""""""""""""" /vim-clang-format """"""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
@@ -471,8 +449,8 @@ if has('unix')
 	" Turn off prompting to load .ycm_extra_conf.py:
 	let g:ycm_confirm_extra_conf = 0
 
-	" Map GetType to an easier key combination:
-	nnoremap <leader>ty :YcmCompleter GetType<CR>
+	" " Map GetType to an easier key combination:
+	" nnoremap <leader>ty :YcmCompleter GetType<CR>
 
 	" Compile the file
 	nnoremap <leader>y :YcmDiag<CR>
@@ -528,6 +506,23 @@ if has('unix')
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
+""""""""""""""""" LanguageClient Config """""""""""""""""""
+let g:LanguageClient_serverCommands = {
+	\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+\ }
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_settingsPath = $HOME.'/dotfiles/settings.json'
+" Limits how often the LanguageClient talks to the
+" server, so it reduces CPU load and flashing.
+let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_diagnosticsEnable = 0
+nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+""""""""""""""""" /LanguageClient Config """"""""""""""""""
+
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 if is_win==0 && domain !=? 'school'
@@ -551,35 +546,6 @@ if is_win==0 && domain !=? 'school'
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
-
-""""""""""""""""""""" Airline Config """"""""""""""""""""""
-" For vim-airline, ensure the status line is always displayed:
-set laststatus=2
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-" Certain number of spaces are allowed after a tab (so, /**\n* comments can work
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-"""""""""""""""""""" /Airline Config """"""""""""""""""""""
-
-
-""""""""""""""""""""" Tagbar Config """"""""""""""""""""""
-" tagbar config. Enable it using this key map:
-nmap <F8> :TagbarToggle<CR>
-"""""""""""""""""""" /Tagbar Config """"""""""""""""""""""
-
-
-
-
-if is_win==0 && domain ==? 'neptec'
-
-	"""""""""""""""""""" ctags """""""""""""""""""""""
-	" A key map to run ctags:
-	nnoremap <leader>ct :!ctags .<CR>
-	"""""""""""""""""""" /ctags """"""""""""""""""""""
-
-endif
 
 
 """"""""""""""""""""""" Grepper """"""""""""""""""""""""""
@@ -609,74 +575,31 @@ nmap <silent> <Leader>of :FSHere<cr>
 
 
 
-"""""""""""""""" Rainbow (foldering) """""""""""""""""""
-	let g:rainbow_conf = {
-	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-	\   'operators': '_,_',
-	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-	\   'separately': {
-	\	   '*': {},
-	\	   'tex': {
-	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-	\	   },
-	\	   'lisp': {
-	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-	\	   },
-	\	   'vim': {
-	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-	\	   },
-	\	   'html': {
-	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-	\	   },
-	\	   'css': 0,
-	\   }
-	\}
-"""""""""""""""" /Rainbow (foldering) """""""""""""""""""
+" """""""""""""""" Rainbow (foldering) """""""""""""""""""
+" 	let g:rainbow_conf = {
+" 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+" 	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+" 	\   'operators': '_,_',
+" 	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+" 	\   'separately': {
+" 	\	   '*': {},
+" 	\	   'tex': {
+" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+" 	\	   },
+" 	\	   'cpp': {
+" 	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+" 	\	   },
+" 	\	   'vim': {
+" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+" 	\	   },
+" 	\	   'html': {
+" 	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+" 	\	   },
+" 	\	   'css': 0,
+" 	\   }
+" 	\}
+" """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
-
-"""""""""""""""" Wipeout """""""""""""""""""
-" Source: http://stackoverflow.com/a/1536094/1861346
-" @breif Remove all buffers not currently being displayed
-
-function! Wipeout()
-	" list of *all* buffer numbers
-	let l:buffers = range(1, bufnr('$'))
-
-	" what tab page are we in?
-	let l:currentTab = tabpagenr()
-	try
-		" go through all tab pages
-		let l:tab = 0
-		while l:tab < tabpagenr('$')
-			let l:tab += 1
-
-			" go through all windows
-			let l:win = 0
-			while l:win < winnr('$')
-				let l:win += 1
-				" whatever buffer is in this window in this tab, remove it from
-				" l:buffers list
-				let l:thisbuf = winbufnr(l:win)
-				call remove(l:buffers, index(l:buffers, l:thisbuf))
-			endwhile
-		endwhile
-
-		" if there are any buffers left, delete them
-		if len(l:buffers)
-			execute 'bwipeout' join(l:buffers)
-		endif
-	finally
-		" go back to our original tab page
-		execute 'tabnext' l:currentTab
-	endtry
-endfunction
-"""""""""""""""" /Wipeout """""""""""""""""""
-
-
-"""""""""""""" python-syntax """""""""""""""""
-" No options yet..
-""""""""""""" /python-syntax """""""""""""""""
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
@@ -693,7 +616,6 @@ noremap <leader><Tab> :Buffers<CR>
 
 """""""""""""""""""""" prosession  """"""""""""""""""""""""
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
-
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
 
 " Command to format Neptec's XML into valid XML

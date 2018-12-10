@@ -26,7 +26,6 @@ set-alias BuildRTags "cmake . -DCMAKE_EXPORT_COMPILE_COMMANDS=1; rc -J ."
 set     BUILD_TYPE    "Release"
 # Use clang.  To use g++, change the path to $(which g++)
 
-setenv  CCACHE_PREFIX  "distcc"
 # setenv  CCACHE_DIR     /media/ccache
 setenv  CCACHE_UMASK   002
 # setenv  CCACHE_BASEDIR $bld # This should be set by autoenv or something
