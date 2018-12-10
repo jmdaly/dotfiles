@@ -150,6 +150,7 @@ $whitelist = array(
 	'distinguished', // good for diff
 	'doorhinge',
 	'duotone-darkearth', // set background=dark  .. need to implement this ability
+	'duotone-darkpool',
 	'dusk',
 	'eclipse',
 	'ecostation',
@@ -222,6 +223,7 @@ $whitelist = array(
 	'strawimodo',
 	'sand',
 	'scite',
+	'scooby',
 	'selenitic',
 	'sexy-railscasts',
 	'sf',

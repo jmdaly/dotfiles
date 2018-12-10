@@ -152,7 +152,6 @@ if v:version >= 800 || has('nvim')
 		call dein#begin($HOME . '/dotfiles/bundles/dein')
 
 		" Let dein manage dein
-		" Required:
 		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
@@ -482,7 +481,8 @@ if has('unix')
 		\ 'vert'      : 1,
 		\ 'comp'      : 1,
 		\ 'qml'       : 1,
-		\ 'tex'       : 1
+		\ 'tex'       : 1,
+		\ 'lcm'       : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
@@ -520,8 +520,10 @@ let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rJ :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
 nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 """"""""""""""""" /LanguageClient Config """"""""""""""""""
 
