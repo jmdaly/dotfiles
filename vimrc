@@ -139,7 +139,7 @@ endif
 " call plug#end()          " required
 
 
-if v:version > 800 || has('nvim')
+if v:version >= 800 || has('nvim')
 	" Switching to dein.  In this section we assume if we're using dein, then
 	" we're on a good enough vim to load any of these plugins (unlike with Plug
 	" which is compatible with earlier versions of vim, so we check
