@@ -169,21 +169,23 @@ if v:version >= 800 || has('nvim')
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		call dein#add('Valloric/YouCompleteMe',
-			\ {
-			\ 	'rev': 'auto',
-			\	'build': 'bash ./install.py --clang-completer --clang-tidy'
-			\ }
-		\ )
+		if 0==is_win
+			call dein#add('Valloric/YouCompleteMe',
+				\ {
+				\ 	'rev': 'auto',
+				\	'build': 'bash ./install.py --clang-completer --clang-tidy'
+				\ }
+			\ )
+
+			call dein#add('SirVer/ultisnips')
+			call dein#add('honza/vim-snippets')
+		endif
 
 		" call dein#add('majutsushi/tagbar')
 
 		" Plugin to change the current directory to a project's root (so, look for
 		" .git or something)
 		call dein#add('airblade/vim-rooter')
-
-		call dein#add('SirVer/ultisnips')
-		call dein#add('honza/vim-snippets')
 
 		" Adding this so I can search/replace and preserve letter case
 		call dein#add('tpope/vim-abolish')
@@ -255,7 +257,7 @@ if v:version >= 800 || has('nvim')
 			\ )
 		endif
 
-		" Install fzf, the fuzzy searcher
+		" Install fzf, the fuzzy searcher (also loads Ultisnips)
 		call dein#add('junegunn/fzf', {'build': './install --all' } )
 		call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
 
@@ -525,7 +527,7 @@ nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if is_win==0 && domain !=? 'school'
+if 0==is_win && domain !=? 'school'
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
