@@ -139,7 +139,7 @@ endif
 " call plug#end()          " required
 
 
-if v:version > 800 || has('nvim')
+if v:version >= 800 || has('nvim')
 	" Switching to dein.  In this section we assume if we're using dein, then
 	" we're on a good enough vim to load any of these plugins (unlike with Plug
 	" which is compatible with earlier versions of vim, so we check
@@ -152,7 +152,6 @@ if v:version > 800 || has('nvim')
 		call dein#begin($HOME . '/dotfiles/bundles/dein')
 
 		" Let dein manage dein
-		" Required:
 		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
@@ -366,9 +365,11 @@ if is_win
 	set ffs=unix
 	set backspace=2
 
-	" Typically windows is used with remote desktop from a smaller screen, so
-	" the font is too big..
-	GuiFont! Consolas:h10
+	if has('gui_running')
+		" Typically windows is used with remote desktop from a smaller screen, so
+		" the font is too big..
+		GuiFont! Consolas:h10
+	endif
 
 	" options: set backspace=indent,eol,start
 "elseif has('mac')
@@ -478,7 +479,8 @@ if has('unix')
 		\ 'vert'      : 1,
 		\ 'comp'      : 1,
 		\ 'qml'       : 1,
-		\ 'tex'       : 1
+		\ 'tex'       : 1,
+		\ 'lcm'       : 1
 	\}
 
 	let g:ycm_filetype_whitelist = {
@@ -516,8 +518,10 @@ let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rJ :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
 nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 """"""""""""""""" /LanguageClient Config """"""""""""""""""
 
