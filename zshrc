@@ -157,10 +157,10 @@ if [[ $? == 1 ]]; then
 
 	# Environmental Modules
 	case "$0" in
-	-sh|sh|*/sh)	modules_shell=sh ;;
-	-ksh|ksh|*/ksh)	modules_shell=ksh ;;
-	-zsh|zsh|*/zsh)	modules_shell=zsh ;;
-	-bash|bash|*/bash)	modules_shell=bash ;;
+	-sh|sh|*/sh)        modules_shell=sh   ;;
+	-ksh|ksh|*/ksh)     modules_shell=ksh  ;;
+	-zsh|zsh|*/zsh)     modules_shell=zsh  ;;
+	-bash|bash|*/bash)  modules_shell=bash ;;
 	esac
 
 	export MODULEPATH=/usr/share/modules/modulefiles
@@ -173,8 +173,7 @@ if [[ $? == 1 ]]; then
 fi;
 
 if [[ $(hostname) == "khea" ]]; then
-	module use /usr/local/Modules/default/modulefiles/
-	module use /opt/pgi/modulefiles
+	module use /usr/local/Modules/default/modulefiles
 	module load modules
 
 	module load khea
@@ -185,7 +184,7 @@ if [[ $(hostname) == "khea" ]]; then
 	#module load youtuber
 
 	# CMC
-	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
+	# export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
 elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
