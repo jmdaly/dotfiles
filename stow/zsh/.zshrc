@@ -24,8 +24,7 @@ zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some ot
 zplug "zsh-users/zsh-syntax-highlighting"
 
 # Load the theme.
-setopt prompt_subst # Make sure prompt is able to be generated properly.
-zplug "caiogondim/bullet-train.zsh", use:bullet-train.zsh-theme, defer:3 # defer until other plugins like oh-my-zsh is loaded
+zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -56,29 +55,6 @@ fi
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
 
-# Set some preferences for the bullet train theme:
-export BULLETTRAIN_CONTEXT_SHOW=true
-export BULLETTRAIN_TIME_SHOW=false
-export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-export BULLETTRAIN_RUBY_SHOW=false
-export BULLETTRAIN_GIT_BG="green"
-export BULLETTRAIN_DIR_FG="black"
-export BULLETTRAIN_PROMPT_CHAR="$ "
-
-BULLETTRAIN_PROMPT_ORDER=(
-  status 
-  custom 
-  context 
-  dir 
-  perl 
-  ruby 
-  virtualenv 
-  go 
-  git 
-  hg 
-  cmd_exec_time
-)
-
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
 
@@ -88,10 +64,6 @@ alias nv='nvim'
 # When switching to normal mode for vi key bindings,
 # make the timeout small:
 export KEYTIMEOUT=1
-
-# Script to adjust colour palette in the terminal for gruvbox:
-GRUVBOX_PALETTE="$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
-[[ -s $GRUVBOX_PALETTE ]] && source $GRUVBOX_PALETTE
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
