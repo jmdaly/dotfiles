@@ -190,6 +190,7 @@ $whitelist = array(
 	'materialvim',
 	'materialtheme',
 	'maroloccio',
+	'materialbox',
 	'midnight2',
 	'mint',
 	'MountainDew',
@@ -201,8 +202,10 @@ $whitelist = array(
 	'neonwave',
 	'nefertiti', // good for diff
 	// 'nicotine',
+	'neodark',
 	'newsprint',
 	'neverland-darker',
+	'night',
 	'nightflight2',
 	// 'nightVision',
 	'nord',
