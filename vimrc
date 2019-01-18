@@ -36,27 +36,29 @@ endif
 
 
 " Configure some unconventional filetypes
-au BufNewFile,BufRead *.html.base      set filetype=html
-au BufNewFile,BufRead *.ftn90          set filetype=fortran
-au BufNewFile,BufRead *.cdk*           set filetype=fortran
-au BufNewFile,BufRead *.nml            set filetype=fortran
-au BufNewFile,BufRead *.module         set filetype=php
-au BufNewFile,BufRead *.dot            set filetype=sh
-au BufNewFile,BufRead *.gs             set filetype=javascript
-au BufNewFile,BufRead *.spi            set filetype=tcl
-au BufNewFile,BufRead .exper_cour      set filetype=sh
-au BufNewFile,BufRead *.lcm            set filetype=c
-au BufNewFile,BufRead Common_Compiler* set filetype=sh
-au BufNewFile,BufRead */Wt/W*          set filetype=cpp
-au BufNewFile,BufRead *recettes        set filetype=make
-au BufNewFile,BufRead *cibles          set filetype=make
-au BufNewFile,BufRead *.qml            set filetype=qml
-au BufNewFile,BufRead *.qrc            set filetype=xml
-au BufNewFile,BufRead *.pro            set filetype=make
-au BufNewFile,BufRead *.vert           set filetype=glsl
-au BufNewFile,BufRead *.geo            set filetype=glsl
-au BufNewFile,BufRead *.frag           set filetype=glsl
-au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
+augroup filetypes
+	au BufNewFile,BufRead *.html.base      set filetype=html
+	au BufNewFile,BufRead *.ftn90          set filetype=fortran
+	au BufNewFile,BufRead *.cdk*           set filetype=fortran
+	au BufNewFile,BufRead *.nml            set filetype=fortran
+	au BufNewFile,BufRead *.module         set filetype=php
+	au BufNewFile,BufRead *.dot            set filetype=sh
+	au BufNewFile,BufRead *.gs             set filetype=javascript
+	au BufNewFile,BufRead *.spi            set filetype=tcl
+	au BufNewFile,BufRead .exper_cour      set filetype=sh
+	au BufNewFile,BufRead *.lcm            set filetype=c
+	au BufNewFile,BufRead Common_Compiler* set filetype=sh
+	au BufNewFile,BufRead */Wt/W*          set filetype=cpp
+	au BufNewFile,BufRead *recettes        set filetype=make
+	au BufNewFile,BufRead *cibles          set filetype=make
+	au BufNewFile,BufRead *.qml            set filetype=qml
+	au BufNewFile,BufRead *.qrc            set filetype=xml
+	au BufNewFile,BufRead *.pro            set filetype=make
+	au BufNewFile,BufRead *.vert           set filetype=glsl
+	au BufNewFile,BufRead *.geo            set filetype=glsl
+	au BufNewFile,BufRead *.frag           set filetype=glsl
+	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
+augroup end
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
