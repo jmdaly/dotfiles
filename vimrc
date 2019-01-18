@@ -516,7 +516,7 @@ let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rJ :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
 nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
 nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
