@@ -58,10 +58,6 @@ au BufNewFile,BufRead *.geo            set filetype=glsl
 au BufNewFile,BufRead *.frag           set filetype=glsl
 au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 
-" Set python
-let g:python_host_prog  = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-
 set nocompatible             " be iMproved, required
 filetype off                 " required
 
