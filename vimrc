@@ -535,11 +535,11 @@ if is_win==0 && domain !=? 'school'
 
 	" Add to the runtime path so that custom
 	" snippets can be found:
-	set rtp+=~/dotfiles
+	set rtp+=$HOME/dotfiles
 
 	augroup neptec-ultisnips
 		au!
-		autocmd BufRead */3dri* :set rtp+=~/workspace/ScriptsAndTools
+		autocmd BufRead */3dri*        :set rtp+=~/workspace/ScriptsAndTools
 		autocmd BufRead */pointcloud/* :set rtp+=~/workspace/ScriptsAndTools
 	augroup end
 
