@@ -36,31 +36,29 @@ endif
 
 
 " Configure some unconventional filetypes
-au BufNewFile,BufRead *.html.base      set filetype=html
-au BufNewFile,BufRead *.ftn90          set filetype=fortran
-au BufNewFile,BufRead *.cdk*           set filetype=fortran
-au BufNewFile,BufRead *.nml            set filetype=fortran
-au BufNewFile,BufRead *.module         set filetype=php
-au BufNewFile,BufRead *.dot            set filetype=sh
-au BufNewFile,BufRead *.gs             set filetype=javascript
-au BufNewFile,BufRead *.spi            set filetype=tcl
-au BufNewFile,BufRead .exper_cour      set filetype=sh
-au BufNewFile,BufRead *.lcm            set filetype=c
-au BufNewFile,BufRead Common_Compiler* set filetype=sh
-au BufNewFile,BufRead */Wt/W*          set filetype=cpp
-au BufNewFile,BufRead *recettes        set filetype=make
-au BufNewFile,BufRead *cibles          set filetype=make
-au BufNewFile,BufRead *.qml            set filetype=qml
-au BufNewFile,BufRead *.qrc            set filetype=xml
-au BufNewFile,BufRead *.pro            set filetype=make
-au BufNewFile,BufRead *.vert           set filetype=glsl
-au BufNewFile,BufRead *.geo            set filetype=glsl
-au BufNewFile,BufRead *.frag           set filetype=glsl
-au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
-
-" Set python
-let g:python_host_prog  = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+augroup filetypes
+	au BufNewFile,BufRead *.html.base      set filetype=html
+	au BufNewFile,BufRead *.ftn90          set filetype=fortran
+	au BufNewFile,BufRead *.cdk*           set filetype=fortran
+	au BufNewFile,BufRead *.nml            set filetype=fortran
+	au BufNewFile,BufRead *.module         set filetype=php
+	au BufNewFile,BufRead *.dot            set filetype=sh
+	au BufNewFile,BufRead *.gs             set filetype=javascript
+	au BufNewFile,BufRead *.spi            set filetype=tcl
+	au BufNewFile,BufRead .exper_cour      set filetype=sh
+	au BufNewFile,BufRead *.lcm            set filetype=c
+	au BufNewFile,BufRead Common_Compiler* set filetype=sh
+	au BufNewFile,BufRead */Wt/W*          set filetype=cpp
+	au BufNewFile,BufRead *recettes        set filetype=make
+	au BufNewFile,BufRead *cibles          set filetype=make
+	au BufNewFile,BufRead *.qml            set filetype=qml
+	au BufNewFile,BufRead *.qrc            set filetype=xml
+	au BufNewFile,BufRead *.pro            set filetype=make
+	au BufNewFile,BufRead *.vert           set filetype=glsl
+	au BufNewFile,BufRead *.geo            set filetype=glsl
+	au BufNewFile,BufRead *.frag           set filetype=glsl
+	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
+augroup end
 
 set nocompatible             " be iMproved, required
 filetype off                 " required
@@ -520,7 +518,7 @@ let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rJ :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
 nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
 nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
@@ -539,11 +537,11 @@ if 0==is_win && domain !=? 'school'
 
 	" Add to the runtime path so that custom
 	" snippets can be found:
-	set rtp+=~/dotfiles
+	set rtp+=$HOME/dotfiles
 
 	augroup neptec-ultisnips
 		au!
-		autocmd BufRead */3dri* :set rtp+=~/workspace/ScriptsAndTools
+		autocmd BufRead */3dri*        :set rtp+=~/workspace/ScriptsAndTools
 		autocmd BufRead */pointcloud/* :set rtp+=~/workspace/ScriptsAndTools
 	augroup end
 
