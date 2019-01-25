@@ -1,6 +1,7 @@
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos = substitute(system('uname -o'), '\n', '', '')
+let hostkv = substitute(system('uname -v'), '\n', '', '')
 
 
 if hostname ==? 'pof' || hostname ==? 'tinder' || hostname ==? 'grinder'
@@ -23,15 +24,15 @@ else
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
 
+let is_winbash=0
 let is_win=0
-let is_mac=0
-let is_nix=1
 if has('win32')||has('win32unix')
+	echom 'has(win32) = 1'
 	let is_win=1
-elseif has('mac')
-	let is_mac=1
-else
-	let is_nix=1
+elseif has('unix')
+	if matchstr(hostkv, 'microsoft')
+		let is_winbash=1
+	endif
 endif
 
 
@@ -166,7 +167,7 @@ if v:version >= 800 || has('nvim')
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		if 0==is_win
+		if has('unix') && 0==is_winbash
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
 				\ 	'rev': 'auto',
@@ -243,7 +244,7 @@ if v:version >= 800 || has('nvim')
 			call dein#add('TheZoq2/neovim-auto-autoread')
 		endif
 
-		if has('nvim')
+		if has('nvim') && 0==is_winbash
 			call dein#add('vimlab/split-term.vim')
 
 			call dein#add('autozimu/LanguageClient-neovim',
