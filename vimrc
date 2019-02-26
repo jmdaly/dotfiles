@@ -27,7 +27,6 @@ endif
 let is_winbash=0
 let is_win=0
 if has('win32')||has('win32unix')
-	echom 'has(win32) = 1'
 	let is_win=1
 elseif has('unix')
 	if matchstr(hostkv, 'microsoft')
@@ -167,7 +166,7 @@ if v:version >= 800 || has('nvim')
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		if has('unix') && 0==is_winbash
+		if has('unix') && 0==is_winbash && 0==is_win
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
 				\ 	'rev': 'auto',
@@ -442,7 +441,7 @@ endif
 set tags=./tags;/
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-if has('unix')
+if has('unix') && is_win==0
 	" Let YouCompleteMe use tag files for completion as well:
 	let g:ycm_collect_identifiers_from_tags_files = 1
 
