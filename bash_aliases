@@ -15,7 +15,7 @@ alias gst="git status -uno -sb"
 alias gd="git diff -w --color"
 
 # A better test would be whether I'm running zsh..
-if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
+if [[ $0 == *bash || "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias ga="git add"
 	alias gb="git branch"
 	alias gba="git branch -vr"
