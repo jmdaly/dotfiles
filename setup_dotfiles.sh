@@ -75,6 +75,9 @@ fi
 if [[ "$(which ctags)" != "" ]]; then
 	files+=('.ctags')
 fi
+if [[ "$(which vncserver)" != "" ]]; then
+	files+=('.vnc')
+fi
 
 # .config/autokey
 
