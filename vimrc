@@ -217,6 +217,9 @@ if v:version >= 800 || has('nvim')
 
 		call dein#add('airblade/vim-gitgutter')
 
+		" Display trailing whitespace
+		call dein#add('ntpeters/vim-better-whitespace')
+
 		" Asynchronous linting
 		call dein#add('benekastah/neomake') " Asynchronous linting
 
