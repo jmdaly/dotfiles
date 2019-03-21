@@ -675,6 +675,12 @@ imap <S-Tab> <C-o><<
 vnoremap < <gv
 vnoremap > >gv
 
+" Auto-correct spelling mistakes
+" source: https://castel.dev/post/lecture-notes-1/
+setlocal spell
+set spelllang=en_ca,en_gb,en_us,fr_ca
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
 " now (might fix it better elsewhere)
 map <F1> x
