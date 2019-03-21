@@ -27,7 +27,6 @@ endif
 let is_winbash=0
 let is_win=0
 if has('win32')||has('win32unix')
-	echom 'has(win32) = 1'
 	let is_win=1
 elseif has('unix')
 	if matchstr(hostkv, 'microsoft')
@@ -138,7 +137,7 @@ endif
 " call plug#end()          " required
 
 
-if v:version >= 800 || has('nvim')
+if !exists('g:gui_oni') && (v:version >= 800 || has('nvim'))
 	" Switching to dein.  In this section we assume if we're using dein, then
 	" we're on a good enough vim to load any of these plugins (unlike with Plug
 	" which is compatible with earlier versions of vim, so we check
@@ -155,7 +154,7 @@ if v:version >= 800 || has('nvim')
 
 		" Lazy-load on C++
 		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
-		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+		" call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
 		" Lazy-load on PHP
 		call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
@@ -167,7 +166,7 @@ if v:version >= 800 || has('nvim')
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		if has('unix') && 0==is_winbash
+		if has('unix') && !(has('win32')||has('win32unix')) && 0==is_winbash && !exists('g:gui_oni')
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
 				\ 	'rev': 'auto',
@@ -244,7 +243,7 @@ if v:version >= 800 || has('nvim')
 			call dein#add('TheZoq2/neovim-auto-autoread')
 		endif
 
-		if has('nvim') && 0==is_winbash
+		if !exists('g:gui_oni') && has('nvim') && 0==is_winbash
 			call dein#add('vimlab/split-term.vim')
 
 			call dein#add('autozimu/LanguageClient-neovim',
@@ -391,13 +390,15 @@ nmap [h <Plug>GitGutterPrevHunk
 let g:clang_format#detect_style_file = 1
 
 " Key mappings for clang-format, to format source code:
-autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
-autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+if has('unix')
+	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
+	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+	autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
 
-" map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
+	" map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
 
-nmap <Leader>C :ClangFormatAutoToggle<CR>
+	nmap <Leader>C :ClangFormatAutoToggle<CR>
+endif
 
 " " neomake configuration
 " let g:neomake_cpp_enabled_makers = ['clangtidy']
@@ -411,14 +412,16 @@ nmap <Leader>C :ClangFormatAutoToggle<CR>
 " nnoremap <leader>n :Neomake<CR>
 
 " ALE configuration
-let g:ale_linters = {
-\   'cpp': ['clangtidy'],
-\}
-let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
-let g:ale_cpp_clangtidy_executable = '/usr/bin/clang-tidy'
-" Set up mapping to move between errors
-nmap <silent> [w <Plug>(ale_previous_wrap)
-nmap <silent> ]w <Plug>(ale_next_wrap)
+if has('unix')
+	let g:ale_linters = {
+	\   'cpp': ['clangtidy'],
+	\}
+	let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
+	let g:ale_cpp_clangtidy_executable = '/usr/bin/clang-tidy'
+	" Set up mapping to move between errors
+	nmap <silent> [w <Plug>(ale_previous_wrap)
+	nmap <silent> ]w <Plug>(ale_next_wrap)
+endif
 
 """"""""""""""""""" /vim-clang-format """"""""""""""""""""
 
@@ -442,7 +445,7 @@ endif
 set tags=./tags;/
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-if has('unix')
+if !exists('g:gui_oni') && has('unix')
 	" Let YouCompleteMe use tag files for completion as well:
 	let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -508,22 +511,24 @@ endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """"""""""""""""" LanguageClient Config """""""""""""""""""
-let g:LanguageClient_serverCommands = {
-	\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
-\ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = $HOME.'/dotfiles/settings.json'
-" Limits how often the LanguageClient talks to the
-" server, so it reduces CPU load and flashing.
-let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_diagnosticsEnable = 0
-nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
-nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
-nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
-nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+if !exists('g:gui_oni')
+	let g:LanguageClient_serverCommands = {
+		\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+	\ }
+	let g:LanguageClient_loadSettings = 1
+	let g:LanguageClient_settingsPath = $HOME.'/dotfiles/settings.json'
+	" Limits how often the LanguageClient talks to the
+	" server, so it reduces CPU load and flashing.
+	let g:LanguageClient_changeThrottle = 0.5
+	let g:LanguageClient_diagnosticsEnable = 0
+	nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
+	nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+	nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+	nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+	nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+	nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+	nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+endif
 """"""""""""""""" /LanguageClient Config """"""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
@@ -540,11 +545,6 @@ if 0==is_win && domain !=? 'school'
 	" snippets can be found:
 	set rtp+=$HOME/dotfiles
 
-	augroup neptec-ultisnips
-		au!
-		autocmd BufRead */3dri*        :set rtp+=~/workspace/ScriptsAndTools
-		autocmd BufRead */pointcloud/* :set rtp+=~/workspace/ScriptsAndTools
-	augroup end
 
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
@@ -570,11 +570,6 @@ let g:grepper     = {
 """"""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
-""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
-" Mapping for fswitch, to switch between header
-" and source:
-nmap <silent> <Leader>of :FSHere<cr>
-""""""""""""""""""""""" /fswitch """""""""""""""""""""""""
 
 
 
@@ -620,22 +615,6 @@ noremap <leader><Tab> :Buffers<CR>
 """""""""""""""""""""" prosession  """"""""""""""""""""""""
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
-
-" Command to format Neptec's XML into valid XML
-function! FixXML()
-	exe "%s/<\\zs3/THREE/g"
-	exe "%s#</\\zs3#THREE#g"
-
-	exe '%s/\v(\w)\/(\w)/\1HHH\2/g'
-	exe "%s/(/BBB/g"
-	exe "%s/)/CCC/g"
-endfunction
-function! RevertXML()
-	exe "%s/THREE/3/g"
-	exe "%s#HHH#\/#g"
-	exe "%s/BBB/(/g"
-	exe "%s/CCC/)/g"
-endfunction
 
 
 
