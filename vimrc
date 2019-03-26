@@ -318,24 +318,12 @@ else
 	call <SID>RandColorScheme()
 endif
 
-" OS Detection
-if is_win
-	behave xterm
-	set ffs=unix
-	set backspace=2
-
-	if has('gui_running')
-		" Typically windows is used with remote desktop from a smaller screen, so
-		" the font is too big..
-		GuiFont! Consolas:h10
-	endif
-
-	" options: set backspace=indent,eol,start
-"elseif has('mac')
-"	 ......
-"elseif has('unix')
-"	let matt='is_unix'
-endif
+" " OS Detection
+" if is_win
+" 	behave xterm
+" 	set backspace=2
+"
+" endif
 
 """"""""""""""""""""" Git-Gutter """"""""""""""""""""""""
 nmap ]h <Plug>GitGutterNextHunk
@@ -585,7 +573,9 @@ set number
 set ignorecase
 set noincsearch
 set hlsearch
-set ffs=unix,dos
+if 0==is_win
+	set ffs=unix,dos
+endif
 
 " Easy save
 noremap <leader>w :w<CR>
