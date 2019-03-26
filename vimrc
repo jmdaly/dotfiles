@@ -575,23 +575,6 @@ endif
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
 
-" " Command to format Neptec's XML into valid XML
-" function! FixXML()
-" 	exe "%s/<\\zs3/THREE/g"
-" 	exe "%s#</\\zs3#THREE#g"
-
-" 	exe '%s/\v(\w)\/(\w)/\1HHH\2/g'
-" 	exe "%s/(/BBB/g"
-" 	exe "%s/)/CCC/g"
-" endfunction
-" function! RevertXML()
-" 	exe "%s/THREE/3/g"
-" 	exe "%s#HHH#\/#g"
-" 	exe "%s/BBB/(/g"
-" 	exe "%s/CCC/)/g"
-" endfunction
-
-
 filetype on
 syntax on
 map <S-Insert> <MiddleMouse>
