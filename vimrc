@@ -269,7 +269,6 @@ if (v:version >= 800 || has('nvim'))
 endif
 
 
-
 " TODO Put these in a pluggin
 " Random Colorscheme
 " TODO Add 'go to last colorschem'
@@ -295,22 +294,6 @@ function! s:RandWhiteListColorScheme()
 	endif
 endfunction
 :map <Leader>wcs :call <SID>RandWhiteListColorScheme()<CR>
-
-" Execute PHP lines http://stackoverflow.com/a/5622258/1861346
-":autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
-
-" Colour scheme
-if has('gui_running')
-	set mousemodel=popup
-	set nomousehide
-
-	" TODO Write a command to toggle this
-	"set background=light
-	set background=dark
-else
-	set mouse+=a
-endif
-set guicursor=
 
 if domain ==? 'ec' || !filereadable("/usr/bin/php")
 	colorscheme onedark
