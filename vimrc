@@ -55,12 +55,10 @@ augroup filetypes
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 augroup end
 
-set nocompatible             " be iMproved, required
-filetype off                 " required
-
+set nocompatible  " Dein also wants this
 
 " Enable true colour support:
-if has('termguicolors')
+if !exists('g:gui_oni') && has('termguicolors')
   set termguicolors
 endif
 
@@ -276,7 +274,7 @@ endif
 " TODO Add 'mark as good colorscheme'
 function! s:RandColorScheme()
 	if filereadable("/usr/bin/php")
-		let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php')
+		let s:scheme=system('/usr/bin/env php $HOME/dotfiles/grabRandomColorscheme.php')
 		execute ':colorscheme '.s:scheme
 		if has('gui_running')
 			echom 'Loading colorscheme ' s:scheme
@@ -599,8 +597,8 @@ setlocal spell
 set spelllang=en_gb,en_us,fr
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" " ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
-" " now (might fix it better elsewhere)
+" ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
+" now (might fix it better elsewhere)
 " map <F1> x
 " imap <F1> <DEL>
 
@@ -632,4 +630,4 @@ ab appraoch approach
 ab yeild yield
 ab lsit list
 
-" vim: ts=3 sts=3 sw=3 noet nowrap :
+" vim: ts=3 sts=3 sw=3 noet nowrap ffs=unix :
