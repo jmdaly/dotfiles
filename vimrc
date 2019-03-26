@@ -347,17 +347,6 @@ if has('unix')
 	nmap <Leader>C :ClangFormatAutoToggle<CR>
 endif
 
-" " neomake configuration
-" let g:neomake_cpp_enabled_makers = ['clangtidy']
-" let g:neomake_cpp_clangtidy_maker = {
-" 	\ 'exe': '/usr/bin/clang-tidy',
-" 	\ 'args': ['-checks=*' ],
-" 	\}
-" " Open error list automatically:
-" let g:neomake_open_list = 2
-" " Set up map for running Neomake:
-" nnoremap <leader>n :Neomake<CR>
-
 " ALE configuration
 if has('unix')
 	let g:ale_linters = {
