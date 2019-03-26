@@ -92,7 +92,7 @@ endif
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
 
-if !exists('g:gui_oni') && (v:version >= 800 || has('nvim'))
+if (v:version >= 800 || has('nvim'))
 	" Switching to dein.  In this section we assume if we're using dein, then
 	" we're on a good enough vim to load any of these plugins (unlike with Plug
 	" which is compatible with earlier versions of vim, so we check
@@ -209,12 +209,16 @@ if !exists('g:gui_oni') && (v:version >= 800 || has('nvim'))
 			\ )
 		endif
 
-		" Install fzf, the fuzzy searcher (also loads Ultisnips)
-		call dein#add('junegunn/fzf', {'build': './install --all' } )
-		call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
+		if has('unix')
+			" Install fzf, the fuzzy searcher (also loads Ultisnips)
+			call dein#add('junegunn/fzf', {'build': './install --all' } )
+			call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
+		endif
 
-		" aall dein#add('calincru/qml.vim')
+		" call dein#add('calincru/qml.vim')
 		" call dein#add('tikhomirov/vim-glsl')
+
+		call dein#add('PProvost/vim-ps1')
 
 		"
 		" Colourschemes
@@ -395,9 +399,11 @@ if !has('nvim')
 	set autoread
 endif
 
-" Tell vim to look for a tags file in the current
-" directory, and all the way up until it finds one:
-set tags=./tags;/
+if has('unix')
+	" Tell vim to look for a tags file in the current
+	" directory, and all the way up until it finds one:
+	set tags=./tags;/
+endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
 if !exists('g:gui_oni') && has('unix')
@@ -553,14 +559,15 @@ let g:grepper     = {
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-" Set up keyboard shortbuts for fzf, the fuzzy finder
-" This one searches all the files in the current git repo:
-noremap <c-k> :GitFiles<CR>
-noremap <leader><Tab> :Buffers<CR>
+if has('unix')
+	" Set up keyboard shortbuts for fzf, the fuzzy finder
+	" This one searches all the files in the current git repo:
+	noremap <c-k> :GitFiles<CR>
+	noremap <leader><Tab> :Buffers<CR>
 
-" Unmap center/<CR> from launching fzf which appears to be mapped by default.
-" unmap <CR>
-
+	" Unmap center/<CR> from launching fzf which appears to be mapped by default.
+	" unmap <CR>
+endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
 
