@@ -1,19 +1,14 @@
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
-let hostos = substitute(system('uname -o'), '\n', '', '')
-let hostkv = substitute(system('uname -v'), '\n', '', '')
+let hostos   = substitute(system('uname -o'), '\n', '', '')
+let hostkv   = substitute(system('uname -v'), '\n', '', '')
 
-
-if hostname ==? 'pof' || hostname ==? 'tinder' || hostname ==? 'grinder'
-	let domain='neptec'
-elseif matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand' || hostname ==? 'pontus' || hostname ==? 'pontus.cee.carleton.ca'
+if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
 	let domain='school'
 
 " Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
-elseif hostname ==? 'tegra-ubuntu' || hostos ==? 'Cygwin'
-	let domain='neptec-small'
 elseif match(hostname, 'siteground') >= 0
 	" Siteground is an exception because it uses vim 7.0
 	let domain='siteground'
@@ -64,40 +59,20 @@ set nocompatible             " be iMproved, required
 filetype off                 " required
 
 
-
 " Enable true colour support:
 if has('termguicolors')
   set termguicolors
 endif
 
 
-" call plug#begin('~/dotfiles/bundles')
-"
-
-" if domain !=? 'ec' && domain !=? 'school'
-" 	" Switch between header and source files:
-" 	" TODO Make filetype specific: http://stackoverflow.com/questions/6133341/can-you-have-file-type-specific-key-bindings-in-vim
-" 	Plug 'derekwyatt/vim-fswitch'
-" endif
-
-" Plug to highlight the variable under the cursor:
-" Appears to have been deleted off GitHub, still available at: http://www.vim.org/scripts/script.php?script_id=4306
-" Plug 'OrelSokolov/HiCursorWords'
-
-" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec'
+" if
 " 	" Colour coding nests
 " 	Plug 'luochen1990/rainbow'
 " 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " endif
 
-
-" " Manage font size
-" if domain !=? 'neptec-small' && domain !=? 'ec' && domain !=? 'siteground'
-" 	Plug 'drmikehenry/vim-fontsize'
-" endif
-
 " Javascript plugins to try
-" if domain !=? 'neptec-small' && domain !=? 'school' && domain !=? 'ec' && domain !=? 'siteground'
+" if
 	" Plug 'pangloss/vim-javascript'
    "
 	" " General conceal settings. Will keep things concealed
@@ -113,28 +88,8 @@ endif
 	" let g:javascript_conceal_prototype = "#"
 " endif
 
-
-" These are getting annoying, and aren't helping with tmux anyways
-" Handle auto-calling mksession
-" Plug 'tpope/vim-obsession'
-" Plug 'dhruvasagar/vim-prosession'
-
-
-" if !has('gui_running') && !is_win && domain !=? 'siteground'
-" 	" Plugin to get gvim colourschemes work better in terminal vim
-" 	Plug 'godlygeek/csapprox'
-" endif
-
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
-
-"if domain !=? 'school'
-"	" Concurrent Editing
-"	Plug 'floobits/floobits-neovim'
-"endif
-
-" " All of your Plugins must be added before the following line
-" call plug#end()          " required
 
 
 if !exists('g:gui_oni') && (v:version >= 800 || has('nvim'))
@@ -303,7 +258,7 @@ if !exists('g:gui_oni') && (v:version >= 800 || has('nvim'))
 
 	" If you want to install not installed plugins on startup.
 	if dein#check_install()
-	 call dein#install()
+		call dein#install()
 	endif
 
 	"End dein Scripts-------------------------
@@ -570,9 +525,6 @@ let g:grepper     = {
 """"""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
-
-
-
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
 " 	let g:rainbow_conf = {
 " 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -616,7 +568,21 @@ noremap <leader><Tab> :Buffers<CR>
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
 
+" " Command to format Neptec's XML into valid XML
+" function! FixXML()
+" 	exe "%s/<\\zs3/THREE/g"
+" 	exe "%s#</\\zs3#THREE#g"
 
+" 	exe '%s/\v(\w)\/(\w)/\1HHH\2/g'
+" 	exe "%s/(/BBB/g"
+" 	exe "%s/)/CCC/g"
+" endfunction
+" function! RevertXML()
+" 	exe "%s/THREE/3/g"
+" 	exe "%s#HHH#\/#g"
+" 	exe "%s/BBB/(/g"
+" 	exe "%s/CCC/)/g"
+" endfunction
 
 
 filetype on
@@ -648,10 +614,10 @@ if &diff
 endif
 
 " Map CTRL-Tab to change tab
-noremap <C-S-Tab> <Esc>:tabprev<CR>
-noremap <C-Tab> <Esc>:tabnext<CR>
-noremap <leader>tp <Esc>:tabprev<CR>
-noremap <leader>tn <Esc>:tabnext<CR>
+" noremap <C-S-Tab> <Esc>:tabprev<CR>
+" noremap <C-Tab> <Esc>:tabnext<CR>
+" noremap <leader>tp <Esc>:tabprev<CR>
+" noremap <leader>tn <Esc>:tabnext<CR>
 
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
@@ -678,26 +644,19 @@ vnoremap > >gv
 " Auto-correct spelling mistakes
 " source: https://castel.dev/post/lecture-notes-1/
 setlocal spell
-set spelllang=en_ca,en_gb,en_us,fr_ca
+set spelllang=en_gb,en_us,fr
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
-" now (might fix it better elsewhere)
-map <F1> x
-imap <F1> <DEL>
+" " ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
+" " now (might fix it better elsewhere)
+" map <F1> x
+" imap <F1> <DEL>
 
 " Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
 vnoremap // y/<C-R>"<CR>
 
 " Match <> brackets
 set matchpairs+=<:>
-
-" " PHP Artisan commands
-" if (&ft ==? 'php')
-" 	abbrev gm !php artisan   generate:model
-" 	abbrev gc !php artisan   generate:controller
-" 	abbrev gmig !php artisan generate:migration
-" endif
 
 " try to automatically fold xml
 let xml_syntax_folding=1
