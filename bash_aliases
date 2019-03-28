@@ -14,8 +14,10 @@ fi
 alias gst="git status -uno -sb"
 alias gd="git diff -w --color"
 
+alias vi=vim
+
 # A better test would be whether I'm running zsh..
-if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
+if [[ $0 == *bash || "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias ga="git add"
 	alias gb="git branch"
 	alias gba="git branch -vr"
@@ -27,6 +29,9 @@ if [[ "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
 	alias gstp="git stash pop"
 	alias grh="git reset HEAD"
 	alias gf="git fetch"
+	alias grb="git rebase"
+	alias grbc="git rebase --continue"
+	alias gmt="git mergetool"
 fi
 #alias glog="git log --follow --name-status"
 

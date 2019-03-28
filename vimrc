@@ -119,7 +119,7 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		if has('unix') && !(has('win32')||has('win32unix')) && 0==is_winbash && !exists('g:gui_oni')
+		if has('unix') && 0==is_winbash && 0==is_win
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
 				\ 	'rev': 'auto',
@@ -169,6 +169,9 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add('w0rp/ale')
 
 		call dein#add('airblade/vim-gitgutter')
+
+		" Display trailing whitespace
+		call dein#add('ntpeters/vim-better-whitespace')
 
 		" Asynchronous linting
 		call dein#add('benekastah/neomake') " Asynchronous linting
