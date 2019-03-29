@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2019-03-29 12:23:40" build="180626">
+		<key name=".Vanilla" modified="2019-03-29 14:02:50" build="180626">
 			<value name="ColorTable00" type="dword" data="00222827"/>
 			<value name="ColorTable01" type="dword" data="009e5401"/>
 			<value name="ColorTable02" type="dword" data="0004aa74"/>
@@ -124,10 +124,10 @@
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
 			<value name="UseCurrentSizePos" type="hex" data="01"/>
 			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd Width" type="dword" data="00000074"/>
+			<value name="ConWnd Width" type="dword" data="000000a6"/>
 			<value name="ConWnd Height" type="dword" data="00000041"/>
 			<value name="Cascaded" type="hex" data="01"/>
-			<value name="ConWnd X" type="long" data="2466"/>
+			<value name="ConWnd X" type="long" data="2291"/>
 			<value name="ConWnd Y" type="long" data="0"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
@@ -554,14 +554,14 @@
 					<value name="Cmd4" type="string" data='* -cur_console:s2T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP Simulator" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\VoIPSimulator.exe'/>
 					<value name="Cmd5" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
 				</key>
-				<key name="Task8" modified="2019-03-29 10:59:38" build="180626">
-					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
-					<value name="Flags" type="dword" data="00000000"/>
+				<key name="Task8" modified="2019-03-29 14:02:50" build="180626">
+					<value name="Name" type="string" data="{IQscript - EdgeIQ}"/>
+					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='PowerShell -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+					<value name="Cmd1" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
 				</key>
 			</key>
 			<key name="Apps" modified="2018-02-22 06:05:13" build="171109">
