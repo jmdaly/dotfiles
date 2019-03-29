@@ -65,4 +65,12 @@ function gst {
 	git status -uno -sb $args
 }
 
+# Add some directories to our path.
+$custom_paths = @("C:\Program Files (x86)\Nmap", "C:\Program Files\Notepad++")
+$custom_paths | ForEach-Object {
+    if (Test-Path $_) { $env:path="$_;$env:path" }
+}
+
 # References: https://mathieubuisson.github.io/powershell-linux-bash/
+
+# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
