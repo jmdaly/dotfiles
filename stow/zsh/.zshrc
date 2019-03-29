@@ -37,6 +37,11 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
+# Disable docker version in prompt. This sends
+# unexpected characters that lead to my shell
+# getting closed.
+export SPACESHIP_DOCKER_SHOW=false
+
 export EDITOR=nvim
 
 # Set the terminal to st, for i3wm:
