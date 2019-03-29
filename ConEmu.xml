@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2019-03-28 12:01:28" build="180626">
+		<key name=".Vanilla" modified="2019-03-29 12:19:47" build="180626">
 			<value name="ColorTable00" type="dword" data="00222827"/>
 			<value name="ColorTable01" type="dword" data="009e5401"/>
 			<value name="ColorTable02" type="dword" data="0004aa74"/>
@@ -73,7 +73,7 @@
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
-			<value name="StartTasksName" type="string" data="{bash::bash}"/>
+			<value name="StartTasksName" type="string" data="{PowerShell Core}"/>
 			<value name="StartFarFolders" type="hex" data="00"/>
 			<value name="StartFarEditors" type="hex" data="00"/>
 			<value name="StoreTaskbarkTasks" type="hex" data="00"/>
@@ -98,7 +98,7 @@
 			<value name="Multi.SplitWidth" type="hex" data="04"/>
 			<value name="Multi.SplitHeight" type="hex" data="04"/>
 			<value name="KeyboardHooks" type="hex" data="02"/>
-			<value name="FontName" type="string" data="Consolas"/>
+			<value name="FontName" type="string" data="Meslo LG M for Powerline"/>
 			<value name="FontName2" type="string" data="Lucida Console"/>
 			<value name="FontAutoSize" type="hex" data="00"/>
 			<value name="FontSize" type="ulong" data="16"/>
@@ -125,15 +125,15 @@
 			<value name="UseCurrentSizePos" type="hex" data="01"/>
 			<value name="WindowMode" type="dword" data="0000051f"/>
 			<value name="ConWnd Width" type="dword" data="00000074"/>
-			<value name="ConWnd Height" type="dword" data="0000003d"/>
+			<value name="ConWnd Height" type="dword" data="0000003f"/>
 			<value name="Cascaded" type="hex" data="01"/>
-			<value name="ConWnd X" type="long" data="3309"/>
-			<value name="ConWnd Y" type="long" data="91"/>
+			<value name="ConWnd X" type="long" data="2466"/>
+			<value name="ConWnd Y" type="long" data="0"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
-			<value name="QuakeStyle" type="hex" data="00"/>
-			<value name="QuakeAnimation" type="ulong" data="300"/>
+			<value name="QuakeStyle" type="hex" data="01"/>
+			<value name="QuakeAnimation" type="ulong" data="150"/>
 			<value name="HideCaption" type="hex" data="00"/>
 			<value name="HideChildCaption" type="hex" data="01"/>
 			<value name="FocusInChildWindows" type="hex" data="01"/>
@@ -186,7 +186,7 @@
 			<value name="SendAltPrintScrn" type="hex" data="00"/>
 			<value name="SendPrintScrn" type="hex" data="00"/>
 			<value name="SendCtrlEsc" type="hex" data="00"/>
-			<value name="Min2Tray" type="hex" data="00"/>
+			<value name="Min2Tray" type="hex" data="01"/>
 			<value name="AlwaysShowTrayIcon" type="hex" data="00"/>
 			<value name="SafeFarClose" type="hex" data="01"/>
 			<value name="SafeFarCloseMacro" type="string" data=""/>
@@ -483,8 +483,8 @@
 			<value name="DndLKey" type="hex" data="00"/>
 			<value name="DndRKey" type="hex" data="a2"/>
 			<value name="WndDragKey" type="dword" data="00121101"/>
-			<key name="Tasks" modified="2019-03-28 11:54:31" build="180626">
-				<value name="Count" type="long" data="7"/>
+			<key name="Tasks" modified="2019-03-29 10:48:26" build="180626">
+				<value name="Count" type="long" data="8"/>
 				<key name="Task1" modified="2019-03-28 11:54:31" build="180626">
 					<value name="Name" type="string" data="{cmd::Cmder}"/>
 					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
@@ -494,14 +494,14 @@
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="Flags" type="dword" data="00000000"/>
 				</key>
-				<key name="Task2" modified="2019-03-28 11:54:31" build="180626">
-					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
-					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
-					<value name="Cmd1" type="string" data='PowerShell -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+				<key name="Task2" modified="2019-03-29 12:19:47" build="180626">
+					<value name="Name" type="string" data="{PowerShell Core}"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Cmd1" type="string" data='* -cur_console:d:C:\GitRepo -cur_console:t:"PS6l" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:^&lt;Solarized^&gt; C:\Program Files\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\dotfiles\profile.ps1&apos;&apos;&apos;"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Flags" type="dword" data="00000004"/>
 				</key>
 				<key name="Task3" modified="2019-03-28 11:54:31" build="180626">
 					<value name="Name" type="string" data="{bash::bash}"/>
@@ -541,19 +541,27 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data='"%CMDER_ROOT%vendor\git-for-windows\usr\bin\mintty.exe" /bin/bash -l'/>
 				</key>
-				<key name="Task7" modified="2019-03-28 12:19:52" build="180626">
+				<key name="Task7" modified="2019-03-29 12:19:47" build="180626">
 					<value name="Name" type="string" data="{Session0 Stuff}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="6"/>
-					<value name="Count" type="long" data="6"/>
-					<value name="Cmd1" type="string" data='* -cur_console:s1T50V -cur_console:d:C:\EdgeIQ\Mesoware -cur_console:t:"VoIP SIL SIP" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\Mesoware\Mesoware.exe'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="5"/>
+					<value name="Cmd1" type="string" data='* -cur_console:d:C:\EdgeIQ\Mesoware -cur_console:t:"VoIP SIL SIP" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\Mesoware\Mesoware.exe'/>
 					<value name="Cmd2" type="string" data='* -cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP SIL SIP" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\startVoIPSIL_SIP.bat'/>
 					<value name="Cmd3" type="string" data='* -cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"SIP GW" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\VoIP\sipgwc.bat'/>
 					<value name="Cmd4" type="string" data='* -cur_console:s2T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP Simulator" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\VoIPSimulator.exe'/>
 					<value name="Cmd5" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
-					<value name="Cmd6" type="string" data='&gt;* -cur_console:d:C:\EdgeIQ -cur_console:t:"Devel" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:^&lt;Solarized^&gt; PowerShell -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+				</key>
+				<key name="Task8" modified="2019-03-29 10:59:38" build="180626">
+					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
+					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='PowerShell -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
 				</key>
 			</key>
 			<key name="Apps" modified="2018-02-22 06:05:13" build="171109">
