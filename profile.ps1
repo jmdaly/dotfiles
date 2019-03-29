@@ -64,3 +64,5 @@ Install-Module git-aliases -Scope CurrentUser -AllowClobber
 function gst {
 	git status -uno -sb $args
 }
+
+# References: https://mathieubuisson.github.io/powershell-linux-bash/
