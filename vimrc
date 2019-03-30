@@ -332,6 +332,8 @@ if has('unix')
 endif
 
 " ALE configuration
+" TODO I think the vimrc in https://github.com/TalAmuyal/MyConfigs has a
+" better formatting package
 if has('unix')
 	let g:ale_linters = {
 	\   'cpp': ['clangtidy'],
@@ -367,7 +369,7 @@ if has('unix')
 endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-if !exists('g:gui_oni') && has('unix')
+if dein#check_install('YouCompleteMe')
 	" Let YouCompleteMe use tag files for completion as well:
 	let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -455,7 +457,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if 0==is_win && domain !=? 'school'
+if !dein#check_install(['ultisnips'])
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
@@ -466,11 +468,8 @@ if 0==is_win && domain !=? 'school'
 	" Add to the runtime path so that custom
 	" snippets can be found:
 	set rtp+=$HOME/dotfiles
-
-
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
-
 
 
 """"""""""""""""""""""" Grepper """"""""""""""""""""""""""
@@ -566,12 +565,6 @@ if &diff
 	set diffopt+=iwhite
 endif
 
-" Map CTRL-Tab to change tab
-" noremap <C-S-Tab> <Esc>:tabprev<CR>
-" noremap <C-Tab> <Esc>:tabnext<CR>
-" noremap <leader>tp <Esc>:tabprev<CR>
-" noremap <leader>tn <Esc>:tabnext<CR>
-
 " Faster vertical expansion
 nmap <C-v> :vertical resize +5<cr>
 nmap <C-b> :above resize +5<cr>
@@ -613,6 +606,9 @@ set matchpairs+=<:>
 
 " try to automatically fold xml
 let xml_syntax_folding=1
+
+" Without this, mouse wheel in vim/tmux scrolls tmux history, not vim's buffer
+set mouse=a
 
 "
 " Abbreviations.  Check https://github.com/tpope/vim-abolish for how to make
