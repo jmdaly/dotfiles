@@ -158,7 +158,7 @@ if (v:version >= 800 || has('nvim'))
 		" Grep through repo
 		call dein#add('mhinz/vim-grepper')
 
-		call dein#add('elzr/vim-json')
+		" call dein#add('elzr/vim-json')
 
 		" Status bar
 		call dein#add('powerline/powerline')
@@ -216,8 +216,8 @@ if (v:version >= 800 || has('nvim'))
 			call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
 		endif
 
-		" call dein#add('calincru/qml.vim')
-		" call dein#add('tikhomirov/vim-glsl')
+		" call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
+		" call dein#add('tikhomirov/vim-glsl', {'on_ft': ['glsl']})
 
 		call dein#add('PProvost/vim-ps1')
 
