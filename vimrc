@@ -249,6 +249,8 @@ if (v:version >= 800 || has('nvim'))
 
 		call dein#add('ayu-theme/ayu-vim')
 		let ayucolor="mirage"
+
+		call dein#add('kheaactua/vim-managecolor')
 		"
 		" /Colourschemes
 
@@ -269,38 +271,12 @@ if (v:version >= 800 || has('nvim'))
 	"End dein Scripts-------------------------
 endif
 
-
-" TODO Put these in a pluggin
-" Random Colorscheme
-" TODO Add 'go to last colorschem'
-" TODO Add 'mark as terrible colorscheme'
-" TODO Add 'mark as good colorscheme'
-function! s:RandColorScheme()
-	if filereadable("/usr/bin/php")
-		let s:scheme=system('/usr/bin/env php $HOME/dotfiles/grabRandomColorscheme.php')
-		execute ':colorscheme '.s:scheme
-		if has('gui_running')
-			echom 'Loading colorscheme ' s:scheme
-		endif
-	endif
-endfunction
-:map <Leader>rcs :call <SID>RandColorScheme()<CR>
-
-" Grab a random whitelisted colour scheme
-function! s:RandWhiteListColorScheme()
-	if filereadable("/usr/bin/php")
-		let s:scheme=system('/usr/bin/env php ~/dotfiles/grabRandomColorscheme.php -w')
-		execute ':colorscheme '.s:scheme
-		echom 'Loading whitelist colorscheme ' s:scheme
-	endif
-endfunction
-:map <Leader>wcs :call <SID>RandWhiteListColorScheme()<CR>
-
-if domain ==? 'ec' || !filereadable("/usr/bin/php")
-	colorscheme onedark
-else
-	call <SID>RandColorScheme()
+silent if dein#check_install('vim-managecolor') == 0
+	let g:colo_search_path = $HOME . '/dotfiles/bundles/dein'
+	let g:colo_cache_file  = $HOME . '/dotfiles/colos.json'
 endif
+
+
 
 " " OS Detection
 " if is_win
@@ -369,7 +345,7 @@ if has('unix')
 endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-if dein#check_install('YouCompleteMe')
+silent if dein#check_install('YouCompleteMe') == 0
 	" Let YouCompleteMe use tag files for completion as well:
 	let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -457,7 +433,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-if !dein#check_install(['ultisnips'])
+silent if dein#check_install(['ultisnips']) == 0
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
