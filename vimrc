@@ -601,6 +601,9 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
 vnoremap // y/<C-R>"<CR>
 
+" Search of IP addresses
+nnoremap /ip /\<\(\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\\|localhost\)\><CR>
+
 " Match <> brackets
 set matchpairs+=<:>
 
