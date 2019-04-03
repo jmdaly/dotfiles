@@ -165,7 +165,7 @@ if [[ $? == 1 ]]; then
 
 	export MODULEPATH=/usr/share/modules/modulefiles
 
-	#module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+	# #module() { eval `/usr/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
 	modulecmd=/usr/bin/modulecmd
 	module() { eval `${modulecmd} $modules_shell $*`; }
 
@@ -174,6 +174,7 @@ fi;
 
 if [[ $(hostname) == "khea" ]]; then
 	module use /usr/local/Modules/default/modulefiles
+	# module use /opt/pgi/modulefiles
 	module load modules
 	module load khea
 
