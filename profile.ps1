@@ -71,6 +71,14 @@ $custom_paths | ForEach-Object {
     if (Test-Path $_) { $env:path="$_;$env:path" }
 }
 
+# Function to try to make searching easier, and show full paths
+function search {
+    Param($Path, $Filter)
+    Get-ChildItem -Path $Path -Filter $Filter -Recurse -File | % {
+         Write-Host $_.FullName
+    }
+}
+
 # References: https://mathieubuisson.github.io/powershell-linux-bash/
 
 # vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
