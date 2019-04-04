@@ -1,3 +1,6 @@
+# Profile for Solacom.  Right now this is a very Solacom-specific profile, I'll
+# create a new one or split this somehow if ever I need a more general profile
+
 # VC Vars https://stackoverflow.com/a/2124759/1861346
 pushd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools"
 cmd /c "VsDevCmd.bat&set" |
@@ -69,7 +72,10 @@ function gst {
 $custom_paths = @(
 	("nmap.exe", "C:/Progra~2/Nmap"),
 	("notepad++.exe", "C:/Progra~1/Notepad++"),
-	("mysql.exe", "c:/Progra~1/MariaDB 10.3/bin")
+	("mysql.exe", "c:/Progra~1/MariaDB 10.3/bin"),
+	("Code.exe", "C:/Progra~1\Microsoft VS Code"),
+	("java.exe", "C:/java-1.8.0-openjdk-1.8.0.201-2.b09.redhat.windows.x86_64/bin"),
+	("javax.mail.jar", "C:/jaf-1_1_1/jaf-1.1.1")
 )
 $custom_paths | ForEach-Object {
     if ((Test-Path $_[1]) -And ((Get-Command $_[0] -ErrorAction SilentlyContinue) -eq $null)) {
@@ -83,6 +89,21 @@ function search {
     Get-ChildItem -Path $Path -Filter $Filter -Recurse -File | % {
          Write-Host $_.FullName
     }
+}
+
+function iqadmin-debug {
+	Push-Location "c:\EdgeIQ\IQAdmin"
+	Start-Process                                `
+		-FilePath java.exe                       `
+		-ArgumentList "-Xmx512m ", `
+			"-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5431", `
+			"-classpath iqadmin.jar;dom4j-1.6.1.jar;mariadb-java-client-2.4.0.jar;axis.jar;commons-discovery-0.2.jar;javax.wsdl.jar;jaxrpc.jar;org.apache.commons.logging.jar;saaj.jar;activation.jar;javax.mail.jar", `
+			"com.versatelnetworks.admin.IQAdmin", `
+			"-probe",                             `
+			"-gateway -gatewaysr",                `
+			"-debug"                              `
+
+	Pop-Location
 }
 
 # References: https://mathieubuisson.github.io/powershell-linux-bash/
