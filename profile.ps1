@@ -19,7 +19,11 @@ Import-Module Get-ChildItemColor
 Set-Alias l Get-ChildItemColor -option AllScope
 Set-Alias ls Get-ChildItemColor -option AllScope
 
-Write-Host "`nLoaded custom ls" -ForegroundColor Yellow
+# If it exists, load our python virtualenv
+if (Test-path python) {
+	Write-Host "`nLoading python virtual env." -ForegroundColor Yellow
+	.virtualenvs\default\Scripts\activate.ps1
+}
 
 # Helper function to set location to the User Profile directory
 function cuserprofile { Set-Location ~ }
