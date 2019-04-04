@@ -100,8 +100,8 @@ bindsym $mod+Ctrl+less move workspace to output left
 set $workspace1 "1: Social"
 set $workspace2 "2: Main"
 set $workspace3 "3: Docs"
-set $workspace4 "4: Meh"
-set $workspace4 "5: NCI"
+set $workspace4 "4: Media"
+set $workspace5 "5: NCI"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
 # Put Workspaces on specific monitors
