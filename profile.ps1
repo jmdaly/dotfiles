@@ -66,9 +66,15 @@ function gst {
 }
 
 # Add some directories to our path.
-$custom_paths = @("C:\Program Files (x86)\Nmap", "C:\Program Files\Notepad++")
+$custom_paths = @(
+	("nmap.exe", "C:/Progra~2/Nmap"),
+	("notepad++.exe", "C:/Progra~1/Notepad++"),
+	("mysql.exe", "c:/Progra~1/MariaDB 10.3/bin")
+)
 $custom_paths | ForEach-Object {
-    if (Test-Path $_) { $env:path="$_;$env:path" }
+    if ((Test-Path $_[1]) -And ((Get-Command $_[0] -ErrorAction SilentlyContinue) -eq $null)) {
+		$env:path = $_[1] + ";$env:path"
+	}
 }
 
 # Function to try to make searching easier, and show full paths
