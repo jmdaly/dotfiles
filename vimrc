@@ -360,16 +360,8 @@ silent if dein#check_install('YouCompleteMe') == 0
 	" Turn off prompting to load .ycm_extra_conf.py:
 	let g:ycm_confirm_extra_conf = 0
 
-	" " Map GetType to an easier key combination:
-	" nnoremap <leader>ty :YcmCompleter GetType<CR>
-
 	" Compile the file
 	nnoremap <leader>y :YcmDiag<CR>
-
-	" F2 will jump to a variable/method definition
-	map <F2> :YcmCompleter GoTo<CR>
-
-	nnoremap <leader>diag YcmDiag<CR>
 
 	" Ignore some files
 	let g:ycm_filetype_blacklist = {
@@ -397,13 +389,13 @@ silent if dein#check_install('YouCompleteMe') == 0
 
 	let g:ycm_filetype_whitelist = {
 		\ 'javascript': 1,
-		\ 'python' : 1,
-		\ 'css'    : 1,
-		\ 'cpp'    : 1,
-		\ 'php'    : 1,
-		\ 'fortran': 1,
-		\ 'xml'    : 1,
-		\ 'html'   : 1
+		\ 'python'    : 1,
+		\ 'css'       : 1,
+		\ 'cpp'       : 1,
+		\ 'php'       : 1,
+		\ 'fortran'   : 1,
+		\ 'xml'       : 1,
+		\ 'html'      : 1
 	\}
 
 	" Ignore large files (BONA db's for instance)
@@ -412,7 +404,9 @@ silent if dein#check_install('YouCompleteMe') == 0
 	" Shut off preview window on PHP files
 	au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
-	" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+	if exists('g:python_host_prog')
+		let g:interpreter_path = '/usr/bin/python'
+	endif
 
 	map <F9> :YcmCompleter FixIt<CR>
 endif
