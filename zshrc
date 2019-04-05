@@ -187,28 +187,6 @@ if [[ $(hostname) == "khea" ]]; then
 
 	# CMC
 	# export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
-elif [[ $(hostname) == "builder" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
-	module use /usr/share/modules/modulefiles
-	module load modules
-
-	module load neptec 3dri clang
-
-	# Ensure Google Test tests always show colour output:
-	export GTEST_COLOR=yes
-
-	# Set up ninja tab completion:
-	if [[ -e /usr/local/src/ninja/misc/zsh-completion ]]; then
-		# Installed from system-setup-scripts
-		fpath+=/usr/local/src/ninja/misc/
-	elif [[ -e /usr/share/zsh/functions/Completion/_ninja ]]; then
-		# Installed from apt
-		source /usr/share/zsh/functions/Completion/_ninja
-	fi;
-
-	# Don't tab complete on shares
-	source ~/dotfiles/restrict_tab_completion.sh
-	zle -N restricted-expand-or-complete
-	bindkey "^I" restricted-expand-or-complete
 
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
@@ -232,14 +210,6 @@ elif [[ $(hostname) = dena* ]]; then
 	if [[ $(hostname) == "dena" ]]; then
 		# Admin modules
 		module load cmsh cmgui
-	fi
-
-elif [[ "$(uname -o)" == "Cygwin" ]]; then
-	# This targets windows laptop at Neptec
-
-	# Modules aren't available here, so duplicate the most common aliases
-	if [[ "${modules_enabled}" == "0" ]]; then
-		export ARCH=o2win64
 	fi
 fi
 
