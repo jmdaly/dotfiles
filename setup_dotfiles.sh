@@ -128,7 +128,7 @@ if [[ "" != "$(which nvim)" ]]; then
 	# Install dein
 	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
 		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-		sh /tmp/installer.sh ~/dotfiles/bundles/dein
+		sh /tmp/installer.sh ${h}/dotfiles/bundles/dein
 	fi
 fi
 
