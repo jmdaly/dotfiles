@@ -424,7 +424,7 @@ if !exists('g:gui_oni')
 		\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
 	\ }
 	let g:LanguageClient_loadSettings = 1
-	let g:LanguageClient_settingsPath = $HOME.'/dotfiles/settings.json'
+	let g:LanguageClient_settingsPath = $HOME.'/dotfiles/ccls_settings.json'
 	" Limits how often the LanguageClient talks to the
 	" server, so it reduces CPU load and flashing.
 	let g:LanguageClient_changeThrottle = 0.5
