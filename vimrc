@@ -23,7 +23,14 @@ let is_winbash=0
 let is_win=0
 if has('win32')||has('win32unix')
 	let is_win=1
-	let $HOME='c:\\users\\' . $USER
+	let $HOME='c:/users/' . $USERNAME
+
+	if has('nvim')
+		let g:venv_folder = $HOME . "/.virtualenvs/default"
+		let g:python_host_prog  = g:venv_folder . '/Scripts/python.exe'
+		let g:python3_host_prog = g:venv_folder . '/Scripts/python.exe'
+	endif
+
 elseif has('unix')
 	if matchstr(hostkv, 'microsoft')
 		let is_winbash=1
