@@ -276,7 +276,6 @@ silent if dein#check_install('vim-managecolor') == 0
 endif
 
 
-
 " " OS Detection
 " if is_win
 " 	behave xterm
