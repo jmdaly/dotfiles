@@ -175,6 +175,13 @@ bar {
         status_command i3status
 }
 
+lock() {
+	$HOME/dotfiles/bin/lock_screen.sh
+}
+
+# mod1 = alt, got it from: xmodmap -pm
+bindsym Ctrl+mod1+L exec i3lock & sleep 5 && xset dpms force off
+
 # Pulse Audio controls. The pkill signals here are to tell i3blocks to update
 # the volume blocklet.
 bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
