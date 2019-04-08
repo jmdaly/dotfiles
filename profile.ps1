@@ -1,6 +1,9 @@
 # Profile for Solacom.  Right now this is a very Solacom-specific profile, I'll
 # create a new one or split this somehow if ever I need a more general profile
 
+# TODO
+# Split this into smaller files or something
+
 # VC Vars https://stackoverflow.com/a/2124759/1861346
 pushd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools"
 cmd /c "VsDevCmd.bat&set" |
@@ -53,6 +56,9 @@ function U
 
 # Oh-my-posh https://github.com/JanDeDobbeleer/oh-my-posh
 Import-Module posh-git
+# https://github.com/dahlbyk/posh-sshell
+Install-Module posh-sshell -AllowClobber
+Install-Module ThreadJob
 
 # Start SshAgent if not already
 # Need this if you are using github as your remote git repository
@@ -71,6 +77,9 @@ Install-Module git-aliases -Scope CurrentUser -AllowClobber
 function gst {
 	git status -uno -sb $args
 }
+
+# Open a tunnel to khea
+function khea-vnc { ssh -nNT khea & }
 
 # Add some directories to our path.
 $custom_paths = @(
