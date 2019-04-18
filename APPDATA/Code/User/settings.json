@@ -1,0 +1,7 @@
+{
+    "java.home": "C:\\java-1.8.0-openjdk-1.8.0.201-2.b09.redhat.windows.x86_64",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\6\\pwsh.exe"
+}
