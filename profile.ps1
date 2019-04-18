@@ -57,8 +57,9 @@ function U
 # Oh-my-posh https://github.com/JanDeDobbeleer/oh-my-posh
 Import-Module posh-git
 # https://github.com/dahlbyk/posh-sshell
-Install-Module posh-sshell -AllowClobber
-Install-Module ThreadJob
+Import-Module posh-sshell
+Import-Module -Name Posh-SSH
+Import-Module ThreadJob
 
 # Start SshAgent if not already
 # Need this if you are using github as your remote git repository
