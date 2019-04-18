@@ -83,12 +83,14 @@ function khea-vnc { ssh -nNT khea & }
 
 # Add some directories to our path.
 $java_jdk="C:/Progra~1/Java/jdk1.8.0_211"
+# VS Code's JDK
+# $java_jdk="C:/java-1.8.0-openjdk-1.8.0.201-2.b09.redhat.windows.x86_64"
 $custom_paths = @(
-	("nmap.exe", "C:/Progra~2/Nmap"),
-	("notepad++.exe", "C:/Progra~1/Notepad++"),
-	("mysql.exe", "c:/Progra~1/MariaDB 10.3/bin"),
-	("Code.exe", "C:/Progra~1\Microsoft VS Code"),
-	("java.exe", "C:/java-1.8.0-openjdk-1.8.0.201-2.b09.redhat.windows.x86_64/bin"),
+	("nmap.exe",       "C:/Progra~2/Nmap"),
+	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
+	("mysql.exe",      "c:/Progra~1/MariaD~1.3/bin"),
+	("Code.exe",       "C:/Progra~1/MIFA7F~1"),
+	("java.exe",       $java_jdk + "/bin"),
 	("javax.mail.jar", "C:/jaf-1_1_1/jaf-1.1.1")
 )
 $custom_paths | ForEach-Object {
