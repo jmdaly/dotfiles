@@ -82,6 +82,7 @@ function gst {
 function khea-vnc { ssh -nNT khea & }
 
 # Add some directories to our path.
+$java_jdk="C:/Progra~1/Java/jdk1.8.0_211"
 $custom_paths = @(
 	("nmap.exe", "C:/Progra~2/Nmap"),
 	("notepad++.exe", "C:/Progra~1/Notepad++"),
