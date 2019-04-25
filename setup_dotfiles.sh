@@ -4,10 +4,15 @@
 # in the user's home directory.
 
 if [[ "$1" == "" ]]; then
-	h=${HOME}
+	if [[ "${WIN_HOME:-undefined}" == "undefined" ]]; then
+		h=${WIN_HOME}
+	else
+		h=${HOME}
+	fi
 else
 	h=$1
 fi;
+echo "Using home: $h"
 
 if [[ "$2" == "" ]]; then
 	copy=0

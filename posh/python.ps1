@@ -9,7 +9,14 @@ if (!(Get-Variable python_venv_dir -Scope Global -ErrorAction SilentlyContinue))
 if (Test-path "$python_venv_dir")
 {
 	Write-Host "`nLoading python virtual env." -ForegroundColor Yellow
-	$python_venv_invoke = $python_venv_dir + "\default\Scripts\activate.ps1"
+	if (Test-path "$python_venv_dir\default\Scripts")
+	{
+		$python_venv_invoke = $python_venv_dir + "\default\Scripts\activate.ps1"
+	}
+	else
+	{
+		$python_venv_invoke = $python_venv_dir + "\default\bin\activate.ps1"
+	}
 	Invoke-Expression $python_venv_invoke
 }
 

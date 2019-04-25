@@ -188,6 +188,18 @@ if [[ $(hostname) == "khea" ]]; then
 	# CMC
 	# export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
 
+elif [[ $(hostname) = CST-PC* ]]; then
+	WIN_HOME=/mnt/c/users/matthew.russell
+
+	python_venv="${WIN_HOME}/.virtualenvs/default"
+	if [[ -e "${python_venv}" ]]; then
+		if [[ -e "${python_venv}/bin" ]]; then
+			source "${python_venv}/bin/activate"
+		elif [[ -e "${python_venv}/Scripts" ]]; then
+			source "${python_venv}/Scripts/activate"
+		fi
+	fi
+
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules
