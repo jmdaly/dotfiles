@@ -21,19 +21,26 @@ endif
 
 let is_winbash=0
 let is_win=0
-if has('win32')||has('win32unix')
+if has('unix')
+	if matchstr(hostkv, 'icrosoft') == 'icrosoft'
+		let is_winbash=1
+	endif
+endif
+if has('win32')||has('win32unix')||1==is_winbash
 	let is_win=1
-	let $HOME='c:/users/' . $USERNAME
+	if ''==$HOME && 0==is_winbash
+		let $HOME='c:/users/' . $USERNAME
+	endif
 
 	if has('nvim')
 		let g:venv_folder = $HOME . "/.virtualenvs/default"
-		let g:python_host_prog  = g:venv_folder . '/Scripts/python.exe'
-		let g:python3_host_prog = g:venv_folder . '/Scripts/python.exe'
-	endif
+		if isdirectory(g:venv_folder . '/bin')
+			let g:python_host_prog = g:venv_folder . '/bin/python3'
+		else
+			let g:python_host_prog = g:venv_folder . '/Scripts/python.exe'
+		endif
 
-elseif has('unix')
-	if matchstr(hostkv, 'microsoft')
-		let is_winbash=1
+		let g:python3_host_prog = g:python_host_prog
 	endif
 endif
 
