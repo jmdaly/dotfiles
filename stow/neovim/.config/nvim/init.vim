@@ -34,6 +34,7 @@ Plug 'arcticicestudio/nord-vim' " nord colour scheme
 Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
 Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
+Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 
 " Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
@@ -177,26 +178,41 @@ let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 " Ensure the status line is always displayed:
 set laststatus=2
 
-let g:lightline = {
-        \ 'colorscheme': 'nord',
-        \ 'active': {
+let g:lightline = {}
+let g:lightline.colorscheme = 'nord'
+
+" Add linting info to the status line:
+let g:lightline.component_expand = {
+        \  'linter_checking': 'lightline#ale#checking',
+        \  'linter_warnings': 'lightline#ale#warnings',
+        \  'linter_errors': 'lightline#ale#errors',
+        \  'linter_ok': 'lightline#ale#ok',
+        \ }
+let g:lightline.component_type = {
+        \     'linter_checking': 'right',
+        \     'linter_warnings': 'warning',
+        \     'linter_errors': 'error',
+        \     'linter_ok': 'right',
+        \ }
+
+let g:lightline.active = {
         \   'left': [ [ 'mode', 'paste' ],
         \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-        \   'right': [ [ 'lineinfo' ],
+        \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+        \              [ 'lineinfo' ],
         \            [ 'obsession', 'percent' ],
         \            [ 'fileformat', 'fileencoding', 'filetype' ] ] 
-        \ },
-        \ 'component': {
-        \   'lineinfo': ' %3l:%-2v',
-        \ },
-        \ 'component_function': {
+        \ }
+let g:lightline.component = {
+        \   'lineinfo': ' %3l:%-2v'
+        \ }
+let g:lightline.component_function = {
         \   'readonly': 'LightlineReadonly',
         \   'fugitive': 'LightlineFugitive',
         \   'obsession': 'ObsessionStatus',
-        \ },
-        \ 'separator': { 'left': '', 'right': '' },
-        \ 'subseparator': { 'left': '', 'right': '' }
         \ }
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
 function! LightlineReadonly()
         return &readonly ? '' : ''
 endfunction
