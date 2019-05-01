@@ -3,6 +3,11 @@ let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos   = substitute(system('uname -o'), '\n', '', '')
 let hostkv   = substitute(system('uname -v'), '\n', '', '')
 
+" Set up some paths that might be changed later based on the platform.  These
+" are defaulted to their linux path
+let g:dotfiles   = $HOME . '/dotfiles'
+let g:env_folder = $HOME . '/.virtualenvs/default'
+
 if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
 	let domain='school'
 
@@ -29,18 +34,26 @@ endif
 if has('win32')||has('win32unix')||1==is_winbash
 	let is_win=1
 	if ''==$HOME && 0==is_winbash
-		let $HOME='c:/users/' . $USERNAME
+		let $WINHOME     = 'c:/users/' . $USERNAME
+		let g:dotfiles   = $WINHOME . '/dotfiles'
+		let g:env_folder = $WINHOME . '/.virtualenvs/default'
+	endif
+endif
+
+if has('nvim')
+	if has('win32')
+		let g:python_host_prog  = expand(g:env_folder . '/Scripts/python.exe')
+		let g:python3_host_prog = g:python_host_prog
+	else
+		let g:python_host_prog  = expand(g:env_folder . '/bin/python')
+		let g:python3_host_prog = g:python_host_prog . '3'
 	endif
 
-	if has('nvim')
-		let g:venv_folder = $HOME . "/.virtualenvs/default"
-		if isdirectory(g:venv_folder . '/bin')
-			let g:python_host_prog = g:venv_folder . '/bin/python3'
-		else
-			let g:python_host_prog = g:venv_folder . '/Scripts/python.exe'
-		endif
-
-		let g:python3_host_prog = g:python_host_prog
+	if empty(glob(g:python_host_prog))
+		echom 'Could not find g:python_host_prog = '. g:python_host_prog
+	endif
+	if empty(glob(g:python3_host_prog))
+		echom 'Could not find g:python3_host_prog = '. g:python3_host_prog
 	endif
 endif
 
@@ -106,19 +119,14 @@ endif
 
 
 if (v:version >= 800 || has('nvim'))
-	" Switching to dein.  In this section we assume if we're using dein, then
-	" we're on a good enough vim to load any of these plugins (unlike with Plug
-	" which is compatible with earlier versions of vim, so we check
-	" compatibility before each)
-
-	let &runtimepath.=',' . $HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim'
+	let &runtimepath.=',' . g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim'
 
 	" Required:
-	if dein#load_state(string($HOME . '/dotfiles/bundles/dein'))
-		call dein#begin($HOME . '/dotfiles/bundles/dein')
+	if dein#load_state(string(g:dotfiles . '/bundles/dein'))
+		call dein#begin(g:dotfiles . '/bundles/dein')
 
 		" Let dein manage dein
-		call dein#add($HOME . '/dotfiles/bundles/dein/repos/github.com/Shougo/dein.vim')
+		call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
 		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
@@ -278,8 +286,8 @@ if (v:version >= 800 || has('nvim'))
 endif
 
 silent if dein#check_install('vim-managecolor') == 0
-	let g:colo_search_path = $HOME . '/dotfiles/bundles/dein'
-	let g:colo_cache_file  = $HOME . '/dotfiles/colos.json'
+	let g:colo_search_path = g:dotfiles . '/bundles/dein'
+	let g:colo_cache_file  = g:dotfiles . '/colos.json'
 endif
 
 
@@ -415,7 +423,7 @@ if !exists('g:gui_oni')
 		\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
 	\ }
 	let g:LanguageClient_loadSettings = 1
-	let g:LanguageClient_settingsPath = $HOME.'/dotfiles/ccls_settings.json'
+	let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
 	" Limits how often the LanguageClient talks to the
 	" server, so it reduces CPU load and flashing.
 	let g:LanguageClient_changeThrottle = 0.5
@@ -442,7 +450,7 @@ silent if dein#check_install('ultisnips') == 0
 
 	" Add to the runtime path so that custom
 	" snippets can be found:
-	set rtp+=$HOME/dotfiles
+	set rtp+=g:dotfiles
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
