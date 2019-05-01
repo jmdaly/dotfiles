@@ -37,10 +37,12 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# Disable docker version in prompt. This sends
+# Disable docker and node versions in prompt. This sends
 # unexpected characters that lead to my shell
 # getting closed.
 export SPACESHIP_DOCKER_SHOW=false
+export SPACESHIP_NODE_SHOW=false
+export SPACESHIP_PACKAGE_SHOW=false
 
 export EDITOR=nvim
 
