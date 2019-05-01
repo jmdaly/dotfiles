@@ -186,7 +186,9 @@ if (v:version >= 800 || has('nvim'))
 		" Status bar
 		call dein#add('powerline/powerline')
 
-		call dein#add('rhysd/vim-clang-format')
+		if has('unix')
+			call dein#add('rhysd/vim-clang-format')
+		endif
 
 		" A plugin for asynchronous linting while you type
 		call dein#add('w0rp/ale')
@@ -269,7 +271,7 @@ if (v:version >= 800 || has('nvim'))
 		" /Colourschemes
 
 	  " Required:
-	  call dein#end()
+	  call dein#end() " On Windows, outputting No matching autocommands"
 	  call dein#save_state()
 	endif
 
@@ -290,13 +292,6 @@ silent if dein#check_install('vim-managecolor') == 0
 	let g:colo_cache_file  = g:dotfiles . '/colos.json'
 endif
 
-
-" " OS Detection
-" if is_win
-" 	behave xterm
-" 	set backspace=2
-"
-" endif
 
 """"""""""""""""""""" Git-Gutter """"""""""""""""""""""""
 nmap ]h <Plug>GitGutterNextHunk
@@ -573,7 +568,7 @@ vnoremap > >gv
 " Auto-correct spelling mistakes
 " source: https://castel.dev/post/lecture-notes-1/
 setlocal spell
-set spelllang=en_gb,en_us,fr
+set spelllang=en_gb,en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
