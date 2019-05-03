@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2019-05-01 09:36:48" build="180626">
+		<key name=".Vanilla" modified="2019-05-03 08:52:08" build="180626">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -134,12 +134,12 @@
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
-			<value name="WindowMode" type="dword" data="00000520"/>
-			<value name="ConWnd X" type="long" data="1"/>
-			<value name="ConWnd Y" type="long" data="207"/>
+			<value name="WindowMode" type="dword" data="0000051f"/>
+			<value name="ConWnd X" type="long" data="967"/>
+			<value name="ConWnd Y" type="long" data="0"/>
 			<value name="LastMonitor" type="string" data="0,0,1920,1040"/>
-			<value name="ConWnd Width" type="dword" data="00000096"/>
-			<value name="ConWnd Height" type="dword" data="0000002f"/>
+			<value name="ConWnd Width" type="dword" data="00000084"/>
+			<value name="ConWnd Height" type="dword" data="0000003c"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="QuakeStyle" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
@@ -337,7 +337,7 @@
 			<value name="MinimizeOnLoseFocus" type="hex" data="00"/>
 			<value name="DisableFarFlashing" type="hex" data="00"/>
 			<value name="DisableAllFlashing" type="hex" data="00"/>
-			<value name="FindText" type="string" data="slave_io"/>
+			<value name="FindText" type="string" data=":150"/>
 			<value name="FindMatchCase" type="hex" data="00"/>
 			<value name="FindMatchWholeWords" type="hex" data="00"/>
 			<value name="FindTransparent" type="hex" data="01"/>
@@ -584,34 +584,43 @@
 			</key>
 			<key name="Tasks" modified="2019-05-01 09:36:48" build="180626">
 				<value name="Count" type="long" data="10"/>
-				<key name="Task1" modified="2019-05-01 09:36:48" build="180626">
+				<key name="Task1" modified="2019-05-03 08:52:08" build="180626">
+					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
+					<value name="Flags" type="dword" data="00000001"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='-cur_console:d:C:\EdgeIQ PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+				</key>
+				<key name="Task2" modified="2019-05-03 08:52:08" build="180626">
+					<value name="Name" type="string" data="{PowerShell::PowerShell as Admin}"/>
+					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='*-cur_console:d:C:\EdgeIQ PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+				</key>
+				<key name="Task3" modified="2019-05-03 08:52:08" build="180626">
 					<value name="Name" type="string" data="{PowerShell Core}"/>
-					<value name="Flags" type="dword" data="00000005"/>
+					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data="/icon C:\Progra~1\PowerShell\6\assets\Powershell_av_colors.ico"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='-cur_console:d:C:\EdgeIQ -cur_console:t:"PowerShell" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&apos;&apos;&apos;"'/>
+					<value name="Cmd1" type="string" data='-cur_console:d:C:\EdgeIQ -cur_console:t:"PSCore" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&apos;&apos;&apos;"'/>
 				</key>
-				<key name="Task2" modified="2019-05-01 09:36:48" build="180626">
+				<key name="Task4" modified="2019-05-03 08:52:08" build="180626">
 					<value name="Name" type="string" data="{PowerShell Core as Admin}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data="/icon C:\Progra~1\PowerShell\6\assets\Powershell_av_colors.ico"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='* -cur_console:d:C:\EdgeIQ -cur_console:t:"PowerShell" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&apos;&apos;&apos;"'/>
+					<value name="Cmd1" type="string" data='* -cur_console:d:C:\EdgeIQ -cur_console:t:"PSCore" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1&apos;&apos;&apos;"'/>
 				</key>
-				<key name="Task3" modified="2019-05-01 09:36:48" build="180626">
-					<value name="Name" type="string" data="{cmd::Cmder as Admin}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='*cmd /k ""%ConEmuDir%\..\init.bat" "'/>
-				</key>
-				<key name="Task4" modified="2019-05-01 09:36:48" build="180626">
+				<key name="Task5" modified="2019-05-03 08:52:08" build="180626">
 					<value name="Name" type="string" data="{cmd::Cmder}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -620,23 +629,14 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDir%\..\init.bat" "'/>
 				</key>
-				<key name="Task5" modified="2019-05-01 09:36:48" build="180626">
-					<value name="Name" type="string" data="{PowerShell::PowerShell as Admin}"/>
+				<key name="Task6" modified="2019-05-03 08:52:08" build="180626">
+					<value name="Name" type="string" data="{cmd::Cmder as Admin}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='*PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
-				</key>
-				<key name="Task6" modified="2019-05-01 09:36:48" build="180626">
-					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
+					<value name="Cmd1" type="string" data='*cmd /k ""%ConEmuDir%\..\init.bat" "'/>
 				</key>
 				<key name="Task7" modified="2019-05-01 09:36:48" build="180626">
 					<value name="Name" type="string" data="{WSL::bash}"/>
@@ -647,18 +647,17 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pm:/mnt'/>
 				</key>
-				<key name="Task8" modified="2019-05-01 09:36:48" build="180626">
+				<key name="Task8" modified="2019-05-03 08:52:08" build="180626">
 					<value name="Name" type="string" data="{Session0 Stuff}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="5"/>
-					<value name="Cmd1" type="string" data='* -cur_console:d:C:\EdgeIQ\Mesoware -cur_console:t:"VoIP SIL SIP" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\Mesoware\Mesoware.exe'/>
-					<value name="Cmd2" type="string" data='* -cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP SIL SIP" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\startVoIPSIL_SIP.bat'/>
-					<value name="Cmd3" type="string" data='* -cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"SIP GW" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\VoIP\sipgwc.bat'/>
-					<value name="Cmd4" type="string" data='* -cur_console:s2T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP Simulator" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\VoIPSimulator.exe'/>
-					<value name="Cmd5" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
+					<value name="Count" type="long" data="4"/>
+					<value name="Cmd1" type="string" data='-cur_console:d:C:\EdgeIQ\Mesoware -cur_console:t:"VSOS - Mesoware" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\Mesoware\Mesoware.exe'/>
+					<value name="Cmd2" type="string" data='-cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP SIL" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\startVoIPSIL_SIP.bat'/>
+					<value name="Cmd3" type="string" data='-cur_console:s1T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"SIP GW" -cur_console:P:^&lt;xterm^&gt; C:\EdgeIQ\VoIP\sipgwc.bat'/>
+					<value name="Cmd4" type="string" data='-cur_console:s2T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP Simulator" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\VoIPSimulator.exe'/>
 				</key>
 				<key name="Task9" modified="2019-05-01 09:36:48" build="180626">
 					<value name="Name" type="string" data="{IQScript}"/>
