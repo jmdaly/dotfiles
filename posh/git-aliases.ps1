@@ -5,6 +5,7 @@ Write-Host "Loading git-aliases" -ForegroundColor Yellow
 # originally I had to do this, but maybe posh-git takes care of it?  Uncertain,
 # leaving this for now.  It's also super slow.
 # Install-Module git-aliases -Scope CurrentUser -AllowClobber
+Import-Module git-aliases
 
 # Override
 function gst { git status -uno -sb $args }
