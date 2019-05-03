@@ -25,7 +25,11 @@ fi
 # TODO See if I can replace this and the MANPATH with Environmental Modules.
 #      They're finally being updated again.
 local -a dirs;
-export LINUXBREWHOME=${HOME}/.linuxbrew
+if [[ -e ${HOME}/.linuxbrew ]]; then
+	export LINUXBREWHOME=${HOME}/.linuxbrew
+else
+	export LINUXBREWHOME=~linuxbrew/.linuxbrew
+fi
 dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin);
 for d in $dirs; do
 	dir=${HOME}/${d};
