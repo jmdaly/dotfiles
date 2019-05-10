@@ -5,9 +5,9 @@
 
 if [[ "$1" == "" ]]; then
 	if [[ "${WIN_HOME:-undefined}" == "undefined" ]]; then
-		h=${WIN_HOME}
-	else
 		h=${HOME}
+	else
+		h=${WIN_HOME}
 	fi
 else
 	h=$1
@@ -20,12 +20,12 @@ else
 	copy=1
 fi;
 
+set -x
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base=${h}/dotfiles
 	#exit 1;
 else
-	declare base=$(dirname $(realpath $0))
 	declare base=${h}/dotfiles
 fi;
 
