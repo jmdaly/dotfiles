@@ -126,7 +126,6 @@ let g:clang_path = "/opt/llvm"
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \}
-let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 " Set up mapping to move between errors
 nmap <silent> [w <Plug>(ale_previous_wrap)
