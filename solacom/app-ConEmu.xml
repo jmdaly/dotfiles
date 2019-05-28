@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2019-05-03 08:52:08" build="180626">
+		<key name=".Vanilla" modified="2019-05-28 12:36:35" build="180626">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -134,12 +134,12 @@
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
-			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd X" type="long" data="967"/>
-			<value name="ConWnd Y" type="long" data="0"/>
+			<value name="WindowMode" type="dword" data="00000520"/>
+			<value name="ConWnd X" type="long" data="1"/>
+			<value name="ConWnd Y" type="long" data="207"/>
 			<value name="LastMonitor" type="string" data="0,0,1920,1040"/>
-			<value name="ConWnd Width" type="dword" data="00000084"/>
-			<value name="ConWnd Height" type="dword" data="0000003c"/>
+			<value name="ConWnd Width" type="dword" data="00000096"/>
+			<value name="ConWnd Height" type="dword" data="0000002f"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="QuakeStyle" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
@@ -582,11 +582,11 @@
 				<value name="DndRKey" type="hex" data="A2"/>
 				<value name="WndDragKey" type="dword" data="00121101"/>
 			</key>
-			<key name="Tasks" modified="2019-05-01 09:36:48" build="180626">
-				<value name="Count" type="long" data="10"/>
+			<key name="Tasks" modified="2019-05-28 12:36:35" build="180626">
+				<value name="Count" type="long" data="12"/>
 				<key name="Task1" modified="2019-05-03 08:52:08" build="180626">
 					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
-					<value name="Flags" type="dword" data="00000001"/>
+					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
 					<value name="Active" type="long" data="0"/>
@@ -668,7 +668,16 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
 				</key>
-				<key name="Task10" modified="2019-05-01 09:36:48" build="180626">
+				<key name="Task10" modified="2019-05-28 12:36:35" build="180626">
+					<value name="Name" type="string" data="{MariaDB}"/>
+					<value name="Flags" type="dword" data="00000004"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data="-cur_console:P:^&lt;Ubuntu^&gt; -cur_console:d:C:\PROGRA~1\MARIAD~1.3\bin -cur_console:t:MariaDB mysql.exe -u root -pSolaCom"/>
+				</key>
+				<key name="Task11" modified="2019-05-28 12:36:35" build="180626">
 					<value name="Name" type="string" data="{MySQL}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -676,6 +685,15 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data="-cur_console:P:^&lt;Ubuntu^&gt; -cur_console:d:C:\Progra~2\MySQL\MYSQLS~1.0\bin -cur_console:t:MySQL mysql.exe -u root -pSolaCom"/>
+				</key>
+				<key name="Task12" modified="2019-05-28 12:36:35" build="180626">
+					<value name="Name" type="string" data="{bash::bash}"/>
+					<value name="Flags" type="dword" data="00000004"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='cmd /c ""%ConEmuDir%\..\git-for-windows\bin\bash" --login -i"'/>
 				</key>
 			</key>
 			<key name="Apps" modified="2019-04-29 10:39:39" build="180626">
