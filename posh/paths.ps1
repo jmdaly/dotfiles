@@ -14,7 +14,7 @@ $custom_paths = @(
 	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
 	("mysql.exe",      "C:/Progra~1/MariaD~1.3/bin"),
 	("Code.exe",       "C:/Progra~1/MIFA7F~1"),
-	("java.exe",       $java_jdk + "/bin"),
+	("java.exe",       "$java_jdk/bin"),
 	("javax.mail.jar", "C:/jaf-1_1_1/jaf-1.1.1")
 )
 $custom_paths | ForEach-Object {
