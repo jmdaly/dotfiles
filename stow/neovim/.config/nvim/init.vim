@@ -101,6 +101,8 @@ nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
 nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+nnoremap <leader>ds :call LanguageClient#textDocument_documentSymbol()<CR>
+nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
 
 " if executable('cquery')
 "    au User lsp_setup call lsp#register_server({
