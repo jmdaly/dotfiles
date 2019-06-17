@@ -81,6 +81,7 @@ augroup filetypes
 	au BufNewFile,BufRead *.geo            set filetype=glsl
 	au BufNewFile,BufRead *.frag           set filetype=glsl
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
+	au BufNewFile,BufRead /mnt/c/*         set ffs=dos
 augroup end
 
 set nocompatible  " Dein also wants this
