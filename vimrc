@@ -539,6 +539,12 @@ nnoremap <leader>rt :%s/\s\s*$//<CR>
 let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
 autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
+" Default whitespace settings
+set ts=4
+set sw=4
+set sts=0
+set expandtab
+
 " Ignore whitespace on vimdiff
 if &diff
 	" diff mode
