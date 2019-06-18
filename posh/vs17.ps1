@@ -1,4 +1,7 @@
 # VC Vars https://stackoverflow.com/a/2124759/1861346
+#
+# Review how MS Terminal does it with Set-MsBuildDevEnvironment at
+# https://github.com/microsoft/terminal tools/OpenConsole.psm1
 pushd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\Tools"
 cmd /c "VsDevCmd.bat&set" |
 foreach {
