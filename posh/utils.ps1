@@ -10,6 +10,9 @@ Set-Alias ~ cuserprofile -Option AllScope
 Import-Module Get-ChildItemColor
 Set-Alias ls Get-ChildItemColor -option AllScope
 
+# Linux `which`
+New-Alias which Get-Command
+
 # https://github.com/dahlbyk/posh-sshell
 Import-Module -Name posh-sshell
 Import-Module -Name Posh-SSH
