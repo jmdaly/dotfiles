@@ -35,7 +35,7 @@ for d in $dirs; do
 	dir=${HOME}/${d};
 	if [[ -e "${dir}" ]]; then
 		export PATH=${dir}:${PATH}
-	fi;
+	fi
 done
 
 # If pyenv exists, initialise it

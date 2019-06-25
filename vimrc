@@ -525,9 +525,9 @@ set number
 set ignorecase
 set noincsearch
 set hlsearch
-if 0==is_win
-	set ffs=unix,dos
-endif
+" if 0==is_win
+" 	set ffs=unix,dos
+" endif
 
 " Easy save
 noremap <leader>w :w<CR>

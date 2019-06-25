@@ -14,13 +14,13 @@ else
 fi;
 echo "Using home: $h"
 
+# I don't think I've used this in years.  WSL removes the need
 if [[ "$2" == "" ]]; then
 	copy=0
 else
 	copy=1
 fi;
 
-set -x
 if [[ "$(which realpath)" == "" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base=${h}/dotfiles
@@ -37,6 +37,10 @@ if [[ "$(uname -o)" != "Cygwin" ]]; then
 	git submodule update
 fi
 cd ${h}
+
+#
+# TODO deal with Windows Terminal, Oni, PS, etc, files
+#
 
 #
 # Declare the files that we always want to copy over.
@@ -58,7 +62,7 @@ else
 		/tmp/powerline_fonts/install.sh
 	fi
 	# apt-get install ttf-ancient-fonts -y
-	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install 
+	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
 fi
 
 # Check if our environment supports these
@@ -121,6 +125,13 @@ for f in ${files[@]}; do
 done;
 
 cd $h
+
+# Install dein
+if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
+	sh /tmp/installer.sh ${h}/dotfiles/bundles/dein
+fi
+
 if [[ "" != "$(which nvim)" ]]; then
 	# neovim is installed
 	if [[ ! -e "${h}/.config/nvim" ]]; then
@@ -128,12 +139,6 @@ if [[ "" != "$(which nvim)" ]]; then
 	fi
 	if [[ -e ${h}/.vimrc ]]; then
 		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
-	fi
-
-	# Install dein
-	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-		sh /tmp/installer.sh ${h}/dotfiles/bundles/dein
 	fi
 fi
 
