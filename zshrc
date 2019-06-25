@@ -16,6 +16,12 @@ HISTFILE=${HOME}/.zsh_history
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
+# On the WSL, it's handy to use Windows $env:temp space
+WSL_TEMP_GUESS=${HOME}/tmp
+if [[ -O ${WSL_TEMP_GUESS} && -d ${WSL_TEMP_GUESS} ]]; then
+	TMPDIR=${WSL_TEMP_GUESS}
+fi
+
 # Adjust the path
 if [[ -e ${HOME}/.pathrc ]]; then
 	source ${HOME}/.pathrc
