@@ -483,10 +483,19 @@
 			<value name="DndLKey" type="hex" data="00"/>
 			<value name="DndRKey" type="hex" data="a2"/>
 			<value name="WndDragKey" type="dword" data="00121101"/>
-			<key name="Tasks" modified="2019-04-19 07:49:24" build="180626">
-				<value name="Count" type="long" data="9"/>
-				<key name="Task1" modified="2019-04-19 07:49:24" build="180626">
+			<key name="Tasks" modified="2019-06-17 11:40:48" build="180626">
+				<value name="Count" type="long" data="10"/>
+				<key name="Task1" modified="2019-06-17 11:40:48" build="180626">
 					<value name="Name" type="string" data="{PowerShell Core}"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Cmd1" type="string" data='-cur_console:d:C:\GitRepo -cur_console:t:"Devel" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\dotfiles\profile.ps1&apos;&apos;&apos;"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="Flags" type="dword" data="00000004"/>
+				</key>
+				<key name="Task2" modified="2019-06-17 11:40:48" build="180626">
+					<value name="Name" type="string" data="{PowerShell Core (Admin)}"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Cmd1" type="string" data='* -cur_console:d:C:\GitRepo -cur_console:t:"Devel" -cur_console:C:%CMDER_ROOT%\icons\cmder.ico -cur_console:P:&lt;Solarized^&gt; C:\Progra~1\PowerShell\6\pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%UserProfile%\dotfiles\profile.ps1&apos;&apos;&apos;"'/>
 					<value name="Active" type="long" data="0"/>
@@ -494,54 +503,54 @@
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="Flags" type="dword" data="00000004"/>
 				</key>
-				<key name="Task2" modified="2019-04-19 07:49:24" build="180626">
-					<value name="Name" type="string" data="{cmd::Cmder}"/>
-					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
-					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDir%\..\init.bat" "'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="Flags" type="dword" data="00000000"/>
-				</key>
-				<key name="Task3" modified="2019-03-28 11:54:31" build="180626">
-					<value name="Name" type="string" data="{bash::bash}"/>
+				<key name="Task3" modified="2019-06-17 11:40:48" build="180626">
+					<value name="Name" type="string" data="{PowerShell::PowerShell}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
-					<value name="Cmd1" type="string" data='cmd /c ""%ConEmuDir%\..\git-for-windows\bin\bash" --login -i"'/>
+					<value name="Cmd1" type="string" data='-cur_console:d:C:\EdgeIQ PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Flags" type="dword" data="00000004"/>
 				</key>
-				<key name="Task4" modified="2019-03-28 11:54:31" build="180626">
-					<value name="Name" type="string" data="{Bash::Msys2-64}"/>
+				<key name="Task4" modified="2019-06-17 11:41:31" build="180626">
+					<value name="Name" type="string" data="{PowerSheell:PowerShell (Admin)}"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='set CHERE_INVOKING=1 &amp; set "PATH=%ConEmuDrive%\msys64\usr\bin;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe -new_console:p %ConEmuDrive%\msys64\usr\bin\bash.exe --login -i -new_console:C:"%ConEmuDrive%\msys64\msys2.ico"'/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Cmd1" type="string" data='*  -cur_console:P:^&lt;Dracula^&gt; -cur_console:t:"Admin" -cur_console:d:C:\EdgeIQ PowerShell -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command "Invoke-Expression &apos;Import-Module &apos;&apos;%ConEmuDir%\..\profile.ps1&apos;&apos;&apos;"'/>
 					<value name="Cmd2" type="string" data='"%CMDER_ROOT%\vendor\git-for-windows\git-bash.exe"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Flags" type="dword" data="00000004"/>
 				</key>
-				<key name="Task5" modified="2019-03-28 11:54:31" build="180626">
-					<value name="Name" type="string" data="{Helper::Show ANSI colors}"/>
-					<value name="Flags" type="dword" data="00000004"/>
+				<key name="Task5" modified="2019-06-17 11:40:48" build="180626">
+					<value name="Name" type="string" data="{cmd::Cmder}"/>
+					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='cmd.exe /k type "%ConEmuBaseDir%\Addons\AnsiColors16t.ans" -cur_console:n'/>
+					<value name="GuiArgs" type="string" data=' /icon "%CMDER_ROOT%\icons\cmder.ico"'/>
+					<value name="Cmd1" type="string" data='cmd /k ""%ConEmuDir%\..\init.bat" "'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task6" modified="2019-03-28 11:54:31" build="180626">
-					<value name="Name" type="string" data="{Tools::Chocolatey (Admin)}"/>
+				<key name="Task6" modified="2019-06-17 11:40:48" build="180626">
+					<value name="Name" type="string" data="{zsh:ubuntu}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='*cmd.exe /k Title Chocolatey &amp; "%ConEmuBaseDir%\Addons\ChocolateyAbout.cmd"'/>
+					<value name="GuiArgs" type="string" data='/icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
+					<value name="Cmd1" type="string" data="%windir%\system32\bash.exe ~ -c zsh -cur_console:p"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data='"%CMDER_ROOT%vendor\git-for-windows\usr\bin\mintty.exe" /bin/bash -l'/>
 				</key>
-				<key name="Task7" modified="2019-03-29 12:19:47" build="180626">
+				<key name="Task7" modified="2019-06-17 11:40:48" build="180626">
+					<value name="Name" type="string" data="{Helper::Show ANSI colors}"/>
+					<value name="Flags" type="dword" data="00000004"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='cmd.exe /k type "%ConEmuBaseDir%\Addons\AnsiColors16t.ans" -cur_console:n'/>
+				</key>
+				<key name="Task8" modified="2019-06-17 11:40:48" build="180626">
 					<value name="Name" type="string" data="{Session0 Stuff}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -554,7 +563,7 @@
 					<value name="Cmd4" type="string" data='* -cur_console:s2T50V -cur_console:d:C:\EdgeIQ\VoIP -cur_console:t:"VoIP Simulator" -cur_console:P:^&lt;Zenburn^&gt; C:\EdgeIQ\VoIP\VoIPSimulator.exe'/>
 					<value name="Cmd5" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
 				</key>
-				<key name="Task8" modified="2019-03-29 14:02:50" build="180626">
+				<key name="Task9" modified="2019-06-17 11:40:48" build="180626">
 					<value name="Name" type="string" data="{IQscript - EdgeIQ}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -563,7 +572,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data="* -cur_console:d:C:\EdgeIQ\IQscript -cur_console:t:IQscript C:\tcl\bin\tclsh84t.exe iqscript.tcl"/>
 				</key>
-				<key name="Task9" modified="2019-04-19 07:50:34" build="180626">
+				<key name="Task10" modified="2019-06-17 11:40:48" build="180626">
 					<value name="Name" type="string" data="{MariaDB}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -1015,7 +1024,7 @@
 			</key>
 			<value name="StartCreateDelay" type="ulong" data="100"/>
 			<value name="DefaultTerminalDebugLog" type="hex" data="00"/>
-			<value name="LastMonitor" type="string" data="1920,0,3840,1080"/>
+			<value name="LastMonitor" type="string" data="1920,0,3840,1040"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
 			<value name="DownShowExOnTopMessage" type="hex" data="00"/>
 			<value name="EnvironmentSet" type="multi">
