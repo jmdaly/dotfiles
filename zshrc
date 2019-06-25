@@ -50,64 +50,43 @@ for d in $dirs; do
 	dir=${HOME}/${d}/man;
 	if [[ -e "${dir}" ]]; then
 		export MANPATH=${dir}:${MANPATH}
-	fi;
+	fi
 done
 
-if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
-	source ${HOME}/dotfiles/antigen/antigen.zsh
+if [[ -e ${HOME}/.zplug ]]; then
+	source ${HOME}/.zplug/init.zsh
 
-	# Load the oh-my-zsh's library.
-	antigen use oh-my-zsh
+	# Bundles from robbyrussell's oh-my-zsh.
+	zplug "plugins/git", from:oh-my-zsh
+	zplug "plugins/command-not-found", from:oh-my-zsh
+	zplug "plugins/vi-mode", from:oh-my-zsh
+	# zplug "lib/completion", from:oh-my-zsh           # Better tab completion
+	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-	# Bundles from the default repo (robbyrussell's oh-my-zsh).
-	# These all take about a second to load
-	antigen bundle git
-	antigen bundle heroku
-	antigen bundle pip
-	antigen bundle lein
-	antigen bundle command-not-found
-	# antigen bundle sorin-ionescu/prezto
-	antigen bundle RobSis/zsh-reentry-hook
-	antigen bundle jocelynmallon/zshmarks
-
-	outp=$(which fzf)
-	if [[ 0 == $?  ]]; then
-		antigen bundle uvaes/fzf-marks
-	fi
-
-	# Plugin to check if a 256 colour terminal
-	# is available, and enable all colours if
-	# it is
-	antigen bundle chrissicool/zsh-256color
+	zplug "lib/history", from:oh-my-zsh              # Provides history management
+	zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+	zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
 	# Syntax highlighting bundle.
-	antigen bundle zsh-users/zsh-syntax-highlighting
+	zplug "zsh-users/zsh-syntax-highlighting"
 
 	# Load the theme.
-	# The prezto theme uses a bunch of glyphs that don't show in putty.  If I'm
-	# using putty, I'm probably connecting from Tinder(windows) to pof.. So
-	# only use blinks on pof.  Or figure out how to detect putty.
-	# Themes: robbyrussell, daveverwer candy clean pygalion, etc..
-	if [[ "$(hostname)" == "tinder" || "$(hostname)" == "grinder" || "$(hostname)" == khea* ]]; then
-		# Set some preferences for the bullet train theme:
-		export BULLETTRAIN_CONTEXT_SHOW=true
-		export BULLETTRAIN_TIME_SHOW=false
-		export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-		export BULLETTRAIN_RUBY_SHOW=false
-		export BULLETTRAIN_GIT_BG="green"
-		export BULLETTRAIN_DIR_FG="black"
+	zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
-		antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
-	else
-		antigen theme blinks
+	# Bookmarks in fzf
+	outp=$(which fzf)
+	zplug "uvaes/fzf-marks"
+
+	# Install plugins if there are plugins that have not been installed
+	if ! zplug check --verbose; then
+		printf "Install? [y/N]: "
+		if read -q; then
+			echo; zplug install
+		fi
 	fi
 
-	# Auto update
-	antigen bundle unixorn/autoupdate-antigen.zshplugin
-
-	# Tell antigen that you're done.
-	antigen apply
-
+	# Then, source plugins and add commands to $PATH
+	zplug load
 fi
 
 if [[ $(which urxvt 2>/dev/null) != "" ]]; then

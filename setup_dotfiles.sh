@@ -126,6 +126,11 @@ done;
 
 cd $h
 
+# Install zplug
+if [[ ! -e "${h}/.zplug" ]]; then
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
+
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
