@@ -15,6 +15,10 @@ alias gst="git status -uno -sb"
 alias gd="git diff -w --color"
 
 alias vi=vim
+if [[ "" != "$(which nvim)" ]]; then
+	alias vimdiff="vim -d"
+fi
+
 
 # A better test would be whether I'm running zsh..
 if [[ $0 == *bash || "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
