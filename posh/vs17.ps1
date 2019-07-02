@@ -12,4 +12,4 @@ foreach {
 popd
 Write-Host "`nVisual Studio 2017 Command Prompt variables set." -ForegroundColor Yellow
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :

@@ -21,4 +21,4 @@ Import-Module -Name ThreadJob
 # Open a tunnel to khea, replies on module Thread-Job
 function khea-vnc { ssh -nNT khea & }
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :
