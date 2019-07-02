@@ -119,6 +119,19 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
 
+# github.com/goreliu/wsl-terminal recommended adding this
+[[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
+	[[ -n "$ATTACH_ONLY" ]] && {
+		tmux a 2>/dev/null || {
+			cd && exec tmux
+		}
+		exit
+	}
+
+	tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
+	exec tmux
+}
+
 # Alises
 if [ -e ${HOME}/.bash_aliases ]; then
 	source ${HOME}/.bash_aliases
