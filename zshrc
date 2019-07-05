@@ -62,25 +62,32 @@ done
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
-	# Bundles from robbyrussell's oh-my-zsh.
-	zplug "plugins/git", from:oh-my-zsh
-	zplug "plugins/command-not-found", from:oh-my-zsh
-	zplug "plugins/vi-mode", from:oh-my-zsh
-	# zplug "lib/completion", from:oh-my-zsh           # Better tab completion
-	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
+		# Bundles from robbyrussell's oh-my-zsh.
+		zplug "plugins/git", from:oh-my-zsh
+		zplug "plugins/command-not-found", from:oh-my-zsh
+		zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-	zplug "lib/history", from:oh-my-zsh              # Provides history management
-	zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
-	zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
+		zplug "lib/history", from:oh-my-zsh              # Provides history management
+		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 
-	# Syntax highlighting bundle.
-	zplug "zsh-users/zsh-syntax-highlighting"
+	if [[ "CST-PC90" == "$(hostname)" ]]; then
+		# Pure Prompt https://github.com/sindresorhus/pure
+		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
-	# Load the theme.
-	zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+		ZSH_THEME=""
+		zplug "mafredri/zsh-async", from:github
+		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+	else
+		zplug "plugins/vi-mode", from:oh-my-zsh
 
-	# Pure Prompt https://github.com/sindresorhus/pure
-	fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
+
+		# Syntax highlighting bundle.
+		zplug "zsh-users/zsh-syntax-highlighting"
+
+		# Load the theme.
+		zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+	fi
 
 	# Bookmarks in fzf
 	outp=$(which fzf)
