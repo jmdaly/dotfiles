@@ -79,6 +79,9 @@ if [[ -e ${HOME}/.zplug ]]; then
 	# Load the theme.
 	zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
+	# Pure Prompt https://github.com/sindresorhus/pure
+	fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+
 	# Bookmarks in fzf
 	outp=$(which fzf)
 	zplug "uvaes/fzf-marks"
