@@ -35,6 +35,7 @@ Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating betwee
 Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
+Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 
 " Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
