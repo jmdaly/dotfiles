@@ -82,6 +82,7 @@ augroup filetypes
 	au BufNewFile,BufRead *.frag           set filetype=glsl
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 	au BufNewFile,BufRead /mnt/c/*         set ffs=dos
+	au BufNewFile,BufRead *vimrc           set ffs=unix
 augroup end
 
 set nocompatible  " Dein also wants this
@@ -130,7 +131,7 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
-		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp', 'cs']})
 		" call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
 		" Lazy-load on PHP
@@ -143,12 +144,13 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add('tpope/vim-fugitive')
 		set diffopt+=vertical
 
-		if has('unix') && 0==is_winbash && 0==is_win
+		" if has('unix') && 0==is_winbash && 0==is_win
+		if has('unix')
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
-				\ 	'rev': 'auto',
-				\	'build': 'bash ./install.py --clang-completer --clang-tidy'
-				\ }
+				\ 	  'rev': 'auto'
+				\	, 'build': 'bash ./install.py --clang-completer --clang-tidy'
+				\ },
 			\ )
 
 			call dein#add('SirVer/ultisnips')
@@ -223,7 +225,7 @@ if (v:version >= 800 || has('nvim'))
 			call dein#add('TheZoq2/neovim-auto-autoread')
 		endif
 
-		if !exists('g:gui_oni') && has('nvim') && 0==is_winbash
+		if !exists('g:gui_oni') && has('nvim')
 			call dein#add('vimlab/split-term.vim')
 
 			" ccls
@@ -394,6 +396,7 @@ silent if dein#check_install('YouCompleteMe') == 0
 		\ 'python'    : 1,
 		\ 'css'       : 1,
 		\ 'cpp'       : 1,
+		\ 'cs'        : 1,
 		\ 'php'       : 1,
 		\ 'fortran'   : 1,
 		\ 'xml'       : 1,
@@ -407,7 +410,7 @@ silent if dein#check_install('YouCompleteMe') == 0
 	au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
 	if exists('g:python_host_prog')
-		let g:interpreter_path = '/usr/bin/python'
+		let g:interpreter_path = g:python_host_prog
 	endif
 
 	map <F9> :YcmCompleter FixIt<CR>

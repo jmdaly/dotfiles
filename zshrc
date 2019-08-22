@@ -27,38 +27,6 @@ if [[ -e ${HOME}/.pathrc ]]; then
 	source ${HOME}/.pathrc
 fi
 
-# Build Run PATH
-# TODO See if I can replace this and the MANPATH with Environmental Modules.
-#      They're finally being updated again.
-local -a dirs;
-if [[ -e ${HOME}/.linuxbrew ]]; then
-	export LINUXBREWHOME=${HOME}/.linuxbrew
-else
-	export LINUXBREWHOME=~linuxbrew/.linuxbrew
-fi
-dirs=(bin utils $(basename ${LINUXBREWHOME})/bin .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin);
-for d in $dirs; do
-	dir=${HOME}/${d};
-	if [[ -e "${dir}" ]]; then
-		export PATH=${dir}:${PATH}
-	fi
-done
-
-# If pyenv exists, initialise it
-if [[ -e "${HOME}/.pyenv/bin" ]]; then
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-fi
-
-# Build MAN path
-dirs=($(basename ${LINUXBREWHOME})/man .rvm/man .local/man);
-for d in $dirs; do
-	dir=${HOME}/${d}/man;
-	if [[ -e "${dir}" ]]; then
-		export MANPATH=${dir}:${MANPATH}
-	fi
-done
-
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
@@ -150,16 +118,6 @@ fi
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
 	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-if [[ -e "${LINUXBREWHOME}" ]]; then
-	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
-	# See: https://github.com/Homebrew/linuxbrew/issues/47
-	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
-	# Setup linux brew
-	export PKG_CONFIG_PATH=${LINUXBREWHOME}/lib64/pkgconfig:${LINUXBREWHOME}/lib/pkgconfig:$PKG_CONFIG_PATH
-	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
-	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
 fi
 
 declare modules_enabled=0

@@ -1,3 +1,46 @@
-# Site-specific path settings here:
-export PATH="${HOME}/bin:$PATH"
+# Build Run PATH
+# TODO See if I can replace this and the MANPATH with Environmental Modules.
+#      They're finally being updated again.
+if [[ -e ${HOME}/.linuxbrew ]]; then
+	export LINUXBREWHOME=${HOME}/.linuxbrew
+else
+	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
+fi
+local -a dirs;
+local -a rdirs=(bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin);
+for d in $rdirs; dirs+="${HOME}/$d"
+dirs+=(${LINUXBREWHOME}/bin)
+for d in $dirs; do
+	if [[ -e "${d}" ]]; then
+		export PATH="${d}:${PATH}"
+	fi
+done
 
+# If pyenv exists, initialise it
+if [[ -e "${HOME}/.pyenv/bin" ]]; then
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
+
+# Build MAN path
+dirs=(${LINUXBREWHOME}/man ${HOME}/.rvm/man ${HOME}/.local/man);
+for d in $dirs; do
+	if [[ -e "${d}" ]]; then
+		export MANPATH=${d}:${MANPATH}
+	fi
+done
+
+if [[ -e "${LINUXBREWHOME}" ]]; then
+# 	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
+# 	# See: https://github.com/Homebrew/linuxbrew/issues/47
+# 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
+# 	# Setup linux brew
+	# export PKG_CONFIG_PATH=${LINUXBREWHOME}/lib64/pkgconfig:${LINUXBREWHOME}/lib/pkgconfig:$PKG_CONFIG_PATH
+	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
+	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
+fi
+
+# Remove duplicate paths https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
+typeset -aU path
+
+# vim: sw=4 sts=0 ts=4 noet ffs=unix ft=sh :

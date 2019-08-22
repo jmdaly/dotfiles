@@ -53,7 +53,7 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	# Do nothing
 	files+=(.zshrc)
 else
-	files+=(.zshrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 
 	mkdir -p ${h}/.local/share/fonts
 	# Install fonts
