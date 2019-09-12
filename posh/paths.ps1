@@ -23,4 +23,13 @@ $custom_paths | ForEach-Object {
 	}
 }
 
+$custom_paths = @(
+	"$env:homepath\utils\win"
+)
+$custom_paths | ForEach-Object {
+	if (Test-Path $_) {
+		$env:path = $_ + ";$env:path"
+	}
+}
+
 # vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
