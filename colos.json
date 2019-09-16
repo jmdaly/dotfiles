@@ -1474,7 +1474,7 @@
       "defaultVariant": null,
       "name": "gruvbox",
       "path": "github.com/morhetz/gruvbox/colors",
-      "tags": [],
+      "tags": ["whitelist"],
       "variants": []
     },
     {
@@ -4242,7 +4242,7 @@
       "defaultVariant": null,
       "name": "dracula",
       "path": "github.com/flazz/vim-colorschemes/colors",
-      "tags": [],
+      "tags": ["whitelist"],
       "variants": []
     },
     {
@@ -7368,7 +7368,7 @@
       "defaultVariant": null,
       "name": "nordisk",
       "path": "github.com/flazz/vim-colorschemes/colors",
-      "tags": [],
+      "tags": ["whitelist"],
       "variants": []
     },
     {
