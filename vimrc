@@ -546,6 +546,7 @@ autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 set ts=4
 set sw=4
 set sts=0
+set textwidth=80
 set expandtab
 
 " Ignore whitespace on vimdiff
