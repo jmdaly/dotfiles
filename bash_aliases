@@ -3,7 +3,7 @@ alias screen="screen -e^Ff"
 alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
-alias ls="ls -lAhtrFG"
+alias ls="ls -lAhtrFG --color=auto"
 alias grep="grep --color=always"
 
 if [[ -e /usr/bin/ag ]]; then
