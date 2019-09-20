@@ -155,12 +155,16 @@ if [[ $(hostname) == "khea" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-	# CMC
-	# export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
+	python_venv="${HOME}/.virtualenvs/default"
+	if [[ -e "${python_venv}/bin/activate" ]]; then
+		source "${python_venv}/bin/activate"
+	fi
 
 elif [[ $(hostname) = CST-PC* ]]; then
 	WIN_HOME=/mnt/c/users/matthew.russell
 
+	# I may want to reconsider this, and always using the linux one on linux..
+	# I could also generalise this to all hosts then too
 	python_venv="${WIN_HOME}/.virtualenvs/default"
 	if [[ -e "${python_venv}" ]]; then
 		if [[ -e "${python_venv}/bin" ]]; then
