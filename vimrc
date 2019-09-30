@@ -538,7 +538,9 @@ inoremap <C-S> <Esc>:w<CR>
 " map alt/apple or something-S for khea
 
 " Remove trailing space
-nnoremap <leader>rt :%s/\s\s*$//<CR>
+nnoremap <leader>rt :silent! %s/\s\+$//e<CR>
+let @r='\rt'
+let @t=':try|silent! exe "norm! @r"|endtry|w|n'
 let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
 autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
