@@ -83,6 +83,7 @@ augroup filetypes
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 	au BufNewFile,BufRead /mnt/c/*         set ffs=dos
 	au BufNewFile,BufRead *vimrc           set ffs=unix
+	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 augroup end
 
 set nocompatible  " Dein also wants this
