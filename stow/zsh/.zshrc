@@ -49,9 +49,9 @@ export EDITOR=nvim
 # Set the terminal to st, for i3wm:
 export TERMINAL=st
 
-# Set ccache to use distcc if distcc is available:
-if type distcc > /dev/null; then
-  export CCACHE_PREFIX="distcc"
+# Set ccache to use icecc if icecc is available:
+if type icecc > /dev/null; then
+  export CCACHE_PREFIX="icecc"
 fi
 
 # Set fzf to use ag if ag is available:
