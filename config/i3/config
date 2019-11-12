@@ -198,7 +198,7 @@ exec "xset dpms 600"
 
 # Set wallpaper:
 # Make sure something exists here in dotfiles setup
-exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.png
+exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.jpg
 
 # TODO Review https://github.com/TalAmuyal/MyConfigs
 # TODO Get dotfiles/setup to install this file
