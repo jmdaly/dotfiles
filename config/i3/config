@@ -178,7 +178,7 @@ bar {
         status_command i3status
 }
 
-lock
+lock {
 	$HOME/dotfiles/bin/lock_screen.sh
 }
 
