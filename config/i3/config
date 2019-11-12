@@ -101,7 +101,7 @@ set $workspace1 "1: Social"
 set $workspace2 "2: Main"
 set $workspace3 "3: Docs"
 set $workspace4 "4: Media"
-set $workspace5 "5: NCI"
+set $workspace5 "5"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
 # Put Workspaces on specific monitors
@@ -110,7 +110,8 @@ set $workspace5 "5: NCI"
 # HDMI-1 = ASUS
 # Position these with:
 # xrandr --output DVI-D-2 --auto --left-of DVI-D-1
-# xrandr --output DVI-D-2 --auto --right-of DVI-D-1
+# xrandr --output DVI-D-1 --auto --right-of DVI-D-2
+# xrandr --output HDMI-1  --auto --right-of DVI-D-1
 workspace $workspace1 output DVI-D-2
 workspace $workspace2 output DVI-D-1
 workspace $workspace3 output HDMI-1
@@ -178,12 +179,9 @@ bar {
         status_command i3status
 }
 
-lock {
-	$HOME/dotfiles/bin/lock_screen.sh
-}
 
 # mod1 = alt, got it from: xmodmap -pm
-bindsym Ctrl+mod1+L exec i3lock & sleep 5 && xset dpms force off
+bindsym Ctrl+mod1+L exec i3lock -i ${HOME}/Desktop/Backgrounds/World_on_Turtle_back.png & sleep 5 && xset dpms force off
 
 # Pulse Audio controls. The pkill signals here are to tell i3blocks to update
 # the volume blocklet.
