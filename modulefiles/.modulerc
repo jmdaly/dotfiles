@@ -5,10 +5,9 @@
 ## modulefiles/modules.  Generated from modules.in by configure.
 ##
 
-module-whatis	"Matt's user module file"
 
 # for Tcl script use only
-set	version		4.1.1
+set	ModuleVersion "native"
 
 # Set the user level
 # module-user exp

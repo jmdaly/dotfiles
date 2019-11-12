@@ -105,12 +105,15 @@ set $workspace5 "5: NCI"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
 # Put Workspaces on specific monitors
-# DVI-D-0 = Wide Dell
+# DVI-D-2 = Wide Dell
 # DVI-D-1 = Big Shimian
-# HDMI-0 = ASUS
-workspace $workspace1 output DVI-D-0
+# HDMI-1 = ASUS
+# Position these with:
+# xrandr --output DVI-D-2 --auto --left-of DVI-D-1
+# xrandr --output DVI-D-2 --auto --right-of DVI-D-1
+workspace $workspace1 output DVI-D-2
 workspace $workspace2 output DVI-D-1
-workspace $workspace3 output HDMI-0
+workspace $workspace3 output HDMI-1
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -175,7 +178,7 @@ bar {
         status_command i3status
 }
 
-lock() {
+lock
 	$HOME/dotfiles/bin/lock_screen.sh
 }
 

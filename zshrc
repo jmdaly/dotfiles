@@ -143,15 +143,10 @@ if [[ $? == 1 ]]; then
 fi;
 
 if [[ $(hostname) == "khea" ]]; then
-	module use /usr/local/Modules/default/modulefiles
-	# module use /opt/pgi/modulefiles
 	module load modules
 	module load khea
 
-	#module load mayofest
-	#module load diplomacy
 	module load bona
-	#module load youtuber
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
