@@ -108,8 +108,8 @@ set $workspace5 "5"
 # DVI-D-2 = Wide Dell
 # DVI-D-1 = Big Shimian
 # HDMI-1 = ASUS
-# Position these with:
-exec --no-startup-id xrandr --output DVI-D-2 --auto --left-of DVI-D-1 && xrandr --output DVI-D-1 --auto --right-of DVI-D-2 && xrandr --output HDMI-1  --auto --right-of DVI-D-1
+# Position these with arandr, save the file, then paste the contents here:
+exec --no-startup-id xrandr --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 5120x360 --rotate normal --output DVI-D-1 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-2 --mode 2560x1080 --pos 0x184 --rotate normal
 workspace $workspace1 output DVI-D-2
 workspace $workspace2 output DVI-D-1
 workspace $workspace3 output HDMI-1
