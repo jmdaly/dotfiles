@@ -145,6 +145,7 @@ fi;
 if [[ $(hostname) == "khea" ]]; then
 	module load modules
 	module load khea
+	module load solacom
 
 	module load bona
 
