@@ -13,7 +13,7 @@ proc ModulesHelp { } {
 module-whatis	"loads some solacom utilities"
 
 # # Open a remote desktop to a windows box
-set-alias rd_desktop "rdesktop -g 1310x768 10.202.135.1"
+set-alias rd_desktop "rdesktop -g 1920x1080 10.202.135.1"
 # set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
 # set-alias tinder "rdesktop -g 1920x1040 tinder"
 # set-alias surface "xfreerdp -u mrussell -g 1920x1040 10.10.1.106"
