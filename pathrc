@@ -7,7 +7,7 @@ else
 	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
 fi
 local -a dirs;
-local -a rdirs=(bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin);
+local -a rdirs=(bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin utils/bin);
 for d in $rdirs; dirs+="${HOME}/$d"
 dirs+=(${LINUXBREWHOME}/bin)
 for d in $dirs; do
