@@ -47,7 +47,7 @@ cd ${h}
 declare -a files;
 files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
-	# We're on env can machines
+	# We're on Env Can machines
 	files+=(.pathrc .vncrc .gdbinit)
 elif [[ "$(uname -o)" == "Cygwin" ]]; then
 	# Do nothing
