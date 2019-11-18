@@ -145,11 +145,14 @@ if (v:version >= 800 || has('nvim'))
 		set diffopt+=vertical
 
 		" if has('unix') && 0==is_winbash && 0==is_win
+		" If this doesn't work for c#, try
+		"  https://github.com/neoclide/coc.nvim
 		if has('unix')
+			" For some reason I'm set to the 'auto' branch of YCM.. Not sure why
+				" \ 	  'rev': 'auto'
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
-				\ 	  'rev': 'auto'
-				\	, 'build': 'bash ./install.py --clang-completer --clang-tidy'
+				\	  'build': 'bash ./install.py --clang-completer --clang-tidy --cs-completer'
 				\ },
 			\ )
 
