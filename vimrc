@@ -243,6 +243,7 @@ if (v:version >= 800 || has('nvim'))
 		if has('unix') && !exists('g:gui_oni')
 			" Install fzf, the fuzzy searcher (also loads Ultisnips)
 			call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+			call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
 		endif
 
 		" call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
