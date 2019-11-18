@@ -132,8 +132,7 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
-		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp', 'cs']})
-		" call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
 		" Lazy-load on PHP
 		call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
