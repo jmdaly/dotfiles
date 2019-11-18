@@ -151,24 +151,9 @@ if [[ $(hostname) == "khea" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-	python_venv="${HOME}/.virtualenvs/default"
-	if [[ -e "${python_venv}/bin/activate" ]]; then
-		source "${python_venv}/bin/activate"
-	fi
-
 elif [[ $(hostname) = CST-PC* ]]; then
+	# set -x
 	WIN_HOME=/mnt/c/users/matthew.russell
-
-	# I may want to reconsider this, and always using the linux one on linux..
-	# I could also generalise this to all hosts then too
-	python_venv="${WIN_HOME}/.virtualenvs/default"
-	if [[ -e "${python_venv}" ]]; then
-		if [[ -e "${python_venv}/bin" ]]; then
-			source "${python_venv}/bin/activate"
-		elif [[ -e "${python_venv}/Scripts" ]]; then
-			source "${python_venv}/Scripts/activate"
-		fi
-	fi
 
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
@@ -193,6 +178,12 @@ elif [[ $(hostname) = dena* ]]; then
 		# Admin modules
 		module load cmsh cmgui
 	fi
+fi
+
+# Load default python virtual env.
+declare python_venv="${HOME}/.virtualenvs/default"
+if [[ -e "${python_venv}/bin" ]]; then
+	source "${python_venv}/bin/activate"
 fi
 
 # Actvate the SSH-Agent.  Following instructions at

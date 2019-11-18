@@ -7,9 +7,15 @@ else
 	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
 fi
 local -a dirs;
-local -a rdirs=(bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin .pyenv/bin utils/bin);
+local -a rdirs=( \
+	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
+	.pyenv/bin utils/bin \
+);
 for d in $rdirs; dirs+="${HOME}/$d"
-dirs+=(${LINUXBREWHOME}/bin)
+dirs+=( \
+	${LINUXBREWHOME}/bin \
+	"/mnt/c/Program Files (x86)/Microsoft Visual Studio/2017/Professional/MSBuild/15.0/bin" \
+)
 for d in $dirs; do
 	if [[ -e "${d}" ]]; then
 		export PATH="${d}:${PATH}"

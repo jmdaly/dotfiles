@@ -132,8 +132,7 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
 		" Lazy-load on C++
-		call dein#add('octol/vim-cpp-enhanced-highlight', {'on_ft': ['c', 'cpp', 'h', 'hpp', 'cs']})
-		" call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
 		" Lazy-load on PHP
 		call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
@@ -146,11 +145,14 @@ if (v:version >= 800 || has('nvim'))
 		set diffopt+=vertical
 
 		" if has('unix') && 0==is_winbash && 0==is_win
+		" If this doesn't work for c#, try
+		"  https://github.com/neoclide/coc.nvim
 		if has('unix')
+			" For some reason I'm set to the 'auto' branch of YCM.. Not sure why
+				" \ 	  'rev': 'auto'
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
-				\ 	  'rev': 'auto'
-				\	, 'build': 'bash ./install.py --clang-completer --clang-tidy'
+				\	  'build': 'bash ./install.py --clang-completer --clang-tidy --cs-completer'
 				\ },
 			\ )
 
@@ -240,8 +242,7 @@ if (v:version >= 800 || has('nvim'))
 
 		if has('unix') && !exists('g:gui_oni')
 			" Install fzf, the fuzzy searcher (also loads Ultisnips)
-			call dein#add('junegunn/fzf', {'build': './install --all' } )
-			call dein#add('junegunn/fzf.vim', {'depends': 'junegunn/fzf' })
+			call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 		endif
 
 		" call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
