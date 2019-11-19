@@ -10,7 +10,6 @@ let g:env_folder = $HOME . '/.virtualenvs/default'
 
 if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
 	let domain='school'
-
 " Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
@@ -414,12 +413,17 @@ endif
 """"""""""""""""""" OmniSharp Config """"""""""""""""""""""
 silent if dein#check_install('omnisharp-vim') == 0
 
-	" " In the WSL, might want to use
-	" let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
-	" let g:OmniSharp_translate_cygwin_wsl = 1
+	if 1==is_winbash
+		" " In the WSL, might want to use
+		let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
+		let g:OmniSharp_translate_cygwin_wsl = 1
+	else
+		" Linux config
+		let g:OmniSharp_server_use_mono = 1
+	endif
 
-	" Linux config
-	let g:OmniSharp_server_use_mono = 1
+	" Use stdio in vim to be asynchronous
+	let g:OmniSharp_server_stdio = 1
 
 	" Use fzf.vim
 	let g:OmniSharp_selector_ui = 'fzf'
@@ -443,6 +447,7 @@ silent if dein#check_install('omnisharp-vim') == 0
 		 " The following commands are contextual, based on the cursor position.
 		 autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
 		 autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>rj :OmniSharpFindImplementations<CR>
 		 autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
 		 autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 
