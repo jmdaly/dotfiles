@@ -323,8 +323,16 @@ if has('unix')
 endif
 
 " ALE configuration
+" ALE clang-tidy setup removed because I don't think it ever worked.  Fix
+" this when I can get back to C++
+"
 " TODO I think the vimrc in https://github.com/TalAmuyal/MyConfigs has a
 " better formatting package
+
+
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
 
 """"""""""""""""""" /vim-clang-format """"""""""""""""""""
 
@@ -430,7 +438,9 @@ silent if dein#check_install('omnisharp-vim') == 0
 	" Tell ALE to use OmniSharp for linting C# files, and no other linters.
 	let g:ale_linters = { 'cs': ['OmniSharp'] }
 
+	" Debug
 	" let g:OmniSharp_loglevel = 'debug'
+	" let g:OmniSharp_proc_debug = 1
 
 	" Update semantic highlighting after all text changes
 	let g:OmniSharp_highlight_types = 3
