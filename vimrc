@@ -10,7 +10,6 @@ let g:env_folder = $HOME . '/.virtualenvs/default'
 
 if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
 	let domain='school'
-
 " Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
 	let domain='ec'
@@ -82,7 +81,6 @@ augroup filetypes
 	au BufNewFile,BufRead *.frag           set filetype=glsl
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 	au BufNewFile,BufRead /mnt/c/*         set ffs=dos
-	au BufNewFile,BufRead *vimrc           set ffs=unix
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 augroup end
 
@@ -152,9 +150,11 @@ if (v:version >= 800 || has('nvim'))
 				" \ 	  'rev': 'auto'
 			call dein#add('Valloric/YouCompleteMe',
 				\ {
-				\	  'build': 'bash ./install.py --clang-completer --clang-tidy --cs-completer'
+				\	  'build': 'bash ./install.py --clang-completer --clang-tidy'
 				\ },
 			\ )
+
+			call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
 
 			call dein#add('SirVer/ultisnips')
 			call dein#add('honza/vim-snippets')
@@ -197,7 +197,7 @@ if (v:version >= 800 || has('nvim'))
 		endif
 
 		" A plugin for asynchronous linting while you type
-		call dein#add('w0rp/ale')
+		call dein#add('w0rp/ale', {'on_ft': ['cs', 'aspx']})
 
 		call dein#add('airblade/vim-gitgutter')
 
@@ -243,6 +243,7 @@ if (v:version >= 800 || has('nvim'))
 		if has('unix') && !exists('g:gui_oni')
 			" Install fzf, the fuzzy searcher (also loads Ultisnips)
 			call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+			call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
 		endif
 
 		" call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
@@ -322,18 +323,16 @@ if has('unix')
 endif
 
 " ALE configuration
+" ALE clang-tidy setup removed because I don't think it ever worked.  Fix
+" this when I can get back to C++
+"
 " TODO I think the vimrc in https://github.com/TalAmuyal/MyConfigs has a
 " better formatting package
-if has('unix')
-	let g:ale_linters = {
-	\   'cpp': ['clangtidy'],
-	\}
-	let g:ale_cpp_clangtidy_checks = ['clang-analyzer-*', 'modernize-*', 'performance-*', 'readability-*', 'google-readability-casting']
-	let g:ale_cpp_clangtidy_executable = '/usr/bin/clang-tidy'
-	" Set up mapping to move between errors
-	nmap <silent> [w <Plug>(ale_previous_wrap)
-	nmap <silent> ]w <Plug>(ale_next_wrap)
-endif
+
+
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
 
 """"""""""""""""""" /vim-clang-format """"""""""""""""""""
 
@@ -418,6 +417,90 @@ silent if dein#check_install('YouCompleteMe') == 0
 	map <F9> :YcmCompleter FixIt<CR>
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
+
+""""""""""""""""""" OmniSharp Config """"""""""""""""""""""
+silent if dein#check_install('omnisharp-vim') == 0
+
+	if 1==is_winbash
+		" " In the WSL, might want to use
+		let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
+		let g:OmniSharp_translate_cygwin_wsl = 1
+	else
+		" Linux config
+		let g:OmniSharp_server_use_mono = 1
+	endif
+
+	" Use stdio in vim to be asynchronous
+	let g:OmniSharp_server_stdio = 1
+
+	" Use fzf.vim
+	let g:OmniSharp_selector_ui = 'fzf'
+	" Tell ALE to use OmniSharp for linting C# files, and no other linters.
+	let g:ale_linters = { 'cs': ['OmniSharp'] }
+
+	" Debug
+	" let g:OmniSharp_loglevel = 'debug'
+	" let g:OmniSharp_proc_debug = 1
+
+	" Update semantic highlighting after all text changes
+	let g:OmniSharp_highlight_types = 3
+	" Update semantic highlighting on BufEnter and InsertLeave
+	" let g:OmniSharp_highlight_types = 2
+
+	" Copied from https://github.com/OmniSharp/omnisharp-vim
+	augroup omnisharp_commands
+		 autocmd!
+
+		 " Show type information automatically when the cursor stops moving
+		 autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+		 " The following commands are contextual, based on the cursor position.
+		 autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>rj :OmniSharpFindImplementations<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+
+		 " Finds members in the current buffer
+		 autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+
+		 autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+		 autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
+		 autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+		 autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+
+		 " " Navigate up and down by method/property/field
+		 " autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
+		 " autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+
+		 " Find all code errors/warnings for the current solution and populate the quickfix window
+		 autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
+	augroup END
+
+	" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
+	nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
+	" Run code actions with text selected in visual mode to extract method
+	xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
+
+	" Rename with dialog
+	nnoremap <Leader>nm :OmniSharpRename<CR>
+	nnoremap <F2> :OmniSharpRename<CR>
+	" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
+	command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+
+	nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
+
+	" Start the omnisharp server for the current solution
+	nnoremap <Leader>ss :OmniSharpStartServer<CR>
+	nnoremap <Leader>sp :OmniSharpStopServer<CR>
+
+	" Enable snippet completion
+	" let g:OmniSharp_want_snippet=1
+
+endif
+""""""""""""""""""" /OmniSharp Config """""""""""""""""""""
+
 
 """"""""""""""""" LanguageClient Config """""""""""""""""""
 if !exists('g:gui_oni')
