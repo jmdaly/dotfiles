@@ -258,7 +258,6 @@ if (v:version >= 800 || has('nvim'))
 		call dein#add('atelierbram/vim-colors_duotones')
 		call dein#add('atelierbram/vim-colors_atelier-schemes')
 
-
 		" Other..
 		call dein#add('joshdick/onedark.vim')
 		call dein#add('arcticicestudio/nord-vim')
