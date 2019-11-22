@@ -422,7 +422,7 @@ endif
 silent if dein#check_install('omnisharp-vim') == 0
 
 	if 1==is_winbash
-		" " In the WSL, might want to use
+		" WSL config
 		let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
 		let g:OmniSharp_translate_cygwin_wsl = 1
 	else
