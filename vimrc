@@ -602,6 +602,15 @@ endif
 " Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
 """""""""""""""""""""" /prosession """"""""""""""""""""""""
 
+""""""""""""""""""""" Generate UUID """"""""""""""""""""""""
+if has('unix')
+	py import uuid
+	noremap <leader>u :s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
+	noremap <leader>ru :%s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
+endif
+"""""""""""""""""""" /Generate UUID """"""""""""""""""""""""
+
+
 filetype on
 syntax on
 map <S-Insert> <MiddleMouse>
