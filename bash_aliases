@@ -37,6 +37,11 @@ if [[ $0 == *bash || "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; t
 	alias grbc="git rebase --continue"
 	alias gmt="git mergetool"
 fi
+if [[ $HOME == *com.termux* ]]; then
+	alias vi="nvim"
+	alias vim="nvim"
+fi
+
 #alias glog="git log --follow --name-status"
 
 if [[ -e ~/.bash_aliases.local ]]; then

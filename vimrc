@@ -23,6 +23,12 @@ else
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
 
+if match($HOME, 'com.termux') >= 0
+	let is_termux=1
+else
+	let is_termux=0
+endif
+
 let is_winbash=0
 let is_win=0
 if has('unix')
@@ -39,7 +45,7 @@ if has('win32')||has('win32unix')||1==is_winbash
 	endif
 endif
 
-if has('nvim')
+if has('nvim') && isdirectory(g:env_folder)
 	if has('win32')
 		let g:python_host_prog  = expand(g:env_folder . '/Scripts/python.exe')
 		let g:python3_host_prog = g:python_host_prog
@@ -50,9 +56,13 @@ if has('nvim')
 
 	if empty(glob(g:python_host_prog))
 		echom 'Could not find g:python_host_prog = '. g:python_host_prog
+		let g:python_host_prog = trim(system('which python3'))
+		echom 'Setting g:python_host_prog = '. g:python_host_prog
 	endif
 	if empty(glob(g:python3_host_prog))
 		echom 'Could not find g:python3_host_prog = '. g:python3_host_prog
+		let g:python3_host_prog = trim(system('which python3'))
+		echom 'Setting g:python3_host_prog = '. g:python3_host_prog
 	endif
 endif
 
@@ -228,7 +238,7 @@ if (v:version >= 800 || has('nvim'))
 			call dein#add('TheZoq2/neovim-auto-autoread')
 		endif
 
-		if !exists('g:gui_oni') && has('nvim')
+		if !exists('g:gui_oni') && has('nvim') && is_termux==0
 			call dein#add('vimlab/split-term.vim')
 
 			" ccls
@@ -609,7 +619,6 @@ if has('unix')
 	noremap <leader>ru :%s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
 endif
 """""""""""""""""""" /Generate UUID """"""""""""""""""""""""
-
 
 filetype on
 syntax on

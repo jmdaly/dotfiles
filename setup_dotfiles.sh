@@ -13,6 +13,8 @@ else
 	h=$1
 fi;
 echo "Using home: $h"
+DFTMP=$(mktemp -d)
+echo "Using tmp: ${DFTMP}"
 
 # I don't think I've used this in years.  WSL removes the need
 if [[ "$2" == "" ]]; then
@@ -55,14 +57,17 @@ elif [[ "$(uname -o)" == "Cygwin" ]]; then
 else
 	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 
-	mkdir -p ${h}/.local/share/fonts
-	# Install fonts
-	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-		git clone https://github.com/powerline/fonts.git /tmp/powerline_fonts
-		/tmp/powerline_fonts/install.sh
-	fi
-	# apt-get install ttf-ancient-fonts -y
-	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
+	if [[ $HOME != *com.termux* ]]; then
+		# For now at least, don't install powerline fonts on termux
+		mkdir -p ${h}/.local/share/fonts
+		# Install fonts
+		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+			git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
+			${DFTMP}/powerline_fonts/install.sh
+		fi
+		# apt-get install ttf-ancient-fonts -y
+		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
+	fi;
 fi
 
 # Check if our environment supports these
@@ -133,8 +138,8 @@ fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-	sh /tmp/installer.sh ${h}/dotfiles/bundles/dein
+	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${DFTMP}/installer.sh
+	sh ${DFTMP}/installer.sh ${h}/dotfiles/bundles/dein
 fi
 
 if [[ "" != "$(which nvim)" ]]; then
@@ -148,7 +153,7 @@ if [[ "" != "$(which nvim)" ]]; then
 fi
 
 if [[ -e .modulefiles && ! -L .modulerc ]]; then
-	ln -s .modulefiles/.modulerc ./
+	ln -s .modulefiles/.modulerc ${h}/
 fi
 
 # Install fzf
