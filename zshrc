@@ -79,7 +79,11 @@ if [[ $(which urxvt 2>/dev/null) != "" ]]; then
 fi
 
 # Use VIM wherever possible.  The latter fixes colours in non-gvim
-export EDITOR=vim
+if [[ $(which nvim 2>/dev/null) != "" ]]; then
+	export EDITOR=nvim
+else
+	export EDITOR=vim
+fi
 
 # This doesn't seem to be applying when at the top
 setopt no_share_history
