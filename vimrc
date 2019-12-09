@@ -50,9 +50,13 @@ if has('nvim')
 
 	if empty(glob(g:python_host_prog))
 		echom 'Could not find g:python_host_prog = '. g:python_host_prog
+		let g:python_host_prog = trim(system('which python3'))
+		echom 'Setting g:python_host_prog = '. g:python_host_prog
 	endif
 	if empty(glob(g:python3_host_prog))
 		echom 'Could not find g:python3_host_prog = '. g:python3_host_prog
+		let g:python3_host_prog = trim(system('which python3'))
+		echom 'Setting g:python3_host_prog = '. g:python3_host_prog
 	endif
 endif
 
