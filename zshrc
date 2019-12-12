@@ -190,21 +190,25 @@ if [[ -e "${python_venv}/bin" ]]; then
 	source "${python_venv}/bin/activate"
 fi
 
-# Actvate the SSH-Agent.  Following instructions at
-# http://blog.joncairns.com/2013/12/understanding-ssh-agent-and-ssh-add/ to
-# avoid an agent per shell.
-# Troubleshooting https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
-if [[ -e "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh" ]]; then
-	. "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh"
+# # Activate the SSH-Agent.  Following instructions at
+# # http://blog.joncairns.com/2013/12/understanding-ssh-agent-and-ssh-add/ to
+# # avoid an agent per shell.
+# # Troubleshooting https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
+# if [[ -e "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh" ]]; then
+# 	. "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh"
+#
+# 	# Automatically choose the first agent
+# 	ssh-find-agent -a
+# 	if [ -z "$SSH_AUTH_SOCK" ]
+# 	then
+# 	   eval $(ssh-agent) > /dev/null
+# 	   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+# 	fi
+# fi
 
-	# Automatically choose the first agent
-	ssh-find-agent -a
-	if [ -z "$SSH_AUTH_SOCK" ]
-	then
-	   eval $(ssh-agent) > /dev/null
-	   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
-	fi
-fi
+# Attempting to use gpg-agent over ssh-agent
+# https://eklitzke.org/using-gpg-agent-effectively
+export SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
