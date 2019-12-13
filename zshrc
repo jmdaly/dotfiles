@@ -209,6 +209,7 @@ fi
 # Attempting to use gpg-agent over ssh-agent
 # https://eklitzke.org/using-gpg-agent-effectively
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export GPG_TTY=$(tty)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
