@@ -56,4 +56,8 @@ function catjson() {
 		| pygmentize -l javascript
 }
 
+# GPG aliases.. Needed until I understand GPG better
+alias gpg-fixtty="gpg-connect-agent updatestartuptty /bye"
+alias gpg-reload="gpg-connect-agent reloadagent /bye"
+
 # vim: ts=3 sts=0 sw=3 noet ft=sh ffs=unix :
