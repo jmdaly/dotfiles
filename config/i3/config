@@ -113,8 +113,8 @@ assign [class="qBittorrent"] $workspace4
 # HDMI-1 = ASUS
 # Position these with arandr, save the file, then paste the contents here:
 exec --no-startup-id xrandr --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 5120x360 --rotate normal --output DVI-D-1 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-2 --mode 2560x1080 --pos 0x184 --rotate normal
-workspace $workspace1 output DVI-D-2
-workspace $workspace2 output DVI-D-1
+workspace $workspace1 output DVI-D-1
+workspace $workspace2 output DVI-D-2
 workspace $workspace3 output HDMI-1
 
 # switch to workspace
