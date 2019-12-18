@@ -19,6 +19,10 @@ if [[ "" != "$(which nvim)" ]]; then
 	alias vimdiff="vim -d"
 fi
 
+# Test for Yubi
+if [[ -e "${HOME}/bin/yubioath-desktop-5.0.1-linux.AppImage" ]]; then
+	alias yubiAuth="${HOME}/bin/yubioath-desktop-5.0.1-linux.AppImage"
+fi
 
 # A better test would be whether I'm running zsh..
 if [[ $0 == *bash || "${TRUE_HOST}" != "" || "$(hostname)" == *siteground* ]]; then
