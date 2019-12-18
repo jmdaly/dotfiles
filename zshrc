@@ -30,13 +30,17 @@ fi
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
-		# Bundles from robbyrussell's oh-my-zsh.
-		zplug "plugins/git", from:oh-my-zsh
-		zplug "plugins/command-not-found", from:oh-my-zsh
-		zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
+	# Bundles from robbyrussell's oh-my-zsh.
+	zplug "plugins/git", from:oh-my-zsh
+	zplug "plugins/command-not-found", from:oh-my-zsh
+	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-		zplug "lib/history", from:oh-my-zsh              # Provides history management
-		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+	zplug "lib/history", from:oh-my-zsh              # Provides history management
+	zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+
+	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
+		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
+	fi
 
 	if [[ "CST-PC90" == "$(hostname)" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
@@ -55,6 +59,7 @@ if [[ -e ${HOME}/.zplug ]]; then
 
 		# Load the theme.
 		zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 	fi
 
 	# Bookmarks in fzf
