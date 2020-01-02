@@ -1,3 +1,9 @@
+# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
+# it'll prompt for the SSH passphrase rather than the keyring passphrase
+# https://eklitzke.org/using-gpg-agent-effectively
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export GPG_TTY=$(tty)
+
 if [[ -e ${HOME}/dotfiles/doupdate.sh ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
 	${HOME}/dotfiles/doupdate.sh
@@ -194,27 +200,6 @@ declare python_venv="${HOME}/.virtualenvs/default"
 if [[ -e "${python_venv}/bin" ]]; then
 	source "${python_venv}/bin/activate"
 fi
-
-# # Activate the SSH-Agent.  Following instructions at
-# # http://blog.joncairns.com/2013/12/understanding-ssh-agent-and-ssh-add/ to
-# # avoid an agent per shell.
-# # Troubleshooting https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
-# if [[ -e "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh" ]]; then
-# 	. "${HOME}/dotfiles/ssh-find-agent/ssh-find-agent.sh"
-#
-# 	# Automatically choose the first agent
-# 	ssh-find-agent -a
-# 	if [ -z "$SSH_AUTH_SOCK" ]
-# 	then
-# 	   eval $(ssh-agent) > /dev/null
-# 	   ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
-# 	fi
-# fi
-
-# Attempting to use gpg-agent over ssh-agent
-# https://eklitzke.org/using-gpg-agent-effectively
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-export GPG_TTY=$(tty)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
