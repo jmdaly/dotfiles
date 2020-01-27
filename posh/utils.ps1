@@ -15,7 +15,6 @@ New-Alias which Get-Command
 
 # Other aliases
 New-Alias wget Invoke-WebRequest
-New-Alias cat Get-Content
 
 # https://github.com/dahlbyk/posh-sshell
 Import-Module -Name posh-sshell
