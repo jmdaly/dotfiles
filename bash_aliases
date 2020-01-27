@@ -4,7 +4,7 @@ alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
 alias ls="ls -lAhtrFG --color=auto"
-alias grep="grep --color=always"
+alias grep="grep --color=always --exclude-dir={.git}"
 
 if [[ -e /usr/bin/ag ]]; then
 	alias ag="ag -iU --color-line-number 34 --color-path 31"
