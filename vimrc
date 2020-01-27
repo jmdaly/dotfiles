@@ -90,7 +90,6 @@ augroup filetypes
 	au BufNewFile,BufRead *.geo            set filetype=glsl
 	au BufNewFile,BufRead *.frag           set filetype=glsl
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
-	au BufNewFile,BufRead /mnt/c/*         set ffs=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 augroup end
 
