@@ -2,7 +2,7 @@
 
 $posh_dir = $env:userprofile + "\dotfiles\posh\"
 
-# . "$posh_dir\vs17.ps1"
+. "$posh_dir\vs17.ps1"
 . "$posh_dir\python.ps1"
 . "$posh_dir\env.ps1"
 . "$posh_dir\git-aliases.ps1"
