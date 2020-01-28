@@ -64,4 +64,7 @@ function catjson() {
 alias gpg-fixtty="gpg-connect-agent updatestartuptty /bye"
 alias gpg-reload="gpg-connect-agent reloadagent /bye"
 
+# Windows Terminal Settings
+alias edit_windows_terminal="vi /mnt/c/Users/matthew.russell/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/profiles.json"
+
 # vim: ts=3 sts=0 sw=3 noet ft=sh ffs=unix :
