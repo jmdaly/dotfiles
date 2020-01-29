@@ -167,9 +167,10 @@ if [[ $(hostname) == "khea" ]]; then
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
 elif [[ $(hostname) = CST-PC* ]]; then
-	# set -x
 	WIN_HOME=/mnt/c/users/matthew.russell
 
+	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
+	export DOCKER_HOST=tcp://localhost:2375
 elif [[ $(hostname) = dena* ]]; then
 	# This should be a system "module use"!
 	module use /cm/shared/denaModules

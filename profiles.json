@@ -1,198 +1,198 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "globals" : 
+    "globals" :
     {
         "alwaysShowTabs" : true,
-        "defaultProfile" : "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "defaultProfile" : "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "initialCols" : 120,
         "initialRows" : 30,
-        "keybindings" : 
+        "keybindings" :
         [
             {
                 "command" : "closeTab",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+w"
                 ]
             },
             {
                 "command" : "newTab",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+t"
                 ]
             },
             {
                 "command" : "newTabProfile0",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+1"
                 ]
             },
             {
                 "command" : "newTabProfile1",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+2"
                 ]
             },
             {
                 "command" : "newTabProfile2",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+3"
                 ]
             },
             {
                 "command" : "newTabProfile3",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+4"
                 ]
             },
             {
                 "command" : "newTabProfile4",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+5"
                 ]
             },
             {
                 "command" : "newTabProfile5",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+6"
                 ]
             },
             {
                 "command" : "newTabProfile6",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+7"
                 ]
             },
             {
                 "command" : "newTabProfile7",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+8"
                 ]
             },
             {
                 "command" : "newTabProfile8",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+9"
                 ]
             },
             {
                 "command" : "nextTab",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+tab"
                 ]
             },
             {
                 "command" : "openSettings",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+,"
                 ]
             },
             {
                 "command" : "prevTab",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+tab"
                 ]
             },
             {
                 "command" : "scrollDown",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+down"
                 ]
             },
             {
                 "command" : "scrollDownPage",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+pgdn"
                 ]
             },
             {
                 "command" : "scrollUp",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+up"
                 ]
             },
             {
                 "command" : "scrollUpPage",
-                "keys" : 
+                "keys" :
                 [
                     "ctrl+shift+pgup"
                 ]
             },
             {
                 "command" : "switchToTab0",
-                "keys" : 
+                "keys" :
                 [
                     "alt+1"
                 ]
             },
             {
                 "command" : "switchToTab1",
-                "keys" : 
+                "keys" :
                 [
                     "alt+2"
                 ]
             },
             {
                 "command" : "switchToTab2",
-                "keys" : 
+                "keys" :
                 [
                     "alt+3"
                 ]
             },
             {
                 "command" : "switchToTab3",
-                "keys" : 
+                "keys" :
                 [
                     "alt+4"
                 ]
             },
             {
                 "command" : "switchToTab4",
-                "keys" : 
+                "keys" :
                 [
                     "alt+5"
                 ]
             },
             {
                 "command" : "switchToTab5",
-                "keys" : 
+                "keys" :
                 [
                     "alt+6"
                 ]
             },
             {
                 "command" : "switchToTab6",
-                "keys" : 
+                "keys" :
                 [
                     "alt+7"
                 ]
             },
             {
                 "command" : "switchToTab7",
-                "keys" : 
+                "keys" :
                 [
                     "alt+8"
                 ]
             },
             {
                 "command" : "switchToTab8",
-                "keys" : 
+                "keys" :
                 [
                     "alt+9"
                 ]
@@ -203,25 +203,8 @@
         "showTabsInTitlebar" : true,
         "showTerminalTitleInTitlebar" : true
     },
-    "profiles" : 
+    "profiles" :
     [
-        {
-            "acrylicOpacity" : 0.5,
-            "closeOnExit" : true,
-            "colorScheme" : "Dracula",
-            "commandline" : "wsl.exe -d Ubuntu-18.04",
-            "cursorColor" : "#FFFFFF",
-            "cursorShape" : "bar",
-            "fontFace" : "Meslo LG S for Powerline",
-            "fontSize" : 10,
-            "guid" : "{2c4de342-38b7-51cf-b940-2309a097f518}",
-            "historySize" : 9001,
-            "icon" : "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
-            "name" : "Ubuntu",
-            "padding" : "0, 0, 0, 0",
-            "snapOnInput" : true,
-            "useAcrylic" : false
-        },
         {
             "acrylicOpacity" : 0.5,
             "closeOnExit" : true,
@@ -238,6 +221,23 @@
             "padding" : "0, 0, 0, 0",
             "snapOnInput" : true,
             "startingDirectory" : "%USERPROFILE%",
+            "useAcrylic" : false
+        },
+        {
+            "acrylicOpacity" : 0.5,
+            "closeOnExit" : true,
+            "colorScheme" : "Dracula",
+            "commandline" : "wsl.exe -d Ubuntu-18.04",
+            "cursorColor" : "#FFFFFF",
+            "cursorShape" : "bar",
+            "fontFace" : "Meslo LG S for Powerline",
+            "fontSize" : 10,
+            "guid" : "{2c4de342-38b7-51cf-b940-2309a097f518}",
+            "historySize" : 9001,
+            "icon" : "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+            "name" : "Ubuntu",
+            "padding" : "0, 0, 0, 0",
+            "snapOnInput" : true,
             "useAcrylic" : false
         },
         {
@@ -290,7 +290,7 @@
             "source": "Windows.Terminal.Wsl"
         }
     ],
-    "schemes" : 
+    "schemes" :
     [
         {
             "background" : "#0C0C0C",
