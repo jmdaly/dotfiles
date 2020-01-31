@@ -55,6 +55,10 @@ if [[ -e ${HOME}/.zplug ]]; then
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+
+		# Only have docker on CST-PC90 right now, make this general when I have
+		# it on khea too
+		zplug "akarzim/zsh-docker-aliases"
 	else
 		zplug "plugins/vi-mode", from:oh-my-zsh
 
