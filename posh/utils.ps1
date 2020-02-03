@@ -24,4 +24,7 @@ Import-Module -Name ThreadJob
 # Open a tunnel to khea, replies on module Thread-Job
 function khea-vnc { ssh -nNT khea "&" }
 
+# Get info about whatever process is using a specified port
+function Get-PortUser($port) { Get-Process -Id (Get-NetTCPConnection -LocalPort $port).OwningProcess; }
+
 # vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :
