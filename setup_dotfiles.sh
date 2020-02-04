@@ -152,7 +152,12 @@ if [[ "" != "$(which nvim)" ]]; then
 	fi
 fi
 
-if [[ -e .modulefiles && ! -L .modulerc ]]; then
+if [[ ! -e ${h}/.config/powershell ]]; then
+	mkdir -p ${h}/.config/powershell
+	ln -s $(pwd)/profile.ps1 ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
+fi
+
+if [[ -e .modulefiles && ! -L ${h}/.modulerc ]]; then
 	ln -s .modulefiles/.modulerc ${h}/
 fi
 
@@ -167,4 +172,4 @@ fi
 # in bash in order to have it on CMC machines
 #cd ${h} && source .zshrc
 
-# vim: ts=3 sw=3 sts=0 noet :
+# vim: ts=3 sw=3 sts=0 ffs=unix noet :
