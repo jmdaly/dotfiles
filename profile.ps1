@@ -11,4 +11,4 @@ $posh_dir = $(Join-Path ${HOME} dotfiles posh)
 . "$posh_dir\solacom.ps1"
 . "$posh_dir\docker.ps1"
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :

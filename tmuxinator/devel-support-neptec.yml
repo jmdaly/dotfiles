@@ -41,4 +41,4 @@ windows:
   - autokey: autokey
   - khea: open_reverse_tunnel
 
-# vim: ts=2 sw=2 sts=2 expandtab ffs=unix :
+# vim: ts=2 sw=2 sts=2 expandtab ff=unix :

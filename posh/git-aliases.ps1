@@ -13,4 +13,4 @@ function gst { git status -uno -sb $args }
 # BFG https://rtyley.github.io/bfg-repo-cleaner/
 function bfg { java.exe -jar c:\GitRepo\bfg-1.13.0.jar $args }
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :

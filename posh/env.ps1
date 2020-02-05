@@ -37,4 +37,4 @@ Import-Module oh-my-posh
 # https://github.com/JanDeDobbeleer/oh-my-posh/tree/master/Themes
 Set-Theme robbyrussell
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :

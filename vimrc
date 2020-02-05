@@ -89,6 +89,7 @@ augroup filetypes
 	au BufNewFile,BufRead *.vert           set filetype=glsl
 	au BufNewFile,BufRead *.geo            set filetype=glsl
 	au BufNewFile,BufRead *.frag           set filetype=glsl
+	au BufNewFile,BufRead *.cs             set ff=dos
 	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 augroup end
@@ -630,7 +631,7 @@ set ignorecase
 set noincsearch
 set hlsearch
 " if 0==is_win
-" 	set ffs=unix,dos
+" 	set ff=unix,dos
 " endif
 
 " Easy save
@@ -725,4 +726,4 @@ ab appraoch approach
 ab yeild yield
 ab lsit list
 
-" vim: ts=3 sts=3 sw=3 noet nowrap ffs=unix :
+" vim: ts=3 sts=3 sw=3 noet nowrap ff=unix :

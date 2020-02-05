@@ -1,9 +1,9 @@
 if ($IsWindows)
 {
-# VC Vars https://stackoverflow.com/a/2124759/1861346
-#
-# Review how MS Terminal does it with Set-MsBuildDevEnvironment at
-# https://github.com/microsoft/terminal tools/OpenConsole.psm1
+	# VC Vars https://stackoverflow.com/a/2124759/1861346
+	#
+	# Review how MS Terminal does it with Set-MsBuildDevEnvironment at
+	# https://github.com/microsoft/terminal tools/OpenConsole.psm1
 	$vspath = $(wslpath -a "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools")
 	pushd $vspath
 	cmd /c "VsDevCmd.bat&set" |
@@ -27,7 +27,6 @@ if (Test-Path $vcpkg_install_dir)
 	Write-Host "Loading vcpkg Powershell Integration." -ForegroundColor Yellow
 	Import-Module "${vcpkg_install_dir}\scripts\posh-vcpkg"
 	$env:path = "${vcpkg_install_dir};" + $env:path
-
 }
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :

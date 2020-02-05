@@ -250,4 +250,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# vim:set expandtab sw=4 ts=4 sts=0 ffs=unix :
+# vim:set expandtab sw=4 ts=4 sts=0 ff=unix :

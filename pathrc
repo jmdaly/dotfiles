@@ -48,4 +48,4 @@ fi
 # Remove duplicate paths https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
 typeset -aU path
 
-# vim: sw=4 sts=0 ts=4 noet ffs=unix ft=sh :
+# vim: sw=4 sts=0 ts=4 noet ff=unix ft=sh :

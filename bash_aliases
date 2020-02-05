@@ -70,4 +70,4 @@ alias edit_windows_terminal="vi /mnt/c/Users/matthew.russell/AppData/Local/Packa
 alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
-# vim: ts=3 sts=0 sw=3 noet ft=sh ffs=unix :
+# vim: ts=3 sts=0 sw=3 noet ft=sh ff=unix :
