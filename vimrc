@@ -69,30 +69,35 @@ endif
 
 " Configure some unconventional filetypes
 augroup filetypes
-	au BufNewFile,BufRead *.html.base      set filetype=html
-	au BufNewFile,BufRead *.ftn90          set filetype=fortran
-	au BufNewFile,BufRead *.cdk*           set filetype=fortran
-	au BufNewFile,BufRead *.nml            set filetype=fortran
-	au BufNewFile,BufRead *.module         set filetype=php
-	au BufNewFile,BufRead *.dot            set filetype=sh
-	au BufNewFile,BufRead *.gs             set filetype=javascript
-	au BufNewFile,BufRead *.spi            set filetype=tcl
-	au BufNewFile,BufRead .exper_cour      set filetype=sh
-	au BufNewFile,BufRead *.lcm            set filetype=c
-	au BufNewFile,BufRead Common_Compiler* set filetype=sh
-	au BufNewFile,BufRead */Wt/W*          set filetype=cpp
-	au BufNewFile,BufRead *recettes        set filetype=make
-	au BufNewFile,BufRead *cibles          set filetype=make
-	au BufNewFile,BufRead *.qml            set filetype=qml
-	au BufNewFile,BufRead *.qrc            set filetype=xml
-	au BufNewFile,BufRead *.pro            set filetype=make
-	au BufNewFile,BufRead *.vert           set filetype=glsl
-	au BufNewFile,BufRead *.geo            set filetype=glsl
-	au BufNewFile,BufRead *.frag           set filetype=glsl
-	au BufNewFile,BufRead *.cs             set ff=dos
-	au BufNewFile,BufRead BuildScripts/profiles/* set filetype=sh
+	" EnvCan filetypes
+	au BufNewFile,BufRead *.ftn90,*.cdk*,.nml setlocal ft=fortran
+	au BufNewFile,BufRead *recettes,*cibles   setlocal ft=make
+	au BufNewFile,BufRead *.spi               setlocal ft=tcl
+	au BufNewFile,BufRead .exper_cour         setlocal ft=sh
+	au BufNewFile,BufRead Common_Compiler*    setlocal ft=sh
+	au BufNewFile,BufRead *.dot               setlocal ft=sh
+
+	" NTC only-rules (so far)
+	au BufNewFile,BufRead *.lcm               setlocal ft=c
+	au BufNewFile,BufRead */Wt/W*             setlocal ft=cpp
+	au BufNewFile,BufRead *.qml               setlocal ft=qml
+	au BufNewFile,BufRead *.qrc               setlocal ft=xml
+	au BufNewFile,BufRead *.vert,*.geo,*.frag setlocal ft=glsl
+
+
+	au BufNewFile,BufRead *.html.base         setlocal ft=html
+	au BufNewFile,BufRead *.module            setlocal ft=php
+	au BufNewFile,BufRead *.gs                setlocal ft=javascript
+	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 augroup end
+
+augroup whitespace
+	autocmd!
+	autocmd FileType yaml     setlocal ts=2 sw=2       expandtab
+	autocmd FileType cs,cpp,c setlocal ts=4 sw=4 sts=4 expandtab
+	autocmd FileType tex      setlocal spell
+augroup END
 
 set nocompatible  " Dein also wants this
 
@@ -646,13 +651,6 @@ let @t=':try|silent! exe "norm! @r"|endtry|w|n'
 let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
 autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
-" Default whitespace settings
-set ts=4
-set sw=4
-set sts=0
-set textwidth=80
-set expandtab
-
 " Ignore whitespace on vimdiff
 if &diff
 	" diff mode
@@ -683,7 +681,6 @@ vnoremap > >gv
 
 " Auto-correct spelling mistakes
 " source: https://castel.dev/post/lecture-notes-1/
-setlocal spell
 set spelllang=en_gb,en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
