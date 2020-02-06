@@ -15,4 +15,4 @@ Write-Host "`nVisual Studio 2010 Command Prompt variables set." -ForegroundColor
 # Example of build command
 # MSBuild.exe /m:6 /p:warn=0 /p:nowarn=0436 /p:Configuration=Debug .\Liberty.sln /target:'CpeServer;InstallServer'
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :

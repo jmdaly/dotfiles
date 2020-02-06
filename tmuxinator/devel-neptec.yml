@@ -16,4 +16,4 @@ windows:
   - logs: tail -f ~/workspace/opal2/3dri/Applications/OPAL2/3DRiWebScheduler/3dri.log
 
 
-# vim: ts=2 sw=2 sts=2 expandtab ffs=unix :
+# vim: ts=2 sw=2 sts=2 expandtab ff=unix :

@@ -30,4 +30,4 @@ function iqadmin
 	Pop-Location
 }
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=dos ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :
