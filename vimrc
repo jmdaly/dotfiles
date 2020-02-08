@@ -97,6 +97,7 @@ augroup whitespace
 	autocmd FileType yaml     setlocal ts=2 sw=2       expandtab
 	autocmd FileType cs,cpp,c setlocal ts=4 sw=4 sts=4 expandtab
 	autocmd FileType tex      setlocal spell
+	autocmd FileType sh       ts=4 sw=4 sts=4 expandtab
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -722,5 +723,16 @@ ab horizonal horizontal
 ab appraoch approach
 ab yeild yield
 ab lsit list
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>wl :call AppendModeline()<CR>
 
 " vim: ts=3 sts=3 sw=3 noet nowrap ff=unix :
