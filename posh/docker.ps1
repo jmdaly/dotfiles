@@ -5,7 +5,7 @@ Import-Module posh-docker
 
 . $posh_dir\Set-ProfileForDocker.ps1
 
-function Stop-Docker { docker stop $_ }
+function Stop-Docker { docker stop $args_ }
 # function Prune-DockerContainers { docker containers prune }
 # function Prune-DockerVolume { docker volumes prune }
 # function Exectute-Docker { docker execute $_ }

@@ -9,8 +9,6 @@ if (!(Get-Variable java_jdk -Scope Global -ErrorAction SilentlyContinue))
 	# $java_jdk="C:/java-1.8.0-openjdk-1.8.0.201-2.b09.redhat.windows.x86_64"
 }
 
-if ($IsWindows) { $ = ";" } else { $path_sep = ":" }
-
 $custom_paths = @(
 	("nmap.exe",       "C:/Progra~2/Nmap"),
 	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
@@ -27,7 +25,7 @@ $custom_paths | ForEach-Object {
 	# intent was to avoid duplicates..)
 	# if ((Test-Path $p) -And ((Get-Command $_[0] -ErrorAction SilentlyContinue) -eq $null)) {
 	if (Test-Path $p) {
-		$env:PATH = "$p${path_sep}$env:PATH"
+		$env:PATH = "$p$([IO.Path]::PathSeparator)$env:PATH"
 	}
 }
 
@@ -40,7 +38,7 @@ $custom_paths | ForEach-Object {
 	if ($IsLinux) { $p = $(wslpath "$p") }
 
 	if (Test-Path $p) {
-		$env:PATH = "$p${path_sep}$env:PATH"
+		$env:PATH = "$p$([IO.Path]::PathSeparator)$env:PATH"
 	}
 }
 

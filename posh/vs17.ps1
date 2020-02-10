@@ -35,17 +35,22 @@ else
 # think I need it
 # https://blog.lextudio.com/locate-msbuild-via-powershell-on-different-operating-systems-140757bb8e18
 
-if ($IsLinux)
-{
-	$vcpkg_install_dir="${HOME}/workspace2/vcpkg"
-} else {
-	$vcpkg_install_dir="${HOME}\vcpkg"
-}
+
+# Because I only use PS right now to help with Windows stuff (I
+# don't build linux apps with it, not yet at least), always target
+# Windows' vcpkg
+$vcpkg_install_dir=Join-Path ${env:WINHOME} vcpkg
 if (Test-Path $vcpkg_install_dir)
 {
 	Write-Host "Loading vcpkg Powershell Integration." -ForegroundColor Yellow
-	Import-Module "${vcpkg_install_dir}\scripts\posh-vcpkg"
-	$env:PATH = "${vcpkg_install_dir};$env:PATH"
+
+	Import-Module $(Join-Path $vcpkg_install_dir scripts posh-vcpkg)
+	$env:PATH = "${vcpkg_install_dir}$([IO.Path]::PathSeparator)$env:PATH"
+
+	if ($IsLinux)
+	{
+		function vcpkg { vcpkg.exe $args }
+	}
 }
 
 # vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :
