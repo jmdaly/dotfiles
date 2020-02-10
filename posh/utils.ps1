@@ -27,4 +27,4 @@ function khea-vnc { ssh -nNT khea "&" }
 # Get info about whatever process is using a specified port
 function Get-PortUser($port) { Get-Process -Id (Get-NetTCPConnection -LocalPort $port).OwningProcess; }
 
-# vim: ts=4 sw=4 sts=0 noexpandtab ffs=unix ft=ps1 :
+# vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :
