@@ -175,29 +175,9 @@ elif [[ $(hostname) = CST-PC* ]]; then
 
 	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
-elif [[ $(hostname) = dena* ]]; then
-	# This should be a system "module use"!
-	module use /cm/shared/denaModules
-
-	if [[ $(hostname) = dena[5-6] ]]; then
-		module use /software/arch/intel64/modules/all
-	else
-		module use /software/arch/amd64/modules/all
-	fi
-
-	# PGI
-	module use /cm/shared/apps/pgi/modulefiles
-
-	# defaults
-	module load shared modules
-
-	# Development
-	module load pgi64/2013 slurm
-
-	if [[ $(hostname) == "dena" ]]; then
-		# Admin modules
-		module load cmsh cmgui
-	fi
+elif [[ "$(uname -o)" = Android ]]; then
+	# Likely in Termux
+	# export DISPLAY=":1"
 fi
 
 # Load default python virtual env.

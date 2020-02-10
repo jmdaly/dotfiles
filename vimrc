@@ -97,7 +97,7 @@ augroup whitespace
 	autocmd FileType yaml     setlocal ts=2 sw=2       expandtab
 	autocmd FileType cs,cpp,c setlocal ts=4 sw=4 sts=4 expandtab
 	autocmd FileType tex      setlocal spell
-	autocmd FileType sh       ts=4 sw=4 sts=4 expandtab
+	autocmd FileType sh       setlocal ts=4 sw=4 sts=4 expandtab
 augroup END
 
 set nocompatible  " Dein also wants this
