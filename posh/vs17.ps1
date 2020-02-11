@@ -31,6 +31,20 @@ else
 	}
 }
 
+function cmake
+{
+	$p=Join-Path "C:\Program Files\CMake\bin" "cmake.exe"
+	Write-Host "Overwriting cmake"
+	if ($IsLinux)
+	{
+		&"$(wslpath $p)" $args
+	}
+	else
+	{
+		&"$p" $args
+	}
+}
+
 # Some code to setup msbuild from Get-VSSetupInstance, but I don't
 # think I need it
 # https://blog.lextudio.com/locate-msbuild-via-powershell-on-different-operating-systems-140757bb8e18

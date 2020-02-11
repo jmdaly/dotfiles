@@ -11,6 +11,8 @@ if (!(Get-Variable java_jdk -Scope Global -ErrorAction SilentlyContinue))
 
 $custom_paths = @(
 	("nmap.exe",       "C:/Progra~2/Nmap"),
+	("cmake.exe",       "C:/Progra~1/CMake\bin"),
+	("cmake.exe",       "C:/Progra~2/CMake\bin"),
 	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
 	("mysql.exe",      "C:/Progra~1/MariaD~1.4/bin"),
 	("Code.exe",       "C:/Progra~1/MIFA7F~1"),
