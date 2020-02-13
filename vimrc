@@ -90,14 +90,14 @@ augroup filetypes
 	au BufNewFile,BufRead *.gs                setlocal ft=javascript
 	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
+	au BufNewFile,BufRead *.json              setlocal ft=json
 augroup end
 
 augroup whitespace
 	autocmd!
-	autocmd FileType yaml     setlocal ts=2 sw=2       expandtab
-	autocmd FileType cs,cpp,c setlocal ts=4 sw=4 sts=4 expandtab
-	autocmd FileType tex      setlocal spell
-	autocmd FileType sh       ts=4 sw=4 sts=4 expandtab
+	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab foldmethod=syntax ai formatoptions=tcq2!
+	autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
+	autocmd FileType tex             setlocal spell
 augroup END
 
 set nocompatible  " Dein also wants this

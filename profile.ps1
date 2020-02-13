@@ -1,5 +1,11 @@
 # PowerShell Profile
 
+if ($IsLinux) {
+	$env:WINHOME="/c/users/matthew.russell/"
+} else {
+	$env:WINHOME="${HOME}"
+}
+
 $posh_dir = $(Join-Path ${HOME} dotfiles posh)
 
 . "$posh_dir\vs17.ps1"

@@ -11,24 +11,36 @@ if (!(Get-Variable java_jdk -Scope Global -ErrorAction SilentlyContinue))
 
 $custom_paths = @(
 	("nmap.exe",       "C:/Progra~2/Nmap"),
+	("cmake.exe",       "C:/Progra~1/CMake\bin"),
+	("cmake.exe",       "C:/Progra~2/CMake\bin"),
 	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
-	("mysql.exe",      "C:/Progra~1/MariaD~1.3/bin"),
+	("mysql.exe",      "C:/Progra~1/MariaD~1.4/bin"),
 	("Code.exe",       "C:/Progra~1/MIFA7F~1"),
 	("java.exe",       "$java_jdk/bin"),
 	("javax.mail.jar", "C:/jaf-1_1_1/jaf-1.1.1")
 )
 $custom_paths | ForEach-Object {
-	if ((Test-Path $_[1]) -And ((Get-Command $_[0] -ErrorAction SilentlyContinue) -eq $null)) {
-		$env:path = $_[1] + ";$env:path"
+	$p = $_[1];
+	if ($IsLinux) { $p = $(wslpath "$p") }
+	# This is really slow...  Also in some cases might not be what I want
+	# (wouldn't I want to overload these even if they do exist?  I know the
+	# intent was to avoid duplicates..)
+	# if ((Test-Path $p) -And ((Get-Command $_[0] -ErrorAction SilentlyContinue) -eq $null)) {
+	if (Test-Path $p) {
+		$env:PATH = "$p$([IO.Path]::PathSeparator)$env:PATH"
 	}
 }
 
+Write-Host "   custom paths" -ForegroundColor Green
 $custom_paths = @(
 	"$env:homepath\utils\win"
 )
 $custom_paths | ForEach-Object {
-	if (Test-Path $_) {
-		$env:path = $_ + ";$env:path"
+	$p = $_;
+	if ($IsLinux) { $p = $(wslpath "$p") }
+
+	if (Test-Path $p) {
+		$env:PATH = "$p$([IO.Path]::PathSeparator)$env:PATH"
 	}
 }
 
