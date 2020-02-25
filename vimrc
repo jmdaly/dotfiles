@@ -556,21 +556,25 @@ endif
 
 
 """"""""""""""""""""""" Grepper """"""""""""""""""""""""""
-" Grepper key bindings:
-" Define an operator that takes any motion and
-" uses it to populate the search prompt:
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+silent if dein#check_install('mhinz/vim-grepper') == 0
+	" Grepper key bindings:
 
-" Have git grep perform searches throughout the whole repo
-" regardless of the directory we are currently in:
-let g:grepper     = {
-	\ 'open':    1,
-	\ 'jump':    0,
-	\ 'switch':  1,
-	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
-   \ }
+	nnoremap <leader>g :Grepper -tool git<cr>
 
+	" Define an operator that takes any motion and
+	" uses it to populate the search prompt:
+	nmap gs <plug>(GrepperOperator)
+	xmap gs <plug>(GrepperOperator)
+
+	" Have git grep perform searches throughout the whole repo
+	" regardless of the directory we are currently in:
+	let g:grepper     = {
+		\ 'open':    1,
+		\ 'jump':    0,
+		\ 'switch':  1,
+		\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
+		\ }
+endif
 """"""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
