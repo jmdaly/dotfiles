@@ -4,10 +4,10 @@
 # in the user's home directory.
 
 if [[ "$1" == "" ]]; then
-	if [[ "${WIN_HOME:-undefined}" == "undefined" ]]; then
+	if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
 		h=${HOME}
 	else
-		h=${WIN_HOME}
+		h=${WINHOME}
 	fi
 else
 	h=$1
@@ -167,9 +167,16 @@ if [[ ! -e ${h}/.fzf ]]; then
 	${h}/.fzf/install
 fi
 
-# Can no longer to this as I'm typically using zsh
-# and this is writting in bash.  I have to keep it
-# in bash in order to have it on CMC machines
-#cd ${h} && source .zshrc
+if [[ ! -e "${h}/.virtualenv/default" ]]; then
+	if [[ "$(which virtualenv)" == "" ]]; then
+		sudo apt-get install virtualenv -y
+	fi;
+
+	mkdir -p "${h}/.virtualenv"
+	pushd;
+	cd "${h}/.virtualenv"
+	virtualenv -p python3 default
+	popd
+fi
 
 # vim: ts=3 sw=3 sts=0 ff=unix noet :

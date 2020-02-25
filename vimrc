@@ -39,9 +39,9 @@ endif
 if has('win32')||has('win32unix')||1==is_winbash
 	let is_win=1
 	if ''==$HOME && 0==is_winbash
-		let $WINHOME     = 'c:/users/' . $USERNAME
-		let g:dotfiles   = $WINHOME . '/dotfiles'
-		let g:env_folder = $WINHOME . '/.virtualenvs/default'
+		let $WINHOME_WIN     = 'c:/users/' . $USERNAME
+		let g:dotfiles   = $WINHOME_WIN . '/dotfiles'
+		let g:env_folder = $WINHOME_WIN . '/.virtualenvs/default'
 	endif
 endif
 
@@ -438,7 +438,7 @@ silent if dein#check_install('omnisharp-vim') == 0
 
 	if 1==is_winbash
 		" WSL config
-		let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
+		let g:OmniSharp_server_path = $WINHOME .'/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
 		let g:OmniSharp_translate_cygwin_wsl = 1
 	else
 		" Linux config
