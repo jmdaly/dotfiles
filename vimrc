@@ -311,7 +311,7 @@ endif
 silent if dein#check_install('vim-managecolor') == 0
 	let g:colo_search_path = g:dotfiles . '/bundles/dein'
 	let g:colo_cache_file  = g:dotfiles . '/colos.json'
-	colo cobalt2
+	colo materialtheme
 endif
 
 
