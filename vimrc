@@ -201,9 +201,6 @@ if (v:version >= 800 || has('nvim'))
 		" Show markers
 		call dein#add('kshenoy/vim-signature')
 
-		" Grep through repo
-		call dein#add('mhinz/vim-grepper')
-
 		" call dein#add('elzr/vim-json')
 
 		" Status bar
@@ -556,27 +553,6 @@ endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
 
-""""""""""""""""""""""" Grepper """"""""""""""""""""""""""
-silent if dein#check_install('mhinz/vim-grepper') == 0
-	" Grepper key bindings:
-
-	nnoremap <leader>g :Grepper -tool git<cr>
-
-	" Define an operator that takes any motion and
-	" uses it to populate the search prompt:
-	nmap gs <plug>(GrepperOperator)
-	xmap gs <plug>(GrepperOperator)
-
-	" Have git grep perform searches throughout the whole repo
-	" regardless of the directory we are currently in:
-	let g:grepper     = {
-		\ 'open':    1,
-		\ 'jump':    0,
-		\ 'switch':  1,
-		\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
-		\ }
-endif
-""""""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
@@ -607,11 +583,14 @@ endif
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-if has('unix')
+silent if has('unix') && dein#check_install('fzf') == 0
 	" Set up keyboard shortbuts for fzf, the fuzzy finder
 	" This one searches all the files in the current git repo:
 	noremap <c-k> :GitFiles<CR>
 	noremap <leader><Tab> :Buffers<CR>
+	noremap <leader>g :Rg<cr>
+	noremap <leader>s :Snippets<cr>
+	noremap <leader>c :Colors<cr>
 
 	" Unmap center/<CR> from launching fzf which appears to be mapped by default.
 	" unmap <CR>
