@@ -21,6 +21,10 @@ function U
 	throw "Invalid character code $Code"
 }
 
+if ($IsWindows -eq $null -And $env:WINHOME -eq $null)
+{
+	$env:WINHOME = $env:HOMEPATH
+}
 
 # Oh-my-posh https://github.com/JanDeDobbeleer/oh-my-posh
 Write-Host "Loading posh-git" -ForegroundColor Yellow

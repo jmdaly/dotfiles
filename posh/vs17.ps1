@@ -1,10 +1,10 @@
-if ($IsWindows)
+if ($IsWindows -Or $IsWindows -eq $null)
 {
 	# VC Vars https://stackoverflow.com/a/2124759/1861346
 	#
 	# Review how MS Terminal does it with Set-MsBuildDevEnvironment at
 	# https://github.com/microsoft/terminal tools/OpenConsole.psm1
-	$vspath = $(wslpath -a "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools")
+	$vspath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\Tools"
 	pushd $vspath
 	cmd.exe /c "VsDevCmd.bat&set" |
 	foreach {
@@ -45,21 +45,45 @@ function cmake
 	}
 }
 
-# Some code to setup msbuild from Get-VSSetupInstance, but I don't
-# think I need it
-# https://blog.lextudio.com/locate-msbuild-via-powershell-on-different-operating-systems-140757bb8e18
+# # https://blog.lextudio.com/locate-msbuild-via-powershell-on-different-operating-systems-140757bb8e18
+# $msBuild = "msbuild"
+# try
+# {
+# 	& $msBuild /version
+# 	Write-Host "Likely on Linux/macOS."
+# }
+# catch
+# {
+# 	Write-Host "MSBuild doesn't exist. Use VSSetup instead."
+# 	Install-Module VSSetup -Scope CurrentUser -Force
+# 	$instance = Get-VSSetupInstance -All -Prerelease | Select-VSSetupInstance -Require 'Microsoft.Component.MSBuild' -Latest
+# 	$installDir = $instance.installationPath
+# 	Write-Host "Visual Studio is found at $installDir"
+# 	$msBuild = $installDir + '\MSBuild\Current\Bin\MSBuild.exe' # VS2019
+# 	if (![System.IO.File]::Exists($msBuild))
+# 	{
+# 		$msBuild = $installDir + '\MSBuild\15.0\Bin\MSBuild.exe' # VS2017
+# 		if (![System.IO.File]::Exists($msBuild))
+# 		{
+# 			Write-Host "MSBuild doesn't exist. Exit."
+# 			exit 1
+# 		}
+# 	}
+# 	Write-Host "Likely on Windows."
+# }
+# Write-Host "MSBuild found. Compile the projects."
 
 
 # Because I only use PS right now to help with Windows stuff (I
 # don't build linux apps with it, not yet at least), always target
 # Windows' vcpkg
-$vcpkg_install_dir=Join-Path ${env:WINHOME} vcpkg
-if (Test-Path $vcpkg_install_dir)
+$env:VCPKG_ROOT=Join-Path ${env:WINHOME} vcpkg
+if (Test-Path $env:VCPKG_ROOT)
 {
 	Write-Host "Loading vcpkg Powershell Integration." -ForegroundColor Yellow
 
-	Import-Module $(Join-Path $vcpkg_install_dir scripts posh-vcpkg)
-	$env:PATH = "${vcpkg_install_dir}$([IO.Path]::PathSeparator)$env:PATH"
+	Import-Module $(Join-Path $(Join-Path $env:VCPKG_ROOT scripts) posh-vcpkg)
+	$env:PATH = "$env:VCPKG_ROOT$([IO.Path]::PathSeparator)$env:PATH"
 
 	if ($IsLinux)
 	{
