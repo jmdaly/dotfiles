@@ -589,11 +589,17 @@ silent if has('unix') && dein#check_install('fzf') == 0
 	noremap <c-k> :GitFiles<CR>
 	noremap <leader><Tab> :Buffers<CR>
 	noremap <leader>g :Rg<cr>
+	noremap gsiw :GGrepIW<cr>
 	noremap <leader>s :Snippets<cr>
 	noremap <leader>c :Colors<cr>
 
 	" Unmap center/<CR> from launching fzf which appears to be mapped by default.
 	" unmap <CR>
+
+	command! -nargs=* -bang GGrepIW
+		\ call fzf#vim#grep(
+		\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+		\   fzf#vim#with_preview(), <bang>0)
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
