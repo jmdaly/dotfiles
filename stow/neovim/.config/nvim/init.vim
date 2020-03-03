@@ -155,6 +155,15 @@ command! -bang -nargs=* Ags
   \ call fzf#vim#grep('ag --nogroup --column --color -s '.shellescape(<q-args>), 0, <bang>0)
 " A mapping to do case-insensitive search using ag:
 nnoremap <leader>as :Ags<space>
+" A command that will search for the word under the cursor:
+command! -nargs=* -bang AgIW
+  \ call fzf#vim#grep(
+  \   'ag --nogroup --column --color --smart-case '.shellescape(expand('<cword>')), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+" A mapping for the above command
+nnoremap <leader>w :AgIW<CR>
+" Set the fzf popup layout
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " Use The Silver Searcher for grep, if available:
 if executable('ag')
