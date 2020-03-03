@@ -90,7 +90,8 @@ if exists(':tnoremap')
 endif
 
 let g:LanguageClient_serverCommands = {
-\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+\ 'cpp': ['ccls', '--log-file=/tmp/cq.log'],
+\ 'c': ['ccls', '--log-file=/tmp/cq.log'],
 \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
@@ -128,6 +129,7 @@ let g:clang_path = "/opt/llvm"
 " ALE configuration
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
+\   'c': ['clangtidy'],
 \}
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 " Set up mapping to move between errors
