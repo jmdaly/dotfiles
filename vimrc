@@ -39,9 +39,9 @@ endif
 if has('win32')||has('win32unix')||1==is_winbash
 	let is_win=1
 	if ''==$HOME && 0==is_winbash
-		let $WINHOME     = 'c:/users/' . $USERNAME
-		let g:dotfiles   = $WINHOME . '/dotfiles'
-		let g:env_folder = $WINHOME . '/.virtualenvs/default'
+		let $WINHOME_WIN     = 'c:/users/' . $USERNAME
+		let g:dotfiles   = $WINHOME_WIN . '/dotfiles'
+		let g:env_folder = $WINHOME_WIN . '/.virtualenvs/default'
 	endif
 endif
 
@@ -98,6 +98,7 @@ augroup whitespace
 	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab foldmethod=syntax ai formatoptions=tcq2!
 	autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
 	autocmd FileType tex             setlocal spell
+	autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -199,9 +200,6 @@ if (v:version >= 800 || has('nvim'))
 
 		" Show markers
 		call dein#add('kshenoy/vim-signature')
-
-		" Grep through repo
-		call dein#add('mhinz/vim-grepper')
 
 		" call dein#add('elzr/vim-json')
 
@@ -311,7 +309,7 @@ endif
 silent if dein#check_install('vim-managecolor') == 0
 	let g:colo_search_path = g:dotfiles . '/bundles/dein'
 	let g:colo_cache_file  = g:dotfiles . '/colos.json'
-	colo cobalt2
+	colo materialtheme
 endif
 
 
@@ -438,7 +436,7 @@ silent if dein#check_install('omnisharp-vim') == 0
 
 	if 1==is_winbash
 		" WSL config
-		let g:OmniSharp_server_path = '/mnt/c/Users/matthew.russell/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
+		let g:OmniSharp_server_path = $WINHOME .'/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
 		let g:OmniSharp_translate_cygwin_wsl = 1
 	else
 		" Linux config
@@ -555,23 +553,6 @@ endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
 
-""""""""""""""""""""""" Grepper """"""""""""""""""""""""""
-" Grepper key bindings:
-" Define an operator that takes any motion and
-" uses it to populate the search prompt:
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-
-" Have git grep perform searches throughout the whole repo
-" regardless of the directory we are currently in:
-let g:grepper     = {
-	\ 'open':    1,
-	\ 'jump':    0,
-	\ 'switch':  1,
-	\ 'git':     { 'grepprg': 'git grep -nI $* -- `git rev-parse --show-toplevel`'},
-   \ }
-
-""""""""""""""""""""""" /Grepper """""""""""""""""""""""""
 
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
@@ -602,14 +583,23 @@ let g:grepper     = {
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-if has('unix')
+silent if has('unix') && dein#check_install('fzf') == 0
 	" Set up keyboard shortbuts for fzf, the fuzzy finder
 	" This one searches all the files in the current git repo:
 	noremap <c-k> :GitFiles<CR>
 	noremap <leader><Tab> :Buffers<CR>
+	noremap <leader>g :Rg<cr>
+	noremap gsiw :GGrepIW<cr>
+	noremap <leader>s :Snippets<cr>
+	noremap <leader>c :Colors<cr>
 
 	" Unmap center/<CR> from launching fzf which appears to be mapped by default.
 	" unmap <CR>
+
+	command! -nargs=* -bang GGrepIW
+		\ call fzf#vim#grep(
+		\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+		\   fzf#vim#with_preview(), <bang>0)
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
