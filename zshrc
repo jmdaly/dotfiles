@@ -170,8 +170,8 @@ if [[ $(hostname) == "khea" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-elif [[ $(hostname) = CST-PC* ]]; then
-	export WINHOME=/c/users/matthew.russell
+elif [[ $(hostname) == "WGC1CVCY3YS13" ]]; then
+	export WINHOME=/c/users/mruss100
 
 	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
