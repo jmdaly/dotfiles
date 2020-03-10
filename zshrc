@@ -48,7 +48,7 @@ if [[ -e ${HOME}/.zplug ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
-	if [[ "CST-PC90" == "$(hostname)" ]]; then
+	if [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
@@ -161,7 +161,7 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
-if [[ $(hostname) == "khea" ]]; then
+if [[ "khea" == "$(hostname)" ]]; then
 	module load modules
 	module load khea
 	module load solacom
@@ -170,7 +170,7 @@ if [[ $(hostname) == "khea" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-elif [[ $(hostname) == "WGC1CVCY3YS13" ]]; then
+elif [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
 	export WINHOME=/c/users/mruss100
 
 	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
