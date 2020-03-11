@@ -56,6 +56,8 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
+		zplug "dracula/zsh", use:dracula.zsh-theme
+
 		# Only have docker on CST-PC90 right now, make this general when I have
 		# it on khea too
 		zplug "akarzim/zsh-docker-aliases"
@@ -172,6 +174,8 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
 	export WINHOME=/c/users/mruss100
+
+	export DISPLAY=:0
 
 	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375

@@ -1,7 +1,7 @@
 # PowerShell Profile
 
 if ($IsLinux) {
-	$env:WINHOME="/c/users/matthew.russell/"
+	$env:WINHOME="/c/users/$env:USERNAME/"
 } else {
 	$env:WINHOME="${HOME}"
 }
@@ -13,6 +13,8 @@ if (Test-Path $priv_dir\proxy.ps1)
 {
 	. "$priv_dir\proxy.ps1"
 }
+. "$posh_dir\dracula-prompt-configuration.ps1"
+. "$posh_dir\vs19.ps1"
 . "$posh_dir\python.ps1"
 . "$posh_dir\env.ps1"
 . "$posh_dir\git-aliases.ps1"
