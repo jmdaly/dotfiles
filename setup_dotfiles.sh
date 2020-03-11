@@ -16,6 +16,8 @@ echo "Using home: $h"
 DFTMP=$(mktemp -d)
 echo "Using tmp: ${DFTMP}"
 
+declare VENVS="${h}/.virtualenvs"
+
 # I don't think I've used this in years.  WSL removes the need
 if [[ "$2" == "" ]]; then
 	copy=0
@@ -169,14 +171,14 @@ if [[ ! -e ${h}/.fzf ]]; then
 	${h}/.fzf/install
 fi
 
-if [[ ! -e "${h}/.virtualenv/default" ]]; then
+if [[ ! -e "${VENVS}/default" ]]; then
 	if [[ "$(which virtualenv)" == "" ]]; then
 		sudo apt-get install virtualenv -y
 	fi;
 
-	mkdir -p "${h}/.virtualenv"
+	mkdir -p "${VENVS}"
 	pushd;
-	cd "${h}/.virtualenv"
+	cd "${VENVS}"
 	virtualenv -p python3 default
 	popd
 fi

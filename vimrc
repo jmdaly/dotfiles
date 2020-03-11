@@ -95,7 +95,7 @@ augroup end
 
 augroup whitespace
 	autocmd!
-	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab foldmethod=syntax ai formatoptions=tcq2!
+	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
 	autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
 	autocmd FileType tex             setlocal spell
 	autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai

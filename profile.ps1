@@ -7,7 +7,19 @@ if ($IsLinux) {
 }
 
 $posh_dir = $(Join-Path ${HOME} dotfiles posh)
-$priv_dir = $(Join-Path ${HOME} dotfiles dotfiles-secret)
+if (Test-Path $(Join-Path ${HOME} dotfiles dotfiles-secret))
+{
+	$priv_dir = $(Join-Path ${HOME} dotfiles dotfiles-secret)
+}
+elseif (Test-Path $(Join-Path ${HOME} dotfiles-secret))
+{
+	$priv_dir = $(Join-Path ${HOME} dotfiles-secret)
+}
+else
+{
+	$priv_dir = ""
+}
+	
 
 if (Test-Path $priv_dir\proxy.ps1)
 {
