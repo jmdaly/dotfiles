@@ -132,6 +132,7 @@ let g:ale_linters = {
 \   'c': ['clangtidy'],
 \}
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
+let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 " Set up mapping to move between errors
 nmap <silent> [w <Plug>(ale_previous_wrap)
 nmap <silent> ]w <Plug>(ale_next_wrap)
