@@ -19,13 +19,12 @@ else
 {
 	$priv_dir = ""
 }
-	
+
 
 if (Test-Path $priv_dir\proxy.ps1)
 {
 	. "$priv_dir\proxy.ps1"
 }
-. "$posh_dir\dracula-prompt-configuration.ps1"
 . "$posh_dir\vs19.ps1"
 . "$posh_dir\python.ps1"
 . "$posh_dir\env.ps1"

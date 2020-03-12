@@ -13,7 +13,7 @@ if ($IsWindows -Or $IsWindows -eq $null)
 	  }
 	}
 	popd
-	Write-Host "`nVisual Studio 2017 Command Prompt variables set." -ForegroundColor Yellow
+	Write-Host "`nVisual Studio 2019 Command Prompt variables set." -ForegroundColor Yellow
 }
 else
 {
@@ -22,8 +22,8 @@ else
 	# worked, so it's possible that I don't need to set $env:VCTargetPath If I
 	# do though, I think it's at (note the two examples have slightly different
 	# paths)
-	# /c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/Common7/IDE/VC/VCTargets/Microsoft.Cpp.Default.props
-	# e.g.  $env:VCTargetPath="$(wslpath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\")"
+	# /c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/Common7/IDE/VC/VCTargets/Microsoft.Cpp.Default.props
+	# e.g.  $env:VCTargetPath="$(wslpath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\VC\VCTargets\")"
 
 	function msbuild {
 		Write-Host "Overwriting msbuild"
@@ -62,7 +62,7 @@ function cmake
 # 	$msBuild = $installDir + '\MSBuild\Current\Bin\MSBuild.exe' # VS2019
 # 	if (![System.IO.File]::Exists($msBuild))
 # 	{
-# 		$msBuild = $installDir + '\MSBuild\15.0\Bin\MSBuild.exe' # VS2017
+# 		$msBuild = $installDir + '\MSBuild\15.0\Bin\MSBuild.exe' # VS2019
 # 		if (![System.IO.File]::Exists($msBuild))
 # 		{
 # 			Write-Host "MSBuild doesn't exist. Exit."
