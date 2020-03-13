@@ -13,8 +13,6 @@ else
 	h=$1
 fi;
 echo "Using home: $h"
-DFTMP=$(mktemp -d)
-echo "Using tmp: ${DFTMP}"
 
 declare VENVS="${h}/.virtualenvs"
 
@@ -35,11 +33,10 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-if [[ "$(uname -o)" != "Cygwin" ]]; then
-	cd ${base}
-	git submodule init
-	git submodule update
-fi
+cd ${base}
+git submodule init
+git submodule update
+
 cd ${h}
 
 #
@@ -53,9 +50,6 @@ files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on Env Can machines
 	files+=(.pathrc .vncrc .gdbinit)
-elif [[ "$(uname -o)" == "Cygwin" ]]; then
-	# Do nothing
-	files+=(.zshrc)
 else
 	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 
@@ -142,6 +136,7 @@ fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+	DFTMP=$(mktemp -d)
 	wget -O ${DFTMP}/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
 	sh ${DFTMP}/installer.sh ${h}/dotfiles/bundles/dein
 fi
@@ -168,16 +163,13 @@ fi
 # Install fzf
 if [[ ! -e ${h}/.fzf ]]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-	${h}/.fzf/install
+	yes | ${h}/.fzf/install
 fi
 
-if [[ ! -e "${VENVS}/default" ]]; then
-	if [[ "$(which virtualenv)" == "" ]]; then
-		sudo apt-get install virtualenv -y
-	fi;
-
+# Setup default virtualenv
+if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
 	mkdir -p "${VENVS}"
-	pushd;
+	pushd .
 	cd "${VENVS}"
 	virtualenv -p python3 default
 	popd
