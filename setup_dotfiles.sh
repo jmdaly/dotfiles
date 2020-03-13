@@ -170,11 +170,7 @@ if [[ ! -e ${h}/.fzf ]]; then
 	${h}/.fzf/install
 fi
 
-if [[ ! -e "${VENVS}/default" ]]; then
-	if [[ "$(which virtualenv)" == "" ]]; then
-		sudo apt-get install virtualenv -y
-	fi;
-
+if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
 	mkdir -p "${VENVS}"
 	pushd .
 	cd "${VENVS}"
