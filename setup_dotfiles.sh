@@ -13,8 +13,6 @@ else
 	h=$1
 fi;
 echo "Using home: $h"
-DFTMP=$(mktemp -d)
-echo "Using tmp: ${DFTMP}"
 
 declare VENVS="${h}/.virtualenvs"
 
@@ -142,6 +140,7 @@ fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+	DFTMP=$(mktemp -d)
 	wget -O ${DFTMP}/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
 	sh ${DFTMP}/installer.sh ${h}/dotfiles/bundles/dein
 fi
@@ -177,7 +176,7 @@ if [[ ! -e "${VENVS}/default" ]]; then
 	fi;
 
 	mkdir -p "${VENVS}"
-	pushd;
+	pushd .
 	cd "${VENVS}"
 	virtualenv -p python3 default
 	popd
