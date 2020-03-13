@@ -175,4 +175,15 @@ if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
 	popd
 fi
 
+# GPG-Agent
+if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
+	mkdir -p "${h}/.gnupg"
+	ln -s gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+fi
+
+if [[ ! -e "${h}/.ssh/tmp" ]]; then
+	mkdir -p "${h}/.ssh/tmp"
+	chmod 700 "${h}/.ssh"
+fi
+
 # vim: ts=3 sw=3 sts=0 ff=unix noet :

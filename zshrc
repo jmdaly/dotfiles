@@ -177,7 +177,7 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CVCY3YS13" == "$(hostname)" ]]; then
+elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
