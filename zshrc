@@ -188,7 +188,13 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 
 	# Use Window's Docker
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
-	export DOCKER_HOST=tcp://localhost:2375
+	if [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
+		export DOCKER_HOST=tcp://localhost:2375
+	elif [[ "WGC1CV2JWQP13" == "$(hostname)" ]]; then
+		export DOCKER_HOST=tcp://WGC1CVCY3YS13.ottawaeng.ford.com:2375
+	else
+		echo "Not specifying remote docker host"
+	fi
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
 	# export DISPLAY=":1"
