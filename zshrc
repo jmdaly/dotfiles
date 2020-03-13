@@ -53,6 +53,8 @@ if [[ -e ${HOME}/.zplug ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
+	zplug "akarzim/zsh-docker-aliases"
+
 	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
@@ -62,10 +64,6 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
 		zplug "dracula/zsh", use:dracula.zsh-theme
-
-		# Only have docker on CST-PC90 right now, make this general when I have
-		# it on khea too
-		zplug "akarzim/zsh-docker-aliases"
 	else
 		zplug "plugins/vi-mode", from:oh-my-zsh
 
