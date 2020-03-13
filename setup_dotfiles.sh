@@ -33,11 +33,10 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-if [[ "$(uname -o)" != "Cygwin" ]]; then
-	cd ${base}
-	git submodule init
-	git submodule update
-fi
+cd ${base}
+git submodule init
+git submodule update
+
 cd ${h}
 
 #
@@ -51,9 +50,6 @@ files=(.bash_aliases)
 if [[ "${TRUE_HOST}" != "" ]]; then
 	# We're on Env Can machines
 	files+=(.pathrc .vncrc .gdbinit)
-elif [[ "$(uname -o)" == "Cygwin" ]]; then
-	# Do nothing
-	files+=(.zshrc)
 else
 	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
 
@@ -167,9 +163,10 @@ fi
 # Install fzf
 if [[ ! -e ${h}/.fzf ]]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-	${h}/.fzf/install
+	yes | ${h}/.fzf/install
 fi
 
+# Setup default virtualenv
 if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
 	mkdir -p "${VENVS}"
 	pushd .
