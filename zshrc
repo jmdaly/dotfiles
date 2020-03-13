@@ -33,6 +33,11 @@ if [[ -e ${HOME}/.pathrc ]]; then
 	source ${HOME}/.pathrc
 fi
 
+declare WSL_VERSION=0
+if [[ -e "${HOME}/dotfiles/detect_wsl_version.sh" ]]; then
+	WSL_VERSION="$(${HOME}/dotfiles/detect_wsl_version.sh)"
+fi
+
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
@@ -48,7 +53,7 @@ if [[ -e ${HOME}/.zplug ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
-	if [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
+	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
@@ -132,13 +137,13 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 }
 
 # Alises
-if [ -e ${HOME}/.bash_aliases ]; then
-	source ${HOME}/.bash_aliases
+if [ -e "${HOME}/.bash_aliases" ]; then
+	source "${HOME}/.bash_aliases"
 fi
 
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
-	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
+	test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 declare modules_enabled=0
@@ -172,7 +177,7 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-elif [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
+elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CVCY3YS13" == "$(hostname)" ]]; then
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
@@ -181,7 +186,8 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
 		source "dotfiles-secret/ford/sh/proxy.dot"
 	fi
 
-	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
+	# Use Window's Docker
+	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
