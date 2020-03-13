@@ -32,12 +32,6 @@ Import-Module posh-git
 
 if ($IsWindows)
 {
-	# Start SshAgent if not already
-	# Need this if you are using github as your remote git repository
-	if (! (ps | ? { $_.Name -eq 'ssh-agent'})) {
-		Start-SshAgent
-	}
-
 	# I'd like to use gpg-agent, and I sort of am.. But I think something isn't setup fully yet, so for now point directly to plink
 	$env:GIT_SSH="C:\Program Files\PuTTY\plink.exe"
 }
