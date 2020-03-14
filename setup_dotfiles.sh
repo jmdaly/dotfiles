@@ -23,12 +23,12 @@ else
 	copy=1
 fi;
 
-if [[ "$(which realpath)" == "" ]]; then
+if [[ "" == "$(which realpath)" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
-	declare base=${h}/dotfiles
+	declare base="${h}/dotfiles"
 	#exit 1;
 else
-	declare base=${h}/dotfiles
+	declare base="${h}/dotfiles"
 fi;
 
 # First ensure that the submodules in this repo
@@ -101,12 +101,12 @@ for f in ${files[@]}; do
 	if [[ $f =~ .* ]]; then
 		src=${f/.//}
 	else
-		src=$f
+		src="$f"
 	fi;
-	if [[ ! -h ${h}/$f ]]; then
-		if [[ -e ${h}/$f && -e ${base}/${src} && ! -h ${h}/${f} ]]; then
+	if [[ ! -h "${h}/$f" ]]; then
+		if [[ -e ${h}/$f && -e "${base}/${src}" && ! -h "${h}/${f}" ]]; then
 			echo "Backing up $f"
-			mv ${h}/$f ${backup_dir}/$f
+			mv "${h}/$f" "${backup_dir}/$f"
 		fi
 		if [[ -e ${base}/${src} ]]; then
 			#echo "Installing $f"
@@ -129,35 +129,33 @@ cd $h
 
 # Install zplug
 if [[ ! -e "${h}/.zplug" ]]; then
-	ztmp=$(mktemp -d)
-	wget -O ${ztmp}/installer.zsh https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
-		&& zsh ${ztmp}/installer.zsh
+	ztmp="$(mktemp -d)"
+	wget -O "${ztmp}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
+		&& zsh "${ztmp}/installer.zsh"
 fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	DFTMP=$(mktemp -d)
-	wget -O ${DFTMP}/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-	sh ${DFTMP}/installer.sh ${h}/dotfiles/bundles/dein
+	DFTMP="$(mktemp -d)"
+	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+	sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
 fi
 
-if [[ "" != "$(which nvim)" ]]; then
-	# neovim is installed
-	if [[ ! -e "${h}/.config/nvim" ]]; then
-		mkdir -p "${h}/.config/nvim"
-	fi
-	if [[ -e ${h}/.vimrc ]]; then
-		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
-	fi
+# Setup nvim config, whether it's currently installed or not
+if [[ ! -e "${h}/.config/nvim" ]]; then
+	mkdir -p "${h}/.config/nvim"
+fi
+if [[ -e "${h}/.vimrc" ]]; then
+	ln -fs "${h}/.vimrc" "${h}/.config/nvim/init.vim"
 fi
 
-if [[ ! -e ${h}/.config/powershell ]]; then
-	mkdir -p ${h}/.config/powershell
+if [[ ! -e "${h}/.config/powershell" ]]; then
+	mkdir -p "${h}/.config/powershell"
 	ln -s $(pwd)/profile.ps1 ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
 fi
 
-if [[ -e .modulefiles && ! -L ${h}/.modulerc ]]; then
-	ln -s .modulefiles/.modulerc ${h}/
+if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
+	ln -s .modulefiles/.modulerc "${h}/"
 fi
 
 # Install fzf
@@ -178,7 +176,7 @@ fi
 # GPG-Agent
 if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 	mkdir -p "${h}/.gnupg"
-	ln -s gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+	ln -fs gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
 fi
 
 if [[ ! -e "${h}/.ssh/tmp" ]]; then
