@@ -91,6 +91,7 @@ augroup filetypes
 	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 	au BufNewFile,BufRead *.json              setlocal ft=json
+	au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
 augroup end
 
 augroup whitespace

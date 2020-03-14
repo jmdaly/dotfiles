@@ -53,6 +53,8 @@ if [[ -e ${HOME}/.zplug ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
+	zplug "akarzim/zsh-docker-aliases"
+
 	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
@@ -62,10 +64,6 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
 		zplug "dracula/zsh", use:dracula.zsh-theme
-
-		# Only have docker on CST-PC90 right now, make this general when I have
-		# it on khea too
-		zplug "akarzim/zsh-docker-aliases"
 	else
 		zplug "plugins/vi-mode", from:oh-my-zsh
 
@@ -188,7 +186,13 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 
 	# Use Window's Docker
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
-	export DOCKER_HOST=tcp://localhost:2375
+	if [[ "WGC1CVCY3YS13" == "$(hostname)" ]]; then
+		export DOCKER_HOST=tcp://localhost:2375
+	elif [[ "WGC1CV2JWQP13" == "$(hostname)" ]]; then
+		export DOCKER_HOST=tcp://WGC1CVCY3YS13.ottawaeng.ford.com:2375
+	else
+		echo "Not specifying remote docker host"
+	fi
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
 	# export DISPLAY=":1"
