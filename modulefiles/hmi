@@ -1,0 +1,13 @@
+#%Module1.0#####################################################################
+##
+## hmi modulefile
+##
+proc ModulesHelp { } {
+	puts stderr "HMI Build environment"
+}
+
+module-whatis	"loads HMI build environment env"
+
+setenv GOOGLE_TEST_PATH /c/Users/mruss100/workspace/dockerfiles/sync/compose/src-sync/external-gtest/bld
+setenv QSG_RENDER_LOOP threaded
+setenv CCACHE_SIZE 10

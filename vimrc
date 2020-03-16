@@ -91,11 +91,12 @@ augroup filetypes
 	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 	au BufNewFile,BufRead *.json              setlocal ft=json
+	au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
 augroup end
 
 augroup whitespace
 	autocmd!
-	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab foldmethod=syntax ai formatoptions=tcq2!
+	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
 	autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
 	autocmd FileType tex             setlocal spell
 	autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai

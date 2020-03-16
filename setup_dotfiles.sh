@@ -13,8 +13,9 @@ else
 	h=$1
 fi;
 echo "Using home: $h"
-DFTMP=$(mktemp -d)
-echo "Using tmp: ${DFTMP}"
+
+declare -r backup_dir=${h}/.dotfiles_backup
+declare VENVS="${h}/.virtualenvs"
 
 # I don't think I've used this in years.  WSL removes the need
 if [[ "$2" == "" ]]; then
@@ -23,62 +24,52 @@ else
 	copy=1
 fi;
 
-if [[ "$(which realpath)" == "" ]]; then
+# Is there an alternative to realpath?
+if [[ "" == "$(which realpath)" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
-	declare base=${h}/dotfiles
+	declare base="${h}/dotfiles"
 	#exit 1;
 else
-	declare base=${h}/dotfiles
+	declare base="${h}/dotfiles"
 fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-if [[ "$(uname -o)" != "Cygwin" ]]; then
-	cd ${base}
-	git submodule init
-	git submodule update
-fi
+cd ${base}
+git submodule init
+git submodule update
+
 cd ${h}
 
 #
-# TODO deal with Windows Terminal, Oni, PS, etc, files
+# TODO deal with Windows Terminal, PS, etc, files
+# TODO Create a function to mkdir and symlink.. I do that a lot here.
+# TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
+# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .  wget requires proxy env vars have the protocol, while pip and other things throw an error if the protocol is specified.
 #
 
 #
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-if [[ "${TRUE_HOST}" != "" ]]; then
-	# We're on Env Can machines
-	files+=(.pathrc .vncrc .gdbinit)
-elif [[ "$(uname -o)" == "Cygwin" ]]; then
-	# Do nothing
-	files+=(.zshrc)
-else
-	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf)
 
-	if [[ $HOME != *com.termux* ]]; then
-		# For now at least, don't install powerline fonts on termux
-		mkdir -p ${h}/.local/share/fonts
-		# Install fonts
-		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-			git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
-			${DFTMP}/powerline_fonts/install.sh
-		fi
-		# apt-get install ttf-ancient-fonts -y
-		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
-	fi;
-fi
+if [[ $HOME != *com.termux* ]]; then
+	# For now at least, don't install powerline fonts on termux
+	mkdir -p ${h}/.local/share/fonts
+	# Install fonts
+	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+		git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
+		${DFTMP}/powerline_fonts/install.sh
+	fi
+	# apt-get install ttf-ancient-fonts -y
+	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
+fi;
 
 # Check if our environment supports these
-if [[ "$(which vi)" != "" ]]; then
-	files+=('.vimrc')
-fi
 if [[ "$(which tmux)" != "" ]]; then
-	files+=('.tmux.conf')
-	if [[ ! -e ${h}/.tmux ]]; then
-		git clone https://github.com/tmux-plugins/tpm ${h}/.tmux/plugins/tpm
-	fi
+	mkdir -p "${h}/.tmux/plugins"
+	git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
 fi
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
@@ -95,22 +86,20 @@ fi
 
 # .config/autokey
 
-declare backup_dir=${h}/.dotfiles_backup
-
 # Create a backup directory:
-mkdir -p ${h}/.dotfiles_backup
+mkdir -p "${h}/.dotfiles_backup"
 
 for f in ${files[@]}; do
 	# Local file in dotfile fir
 	if [[ $f =~ .* ]]; then
 		src=${f/.//}
 	else
-		src=$f
+		src="$f"
 	fi;
-	if [[ ! -h ${h}/$f ]]; then
-		if [[ -e ${h}/$f && -e ${base}/${src} && ! -h ${h}/${f} ]]; then
+	if [[ ! -h "${h}/$f" ]]; then
+		if [[ -e ${h}/$f && -e "${base}/${src}" && ! -h "${h}/${f}" ]]; then
 			echo "Backing up $f"
-			mv ${h}/$f ${backup_dir}/$f
+			mv "${h}/$f" "${backup_dir}/$f"
 		fi
 		if [[ -e ${base}/${src} ]]; then
 			#echo "Installing $f"
@@ -133,50 +122,60 @@ cd $h
 
 # Install zplug
 if [[ ! -e "${h}/.zplug" ]]; then
-	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+	ztmp="$(mktemp -d)"
+	wget -O "${ztmp}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
+		&& zsh "${ztmp}/installer.zsh"
 fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${DFTMP}/installer.sh
-	sh ${DFTMP}/installer.sh ${h}/dotfiles/bundles/dein
+	DFTMP="$(mktemp -d)"
+	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+	sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
 fi
 
-if [[ "" != "$(which nvim)" ]]; then
-	# neovim is installed
-	if [[ ! -e "${h}/.config/nvim" ]]; then
-		mkdir -p "${h}/.config/nvim"
-	fi
-	if [[ -e ${h}/.vimrc ]]; then
-		ln -fs ${h}/.vimrc ${h}/.config/nvim/init.vim
-	fi
+# Setup nvim config, whether it's currently installed or not
+mkdir -p "${h}/.config/nvim"
+if [[ -e "${h}/.vimrc" ]]; then
+	ln -fs "${h}/.vimrc" "${h}/.config/nvim/init.vim"
 fi
 
-if [[ ! -e ${h}/.config/powershell ]]; then
-	mkdir -p ${h}/.config/powershell
-	ln -s $(pwd)/profile.ps1 ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
-fi
+# Setup pwsh on linux
+mkdir -p "${h}/.config/powershell"
+ln -sf "$(pwd)/profile.ps1" ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
 
-if [[ -e .modulefiles && ! -L ${h}/.modulerc ]]; then
-	ln -s .modulefiles/.modulerc ${h}/
+# Setup i3
+mkdir -p "${h}/.config/i3"
+ln -sf "$(pwd)/i3/config" "${h}/.config/i3/config"
+
+if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
+	ln -s .modulefiles/.modulerc "${h}/"
 fi
 
 # Install fzf
-if [[ ! -e ${h}/.fzf ]]; then
+if [[ ! -e "${h}/.fzf" ]]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-	${h}/.fzf/install
+	yes | ${h}/.fzf/install
 fi
 
-if [[ ! -e "${h}/.virtualenv/default" ]]; then
-	if [[ "$(which virtualenv)" == "" ]]; then
-		sudo apt-get install virtualenv -y
-	fi;
-
-	mkdir -p "${h}/.virtualenv"
-	pushd;
-	cd "${h}/.virtualenv"
+# Setup default virtualenv
+if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
+	mkdir -p "${VENVS}"
+	pushd .
+	cd "${VENVS}"
 	virtualenv -p python3 default
 	popd
+fi
+
+# GPG-Agent
+if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
+	mkdir -p "${h}/.gnupg"
+	ln -fs gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+fi
+
+if [[ ! -e "${h}/.ssh/tmp" ]]; then
+	mkdir -p "${h}/.ssh/tmp"
+	chmod 700 "${h}/.ssh"
 fi
 
 # vim: ts=3 sw=3 sts=0 ff=unix noet :

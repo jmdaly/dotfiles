@@ -33,6 +33,11 @@ if [[ -e ${HOME}/.pathrc ]]; then
 	source ${HOME}/.pathrc
 fi
 
+declare WSL_VERSION=0
+if [[ -e "${HOME}/dotfiles/detect_wsl_version.sh" ]]; then
+	WSL_VERSION="$(${HOME}/dotfiles/detect_wsl_version.sh)"
+fi
+
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
@@ -42,13 +47,14 @@ if [[ -e ${HOME}/.zplug ]]; then
 	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
 	zplug "lib/history", from:oh-my-zsh              # Provides history management
-	zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 
 	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
-	if [[ "CST-PC90" == "$(hostname)" ]]; then
+	zplug "akarzim/zsh-docker-aliases"
+
+	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
@@ -56,10 +62,9 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 
-		# Only have docker on CST-PC90 right now, make this general when I have
-		# it on khea too
-		zplug "akarzim/zsh-docker-aliases"
+		zplug "dracula/zsh", use:dracula.zsh-theme
 	else
+		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 		zplug "plugins/vi-mode", from:oh-my-zsh
 
 		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
@@ -116,6 +121,10 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
 
+# Beginning/end of line
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+
 # github.com/goreliu/wsl-terminal recommended adding this
 [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
 	[[ -n "$ATTACH_ONLY" ]] && {
@@ -130,13 +139,13 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 }
 
 # Alises
-if [ -e ${HOME}/.bash_aliases ]; then
-	source ${HOME}/.bash_aliases
+if [ -e "${HOME}/.bash_aliases" ]; then
+	source "${HOME}/.bash_aliases"
 fi
 
 # Dir colours, used by solarized
 if [ -x /usr/bin/dircolors ]; then
-	test -r ${HOME}/.dircolors && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
+	test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 declare modules_enabled=0
@@ -161,7 +170,7 @@ if [[ $? == 1 ]]; then
 	#module use ${HOST}/.modulefiles
 fi;
 
-if [[ $(hostname) == "khea" ]]; then
+if [[ "khea" == "$(hostname)" ]]; then
 	module load modules
 	module load khea
 	module load solacom
@@ -170,11 +179,21 @@ if [[ $(hostname) == "khea" ]]; then
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
-elif [[ $(hostname) = CST-PC* ]]; then
-	export WINHOME=/c/users/matthew.russell
+elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
+	export WINHOME=/c/users/mruss100
 
-	# Use Window's Docker https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
+	export DISPLAY=:0
+
+	if [[ -e "dotfiles-secret/ford/sh/proxy.dot" ]]; then
+		source "dotfiles-secret/ford/sh/proxy.dot"
+	fi
+
+	# Use Window's Docker
+	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
+
+	module load qt/5.12.7 hmi
+
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
 	# export DISPLAY=":1"

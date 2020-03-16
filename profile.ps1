@@ -1,14 +1,31 @@
 # PowerShell Profile
 
 if ($IsLinux) {
-	$env:WINHOME="/c/users/matthew.russell/"
+	$env:WINHOME="/c/users/$env:USERNAME/"
 } else {
 	$env:WINHOME="${HOME}"
 }
 
 $posh_dir = $(Join-Path ${HOME} dotfiles posh)
+if (Test-Path $(Join-Path ${HOME} dotfiles dotfiles-secret))
+{
+	$priv_dir = $(Join-Path ${HOME} dotfiles dotfiles-secret)
+}
+elseif (Test-Path $(Join-Path ${HOME} dotfiles-secret))
+{
+	$priv_dir = $(Join-Path ${HOME} dotfiles-secret)
+}
+else
+{
+	$priv_dir = ""
+}
 
-. "$posh_dir\vs17.ps1"
+
+if (Test-Path $priv_dir\proxy.ps1)
+{
+	. "$priv_dir\proxy.ps1"
+}
+. "$posh_dir\vs19.ps1"
 . "$posh_dir\python.ps1"
 . "$posh_dir\env.ps1"
 . "$posh_dir\git-aliases.ps1"
