@@ -47,7 +47,6 @@ if [[ -e ${HOME}/.zplug ]]; then
 	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
 	zplug "lib/history", from:oh-my-zsh              # Provides history management
-	zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 
 	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
@@ -65,6 +64,7 @@ if [[ -e ${HOME}/.zplug ]]; then
 
 		zplug "dracula/zsh", use:dracula.zsh-theme
 	else
+		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 		zplug "plugins/vi-mode", from:oh-my-zsh
 
 		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
@@ -120,6 +120,10 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
+
+# Beginning/end of line
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # github.com/goreliu/wsl-terminal recommended adding this
 [[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
@@ -187,6 +191,9 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 	# Use Window's Docker
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
+
+	module load qt/5.12.7 hmi
+
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
 	# export DISPLAY=":1"

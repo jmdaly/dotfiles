@@ -44,6 +44,8 @@ cd ${h}
 #
 # TODO deal with Windows Terminal, PS, etc, files
 # TODO Create a function to mkdir and symlink.. I do that a lot here.
+# TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
+# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .  wget requires proxy env vars have the protocol, while pip and other things throw an error if the protocol is specified.
 #
 
 #
