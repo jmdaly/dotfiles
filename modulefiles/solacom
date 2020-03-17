@@ -14,8 +14,9 @@ module-whatis	"loads some solacom utilities"
 
 # Open a remote desktop to a windows box.  -K means that the most receives the
 # keys first, I set this so I can un-zoom in i3
-set-alias rd_desktop "rdesktop -K -g 1920x1080 10.202.135.1"
-# set-alias outlook "rdesktop -g 1310x768 10.10.0.20"
+set-alias rd_desktop1 "rdesktop -K -g 2560x1080 10.202.135.1"
+set-alias rd_desktop2 "rdesktop -K -g 2560x1440 10.202.135.1"
+set-alias rd_desktop3 "rdesktop -K -g 1920x1080 10.202.135.1"
 # set-alias tinder "rdesktop -g 1920x1040 tinder"
 # set-alias surface "xfreerdp -u mrussell -g 1920x1040 10.10.1.106"
 

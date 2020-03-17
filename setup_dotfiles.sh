@@ -14,6 +14,7 @@ else
 fi;
 echo "Using home: $h"
 
+declare -r backup_dir=${h}/.dotfiles_backup
 declare VENVS="${h}/.virtualenvs"
 
 # I don't think I've used this in years.  WSL removes the need
@@ -23,6 +24,7 @@ else
 	copy=1
 fi;
 
+# Is there an alternative to realpath?
 if [[ "" == "$(which realpath)" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base="${h}/dotfiles"
@@ -40,41 +42,34 @@ git submodule update
 cd ${h}
 
 #
-# TODO deal with Windows Terminal, Oni, PS, etc, files
+# TODO deal with Windows Terminal, PS, etc, files
+# TODO Create a function to mkdir and symlink.. I do that a lot here.
+# TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
+# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .  wget requires proxy env vars have the protocol, while pip and other things throw an error if the protocol is specified.
 #
 
 #
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-if [[ "${TRUE_HOST}" != "" ]]; then
-	# We're on Env Can machines
-	files+=(.pathrc .vncrc .gdbinit)
-else
-	files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf)
 
-	if [[ $HOME != *com.termux* ]]; then
-		# For now at least, don't install powerline fonts on termux
-		mkdir -p ${h}/.local/share/fonts
-		# Install fonts
-		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-			git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
-			${DFTMP}/powerline_fonts/install.sh
-		fi
-		# apt-get install ttf-ancient-fonts -y
-		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
-	fi;
-fi
+if [[ $HOME != *com.termux* ]]; then
+	# For now at least, don't install powerline fonts on termux
+	mkdir -p ${h}/.local/share/fonts
+	# Install fonts
+	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+		git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
+		${DFTMP}/powerline_fonts/install.sh
+	fi
+	# apt-get install ttf-ancient-fonts -y
+	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
+fi;
 
 # Check if our environment supports these
-if [[ "$(which vi)" != "" ]]; then
-	files+=('.vimrc')
-fi
 if [[ "$(which tmux)" != "" ]]; then
-	files+=('.tmux.conf')
-	if [[ ! -e ${h}/.tmux ]]; then
-		git clone https://github.com/tmux-plugins/tpm ${h}/.tmux/plugins/tpm
-	fi
+	mkdir -p "${h}/.tmux/plugins"
+	git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
 fi
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
@@ -91,10 +86,8 @@ fi
 
 # .config/autokey
 
-declare backup_dir=${h}/.dotfiles_backup
-
 # Create a backup directory:
-mkdir -p ${h}/.dotfiles_backup
+mkdir -p "${h}/.dotfiles_backup"
 
 for f in ${files[@]}; do
 	# Local file in dotfile fir
@@ -142,24 +135,25 @@ if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
 fi
 
 # Setup nvim config, whether it's currently installed or not
-if [[ ! -e "${h}/.config/nvim" ]]; then
-	mkdir -p "${h}/.config/nvim"
-fi
+mkdir -p "${h}/.config/nvim"
 if [[ -e "${h}/.vimrc" ]]; then
 	ln -fs "${h}/.vimrc" "${h}/.config/nvim/init.vim"
 fi
 
-if [[ ! -e "${h}/.config/powershell" ]]; then
-	mkdir -p "${h}/.config/powershell"
-	ln -s $(pwd)/profile.ps1 ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
-fi
+# Setup pwsh on linux
+mkdir -p "${h}/.config/powershell"
+ln -sf "$(pwd)/profile.ps1" ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
+
+# Setup i3
+mkdir -p "${h}/.config/i3"
+ln -sf "$(pwd)/i3/config" "${h}/.config/i3/config"
 
 if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
 	ln -s .modulefiles/.modulerc "${h}/"
 fi
 
 # Install fzf
-if [[ ! -e ${h}/.fzf ]]; then
+if [[ ! -e "${h}/.fzf" ]]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
 	yes | ${h}/.fzf/install
 fi
@@ -176,7 +170,9 @@ fi
 # GPG-Agent
 if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 	mkdir -p "${h}/.gnupg"
-	ln -fs gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+	if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
+		ln -sf gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+	fi;
 fi
 
 if [[ ! -e "${h}/.ssh/tmp" ]]; then
