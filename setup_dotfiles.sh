@@ -24,7 +24,7 @@ else
 	copy=1
 fi;
 
-# Is there an alternative to realpath?
+# TODO Is there an alternative to realpath?
 if [[ "" == "$(which realpath)" ]]; then
 	echo "Cannot find realpath.  Use apt-get to install it"
 	declare base="${h}/dotfiles"
@@ -45,7 +45,10 @@ cd ${h}
 # TODO deal with Windows Terminal, PS, etc, files
 # TODO Create a function to mkdir and symlink.. I do that a lot here.
 # TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
-# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .  wget requires proxy env vars have the protocol, while pip and other things throw an error if the protocol is specified.
+# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .
+#      wget requires proxy env vars have the protocol, while pip and other
+#      things throw an error if the protocol is specified.
+#      Alternatively, I may need a .netrc file
 #
 
 #
