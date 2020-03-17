@@ -1,4 +1,5 @@
 # PowerShell Profile
+# Source in $env:homepath\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 
 if ($IsLinux) {
 	$env:WINHOME="/c/users/$env:USERNAME/"
