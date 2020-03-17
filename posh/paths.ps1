@@ -1,7 +1,6 @@
 # Add some directories to our path.
 Write-Host "Adjusting path" -ForegroundColor Yellow
 
-
 $custom_paths = @(
 	("nuget.exe",       "C:/Progra~2/Nuget"),
 	("nmap.exe",       "C:/Progra~2/Nmap"),
