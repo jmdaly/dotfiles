@@ -12,4 +12,4 @@
 	url = https://github.com/wwalker/ssh-find-agent
 [submodule "dotfiles-secret"]
 	path = dotfiles-secret
-	url = git@github.com:kheaactua/dotfiles-secret.git
+	url = https://github.com/kheaactua/dotfiles-secret.git
