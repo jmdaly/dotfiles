@@ -184,10 +184,6 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 
 	export DISPLAY=:0
 
-	if [[ -e "dotfiles-secret/ford/sh/proxy.dot" ]]; then
-		source "dotfiles-secret/ford/sh/proxy.dot"
-	fi
-
 	# Use Window's Docker
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
