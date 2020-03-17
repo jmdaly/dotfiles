@@ -170,7 +170,9 @@ fi
 # GPG-Agent
 if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 	mkdir -p "${h}/.gnupg"
-	ln -fs gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+	if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
+		ln -sf gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+	fi;
 fi
 
 if [[ ! -e "${h}/.ssh/tmp" ]]; then
