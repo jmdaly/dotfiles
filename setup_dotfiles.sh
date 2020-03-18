@@ -3,20 +3,73 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
-# TODO set up gitopts, -h, -s small, maybe even --skip-*
-
-if [[ "$1" == "" ]]; then
-	if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
-		h=${HOME}
-	else
-		h=${WINHOME}
-	fi
+if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
+	h="${HOME}"
 else
-	h=$1
-fi;
-echo "Using home: $h"
+	h="${WINHOME}"
+fi
 
-declare -r backup_dir=${h}/.dotfiles_backup
+ARGUMENT_STR_LIST=(
+	"home"
+)
+ARGUMENT_FLAG_LIST=(
+	"skip-powerline"
+	"skip-fzf"
+	"skip-python-venv"
+	"small"
+)
+
+echo $(printf "%s:," "${ARGUMENT_STR_LIST[@]}")$(printf "%s," "${ARGUMENT_FLAG_LIST[@]}")
+
+# read arguments
+opts=$(getopt \
+    --longoptions "$(printf "%s:," "${ARGUMENT_STR_LIST[@]}")$(printf "%s," "${ARGUMENT_FLAG_LIST[@]}")" \
+    --name "$(basename "$0")" \
+    --options "" \
+    -- "$@"
+)
+eval set --$opts
+
+declare skip_powerline=0
+declare skip_python_venv=0
+declare skip_fzf=0
+while [[ "" != $1 ]]; do
+	echo "1=$1"
+	case "$1" in
+	"--home")
+		shift
+		h=$1
+		echo "Setting home=$h"
+		;;
+	"--skip-powerline")
+		echo "Setting powerline"
+		skip_powerline=1
+		;;
+	"--skip-python-venv")
+		echo "Skip python venv"
+		skip_python_venv=1
+		;;
+	"--skip-fzf")
+		skip_fzf=1
+		;;
+	"--small")
+		skip_fzf=1
+		skip_python_venv=1
+		skip_powerline=1
+		;;
+	"--")
+		shift
+		break
+		;;
+	esac
+	shift
+done
+
+echo "Using home: ${h}"
+
+exit;
+
+declare -r backup_dir="${h}/.dotfiles_backup"
 declare DFTMP="$(mktemp -d)"
 declare VENVS="${h}/.virtualenvs"
 
@@ -60,22 +113,26 @@ declare -a files;
 files=(.bash_aliases)
 files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
 
-if [[ $HOME != *com.termux* ]]; then
-	# For now at least, don't install powerline fonts on termux
-	mkdir -p "${h}/.local/share/fonts"
-	# Install fonts
-	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-		git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
-		${DFTMP}/powerline_fonts/install.sh
+if [[ "1" != "${skip_powerline}" ]]; then
+	if [[ $HOME != *com.termux* ]]; then
+		# For now at least, don't install powerline fonts on termux
+		mkdir -p "${h}/.local/share/fonts"
+		# Install fonts
+		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+			git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
+			${DFTMP}/powerline_fonts/install.sh
+		fi
+		# apt-get install ttf-ancient-fonts -y
+		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
 	fi
-	# apt-get install ttf-ancient-fonts -y
-	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
-fi;
+fi
 
 # Check if our environment supports these
-if [[ "$(which tmux)" != "" ]]; then
-	mkdir -p "${h}/.tmux/plugins"
-	git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+if [[ "1" != "${skip_tmux}" ]]; then
+	if [[ "$(which tmux)" != "" ]]; then
+		mkdir -p "${h}/.tmux/plugins"
+		git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+	fi
 fi
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
@@ -157,18 +214,22 @@ if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
 fi
 
 # Install fzf
-if [[ ! -e "${h}/.fzf" ]]; then
-	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-	yes | ${h}/.fzf/install
+if [[ "1" != "${skip_fzf}" ]]; then
+	if [[ ! -e "${h}/.fzf" ]]; then
+		git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
+		yes | ${h}/.fzf/install
+	fi
 fi
 
 # Setup default virtualenv
-if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
-	mkdir -p "${VENVS}"
-	pushd .
-	cd "${VENVS}"
-	virtualenv -p python3 default
-	popd
+if [[ "1" != "${skip_python_venv}" ]]; then
+	if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
+		mkdir -p "${VENVS}"
+		pushd .
+		cd "${VENVS}"
+		virtualenv -p python3 default
+		popd
+	fi
 fi
 
 # GPG-Agent
