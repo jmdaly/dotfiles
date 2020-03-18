@@ -4,7 +4,7 @@
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export GPG_TTY=$(tty)
 
-if [[ -e ${HOME}/dotfiles/doupdate.sh && ! "$(hostname)" ~= sync* ]]; then
+if [[ -e ${HOME}/dotfiles/doupdate.sh && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
 	${HOME}/dotfiles/doupdate.sh
 fi
