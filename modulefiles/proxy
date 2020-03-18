@@ -1,6 +1,6 @@
 #%Module1.0#####################################################################
 ##
-## hmi modulefile
+## Ford Proxy modulefile
 ##
 proc ModulesHelp { } {
 	puts stderr "Lost Ford proxy"
@@ -11,3 +11,4 @@ module-whatis	"loads Ford proxy"
 set PROXY http://internet.ford.com:83
 setenv http_proxy ${PROXY}
 setenv https_proxy ${PROXY}
+setenv no_proxy "localhost,127.0.0.1,.ford.com,*.ford.com,10.1.0.3,192.168.1.26"

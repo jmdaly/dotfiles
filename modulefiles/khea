@@ -12,8 +12,7 @@ proc ModulesHelp { } {
 
 module-whatis	"loads some khea utilities"
 
-set hostname [info hostname]
-
 set-alias cless {ccat --color=always $1 |/usr/bin/less -N -I --tabs=3}
+set-alias fix-alt { setxkbmap -option altwin:swap_alt_win }
 
 # vim: ts=3 sts=0 sw=3 noet ft=tcl :

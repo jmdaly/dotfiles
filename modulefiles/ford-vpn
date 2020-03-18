@@ -1,0 +1,12 @@
+#%Module1.0#####################################################################
+##
+## Ford VPN modulefile
+##
+proc ModulesHelp { } {
+	puts stderr "Lost Ford proxy"
+}
+
+module-whatis	"loads Ford VPN"
+
+set-alias ford-vpn-up   "nmcli c u 'Ford VPN' --ask"
+set-alias ford-vpn-down "nmcli c d 'Ford VPN'"
