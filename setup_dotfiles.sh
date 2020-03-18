@@ -67,8 +67,6 @@ done
 
 echo "Using home: ${h}"
 
-exit;
-
 declare -r backup_dir="${h}/.dotfiles_backup"
 declare DFTMP="$(mktemp -d)"
 declare VENVS="${h}/.virtualenvs"
