@@ -3,6 +3,8 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
+echo "args = $@"
+
 if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
 	h="${HOME}"
 else
@@ -16,6 +18,8 @@ ARGUMENT_FLAG_LIST=(
 	"skip-powerline"
 	"skip-fzf"
 	"skip-python-venv"
+	"skip-tmux"
+	"skip-submodules"
 	"small"
 )
 
@@ -31,6 +35,8 @@ eval set --$opts
 declare skip_powerline=0
 declare skip_python_venv=0
 declare skip_fzf=0
+declare skip_tmux=0
+declare skip_submodules=0
 while [[ "" != $1 ]]; do
 	case "$1" in
 	"--home")
@@ -46,10 +52,18 @@ while [[ "" != $1 ]]; do
 	"--skip-fzf")
 		skip_fzf=1
 		;;
+	"--skip-tmux")
+		skip_tmux=1
+		;;
+	"--skip-submodules")
+		skip_submodules=1
+		;;
 	"--small")
+		skip_tmux=1
 		skip_fzf=1
 		skip_python_venv=1
 		skip_powerline=1
+		skip_submodules=1
 		;;
 	"--")
 		shift
@@ -83,9 +97,11 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-cd ${base}
-git submodule init
-git submodule update
+if [[ ! "1" == "${skip_submodules}" ]]; then
+	cd ${base}
+	git submodule init
+	git submodule update
+fi
 
 cd ${h}
 
@@ -93,10 +109,6 @@ cd ${h}
 # TODO deal with Windows Terminal, PS, etc, files
 # TODO Create a function to mkdir and symlink.. I do that a lot here.
 # TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
-# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .
-#      wget requires proxy env vars have the protocol, while pip and other
-#      things throw an error if the protocol is specified.
-#      Alternatively, I may need a .netrc file
 #
 
 #
