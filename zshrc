@@ -62,8 +62,6 @@ if [[ -e ${HOME}/.zplug ]]; then
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
-
-		zplug "dracula/zsh", use:dracula.zsh-theme
 	else
 		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 		zplug "plugins/vi-mode", from:oh-my-zsh
@@ -74,8 +72,11 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "zsh-users/zsh-syntax-highlighting"
 
 		# Load the theme.
-		zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+		DRACULA_DISPLAY_TIME=1
+		DRACULA_DISPLAY_CONTEXT=1
+		zplug "dracula/zsh", use:dracula.zsh-theme
 	fi
 
 	# Bookmarks in fzf

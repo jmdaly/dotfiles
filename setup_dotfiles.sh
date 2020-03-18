@@ -3,6 +3,8 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
+# TODO set up gitopts, -h, -s small, maybe even --skip-*
+
 if [[ "$1" == "" ]]; then
 	if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
 		h=${HOME}
@@ -15,6 +17,7 @@ fi;
 echo "Using home: $h"
 
 declare -r backup_dir=${h}/.dotfiles_backup
+declare DFTMP="$(mktemp -d)"
 declare VENVS="${h}/.virtualenvs"
 
 # I don't think I've used this in years.  WSL removes the need
@@ -55,14 +58,14 @@ cd ${h}
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
 
 if [[ $HOME != *com.termux* ]]; then
 	# For now at least, don't install powerline fonts on termux
-	mkdir -p ${h}/.local/share/fonts
+	mkdir -p "${h}/.local/share/fonts"
 	# Install fonts
 	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-		git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
+		git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
 		${DFTMP}/powerline_fonts/install.sh
 	fi
 	# apt-get install ttf-ancient-fonts -y
@@ -125,16 +128,14 @@ cd $h
 
 # Install zplug
 if [[ ! -e "${h}/.zplug" ]]; then
-	ztmp="$(mktemp -d)"
-	wget -O "${ztmp}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
-		&& zsh "${ztmp}/installer.zsh"
+	wget -O "${DFTMP}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
+		&& zsh "${DFTMP}/installer.zsh"
 fi
 
 # Install dein
 if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	DFTMP="$(mktemp -d)"
-	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-	sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
+		&& sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
 fi
 
 # Setup nvim config, whether it's currently installed or not

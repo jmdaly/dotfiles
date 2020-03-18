@@ -3,7 +3,7 @@
 ## Ford VPN modulefile
 ##
 proc ModulesHelp { } {
-	puts stderr "Lost Ford proxy"
+	puts stderr "Loads Ford proxy"
 }
 
 module-whatis	"loads Ford VPN"
