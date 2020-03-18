@@ -34,7 +34,6 @@ declare skip_powerline=0
 declare skip_python_venv=0
 declare skip_fzf=0
 while [[ "" != $1 ]]; do
-	echo "1=$1"
 	case "$1" in
 	"--home")
 		shift
