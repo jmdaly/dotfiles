@@ -3,8 +3,6 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
-echo "args = $@"
-
 if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
 	h="${HOME}"
 else
@@ -20,6 +18,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-python-venv"
 	"skip-tmux"
 	"skip-submodules"
+	"skip-dein"
 	"small"
 )
 
@@ -37,6 +36,7 @@ declare skip_python_venv=0
 declare skip_fzf=0
 declare skip_tmux=0
 declare skip_submodules=0
+declare skip_dein=0
 while [[ "" != $1 ]]; do
 	case "$1" in
 	"--home")
@@ -58,12 +58,16 @@ while [[ "" != $1 ]]; do
 	"--skip-submodules")
 		skip_submodules=1
 		;;
+	"--skip-dein")
+		skip_dein=1
+		;;
 	"--small")
 		skip_tmux=1
 		skip_fzf=1
 		skip_python_venv=1
 		skip_powerline=1
 		skip_submodules=1
+		skip_dein=1
 		;;
 	"--")
 		shift
@@ -199,9 +203,13 @@ if [[ ! -e "${h}/.zplug" ]]; then
 fi
 
 # Install dein
-if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
-		&& sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+if [[ "1" != "${skip_dein}" ]]; then
+	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+		wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
+			&& sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+	fi
+else
+	echo "Skipped installing dein"
 fi
 
 # Setup nvim config, whether it's currently installed or not
@@ -229,7 +237,7 @@ if [[ "1" != "${skip_fzf}" ]]; then
 		yes | ${h}/.fzf/install
 	fi
 else
-	echo "Skipped setting up fzf"
+	echo "Skipped installing fzf"
 fi
 
 # Setup default virtualenv
