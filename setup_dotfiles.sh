@@ -19,8 +19,6 @@ ARGUMENT_FLAG_LIST=(
 	"small"
 )
 
-echo $(printf "%s:," "${ARGUMENT_STR_LIST[@]}")$(printf "%s," "${ARGUMENT_FLAG_LIST[@]}")
-
 # read arguments
 opts=$(getopt \
     --longoptions "$(printf "%s:," "${ARGUMENT_STR_LIST[@]}")$(printf "%s," "${ARGUMENT_FLAG_LIST[@]}")" \
@@ -38,14 +36,11 @@ while [[ "" != $1 ]]; do
 	"--home")
 		shift
 		h=$1
-		echo "Setting home=$h"
 		;;
 	"--skip-powerline")
-		echo "Setting powerline"
 		skip_powerline=1
 		;;
 	"--skip-python-venv")
-		echo "Skip python venv"
 		skip_python_venv=1
 		;;
 	"--skip-fzf")
@@ -122,6 +117,8 @@ if [[ "1" != "${skip_powerline}" ]]; then
 		# apt-get install ttf-ancient-fonts -y
 		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
 	fi
+else
+	echo "Skipped installing powerline fonts"
 fi
 
 # Check if our environment supports these
@@ -130,7 +127,10 @@ if [[ "1" != "${skip_tmux}" ]]; then
 		mkdir -p "${h}/.tmux/plugins"
 		git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
 	fi
+else
+	echo "Skipped setting up tmux pluggins"
 fi
+
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
 fi
@@ -216,6 +216,8 @@ if [[ "1" != "${skip_fzf}" ]]; then
 		git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
 		yes | ${h}/.fzf/install
 	fi
+else
+	echo "Skipped setting up fzf"
 fi
 
 # Setup default virtualenv
@@ -227,6 +229,8 @@ if [[ "1" != "${skip_python_venv}" ]]; then
 		virtualenv -p python3 default
 		popd
 	fi
+else
+	echo "Skipped setting up python virtual environments"
 fi
 
 # GPG-Agent
