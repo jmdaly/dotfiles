@@ -17,6 +17,9 @@ New-Alias which Get-Command
 New-Alias wget Invoke-WebRequest
 
 # https://github.com/dahlbyk/posh-sshell
+# Import-Module -Name posh-sshell
+# Import-Module -Name Posh-SSH
+# Import-Module -Name ThreadJob
 
 # Get info about whatever process is using a specified port
 function Get-PortUser($port) { Get-Process -Id (Get-NetTCPConnection -LocalPort $port).OwningProcess; }
