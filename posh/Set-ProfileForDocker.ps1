@@ -9,7 +9,7 @@ if (Test-Path($ChocolateyProfile)) {
 
 # Docker Module
 # This is slow!
-Install-Module posh-docker -Scope CurrentUser
+Import-Module posh-docker
 
 # Docker Aliases
 # @ https://www.ctl.io/developers/blog/post/15-quick-docker-tips/

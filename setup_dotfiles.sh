@@ -3,18 +3,84 @@
 # This script sets up symlinks to all the dotfiles
 # in the user's home directory.
 
-if [[ "$1" == "" ]]; then
-	if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
-		h=${HOME}
-	else
-		h=${WINHOME}
-	fi
+if [[ "${WINHOME:-undefined}" == "undefined" ]]; then
+	h="${HOME}"
 else
-	h=$1
-fi;
-echo "Using home: $h"
+	h="${WINHOME}"
+fi
 
-declare -r backup_dir=${h}/.dotfiles_backup
+ARGUMENT_STR_LIST=(
+	"home"
+)
+ARGUMENT_FLAG_LIST=(
+	"skip-powerline"
+	"skip-fzf"
+	"skip-python-venv"
+	"skip-tmux"
+	"skip-submodules"
+	"skip-dein"
+	"small"
+)
+
+# read arguments
+opts=$(getopt \
+    --longoptions "$(printf "%s:," "${ARGUMENT_STR_LIST[@]}")$(printf "%s," "${ARGUMENT_FLAG_LIST[@]}")" \
+    --name "$(basename "$0")" \
+    --options "" \
+    -- "$@"
+)
+eval set --$opts
+
+declare skip_powerline=0
+declare skip_python_venv=0
+declare skip_fzf=0
+declare skip_tmux=0
+declare skip_submodules=0
+declare skip_dein=0
+while [[ "" != $1 ]]; do
+	case "$1" in
+	"--home")
+		shift
+		h=$1
+		;;
+	"--skip-powerline")
+		skip_powerline=1
+		;;
+	"--skip-python-venv")
+		skip_python_venv=1
+		;;
+	"--skip-fzf")
+		skip_fzf=1
+		;;
+	"--skip-tmux")
+		skip_tmux=1
+		;;
+	"--skip-submodules")
+		skip_submodules=1
+		;;
+	"--skip-dein")
+		skip_dein=1
+		;;
+	"--small")
+		skip_tmux=1
+		skip_fzf=1
+		skip_python_venv=1
+		skip_powerline=1
+		skip_submodules=1
+		skip_dein=1
+		;;
+	"--")
+		shift
+		break
+		;;
+	esac
+	shift
+done
+
+echo "Using home: ${h}"
+
+declare -r backup_dir="${h}/.dotfiles_backup"
+declare DFTMP="$(mktemp -d)"
 declare VENVS="${h}/.virtualenvs"
 
 # I don't think I've used this in years.  WSL removes the need
@@ -35,9 +101,11 @@ fi;
 
 # First ensure that the submodules in this repo
 # are available and up to date:
-cd ${base}
-git submodule init
-git submodule update
+if [[ ! "1" == "${skip_submodules}" ]]; then
+	cd ${base}
+	git submodule init
+	git submodule update
+fi
 
 cd ${h}
 
@@ -45,35 +113,40 @@ cd ${h}
 # TODO deal with Windows Terminal, PS, etc, files
 # TODO Create a function to mkdir and symlink.. I do that a lot here.
 # TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
-# TODO for wget, and anything else that needs a proxy, maybe add --no-hsts .
-#      wget requires proxy env vars have the protocol, while pip and other
-#      things throw an error if the protocol is specified.
-#      Alternatively, I may need a .netrc file
 #
 
 #
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
 
-if [[ $HOME != *com.termux* ]]; then
-	# For now at least, don't install powerline fonts on termux
-	mkdir -p ${h}/.local/share/fonts
-	# Install fonts
-	if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-		git clone https://github.com/powerline/fonts.git ${DFTMP}/powerline_fonts
-		${DFTMP}/powerline_fonts/install.sh
+if [[ "1" != "${skip_powerline}" ]]; then
+	if [[ $HOME != *com.termux* ]]; then
+		# For now at least, don't install powerline fonts on termux
+		mkdir -p "${h}/.local/share/fonts"
+		# Install fonts
+		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+			git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
+			${DFTMP}/powerline_fonts/install.sh
+		fi
+		# apt-get install ttf-ancient-fonts -y
+		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
 	fi
-	# apt-get install ttf-ancient-fonts -y
-	# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
-fi;
+else
+	echo "Skipped installing powerline fonts"
+fi
 
 # Check if our environment supports these
-if [[ "$(which tmux)" != "" ]]; then
-	mkdir -p "${h}/.tmux/plugins"
-	git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+if [[ "1" != "${skip_tmux}" ]]; then
+	if [[ "$(which tmux)" != "" ]]; then
+		mkdir -p "${h}/.tmux/plugins"
+		git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+	fi
+else
+	echo "Skipped setting up tmux pluggins"
 fi
+
 if [[ "$(which screen)" != "" ]]; then
 	files+=('.screenrc')
 fi
@@ -125,16 +198,18 @@ cd $h
 
 # Install zplug
 if [[ ! -e "${h}/.zplug" ]]; then
-	ztmp="$(mktemp -d)"
-	wget -O "${ztmp}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
-		&& zsh "${ztmp}/installer.zsh"
+	wget -O "${DFTMP}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
+		&& zsh "${DFTMP}/installer.zsh"
 fi
 
 # Install dein
-if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-	DFTMP="$(mktemp -d)"
-	wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-	sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+if [[ "1" != "${skip_dein}" ]]; then
+	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
+		wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
+			&& sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+	fi
+else
+	echo "Skipped installing dein"
 fi
 
 # Setup nvim config, whether it's currently installed or not
@@ -156,18 +231,26 @@ if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
 fi
 
 # Install fzf
-if [[ ! -e "${h}/.fzf" ]]; then
-	git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-	yes | ${h}/.fzf/install
+if [[ "1" != "${skip_fzf}" ]]; then
+	if [[ ! -e "${h}/.fzf" ]]; then
+		git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
+		yes | ${h}/.fzf/install
+	fi
+else
+	echo "Skipped installing fzf"
 fi
 
 # Setup default virtualenv
-if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
-	mkdir -p "${VENVS}"
-	pushd .
-	cd "${VENVS}"
-	virtualenv -p python3 default
-	popd
+if [[ "1" != "${skip_python_venv}" ]]; then
+	if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
+		mkdir -p "${VENVS}"
+		pushd .
+		cd "${VENVS}"
+		virtualenv -p python3 default
+		popd
+	fi
+else
+	echo "Skipped setting up python virtual environments"
 fi
 
 # GPG-Agent

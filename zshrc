@@ -4,7 +4,7 @@
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export GPG_TTY=$(tty)
 
-if [[ -e ${HOME}/dotfiles/doupdate.sh ]]; then
+if [[ -e ${HOME}/dotfiles/doupdate.sh && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
 	${HOME}/dotfiles/doupdate.sh
 fi
@@ -38,6 +38,7 @@ if [[ -e "${HOME}/dotfiles/detect_wsl_version.sh" ]]; then
 	WSL_VERSION="$(${HOME}/dotfiles/detect_wsl_version.sh)"
 fi
 
+
 if [[ -e ${HOME}/.zplug ]]; then
 	source ${HOME}/.zplug/init.zsh
 
@@ -61,8 +62,6 @@ if [[ -e ${HOME}/.zplug ]]; then
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
-
-		zplug "dracula/zsh", use:dracula.zsh-theme
 	else
 		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 		zplug "plugins/vi-mode", from:oh-my-zsh
@@ -73,8 +72,11 @@ if [[ -e ${HOME}/.zplug ]]; then
 		zplug "zsh-users/zsh-syntax-highlighting"
 
 		# Load the theme.
-		zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+		DRACULA_DISPLAY_TIME=1
+		DRACULA_DISPLAY_CONTEXT=1
+		zplug "dracula/zsh", use:dracula.zsh-theme
 	fi
 
 	# Bookmarks in fzf
@@ -173,9 +175,9 @@ fi;
 if [[ "khea" == "$(hostname)" ]]; then
 	module load modules
 	module load khea
-	module load solacom
+	module load qt/5.12.7 hmi sync ford-vpn
 
-	module load bona
+	# module load bona
 
 	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
 
@@ -188,7 +190,7 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
 
-	module load qt/5.12.7 hmi
+	module load qt/5.12.7 hmi sync ford-vpn
 
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
@@ -199,6 +201,8 @@ fi
 declare python_venv="${HOME}/.virtualenvs/default"
 if [[ -e "${python_venv}/bin" ]]; then
 	source "${python_venv}/bin/activate"
+else
+	echo "Canont load virtual env"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

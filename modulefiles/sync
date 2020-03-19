@@ -1,0 +1,14 @@
+#%Module1.0#####################################################################
+##
+## SYNC modulefile
+##
+proc ModulesHelp { } {
+	puts stderr "SYNC Build environment"
+}
+
+module-whatis	"loads SYNC build environment env"
+
+set USER_HOME $env(HOME)
+
+setenv USER_HOME ${USER_HOME}
+setenv WORKSPACE ${USER_HOME}/workspace/ford

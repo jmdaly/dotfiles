@@ -1,0 +1,11 @@
+[user]
+	name = Matthew Russell
+[core]
+	quotepath = false
+	commitGraph = true
+[gc]
+	writeCommitGraph = true
+[merge]
+	tool = vimdiff
+[credential]
+	helper = cache --timeout=36000
