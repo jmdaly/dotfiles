@@ -175,7 +175,7 @@ fi;
 if [[ "khea" == "$(hostname)" ]]; then
 	module load modules
 	module load khea
-	module load qt/5.12.7 hmi sync ford-vpn
+	module load ford
 
 	# module load bona
 
@@ -190,7 +190,7 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
 
-	module load qt/5.12.7 hmi sync ford-vpn
+	module load ford
 
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
