@@ -84,14 +84,15 @@ augroup filetypes
 	au BufNewFile,BufRead *.qrc               setlocal ft=xml
 	au BufNewFile,BufRead *.vert,*.geo,*.frag setlocal ft=glsl
 
-
 	au BufNewFile,BufRead *.html.base         setlocal ft=html
 	au BufNewFile,BufRead *.module            setlocal ft=php
 	au BufNewFile,BufRead *.gs                setlocal ft=javascript
 	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
 	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
 	au BufNewFile,BufRead *.json              setlocal ft=json
+
 	au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
+	au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
 augroup end
 
 augroup whitespace
@@ -108,7 +109,6 @@ set nocompatible  " Dein also wants this
 if !exists('g:gui_oni') && has('termguicolors')
   set termguicolors
 endif
-
 
 " if
 " 	" Colour coding nests
@@ -172,7 +172,8 @@ if (v:version >= 800 || has('nvim'))
 				\ },
 			\ )
 
-			call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
+			" Not doing C# anymore..
+			" call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
 
 			call dein#add('SirVer/ultisnips')
 			call dein#add('honza/vim-snippets')
