@@ -15,4 +15,3 @@ set	ModuleVersion "native"
 
 module use -a $::env(HOME)/.modulefiles
 module use $::env(HOME)/.modulefiles
-module use $::env(HOME)/workspace/ford/modulefiles
