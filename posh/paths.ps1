@@ -2,10 +2,10 @@
 Write-Host "Adjusting path" -ForegroundColor Yellow
 
 $custom_paths = @(
-	("nuget.exe",       "C:/Progra~2/Nuget"),
+	("nuget.exe",      "C:/Progra~2/Nuget"),
 	("nmap.exe",       "C:/Progra~2/Nmap"),
-	("cmake.exe",       "C:/Progra~1/CMake\bin"),
-	("cmake.exe",       "C:/Progra~2/CMake\bin"),
+	("cmake.exe",      "C:/Progra~1/CMake\bin"),
+	("cmake.exe",      "C:/Progra~2/CMake\bin"),
 	("notepad++.exe",  "C:/Progra~1/Notepa~1"),
 	("Code.exe",       "C:/Progra~1/MIFA7F~1")
 )
