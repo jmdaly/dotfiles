@@ -173,15 +173,19 @@ if [[ $? == 1 ]]; then
 fi;
 
 if [[ "khea" == "$(hostname)" ]]; then
-	module load modules
+	# Not using conan at the moment
+	# export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
+
+	export DEFAULT_PYTHON_VENV="ford"
+
+	# module load modules
 	module load khea
 	module load ford/ford
-
 	# module load bona
 
-	export CONAN_SYSREQUIRES_MODE=disabled CONAN_SYSREQUIRES_SUDO=0
-
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
+	# WGC1CVCY3YS13 = desktop
+	# WGC1CV2JWQP13 = laptop
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
@@ -198,7 +202,10 @@ elif [[ "$(uname -o)" = Android ]]; then
 fi
 
 # Load default python virtual env.
-declare python_venv="${HOME}/.virtualenvs/default"
+if [[ "${DEFAULT_PYTHON_VENV:-undefined}" == "undefined" ]]; then
+	DEFAULT_PYTHON_VENV="default"
+fi
+declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
 if [[ -e "${python_venv}/bin" ]]; then
 	source "${python_venv}/bin/activate"
 else
