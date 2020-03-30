@@ -5,9 +5,9 @@
 ## modulefiles/modules.  Generated from modules.in by configure.
 ##
 proc ModulesHelp { } {
-        global version prefix
+	global version prefix
 
-        puts stderr "\tkhea - Some misc functions that are useful on khea"
+	puts stderr "\tkhea - Some misc functions that are useful on khea"
 }
 
 module-whatis	"loads some khea utilities"

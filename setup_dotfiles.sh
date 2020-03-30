@@ -9,7 +9,7 @@ else
 	h="${WINHOME}"
 fi
 
-declare -r DOTFILES_DIR="$(dirname $0)"
+declare -r DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 ARGUMENT_STR_LIST=(
 	"home"
@@ -91,31 +91,15 @@ declare -r backup_dir="${h}/.dotfiles_backup"
 declare DFTMP="$(mktemp -d)"
 declare VENVS="${h}/.virtualenvs"
 
-# I don't think I've used this in years.  WSL removes the need
-if [[ "$2" == "" ]]; then
-	copy=0
-else
-	copy=1
-fi;
-
-# TODO Is there an alternative to realpath?
-if [[ "" == "$(which realpath)" ]]; then
-	echo "Cannot find realpath.  Use apt-get to install it"
-	declare base="${h}/dotfiles"
-	#exit 1;
-else
-	declare base="${h}/dotfiles"
-fi;
-
 # First ensure that the submodules in this repo
 # are available and up to date:
 if [[ ! "1" == "${skip_submodules}" ]]; then
-	cd ${base}
+	cd "${DOTFILES_DIR}"
 	git submodule init
 	git submodule update
 fi
 
-cd ${h}
+cd "${h}"
 
 #
 # TODO deal with Windows Terminal, PS, etc, files
@@ -147,9 +131,13 @@ fi
 
 # Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
-	if [[ "$(which tmux)" != "" ]]; then
-		mkdir -p "${h}/.tmux/plugins"
-		git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+	if [[ ! -e "${h}/.tmux/plugins/tpm" ]]; then
+		if [[ "$(which tmux)" != "" ]]; then
+			mkdir -p "${h}/.tmux/plugins"
+			git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
+		fi
+	else
+		echo "TPM was already exists, skipping"
 	fi
 else
 	echo "Skipped setting up tmux pluggins"
@@ -164,7 +152,7 @@ fi
 if [[ "$(which ctags)" != "" ]]; then
 	files+=('.ctags')
 fi
-if [[ "$(which vncserver)" != "" ]]; then
+if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
 	files+=('.vnc')
 fi
 
@@ -181,24 +169,22 @@ for f in ${files[@]}; do
 		src="$f"
 	fi;
 	if [[ ! -h "${h}/$f" ]]; then
-		if [[ -e ${h}/$f && -e "${base}/${src}" && ! -h "${h}/${f}" ]]; then
+		if [[ -e ${h}/$f && -e "${DOTFILES_DIR}/${src}" && ! -h "${h}/${f}" ]]; then
 			echo "Backing up $f"
 			mv "${h}/$f" "${backup_dir}/$f"
 		fi
-		if [[ -e ${base}/${src} ]]; then
+		if [[ -e "${DOTFILES_DIR}/${src}" ]]; then
 			#echo "Installing $f"
-			if [[ "$copy" == 1 ]]; then
+			if [[ "1" == "$copy" ]]; then
 				# On cygwin, symlinks when used through gvim
-				# can be an issue
-				cp -r ${base}/${src} $f;
+				# can be an issue.  Note, this hasn't been used in years
+				cp -r "${DOTFILES_DIR}/${src}" "$f";
 			else
-				if [[ ! -L $f ]]; then
-					ln -s ${base}/${src} $f
+				if [[ ! -L "$f" ]]; then
+					ln -s "${DOTFILES_DIR}/${src}" "$f"
 				fi
 			fi;
 		fi
-	else
-		echo "Skipping symlink $f"
 	fi
 done;
 
@@ -219,10 +205,10 @@ fi
 
 # Install dein
 if [[ "1" != "${skip_dein}" ]]; then
-	if [[ ! -e "${DOTFILES_DIR}/dotfiles/bundles/dein" ]]; then
+	if [[ ! -e "${DOTFILES_DIR}/bundles/dein" ]]; then
 		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${DFTMP}/install_dein.sh"
 		if [[ $? == 0 ]]; then
-			sh "${DFTMP}/install_dein.sh" "${DOTFILES_DIR}/dotfiles/bundles/dein"
+			sh "${DFTMP}/install_dein.sh" "${DOTFILES_DIR}/bundles/dein"
 		else
 			echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
 			env | grep -i proxy
@@ -232,30 +218,29 @@ else
 	echo "Skipped installing dein"
 fi
 
-# Setup nvim config, whether it's currently installed or not
-mkdir -p "${h}/.config/nvim"
-if [[ -e "${h}/.vimrc" ]]; then
-	ln -fs "${h}/.vimrc" "${h}/.config/nvim/init.vim"
-fi
-ln -fs "${DOTFILES_DIR}/dotfiles/config/nvim/spell" "${h}/.config/nvim/spell"
+# Make sure config directory exists
+mkdir -p "${h}/.config"
+
+# Setup nvim config (symlink entire directory)
+ln -s "${DOTFILES_DIR}/config/nvim" "${h}/.config/"
+
+# Setup i3 (symlink entire directory)
+ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
 
 # Setup pwsh on linux
 mkdir -p "${h}/.config/powershell"
-ln -sf "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+ln -s "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
 
-# Setup i3
-mkdir -p "${h}/.config/i3"
-ln -sf "${DOTFILES_DIR}/i3/config" "${h}/.config/i3/config"
-
-if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
-	ln -s .modulefiles/.modulerc "${h}/"
+# Setup module files
+if [[ -e "${DOTFILES_DIR}/.modulefiles" && ! -L "${h}/.modulerc" ]]; then
+	ln -s "${DOTFILES_DIR}/.modulefiles/.modulerc" "${h}/"
 fi
 
 # Install fzf
 if [[ "1" != "${skip_fzf}" ]]; then
 	if [[ ! -e "${h}/.fzf" ]]; then
-		git clone --depth 1 https://github.com/junegunn/fzf.git ${h}/.fzf
-		yes | ${h}/.fzf/install
+		git clone --depth 1 https://github.com/junegunn/fzf.git "${h}/.fzf"
+		yes | "${h}/.fzf/install"
 	fi
 else
 	echo "Skipped installing fzf"
@@ -263,11 +248,16 @@ fi
 
 # Setup default virtualenv
 if [[ "1" != "${skip_python_venv}" ]]; then
-	if [[ ! -e "${VENVS}/default" && "" != "$(which virtualenv)" ]]; then
+	if [[ "${DEFAULT_PYTHON_VENV:-undefined}" == "undefined" ]]; then
+		DEFAULT_PYTHON_VENV="default"
+	fi
+
+	if [[ ! -e "${VENVS}/${DEFAULT_PYTHON_VENV}" && "" != "$(which virtualenv)" ]]; then
 		mkdir -p "${VENVS}"
 		pushd .
 		cd "${VENVS}"
-		virtualenv -p python3 default
+		echo "Creating virtual python environment ${DEFAULT_PYTHON_VENV}"
+		virtualenv -p python3 "${DEFAULT_PYTHON_VENV}"
 		popd
 	fi
 else
