@@ -9,6 +9,8 @@ else
 	h="${WINHOME}"
 fi
 
+declare -r DOTFILES_DIR="$(dirname $0)"
+
 ARGUMENT_STR_LIST=(
 	"home"
 )
@@ -19,6 +21,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-tmux"
 	"skip-submodules"
 	"skip-dein"
+	"skip-zplug"
 	"small"
 )
 
@@ -37,6 +40,7 @@ declare skip_fzf=0
 declare skip_tmux=0
 declare skip_submodules=0
 declare skip_dein=0
+declare skip_zplug=0
 while [[ "" != $1 ]]; do
 	case "$1" in
 	"--home")
@@ -61,6 +65,9 @@ while [[ "" != $1 ]]; do
 	"--skip-dein")
 		skip_dein=1
 		;;
+	"--skip-zplug")
+		skip_zplug=1
+		;;
 	"--small")
 		skip_tmux=1
 		skip_fzf=1
@@ -68,6 +75,7 @@ while [[ "" != $1 ]]; do
 		skip_powerline=1
 		skip_submodules=1
 		skip_dein=1
+		skip_zplug=1
 		;;
 	"--")
 		shift
@@ -197,16 +205,28 @@ done;
 cd $h
 
 # Install zplug
-if [[ ! -e "${h}/.zplug" ]]; then
-	wget -O "${DFTMP}/installer.zsh" https://raw.githubusercontent.com/zplug/installer/master/installer.zsh \
-		&& zsh "${DFTMP}/installer.zsh"
+if [[ "1" != "${skip_zplug}" ]]; then
+	if [[ ! -e "${h}/.zplug" ]]; then
+		curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh > "${DFTMP}/install_zplug.sh"
+		if [[ $? == 0 ]]; then
+			zsh "${DFTMP}/install_zplug.sh"
+		else
+			echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
+			env | grep -i proxy
+		fi
+	fi
 fi
 
 # Install dein
 if [[ "1" != "${skip_dein}" ]]; then
-	if [[ ! -e "${h}/dotfiles/bundles/dein" ]]; then
-		wget -O "${DFTMP}/installer.sh" https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
-			&& sh "${DFTMP}/installer.sh" "${h}/dotfiles/bundles/dein"
+	if [[ ! -e "${DOTFILES_DIR}/dotfiles/bundles/dein" ]]; then
+		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${DFTMP}/install_dein.sh"
+		if [[ $? == 0 ]]; then
+			sh "${DFTMP}/install_dein.sh" "${DOTFILES_DIR}/dotfiles/bundles/dein"
+		else
+			echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
+			env | grep -i proxy
+		fi
 	fi
 else
 	echo "Skipped installing dein"
@@ -217,14 +237,15 @@ mkdir -p "${h}/.config/nvim"
 if [[ -e "${h}/.vimrc" ]]; then
 	ln -fs "${h}/.vimrc" "${h}/.config/nvim/init.vim"
 fi
+ln -fs "${DOTFILES_DIR}/dotfiles/config/nvim/spell" "${h}/.config/nvim/spell"
 
 # Setup pwsh on linux
 mkdir -p "${h}/.config/powershell"
-ln -sf "$(pwd)/profile.ps1" ${h}/.config/powershell/Microsoft.PowerShell_profile.ps1
+ln -sf "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
 
 # Setup i3
 mkdir -p "${h}/.config/i3"
-ln -sf "$(pwd)/i3/config" "${h}/.config/i3/config"
+ln -sf "${DOTFILES_DIR}/i3/config" "${h}/.config/i3/config"
 
 if [[ -e .modulefiles && ! -L "${h}/.modulerc" ]]; then
 	ln -s .modulefiles/.modulerc "${h}/"
@@ -257,7 +278,7 @@ fi
 if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 	mkdir -p "${h}/.gnupg"
 	if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
-		ln -sf gpg-agent.conf "${h}/.gnupg/gpg-agent.conf"
+		ln -sf "${DOTFILES_DIR}/gpg-agent.conf" "${h}/.gnupg/gpg-agent.conf"
 	fi;
 fi
 

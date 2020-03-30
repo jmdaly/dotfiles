@@ -39,8 +39,8 @@ if [[ -e "${HOME}/dotfiles/detect_wsl_version.sh" ]]; then
 fi
 
 
-if [[ -e ${HOME}/.zplug ]]; then
-	source ${HOME}/.zplug/init.zsh
+if [[ -e "${HOME}/.zplug" ]]; then
+	source "${HOME}/.zplug/init.zsh"
 
 	# Bundles from robbyrussell's oh-my-zsh.
 	zplug "plugins/git", from:oh-my-zsh
@@ -180,7 +180,13 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 	# module load modules
 	module load khea
-	module load ford/ford
+	module load \
+		ford/hmi \
+		ford/proxy \
+		ford/qnx \
+		ford/qt \
+		ford/sync \
+		ford/vpn \
 	# module load bona
 
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then

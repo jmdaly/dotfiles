@@ -47,4 +47,7 @@ Import-Module oh-my-posh
 # https://github.com/JanDeDobbeleer/oh-my-posh/tree/master/Themes
 Set-Theme robbyrussell
 
+# Get CTRL-A working
+Set-PSReadlineOption -EditMode Emacs
+
 # vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :
