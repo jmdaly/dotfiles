@@ -225,11 +225,15 @@ mkdir -p "${h}/.config"
 ln -s "${DOTFILES_DIR}/config/nvim" "${h}/.config/"
 
 # Setup i3 (symlink entire directory)
-ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+if [[ "$(which i3)" != "" ]]; then
+	ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+fi
 
 # Setup pwsh on linux
-mkdir -p "${h}/.config/powershell"
-ln -s "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+if [[ "$(which pwsh)" != "" ]]; then
+	mkdir -p "${h}/.config/powershell"
+	ln -s "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+fi
 
 # Setup module files
 if [[ -e "${DOTFILES_DIR}/.modulefiles" && ! -L "${h}/.modulerc" ]]; then
