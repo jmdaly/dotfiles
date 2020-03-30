@@ -223,6 +223,7 @@ mkdir -p "${h}/.config"
 
 # Setup nvim config (symlink entire directory)
 ln -s "${DOTFILES_DIR}/config/nvim" "${h}/.config/"
+ln -s "${DOTFILES_DIR}/vimrc" "${h}/.config/nvim/init.vim"
 
 # Setup i3 (symlink entire directory)
 if [[ "$(which i3)" != "" ]]; then
