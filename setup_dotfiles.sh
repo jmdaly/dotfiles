@@ -10,6 +10,7 @@ else
 fi
 
 declare -r DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+source "${DOTFILES_DIR}/detect_docker.dot"
 
 ARGUMENT_STR_LIST=(
 	"home"
@@ -75,7 +76,6 @@ while [[ "" != $1 ]]; do
 		skip_powerline=1
 		skip_submodules=1
 		skip_dein=1
-		skip_zplug=1
 		;;
 	"--")
 		shift
@@ -191,14 +191,27 @@ done;
 cd $h
 
 # Install zplug
+# TODO put in function
 if [[ "1" != "${skip_zplug}" ]]; then
 	if [[ ! -e "${h}/.zplug" ]]; then
-		curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh > "${DFTMP}/install_zplug.sh"
-		if [[ $? == 0 ]]; then
-			zsh "${DFTMP}/install_zplug.sh"
+		if [[ "1" == "$(detect_docker)" ]]; then
+			git_proxy_args=""
+			if [[ "" != "${http_proxy}" ]]; then
+				git_proxy_args="--config=http.proxy=${http_proxy}"
+			fi
+			git clone ${git_proxy_args} https://github.com/zplug/zplug.git "${h}/.zplug"
+			if [[ $? != 0 ]]; then
+				echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
+				env | grep -i proxy
+			fi
 		else
-			echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
-			env | grep -i proxy
+			curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh > "${DFTMP}/install_zplug.sh"
+			if [[ $? == 0 ]]; then
+				zsh "${DFTMP}/install_zplug.sh"
+			else
+				echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
+				env | grep -i proxy
+			fi
 		fi
 	fi
 fi
