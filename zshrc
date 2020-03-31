@@ -1,12 +1,14 @@
+declare DOTFILES_DIR=${HOME}/dotfiles
+
 # Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 # it'll prompt for the SSH passphrase rather than the keyring passphrase
 # https://eklitzke.org/using-gpg-agent-effectively
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export GPG_TTY=$(tty)
 
-if [[ -e ${HOME}/dotfiles/doupdate.sh && ! "$(hostname)" =~ sync* ]]; then
+if [[ -e "${DOTFILES_DIR}/doupdate.sh" && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
-	${HOME}/dotfiles/doupdate.sh
+	"${DOTFILES_DIR}/doupdate.sh"
 fi
 
 # Uncomment if I want history shared across all terminals
@@ -25,63 +27,71 @@ COMPLETION_WAITING_DOTS="true"
 # On the WSL, it's handy to use Windows $env:temp space
 WSL_TEMP_GUESS=${HOME}/tmp
 if [[ -O ${WSL_TEMP_GUESS} && -d ${WSL_TEMP_GUESS} ]]; then
-	TMPDIR=${WSL_TEMP_GUESS}
+	TMPDIR="${WSL_TEMP_GUESS}"
 fi
 
 # Adjust the path
-if [[ -e ${HOME}/.pathrc ]]; then
-	source ${HOME}/.pathrc
+if [[ -e "${HOME}/.pathrc" ]]; then
+	source "${HOME}/.pathrc"
 fi
 
 declare WSL_VERSION=0
-if [[ -e "${HOME}/dotfiles/detect_wsl_version.sh" ]]; then
-	WSL_VERSION="$(${HOME}/dotfiles/detect_wsl_version.sh)"
+if [[ -e "${DOTFILES_DIR}/detect_wsl_version.sh" ]]; then
+	WSL_VERSION="$(${DOTFILES_DIR}/detect_wsl_version.sh)"
 fi
 
+declare IN_DOCKER=0
+if [[ -e "${DOTFILES_DIR}/detect_docker.dot" ]]; then
+	source "${DOTFILES_DIR}/detect_docker.dot"
+	IN_DOCKER="$(detect_docker)"
+fi
 
 if [[ -e "${HOME}/.zplug" ]]; then
 	source "${HOME}/.zplug/init.zsh"
 
 	# Bundles from robbyrussell's oh-my-zsh.
 	zplug "plugins/git", from:oh-my-zsh
-	zplug "plugins/command-not-found", from:oh-my-zsh
-	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-	zplug "lib/history", from:oh-my-zsh              # Provides history management
+	if [[ "0" == "${IN_DOCKER}" ]]; then
+		zplug "plugins/command-not-found", from:oh-my-zsh
+		zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
-		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
-	fi
+		zplug "lib/history", from:oh-my-zsh              # Provides history management
 
-	zplug "akarzim/zsh-docker-aliases"
+		if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
+			fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
+		fi
 
-	if [[ "1" == "${WSL_VERSION}" ]]; then
-		# Pure Prompt https://github.com/sindresorhus/pure
-		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+		zplug "akarzim/zsh-docker-aliases"
 
-		ZSH_THEME=""
-		zplug "mafredri/zsh-async", from:github
-		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
-	else
-		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
-		zplug "plugins/vi-mode", from:oh-my-zsh
+		if [[ "1" == "${WSL_VERSION}" ]]; then
+			# Pure Prompt https://github.com/sindresorhus/pure
+			fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
-		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
+			ZSH_THEME=""
+			zplug "mafredri/zsh-async", from:github
+			zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+		else
+			zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+			zplug "plugins/vi-mode", from:oh-my-zsh
 
-		# Syntax highlighting bundle.
-		zplug "zsh-users/zsh-syntax-highlighting"
+			zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
-		# Load the theme.
-		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-		DRACULA_DISPLAY_TIME=1
-		DRACULA_DISPLAY_CONTEXT=1
-		zplug "dracula/zsh", use:dracula.zsh-theme
-	fi
+			# Syntax highlighting bundle.
+			zplug "zsh-users/zsh-syntax-highlighting"
 
-	# Bookmarks in fzf
-	outp=$(which fzf)
-	zplug "uvaes/fzf-marks"
+			# Load the theme.
+			# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+			# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+			DRACULA_DISPLAY_TIME=1
+			DRACULA_DISPLAY_CONTEXT=1
+			zplug "dracula/zsh", use:dracula.zsh-theme
+		fi
+
+		# Bookmarks in fzf
+		outp=$(which fzf)
+		zplug "uvaes/fzf-marks"
+	fi # if not docker
 
 	# Install plugins if there are plugins that have not been installed
 	if ! zplug check --verbose; then
@@ -127,27 +137,9 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
-# github.com/goreliu/wsl-terminal recommended adding this
-[[ -z "$TMUX" && -n "$USE_TMUX" ]] && {
-	[[ -n "$ATTACH_ONLY" ]] && {
-		tmux a 2>/dev/null || {
-			cd && exec tmux
-		}
-		exit
-	}
-
-	tmux new-window -c "$PWD" 2>/dev/null && exec tmux a
-	exec tmux
-}
-
 # Alises
 if [ -e "${HOME}/.bash_aliases" ]; then
 	source "${HOME}/.bash_aliases"
-fi
-
-# Dir colours, used by solarized
-if [ -x /usr/bin/dircolors ]; then
-	test -r "${HOME}/.dircolors" && eval "$(dircolors -b ${HOME}/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 declare modules_enabled=0
