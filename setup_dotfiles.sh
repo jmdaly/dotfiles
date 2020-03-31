@@ -42,6 +42,7 @@ declare skip_tmux=0
 declare skip_submodules=0
 declare skip_dein=0
 declare skip_zplug=0
+declare copy=0 # This hasn't been used in years, it's only for cygwin/issues with symlinks with Windos
 while [[ "" != $1 ]]; do
 	case "$1" in
 	"--home")
@@ -201,7 +202,7 @@ if [[ "1" != "${skip_zplug}" ]]; then
 			fi
 			git clone ${git_proxy_args} https://github.com/zplug/zplug.git "${h}/.zplug"
 			if [[ $? != 0 ]]; then
-				echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
+				echo "Couldn't clone zplug repo.  Is there a proxy blocking it?  Proxy env is:"
 				env | grep -i proxy
 			fi
 		else

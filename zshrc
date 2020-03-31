@@ -1,4 +1,4 @@
-declare DOTFILES_DIR=${HOME}/dotfiles
+declare DOTFILES_DIR="${HOME}/dotfiles"
 
 # Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 # it'll prompt for the SSH passphrase rather than the keyring passphrase
@@ -19,7 +19,7 @@ setopt no_share_history
 # Keep 1000 lines of history within the shell and save it to ${HOME}/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
-HISTFILE=${HOME}/.zsh_history
+HISTFILE="${HOME}/.zsh_history"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -52,46 +52,44 @@ if [[ -e "${HOME}/.zplug" ]]; then
 	# Bundles from robbyrussell's oh-my-zsh.
 	zplug "plugins/git", from:oh-my-zsh
 
-	if [[ "0" == "${IN_DOCKER}" ]]; then
-		zplug "plugins/command-not-found", from:oh-my-zsh
-		zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
+	zplug "plugins/command-not-found", from:oh-my-zsh
+	zplug "lib/directories", from:oh-my-zsh          # Provides the directory stack
 
-		zplug "lib/history", from:oh-my-zsh              # Provides history management
+	zplug "lib/history", from:oh-my-zsh              # Provides history management
 
-		if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
-			fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
-		fi
+	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
+		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
+	fi
 
-		zplug "akarzim/zsh-docker-aliases"
+	zplug "akarzim/zsh-docker-aliases"
 
-		if [[ "1" == "${WSL_VERSION}" ]]; then
-			# Pure Prompt https://github.com/sindresorhus/pure
-			fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+	if [[ "1" == "${WSL_VERSION}" ]]; then
+		# Pure Prompt https://github.com/sindresorhus/pure
+		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
-			ZSH_THEME=""
-			zplug "mafredri/zsh-async", from:github
-			zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
-		else
-			zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
-			zplug "plugins/vi-mode", from:oh-my-zsh
+		ZSH_THEME=""
+		zplug "mafredri/zsh-async", from:github
+		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+	else
+		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+		zplug "plugins/vi-mode", from:oh-my-zsh
 
-			zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
+		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
-			# Syntax highlighting bundle.
-			zplug "zsh-users/zsh-syntax-highlighting"
+		# Syntax highlighting bundle.
+		zplug "zsh-users/zsh-syntax-highlighting"
 
-			# Load the theme.
-			# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-			# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-			DRACULA_DISPLAY_TIME=1
-			DRACULA_DISPLAY_CONTEXT=1
-			zplug "dracula/zsh", use:dracula.zsh-theme
-		fi
+		# Load the theme.
+		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+		DRACULA_DISPLAY_TIME=1
+		DRACULA_DISPLAY_CONTEXT=1
+		zplug "dracula/zsh", use:dracula.zsh-theme
+	fi
 
-		# Bookmarks in fzf
-		outp=$(which fzf)
-		zplug "uvaes/fzf-marks"
-	fi # if not docker
+	# Bookmarks in fzf
+	outp=$(which fzf)
+	zplug "uvaes/fzf-marks"
 
 	# Install plugins if there are plugins that have not been installed
 	if ! zplug check --verbose; then
