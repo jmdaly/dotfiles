@@ -214,8 +214,6 @@ fi
 declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
 if [[ -e "${python_venv}/bin" ]]; then
 	source "${python_venv}/bin/activate"
-else
-	echo "Canont load virtual env"
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
