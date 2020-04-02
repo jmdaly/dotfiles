@@ -45,6 +45,13 @@ if has('win32')||has('win32unix')||1==is_winbash
 	endif
 endif
 
+let g:dein_plugin = g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim'
+if isdirectory(g:dein_plugin)
+	let g:dein_exists = 1
+else
+	let g:dein_exists = 0
+endif
+
 if has('nvim') && isdirectory(g:env_folder)
 	if has('win32')
 		let g:python_host_prog  = expand(g:env_folder . '/Scripts/python.exe')
@@ -137,8 +144,8 @@ endif
 " Plug 'scrooloose/syntastic' " <-- using jshint for syntax
 
 
-if (v:version >= 800 || has('nvim'))
-	let &runtimepath.=',' . g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim'
+if g:dein_exists && (v:version >= 800 || has('nvim'))
+	let &runtimepath.=',' . g:dein_plugin
 
 	" Required:
 	if dein#load_state(string(g:dotfiles . '/bundles/dein'))
@@ -308,7 +315,7 @@ if (v:version >= 800 || has('nvim'))
 	"End dein Scripts-------------------------
 endif
 
-silent if dein#check_install('vim-managecolor') == 0
+silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
 	let g:colo_search_path = g:dotfiles . '/bundles/dein'
 	let g:colo_cache_file  = g:dotfiles . '/colos.json'
 	colo materialtheme
@@ -373,7 +380,7 @@ if has('unix')
 endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
-silent if dein#check_install('YouCompleteMe') == 0
+silent if g:dein_exists && dein#check_install('YouCompleteMe') == 0
 	" Let YouCompleteMe use tag files for completion as well:
 	let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -434,7 +441,7 @@ endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """"""""""""""""""" OmniSharp Config """"""""""""""""""""""
-silent if dein#check_install('omnisharp-vim') == 0
+silent if g:dein_exists && dein#check_install('omnisharp-vim') == 0
 
 	if 1==is_winbash
 		" WSL config
@@ -540,7 +547,7 @@ endif
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-silent if dein#check_install('ultisnips') == 0
+silent if g:dein_exists && dein#check_install('ultisnips') == 0
 	let g:UltiSnipsExpandTrigger='<c-j>'
 	let g:UltiSnipsJumpForwardTrigger='<c-j>'
 	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
@@ -585,7 +592,7 @@ endif
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-silent if has('unix') && dein#check_install('fzf') == 0
+silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
 	" Set up keyboard shortbuts for fzf, the fuzzy finder
 	" This one searches all the files in the current git repo:
 	noremap <c-k> :GitFiles<CR>
@@ -612,7 +619,7 @@ endif
 
 """"""""""""""""""""" Generate UUID """"""""""""""""""""""""
 if has('unix')
-	py import uuid
+	silent! py import uuid
 	noremap <leader>u :s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
 	noremap <leader>ru :%s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
 endif
