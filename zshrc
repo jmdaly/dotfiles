@@ -198,12 +198,14 @@ elif [[ "$(uname -o)" = Android ]]; then
 fi
 
 # Load default python virtual env.
-if [[ "${DEFAULT_PYTHON_VENV:-undefined}" == "undefined" ]]; then
+if [[ "undefined" == "${DEFAULT_PYTHON_VENV:-undefined}" ]]; then
 	DEFAULT_PYTHON_VENV="default"
 fi
-declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
-if [[ -e "${python_venv}/bin" ]]; then
-	source "${python_venv}/bin/activate"
+if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
+	declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
+	if [[ -e "${python_venv}/bin" ]]; then
+		source "${python_venv}/bin/activate"
+	fi
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
