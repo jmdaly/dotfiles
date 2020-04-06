@@ -1,5 +1,9 @@
 [user]
 	name = Matthew Russell
+[includeIf "gitdir:~/workspace/ford/"]
+	path = ~/dotfiles/gitconfig.ford.inc
+[includeIf "gitdir:/src"]
+	path = ~/dotfiles/gitconfig.ford.inc
 [core]
 	quotepath = false
 	commitGraph = true
@@ -8,4 +12,6 @@
 [merge]
 	tool = vimdiff
 [credential]
-	helper = cache --timeout=36000
+	helper = cache --timeout=72000
+[http]
+	proxy = http://internet.ford.com:83
