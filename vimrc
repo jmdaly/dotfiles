@@ -9,105 +9,105 @@ let g:dotfiles   = $HOME . '/dotfiles'
 let g:env_folder = $HOME . '/.virtualenvs/default'
 
 if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
-	let domain='school'
+   let domain='school'
 " Can probably get rid of this...
 elseif $TRUE_HOST !=? ''
-	let domain='ec'
+   let domain='ec'
 elseif match(hostname, 'siteground') >= 0
-	" Siteground is an exception because it uses vim 7.0
-	let domain='siteground'
+   " Siteground is an exception because it uses vim 7.0
+   let domain='siteground'
 elseif match(hostname, 'khea') >= 0
-	let domain='home'
+   let domain='home'
 else
-	let domain='any'
+   let domain='any'
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
 
 if match($HOME, 'com.termux') >= 0
-	let is_termux=1
+   let is_termux=1
 else
-	let is_termux=0
+   let is_termux=0
 endif
 
 let is_winbash=0
 let is_win=0
 if has('unix')
-	if matchstr(hostkv, 'icrosoft') == 'icrosoft'
-		let is_winbash=1
-	endif
+   if matchstr(hostkv, 'icrosoft') == 'icrosoft'
+      let is_winbash=1
+   endif
 endif
 if has('win32')||has('win32unix')||1==is_winbash
-	let is_win=1
-	if ''==$HOME && 0==is_winbash
-		let $WINHOME_WIN     = 'c:/users/' . $USERNAME
-		let g:dotfiles   = $WINHOME_WIN . '/dotfiles'
-		let g:env_folder = $WINHOME_WIN . '/.virtualenvs/default'
-	endif
+   let is_win=1
+   if ''==$HOME && 0==is_winbash
+      let $WINHOME_WIN     = 'c:/users/' . $USERNAME
+      let g:dotfiles   = $WINHOME_WIN . '/dotfiles'
+      let g:env_folder = $WINHOME_WIN . '/.virtualenvs/default'
+   endif
 endif
 
 let g:dein_plugin = g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim'
 if isdirectory(g:dein_plugin)
-	let g:dein_exists = 1
+   let g:dein_exists = 1
 else
-	let g:dein_exists = 0
+   let g:dein_exists = 0
 endif
 
 if has('nvim') && isdirectory(g:env_folder)
-	if has('win32')
-		let g:python_host_prog  = expand(g:env_folder . '/Scripts/python.exe')
-		let g:python3_host_prog = g:python_host_prog
-	else
-		let g:python_host_prog  = expand(g:env_folder . '/bin/python')
-		let g:python3_host_prog = g:python_host_prog . '3'
-	endif
+   if has('win32')
+      let g:python_host_prog  = expand(g:env_folder . '/Scripts/python.exe')
+      let g:python3_host_prog = g:python_host_prog
+   else
+      let g:python_host_prog  = expand(g:env_folder . '/bin/python')
+      let g:python3_host_prog = g:python_host_prog . '3'
+   endif
 
-	if empty(glob(g:python_host_prog))
-		echom 'Could not find g:python_host_prog = '. g:python_host_prog
-		let g:python_host_prog = trim(system('which python3'))
-		echom 'Setting g:python_host_prog = '. g:python_host_prog
-	endif
-	if empty(glob(g:python3_host_prog))
-		echom 'Could not find g:python3_host_prog = '. g:python3_host_prog
-		let g:python3_host_prog = trim(system('which python3'))
-		echom 'Setting g:python3_host_prog = '. g:python3_host_prog
-	endif
+   if empty(glob(g:python_host_prog))
+      echom 'Could not find g:python_host_prog = '. g:python_host_prog
+      let g:python_host_prog = trim(system('which python3'))
+      echom 'Setting g:python_host_prog = '. g:python_host_prog
+   endif
+   if empty(glob(g:python3_host_prog))
+      echom 'Could not find g:python3_host_prog = '. g:python3_host_prog
+      let g:python3_host_prog = trim(system('which python3'))
+      echom 'Setting g:python3_host_prog = '. g:python3_host_prog
+   endif
 endif
 
 
 " Configure some unconventional filetypes
 augroup filetypes
-	" EnvCan filetypes
-	au BufNewFile,BufRead *.ftn90,*.cdk*,.nml setlocal ft=fortran
-	au BufNewFile,BufRead *recettes,*cibles   setlocal ft=make
-	au BufNewFile,BufRead *.spi               setlocal ft=tcl
-	au BufNewFile,BufRead .exper_cour         setlocal ft=sh
-	au BufNewFile,BufRead Common_Compiler*    setlocal ft=sh
-	au BufNewFile,BufRead *.dot               setlocal ft=sh
+   " EnvCan filetypes
+   au BufNewFile,BufRead *.ftn90,*.cdk*,.nml setlocal ft=fortran
+   au BufNewFile,BufRead *recettes,*cibles   setlocal ft=make
+   au BufNewFile,BufRead *.spi               setlocal ft=tcl
+   au BufNewFile,BufRead .exper_cour         setlocal ft=sh
+   au BufNewFile,BufRead Common_Compiler*    setlocal ft=sh
+   au BufNewFile,BufRead *.dot               setlocal ft=sh
 
-	" NTC only-rules (so far)
-	au BufNewFile,BufRead *.lcm               setlocal ft=c
-	au BufNewFile,BufRead */Wt/W*             setlocal ft=cpp
-	au BufNewFile,BufRead *.qml               setlocal ft=qml
-	au BufNewFile,BufRead *.qrc               setlocal ft=xml
-	au BufNewFile,BufRead *.vert,*.geo,*.frag setlocal ft=glsl
+   " NTC only-rules (so far)
+   au BufNewFile,BufRead *.lcm               setlocal ft=c
+   au BufNewFile,BufRead */Wt/W*             setlocal ft=cpp
+   au BufNewFile,BufRead *.qml               setlocal ft=qml
+   au BufNewFile,BufRead *.qrc               setlocal ft=xml
+   au BufNewFile,BufRead *.vert,*.geo,*.frag setlocal ft=glsl
 
-	au BufNewFile,BufRead *.html.base         setlocal ft=html
-	au BufNewFile,BufRead *.module            setlocal ft=php
-	au BufNewFile,BufRead *.gs                setlocal ft=javascript
-	au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
-	au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
-	au BufNewFile,BufRead *.json              setlocal ft=json
+   au BufNewFile,BufRead *.html.base         setlocal ft=html
+   au BufNewFile,BufRead *.module            setlocal ft=php
+   au BufNewFile,BufRead *.gs                setlocal ft=javascript
+   au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
+   au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
+   au BufNewFile,BufRead *.json              setlocal ft=json
 
-	au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
-	au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
+   au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
+   au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
 augroup end
 
 augroup whitespace
-	autocmd!
-	autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
-	autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
-	autocmd FileType tex             setlocal spell
-	autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd!
+   autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType tex             setlocal spell
+   autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -118,26 +118,26 @@ if !exists('g:gui_oni') && has('termguicolors')
 endif
 
 " if
-" 	" Colour coding nests
-" 	Plug 'luochen1990/rainbow'
-" 	let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+"    " Colour coding nests
+"    Plug 'luochen1990/rainbow'
+"    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " endif
 
 " Javascript plugins to try
 " if
-	" Plug 'pangloss/vim-javascript'
+   " Plug 'pangloss/vim-javascript'
    "
-	" " General conceal settings. Will keep things concealed
-	" " even when your cursor is on top of them.
-	" Plug 'Wolfy87/vim-syntax-expand'
-	" set conceallevel=1
-	" set concealcursor=nvic
+   " " General conceal settings. Will keep things concealed
+   " " even when your cursor is on top of them.
+   " Plug 'Wolfy87/vim-syntax-expand'
+   " set conceallevel=1
+   " set concealcursor=nvic
    "
-	" " vim-javascript conceal settings.
-	" let g:javascript_conceal_function = "λ"
-	" let g:javascript_conceal_this = "@"
-	" let g:javascript_conceal_return = "<"
-	" let g:javascript_conceal_prototype = "#"
+   " " vim-javascript conceal settings.
+   " let g:javascript_conceal_function = "λ"
+   " let g:javascript_conceal_this = "@"
+   " let g:javascript_conceal_return = "<"
+   " let g:javascript_conceal_prototype = "#"
 " endif
 
 " Plug 'othree/javascript-libraries-syntax.vim'
@@ -145,180 +145,180 @@ endif
 
 
 if g:dein_exists && (v:version >= 800 || has('nvim'))
-	let &runtimepath.=',' . g:dein_plugin
+   let &runtimepath.=',' . g:dein_plugin
 
-	" Required:
-	if dein#load_state(string(g:dotfiles . '/bundles/dein'))
-		call dein#begin(g:dotfiles . '/bundles/dein')
+   " Required:
+   if dein#load_state(string(g:dotfiles . '/bundles/dein'))
+      call dein#begin(g:dotfiles . '/bundles/dein')
 
-		" Let dein manage dein
-		call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
+      " Let dein manage dein
+      call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
-		" Lazy-load on C++
-		call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
+      " Lazy-load on C++
+      call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
-		" Lazy-load on PHP
-		call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
+      " Lazy-load on PHP
+      call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
 
-		" Lazy-load on python
-		call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
+      " Lazy-load on python
+      call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
 
-		" fugitive - a Git wrapper for vim. Also allows current
-		call dein#add('tpope/vim-fugitive')
-		set diffopt+=vertical
+      " fugitive - a Git wrapper for vim. Also allows current
+      call dein#add('tpope/vim-fugitive')
+      set diffopt+=vertical
 
-		" if has('unix') && 0==is_winbash && 0==is_win
-		" If this doesn't work for c#, try
-		"  https://github.com/neoclide/coc.nvim
-		if has('unix')
-			" For some reason I'm set to the 'auto' branch of YCM.. Not sure why
-				" \ 	  'rev': 'auto'
-			call dein#add('Valloric/YouCompleteMe',
-				\ {
-				\	  'build': 'bash ./install.py --clang-completer --clang-tidy'
-				\ },
-			\ )
+      " if has('unix') && 0==is_winbash && 0==is_win
+      " If this doesn't work for c#, try
+      "  https://github.com/neoclide/coc.nvim
+      if has('unix')
+         " For some reason I'm set to the 'auto' branch of YCM.. Not sure why
+            " \      'rev': 'auto'
+         call dein#add('Valloric/YouCompleteMe',
+            \ {
+            \     'build': 'bash ./install.py --clang-completer --clang-tidy'
+            \ },
+         \ )
 
-			" Not doing C# anymore..
-			" call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
+         " Not doing C# anymore..
+         " call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
 
-			call dein#add('SirVer/ultisnips')
-			call dein#add('honza/vim-snippets')
-		endif
+         call dein#add('SirVer/ultisnips')
+         call dein#add('honza/vim-snippets')
+      endif
 
-		" call dein#add('majutsushi/tagbar')
+      " call dein#add('majutsushi/tagbar')
 
-		" Plugin to change the current directory to a project's root (so, look for
-		" .git or something)
-		call dein#add('airblade/vim-rooter')
+      " Plugin to change the current directory to a project's root (so, look for
+      " .git or something)
+      call dein#add('airblade/vim-rooter')
 
-		" Adding this so I can search/replace and preserve letter case
-		call dein#add('tpope/vim-abolish')
+      " Adding this so I can search/replace and preserve letter case
+      call dein#add('tpope/vim-abolish')
 
-		" Used for navigating the quickfix window better.  Recommended by fugitive
-		call dein#add('tpope/vim-unimpaired')
+      " Used for navigating the quickfix window better.  Recommended by fugitive
+      call dein#add('tpope/vim-unimpaired')
 
-		" This should improve Git Fugitive and Git Gutter
-		call dein#add('tmux-plugins/vim-tmux-focus-events')
+      " This should improve Git Fugitive and Git Gutter
+      call dein#add('tmux-plugins/vim-tmux-focus-events')
 
-		" Plug to assist with commenting out blocks of text:
-		call dein#add('tomtom/tcomment_vim')
+      " Plug to assist with commenting out blocks of text:
+      call dein#add('tomtom/tcomment_vim')
 
-		" Tabular, align equals
-		call dein#add('godlygeek/tabular')
+      " Tabular, align equals
+      call dein#add('godlygeek/tabular')
 
-		" Show markers
-		call dein#add('kshenoy/vim-signature')
+      " Show markers
+      call dein#add('kshenoy/vim-signature')
 
-		" call dein#add('elzr/vim-json')
+      " call dein#add('elzr/vim-json')
 
-		" Status bar
-		call dein#add('powerline/powerline')
+      " Status bar
+      call dein#add('powerline/powerline')
 
-		if has('unix')
-			call dein#add('rhysd/vim-clang-format')
-		endif
+      if has('unix')
+         call dein#add('rhysd/vim-clang-format')
+      endif
 
-		" A plugin for asynchronous linting while you type
-		call dein#add('w0rp/ale', {'on_ft': ['cs', 'aspx']})
+      " A plugin for asynchronous linting while you type
+      call dein#add('w0rp/ale', {'on_ft': ['cs', 'aspx']})
 
-		call dein#add('airblade/vim-gitgutter')
+      call dein#add('airblade/vim-gitgutter')
 
-		" Display trailing whitespace
-		call dein#add('ntpeters/vim-better-whitespace')
+      " Display trailing whitespace
+      call dein#add('ntpeters/vim-better-whitespace')
 
-		" Asynchronous linting
-		call dein#add('benekastah/neomake') " Asynchronous linting
+      " Asynchronous linting
+      call dein#add('benekastah/neomake') " Asynchronous linting
 
-		" call dein#add('editorconfig/editorconfig-vim')
+      " call dein#add('editorconfig/editorconfig-vim')
 
-		" Vim sugar for the UNIX shell commands that need it the most. Features include:
-		" :Remove: Delete a buffer and the file on disk simultaneously.
-		" :Unlink: Like :Remove, but keeps the now empty buffer.
-		" :Move:   Rename a buffer and the file on disk simultaneously.
-		" :Rename: Like :Move, but relative to the current file's containing directory.
-		" :Chmod:  Change the permissions of the current file.
-		" :Mkdir:  Create a directory, defaulting to the parent of the current file.
-		" :Find:   Run find and load the results into the quickfix list.
-		" :Locate: Run locate and load the results into the quickfix list.
-		" :Wall:   Write every open window. Handy for kicking off tools like guard.
-		" :SudoWrite: Write a privileged file with sudo.
-		" :SudoEdit:  Edit a privileged file with sudo.
-		call dein#add('tpope/vim-eunuch')
+      " Vim sugar for the UNIX shell commands that need it the most. Features include:
+      " :Remove: Delete a buffer and the file on disk simultaneously.
+      " :Unlink: Like :Remove, but keeps the now empty buffer.
+      " :Move:   Rename a buffer and the file on disk simultaneously.
+      " :Rename: Like :Move, but relative to the current file's containing directory.
+      " :Chmod:  Change the permissions of the current file.
+      " :Mkdir:  Create a directory, defaulting to the parent of the current file.
+      " :Find:   Run find and load the results into the quickfix list.
+      " :Locate: Run locate and load the results into the quickfix list.
+      " :Wall:   Write every open window. Handy for kicking off tools like guard.
+      " :SudoWrite: Write a privileged file with sudo.
+      " :SudoEdit:  Edit a privileged file with sudo.
+      call dein#add('tpope/vim-eunuch')
 
-		if has('nvim')
-			" Have vim reload a file if it has changed outside of vim:
-			call dein#add('TheZoq2/neovim-auto-autoread')
-		endif
+      if has('nvim')
+         " Have vim reload a file if it has changed outside of vim:
+         call dein#add('TheZoq2/neovim-auto-autoread')
+      endif
 
-		if !exists('g:gui_oni') && has('nvim') && is_termux==0
-			call dein#add('vimlab/split-term.vim')
+      if !exists('g:gui_oni') && has('nvim') && is_termux==0
+         call dein#add('vimlab/split-term.vim')
 
-			" ccls
-			call dein#add('autozimu/LanguageClient-neovim',
-				 \ {
-				 \	'rev': 'next',
-				 \	'build': 'bash install.sh',
-				 \ }
-			\ )
-		endif
+         " ccls
+         call dein#add('autozimu/LanguageClient-neovim',
+             \ {
+             \   'rev': 'next',
+             \   'build': 'bash install.sh',
+             \ }
+         \ )
+      endif
 
-		if has('unix') && !exists('g:gui_oni')
-			" Install fzf, the fuzzy searcher (also loads Ultisnips)
-			call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-			call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
-		endif
+      if has('unix') && !exists('g:gui_oni')
+         " Install fzf, the fuzzy searcher (also loads Ultisnips)
+         call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+         call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
+      endif
 
-		" call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
-		" call dein#add('tikhomirov/vim-glsl', {'on_ft': ['glsl']})
+      " call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
+      " call dein#add('tikhomirov/vim-glsl', {'on_ft': ['glsl']})
 
-		call dein#add('PProvost/vim-ps1')
+      call dein#add('PProvost/vim-ps1')
 
-		"
-		" Colourschemes
-		call dein#add('altercation/vim-colors-solarized')
-		call dein#add('kristijanhusak/vim-hybrid-material')
-		call dein#add('atelierbram/vim-colors_duotones')
-		call dein#add('atelierbram/vim-colors_atelier-schemes')
+      "
+      " Colourschemes
+      call dein#add('altercation/vim-colors-solarized')
+      call dein#add('kristijanhusak/vim-hybrid-material')
+      call dein#add('atelierbram/vim-colors_duotones')
+      call dein#add('atelierbram/vim-colors_atelier-schemes')
 
-		" Other..
-		call dein#add('joshdick/onedark.vim')
-		call dein#add('arcticicestudio/nord-vim')
-		call dein#add('drewtempelmeyer/palenight.vim')
-		call dein#add('morhetz/gruvbox')
-		call dein#add('mhartington/oceanic-next')
+      " Other..
+      call dein#add('joshdick/onedark.vim')
+      call dein#add('arcticicestudio/nord-vim')
+      call dein#add('drewtempelmeyer/palenight.vim')
+      call dein#add('morhetz/gruvbox')
+      call dein#add('mhartington/oceanic-next')
 
-		call dein#add('ayu-theme/ayu-vim')
-		let ayucolor="mirage"
+      call dein#add('ayu-theme/ayu-vim')
+      let ayucolor="mirage"
 
-		" A bunch more...
-		call dein#add('flazz/vim-colorschemes')
+      " A bunch more...
+      call dein#add('flazz/vim-colorschemes')
 
-		call dein#add('kheaactua/vim-managecolor')
-		"
-		" /Colourschemes
+      call dein#add('kheaactua/vim-managecolor')
+      "
+      " /Colourschemes
 
-	  " Required:
-	  call dein#end() " On Windows, outputting No matching autocommands"
-	  call dein#save_state()
-	endif
+     " Required:
+     call dein#end() " On Windows, outputting No matching autocommands"
+     call dein#save_state()
+   endif
 
-	" Required:
-	filetype plugin indent on
-	syntax enable
+   " Required:
+   filetype plugin indent on
+   syntax enable
 
-	" If you want to install not installed plugins on startup.
-	if dein#check_install()
-		call dein#install()
-	endif
+   " If you want to install not installed plugins on startup.
+   if dein#check_install()
+      call dein#install()
+   endif
 
-	"End dein Scripts-------------------------
+   "End dein Scripts-------------------------
 endif
 
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
-	let g:colo_search_path = g:dotfiles . '/bundles/dein'
-	let g:colo_cache_file  = g:dotfiles . '/colos.json'
-	colo materialtheme
+   let g:colo_search_path = g:dotfiles . '/bundles/dein'
+   let g:colo_cache_file  = g:dotfiles . '/colos.json'
+   colo materialtheme
 endif
 
 
@@ -335,13 +335,13 @@ let g:clang_format#detect_style_file = 1
 
 " Key mappings for clang-format, to format source code:
 if has('unix')
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
-	autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
-	autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+   autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
 
-	" map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
+   " map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
 
-	nmap <Leader>C :ClangFormatAutoToggle<CR>
+   nmap <Leader>C :ClangFormatAutoToggle<CR>
 endif
 
 " ALE configuration
@@ -364,161 +364,161 @@ let g:cpp_class_scope_highlight = 1
 " Tell vim to set the current directory to the directory
 " of the file being opened:
 if domain !=? 'siteground'
-	set autochdir
+   set autochdir
 endif
 
 " Have vim reload a file if it has changed outside
 " of vim:
 if !has('nvim')
-	set autoread
+   set autoread
 endif
 
 if has('unix')
-	" Tell vim to look for a tags file in the current
-	" directory, and all the way up until it finds one:
-	set tags=./tags;/
+   " Tell vim to look for a tags file in the current
+   " directory, and all the way up until it finds one:
+   set tags=./tags;/
 endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
 silent if g:dein_exists && dein#check_install('YouCompleteMe') == 0
-	" Let YouCompleteMe use tag files for completion as well:
-	let g:ycm_collect_identifiers_from_tags_files = 1
+   " Let YouCompleteMe use tag files for completion as well:
+   let g:ycm_collect_identifiers_from_tags_files = 1
 
-	" Turn off prompting to load .ycm_extra_conf.py:
-	let g:ycm_confirm_extra_conf = 0
+   " Turn off prompting to load .ycm_extra_conf.py:
+   let g:ycm_confirm_extra_conf = 0
 
-	" Compile the file
-	nnoremap <leader>y :YcmDiag<CR>
+   " Compile the file
+   nnoremap <leader>y :YcmDiag<CR>
 
-	" Ignore some files
-	let g:ycm_filetype_blacklist = {
-		\ 'tagbar'    : 1,
-		\ 'qf'        : 1,
-		\ 'notes'     : 1,
-		\ 'markdown'  : 1,
-		\ 'unite'     : 1,
-		\ 'text'      : 1,
-		\ 'vimwiki'   : 1,
-		\ 'pandoc'    : 1,
-		\ 'infolog'   : 1,
-		\ 'vim'       : 1,
-		\ 'gitcommit' : 1,
-		\ 'gitrebase' : 1,
-		\ 'cmake'     : 1,
-		\ 'mail'      : 1,
-		\ 'frag'      : 1,
-		\ 'vert'      : 1,
-		\ 'comp'      : 1,
-		\ 'qml'       : 1,
-		\ 'tex'       : 1,
-		\ 'lcm'       : 1
-	\}
+   " Ignore some files
+   let g:ycm_filetype_blacklist = {
+      \ 'tagbar'    : 1,
+      \ 'qf'        : 1,
+      \ 'notes'     : 1,
+      \ 'markdown'  : 1,
+      \ 'unite'     : 1,
+      \ 'text'      : 1,
+      \ 'vimwiki'   : 1,
+      \ 'pandoc'    : 1,
+      \ 'infolog'   : 1,
+      \ 'vim'       : 1,
+      \ 'gitcommit' : 1,
+      \ 'gitrebase' : 1,
+      \ 'cmake'     : 1,
+      \ 'mail'      : 1,
+      \ 'frag'      : 1,
+      \ 'vert'      : 1,
+      \ 'comp'      : 1,
+      \ 'qml'       : 1,
+      \ 'tex'       : 1,
+      \ 'lcm'       : 1
+   \}
 
-	let g:ycm_filetype_whitelist = {
-		\ 'javascript': 1,
-		\ 'python'    : 1,
-		\ 'css'       : 1,
-		\ 'cpp'       : 1,
-		\ 'cs'        : 1,
-		\ 'php'       : 1,
-		\ 'fortran'   : 1,
-		\ 'xml'       : 1,
-		\ 'html'      : 1
-	\}
+   let g:ycm_filetype_whitelist = {
+      \ 'javascript': 1,
+      \ 'python'    : 1,
+      \ 'css'       : 1,
+      \ 'cpp'       : 1,
+      \ 'cs'        : 1,
+      \ 'php'       : 1,
+      \ 'fortran'   : 1,
+      \ 'xml'       : 1,
+      \ 'html'      : 1
+   \}
 
-	" Ignore large files (BONA db's for instance)
-	let g:ycm_disable_for_files_larger_than_kb = 300
+   " Ignore large files (BONA db's for instance)
+   let g:ycm_disable_for_files_larger_than_kb = 300
 
-	" Shut off preview window on PHP files
-	au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
+   " Shut off preview window on PHP files
+   au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
 
-	if exists('g:python_host_prog')
-		let g:interpreter_path = g:python_host_prog
-	endif
+   if exists('g:python_host_prog')
+      let g:interpreter_path = g:python_host_prog
+   endif
 
-	map <F9> :YcmCompleter FixIt<CR>
+   map <F9> :YcmCompleter FixIt<CR>
 endif
 """""""""""""""""""""" /YCM Config """"""""""""""""""""""""
 
 """"""""""""""""""" OmniSharp Config """"""""""""""""""""""
 silent if g:dein_exists && dein#check_install('omnisharp-vim') == 0
 
-	if 1==is_winbash
-		" WSL config
-		let g:OmniSharp_server_path = $WINHOME .'/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
-		let g:OmniSharp_translate_cygwin_wsl = 1
-	else
-		" Linux config
-		let g:OmniSharp_server_use_mono = 1
-	endif
+   if 1==is_winbash
+      " WSL config
+      let g:OmniSharp_server_path = $WINHOME .'/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
+      let g:OmniSharp_translate_cygwin_wsl = 1
+   else
+      " Linux config
+      let g:OmniSharp_server_use_mono = 1
+   endif
 
-	" Use stdio in vim to be asynchronous
-	let g:OmniSharp_server_stdio = 1
+   " Use stdio in vim to be asynchronous
+   let g:OmniSharp_server_stdio = 1
 
-	" Use fzf.vim
-	let g:OmniSharp_selector_ui = 'fzf'
-	" Tell ALE to use OmniSharp for linting C# files, and no other linters.
-	let g:ale_linters = { 'cs': ['OmniSharp'] }
+   " Use fzf.vim
+   let g:OmniSharp_selector_ui = 'fzf'
+   " Tell ALE to use OmniSharp for linting C# files, and no other linters.
+   let g:ale_linters = { 'cs': ['OmniSharp'] }
 
-	" Debug
-	" let g:OmniSharp_loglevel = 'debug'
-	" let g:OmniSharp_proc_debug = 1
+   " Debug
+   " let g:OmniSharp_loglevel = 'debug'
+   " let g:OmniSharp_proc_debug = 1
 
-	" Update semantic highlighting after all text changes
-	let g:OmniSharp_highlight_types = 3
-	" Update semantic highlighting on BufEnter and InsertLeave
-	" let g:OmniSharp_highlight_types = 2
+   " Update semantic highlighting after all text changes
+   let g:OmniSharp_highlight_types = 3
+   " Update semantic highlighting on BufEnter and InsertLeave
+   " let g:OmniSharp_highlight_types = 2
 
-	" Copied from https://github.com/OmniSharp/omnisharp-vim
-	augroup omnisharp_commands
-		 autocmd!
+   " Copied from https://github.com/OmniSharp/omnisharp-vim
+   augroup omnisharp_commands
+       autocmd!
 
-		 " Show type information automatically when the cursor stops moving
-		 autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+       " Show type information automatically when the cursor stops moving
+       autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
-		 " The following commands are contextual, based on the cursor position.
-		 autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>rj :OmniSharpFindImplementations<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+       " The following commands are contextual, based on the cursor position.
+       autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>rj :OmniSharpFindImplementations<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 
-		 " Finds members in the current buffer
-		 autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+       " Finds members in the current buffer
+       autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
 
-		 autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-		 autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
-		 autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-		 autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+       autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
+       autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+       autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
 
-		 " " Navigate up and down by method/property/field
-		 " autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-		 " autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
+       " " Navigate up and down by method/property/field
+       " autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
+       " autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
 
-		 " Find all code errors/warnings for the current solution and populate the quickfix window
-		 autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
-	augroup END
+       " Find all code errors/warnings for the current solution and populate the quickfix window
+       autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
+   augroup END
 
-	" Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-	nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-	" Run code actions with text selected in visual mode to extract method
-	xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
+   " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
+   nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
+   " Run code actions with text selected in visual mode to extract method
+   xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
 
-	" Rename with dialog
-	nnoremap <Leader>nm :OmniSharpRename<CR>
-	nnoremap <F2> :OmniSharpRename<CR>
-	" Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
-	command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+   " Rename with dialog
+   nnoremap <Leader>nm :OmniSharpRename<CR>
+   nnoremap <F2> :OmniSharpRename<CR>
+   " Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
+   command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
 
-	nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
+   nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
 
-	" Start the omnisharp server for the current solution
-	nnoremap <Leader>ss :OmniSharpStartServer<CR>
-	nnoremap <Leader>sp :OmniSharpStopServer<CR>
+   " Start the omnisharp server for the current solution
+   nnoremap <Leader>ss :OmniSharpStartServer<CR>
+   nnoremap <Leader>sp :OmniSharpStopServer<CR>
 
-	" Enable snippet completion
-	" let g:OmniSharp_want_snippet=1
+   " Enable snippet completion
+   " let g:OmniSharp_want_snippet=1
 
 endif
 """"""""""""""""""" /OmniSharp Config """""""""""""""""""""
@@ -526,38 +526,38 @@ endif
 
 """"""""""""""""" LanguageClient Config """""""""""""""""""
 if !exists('g:gui_oni')
-	let g:LanguageClient_serverCommands = {
-		\ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
-	\ }
-	let g:LanguageClient_loadSettings = 1
-	let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
-	" Limits how often the LanguageClient talks to the
-	" server, so it reduces CPU load and flashing.
-	let g:LanguageClient_changeThrottle = 0.5
-	let g:LanguageClient_diagnosticsEnable = 0
-	nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-	nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-	nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-	nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
-	nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
-	nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
-	nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
+   let g:LanguageClient_serverCommands = {
+      \ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+   \ }
+   let g:LanguageClient_loadSettings = 1
+   let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
+   " Limits how often the LanguageClient talks to the
+   " server, so it reduces CPU load and flashing.
+   let g:LanguageClient_changeThrottle = 0.5
+   let g:LanguageClient_diagnosticsEnable = 0
+   nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
+   nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+   nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
+   nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
+   nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+   nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+   nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 endif
 """"""""""""""""" /LanguageClient Config """"""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 silent if g:dein_exists && dein#check_install('ultisnips') == 0
-	let g:UltiSnipsExpandTrigger='<c-j>'
-	let g:UltiSnipsJumpForwardTrigger='<c-j>'
-	let g:UltiSnipsJumpBackwardTrigger='<c-n>'
+   let g:UltiSnipsExpandTrigger='<c-j>'
+   let g:UltiSnipsJumpForwardTrigger='<c-j>'
+   let g:UltiSnipsJumpBackwardTrigger='<c-n>'
 
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit='vertical'
+   " If you want :UltiSnipsEdit to split your window.
+   let g:UltiSnipsEditSplit='vertical'
 
-	" Add to the runtime path so that custom
-	" snippets can be found:
-	set rtp+=g:dotfiles
+   " Add to the runtime path so that custom
+   " snippets can be found:
+   set rtp+=g:dotfiles
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
@@ -565,50 +565,59 @@ endif
 
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
-" 	let g:rainbow_conf = {
-" 	\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-" 	\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-" 	\   'operators': '_,_',
-" 	\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-" 	\   'separately': {
-" 	\	   '*': {},
-" 	\	   'tex': {
-" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-" 	\	   },
-" 	\	   'cpp': {
-" 	\		   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-" 	\	   },
-" 	\	   'vim': {
-" 	\		   'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-" 	\	   },
-" 	\	   'html': {
-" 	\		   'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-" 	\	   },
-" 	\	   'css': 0,
-" 	\   }
-" 	\}
+"    let g:rainbow_conf = {
+"    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+"    \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+"    \   'operators': '_,_',
+"    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+"    \   'separately': {
+"    \      '*': {},
+"    \      'tex': {
+"    \         'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+"    \      },
+"    \      'cpp': {
+"    \         'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+"    \      },
+"    \      'vim': {
+"    \         'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+"    \      },
+"    \      'html': {
+"    \         'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+"    \      },
+"    \      'css': 0,
+"    \   }
+"    \}
 " """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
 
 
 """""""""""""""""""""""""" fzf """""""""""""""""""""""""""
 silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
-	" Set up keyboard shortbuts for fzf, the fuzzy finder
-	" This one searches all the files in the current git repo:
-	noremap <c-k> :GitFiles<CR>
-	noremap <leader><Tab> :Buffers<CR>
-	noremap <leader>g :Rg<cr>
-	noremap gsiw :GGrepIW<cr>
-	noremap <leader>s :Snippets<cr>
-	noremap <leader>c :Colors<cr>
+   " Set up keyboard shortbuts for fzf, the fuzzy finder
+   " This one searches all the files in the current git repo:
+   noremap <c-k> :GitFiles<CR>
+   noremap <leader><Tab> :Buffers<CR>
+   noremap gsiw :GGrepIW<cr>
+   noremap <leader>s :Snippets<cr>
+   noremap <leader>c :Colors<cr>
 
-	" Unmap center/<CR> from launching fzf which appears to be mapped by default.
-	" unmap <CR>
+   " Unmap center/<CR> from launching fzf which appears to be mapped by default.
+   " unmap <CR>
 
-	command! -nargs=* -bang GGrepIW
-		\ call fzf#vim#grep(
-		\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
-		\   fzf#vim#with_preview(), <bang>0)
+	let g:search_tool='rg'
+	if g:search_tool ==? 'rg'
+		noremap <leader>g :Rg<cr>
+		command! -nargs=* -bang GGrepIW
+		   \ call fzf#vim#grep(
+		   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+		   \   fzf#vim#with_preview(), <bang>0)
+	else
+		noremap <leader>g :Ag<cr>
+		command! -nargs=* -bang GGrepIW
+		  \ call fzf#vim#grep(
+		  \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')), 1,
+		  \    fzf#vim#with_preview(), <bang>0)
+	endif
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
@@ -619,9 +628,9 @@ endif
 
 """"""""""""""""""""" Generate UUID """"""""""""""""""""""""
 if has('unix')
-	silent! py import uuid
-	noremap <leader>u :s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
-	noremap <leader>ru :%s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
+   silent! py import uuid
+   noremap <leader>u :s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
+   noremap <leader>ru :%s/REPLACE_UUID/\=pyeval('str(uuid.uuid4())')/g
 endif
 """""""""""""""""""" /Generate UUID """"""""""""""""""""""""
 
@@ -636,7 +645,7 @@ set ignorecase
 set noincsearch
 set hlsearch
 " if 0==is_win
-" 	set ff=unix,dos
+"    set ff=unix,dos
 " endif
 
 " Easy save
@@ -653,8 +662,8 @@ autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
 " Ignore whitespace on vimdiff
 if &diff
-	" diff mode
-	set diffopt+=iwhite
+   " diff mode
+   set diffopt+=iwhite
 endif
 
 " Faster vertical expansion
