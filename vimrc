@@ -108,6 +108,7 @@ augroup whitespace
    autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -318,7 +319,8 @@ endif
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
    let g:colo_cache_file  = g:dotfiles . '/colos.json'
-   colo materialtheme
+   " colo materialtheme
+   colo flatland
 endif
 
 
@@ -335,9 +337,10 @@ let g:clang_format#detect_style_file = 1
 
 " Key mappings for clang-format, to format source code:
 if has('unix')
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format.py<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format-9/clang-format.py<CR>
    autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
    autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
+   autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 
    " map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
 
@@ -604,20 +607,20 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    " Unmap center/<CR> from launching fzf which appears to be mapped by default.
    " unmap <CR>
 
-	let g:search_tool='rg'
-	if g:search_tool ==? 'rg'
-		noremap <leader>g :Rg<cr>
-		command! -nargs=* -bang GGrepIW
-		   \ call fzf#vim#grep(
-		   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
-		   \   fzf#vim#with_preview(), <bang>0)
-	else
-		noremap <leader>g :Ag<cr>
-		command! -nargs=* -bang GGrepIW
-		  \ call fzf#vim#grep(
-		  \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')), 1,
-		  \    fzf#vim#with_preview(), <bang>0)
-	endif
+   let g:search_tool='rg'
+   if g:search_tool ==? 'rg'
+      noremap <leader>g :Rg<cr>
+      command! -nargs=* -bang GGrepIW
+         \ call fzf#vim#grep(
+         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+         \   fzf#vim#with_preview(), <bang>0)
+   else
+      noremap <leader>g :Ag<cr>
+      command! -nargs=* -bang GGrepIW
+        \ call fzf#vim#grep(
+        \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')), 1,
+        \    fzf#vim#with_preview(), <bang>0)
+   endif
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 

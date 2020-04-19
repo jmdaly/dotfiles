@@ -112,7 +112,7 @@ cd "${h}"
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig .docker)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	if [[ $HOME != *com.termux* ]]; then
@@ -165,18 +165,18 @@ mkdir -p "${h}/.dotfiles_backup"
 for f in ${files[@]}; do
 	# Local file in dotfile fir
 	if [[ $f =~ .* ]]; then
-		src=${f/.//}
+		src="${f/.//}"
 	else
 		src="$f"
 	fi;
 	if [[ ! -h "${h}/$f" ]]; then
-		if [[ -e ${h}/$f && -e "${DOTFILES_DIR}/${src}" && ! -h "${h}/${f}" ]]; then
+		if [[ -e "${h}/$f" && -e "${DOTFILES_DIR}/${src}" && ! -h "${h}/${f}" ]]; then
 			echo "Backing up $f"
 			mv "${h}/$f" "${backup_dir}/$f"
 		fi
 		if [[ -e "${DOTFILES_DIR}/${src}" ]]; then
 			#echo "Installing $f"
-			if [[ "1" == "$copy" ]]; then
+			if [[ "1" == "${copy}" ]]; then
 				# On cygwin, symlinks when used through gvim
 				# can be an issue.  Note, this hasn't been used in years
 				cp -r "${DOTFILES_DIR}/${src}" "$f";
