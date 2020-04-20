@@ -15,4 +15,3 @@
 [credential]
 	helper = cache --timeout=72000
 [http]
-	proxy = http://internet.ford.com:83

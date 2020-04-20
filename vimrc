@@ -171,6 +171,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " if has('unix') && 0==is_winbash && 0==is_win
       " If this doesn't work for c#, try
       "  https://github.com/neoclide/coc.nvim
+      " if 0 && has('unix')
       if has('unix')
          " For some reason I'm set to the 'auto' branch of YCM.. Not sure why
             " \      'rev': 'auto'
@@ -319,8 +320,8 @@ endif
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
    let g:colo_cache_file  = g:dotfiles . '/colos.json'
-   " colo materialtheme
-   colo flatland
+   " colo flatland
+   colo argonaut
 endif
 
 
@@ -337,7 +338,7 @@ let g:clang_format#detect_style_file = 1
 
 " Key mappings for clang-format, to format source code:
 if has('unix')
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format-9/clang-format.py<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format-10/clang-format.py<CR>
    autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
    autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
    autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
@@ -353,11 +354,11 @@ endif
 "
 " TODO I think the vimrc in https://github.com/TalAmuyal/MyConfigs has a
 " better formatting package
-
-
-" Set up mapping to move between errors
-nmap <silent> [w <Plug>(ale_previous_wrap)
-nmap <silent> ]w <Plug>(ale_next_wrap)
+"
+"
+" " Set up mapping to move between errors
+" nmap <silent> [w <Plug>(ale_previous_wrap)
+" nmap <silent> ]w <Plug>(ale_next_wrap)
 
 """"""""""""""""""" /vim-clang-format """"""""""""""""""""
 
@@ -530,7 +531,7 @@ endif
 """"""""""""""""" LanguageClient Config """""""""""""""""""
 if !exists('g:gui_oni')
    let g:LanguageClient_serverCommands = {
-      \ 'cpp': ['ccls', '--log-file=/tmp/cq.log']
+      \ 'cpp': ['ccls', '--log-file=/tmp/cq.log', '-v=1']
    \ }
    let g:LanguageClient_loadSettings = 1
    let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
@@ -600,6 +601,7 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    " This one searches all the files in the current git repo:
    noremap <c-k> :GitFiles<CR>
    noremap <leader><Tab> :Buffers<CR>
+   noremap <c-j> :Files<CR>
    noremap gsiw :GGrepIW<cr>
    noremap <leader>s :Snippets<cr>
    noremap <leader>c :Colors<cr>
@@ -696,16 +698,11 @@ vnoremap > >gv
 set spelllang=en_gb,en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" ST term fucks up the delete key, seeing it as <F1>, so fixing it in vim for
-" now (might fix it better elsewhere)
-" map <F1> x
-" imap <F1> <DEL>
-
 " Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
 vnoremap // y/<C-R>"<CR>
 
-" Search of IP addresses
-nnoremap /ip /\<\(\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\\|localhost\)\><CR>
+" " Search of IP addresses
+" nnoremap /ip /\<\(\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\\|localhost\)\><CR>
 
 " Match <> brackets
 set matchpairs+=<:>
