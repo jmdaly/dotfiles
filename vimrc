@@ -109,6 +109,7 @@ augroup whitespace
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
+   autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
 augroup END
 
 set nocompatible  " Dein also wants this
