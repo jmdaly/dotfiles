@@ -179,6 +179,10 @@ if [[ "khea" == "$(hostname)" ]]; then
 		ford/vpn \
 	# module load bona
 
+elif [[ "sync-build" == "$(hostname)" ]]; then
+
+	module load sync
+
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
 	# WGC1CVCY3YS13 = desktop
 	# WGC1CV2JWQP13 = laptop
