@@ -97,6 +97,7 @@ augroup filetypes
    au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
    au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
    au BufNewFile,BufRead *.json              setlocal ft=json
+   au BufNewFile,BufRead *.fidl              setlocal ft=fidl
 
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
@@ -160,7 +161,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
       " Lazy-load on PHP
-      call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
+      " call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
 
       " Lazy-load on python
       call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
@@ -366,11 +367,6 @@ endif
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
 
-" Tell vim to set the current directory to the directory
-" of the file being opened:
-if domain !=? 'siteground'
-   set autochdir
-endif
 
 " Have vim reload a file if it has changed outside
 " of vim:
@@ -545,6 +541,7 @@ if !exists('g:gui_oni')
    nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
    nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
    nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+   nnoremap <leader>rX :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
    nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
    nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 endif
