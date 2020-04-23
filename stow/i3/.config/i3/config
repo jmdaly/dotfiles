@@ -164,6 +164,7 @@ assign [class="st-256color" instance="term-ws3"] $workspace3
 
 # Ensure certain programs always start floating:
 for_window [class="zoom"] floating enable
+for_window [title="Microsoft Teams Notification" class="Microsoft Teams - Preview"] floating enable, no_focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
