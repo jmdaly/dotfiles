@@ -182,6 +182,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
             \     'build': 'bash ./install.py --clang-completer --clang-tidy'
             \ },
          \ )
+         " call dein#add('rdnetto/YCM-Generator')
 
          " Not doing C# anymore..
          " call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
