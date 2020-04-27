@@ -95,7 +95,6 @@ augroup filetypes
    au BufNewFile,BufRead *.module            setlocal ft=php
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
    au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
-   au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
    au BufNewFile,BufRead *.json              setlocal ft=json
    au BufNewFile,BufRead *.fidl              setlocal ft=fidl
 
@@ -111,6 +110,7 @@ augroup whitespace
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType gitcommit       setlocal tw=72 | syntax off
 augroup END
 
 set nocompatible  " Dein also wants this
