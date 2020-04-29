@@ -110,7 +110,7 @@ augroup whitespace
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
-   autocmd FileType gitcommit       setlocal tw=72 | syntax off
+   autocmd FileType gitcommit       setlocal tw=72 spell | syntax off
 augroup END
 
 set nocompatible  " Dein also wants this
