@@ -110,7 +110,8 @@ set $workspace10 "10: Media"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
 # Assign windows to a Workspace
-assign [class="qBittorrent"] $workspace4
+assign [class="qBittorrent"] $workspace10
+assign [class="Stoken-gui"] $workspace9
 
 # Put Workspaces on specific monitors
 # DVI-D-2 = Wide Dell
