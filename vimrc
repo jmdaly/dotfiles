@@ -94,10 +94,11 @@ augroup filetypes
    au BufNewFile,BufRead *.html.base         setlocal ft=html
    au BufNewFile,BufRead *.module            setlocal ft=php
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
-   au BufNewFile,BufRead *.cs                setlocal ft=cs ff=dos
-   au BufNewFile,BufRead COMMIT_EDITMSG   syntax off
    au BufNewFile,BufRead *.json              setlocal ft=json
+
+	" Ford
    au BufNewFile,BufRead *.fidl              setlocal ft=fidl
+   au BufNewFile,BufRead */Config.in         setlocal ft=make
 
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
@@ -105,12 +106,14 @@ augroup end
 
 augroup whitespace
    autocmd!
+   autocmd FileType cs              setlocal ff=dos
    autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab ai spell | syntax off
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -323,8 +326,8 @@ endif
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
    let g:colo_cache_file  = g:dotfiles . '/colos.json'
-   " colo flatland
-   colo argonaut
+   colo flatland
+   " colo argonaut
 endif
 
 
@@ -565,6 +568,10 @@ endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
 
+"""""""""""""""""""" rooter config """"""""""""""""""""""
+" Stop printing the cwd on write
+let rooter_silent_chdir=1
+""""""""""""""""""" /rooter config """"""""""""""""""""""
 
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
