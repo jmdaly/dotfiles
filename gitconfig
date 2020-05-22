@@ -1,9 +1,9 @@
 [user]
 	name = Matthew Russell
 	email = matthew.g.russell@gmail.com
-[includeIf "gitdir:~/workspace/ford/"]
+[includeIf "gitdir:~/workspace/ford/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
-[includeIf "gitdir:/src"]
+[includeIf "gitdir:/src/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [core]
 	quotepath = false
