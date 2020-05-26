@@ -211,7 +211,7 @@ let g:lightline.component_type = {
 
 let g:lightline.active = {
         \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
         \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
         \              [ 'lineinfo' ],
         \            [ 'obsession', 'percent' ],
@@ -222,7 +222,7 @@ let g:lightline.component = {
         \ }
 let g:lightline.component_function = {
         \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
+        \   'gitbranch': 'LightlineFugitive',
         \   'obsession': 'ObsessionStatus',
         \ }
 let g:lightline.separator = { 'left': '', 'right': '' }
@@ -246,8 +246,8 @@ function! LightlineShorten(text, winwidth, minwidth, ...)
   endif
 endfunction
 function! LightlineFugitive()
-        if exists('*fugitive#head')
-                let branch = fugitive#head(7)
+        if exists('*FugitiveHead')
+                let branch = FugitiveHead(7)
                 let branch = branch !=# '' ? ' '.branch : ''
                 return LightlineShorten(branch, 120, 15)
         endif
