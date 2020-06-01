@@ -46,6 +46,9 @@ if [[ $HOME == *com.termux* ]]; then
 	alias vim="nvim"
 fi
 
+alias vigd="vi -p \$(git diff --name-only topic/capi \$(git merge-base topic/capi master))"
+alias make-targets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' | sort -u"
+
 #alias glog="git log --follow --name-status"
 
 if [[ -e ~/.bash_aliases.local ]]; then
