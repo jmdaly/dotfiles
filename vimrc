@@ -228,15 +228,15 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       endif
 
       " A plugin for asynchronous linting while you type
-      call dein#add('w0rp/ale', {'on_ft': ['cs', 'aspx']})
+      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'cs', 'cs', 'aspx']})
+      call dein#add('itchyny/lightline.vim')
+      call dein#add('maximbaz/lightline-ale')
 
       call dein#add('airblade/vim-gitgutter')
 
       " Display trailing whitespace
       call dein#add('ntpeters/vim-better-whitespace')
 
-      " Asynchronous linting
-      call dein#add('benekastah/neomake') " Asynchronous linting
 
       " call dein#add('editorconfig/editorconfig-vim')
 
@@ -337,6 +337,19 @@ nmap [h <Plug>GitGutterPrevHunk
 " stage the hunk with <Leader>hs or
 " revert it with <Leader>hr.
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
+
+"""""""""""""""""""""""""""" ALE """""""""""""""""""""""""
+let g:ale_linters = {
+   \ 'cpp': ['clangtidy'],
+   \ 'c': ['clangtidy'],
+   \}
+" let g:ale_cpp_clangtidy_executable = 'clang-tidy'
+" let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
+" Set up mapping to move between errors
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
+""""""""""""""""""""""""""" /ALE """""""""""""""""""""""""
+
 
 """"""""""""""""""" vim-clang-format """""""""""""""""""""
 " Detect clang-format file
