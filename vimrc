@@ -96,7 +96,7 @@ augroup filetypes
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
    au BufNewFile,BufRead *.json              setlocal ft=json
 
-	" Ford
+   " Ford
    au BufNewFile,BufRead *.fidl              setlocal ft=fidl
    au BufNewFile,BufRead */Config.in         setlocal ft=make
 
@@ -111,7 +111,7 @@ augroup whitespace
    autocmd FileType cs,cpp,c,sh,ps1 setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
-   autocmd FileType make            setlocal ts=2 sw=2 sts=2 noet ai
+   autocmd FileType make            setlocal ts=8 sw=8 sts=8 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
 augroup END
