@@ -286,6 +286,7 @@ fi
 # GPG-Agent
 if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 	mkdir -p "${h}/.gnupg"
+	chmod 700 "${h}/.gnupg"
 	if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
 		ln -sf "${DOTFILES_DIR}/gpg-agent.conf" "${h}/.gnupg/gpg-agent.conf"
 	fi;
