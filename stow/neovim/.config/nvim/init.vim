@@ -89,6 +89,13 @@ if exists(':tnoremap')
    tnoremap <Leader>e <C-\><C-n>
 endif
 
+" Location of clang
+let g:clang_path = "/opt/llvm"
+
+if has('win32')
+  let g:clang_path = "C:/Program Files/LLVM"
+endif
+
 let g:LanguageClient_serverCommands = {
 \ 'cpp': ['ccls', '--log-file=/tmp/cq.log'],
 \ 'c': ['ccls', '--log-file=/tmp/cq.log'],
@@ -122,9 +129,6 @@ nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
 " nnoremap <leader>rf :LspReferences<CR>
 " nnoremap <leader>rj :LspDefinition<CR>
 " nnoremap <leader>rw :LspRename<CR>
-
-" Location of clang
-let g:clang_path = "/opt/llvm"
 
 " ALE configuration
 let g:ale_linters = {
