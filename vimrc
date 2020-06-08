@@ -343,7 +343,22 @@ let g:ale_linters = {
    \ 'cpp': ['clangtidy'],
    \ 'c': ['clangtidy'],
    \}
-" let g:ale_cpp_clangtidy_executable = 'clang-tidy'
+let clang_opts_str=
+   \ "-target aarch64-unknown-nto-qnx7.0.0
+   \ -fsyntax-only -mlittle-endian
+   \ -isystem ".$QNX_HOST."/usr/lib/gcc/aarch64-unknown-nto-qnx7.0.0/5.4.0/include
+   \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include/c++/v1
+   \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include"
+let clang_opts_arr = split(clang_opts_str)
+let g:ale_cpp_clangtidy_options=""
+for i in clang_opts_arr
+   let g:ale_cpp_clangtidy_options.='-extra-arg="' . i . '" '
+endfor
+" echom g:ale_cpp_clangtidy_options
+let g:ale_cpp_clang_options='-std=c++14 -Wall ' . clang_opts_str
+let g:ale_cpp_gpp_options='-std=c++14 -Wall ' . clang_opts_str
+let g:ale_cpp_gcc_options=g:ale_cpp_gpp_options
+
 " let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 " Set up mapping to move between errors
 nmap <silent> [w <Plug>(ale_previous_wrap)
@@ -545,7 +560,11 @@ endif
 """"""""""""""""" LanguageClient Config """""""""""""""""""
 if !exists('g:gui_oni')
    let g:LanguageClient_serverCommands = {
-      \ 'cpp': ['ccls', '--log-file=/tmp/cq.log', '-v=1']
+      \ 'cpp': [
+         \ 'ccls',
+         \ '--log-file=/tmp/cq.log',
+         \ '-v=1'
+      \ ]
    \ }
    let g:LanguageClient_loadSettings = 1
    let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
@@ -762,4 +781,4 @@ function! AppendModeline()
 endfunction
 nnoremap <silent> <Leader>wl :call AppendModeline()<CR>
 
-" vim: ts=3 sts=3 sw=3 noet nowrap ff=unix :
+" vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
