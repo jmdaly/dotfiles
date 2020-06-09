@@ -223,12 +223,8 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " Status bar
       call dein#add('powerline/powerline')
 
-      if has('unix')
-         call dein#add('rhysd/vim-clang-format')
-      endif
-
       " A plugin for asynchronous linting while you type
-      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'cs', 'cs', 'aspx']})
+      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c']})
       call dein#add('itchyny/lightline.vim')
       call dein#add('maximbaz/lightline-ale')
 
@@ -339,62 +335,35 @@ nmap [h <Plug>GitGutterPrevHunk
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
 """""""""""""""""""""""""""" ALE """""""""""""""""""""""""
-let g:ale_linters = {
-   \ 'cpp': ['clangtidy'],
-   \ 'c': ['clangtidy'],
-   \}
-let clang_opts_str=
-   \ "-target aarch64-unknown-nto-qnx7.0.0
-   \ -fsyntax-only -mlittle-endian
-   \ -isystem ".$QNX_HOST."/usr/lib/gcc/aarch64-unknown-nto-qnx7.0.0/5.4.0/include
-   \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include/c++/v1
-   \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include"
-let clang_opts_arr = split(clang_opts_str)
-let g:ale_cpp_clangtidy_options=""
-for i in clang_opts_arr
-   let g:ale_cpp_clangtidy_options.='-extra-arg="' . i . '" '
-endfor
-" echom g:ale_cpp_clangtidy_options
-let g:ale_cpp_clang_options='-std=c++14 -Wall ' . clang_opts_str
-let g:ale_cpp_gpp_options='-std=c++14 -Wall ' . clang_opts_str
-let g:ale_cpp_gcc_options=g:ale_cpp_gpp_options
+silent if g:dein_exists && dein#check_install('ale') == 0
+   let g:ale_linters = {
+      \ 'cpp': ['clangtidy'],
+      \ 'c': ['clangtidy'],
+      \}
+   let g:ale_fixers={
+      \ 'cpp': ['clang-format'],
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \}
 
-" let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
-" Set up mapping to move between errors
-nmap <silent> [w <Plug>(ale_previous_wrap)
-nmap <silent> ]w <Plug>(ale_next_wrap)
+   " if 1 == g:buildroot
+   "    echom "Adding extra options"
+   let br_extra_options=
+      \ "-target aarch64-unknown-nto-qnx7.0.0
+      \ -fsyntax-only -mlittle-endian
+      \ -isystem ".$QNX_HOST."/usr/lib/gcc/aarch64-unknown-nto-qnx7.0.0/5.4.0/include
+      \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include/c++/v1
+      \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include"
+   let g:ale_cpp_clangtidy_extra_options='-- ' . br_extra_options
+
+   " Set up mapping to move between errors
+   nmap <silent> [w <Plug>(ale_previous_wrap)
+   nmap <silent> ]w <Plug>(ale_next_wrap)
+
+   " Run clang-format
+   autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ALEFix<CR>
+endif
 """"""""""""""""""""""""""" /ALE """""""""""""""""""""""""
 
-
-""""""""""""""""""" vim-clang-format """""""""""""""""""""
-" Detect clang-format file
-let g:clang_format#detect_style_file = 1
-
-" Key mappings for clang-format, to format source code:
-if has('unix')
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fo :pyf /usr/share/clang/clang-format-10/clang-format.py<CR>
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
-   autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ClangFormat<CR>
-   autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-
-   " map <leader>f :pyf /usr/share/clang/clang-format.py<CR>
-
-   nmap <Leader>C :ClangFormatAutoToggle<CR>
-endif
-
-" ALE configuration
-" ALE clang-tidy setup removed because I don't think it ever worked.  Fix
-" this when I can get back to C++
-"
-" TODO I think the vimrc in https://github.com/TalAmuyal/MyConfigs has a
-" better formatting package
-"
-"
-" " Set up mapping to move between errors
-" nmap <silent> [w <Plug>(ale_previous_wrap)
-" nmap <silent> ]w <Plug>(ale_next_wrap)
-
-""""""""""""""""""" /vim-clang-format """"""""""""""""""""
 
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
