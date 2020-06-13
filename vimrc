@@ -99,6 +99,7 @@ augroup filetypes
    " Ford
    au BufNewFile,BufRead *.fidl              setlocal ft=fidl
    au BufNewFile,BufRead */Config.in         setlocal ft=make
+   au BufNewFile,BufRead */Config.in.host    setlocal ft=make
 
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
