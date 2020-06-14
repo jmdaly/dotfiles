@@ -5,15 +5,22 @@ if ($IsWindows -Or $IsWindows -eq $null)
 	# Review how MS Terminal does it with Set-MsBuildDevEnvironment at
 	# https://github.com/microsoft/terminal tools/OpenConsole.psm1
 	$vspath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools"
-	pushd $vspath
-	cmd.exe /c "VsDevCmd.bat&set" |
-	foreach {
-	  if ($_ -match "=") {
-		$v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
-	  }
+	if (Test-Path $vspath)
+	{
+		pushd $vspath
+		cmd.exe /c "VsDevCmd.bat&set" |
+		foreach {
+		  if ($_ -match "=") {
+			$v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
+		  }
+		}
+		popd
+		Write-Host "`nVisual Studio 2019 Command Prompt variables set." -ForegroundColor Yellow
 	}
-	popd
-	Write-Host "`nVisual Studio 2019 Command Prompt variables set." -ForegroundColor Yellow
+	else
+	{
+		Write-Host "Cannot find Visual Studio, skipping setup"
+	}
 }
 else
 {
