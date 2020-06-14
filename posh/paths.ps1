@@ -2,6 +2,7 @@
 Write-Host "Adjusting path" -ForegroundColor Yellow
 
 $custom_paths = @(
+	("ssh.exe",        "C:/Progra~1/OpenSSH-Win64"),
 	("nuget.exe",      "C:/Progra~2/Nuget"),
 	("nmap.exe",       "C:/Progra~2/Nmap"),
 	("cmake.exe",      "C:/Progra~1/CMake\bin"),
