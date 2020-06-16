@@ -1,4 +1,4 @@
-alias less="less -I --tabs=3"
+alias less="less -R -I --tabs=2"
 alias screen="screen -e^Ff"
 alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"

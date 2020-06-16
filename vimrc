@@ -281,7 +281,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('atelierbram/vim-colors_atelier-schemes')
 
       " Other..
-      call dein#add('joshdick/onedark.vim')
+      call dein#add('rakr/vim-one')
       call dein#add('arcticicestudio/nord-vim')
       call dein#add('drewtempelmeyer/palenight.vim')
       call dein#add('morhetz/gruvbox')
@@ -331,7 +331,7 @@ nmap [h <Plug>GitGutterPrevHunk
 
 """"""""""""""""""""""" Lightline """"""""""""""""""""""""
 let g:lightline = {
-   \ 'colorscheme': 'onelight',
+   \ 'colorscheme': 'one',
    \ 'component_function': {
    \   'filename': 'LightlineFilename',
    \ },

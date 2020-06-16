@@ -8,6 +8,7 @@
 [core]
 	quotepath = false
 	commitGraph = true
+	commentchar = @
 [gc]
 	writeCommitGraph = true
 [merge]
