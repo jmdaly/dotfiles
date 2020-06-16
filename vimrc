@@ -186,7 +186,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
             \     'build': 'bash ./install.py --clang-completer --clang-tidy'
             \ },
          \ )
-         " call dein#add('rdnetto/YCM-Generator')
 
          " Not doing C# anymore..
          " call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
@@ -218,11 +217,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
 
       " Show markers
       call dein#add('kshenoy/vim-signature')
-
-      " call dein#add('elzr/vim-json')
-
-      " Status bar
-      call dein#add('powerline/powerline')
 
       " A plugin for asynchronous linting while you type
       call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c']})
@@ -335,6 +329,26 @@ nmap [h <Plug>GitGutterPrevHunk
 " revert it with <Leader>hr.
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
 
+""""""""""""""""""""""" Lightline """"""""""""""""""""""""
+let g:lightline = {
+   \ 'colorscheme': 'onelight',
+   \ 'component_function': {
+   \   'filename': 'LightlineFilename',
+   \ },
+\ }
+
+function! LightlineFilename()
+   return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+      \ &filetype ==# 'unite' ? unite#get_status_string() :
+      \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+      \ expand('%:t') !=# '' ? expand('%:h') : '[No Name]'
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+"""""""""""""""""""""" /Lightline """"""""""""""""""""""""
+
 """""""""""""""""""""""""""" ALE """""""""""""""""""""""""
 silent if g:dein_exists && dein#check_install('ale') == 0
    let g:ale_linters = {
@@ -361,7 +375,7 @@ silent if g:dein_exists && dein#check_install('ale') == 0
    nmap <silent> ]w <Plug>(ale_next_wrap)
 
    " Run clang-format
-   autocmd FileType c,cpp,h,hpp vnoremap <buffer><Leader>f :ALEFix<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :ALEFix<CR>
 endif
 """"""""""""""""""""""""""" /ALE """""""""""""""""""""""""
 
