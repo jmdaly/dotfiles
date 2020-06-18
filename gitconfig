@@ -1,6 +1,7 @@
 [user]
 	name = Matthew Russell
 	email = matthew.g.russell@gmail.com
+	signingkey = 9DADF75304599BD8
 [includeIf "gitdir:~/workspace/ford/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/src/*"]
@@ -15,4 +16,3 @@
 	tool = vimdiff
 [credential]
 	helper = cache --timeout=72000
-[http]

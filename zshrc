@@ -170,13 +170,6 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 	# module load modules
 	module load khea
-	module load \
-		ford/hmi \
-		ford/proxy \
-		ford/qnx \
-		ford/qt \
-		ford/sync \
-		ford/vpn \
 	# module load bona
 
 elif [[ "sync-build" == "$(hostname)" ]]; then
