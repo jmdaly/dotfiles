@@ -105,14 +105,13 @@ cd "${h}"
 #
 # TODO deal with Windows Terminal, PS, etc, files
 # TODO Create a function to mkdir and symlink.. I do that a lot here.
-# TODO Make dotfiles secret a module, and add a section here to link the files there, add keys, etc.  Or at least make the config file point to some identify files in the dotfiles-secret clone
 #
 
 #
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig .docker)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	if [[ $HOME != *com.termux* ]]; then
@@ -129,6 +128,7 @@ if [[ "1" != "${skip_powerline}" ]]; then
 else
 	echo "Skipped installing powerline fonts"
 fi
+
 
 # Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
@@ -190,6 +190,11 @@ for f in ${files[@]}; do
 done;
 
 cd $h
+
+# Symlink docker config from dotfiles-secret
+if [[ -e "${h}/.docker" && ! -e "${h}/.docker/config.json" ]]
+	ln -s ${h}/dotfiles/dotfiles-secret/docker" "${h}/.docker"
+fi
 
 # Install zplug
 # TODO put in function

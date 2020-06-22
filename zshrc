@@ -179,8 +179,8 @@ elif [[ "sync-build" == "$(hostname)" ]]; then
 	module load sync
 
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
-	# WGC1CVCY3YS13 = desktop
-	# WGC1CV2JWQP13 = laptop
+	# WGC1CVCY3YS13 = desktop (UPDATE)
+	# WGC1CV2JWQP13 = laptop  (UPDATE)
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
