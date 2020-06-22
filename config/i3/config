@@ -198,9 +198,12 @@ bindsym Ctrl+mod1+L exec i3lock -i ${HOME}/Desktop/Backgrounds/World_on_Turtle_b
 
 # Pulse Audio controls. The pkill signals here are to tell i3blocks to update
 # the volume blocklet.
-bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle; exec pkill -RTMIN+10 i3blocks
+# bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
+# bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
+# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle; exec pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
