@@ -15,4 +15,4 @@
 [merge]
 	tool = vimdiff
 [credential]
-	helper = cache --timeout=72000
+	helper = cache --timeout=720000
