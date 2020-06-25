@@ -341,7 +341,7 @@ function! LightlineFilename()
    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
       \ &filetype ==# 'unite' ? unite#get_status_string() :
       \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
-      \ expand('%:t') !=# '' ? expand('%:h') : '[No Name]'
+      \ expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
 
 let g:unite_force_overwrite_statusline = 0
@@ -545,8 +545,8 @@ endif
 if !exists('g:gui_oni')
    let g:LanguageClient_serverCommands = {
       \ 'cpp': [
-         \ 'docker run ccls',
-         \ '--log-file=/tmp/cq.log',
+         \ 'docker exec ccls',
+         \ '--log-file=/tmp/ccls/cq.log',
          \ '-v=1'
       \ ]
    \ }
