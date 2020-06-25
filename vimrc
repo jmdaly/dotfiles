@@ -545,7 +545,7 @@ endif
 if !exists('g:gui_oni')
    let g:LanguageClient_serverCommands = {
       \ 'cpp': [
-         \ 'ccls',
+         \ 'docker run ccls',
          \ '--log-file=/tmp/cq.log',
          \ '-v=1'
       \ ]

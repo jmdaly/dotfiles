@@ -200,6 +200,10 @@ fi
 if [[ "undefined" == "${DEFAULT_PYTHON_VENV:-undefined}" ]]; then
 	DEFAULT_PYTHON_VENV="default"
 fi
+
+# The issue is that tmux copies my path, which includes the python venv, so
+# this test always passes once in tmux even when I'm not in a proper venv
+declare INVENV=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
 	declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
 	if [[ -e "${python_venv}/bin" ]]; then
