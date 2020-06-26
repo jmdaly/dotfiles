@@ -262,6 +262,8 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
          \ )
       endif
 
+      call dein#add('udalov/kotlin-vim')
+
       if has('unix') && !exists('g:gui_oni')
          " Install fzf, the fuzzy searcher (also loads Ultisnips)
          call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
@@ -545,8 +547,8 @@ endif
 if !exists('g:gui_oni')
    let g:LanguageClient_serverCommands = {
       \ 'cpp': [
-         \ 'docker exec ccls',
-         \ '--log-file=/tmp/ccls/cq.log',
+         \ 'ccls',
+         \ '--log-file=/tmp/cq.log',
          \ '-v=1'
       \ ]
    \ }
