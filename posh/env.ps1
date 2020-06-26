@@ -47,7 +47,10 @@ Import-Module oh-my-posh
 # https://github.com/JanDeDobbeleer/oh-my-posh/tree/master/Themes
 Set-Theme robbyrussell
 
+# https://github.com/PowerShell/PSReadLine
 # Get CTRL-A working
 Set-PSReadlineOption -EditMode Emacs
+# Improve tab completion
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
 
 # vim: ts=4 sw=4 sts=0 noexpandtab ff=dos ft=ps1 :
