@@ -1,0 +1,31 @@
+# Source after "${DOTFILES_DIR}/detect_docker.dot"
+
+function dotfiles_install_zplug()
+{
+  local home=${1:-${HOME}}
+  local tmp=${2:-$(mktemp -d)}
+
+  if [[ ! -e "${home}/.zplug" ]]; then
+    if [[ "1" == "$(detect_docker)" ]]; then
+      git_proxy_args=""
+      if [[ "" != "${http_proxy}" ]]; then
+        git_proxy_args="--config=http.proxy=${http_proxy}"
+      fi
+      git clone ${git_proxy_args} https://github.com/zplug/zplug.git "${home}/.zplug"
+      if [[ $? != 0 ]]; then
+        echo "Couldn't clone zplug repo.  Is there a proxy blocking it?  Proxy env is:"
+        env | grep -i proxy
+      fi
+    else
+      curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh > "${tmp}/install_zplug.sh"
+      if [[ $? == 0 ]]; then
+        zsh "${tmp}/install_zplug.sh"
+      else
+        echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
+        env | grep -i proxy
+      fi
+    fi
+  fi
+}
+
+# vim: ts=2 sw=2 sts=0 ff=unix expandtab :
