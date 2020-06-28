@@ -1,3 +1,4 @@
+# Requires ${DOTFILES_DIR}
 # Source after "${DOTFILES_DIR}/detect_docker.dot"
 
 function dotfiles_install_zplug()
@@ -28,4 +29,27 @@ function dotfiles_install_zplug()
   fi
 }
 
-# vim: ts=2 sw=2 sts=0 ff=unix expandtab :
+function dotfiles_install_rofi()
+{
+  local home=${1:-${HOME}}
+  local tmp=${2:-$(mktemp -d)}
+
+}
+
+function dotfiles_install_dein()
+{
+  local home=${1:-${HOME}}
+  local tmp=${2:-$(mktemp -d)}
+
+	if [[ ! -e "${DOTFILES_DIR}/bundles/dein" ]]; then
+		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${tmp}/install_dein.sh"
+		if [[ $? == 0 ]]; then
+			sh "${tmp}/install_dein.sh" "${DOTFILES_DIR}/bundles/dein"
+		else
+			echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
+			env | grep -i proxy
+		fi
+	fi
+}
+
+# vim: ts=2 sw=2 sts=0 ff=unix expandtab ft=sh :

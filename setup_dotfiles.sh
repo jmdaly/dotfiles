@@ -11,6 +11,7 @@ fi
 
 declare -r DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 source "${DOTFILES_DIR}/detect_docker.dot"
+source "${DOTFILES_DIR}/lib.dot"
 
 ARGUMENT_STR_LIST=(
 	"home"
@@ -23,6 +24,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-submodules"
 	"skip-dein"
 	"skip-zplug"
+	"skip-rofi"
 	"small"
 )
 
@@ -42,6 +44,7 @@ declare skip_tmux=0
 declare skip_submodules=0
 declare skip_dein=0
 declare skip_zplug=0
+declare skip_rofi=0
 declare copy=0 # This hasn't been used in years, it's only for cygwin/issues with symlinks with Windos
 while [[ "" != $1 ]]; do
 	case "$1" in
@@ -69,6 +72,9 @@ while [[ "" != $1 ]]; do
 		;;
 	"--skip-zplug")
 		skip_zplug=1
+		;;
+	"--skip-rofi")
+		skip_rofi=1
 		;;
 	"--small")
 		skip_tmux=1
@@ -196,43 +202,20 @@ if [[ -e "${h}/.docker" && ! -e "${h}/.docker/config.json" ]]
 	ln -s ${h}/dotfiles/dotfiles-secret/docker" "${h}/.docker"
 fi
 
-# Install zplug
-# TODO put in function
 if [[ "1" != "${skip_zplug}" ]]; then
-	if [[ ! -e "${h}/.zplug" ]]; then
-		if [[ "1" == "$(detect_docker)" ]]; then
-			git_proxy_args=""
-			if [[ "" != "${http_proxy}" ]]; then
-				git_proxy_args="--config=http.proxy=${http_proxy}"
-			fi
-			git clone ${git_proxy_args} https://github.com/zplug/zplug.git "${h}/.zplug"
-			if [[ $? != 0 ]]; then
-				echo "Couldn't clone zplug repo.  Is there a proxy blocking it?  Proxy env is:"
-				env | grep -i proxy
-			fi
-		else
-			curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh > "${DFTMP}/install_zplug.sh"
-			if [[ $? == 0 ]]; then
-				zsh "${DFTMP}/install_zplug.sh"
-			else
-				echo "Couldn't download zplug installer.  Is there a proxy blocking it?  Proxy env is:"
-				env | grep -i proxy
-			fi
-		fi
-	fi
+	dotfiles_install_zplug "${h}" "${DFTMP}"
+else
+	echo "Skipped installing zplug"
 fi
 
-# Install dein
+if [[ "1" != "${skip_rofi}" ]]; then
+	dotfiles_install_rofi "${h}"
+else
+	echo "Skipped installing rofi"
+fi
+
 if [[ "1" != "${skip_dein}" ]]; then
-	if [[ ! -e "${DOTFILES_DIR}/bundles/dein" ]]; then
-		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${DFTMP}/install_dein.sh"
-		if [[ $? == 0 ]]; then
-			sh "${DFTMP}/install_dein.sh" "${DOTFILES_DIR}/bundles/dein"
-		else
-			echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
-			env | grep -i proxy
-		fi
-	fi
+	dotfiles_install_dein "${h}" "${DFTMP}"
 else
 	echo "Skipped installing dein"
 fi
