@@ -41,6 +41,11 @@ font pango:monospace 8
 # clear in small sizes. However, its unicode glyph coverage is limited, the old
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -159,7 +164,7 @@ assign [class="Stoken-gui"] $workspace9
 # DVI-D-1 = Big Shimian
 # HDMI-1 = ASUS
 # Position these with arandr, save the file, then paste the contents here:
-exec --no-startup-id xrandr --output VGA-1 --off --output HDMI-1 --mode 1920x1080 --pos 5120x360 --rotate normal --output DVI-D-1 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-2 --mode 2560x1080 --pos 0x184 --rotate normal
+exec --no-startup-id xrandr --output VGA-0 --off --output DVI-D-0 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-1 --mode 2560x1080 --pos 0x160 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 5120x360 --rotate normal
 workspace $workspace1 output DVI-D-1
 workspace $workspace2 output DVI-D-2
 workspace $workspace3 output HDMI-1
@@ -235,19 +240,6 @@ bar {
 
 # mod1 = alt, got it from: xmodmap -pm
 bindsym Ctrl+mod1+L exec i3lock -i ${HOME}/Desktop/Backgrounds/World_on_Turtle_back.png & sleep 5 && xset dpms force off
-
-# Pulse Audio controls. The pkill signals here are to tell i3blocks to update
-# the volume blocklet.
-# bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
-# bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -8%; exec pactl -- set-sink-mute @DEFAULT_SINK@ 0; exec pkill -RTMIN+10 i3blocks
-# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle; exec pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
-bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Set the screens to turn off after 600 seconds of inactivity:
 exec "xset dpms 600"
