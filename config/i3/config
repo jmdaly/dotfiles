@@ -23,7 +23,14 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
+# starting up pywal for terminal color scheme
+# exec_always --no-startup-id wal -R
 
+
+# Set wallpaper:
+exec_always --no-startup-id feh --randomize --bg-fill ~/Desktop/Backgrounds/*
+
+bindsym Ctrl+mod1+L exec i3lock-fancy-rapid 5 3
 
 set $mod Mod4
 
@@ -33,14 +40,14 @@ font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 8
 
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -239,9 +246,6 @@ bar {
         status_command i3status
 }
 
-# mod1 = alt, got it from: xmodmap -pm
-bindsym Ctrl+mod1+L exec i3lock -i ${HOME}/Desktop/Backgrounds/World_on_Turtle_back.png & sleep 5 && xset dpms force off
-
 # Set the screens to turn off after 600 seconds of inactivity:
 exec "xset dpms 600"
 
@@ -306,11 +310,6 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-# Set wallpaper:
-# Make sure something exists here in dotfiles setup
-# exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.jpg
-exec_always --no-startup-id feh --randomize --bg-fill ~/Desktop/Backgrounds/*
 
 # Sources:
 # - https://github.com/TalAmuyal/MyConfigs
