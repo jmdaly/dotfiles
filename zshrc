@@ -211,6 +211,14 @@ if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
 	fi
 fi
 
+# direnv
+eval "$(direnv hook zsh)"
+
+# vcpkg
+if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
+	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
