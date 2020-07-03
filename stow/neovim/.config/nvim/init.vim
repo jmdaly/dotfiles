@@ -97,8 +97,8 @@ if has('win32')
 endif
 
 let g:LanguageClient_serverCommands = {
-\ 'cpp': ['ccls', '--log-file=/tmp/cq.log'],
-\ 'c': ['ccls', '--log-file=/tmp/cq.log'],
+\ 'cpp': [g:clang_path . '/bin/clangd', '--background-index'],
+\ 'c': [g:clang_path . '/bin/clangd', '--background-index'],
 \ }
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
