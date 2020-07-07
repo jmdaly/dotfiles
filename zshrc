@@ -61,11 +61,23 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
-	zplug "akarzim/zsh-docker-aliases"
+	if [[ ! "$(uname -o)" = Android ]]; then
+		zplug "akarzim/zsh-docker-aliases"
+	fi
 
 	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+
+		ZSH_THEME=""
+		zplug "mafredri/zsh-async", from:github
+		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
+	elif [[ "$(uname -o)" = Android ]]; then
+		# Pure Prompt https://github.com/sindresorhus/pure
+		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+
+		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
+		# zplug "plugins/vi-mode", from:oh-my-zsh
 
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
