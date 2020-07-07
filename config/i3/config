@@ -82,6 +82,10 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec ~/.config/rofi/launcher.sh
 
+# start rofi-pass, a password manager that
+# uses rofi:
+bindsym $mod+p exec --no-startup-id rofi-pass
+
 # take full sreenshot
 bindsym Print exec scrot 'screenshot_%F__%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 # take screenshot with selection
