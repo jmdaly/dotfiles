@@ -12,6 +12,7 @@ source ~/.zplug/init.zsh
 
 # Bundles from robbyrussell's oh-my-zsh.
 zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/gitfast", from:oh-my-zsh # Faster git command line completion
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh # Better tab completion
