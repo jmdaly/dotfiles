@@ -136,6 +136,13 @@ else
 fi
 
 
+if [[ "khea" == "$(hostname)" ]]; then
+	# Apple keyboard stuff.. Should detect keyboard rather than host, maybe later..
+	if [[ ! -e "${DOTFILES_DIR}/.xinitrc" ]]; then
+		ln -s "${DOTFILES_DIR}/.xinitrc" "xinitrc"
+	fi
+fi
+
 # Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
 	if [[ ! -e "${h}/.tmux/plugins/tpm" ]]; then

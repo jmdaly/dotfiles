@@ -86,14 +86,14 @@ bindsym $mod+d exec ~/.config/rofi/launcher.sh
 # uses rofi:
 bindsym $mod+p exec --no-startup-id rofi-pass
 
+# Print screen.  With Apply keyboard, ensure apple:alupckeys is set.  Also
+# ensure scrot is installed (or change this to gnome-screenshot or something)
 # take full sreenshot
-bindsym Print exec scrot 'screenshot_%F__%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
+bindsym Print exec scrot 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
 # take screenshot with selection
-bindsym --release shift+Print exec scrot -s 'screenshot_%F__%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
+bindsym --release shift+Print exec scrot -s 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
 # take screenshot of focused window
-bindsym ctrl+Print exec scrot -u 'screenshot_%F__%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
-# translate highlighted text
-bindsym ctrl+shift+j exec notitranslation
+bindsym ctrl+Print exec scrot -u 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
