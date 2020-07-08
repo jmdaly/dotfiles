@@ -113,23 +113,6 @@ nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 nnoremap <leader>ds :call LanguageClient#textDocument_documentSymbol()<CR>
 nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
 
-" if executable('cquery')
-"    au User lsp_setup call lsp#register_server({
-"       \ 'name': 'cquery',
-"       \ 'cmd': {server_info->['cquery']},
-"       \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"       \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery' },
-"       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-"       \ })
-" endif
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = '/tmp/vim-lsp.log'
-" let g:lsp_signs_enabled = 1         " enable signs
-" nnoremap <leader>ty :LspHover<CR>
-" nnoremap <leader>rf :LspReferences<CR>
-" nnoremap <leader>rj :LspDefinition<CR>
-" nnoremap <leader>rw :LspRename<CR>
-
 " ALE configuration
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
@@ -186,6 +169,9 @@ let g:ycm_confirm_extra_conf = 0
 nnoremap <F2> :YcmCompleter GoTo<CR>
 " Map to apply quick fix:
 nnoremap <F3> :YcmCompleter FixIt<CR>
+" Let clangd fully control code completion
+" let g:ycm_clangd_uses_ycmd_caching = 0
+let g:ycm_clangd_args = ['-log=verbose', '--pretty', '--background-index', '--completion-style=detailed']
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
