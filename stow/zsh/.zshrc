@@ -13,6 +13,7 @@ source ~/.zplug/init.zsh
 # Bundles from robbyrussell's oh-my-zsh.
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/gitfast", from:oh-my-zsh # Faster git command line completion
+zplug "plugins/wd", from:oh-my-zsh # Warp directory - easily switch to particular directories
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh # Better tab completion
@@ -86,4 +87,9 @@ b() {
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# Create and switch to a directory in one command
+function mdcd {
+    command mkdir $1 && cd $1
 }
