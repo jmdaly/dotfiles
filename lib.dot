@@ -34,6 +34,36 @@ function dotfiles_install_rofi()
   local home=${1:-${HOME}}
   local tmp=${2:-$(mktemp -d)}
 
+  ln -s "${DOTFILES_DIR}/config/rofi" "${home}/.config/"
+}
+
+function dotfiles_install_rofipass()
+{
+  local home=${1:-${HOME}}
+
+  ln -s "${DOTFILES_DIR}/config/rofi-pass" "${home}/.config/"
+}
+
+function dotfiles_install_i3()
+{
+  local home=${1:-${HOME}}
+  if [[ "$(which i3)" != "" ]]; then
+    ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+  fi
+
+  if [[ ! -e "${home}/bin" ]]; then
+    mkdir -p "${home}/bin"
+  fi
+
+  cat <<<TOHERE > "${home}/bin/do_lock.sh"
+#!/bin/bash
+
+# Shuts the screen off the first time, but after a period of inactivity
+# Assumes i3lock-fancy-rapid is installed
+/usr/local/bin/i3lock-fancy-rapid 5 3 -t "Enter Password" -k --indicator -e \
+    & sleep 5 \
+    && xset dpms force off
+TOHERE
 }
 
 function dotfiles_install_dein()

@@ -25,6 +25,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-dein"
 	"skip-zplug"
 	"skip-rofi"
+	"skip-i3"
 	"small"
 )
 
@@ -45,6 +46,7 @@ declare skip_submodules=0
 declare skip_dein=0
 declare skip_zplug=0
 declare skip_rofi=0
+declare skip_i3=0
 declare copy=0 # This hasn't been used in years, it's only for cygwin/issues with symlinks with Windos
 while [[ "" != $1 ]]; do
 	case "$1" in
@@ -76,6 +78,9 @@ while [[ "" != $1 ]]; do
 	"--skip-rofi")
 		skip_rofi=1
 		;;
+	"--skip-i3")
+		skip_i3=1
+		;;
 	"--small")
 		skip_tmux=1
 		skip_fzf=1
@@ -83,6 +88,8 @@ while [[ "" != $1 ]]; do
 		skip_powerline=1
 		skip_submodules=1
 		skip_dein=1
+		skip_rofi=1
+		skip_i3=1
 		;;
 	"--")
 		shift
@@ -217,6 +224,7 @@ fi
 
 if [[ "1" != "${skip_rofi}" ]]; then
 	dotfiles_install_rofi "${h}"
+	dotfiles_install_rofipass "${h}"
 else
 	echo "Skipped installing rofi"
 fi
@@ -234,9 +242,11 @@ mkdir -p "${h}/.config"
 ln -s "${DOTFILES_DIR}/config/nvim" "${h}/.config/"
 ln -s "${DOTFILES_DIR}/vimrc" "${h}/.config/nvim/init.vim"
 
-# Setup i3 (symlink entire directory)
-if [[ "$(which i3)" != "" ]]; then
-	ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+# Setup i3
+if [[ "1" != "${skip_i3}" ]]; then
+	dotfiles_install_i3 "${h}"
+else
+	echo "Skipped installing i3"
 fi
 
 # Setup pwsh on linux
