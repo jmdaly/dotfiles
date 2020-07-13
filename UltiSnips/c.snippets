@@ -7,9 +7,25 @@ snippet lic "Generic Cepton License"
 /*******************************************************************
  **                                                               **
  **  Copyright(C) `!v strftime("%Y")` Cepton Technologies. All Rights Reserved.  **
- **  Contact: https://www.cepton.com                              **
  **                                                               **
  *******************************************************************/
+endsnippet
+
+snippet guard "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import string
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	snip.rv = ('%s_' % (name)).upper()
+else:
+	snip.rv = snip.c`}
+#pragma nomisrac 2.5 // MISRA D4.10 requires an unused macro in include guard
+#define $1
+#pragma nomisrac 2.5 restore
+
+${VISUAL}$0
+
+#endif /* end of include guard: $1 */
 endsnippet
 
 # vim:ft=snippets:
