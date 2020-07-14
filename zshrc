@@ -61,13 +61,11 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
 	fi
 
-	if [[ ! "$(uname -o)" = Android ]]; then
-		zplug "akarzim/zsh-docker-aliases"
-	fi
-
 	if [[ "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
+
+		zplug "akarzim/zsh-docker-aliases"
 
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
@@ -85,6 +83,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 	else
 		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
 		zplug "plugins/vi-mode", from:oh-my-zsh
+		zplug "akarzim/zsh-docker-aliases"
 
 		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
@@ -182,17 +181,16 @@ if [[ "khea" == "$(hostname)" ]]; then
 
 	# module load modules
 	module load khea \
-		ford/sync    \
-		ford/qt
+		ford/sync
 	# module load bona
 
-elif [[ "sync-build" == "$(hostname)" ]]; then
+elif [[ "sync-android" == "$(hostname)" ]]; then
 
 	module load sync
 
 elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
 	# WGC1CVCY3YS13 = desktop (UPDATE)
-	# WGC1CV2JWQP13 = laptop  (UPDATE)
+	# WGC1CVGY0YL33 = laptop
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
@@ -201,7 +199,7 @@ elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]];
 	# https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 	export DOCKER_HOST=tcp://localhost:2375
 
-	module load ford/ford
+	# module load ford/ford
 
 elif [[ "$(uname -o)" = Android ]]; then
 	# Likely in Termux
