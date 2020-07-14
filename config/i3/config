@@ -23,8 +23,10 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
-# starting up pywal for terminal color scheme
-# exec_always --no-startup-id wal -R
+# starting some apps in floating mode
+for_window [class="Nautilus"] floating enable, border normal 0
+for_window [title="Emulator"] floating enable, border normal 0
+for_window [title="Android Emulator.*"] floating enable, border normal 0
 
 
 # Set wallpaper:
