@@ -28,4 +28,18 @@ ${VISUAL}$0
 #endif /* end of include guard: $1 */
 endsnippet
 
+snippet switch "Pragma arround MISRA rule 16.1"
+// TASKING v6.2r2 has a bug where it erroneously detects MISRA switch statement
+// errors on certain lines. We need to turn that check off on affected lines.
+#pragma nomisrac 16.1
+${VISUAL}$0
+#pragma nomisrac restore
+endsnippet
+
+snippet misra "Generic MISRA pragma"
+#pragma nomisrac $1
+${VISUAL}$0
+#pragma nomisrac restore
+endsnippet
+
 # vim:ft=snippets:
