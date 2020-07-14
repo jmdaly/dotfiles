@@ -6,15 +6,27 @@ if [[ -e ${HOME}/.linuxbrew ]]; then
 else
 	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
 fi
+
 local -a dirs;
 local -a rdirs=( \
 	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
 	.pyenv/bin utils/bin \
 );
+
 for d in $rdirs; dirs+="${HOME}/$d"
+
 dirs+=( \
 	${LINUXBREWHOME}/bin \
 )
+
+if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
+    dirs += (                                         \
+        "${ANDROID_SDK_ROOT}/tools"                   \
+        "${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin" \
+        "${ANDROID_SDK_ROOT}/platform-tools"          \
+    )
+fi
+
 for d in $dirs; do
 	if [[ -e "${d}" ]]; then
 		export PATH="${d}:${PATH}"
