@@ -209,6 +209,9 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " This should improve Git Fugitive and Git Gutter
       call dein#add('tmux-plugins/vim-tmux-focus-events')
 
+      " Highlighting for tmux
+      call dein#add('tmux-plugins/vim-tmux')
+
       " Plug to assist with commenting out blocks of text:
       call dein#add('tomtom/tcomment_vim')
 
