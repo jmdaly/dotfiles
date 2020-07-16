@@ -4,7 +4,7 @@
 	signingkey = 9DADF75304599BD8
 [includeIf "gitdir:~/workspace/ford/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
-[includeIf "gitdir:/src/*"]
+[includeIf "gitdir:/src/**"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [core]
 	quotepath = false
@@ -16,3 +16,5 @@
 	tool = vimdiff
 [credential]
 	helper = cache --timeout=720000
+[color]
+	ui = auto
