@@ -20,7 +20,7 @@ dirs+=( \
 )
 
 if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
-    dirs += (                                         \
+    dirs+=(                                           \
         "${ANDROID_SDK_ROOT}/tools"                   \
         "${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin" \
         "${ANDROID_SDK_ROOT}/platform-tools"          \
