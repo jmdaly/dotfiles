@@ -23,24 +23,52 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
+# starting up for compton
+# exec --no-startup-id compton --config ~/.config/compton/compton.conf --blur-background --blur-method kawase --blur-strength 12 # --opacity-rule 85:'class_g="URxvt"'
+
+# # Starting up for picom
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# starting up pywal for terminal color scheme
+exec_always --no-startup-id wal -R
+
 # starting some apps in floating mode
 for_window [class="Nautilus"] floating enable, border normal 0
 for_window [title="^Emulator$"] floating enable, border normal 0
 for_window [title="^Android Emulator - <build>:.*"] floating enable, border normal 0
 
+# # starting nautilus in floating mode
+# for_window [class="Thunar"] floating enable, border normal 0
+#
+# # starting urxvt in floating mode
+# for_window [class="URxvt" instance="floating_urxvt$"] floating enable, border normal 0
 
 # Set wallpaper:
+# exec --no-startup-id feh --bg-scale ${HOME}/Desktop/Backgrounds/jason-scheier-jason-scheier-sunset-on-the-lake-js.jpg
+# exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/wall.jpg
+# exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/4L8C6E8.jpg
 exec_always --no-startup-id feh --randomize --bg-fill ~/Desktop/Backgrounds/*
 
+# starting up polybar
+# exec_always --no-startup-id ~/.config/polybar/launch.sh &
+
+# # exec the .Xresources for urxvt
+# exec_always --no-startup-id xrdb .Xresources
 
 # Lock screen
 bindsym Ctrl+mod1+L exec ${HOME}/bin/do_lock.sh
+
+# # enable tapping, natural scrolling and middle click emulation for touchpad use
+# exec --no-startup-id xinput set-prop "ELAN1300:00 04F3:3057 Touchpad" "libinput Tapping Enabled" 1
+# exec --no-startup-id xinput set-prop "ELAN1300:00 04F3:3057 Touchpad" "libinput Natural Scrolling Enabled" 1
+# exec --no-startup-id xinput set-prop "ELAN1300:00 04F3:3057 Touchpad" "libinput Middle Emulation Enabled" 1
+
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:SFNS Display 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -73,6 +101,19 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
 # bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
 
+
+# # use to change screen brightness
+# bindsym XF86MonBrightnessUp exec brightnessctl set +10%;exec notify-send "Brightness Up" # ${$(bc -l <<< $(brightnessctl g)/$(brightnessctl m)*100)%\.*}\% # increase
+# bindsym XF86MonBrightnessDown exec brightnessctl set 10%-;exec notify-send "Brightness Down" #  ${$(bc -l <<< $(brightnessctl g)/$(brightnessctl m)*100)%\.*}\% # decrease
+#
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+
+# use to change keyboard brightness
+bindsym XF86KbdBrightnessUp exec light -s sysfs/leds/asus::kbd_backlight -A 100 # increace
+bindsym XF86KbdBrightnessDown exec light -s sysfs/leds/asus::kbd_backlight -U 100 # decrease
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -98,6 +139,9 @@ bindsym Print exec scrot 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
 bindsym --release shift+Print exec scrot -s 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
 # take screenshot of focused window
 bindsym ctrl+Print exec scrot -u 'screenshot_%F__%H-%M-%S.png' -e 'mv $f /tmp/'
+
+# # translate highlighted text
+# bindsym ctrl+shift+j exec notitranslation
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
