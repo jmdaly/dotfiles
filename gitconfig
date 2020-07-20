@@ -6,6 +6,8 @@
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/src/**"]
 	path = ~/dotfiles/gitconfig.ford.inc
+[includeIf "gitdir:/opt/**"]
+	path = ~/dotfiles/gitconfig.ford.inc
 [core]
 	quotepath = false
 	commitGraph = true
