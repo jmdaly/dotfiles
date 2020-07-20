@@ -9,9 +9,10 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-########################################
-###      MY CONFIGURATION HERE    ######
-########################################
+
+######################################
+###      MY CONFIGURATION HERE  ######
+######################################
 
 # COLOR CONFIG
 # class                 border  backgr. text    indicator child_border
