@@ -289,6 +289,7 @@ let g:sneak#streak = 1
 let g:startify_change_to_dir = 0
 
 " mappings for fugitive:
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gs :Git<cr>
+nnoremap <leader>gd :Gdiffsplit<cr>
+nnoremap <leader>gm :Gdiffsplit master<cr>
+nnoremap <leader>gb :Git blame<cr>
