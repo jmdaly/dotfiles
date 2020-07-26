@@ -591,8 +591,16 @@ endif
 
 
 """""""""""""""""""" rooter config """"""""""""""""""""""
-" Stop printing the cwd on write
-let rooter_silent_chdir=1
+silent if g:dein_exists && dein#check_install('vim-rooter') == 0
+   " Stop printing the cwd on write
+   let rooter_silent_chdir=1
+
+   if expand('%:p') =~ '^/opt/android-src'
+      let g:rooter_patterns = ['.repo']
+   else
+      let g:rooter_patterns = ['.git']
+   endif
+endif
 """"""""""""""""""" /rooter config """"""""""""""""""""""
 
 
