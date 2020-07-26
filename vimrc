@@ -553,6 +553,7 @@ if !exists('g:gui_oni')
       \ 'cpp': [
          \ 'ccls',
          \ '--log-file=/tmp/cq.log',
+         \ '--ccls-cache=/tmp/.ccls-cache',
          \ '-v=1'
       \ ]
    \ }
