@@ -278,6 +278,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " call dein#add('tikhomirov/vim-glsl', {'on_ft': ['glsl']})
 
       call dein#add('PProvost/vim-ps1')
+      call dein#add('rubberduck203/aosp-vim')
 
       "
       " Colourschemes

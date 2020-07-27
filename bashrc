@@ -106,4 +106,6 @@ export PATH="${HOME}/utils:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+source /home/developer/workspace/vcpkg/scripts/vcpkg_completion.bash
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
