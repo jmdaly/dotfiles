@@ -222,7 +222,8 @@ if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
 fi
 
 # direnv
-if [[ $(which direnv 2>/dev/null) != "" ]]; then
+which direnv 2>&1 > /dev/null
+if [[ "0" == "$?" ]]; then
 	eval "$(direnv hook zsh)"
 fi
 
