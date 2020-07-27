@@ -222,7 +222,9 @@ if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
 fi
 
 # direnv
-eval "$(direnv hook zsh)"
+if [[ $(which direnv 2>/dev/null) != "" ]]; then
+	eval "$(direnv hook zsh)"
+fi
 
 # vcpkg
 if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
