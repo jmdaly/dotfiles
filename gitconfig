@@ -20,5 +20,3 @@
 	helper = cache --timeout=720000
 [color]
 	ui = auto
-[http]
-	proxy = http://internet.ford.com:83
