@@ -172,6 +172,8 @@ nnoremap <F3> :YcmCompleter FixIt<CR>
 " Let clangd fully control code completion
 " let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_args = ['-log=verbose', '--pretty', '--background-index', '--completion-style=detailed']
+" Use the system version of clangd
+let g:ycm_clangd_binary_path = g:clang_path . '/bin/clangd'
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -291,5 +293,6 @@ let g:startify_change_to_dir = 0
 " mappings for fugitive:
 nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gd :Gdiffsplit<cr>
+nnoremap <leader>gg :Gdiffsplit 
 nnoremap <leader>gm :Gdiffsplit master<cr>
 nnoremap <leader>gb :Git blame<cr>
