@@ -280,6 +280,8 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('PProvost/vim-ps1')
       call dein#add('rubberduck203/aosp-vim')
 
+      " call dein#add('kheaactua/vim-fzf-repo')
+
       "
       " Colourschemes
       call dein#add('altercation/vim-colors-solarized')
@@ -395,12 +397,6 @@ let g:cpp_class_scope_highlight = 1
 " of vim:
 if !has('nvim')
    set autoread
-endif
-
-if has('unix')
-   " Tell vim to look for a tags file in the current
-   " directory, and all the way up until it finds one:
-   set tags=./tags;/
 endif
 
 """"""""""""""""""""""" YCM Config """"""""""""""""""""""""
@@ -549,7 +545,7 @@ endif
 
 
 """"""""""""""""" LanguageClient Config """""""""""""""""""
-if !exists('g:gui_oni')
+silent if has('unix') && g:dein_exists && dein#check_install('LanguageClient-neovim') == 0
    let g:LanguageClient_serverCommands = {
       \ 'cpp': [
          \ 'ccls',
@@ -596,12 +592,6 @@ endif
 silent if g:dein_exists && dein#check_install('vim-rooter') == 0
    " Stop printing the cwd on write
    let rooter_silent_chdir=1
-
-   if expand('%:p') =~ '^/opt/android-src'
-      let g:rooter_patterns = ['.repo']
-   else
-      let g:rooter_patterns = ['.git']
-   endif
 endif
 """"""""""""""""""" /rooter config """"""""""""""""""""""
 
