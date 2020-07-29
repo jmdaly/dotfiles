@@ -113,10 +113,22 @@ nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
 nnoremap <leader>ds :call LanguageClient#textDocument_documentSymbol()<CR>
 nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
 
+" pc-lint error format and make configuration.
+let g:pclint_path = $HOME.'/pclint/linux'
+if isdirectory(g:pclint_path)
+  let &makeprg = g:pclint_path . '/pclp64_linux ' . g:pclint_path . '/lnt/au-misra3.lnt -wlib\(4\) -wlib\(1\) -h1 -width\(0,0\) -"format=\%(\%f:\%l:\%C \%) \%t \%n: \%m" co-gcc.lnt project_includes.lnt %'
+  set errorformat+=%f:%l:%c\ \ warning\ %n:\ %m
+  set errorformat+=%f:%l:%c\ \ error\ %n:\ %m
+  set errorformat+=%f:%l:%c\ \ supplemental\ %n:\ %m
+  set errorformat+=%f:%l:%c\ \ info\ %n:\ %m
+  let g:ale_c_pclint_executable = g:pclint_path . '/pclp64_linux'
+  let g:ale_c_pclint_options =  g:pclint_path . '/lnt/au-misra3.lnt -wlib\(4\) -wlib\(1\) co-gcc.lnt project_includes.lnt'
+endif
+
 " ALE configuration
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
-\   'c': ['clangtidy'],
+\   'c': ['clangtidy', 'pclint'],
 \}
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
