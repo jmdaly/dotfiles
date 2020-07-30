@@ -7,12 +7,13 @@
 [submodule "gdb-dashboard"]
 	path = gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard.git
-[submodule "ssh-find-agent"]
-	path = ssh-find-agent
-	url = https://github.com/wwalker/ssh-find-agent
 [submodule "dotfiles-secret"]
 	path = dotfiles-secret
 	url = https://github.com/kheaactua/dotfiles-secret.git
 [submodule "modulefiles/ford"]
 	path = modulefiles/ford
 	url = git@github.ford.com:MRUSS100/modulefiles.git
+[dotfiles-secret]
+	master = master
+[modulefiles "ford"]
+	master = master
