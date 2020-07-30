@@ -26,6 +26,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-zplug"
 	"skip-rofi"
 	"skip-i3"
+	"skip-gnupg"
 	"small"
 )
 
@@ -47,6 +48,7 @@ declare skip_dein=0
 declare skip_zplug=0
 declare skip_rofi=0
 declare skip_i3=0
+declare skip_gnupg=0
 declare copy=0 # This hasn't been used in years, it's only for cygwin/issues with symlinks with Windos
 while [[ "" != $1 ]]; do
 	case "$1" in
@@ -80,6 +82,9 @@ while [[ "" != $1 ]]; do
 		;;
 	"--skip-i3")
 		skip_i3=1
+		;;
+	"--skip-gnupg")
+		skip_gnupg=1
 		;;
 	"--small")
 		skip_tmux=1
@@ -145,21 +150,14 @@ fi
 
 if [[ "khea" == "$(hostname)" ]]; then
 	# Apple keyboard stuff.. Should detect keyboard rather than host, maybe later..
-	if [[ ! -e "${DOTFILES_DIR}/.xinitrc" ]]; then
+	if [[ ! -e "${DOTFILES_DIR}/xinitrc" ]]; then
 		ln -s "${DOTFILES_DIR}/.xinitrc" "xinitrc"
 	fi
 fi
 
 # Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
-	if [[ ! -e "${h}/.tmux/plugins/tpm" ]]; then
-		if [[ "$(which tmux)" != "" ]]; then
-			mkdir -p "${h}/.tmux/plugins"
-			git clone https://github.com/tmux-plugins/tpm "${h}/.tmux/plugins/tpm"
-		fi
-	else
-		echo "TPM was already exists, skipping"
-	fi
+	dotfiles_install_tpm "${h}"
 else
 	echo "Skipped setting up tmux pluggins"
 fi
@@ -212,9 +210,7 @@ done;
 cd $h
 
 # Symlink docker config from dotfiles-secret
-if [[ -e "${h}/.docker" && ! -e "${h}/.docker/config.json" ]]
-	ln -s ${h}/dotfiles/dotfiles-secret/docker" "${h}/.docker"
-fi
+dotfiles_install_docker_config "${h}" "${DOTFILES_DIR}/dotfiles-secret"
 
 if [[ "1" != "${skip_zplug}" ]]; then
 	dotfiles_install_zplug "${h}" "${DFTMP}"
@@ -238,9 +234,7 @@ fi
 # Make sure config directory exists
 mkdir -p "${h}/.config"
 
-# Setup nvim config (symlink entire directory)
-ln -s "${DOTFILES_DIR}/config/nvim" "${h}/.config/"
-ln -s "${DOTFILES_DIR}/vimrc" "${h}/.config/nvim/init.vim"
+dotfiles_install_nvim "${h}"
 
 # Setup i3
 if [[ "1" != "${skip_i3}" ]]; then
@@ -289,12 +283,10 @@ else
 fi
 
 # GPG-Agent
-if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
-	mkdir -p "${h}/.gnupg"
-	chmod 700 "${h}/.gnupg"
-	if [[ ! -e "${h}/.gnupg/gpg-agent.conf" ]]; then
-		ln -sf "${DOTFILES_DIR}/gpg-agent.conf" "${h}/.gnupg/gpg-agent.conf"
-	fi;
+if [[ "1" != "${skip_gnupg}" ]]; then
+	dotfiles_install_gnupg "${h}" "${DOTFILES_DIR}/dotfiles-secret"
+else
+	echo "Skipped installing gnupg"
 fi
 
 if [[ ! -e "${h}/.ssh/tmp" ]]; then

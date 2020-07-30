@@ -1,5 +1,75 @@
 # Requires ${DOTFILES_DIR}
 # Source after "${DOTFILES_DIR}/detect_docker.dot"
+# One day I'll convert this to pwsh so it can run on Windows as well.
+
+function symlink()
+{
+  local -r target=${1}; shift
+  local -r link=${1}; shift
+  local -r force=${1:-0}
+
+  if [[ "0" != "${force}" ]]; then
+    force=1
+  fi
+
+  local flags="-s"
+  if [[ 0 != ${force} ]]; then
+    flags="${flags}f"
+  fi
+
+  if [[ ! -e "${link}" || 1 == ${force} ]]; then
+    ln ${flags} "${target}" "${link}"
+  fi
+}
+
+function dotfiles_install_gnupg()
+{
+  local home=${1:-${HOME}}
+  local dotfiles_secret_dir=${2:-${DOTFILES_DIR}/dotfiles-secret}
+
+  if [[ ! -e "${home}/.gnupg" ]]; then
+    mkdir -p "${home}/.gnupg"
+    chmod 700 "${home}/.gnupg"
+  fi
+
+  symlink "${DOTFILES_DIR}/gnupg/gpg-agent.conf" "${home}/.gnupg/gpg-agent.conf"
+  symlink "${dotfiles_secret_dir}/global/gnupg/sshcontrol" "${home}/.gnupg/sshcontrol"
+}
+
+function dotfiles_install_docker_config()
+{
+  local home=${1:-${HOME}}
+  local dotfiles_secret_dir=${2:-${DOTFILES_DIR}/dotfiles-secret}
+
+  if [[ -e "${home}/.docker" && ! -e "${home}/.docker/config.json" ]]; then
+    symlink "${dotfiles_secret_dir}/docker" "${home}/.docker"
+  fi
+}
+
+function dotfiles_install_nvim()
+{
+  local home=${1:-${HOME}}
+
+  # Setup nvim config (symlink entire directory)
+  symlink "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/vimrc" "${home}/.config/nvim/init.vim"
+  # ln -s "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
+  # ln -s "${DOTFILES_DIR}/vimrc" "${home}/.config/nvim/init.vim"
+}
+
+function dotfiles_install_tpm()
+{
+  local home=${1:-${HOME}}
+
+  if [[ ! -e "${home}/.tmux/plugins/tpm" ]]; then
+    if [[ "$(which tmux)" != "" ]]; then
+      mkdir -p "${home}/.tmux/plugins"
+      git clone https://github.com/tmux-plugins/tpm "${home}/.tmux/plugins/tpm"
+    fi
+  else
+    echo "TPM already exists, skipping"
+  fi
+}
 
 function dotfiles_install_zplug()
 {
@@ -34,28 +104,29 @@ function dotfiles_install_rofi()
   local home=${1:-${HOME}}
   local tmp=${2:-$(mktemp -d)}
 
-  ln -s "${DOTFILES_DIR}/config/rofi" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/config/rofi" "${home}/.config/"
 }
 
 function dotfiles_install_rofipass()
 {
   local home=${1:-${HOME}}
 
-  ln -s "${DOTFILES_DIR}/config/rofi-pass" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/config/rofi-pass" "${home}/.config/"
 }
 
 function dotfiles_install_i3()
 {
   local home=${1:-${HOME}}
+
   if [[ "$(which i3)" != "" ]]; then
-    ln -s "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+    symlink "${DOTFILES_DIR}/config/i3" "${h}/.config/"
   fi
 
   if [[ ! -e "${home}/bin" ]]; then
     mkdir -p "${home}/bin"
   fi
 
-  cat <<<TOHERE > "${home}/bin/do_lock.sh"
+  cat <<TOHERE > "${home}/bin/do_lock.sh"
 #!/bin/bash
 
 # Shuts the screen off the first time, but after a period of inactivity
@@ -71,15 +142,15 @@ function dotfiles_install_dein()
   local home=${1:-${HOME}}
   local tmp=${2:-$(mktemp -d)}
 
-	if [[ ! -e "${DOTFILES_DIR}/bundles/dein" ]]; then
-		curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${tmp}/install_dein.sh"
-		if [[ $? == 0 ]]; then
-			sh "${tmp}/install_dein.sh" "${DOTFILES_DIR}/bundles/dein"
-		else
-			echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
-			env | grep -i proxy
-		fi
-	fi
+  if [[ ! -e "${DOTFILES_DIR}/bundles/dein" ]]; then
+    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${tmp}/install_dein.sh"
+    if [[ $? == 0 ]]; then
+      sh "${tmp}/install_dein.sh" "${DOTFILES_DIR}/bundles/dein"
+    else
+      echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
+      env | grep -i proxy
+    fi
+  fi
 }
 
 # vim: ts=2 sw=2 sts=0 ff=unix expandtab ft=sh :
