@@ -10,7 +10,7 @@ fi
 local -a dirs;
 local -a rdirs=( \
 	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
-	.pyenv/bin utils/bin \
+	.pyenv/bin utils/bin .cargo/bin \
 );
 
 for d in $rdirs; dirs+="${HOME}/$d"
