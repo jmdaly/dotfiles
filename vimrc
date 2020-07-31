@@ -104,6 +104,7 @@ augroup filetypes
    au BufNewFile,BufRead *.bp                setlocal ft=bzl
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
+   au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
 augroup end
 
 augroup whitespace
