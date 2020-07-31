@@ -3,7 +3,13 @@ declare DOTFILES_DIR="${HOME}/dotfiles"
 # Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 # it'll prompt for the SSH passphrase rather than the keyring passphrase
 # https://eklitzke.org/using-gpg-agent-effectively
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
+	echo "Defining SSH_AUTH_SOCK"
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	echo "Defining SSH_AUTH_SOCK=${SSH_AUTH_SOCK}"
+else
+	echo "Using SSH_AUTH_SOCK=${SSH_AUTH_SOCK}"
+fi
 export GPG_TTY=$(tty)
 
 if [[ -e "${DOTFILES_DIR}/doupdate.sh" && ! "$(hostname)" =~ sync* ]]; then
