@@ -4,6 +4,13 @@ alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
 alias ls="ls -lAhtrFG --color=auto"
+if [[ "$(which exa 2> /dev/null)" != "" ]]; then
+    alias ls="exa --header --long -s changed --tree --level=2"
+fi
+if [[ "$(which htop 2> /dev/null)" != "" ]]; then
+    alias htop="ytop"
+fi
+
 alias grep="grep --color=always --exclude-dir={.git}"
 
 if [[ -e /usr/bin/ag ]]; then
