@@ -10,6 +10,9 @@ fi
 if [[ "$(which htop 2> /dev/null)" != "" ]]; then
     alias htop="ytop"
 fi
+if [[ "$(which dust 2> /dev/null)" != "" ]]; then
+    alias du="dust"
+fi
 
 alias grep="grep --color=always --exclude-dir={.git}"
 
