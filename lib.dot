@@ -22,6 +22,17 @@ function symlink()
   fi
 }
 
+function dotfiles_install_netrc()
+{
+  local home=${1:-${HOME}}
+  local dotfiles_secret_dir=${2:-${DOTFILES_DIR}/dotfiles-secret}
+
+  if [[ -e "${dotfiles_secret_dir}" ]]; then
+    chmod 600 "${dotfiles_secret_dir}/global/netrc"
+    symlink "${dotfiles_secret_dir}/global/netrc" "${home}/.netrc"
+  fi
+}
+
 function dotfiles_install_gnupg()
 {
   local home=${1:-${HOME}}
@@ -33,7 +44,9 @@ function dotfiles_install_gnupg()
   fi
 
   symlink "${DOTFILES_DIR}/gnupg/gpg-agent.conf" "${home}/.gnupg/gpg-agent.conf"
-  symlink "${dotfiles_secret_dir}/global/gnupg/sshcontrol" "${home}/.gnupg/sshcontrol"
+  if [[ -e "${dotfiles_secret_dir}" ]]; then
+    symlink "${dotfiles_secret_dir}/global/gnupg/sshcontrol" "${home}/.gnupg/sshcontrol"
+  fi
 }
 
 function dotfiles_install_docker_config()
@@ -41,7 +54,7 @@ function dotfiles_install_docker_config()
   local home=${1:-${HOME}}
   local dotfiles_secret_dir=${2:-${DOTFILES_DIR}/dotfiles-secret}
 
-  if [[ -e "${home}/.docker" && ! -e "${home}/.docker/config.json" ]]; then
+  if [[ -e "${dotfiles_secret_dir}" && -e "${home}/.docker" && ! -e "${home}/.docker/config.json" ]]; then
     symlink "${dotfiles_secret_dir}/docker" "${home}/.docker"
   fi
 }
