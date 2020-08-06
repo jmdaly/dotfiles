@@ -212,6 +212,8 @@ cd $h
 # Symlink docker config from dotfiles-secret
 dotfiles_install_docker_config "${h}" "${DOTFILES_DIR}/dotfiles-secret"
 
+dotfiles_install_netrc "${h}" "${DOTFILES_DIR}/dotfiles-secret"
+
 if [[ "1" != "${skip_zplug}" ]]; then
 	dotfiles_install_zplug "${h}" "${DFTMP}"
 else

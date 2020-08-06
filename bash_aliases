@@ -5,7 +5,7 @@ alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
 alias ls="ls -lAhtrFG --color=auto"
 if [[ "$(which exa 2> /dev/null)" != "" ]]; then
-    alias ls="exa --header --long -s changed --tree --level=2"
+    alias ls="exa --header --long -s changed --tree --all --level=1"
 fi
 if [[ "$(which htop 2> /dev/null)" != "" ]]; then
     alias htop="ytop"

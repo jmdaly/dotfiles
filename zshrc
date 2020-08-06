@@ -5,7 +5,6 @@ declare DOTFILES_DIR="${HOME}/dotfiles"
 # https://eklitzke.org/using-gpg-agent-effectively
 if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
 	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-	echo "Defining SSH_AUTH_SOCK=${SSH_AUTH_SOCK}"
 fi
 export GPG_TTY=$(tty)
 
