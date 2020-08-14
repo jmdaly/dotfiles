@@ -22,6 +22,13 @@ function symlink()
   fi
 }
 
+function dotfiles_install_proc()
+{
+  local home=${1:-${HOME}}
+
+  symlink "${DOTFILES_DIR}/config/procs" "${home}/.config/"
+}
+
 function dotfiles_install_netrc()
 {
   local home=${1:-${HOME}}

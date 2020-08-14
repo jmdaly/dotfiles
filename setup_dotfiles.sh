@@ -175,6 +175,9 @@ if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
 	files+=('.vnc')
 fi
 
+# Rust "procs" tool (better ps)
+dotfiles_install_tpm "${h}"
+
 # .config/autokey
 
 # Create a backup directory:
