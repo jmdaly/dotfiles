@@ -117,6 +117,7 @@ augroup whitespace
    autocmd FileType make            setlocal ts=8 sw=8 sts=8 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
+   autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -765,7 +766,7 @@ ab lsit list
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
 " files.
 function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+  let l:modeline = printf("vim: set ts=%d sw=%d tw=%d %set :",
         \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
