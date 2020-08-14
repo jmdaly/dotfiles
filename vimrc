@@ -552,7 +552,6 @@ silent if has('unix') && g:dein_exists && dein#check_install('LanguageClient-neo
       \ 'cpp': [
          \ 'ccls',
          \ '--log-file=/tmp/cq.log',
-         \ '--ccls-cache=/tmp/.ccls-cache',
          \ '-v=1'
       \ ]
    \ }
