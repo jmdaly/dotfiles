@@ -13,6 +13,9 @@ fi
 if [[ "$(which dust 2> /dev/null)" != "" ]]; then
     alias du="dust"
 fi
+if [[ "$(which bat 2> /dev/null)" != "" ]]; then
+    alias cat=bat
+fi
 
 alias grep="grep --color=always --exclude-dir={.git}"
 
