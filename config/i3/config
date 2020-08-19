@@ -308,7 +308,7 @@ exec "xset dpms 600"
 
 # Set inner/outer gaps
 for_window [class="^.*"] border pixel 0
-gaps inner 12
+gaps inner 7
 gaps outer 1
 
 
