@@ -242,10 +242,8 @@ else
 	function arm-ldd() { readelf -d $1 | grep "\(NEEDED\)" | sed -r "s/.*\[(.*)\]/\1/" }
 fi
 
-# sdkman
-if [[ -e ~/.sdkman/bin/sdkman-init.sh ]]; then
-	source ~/.sdkman/bin/sdkman-init.sh
-fi
+export SDKMAN_DIR="${HOME}/.sdkman"
+[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
