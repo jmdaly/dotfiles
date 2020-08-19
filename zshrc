@@ -234,6 +234,11 @@ if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
 	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 fi
 
+# sdkman
+if [[ -e ~/.sdkman/bin/sdkman-init.sh ]]; then
+	source ~/.sdkman/bin/sdkman-init.sh
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
