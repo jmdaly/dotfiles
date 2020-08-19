@@ -234,6 +234,14 @@ if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
 	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 fi
 
+# Helper functions (move to lib)
+which patchelf 2>&1 > /dev/null
+if [[ "0" == "$?" ]]; then
+	function arm-ldd() { patchelf --print-needed $1 }
+else
+	function arm-ldd() { readelf -d $1 | grep "\(NEEDED\)" | sed -r "s/.*\[(.*)\]/\1/" }
+fi
+
 # sdkman
 if [[ -e ~/.sdkman/bin/sdkman-init.sh ]]; then
 	source ~/.sdkman/bin/sdkman-init.sh
