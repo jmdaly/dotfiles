@@ -70,12 +70,6 @@ fi
 
 alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
-function catjson() {
-	cat $1                        \
-		| python -m json.tool      \
-		| pygmentize -l javascript
-}
-
 # GPG aliases.. Needed until I understand GPG better
 alias gpg-fixtty="gpg-connect-agent updatestartuptty /bye"
 alias gpg-reload="gpg-connect-agent reloadagent /bye"
