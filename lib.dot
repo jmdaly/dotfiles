@@ -22,6 +22,23 @@ function symlink()
   fi
 }
 
+
+function dotfiles_install_cargo()
+{
+  local home=${1:-${HOME}}
+
+  symlink "${DOTFILES_DIR}/cargo" "${home}/.cargo"
+
+  source "${DOTFILES_DIR}/cargo/env"
+  if [[ "$(which rustup)" == "" ]]; then
+    echo "Cargo configuration files are setup, but rustup is not installed.  To install it, run:"
+    echo "  curl https://sh.rustup.rs -sSf | sh"
+    echo
+    echo "Then, toolchains from ~/.cargo/config can be installed by running (example)"
+    echo "  rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android"
+  fi
+}
+
 function dotfiles_install_proc()
 {
   local home=${1:-${HOME}}

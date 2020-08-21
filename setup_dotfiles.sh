@@ -27,6 +27,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-rofi"
 	"skip-i3"
 	"skip-gnupg"
+	"skip-cargo"
 	"small"
 )
 
@@ -49,6 +50,7 @@ declare skip_zplug=0
 declare skip_rofi=0
 declare skip_i3=0
 declare skip_gnupg=0
+declare skip_cargo=0
 declare copy=0 # This hasn't been used in years, it's only for cygwin/issues with symlinks with Windos
 while [[ "" != $1 ]]; do
 	case "$1" in
@@ -86,6 +88,9 @@ while [[ "" != $1 ]]; do
 	"--skip-gnupg")
 		skip_gnupg=1
 		;;
+	"--skip-cargo")
+		skip_cargo=1
+		;;
 	"--small")
 		skip_tmux=1
 		skip_fzf=1
@@ -95,6 +100,8 @@ while [[ "" != $1 ]]; do
 		skip_dein=1
 		skip_rofi=1
 		skip_i3=1
+		skip_gnupg=1
+		skip_cargo=1
 		;;
 	"--")
 		shift
@@ -285,6 +292,13 @@ if [[ "1" != "${skip_python_venv}" ]]; then
 	fi
 else
 	echo "Skipped setting up python virtual environments"
+fi
+
+# Cargo
+if [[ "1" != "${skip_cargo}" ]]; then
+	dotfiles_install_cargo "${h}"
+else
+	echo "Skipped installing cargo config"
 fi
 
 # GPG-Agent
