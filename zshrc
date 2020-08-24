@@ -1,6 +1,6 @@
 declare DOTFILES_DIR="${HOME}/dotfiles"
 
-if [[ $(which gpgconf 2>/dev/null) != "" ]]; then
+if [[ $(which gpgconf 2> /dev/null) != "" ]]; then
 	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 	# it'll prompt for the SSH passphrase rather than the keyring passphrase
 	# https://eklitzke.org/using-gpg-agent-effectively
@@ -74,7 +74,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
-	elif [[ "$(uname -o)" = Android ]]; then
+	elif [[ "$(uname -o)" == Android || "$(uname -a)" =~ aarch64 ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
