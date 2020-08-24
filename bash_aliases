@@ -4,8 +4,12 @@ alias df="df -h"
 alias f95="f95 -cpp -Wall -ffree-line-length-none -Wtabs"
 alias tclsh="rlwrap tclsh"
 alias ls="ls -lAhtrFG --color=auto"
-if [[ "$(which exa 2> /dev/null)" != "" ]]; then
+
+tmp=$(which exa 2> /dev/null)
+if [[ "$?" == "0" ]]; then
     alias ls="exa --header --long -s changed --tree --all --level=1"
+else
+    alias ls="ls -lAhtrG --color=auto"
 fi
 if [[ "$(which htop 2> /dev/null)" != "" ]]; then
     alias htop="ytop"
@@ -13,7 +17,9 @@ fi
 if [[ "$(which dust 2> /dev/null)" != "" ]]; then
     alias du="dust"
 fi
-if [[ "$(which bat 2> /dev/null)" != "" ]]; then
+
+tmp=$(which bat 2> /dev/null)
+if [[ "$?" == "0" ]]; then
     alias cat=bat
 fi
 

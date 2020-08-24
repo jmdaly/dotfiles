@@ -1,12 +1,14 @@
 declare DOTFILES_DIR="${HOME}/dotfiles"
 
-# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
-# it'll prompt for the SSH passphrase rather than the keyring passphrase
-# https://eklitzke.org/using-gpg-agent-effectively
-if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
-	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+if [[ $(which gpgconf 2>/dev/null) != "" ]]; then
+	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
+	# it'll prompt for the SSH passphrase rather than the keyring passphrase
+	# https://eklitzke.org/using-gpg-agent-effectively
+	if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
+		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	fi
+	export GPG_TTY=$(tty)
 fi
-export GPG_TTY=$(tty)
 
 if [[ -e "${DOTFILES_DIR}/doupdate.sh" && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
