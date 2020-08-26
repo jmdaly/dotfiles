@@ -282,7 +282,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('PProvost/vim-ps1')
       call dein#add('rubberduck203/aosp-vim')
 
-      " call dein#add('kheaactua/vim-fzf-repo')
+      call dein#add('kheaactua/vim-fzf-repo')
 
       "
       " Colourschemes
@@ -651,6 +651,10 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
         \ call fzf#vim#grep(
         \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')), 1,
         \    fzf#vim#with_preview(), <bang>0)
+   endif
+
+   silent if has('unix') && g:dein_exists && dein#check_install('vim-fzf-repo') == 0
+      noremap <leader>k :GRepoFiles<cr>
    endif
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
