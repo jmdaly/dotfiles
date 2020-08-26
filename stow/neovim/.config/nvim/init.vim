@@ -118,12 +118,13 @@ let g:LanguageClient_serverCommands = {
 " Limits how often the LanguageClient talks to the
 " server, so it reduces CPU load and flashing.
 let g:LanguageClient_changeThrottle = 0.5
-nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
-nnoremap <leader>ds :call LanguageClient#textDocument_documentSymbol()<CR>
-nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
+nmap <leader>ty <Plug>(lcn-hover)
+nmap <leader>rf <Plug>(lcn-references)
+nmap <leader>rj <Plug>(lcn-definition)
+nmap <leader>rw <Plug>(lcn-rename)
+nmap <leader>ds <Plug>(lcn-symbols)
+nmap <leader>cm <Plug>(lcn-menu)
+nmap <leader>ca <Plug>(lcn-code-action)
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
