@@ -9,7 +9,7 @@ call ale#Set('c_pclint_options', '')
 " we can use the gcc format handler.
 function! ale_linters#c#pclint#GetCommand(buffer) abort
   return '%e'
-  \  . ale#Pad('-h1 -width\(0,0\) -"format=%(%f:%l:%C %) %%t: %m"')
+  \  . ale#Pad('-h1 -width\(0,0\) -"format=%(%f:%l:%C %) %%t: %n %m"')
   \  . ale#Pad(ale#Var(a:buffer, 'c_pclint_options'))
   \  . ' %t'
 endfunction
