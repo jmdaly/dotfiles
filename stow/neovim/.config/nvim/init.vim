@@ -45,6 +45,14 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
 " tmux. This doesn't seem to work when running with
@@ -58,6 +66,13 @@ call plug#end()            " required
 " Add to the runtime path so that custom
 " snippets can be found:
 set rtp+=~/dotfiles
+
+" Deoplete setup
+let g:deoplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Use the full fuzzy matcher, like YCM
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 " Enable true colour support:
 if has('termguicolors')
@@ -100,12 +115,9 @@ let g:LanguageClient_serverCommands = {
 \ 'cpp': [g:clang_path . '/bin/clangd', '--background-index'],
 \ 'c': [g:clang_path . '/bin/clangd', '--background-index'],
 \ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
 " Limits how often the LanguageClient talks to the
 " server, so it reduces CPU load and flashing.
 let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_diagnosticsEnable = 0
 nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
 nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
@@ -186,6 +198,23 @@ nnoremap <F3> :YcmCompleter FixIt<CR>
 let g:ycm_clangd_args = ['-log=verbose', '--pretty', '--background-index', '--completion-style=detailed']
 " Use the system version of clangd
 let g:ycm_clangd_binary_path = g:clang_path . '/bin/clangd'
+" Disable YCM for C and C++ files, which we use LanguageClient-neovim and
+" deoplete for
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'text': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'leaderf': 1,
+      \ 'mail': 1
+      \}
+let g:ycm_filetype_blacklist['c'] = 1
+let g:ycm_filetype_blacklist['cpp'] = 1
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
