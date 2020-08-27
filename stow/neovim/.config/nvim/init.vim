@@ -3,7 +3,6 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe' " YouCompleteMe
 Plug 'justinmk/vim-dirvish' " Path navigator for vim
 Plug 'octol/vim-cpp-enhanced-highlight' " Better C++ Syntax Highlighting:
 Plug 'SirVer/ultisnips' " Track the ultisnips engine.
@@ -36,17 +35,11 @@ Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
-
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neovim/nvim-lsp' " Configurations for neovim's language client
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
@@ -71,8 +64,16 @@ set rtp+=~/dotfiles
 let g:deoplete#enable_at_startup = 1
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 " Use the full fuzzy matcher, like YCM
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+set completeopt+=noselect
+" I have to set this in order for completion to work on objects
+" when I press '.'
+call deoplete#custom#option('omni_patterns', {
+\ 'c': ['[^. *\t]\%(\.\|->\)\w*'],
+\ 'cpp': ['[^. *\t]\%(\.\|->\)\w*', '[a-zA-Z_]\w*::'],
+\})
 
 " Enable true colour support:
 if has('termguicolors')
@@ -111,20 +112,24 @@ if has('win32')
   let g:clang_path = "C:/Program Files/LLVM"
 endif
 
-let g:LanguageClient_serverCommands = {
-\ 'cpp': [g:clang_path . '/bin/clangd', '--background-index'],
-\ 'c': [g:clang_path . '/bin/clangd', '--background-index'],
-\ }
-" Limits how often the LanguageClient talks to the
-" server, so it reduces CPU load and flashing.
-let g:LanguageClient_changeThrottle = 0.5
-nmap <leader>ty <Plug>(lcn-hover)
-nmap <leader>rf <Plug>(lcn-references)
-nmap <leader>rj <Plug>(lcn-definition)
-nmap <leader>rw <Plug>(lcn-rename)
-nmap <leader>ds <Plug>(lcn-symbols)
-nmap <leader>cm <Plug>(lcn-menu)
-nmap <leader>ca <Plug>(lcn-code-action)
+" Set up the built-in language client
+lua <<EOF
+local nvim_lsp = require'nvim_lsp'
+nvim_lsp.clangd.setup{
+  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+}
+EOF
+" Use LSP omni-completion in C and C++ files.
+autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>ty <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
