@@ -130,6 +130,7 @@ nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
