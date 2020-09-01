@@ -118,6 +118,7 @@ augroup whitespace
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType cs,cpp,c,sh,ps1,kotlin setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType bzl             setlocal ts=2 sw=2 sts=2 expandtab
 augroup END
 
 set nocompatible  " Dein also wants this
