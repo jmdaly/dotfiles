@@ -35,9 +35,9 @@ Plug 'wellle/targets.vim' " A plugin for additional text objects
 Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
-Plug 'neovim/nvim-lsp' " Configurations for neovim's language client
 
 if has('nvim')
+  Plug 'neovim/nvim-lsp' " Configurations for neovim's language client
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 else
@@ -58,7 +58,7 @@ call plug#end()            " required
 
 " Add to the runtime path so that custom
 " snippets can be found:
-set rtp+=~/dotfiles
+set runtimepath+=~/dotfiles
 
 " Deoplete setup
 let g:deoplete#enable_at_startup = 1
@@ -67,13 +67,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 " Use the full fuzzy matcher, like YCM
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-set completeopt+=noselect
-" I have to set this in order for completion to work on objects
-" when I press '.'
-call deoplete#custom#option('omni_patterns', {
-\ 'c': ['[^. *\t]\%(\.\|->\)\w*'],
-\ 'cpp': ['[^. *\t]\%(\.\|->\)\w*', '[a-zA-Z_]\w*::'],
-\})
 
 " Enable true colour support:
 if has('termguicolors')
@@ -115,13 +108,22 @@ endif
 " Set up the built-in language client
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
+
+-- Set up clangd
 nvim_lsp.clangd.setup{
   cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
 }
+
+nvim_lsp.cmake.setup{}
+nvim_lsp.pyls.setup{}
 EOF
-" Use LSP omni-completion in C and C++ files.
-autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+augroup lsp
+  autocmd!
+  " Use LSP omni-completion in C and C++ files.
+  autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+  autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup end
 
 nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
@@ -131,6 +133,8 @@ nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>d  <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
@@ -293,28 +297,6 @@ function! LightlineFugitive()
         endif
         return ''
 endfunction
-
-" Function, courtesy of Marc Gallant, to make it easy
-" to switch between C and C++ header and source files
-" using fzf.
-function! FZFSameName(sink, pre_command, post_command)
-    let current_file_no_extension = expand("%:t:r")
-    let current_file_with_extension = expand("%:t")
-    execute a:pre_command
-    call fzf#run(fzf#wrap({
-          \ 'source': 'find -name ' . current_file_no_extension . '.* | grep -Ev *' . current_file_with_extension . '$',
-          \ 'options': '--select-1', 'sink': a:sink}))
-    execute a:post_command
-endfunction
-nnoremap <leader>of :call FZFSameName('e', '', '')<CR>
-nnoremap <leader>oh :call FZFSameName('e', 'wincmd h', '')<CR>
-nnoremap <leader>ol :call FZFSameName('e', 'wincmd l', '')<CR>
-nnoremap <leader>ok :call FZFSameName('e', 'wincmd k', '')<CR>
-nnoremap <leader>oj :call FZFSameName('e', 'wincmd j', '')<CR>
-nnoremap <leader>oH :call FZFSameName('leftabove vsplit', '', 'wincmd h')<CR>
-nnoremap <leader>oL :call FZFSameName('rightbelow vsplit', '', 'wincmd l')<CR>
-nnoremap <leader>oK :call FZFSameName('leftabove split', '', 'wincmd k')<CR>
-nnoremap <leader>oJ :call FZFSameName('rightbelow split', '', 'wincmd j')<CR>
 
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):
