@@ -36,15 +36,9 @@ Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 
-if has('nvim')
-  Plug 'neovim/nvim-lsp' " Configurations for neovim's language client
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -199,34 +193,6 @@ let g:cpp_class_scope_highlight = 1
 " And highlight member variables:
 let g:cpp_member_variable_highlight = 1
 
-" Turn off prompting to load .ycm_extra_conf.py:
-let g:ycm_confirm_extra_conf = 0
-nnoremap <F2> :YcmCompleter GoTo<CR>
-" Map to apply quick fix:
-nnoremap <F3> :YcmCompleter FixIt<CR>
-" Let clangd fully control code completion
-" let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_clangd_args = ['-log=verbose', '--pretty', '--background-index', '--completion-style=detailed']
-" Use the system version of clangd
-let g:ycm_clangd_binary_path = g:clang_path . '/bin/clangd'
-" Disable YCM for C and C++ files, which we use LanguageClient-neovim and
-" deoplete for
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar': 1,
-      \ 'notes': 1,
-      \ 'markdown': 1,
-      \ 'netrw': 1,
-      \ 'unite': 1,
-      \ 'text': 1,
-      \ 'vimwiki': 1,
-      \ 'pandoc': 1,
-      \ 'infolog': 1,
-      \ 'leaderf': 1,
-      \ 'mail': 1
-      \}
-let g:ycm_filetype_blacklist['c'] = 1
-let g:ycm_filetype_blacklist['cpp'] = 1
-
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -304,6 +270,7 @@ augroup FTOptions
     autocmd!
     autocmd FileType c,cpp,cs,java          setlocal commentstring=//\ %s
     autocmd FileType cmake                  setlocal commentstring=#\ %s
+    autocmd FileType matlab                 setlocal commentstring=%\ %s
 augroup END
 
 " Mapping to close the file in the current buffer:
