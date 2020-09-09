@@ -236,6 +236,11 @@ if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
 	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 fi
 
+which fd 2>&1 > /dev/null
+if [[ "0" == "$?" ]]; then
+	export FZF_DEFAULT_COMMAND='fd --type f'
+fi
+
 # Helper functions (move to lib)
 which patchelf 2>&1 > /dev/null
 if [[ "0" == "$?" ]]; then
