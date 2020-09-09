@@ -7,7 +7,7 @@ alias ls="ls -lAhtrFG --color=auto"
 
 tmp=$(which exa 2> /dev/null)
 if [[ "$?" == "0" ]]; then
-    alias ls="exa --header --long -s changed --tree --all --level=1"
+    alias ls="exa --header --long --sort=newest --tree --all --level=1"
 else
     alias ls="ls -lAhtrG --color=auto"
 fi
