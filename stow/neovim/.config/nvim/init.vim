@@ -111,7 +111,13 @@ nvim_lsp.clangd.setup{
 }
 
 nvim_lsp.cmake.setup{}
-nvim_lsp.pyls.setup{}
+
+-- We check if pyls is available before setting it up as
+-- a language server. Otherwise, we'll get errors when
+-- loading Python files.
+if 1 == vim.fn.executable("pyls") then
+  nvim_lsp.pyls.setup{on_attach=require'diagnostic'.on_attach}
+end
 EOF
 
 augroup lsp
