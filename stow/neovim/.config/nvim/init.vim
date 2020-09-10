@@ -94,10 +94,10 @@ if exists(':tnoremap')
 endif
 
 " Location of clang
-let g:clang_path = "/opt/llvm"
+let g:clang_path = '/opt/llvm'
 
 if has('win32')
-  let g:clang_path = "C:/Program Files/LLVM"
+  let g:clang_path = 'C:/Program Files/LLVM'
 endif
 
 " Set up the built-in language client
@@ -206,9 +206,9 @@ let g:cpp_member_variable_highlight = 1
 
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-n>'
 
 " Ensure the status line is always displayed:
 set laststatus=2
