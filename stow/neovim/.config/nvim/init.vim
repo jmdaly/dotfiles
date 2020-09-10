@@ -39,6 +39,7 @@ Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
+Plug 'nvim-lua/diagnostic-nvim'
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -103,9 +104,10 @@ endif
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
 
--- Set up clangd
+-- Set up clangd, also to use nvim-diagnostic
 nvim_lsp.clangd.setup{
-  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" },
+  on_attach=require'diagnostic'.on_attach
 }
 
 nvim_lsp.cmake.setup{}
@@ -127,8 +129,17 @@ nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>d  <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>m  <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+
+" Various mappings to open the corresponding header/source file in a new split
 nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oh <cmd>vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+
+nnoremap <silent> [z         <cmd>PrevDiagnosticCycle<CR>
+nnoremap <silent> ]z         <cmd>NextDiagnosticCycle<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
