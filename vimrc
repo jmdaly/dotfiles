@@ -654,6 +654,9 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
         \    fzf#vim#with_preview(), <bang>0)
    endif
 
+   noremap <leader>l :Lines<cr>
+   noremap <leader>w :Windows<cr>
+
    silent if has('unix') && g:dein_exists && dein#check_install('vim-fzf-repo') == 0
       noremap <leader>k :GRepoFiles<cr>
    endif
