@@ -121,6 +121,14 @@ augroup whitespace
    autocmd FileType bzl             setlocal ts=2 sw=2 sts=2 expandtab
 augroup END
 
+" Set the comment string for certain filetypes to
+" double slashes (used for vim-commentary):
+augroup FTOptions
+    autocmd!
+    autocmd FileType c,cpp,cs,java,bzl      setlocal commentstring=//\ %s
+    autocmd FileType cmake                  setlocal commentstring=#\ %s
+augroup END
+
 set nocompatible  " Dein also wants this
 
 " Enable true colour support:
@@ -217,7 +225,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('tmux-plugins/vim-tmux')
 
       " Plug to assist with commenting out blocks of text:
-      call dein#add('tomtom/tcomment_vim')
+      call dein#add('tpope/vim-commentary')
 
       " Tabular, align equals
       call dein#add('godlygeek/tabular')
