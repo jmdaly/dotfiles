@@ -41,6 +41,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 Plug 'nvim-lua/diagnostic-nvim'
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
 " tmux. This doesn't seem to work when running with
@@ -103,6 +107,8 @@ endif
 " Set up the built-in language client
 lua <<EOF
 local nvim_lsp = require'nvim_lsp'
+-- We check if a language server is available before setting it up.
+-- Otherwise, we'll get errors when loading files.
 
 -- Set up clangd, also to use nvim-diagnostic
 nvim_lsp.clangd.setup{
@@ -110,11 +116,10 @@ nvim_lsp.clangd.setup{
   on_attach=require'diagnostic'.on_attach
 }
 
-nvim_lsp.cmake.setup{}
+if 1 == vim.fn.executable("cmake-language-server") then
+  nvim_lsp.cmake.setup{}
+end
 
--- We check if pyls is available before setting it up as
--- a language server. Otherwise, we'll get errors when
--- loading Python files.
 if 1 == vim.fn.executable("pyls") then
   nvim_lsp.pyls.setup{on_attach=require'diagnostic'.on_attach}
 end
@@ -146,6 +151,12 @@ nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
 nnoremap <silent> [z         <cmd>PrevDiagnosticCycle<CR>
 nnoremap <silent> ]z         <cmd>NextDiagnosticCycle<CR>
+
+" Set up Telescope
+" nnoremap <leader>rf <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+" nnoremap <Leader>z <cmd>lua require'telescope.builtin'.find_files{ find_command = { "ag", "-g", "" } }<CR>
+" nnoremap <Leader>h <cmd>lua require'telescope.builtin'.command_history{}<CR>
+" nnoremap <Leader><Tab> <cmd>lua require'telescope.builtin'.buffers{}<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
