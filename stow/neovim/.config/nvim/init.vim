@@ -184,6 +184,7 @@ nmap <silent> ]w <Plug>(ale_next_wrap)
 " Key mappings for clang-format, to format source code.
 " map <expr> allows expansion of the variable for the
 " clang path.
+let g:clang_format_path = g:clang_path . '/bin/clang-format'
 map <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
