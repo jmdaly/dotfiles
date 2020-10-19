@@ -12,6 +12,7 @@
 	quotepath = false
 	commitGraph = true
 	commentchar = @
+	excludesfile = ~/dotfiles/gitignore
 [gc]
 	writeCommitGraph = true
 [merge]
