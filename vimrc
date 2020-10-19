@@ -101,7 +101,6 @@ augroup filetypes
    au BufNewFile,BufRead */Config.in         setlocal ft=make
    au BufNewFile,BufRead */Config.in.host    setlocal ft=make
 
-   au BufNewFile,BufRead *.bp                setlocal ft=bzl
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
@@ -113,20 +112,25 @@ augroup whitespace
    autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType cmake           setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=8 sw=8 sts=8 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType cs,cpp,c,sh,ps1,kotlin setlocal ts=4 sw=4 sts=4 expandtab
-   autocmd FileType bzl             setlocal ts=2 sw=2 sts=2 expandtab
+   autocmd FileType bzl,javascript  setlocal ts=4 sw=4 sts=4 expandtab
 augroup END
 
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):
 augroup FTOptions
     autocmd!
-    autocmd FileType c,cpp,cs,java,bzl      setlocal commentstring=//\ %s
-    autocmd FileType cmake                  setlocal commentstring=#\ %s
+    autocmd FileType c,cpp,cs,java,bzl,javascript setlocal commentstring=//\ %s
+    autocmd FileType cmake                        setlocal commentstring=#\ %s
+augroup END
+
+augroup SHORTCUTS
+    autocmd FileType c,cpp noremap cc :exec 's/\(\<'.expand('<cword>') .'\>\)/\/* \1 *\//g'<CR>
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -242,7 +246,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
 
       " Display trailing whitespace
       call dein#add('ntpeters/vim-better-whitespace')
-
 
       " call dein#add('editorconfig/editorconfig-vim')
 
@@ -442,7 +445,8 @@ silent if g:dein_exists && dein#check_install('YouCompleteMe') == 0
       \ 'comp'      : 1,
       \ 'qml'       : 1,
       \ 'tex'       : 1,
-      \ 'lcm'       : 1
+      \ 'lcm'       : 1,
+      \ 'bzl'       : 1
    \}
 
    let g:ycm_filetype_whitelist = {
@@ -707,7 +711,7 @@ inoremap <C-S> <Esc>:w<CR>
 nnoremap <leader>rt :silent! %s/\s\+$//e<CR>
 let @r='\rt'
 let @t=':try|silent! exe "norm! @r"|endtry|w|n'
-let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css']
+let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css', 'bzl']
 autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
 
 " Ignore whitespace on vimdiff
@@ -786,6 +790,9 @@ function! AppendModeline()
   let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
   call append(line("$"), l:modeline)
 endfunction
-nnoremap <silent> <Leader>wl :call AppendModeline()<CR>
+nnoremap <silent> <leader>wl :call AppendModeline()<CR>
+
+" Echo full file path
+command! Ep :echo expand('%:p')
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
