@@ -104,6 +104,8 @@ augroup filetypes
    au BufNewFile,BufRead Dockerfile*         setlocal ft=dockerfile
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
+   au BufNewFile,BufRead *.te                setlocal ft=sh
+   au BufNewFile,BufRead file_contexts       setlocal ft=sh
 augroup end
 
 augroup whitespace
@@ -130,7 +132,7 @@ augroup FTOptions
 augroup END
 
 augroup SHORTCUTS
-    autocmd FileType c,cpp noremap cc :exec 's/\(\<'.expand('<cword>') .'\>\)/\/* \1 *\//g'<CR>
+    autocmd FileType c,cpp noremap wcc :exec 's/\(\<'.expand('<cword>') .'\>\)/\/* \1 *\//g'<CR>
 augroup END
 
 set nocompatible  " Dein also wants this
@@ -145,27 +147,6 @@ endif
 "    Plug 'luochen1990/rainbow'
 "    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " endif
-
-" Javascript plugins to try
-" if
-   " Plug 'pangloss/vim-javascript'
-   "
-   " " General conceal settings. Will keep things concealed
-   " " even when your cursor is on top of them.
-   " Plug 'Wolfy87/vim-syntax-expand'
-   " set conceallevel=1
-   " set concealcursor=nvic
-   "
-   " " vim-javascript conceal settings.
-   " let g:javascript_conceal_function = "λ"
-   " let g:javascript_conceal_this = "@"
-   " let g:javascript_conceal_return = "<"
-   " let g:javascript_conceal_prototype = "#"
-" endif
-
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'scrooloose/syntastic' " <-- using jshint for syntax
-
 
 if g:dein_exists && (v:version >= 800 || has('nvim'))
    let &runtimepath.=',' . g:dein_plugin
