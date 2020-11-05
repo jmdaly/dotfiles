@@ -587,6 +587,7 @@ endif
 silent if g:dein_exists && dein#check_install('vim-rooter') == 0
    " Stop printing the cwd on write
    let rooter_silent_chdir=1
+   let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn']
 endif
 """"""""""""""""""" /rooter config """"""""""""""""""""""
 
@@ -775,5 +776,6 @@ nnoremap <silent> <leader>wl :call AppendModeline()<CR>
 
 " Echo full file path
 command! Ep :echo expand('%:p')
+command! Bp :!bpfmt -w %
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
