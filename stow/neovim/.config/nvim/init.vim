@@ -39,11 +39,10 @@ Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
-Plug 'nvim-lua/diagnostic-nvim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -106,23 +105,41 @@ endif
 
 " Set up the built-in language client
 lua <<EOF
-local nvim_lsp = require'nvim_lsp'
+local lspconfig = require'lspconfig'
 -- We check if a language server is available before setting it up.
 -- Otherwise, we'll get errors when loading files.
 
--- Set up clangd, also to use nvim-diagnostic
-nvim_lsp.clangd.setup{
-  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" },
-  on_attach=require'diagnostic'.on_attach
+-- Set up clangd
+lspconfig.clangd.setup{
+  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
 }
 
 if 1 == vim.fn.executable("cmake-language-server") then
-  nvim_lsp.cmake.setup{}
+  lspconfig.cmake.setup{}
 end
 
 if 1 == vim.fn.executable("pyls") then
-  nvim_lsp.pyls.setup{on_attach=require'diagnostic'.on_attach}
+  lspconfig.pyls.setup{}
 end
+
+-- Configure the way code diagnostics are displayed
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
 EOF
 
 augroup lsp
@@ -140,7 +157,7 @@ nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>m  <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " Various mappings to open the corresponding header/source file in a new split
 nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
@@ -149,8 +166,8 @@ nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
 nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
 nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
-nnoremap <silent> [z         <cmd>PrevDiagnosticCycle<CR>
-nnoremap <silent> ]z         <cmd>NextDiagnosticCycle<CR>
+nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Set up Telescope
 " nnoremap <leader>rf <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
