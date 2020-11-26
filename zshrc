@@ -174,7 +174,7 @@ if [[ $? == 1 ]]; then
 	modulecmd=/usr/bin/modulecmd
 	module() { eval `${modulecmd} $modules_shell $*`; }
 
-	#module use ${HOST}/.modulefiles
+	module use ${HOME}/.modulefiles
 fi;
 
 if [[ "khea" == "$(hostname)" ]]; then
@@ -188,13 +188,16 @@ if [[ "khea" == "$(hostname)" ]]; then
 		ford/sync
 	# module load bona
 
+elif [[ "ugc15x24r53" == "$(hostname)" ]]; then
+	# Ford Desktop
+	module load ford/sync
+
 elif [[ "sync-android" == "$(hostname)" ]]; then
 
 	module load sync
 
-elif [[ "WGC1CVCY3YS13" == "$(hostname)" || "WGC1CV2JWQP13" == "$(hostname)" ]]; then
-	# WGC1CVCY3YS13 = desktop (UPDATE)
-	# WGC1CVGY0YL33 = laptop
+elif [[ "WGC1CV2JWQP13" == "$(hostname)" ]]; then
+	# Ford Laptop
 	export WINHOME=/c/users/mruss100
 
 	export DISPLAY=:0
@@ -217,7 +220,7 @@ fi
 
 # The issue is that tmux copies my path, which includes the python venv, so
 # this test always passes once in tmux even when I'm not in a proper venv
-declare INVENV=$(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
+declare INVENV=$(python3 -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [[ "undefined" == "${VIRTUAL_ENV:-undefined}" ]]; then
 	declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
 	if [[ -e "${python_venv}/bin" ]]; then

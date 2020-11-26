@@ -88,6 +88,7 @@ function dotfiles_install_nvim()
   local home=${1:-${HOME}}
 
   # Setup nvim config (symlink entire directory)
+  mkdir -p "${home}/.config/"
   symlink "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
   symlink "${DOTFILES_DIR}/vimrc" "${home}/.config/nvim/init.vim"
   # ln -s "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
