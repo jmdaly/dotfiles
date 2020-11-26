@@ -1,3 +1,4 @@
 {
-	"index.threads": 4
+  "index.threads": 4,
+  "ccache.directory": "/tmp/ccls-cache"
 }

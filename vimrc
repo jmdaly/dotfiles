@@ -638,13 +638,13 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
       noremap <leader>g :Rg<cr>
       command! -nargs=* -bang GGrepIW
          \ call fzf#vim#grep(
-         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
+         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')).' '.getcwd(), 1,
          \   fzf#vim#with_preview(), <bang>0)
    else
       noremap <leader>g :Ag<cr>
       command! -nargs=* -bang GGrepIW
         \ call fzf#vim#grep(
-        \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')), 1,
+        \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')).' '.getcwd(), 1,
         \    fzf#vim#with_preview(), <bang>0)
    endif
 
@@ -776,6 +776,6 @@ nnoremap <silent> <leader>wl :call AppendModeline()<CR>
 
 " Echo full file path
 command! Ep :echo expand('%:p')
-command! Bp :!bpfmt -w %
+command! Bp :!/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt -w %
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
