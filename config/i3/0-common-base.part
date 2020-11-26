@@ -203,57 +203,6 @@ bindsym $mod+a focus parent
 bindsym $mod+Ctrl+greater move workspace to output right
 bindsym $mod+Ctrl+less move workspace to output left
 
-# Name the workspaces
-set $workspace1  "1: Social"
-set $workspace2  "2: Ford"
-set $workspace3  "3: Main"
-set $workspace4  "4"
-set $workspace5  "5"
-set $workspace6  "6"
-set $workspace7  "7"
-set $workspace8  "8"
-set $workspace9  "9: VPN"
-set $workspace10 "10: Media"
-# TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
-
-# Assign windows to a Workspace
-assign [class="qBittorrent"] $workspace10
-assign [class="Stoken-gui"] $workspace9
-
-# Put Workspaces on specific monitors
-# DVI-D-2 = Wide Dell
-# DVI-D-1 = Big Shimian
-# HDMI-1 = ASUS
-# Position these with arandr, save the file, then paste the contents here:
-exec --no-startup-id xrandr --output VGA-0 --off --output DVI-D-0 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-1 --mode 2560x1080 --pos 0x160 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 5120x360 --rotate normal
-workspace $workspace1 output DVI-D-1
-workspace $workspace2 output DVI-D-2
-workspace $workspace3 output HDMI-1
-
-# switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -310,7 +259,6 @@ exec "xset dpms 600"
 for_window [class="^.*"] border pixel 0
 gaps inner 7
 gaps outer 1
-
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

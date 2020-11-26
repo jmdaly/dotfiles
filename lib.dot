@@ -6,7 +6,7 @@ function symlink()
 {
   local -r target=${1}; shift
   local -r link=${1}; shift
-  local -r force=${1:-0}
+  local force=${1:-0}
 
   if [[ "0" != "${force}" ]]; then
     force=1
@@ -102,8 +102,6 @@ function dotfiles_install_tpm()
       mkdir -p "${home}/.tmux/plugins"
       git clone https://github.com/tmux-plugins/tpm "${home}/.tmux/plugins/tpm"
     fi
-  else
-    echo "TPM already exists, skipping"
   fi
 }
 
@@ -138,9 +136,8 @@ function dotfiles_install_zplug()
 function dotfiles_install_rofi()
 {
   local home=${1:-${HOME}}
-  local tmp=${2:-$(mktemp -d)}
 
-  symlink "${DOTFILES_DIR}/config/rofi" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/config/rofi" "${home}/.config/rofi"
 }
 
 function dotfiles_install_rofipass()
@@ -150,12 +147,31 @@ function dotfiles_install_rofipass()
   symlink "${DOTFILES_DIR}/config/rofi-pass" "${home}/.config/"
 }
 
+function assemble_i3_config()
+{
+    local parts_dir=${1:-${DOTFILES_DIR}/config/i3}
+    local dest=${2:-${HOME}/.config/i3/config}
+
+    local files=($(find "${parts_dir}" -iname '*-common*.part' -or -iname \*$(hostname)\*.part | sort))
+    if [[ -e "${dest}" ]]; then
+        rm "${dest}"
+    fi
+    for f in ${files[@]}; do
+        echo -e "\n\n#\n# Include: ${f}\n#\n" >> "${dest}"
+        cat "${f}" >> "${dest}"
+        echo -e "\n#\n# /Include: ${f}\n#\n\n" >> "${dest}"
+    done
+}
+
 function dotfiles_install_i3()
 {
   local home=${1:-${HOME}}
 
   if [[ "$(which i3)" != "" ]]; then
-    symlink "${DOTFILES_DIR}/config/i3" "${h}/.config/i3"
+    mkdir -p "${home}/.config/i3"
+    assemble_i3_config "${DOTFILES_DIR}/config/i3" "${home}/.config/i3/config"
+    mkdir -p "${home}/.screenlayout"
+    symlink "${DOTFILES_DIR}/screenlayout/$(hostname).sh" "${home}/.screenlayout/host.sh" 1
   fi
 
   if [[ ! -e "${home}/bin" ]]; then

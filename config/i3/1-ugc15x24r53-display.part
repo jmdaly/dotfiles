@@ -1,0 +1,25 @@
+# Name the workspaces
+set $workspace1  "1: Ford"
+set $workspace2  "2: Main"
+set $workspace3  "3: Coms"
+set $workspace4  "4"
+set $workspace5  "5"
+set $workspace6  "6"
+set $workspace7  "7"
+set $workspace8  "8"
+set $workspace9  "9: VPN"
+set $workspace10 "10"
+# TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
+
+# Assign windows to a Workspace
+# assign [class="Stoken-gui"] $workspace9
+
+# Put Workspaces on specific monitors
+# DP-0 = Older Dell
+# DP-6 = Middle Dell
+# DP-4 = Portrait Dell
+# Position these with arandr, save the file, then paste the contents here:
+exec --no-startup-id ~/.screenlayout/host.sh
+workspace $workspace1 output DP-6
+workspace $workspace2 output DP-0
+workspace $workspace3 output DP-4
