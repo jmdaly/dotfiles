@@ -20,6 +20,6 @@ set $workspace10 "10"
 # DP-4 = Portrait Dell
 # Position these with arandr, save the file, then paste the contents here:
 exec --no-startup-id ~/.screenlayout/host.sh
-workspace $workspace1 output DP-6
-workspace $workspace2 output DP-0
+workspace $workspace1 output DP-0
+workspace $workspace2 output DP-6
 workspace $workspace3 output DP-4

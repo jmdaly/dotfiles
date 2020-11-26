@@ -191,6 +191,7 @@ else
   echo "i3lock-fancy-rapid not installed"
 fi
 TOHERE
+  chmod u+x "${home}/bin/do_lock.sh"
 }
 
 function dotfiles_install_dein()
