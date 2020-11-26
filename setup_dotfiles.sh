@@ -165,8 +165,6 @@ fi
 # Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
 	dotfiles_install_tpm "${h}"
-else
-	echo "Skipped setting up tmux pluggins"
 fi
 
 if [[ "$(which screen)" != "" ]]; then
@@ -183,7 +181,7 @@ if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
 fi
 
 # Rust "procs" tool (better ps)
-dotfiles_install_cargo "${h}"
+dotfiles_install_proc "${h}"
 
 # .config/autokey
 
@@ -251,8 +249,6 @@ dotfiles_install_nvim "${h}"
 # Setup i3
 if [[ "1" != "${skip_i3}" ]]; then
 	dotfiles_install_i3 "${h}"
-else
-	echo "Skipped installing i3"
 fi
 
 # Setup pwsh on linux

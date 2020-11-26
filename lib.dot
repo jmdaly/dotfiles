@@ -43,7 +43,7 @@ function dotfiles_install_proc()
 {
   local home=${1:-${HOME}}
 
-  symlink "${DOTFILES_DIR}/config/procs" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/config/procs" "${home}/.config/procs"
 }
 
 function dotfiles_install_netrc()
@@ -89,10 +89,8 @@ function dotfiles_install_nvim()
 
   # Setup nvim config (symlink entire directory)
   mkdir -p "${home}/.config/"
-  symlink "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
+  symlink "${DOTFILES_DIR}/config/nvim" "${home}/.config/nvim"
   symlink "${DOTFILES_DIR}/vimrc" "${home}/.config/nvim/init.vim"
-  # ln -s "${DOTFILES_DIR}/config/nvim" "${home}/.config/"
-  # ln -s "${DOTFILES_DIR}/vimrc" "${home}/.config/nvim/init.vim"
 }
 
 function dotfiles_install_tpm()
@@ -157,7 +155,7 @@ function dotfiles_install_i3()
   local home=${1:-${HOME}}
 
   if [[ "$(which i3)" != "" ]]; then
-    symlink "${DOTFILES_DIR}/config/i3" "${h}/.config/"
+    symlink "${DOTFILES_DIR}/config/i3" "${h}/.config/i3"
   fi
 
   if [[ ! -e "${home}/bin" ]]; then
