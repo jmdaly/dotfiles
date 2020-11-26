@@ -17,6 +17,9 @@ fi
 if [[ "$(which dust 2> /dev/null)" != "" ]]; then
     alias du="dust"
 fi
+if [[ "$(which fd 2> /dev/null)" == "fd not found" && "$(which fdfind 2> /dev/null)" =~ fdfind$ ]]; then
+    alias fd="fdfind"
+fi
 
 tmp=$(which bat 2> /dev/null)
 if [[ "$?" == "0" ]]; then
