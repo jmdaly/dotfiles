@@ -183,7 +183,7 @@ if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
 fi
 
 # Rust "procs" tool (better ps)
-dotfiles_install_tpm "${h}"
+dotfiles_install_cargo "${h}"
 
 # .config/autokey
 
