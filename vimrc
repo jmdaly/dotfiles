@@ -578,7 +578,7 @@ silent if g:dein_exists && dein#check_install('ultisnips') == 0
 
    " Add to the runtime path so that custom
    " snippets can be found:
-   set rtp+=g:dotfiles
+   let &rtp .= ','.expand(g:dotfiles)
 endif
 """"""""""""""""""" /Ultisnips config """"""""""""""""""""""
 
@@ -625,7 +625,6 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    " This one searches all the files in the current git repo:
    noremap <c-k> :GitFiles<CR>
    noremap <leader><Tab> :Buffers<CR>
-   noremap <c-j> :Files<CR>
    noremap gsiw :GGrepIW<cr>
    noremap <leader>s :Snippets<cr>
    noremap <leader>c :Colors<cr>
