@@ -46,6 +46,14 @@ if [[ -e "${HOME}/bin/yubioath-desktop-5.0.1-linux.AppImage" ]]; then
    alias yubiAuth="${HOME}/bin/yubioath-desktop-5.0.1-linux.AppImage"
 fi
 
+function git_current_remote() {
+    # This is a hack for now, soon this should be changes to detect if we're in
+    # a repo workspace and use the python manifest tools to select the proper
+    # tool.
+    # Currently this returns this first remote
+    echo $(git remote | head -n 1)
+}
+
 # A better test would be whether I'm running zsh..
 if [[ $0 == *bash || "" != "${TRUE_HOST}" || "$(hostname)" == *siteground* ]]; then
    alias ga="git add"
@@ -68,12 +76,15 @@ if [[ "${HOME}" == *com.termux* ]]; then
    alias vim="nvim"
 fi
 alias gst="git status -uno -sb"
+alias rst="repo status"
 alias gd="git diff -w --color"
-
 alias rs="repo sync -j8 -q -c --no-tags"
+alias rl="repo sync -j8 -q -c --no-tags"
+alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'
+alias ggsup='git branch --set-upstream-to=$(git_current_remote)/$(git_current_branch)'
 
 function vigd() {
-    local remote=${1:-fnv}; shift
+    local remote=${1:-$(git_current_remote)}; shift
     local branch=${2:-$(git_current_branch)}
     vi -p $(git diff --name-only "${branch}" "$(git merge-base "${branch}" "${remote}")")
 }
@@ -95,5 +106,7 @@ alias gpg-reload="gpg-connect-agent reloadagent /bye"
 
 alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
+
+alias aos-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone-userdebug"
 
 # vim: ts=3 sts=0 sw=3 noet ft=sh ff=unix :
