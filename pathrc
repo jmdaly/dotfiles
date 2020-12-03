@@ -1,10 +1,31 @@
+# Path functions
+# https://stackoverflow.com/q/370047/1861346
+path_append  () {
+    path_remove $1;
+    if [[ -e "$1" ]]; then
+        export PATH="$PATH:$1";
+    fi
+}
+path_prepend () {
+    path_remove $1;
+    if [[ -e "$1" ]]; then
+        export PATH="$1:$PATH";
+    fi
+}
+path_remove  () { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'); }
+
+# Remove python virtual env from path.  This will be added back later, but if
+# it's in now it'll corrupt tests and proper venv settings due to tmux copying
+# my path
+export PATH=$(echo -n "${PATH}" | awk -v RS=: -v ORS=: '/virtualenv/ {next} {print}' | sed 's/:$//')
+
 # Build Run PATH
 # TODO See if I can replace this and the MANPATH with Environmental Modules.
 #      They're finally being updated again.
 if [[ -e ${HOME}/.linuxbrew ]]; then
 	export LINUXBREWHOME=${HOME}/.linuxbrew
-else
-	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
+elif [[ "$(id linuxbrew 2>/dev/null)" && -e ~linuxbrew/.linuxbrew ]]; then
+        export LINUXBREWHOME=~linuxbrew/.linuxbrew
 fi
 
 local -a dirs;
@@ -28,9 +49,7 @@ if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
 fi
 
 for d in $dirs; do
-	if [[ -e "${d}" ]]; then
-		export PATH="${d}:${PATH}"
-	fi
+    path_prepend "${d}"
 done
 
 # If pyenv exists, initialise it

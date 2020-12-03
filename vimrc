@@ -321,7 +321,8 @@ endif
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
    let g:colo_cache_file  = g:dotfiles . '/colos.json'
-   colo flatland
+   colo hydrangea
+   " colo flatland
    " colo argonaut
 endif
 
