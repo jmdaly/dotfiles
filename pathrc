@@ -1,18 +1,18 @@
 # Path functions
 # https://stackoverflow.com/q/370047/1861346
-path_append  () {
+path_append() {
     path_remove $1;
     if [[ -e "$1" ]]; then
         export PATH="$PATH:$1";
     fi
 }
-path_prepend () {
+path_prepend() {
     path_remove $1;
     if [[ -e "$1" ]]; then
         export PATH="$1:$PATH";
     fi
 }
-path_remove  () { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'); }
+path_remove() { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'); }
 
 # Remove python virtual env from path.  This will be added back later, but if
 # it's in now it'll corrupt tests and proper venv settings due to tmux copying
