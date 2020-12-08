@@ -4,3 +4,4 @@ compile_commands.json
 *.autosave
 .gnupg
 __pycache__
+.cache
