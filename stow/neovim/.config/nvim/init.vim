@@ -3,7 +3,6 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe' " YouCompleteMe
 Plug 'justinmk/vim-dirvish' " Path navigator for vim
 Plug 'octol/vim-cpp-enhanced-highlight' " Better C++ Syntax Highlighting:
 Plug 'SirVer/ultisnips' " Track the ultisnips engine.
@@ -37,13 +36,13 @@ Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
+Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " A plugin to apply vim-airline's theme to tmux, and then
 " to snapshot the theme so that it can be loaded up into
@@ -57,7 +56,15 @@ call plug#end()            " required
 
 " Add to the runtime path so that custom
 " snippets can be found:
-set rtp+=~/dotfiles
+set runtimepath+=~/dotfiles
+
+" Deoplete setup
+let g:deoplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+" Use the full fuzzy matcher, like YCM
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 
 " Enable true colour support:
 if has('termguicolors')
@@ -90,28 +97,83 @@ if exists(':tnoremap')
 endif
 
 " Location of clang
-let g:clang_path = "/opt/llvm"
+let g:clang_path = '/opt/llvm'
 
 if has('win32')
-  let g:clang_path = "C:/Program Files/LLVM"
+  let g:clang_path = 'C:/Program Files/LLVM'
 endif
 
-let g:LanguageClient_serverCommands = {
-\ 'cpp': [g:clang_path . '/bin/clangd', '--background-index'],
-\ 'c': [g:clang_path . '/bin/clangd', '--background-index'],
-\ }
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
-" Limits how often the LanguageClient talks to the
-" server, so it reduces CPU load and flashing.
-let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_diagnosticsEnable = 0
-nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
-nnoremap <leader>ds :call LanguageClient#textDocument_documentSymbol()<CR>
-nnoremap <leader>cm :call LanguageClient_contextMenu()<CR>
+" Set up the built-in language client
+lua <<EOF
+local lspconfig = require'lspconfig'
+-- We check if a language server is available before setting it up.
+-- Otherwise, we'll get errors when loading files.
+
+-- Set up clangd
+lspconfig.clangd.setup{
+  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+}
+
+if 1 == vim.fn.executable("cmake-language-server") then
+  lspconfig.cmake.setup{}
+end
+
+if 1 == vim.fn.executable("pyls") then
+  lspconfig.pyls.setup{}
+end
+
+-- Configure the way code diagnostics are displayed
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
+EOF
+
+augroup lsp
+  autocmd!
+  " Use LSP omni-completion in C and C++ files.
+  autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+  autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup end
+
+nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>ty <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
+" Various mappings to open the corresponding header/source file in a new split
+nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oh <cmd>vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+
+nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" Set up Telescope
+" nnoremap <leader>rf <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+" nnoremap <Leader>z <cmd>lua require'telescope.builtin'.find_files{ find_command = { "ag", "-g", "" } }<CR>
+" nnoremap <Leader>h <cmd>lua require'telescope.builtin'.command_history{}<CR>
+" nnoremap <Leader><Tab> <cmd>lua require'telescope.builtin'.buffers{}<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
@@ -139,6 +201,7 @@ nmap <silent> ]w <Plug>(ale_next_wrap)
 " Key mappings for clang-format, to format source code.
 " map <expr> allows expansion of the variable for the
 " clang path.
+let g:clang_format_path = g:clang_path . '/bin/clang-format'
 map <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
@@ -176,22 +239,11 @@ let g:cpp_class_scope_highlight = 1
 " And highlight member variables:
 let g:cpp_member_variable_highlight = 1
 
-" Turn off prompting to load .ycm_extra_conf.py:
-let g:ycm_confirm_extra_conf = 0
-nnoremap <F2> :YcmCompleter GoTo<CR>
-" Map to apply quick fix:
-nnoremap <F3> :YcmCompleter FixIt<CR>
-" Let clangd fully control code completion
-" let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_clangd_args = ['-log=verbose', '--pretty', '--background-index', '--completion-style=detailed']
-" Use the system version of clangd
-let g:ycm_clangd_binary_path = g:clang_path . '/bin/clangd'
-
 " Ultisnips config:
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsExpandTrigger='<c-j>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-n>'
 
 " Ensure the status line is always displayed:
 set laststatus=2
@@ -258,34 +310,13 @@ function! LightlineFugitive()
         return ''
 endfunction
 
-" Function, courtesy of Marc Gallant, to make it easy
-" to switch between C and C++ header and source files
-" using fzf.
-function! FZFSameName(sink, pre_command, post_command)
-    let current_file_no_extension = expand("%:t:r")
-    let current_file_with_extension = expand("%:t")
-    execute a:pre_command
-    call fzf#run(fzf#wrap({
-          \ 'source': 'find -name ' . current_file_no_extension . '.* | grep -Ev *' . current_file_with_extension . '$',
-          \ 'options': '--select-1', 'sink': a:sink}))
-    execute a:post_command
-endfunction
-nnoremap <leader>of :call FZFSameName('e', '', '')<CR>
-nnoremap <leader>oh :call FZFSameName('e', 'wincmd h', '')<CR>
-nnoremap <leader>ol :call FZFSameName('e', 'wincmd l', '')<CR>
-nnoremap <leader>ok :call FZFSameName('e', 'wincmd k', '')<CR>
-nnoremap <leader>oj :call FZFSameName('e', 'wincmd j', '')<CR>
-nnoremap <leader>oH :call FZFSameName('leftabove vsplit', '', 'wincmd h')<CR>
-nnoremap <leader>oL :call FZFSameName('rightbelow vsplit', '', 'wincmd l')<CR>
-nnoremap <leader>oK :call FZFSameName('leftabove split', '', 'wincmd k')<CR>
-nnoremap <leader>oJ :call FZFSameName('rightbelow split', '', 'wincmd j')<CR>
-
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):
 augroup FTOptions 
     autocmd!
     autocmd FileType c,cpp,cs,java          setlocal commentstring=//\ %s
     autocmd FileType cmake                  setlocal commentstring=#\ %s
+    autocmd FileType matlab                 setlocal commentstring=%\ %s
 augroup END
 
 " Mapping to close the file in the current buffer:
