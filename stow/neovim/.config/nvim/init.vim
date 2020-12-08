@@ -319,6 +319,11 @@ augroup FTOptions
     autocmd FileType matlab                 setlocal commentstring=%\ %s
 augroup END
 
+" Configure some unconventional filetypes
+augroup filetypes
+    autocmd BufNewFile,BufRead Jenkinsfile         setlocal filetype=groovy
+augroup end
+
 " Mapping to close the file in the current buffer:
 nnoremap <leader>q :Sayonara<cr>
 nnoremap <leader>Q :Sayonara!<cr>

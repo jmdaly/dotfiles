@@ -1,11 +1,23 @@
+[user]
+	name = John M Daly
+	email = jmdaly@gmail.com
+
+[includeIf "gitdir:~/workspaces/*"]
+	path = ~/dotfiles/gitconfig/gitconfig.cepton.inc
+[includeIf "gitdir:~/cepton/*"]
+	path = ~/dotfiles/gitconfig/gitconfig.cepton.inc
+
+[merge]
+	tool = vimdiff
+
 [color]
 	ui = auto
 
-[alias]
-lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [credential]
 	helper = cache --timeout=28800
 [push]
 	default = simple
 [core]
-	excludesfile = ~/dotfiles/gitignore
+	excludesfile = ~/dotfiles/gitconfig/gitignore
+[pull]
+	rebase = true

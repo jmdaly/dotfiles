@@ -2,3 +2,5 @@
 .ycm_extra_conf.*
 compile_commands.json
 *.autosave
+.gnupg
+__pycache__
