@@ -39,6 +39,10 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
+# Increase history file sizes, so we can store all history
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+
 # Disable docker and node versions in prompt. This sends
 # unexpected characters that lead to my shell
 # getting closed.
