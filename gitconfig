@@ -30,7 +30,5 @@
 	default = current
 [pull]
 	rebase = true
-[remote "origin"]
-	prune = true
-[remote "fnv"]
+[fetch]
 	prune = true
