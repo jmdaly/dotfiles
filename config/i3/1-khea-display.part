@@ -23,3 +23,6 @@ workspace $workspace3 output HDMI-1
 
 # Assign windows to a Workspace
 assign [class="qBittorrent"] $workspace10
+
+# I believe this is the alt-key switch I do for the Apple keyboard
+set $mod Mod4
