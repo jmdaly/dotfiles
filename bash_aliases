@@ -5,7 +5,10 @@ alias tclsh="rlwrap tclsh"
 function _exists() {
 	local bin=${1}
 	local -r _not_found_pattern="not found$"
-	if [[ "$(which "${1}" 2> /dev/null)" =~ ${_not_found_pattern} ]]; then
+    # ZSH only
+	# if [[ "$(which "${1}" 2> /dev/null)" =~ ${_not_found_pattern} ]]; then
+    which "${1}" 2>&1 > /dev/null
+	if [[ 0 != "$?" ]]; then
 		echo "0"
 	else
 		echo "1"
@@ -35,7 +38,7 @@ if [[ "$(_exists ag)" == 1 ]]; then
    alias ag="ag -iU --color-line-number 34 --color-path 31"
 fi
 alias vi=vim
-if [[ $(exists nvim) == 1 ]]; then
+if [[ $(_exists nvim) == 1 ]]; then
     alias vimdiff="vim -d"
 fi
 
