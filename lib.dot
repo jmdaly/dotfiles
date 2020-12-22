@@ -133,6 +133,23 @@ function dotfiles_install_zplug()
   fi
 }
 
+function dotfiles_install_zsh_autocomplete()
+{
+  local home=${1:-${HOME}}
+  local tmp=${2:-$(mktemp -d)}
+
+  work_dir="${DOTFILES_DIR:-${HOME}/dotfiles}/zsh-autocomplete"
+  if [[ ! -e "${work_dir}" ]]; then
+    echo "zsh-autocomplete submodule not loaded ( ${work_dir} ).  Please update the submodule first" >2
+    return
+  else
+    pushd .
+    cd "${work_dir}"
+    git fetch; git pull;
+    popd
+  fi
+}
+
 function dotfiles_install_rofi()
 {
   local home=${1:-${HOME}}

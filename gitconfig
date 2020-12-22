@@ -8,6 +8,8 @@
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/opt/**"]
 	path = ~/dotfiles/gitconfig.ford.inc
+[commit]
+        gpgsign = true
 [core]
 	quotepath = false
 	commitGraph = true

@@ -94,6 +94,13 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		# Syntax highlighting bundle.
 		zplug "zsh-users/zsh-syntax-highlighting"
 
+		# "marlonrichert/zsh-autocomplete"
+		# Doesn't work with zplug it seems (get an error indicating it's double sourced)
+		zsh_autocomplete_dir="${DOTFILES_DIR}/zsh-autocomplete"
+		if [[ -e "${zsh_autocomplete_dir}" ]]; then
+			source "${zsh_autocomplete_dir}/zsh-autocomplete.plugin.zsh"
+		fi
+
 		# Load the theme.
 		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
