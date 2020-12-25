@@ -112,4 +112,6 @@ alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
 alias aos-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone-userdebug"
 
+alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
+
 # vim: ts=3 sts=0 sw=3 noet ft=sh ff=unix :
