@@ -23,6 +23,31 @@ function symlink()
 }
 
 
+function install_powerline_fonts()
+{
+  local home=${1:-${HOME}}
+  local DFTMP="$(mktemp -d)"
+
+  if [[ $HOME != *com.termux* ]]; then
+    # For now at least, don't install powerline fonts on termux
+    mkdir -p "${home}/.local/share/fonts"
+    # Install fonts
+    if [[ "$(ls ${home}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
+      git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
+      ${DFTMP}/powerline_fonts/install.sh
+    fi
+    # apt-get install ttf-ancient-fonts -y
+    # install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
+
+    # Install nerd-fonts
+    if [[ "$(ls ${home}/.local/share/fonts | grep nerd | wc -l)" -lt 3 ]]; then
+      git clone https://github.com/ryanoasis/nerd-fonts "${DFTMP}/nerd_fonts"
+      ${DFTMP}/nerd_fonts/install.sh Meslo
+    fi
+  fi
+
+}
+
 function dotfiles_install_cargo()
 {
   local home=${1:-${HOME}}

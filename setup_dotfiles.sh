@@ -129,7 +129,7 @@ cd "${h}"
 
 #
 # TODO deal with Windows Terminal, PS, etc, files
-# TODO Create a function to mkdir and symlink.. I do that a lot here.
+# TODO Create a function to mkdir.. I do that a lot here.
 #
 
 #
@@ -139,26 +139,15 @@ files=(.bash_aliases)
 files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
 
 if [[ "1" != "${skip_powerline}" ]]; then
-	if [[ $HOME != *com.termux* ]]; then
-		# For now at least, don't install powerline fonts on termux
-		mkdir -p "${h}/.local/share/fonts"
-		# Install fonts
-		if [[ "$(ls ${h}/.local/share/fonts | grep powerline | wc -l)" -lt 3 ]]; then
-			git clone https://github.com/powerline/fonts.git "${DFTMP}/powerline_fonts"
-			${DFTMP}/powerline_fonts/install.sh
-		fi
-		# apt-get install ttf-ancient-fonts -y
-		# install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
-	fi
+	install_powerline_fonts
 else
 	echo "Skipped installing powerline fonts"
 fi
 
-
 if [[ "khea" == "$(hostname)" ]]; then
 	# Apple keyboard stuff.. Should detect keyboard rather than host, maybe later..
 	if [[ ! -e "${DOTFILES_DIR}/xinitrc" ]]; then
-		ln -s "${DOTFILES_DIR}/.xinitrc" "xinitrc"
+		symlink "xinitrc" "${DOTFILES_DIR}/.xinitrc"
 	fi
 fi
 
@@ -208,7 +197,7 @@ for f in ${files[@]}; do
 				cp -r "${DOTFILES_DIR}/${src}" "$f";
 			else
 				if [[ ! -L "$f" ]]; then
-					ln -s "${DOTFILES_DIR}/${src}" "$f"
+					symlink "$f" "${DOTFILES_DIR}/${src}"
 				fi
 			fi;
 		fi
@@ -254,12 +243,12 @@ fi
 # Setup pwsh on linux
 if [[ "$(which pwsh)" != "" ]]; then
 	mkdir -p "${h}/.config/powershell"
-	ln -s "${DOTFILES_DIR}/profile.ps1" "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+	symlink "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1" "${DOTFILES_DIR}/profile.ps1"
 fi
 
 # Setup module files
 if [[ -e "${DOTFILES_DIR}/.modulefiles" && ! -L "${h}/.modulerc" ]]; then
-	ln -s "${DOTFILES_DIR}/.modulefiles/.modulerc" "${h}/"
+	symlink "${h}/.modulerc" "${DOTFILES_DIR}/.modulefiles/.modulerc"
 fi
 
 # Install fzf
