@@ -11,6 +11,7 @@ fi
 
 declare -r DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 source "${DOTFILES_DIR}/detect_docker.dot"
+source "${DOTFILES_DIR}/rclib.dot"
 source "${DOTFILES_DIR}/lib.dot"
 
 ARGUMENT_STR_LIST=(
@@ -241,7 +242,7 @@ if [[ "1" != "${skip_i3}" ]]; then
 fi
 
 # Setup pwsh on linux
-if [[ "$(which pwsh)" != "" ]]; then
+if [[ "1" == "$(_exists pwsh)" ]]; then
 	mkdir -p "${h}/.config/powershell"
 	symlink "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1" "${DOTFILES_DIR}/profile.ps1"
 fi

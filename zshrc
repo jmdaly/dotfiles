@@ -2,7 +2,7 @@ if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
 	declare DOTFILES_DIR="${HOME}/dotfiles"
 fi
 
-source ${DOTFILES_DIR:-${HOME}/dotfiles}/rclib.sh
+source ${DOTFILES_DIR:-${HOME}/dotfiles}/rclib.dot
 
 if [[ "$(_exists gpgconf)" != "1" ]]; then
 	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
