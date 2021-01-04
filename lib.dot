@@ -25,8 +25,8 @@ function symlink()
 
 function install_powerline_fonts()
 {
-  local home=${1:-${HOME}}
-  local DFTMP="$(mktemp -d)"
+  local home=${1:-${HOME}}; shift
+  local DFTMP=${1:-"$(mktemp -d)"}
 
   if [[ $HOME != *com.termux* ]]; then
     # For now at least, don't install powerline fonts on termux
@@ -40,8 +40,10 @@ function install_powerline_fonts()
     # install http://input.fontbureau.com/download/  and http://larsenwork.com/monoid/ Hack the powerline font install script to mass install
 
     # Install nerd-fonts
-    if [[ "$(ls ${home}/.local/share/fonts | grep nerd | wc -l)" -lt 3 ]]; then
-      git clone https://github.com/ryanoasis/nerd-fonts "${DFTMP}/nerd_fonts"
+    if [[ "$(ls ${home}/.local/share/fonts | grep NerdFonts | wc -l)" -lt 3 ]]; then
+      if [[ ! -e "${DFTMP}/nerd_fonts/nerd_fonts" ]]; then
+        git clone https://github.com/ryanoasis/nerd-fonts "${DFTMP}/nerd_fonts"
+      fi
       ${DFTMP}/nerd_fonts/install.sh Meslo
     fi
   fi
