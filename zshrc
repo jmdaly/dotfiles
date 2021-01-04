@@ -1,6 +1,10 @@
-declare DOTFILES_DIR="${HOME}/dotfiles"
+if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
+	declare DOTFILES_DIR="${HOME}/dotfiles"
+fi
 
-if [[ $(which gpgconf 2> /dev/null) != "" ]]; then
+source ${DOTFILES_DIR:-${HOME}/dotfiles}/rclib.sh
+
+if [[ "$(_exists gpgconf)" != "1" ]]; then
 	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 	# it'll prompt for the SSH passphrase rather than the keyring passphrase
 	# https://eklitzke.org/using-gpg-agent-effectively
@@ -61,8 +65,8 @@ if [[ -e "${HOME}/.zplug" ]]; then
 
 	zplug "lib/history", from:oh-my-zsh              # Provides history management
 
-	if [[ -e /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
-		fpath+=('/home/linuxbrew/.linuxbrew/share/zsh/site-functions')
+	if [[ -e "${LINUXBREWHOME}/.linuxbrew/share/zsh/site-functions" ]]; then
+		fpath+=("${LINUXBREWHOME}/.linuxbrew/share/zsh/site-functions")
 	fi
 
 	if [[ "1" == "${WSL_VERSION}" ]]; then
@@ -94,12 +98,6 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		# Syntax highlighting bundle.
 		zplug "zsh-users/zsh-syntax-highlighting"
 
-		# "marlonrichert/zsh-autocomplete"
-		# Doesn't work with zplug it seems (get an error indicating it's double sourced)
-		zsh_autocomplete_dir="${DOTFILES_DIR}/zsh-autocomplete"
-		if [[ -e "${zsh_autocomplete_dir}" ]]; then
-			source "${zsh_autocomplete_dir}/zsh-autocomplete.plugin.zsh"
-		fi
 
 		# Load the theme.
 		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
@@ -110,8 +108,9 @@ if [[ -e "${HOME}/.zplug" ]]; then
 	fi
 
 	# Bookmarks in fzf
-	outp=$(which fzf)
-	zplug "uvaes/fzf-marks"
+	if [[ "1" == "$(_exists fzf)" ]]; then
+		zplug "uvaes/fzf-marks"
+	fi
 
 	# Install plugins if there are plugins that have not been installed
 	if ! zplug check --verbose; then
@@ -125,17 +124,12 @@ if [[ -e "${HOME}/.zplug" ]]; then
 	zplug load
 fi
 
-if [[ $(which urxvt 2>/dev/null) != "" ]]; then
+if [[ "1" == $(_exists urxvt) ]]; then
 	# Set the terminal to urxvt, for i3wm:
 	export TERMINAL=urxvt
 fi
 
-# Use VIM wherever possible.  The latter fixes colours in non-gvim
-if [[ $(which nvim 2>/dev/null) != "" ]]; then
-	export EDITOR=nvim
-else
-	export EDITOR=vim
-fi
+export EDITOR=vim
 
 # This doesn't seem to be applying when at the top
 setopt no_share_history
@@ -158,7 +152,9 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 # Alises
-if [ -e "${HOME}/.bash_aliases" ]; then
+if [ -e "${DOTFILES_DIR}/.bash_aliases" ]; then
+	source "${DOTFILES_DIR}/.bash_aliases"
+elif [ -e "${HOME}/.bash_aliases" ]; then
 	source "${HOME}/.bash_aliases"
 fi
 
@@ -236,8 +232,7 @@ if [[ 0 == "${INVENV}" ]]; then
 fi
 
 # direnv
-which direnv 2>&1 > /dev/null
-if [[ "0" == "$?" ]]; then
+if [[ "1" == "$(_exists direnv)" ]]; then
 	eval "$(direnv hook zsh)"
 fi
 
@@ -246,17 +241,8 @@ if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
 	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 fi
 
-which fd 2>&1 > /dev/null
-if [[ "0" == "$?" ]]; then
+if [[ "1" == "$(_exists fd)" || "1" == "$(_exists fdfind)" ]]; then
 	export FZF_DEFAULT_COMMAND='fd --type f'
-fi
-
-# Helper functions (move to lib)
-which patchelf 2>&1 > /dev/null
-if [[ "0" == "$?" ]]; then
-	function arm-ldd() { patchelf --print-needed $1 }
-else
-	function arm-ldd() { readelf -d $1 | grep "\(NEEDED\)" | sed -r "s/.*\[(.*)\]/\1/" }
 fi
 
 export SDKMAN_DIR="${HOME}/.sdkman"
