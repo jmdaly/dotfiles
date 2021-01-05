@@ -8,7 +8,6 @@ fi
 alias df="df -h"
 alias tclsh="rlwrap tclsh"
 
-
 if [[ "$(_exists exa)" == 1 ]]; then
    alias ls="exa --header --long --sort=newest --tree --all --level=1"
 else
