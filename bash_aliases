@@ -1,19 +1,13 @@
-alias less="less -R -I --tabs=2"
+if [[ "undefined" == "${DOTFILES_DIR:-undefined}" ]]; then
+    export DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+fi
+if [[ -e "${DOTFILES_DIR}/rclib.dot" ]]; then
+    source "${DOTFILES_DIR}/rclib.dot"
+fi
+
 alias df="df -h"
 alias tclsh="rlwrap tclsh"
 
-function _exists() {
-	local bin=${1}
-	local -r _not_found_pattern="not found$"
-    # ZSH only
-	# if [[ "$(which "${1}" 2> /dev/null)" =~ ${_not_found_pattern} ]]; then
-    which "${1}" 2>&1 > /dev/null
-	if [[ 0 != "$?" ]]; then
-		echo "0"
-	else
-		echo "1"
-	fi
-}
 
 if [[ "$(_exists exa)" == 1 ]]; then
    alias ls="exa --header --long --sort=newest --tree --all --level=1"
@@ -31,8 +25,11 @@ if [[ "$(_exists fd)" == 0 && "$(_exists fdfind)" == 1 ]]; then
 fi
 if [[ "$(_exists bat)" == 0 && $(_exists batcat) == 1 ]]; then
    alias cat=batcat
+   alias less=batcat
 elif [[ "$(_exists bat)" == 1 ]]; then
    alias cat=bat
+else
+   alias less="less -R -I --tabs=2"
 fi
 if [[ "$(_exists ag)" == 1 ]]; then
    alias ag="ag -iU --color-line-number 34 --color-path 31"
@@ -80,7 +77,9 @@ if [[ "${HOME}" == *com.termux* ]]; then
 fi
 alias gst="git status -uno -sb"
 alias rst="repo status"
-alias gd="git diff -w --color"
+alias gd="git diff -w --color --word-diff"
+alias gdrm="git diff $(git_current_remote)/master"
+alias gdr="git diff $(git_current_remote)/$(git_current_branch)"
 alias rs="repo sync -j8 -q -c --no-tags"
 alias rl="repo sync -j8 -q -c --no-tags"
 alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'

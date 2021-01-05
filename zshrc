@@ -1,5 +1,5 @@
 if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
-	declare DOTFILES_DIR="${HOME}/dotfiles"
+	export DOTFILES_DIR="${HOME}/dotfiles"
 fi
 
 source ${DOTFILES_DIR:-${HOME}/dotfiles}/rclib.dot
