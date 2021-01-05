@@ -77,8 +77,8 @@ fi
 alias gst="git status -uno -sb"
 alias rst="repo status"
 alias gd="git diff -w --color --word-diff"
-alias gdrm="git diff $(git_current_remote)/master"
-alias gdr="git diff $(git_current_remote)/$(git_current_branch)"
+alias gdrm='git diff $(git_current_remote)/master'
+alias gdr='git diff $(git_current_remote)/$(git_current_branch)'
 alias rs="repo sync -j8 -q -c --no-tags"
 alias rl="repo sync -j8 -q -c --no-tags"
 alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'

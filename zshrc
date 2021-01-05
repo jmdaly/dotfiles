@@ -2,7 +2,9 @@ if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
 	export DOTFILES_DIR="${HOME}/dotfiles"
 fi
 
-source ${DOTFILES_DIR:-${HOME}/dotfiles}/rclib.dot
+if [[ -e "${DOTFILES_DIR}/rclib.dot" ]]; then
+	source "${DOTFILES_DIR}/rclib.dot"
+fi
 
 if [[ "$(_exists gpgconf)" != "1" ]]; then
 	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
@@ -151,7 +153,7 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
-# Alises
+# Aliases
 if [ -e "${DOTFILES_DIR}/.bash_aliases" ]; then
 	source "${DOTFILES_DIR}/.bash_aliases"
 elif [ -e "${HOME}/.bash_aliases" ]; then

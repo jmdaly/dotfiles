@@ -5142,9 +5142,6 @@
       "defaultVariant": null,
       "name": "greens",
       "path": "github.com/flazz/vim-colorschemes/colors",
-      "tags": [
-        "whitelist"
-      ],
       "variants": []
     },
     {
