@@ -191,6 +191,7 @@ endif
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy', 'pclint'],
+\   'python': ['pyls', 'flake8'],
 \}
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
 let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'

@@ -72,6 +72,11 @@ if type ag > /dev/null; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
 fi
 
+# If lsd is available, use it in place of ls
+if type lsd > /dev/null; then
+  alias ls='lsd'
+fi
+
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
 
