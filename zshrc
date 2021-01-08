@@ -102,26 +102,11 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		zplug "plugins/vi-mode", from:oh-my-zsh
 		zplug "akarzim/zsh-docker-aliases"
 
-		if [[ "1" == "1" ]]; then
-			zplug romkatv/powerlevel10k, as:theme, depth:1
+		# Really fast theme, configured at the head and tail of zshrc
+		zplug romkatv/powerlevel10k, as:theme, depth:1
 
-			# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-			[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-		else
-
-		zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
-
-		# Syntax highlighting bundle.
+		# Syntax highlighting bundle (syntax highlights commands as typing).
 		zplug "zsh-users/zsh-syntax-highlighting"
-
-
-		# Load the theme.
-		# zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-		# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-		DRACULA_DISPLAY_TIME=1
-		DRACULA_DISPLAY_CONTEXT=1
-		zplug "dracula/zsh", use:dracula.zsh-theme
-		fi
 	fi
 
 	# Bookmarks in fzf
@@ -266,5 +251,8 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
