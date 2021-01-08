@@ -137,7 +137,7 @@ cd "${h}"
 # Declare the files that we always want to copy over.
 declare -a files;
 files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig)
+files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig .p10k.zsh)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	install_powerline_fonts
