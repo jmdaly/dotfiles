@@ -70,6 +70,7 @@ fi
 # If bat is available, set the theme
 if type bat > /dev/null; then
   export BAT_THEME="Nord"
+  export COLORTERM=24bit
   alias cat='bat'
 fi
 
