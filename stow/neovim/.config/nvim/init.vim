@@ -40,18 +40,6 @@ Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete-lsp' " deoplete source for the neovim language server
 
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-" A plugin to apply vim-airline's theme to tmux, and then
-" to snapshot the theme so that it can be loaded up into
-" tmux. This doesn't seem to work when running with
-" neovim in a truecolour terminal. I'm commenting it out,
-" so that next time I need to update my tmux theme, I can
-" re-enable this and use it in a 256 colour terminal.
-" Plug 'edkolev/tmuxline.vim'
-
 call plug#end()            " required
 
 " Add to the runtime path so that custom
@@ -168,12 +156,6 @@ nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
 nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
-" Set up Telescope
-" nnoremap <leader>rf <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
-" nnoremap <Leader>z <cmd>lua require'telescope.builtin'.find_files{ find_command = { "ag", "-g", "" } }<CR>
-" nnoremap <Leader>h <cmd>lua require'telescope.builtin'.command_history{}<CR>
-" nnoremap <Leader><Tab> <cmd>lua require'telescope.builtin'.buffers{}<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
