@@ -67,6 +67,11 @@ if type icecc > /dev/null; then
   export CCACHE_PREFIX="icecc"
 fi
 
+# If bat is available, set the theme
+if type bat > /dev/null; then
+  export BAT_THEME="Nord"
+fi
+
 # Set fzf to use ag if ag is available:
 if type ag > /dev/null; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
