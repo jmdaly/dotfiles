@@ -70,6 +70,7 @@ fi
 # If bat is available, set the theme
 if type bat > /dev/null; then
   export BAT_THEME="Nord"
+  alias cat='bat'
 fi
 
 # Set fzf to use ag if ag is available:
