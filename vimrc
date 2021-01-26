@@ -105,6 +105,7 @@ augroup filetypes
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
    au BufNewFile,BufRead *.te                setlocal ft=sh
+   au BufNewFile,BufRead *.rc                setlocal ft=sh
    au BufNewFile,BufRead file_contexts       setlocal ft=sh
 augroup end
 

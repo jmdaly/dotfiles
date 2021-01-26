@@ -189,8 +189,7 @@ if [[ "khea" == "$(hostname)" ]]; then
 	# export DEFAULT_PYTHON_VENV="ford"
 
 	# module load modules
-	module load khea \
-		ford/sync
+	module load khea
 	# module load bona
 
 elif [[ "ugc15x24r53" == "$(hostname)" ]]; then

@@ -84,6 +84,11 @@ alias rl="repo sync -j8 -q -c --no-tags"
 alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'
 alias ggsup='git branch --set-upstream-to=$(git_current_remote)/$(git_current_branch)'
 
+function rebase_to_master() {
+	git fetch $(git_current_remote) && \
+	git rebase $(git_current_remote)/master
+}
+
 function vigd() {
     local remote=${1:-$(git_current_remote)}; shift
     local branch=${2:-$(git_current_branch)}
@@ -111,5 +116,7 @@ alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 alias aos-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone-userdebug"
 
 alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
+
+alias reboot="echo no........"
 
 # vim: ts=3 sts=0 sw=3 noet ft=sh ff=unix :

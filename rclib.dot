@@ -17,3 +17,8 @@ if [[ "1" == "$(which patchelf)" ]]; then
 else
 	function arm-ldd() { readelf -d $1 | grep "\(NEEDED\)" | sed -r "s/.*\[(.*)\]/\1/" }
 fi
+
+function a2a() {
+	adb wait-for-device pull /sys/fs/selinux/policy
+	adb logcat -b all -d | audit2allow -p policy
+}
