@@ -246,6 +246,8 @@ if [[ "1" == "$(_exists fd)" || "1" == "$(_exists fdfind)" ]]; then
 	export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 
+export RIPGREP_CONFIG_PATH="${DOTFILES_DIR}/ripgreprc"
+
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
 
