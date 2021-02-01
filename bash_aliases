@@ -95,6 +95,10 @@ function vigd() {
     vi -p $(git diff --name-only "${branch}" "$(git merge-base "${branch}" "${remote}")")
 }
 
+function repo_init_aos() {
+	repo init -u ssh://git@github.ford.com/AOS/manifest -m aos-development.xml --config --partial-clone $@
+}
+
 # alias glog="git log --follow --name-status"
 
 if [[ -e ~/.bash_aliases.local ]]; then
@@ -114,6 +118,7 @@ alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
 alias aos-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone-userdebug"
+alias aos-gas-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone_gas-userdebug"
 
 alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
 
