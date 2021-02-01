@@ -154,8 +154,8 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 # Aliases
-if [ -e "${DOTFILES_DIR}/.bash_aliases" ]; then
-	source "${DOTFILES_DIR}/.bash_aliases"
+if [ -e "${DOTFILES_DIR}/bash_aliases" ]; then
+	source "${DOTFILES_DIR}/bash_aliases"
 elif [ -e "${HOME}/.bash_aliases" ]; then
 	source "${HOME}/.bash_aliases"
 fi
