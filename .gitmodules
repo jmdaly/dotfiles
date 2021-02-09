@@ -17,6 +17,3 @@
 	master = master
 [modulefiles "ford"]
 	master = master
-[submodule "zsh-autocomplete"]
-	path = zsh-autocomplete
-	url = https://github.com/marlonrichert/zsh-autocomplete.git
