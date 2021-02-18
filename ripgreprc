@@ -14,5 +14,8 @@ rc:*.rc
 --type-add
 se:include:te,fc,tem,rc
 
+--type-add
+bp:*.bp
+
 # Using glob patterns to include/exclude files or folders
 --glob=!git/*
