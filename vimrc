@@ -133,7 +133,8 @@ augroup FTOptions
 augroup END
 
 augroup SHORTCUTS
-    autocmd FileType c,cpp noremap wcc :exec 's/\(\<'.expand('<cword>') .'\>\)/\/* \1 *\//g'<CR>
+   " Comment out parameter
+   autocmd FileType c,cpp noremap wcc :exec 's/\(\<'.expand('<cword>') .'\>\)/\/* \1 *\//g'<CR>
 augroup END
 
 set nocompatible  " Dein also wants this
