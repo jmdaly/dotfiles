@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " Use space as leader:
 let mapleader = "\<Space>"
 
@@ -62,6 +63,9 @@ endif
 " Set a colour scheme for vim:
 silent! colorscheme nord
 set background=dark
+
+" Make the comments Italics
+highlight Comment cterm=italic gui=italic
 
 " Turn line numbers on:
 set number
