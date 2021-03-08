@@ -308,7 +308,7 @@ augroup END
 
 " Configure some unconventional filetypes
 augroup filetypes
-    autocmd BufNewFile,BufRead Jenkinsfile         setlocal filetype=groovy
+    autocmd BufNewFile,BufRead Jenkinsfile*        setlocal filetype=groovy
 augroup end
 
 " Mapping to close the file in the current buffer:
