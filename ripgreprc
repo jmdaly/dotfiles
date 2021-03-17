@@ -6,13 +6,16 @@ te:*.te
 fc:file_contexts
 
 --type-add
+pc:property_contexts
+
+--type-add
 tem:te_macros
 
 --type-add
 rc:*.rc
 
 --type-add
-se:include:te,fc,tem,rc
+se:include:te,fc,pc,tem,rc
 
 --type-add
 bp:*.bp

@@ -1,7 +1,7 @@
 [user]
 	name = Matthew Russell
 	email = matthew.g.russell@gmail.com
-	signingkey = 9DADF75304599BD8
+	signingkey = DF94887FB3F0726EE0606F2EDE8210182994327F
 [includeIf "gitdir:~/workspace/ford/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/src/**"]

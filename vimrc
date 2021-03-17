@@ -105,7 +105,8 @@ augroup filetypes
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
    au BufNewFile,BufRead *.te                setlocal ft=sh
-   au BufNewFile,BufRead *.rc                setlocal ft=sh
+   au BufNewFile,BufRead *.fs                setlocal ft=sh
+   au BufNewFile,BufRead */aos/*.rc          setlocal ft=sh
    au BufNewFile,BufRead file_contexts       setlocal ft=sh
 augroup end
 
@@ -118,6 +119,7 @@ augroup whitespace
    autocmd FileType cmake           setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType make            setlocal ts=8 sw=8 sts=8 noet ai
    autocmd FileType fidl            setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType aidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType cs,cpp,c,sh,ps1,kotlin setlocal ts=4 sw=4 sts=4 expandtab
@@ -130,6 +132,7 @@ augroup FTOptions
     autocmd!
     autocmd FileType c,cpp,cs,java,bzl,javascript setlocal commentstring=//\ %s
     autocmd FileType cmake                        setlocal commentstring=#\ %s
+    autocmd FileType sh                           setlocal commentstring=#\ %s
 augroup END
 
 augroup SHORTCUTS
