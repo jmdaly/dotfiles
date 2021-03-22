@@ -122,7 +122,7 @@ augroup whitespace
    autocmd FileType aidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
-   autocmd FileType cs,cpp,c,sh,ps1,kotlin setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType cs,cpp,c,sh,ps1,kotlin,java setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType bzl,javascript  setlocal ts=4 sw=4 sts=4 expandtab
 augroup END
 

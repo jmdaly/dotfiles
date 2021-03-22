@@ -117,8 +117,12 @@ alias gpg-reload="gpg-connect-agent reloadagent /bye"
 alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
-alias aos-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone-userdebug"
-alias aos-gas-setup="source /opt/android-src/aos/build/envsetup.sh && lunch alverstone_gas-userdebug"
+if [[ "undefined" == "${ANDROID_BUILD_TOP:-undefined}" ]]; then
+    export ANDROID_BUILD_TOP=/opt/android-src/aos
+fi
+alias aos-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch alverstone-userdebug"
+alias aos-gas-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch alverstone_gas-userdebug"
+alias aos-em-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch aos_emulator_car_x86_64-userdebug"
 
 alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
 
