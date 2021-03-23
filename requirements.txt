@@ -1,0 +1,3 @@
+python-language-server
+neovim
+PyGithub>=1.54

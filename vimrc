@@ -243,22 +243,9 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       if !exists('g:gui_oni') && has('nvim') && is_termux==0
          call dein#add('vimlab/split-term.vim')
 
-         " Requires curl -sL install-node.now.sh/lts | bash
-         call dein#add('neoclide/coc.nvim', { 'branch': 'release' })
-
-         " ccls
-         call dein#add('autozimu/LanguageClient-neovim',
-             \ {
-             \   'rev': 'next',
-             \   'build': 'bash install.sh',
-             \ }
-         \ )
-
-         call dein#add('Valloric/YouCompleteMe',
-            \ {
-            \    'build': 'bash ./install.py --clang-completer --clang-tidy'
-            \ },
-         \ )
+         call dein#add('neovim/nvim-lspconfig')
+         call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+         call dein#add('Shougo/deoplete-lsp') " deoplete source for the neovim language server
       endif
 
       " Syntax highlighting for kotlin
@@ -350,7 +337,90 @@ endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+function! LightlineReadonly()
+        return &readonly ? '' : ''
+endfunction
+
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
+
+
+"""""""""""""""""""""" LSP """"""""""""""""""""""""
+let g:clang_path = '/usr'
+
+" Set up the built-in language client
+lua <<EOF
+local lspconfig = require'lspconfig'
+-- We check if a language server is available before setting it up.
+-- Otherwise, we'll get errors when loading files.
+
+-- Set up clangd
+lspconfig.clangd.setup{
+  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+}
+
+if 1 == vim.fn.executable("cmake-language-server") then
+  lspconfig.cmake.setup{}
+end
+
+require'lspconfig'.kotlin_language_server.setup{}
+if 1 == vim.fn.executable("kotlin-language-server") then
+  lspconfig.kotlin.setup{}
+end
+
+if 1 == vim.fn.executable("pyls") then
+  lspconfig.pyls.setup{}
+end
+
+-- Configure the way code diagnostics are displayed
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- This will disable virtual text, like doing:
+    -- let g:diagnostic_enable_virtual_text = 0
+    virtual_text = false,
+
+    -- This is similar to:
+    -- let g:diagnostic_show_sign = 1
+    -- To configure sign display,
+    --  see: ":help vim.lsp.diagnostic.set_signs()"
+    signs = true,
+
+    -- This is similar to:
+    -- "let g:diagnostic_insert_delay = 1"
+    update_in_insert = false,
+  }
+)
+EOF
+
+augroup lsp
+  autocmd!
+  " Use LSP omni-completion in C and C++ files.
+  autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+  autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+augroup end
+
+nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>ty <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
+" Various mappings to open the corresponding header/source file in a new split
+nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oh <cmd>vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
+nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
+
+nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+"""""""""""""""""""""" /LSP """"""""""""""""""""""""
+
 
 """""""""""""""""""""""""""" ALE """""""""""""""""""""""""
 silent if g:dein_exists && dein#check_install('ale') == 0
@@ -362,16 +432,6 @@ silent if g:dein_exists && dein#check_install('ale') == 0
       \ 'cpp': ['clang-format'],
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \}
-
-   " if 1 == g:buildroot
-   "    echom "Adding extra options"
-   let br_extra_options=
-      \ "-target aarch64-unknown-nto-qnx7.0.0
-      \ -fsyntax-only -mlittle-endian
-      \ -isystem ".$QNX_HOST."/usr/lib/gcc/aarch64-unknown-nto-qnx7.0.0/5.4.0/include
-      \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include/c++/v1
-      \ -isystem ".$QNX_HOST."/usr/aarch64-buildroot-nto-qnx/sysroot/usr/include"
-   let g:ale_cpp_clangtidy_extra_options='-- ' . br_extra_options
 
    " Set up mapping to move between errors
    nmap <silent> [w <Plug>(ale_previous_wrap)
@@ -393,180 +453,6 @@ if !has('nvim')
    set autoread
 endif
 
-""""""""""""""""""""""" YCM Config """"""""""""""""""""""""
-silent if g:dein_exists && dein#check_install('YouCompleteMe') == 0
-   " Let YouCompleteMe use tag files for completion as well:
-   let g:ycm_collect_identifiers_from_tags_files = 1
-
-   " Turn off prompting to load .ycm_extra_conf.py:
-   let g:ycm_confirm_extra_conf = 0
-
-   " Compile the file
-   nnoremap <leader>y :YcmDiag<CR>
-
-   " Ignore some files
-   let g:ycm_filetype_blacklist = {
-      \ 'tagbar'    : 1,
-      \ 'qf'        : 1,
-      \ 'notes'     : 1,
-      \ 'markdown'  : 1,
-      \ 'unite'     : 1,
-      \ 'text'      : 1,
-      \ 'vimwiki'   : 1,
-      \ 'pandoc'    : 1,
-      \ 'infolog'   : 1,
-      \ 'vim'       : 1,
-      \ 'gitcommit' : 1,
-      \ 'gitrebase' : 1,
-      \ 'cmake'     : 1,
-      \ 'mail'      : 1,
-      \ 'frag'      : 1,
-      \ 'vert'      : 1,
-      \ 'comp'      : 1,
-      \ 'qml'       : 1,
-      \ 'tex'       : 1,
-      \ 'lcm'       : 1,
-      \ 'bzl'       : 1
-   \}
-
-   let g:ycm_filetype_whitelist = {
-      \ 'javascript': 1,
-      \ 'python'    : 1,
-      \ 'css'       : 1,
-      \ 'cpp'       : 1,
-      \ 'cs'        : 1,
-      \ 'php'       : 1,
-      \ 'fortran'   : 1,
-      \ 'xml'       : 1,
-      \ 'html'      : 1
-   \}
-
-   " Ignore large files (BONA db's for instance)
-   let g:ycm_disable_for_files_larger_than_kb = 300
-
-   " Shut off preview window on PHP files
-   au BufNewFile,BufRead *.php let g:ycm_add_preview_to_completeopt=0
-
-   if exists('g:python_host_prog')
-      let g:interpreter_path = g:python_host_prog
-   endif
-
-   map <F9> :YcmCompleter FixIt<CR>
-endif
-"""""""""""""""""""""" /YCM Config """"""""""""""""""""""""
-
-""""""""""""""""""" OmniSharp Config """"""""""""""""""""""
-silent if g:dein_exists && dein#check_install('omnisharp-vim') == 0
-
-   if 1==is_winbash
-      " WSL config
-      let g:OmniSharp_server_path = $WINHOME .'/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/win7-x64/OmniSharp.exe'
-      let g:OmniSharp_translate_cygwin_wsl = 1
-   else
-      " Linux config
-      let g:OmniSharp_server_use_mono = 1
-   endif
-
-   " Use stdio in vim to be asynchronous
-   let g:OmniSharp_server_stdio = 1
-
-   " Use fzf.vim
-   let g:OmniSharp_selector_ui = 'fzf'
-   " Tell ALE to use OmniSharp for linting C# files, and no other linters.
-   let g:ale_linters = { 'cs': ['OmniSharp'] }
-
-   " Debug
-   " let g:OmniSharp_loglevel = 'debug'
-   " let g:OmniSharp_proc_debug = 1
-
-   " Update semantic highlighting after all text changes
-   let g:OmniSharp_highlight_types = 3
-   " Update semantic highlighting on BufEnter and InsertLeave
-   " let g:OmniSharp_highlight_types = 2
-
-   " Copied from https://github.com/OmniSharp/omnisharp-vim
-   augroup omnisharp_commands
-       autocmd!
-
-       " Show type information automatically when the cursor stops moving
-       autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-       " The following commands are contextual, based on the cursor position.
-       autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>rj :OmniSharpFindImplementations<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
-
-       " Finds members in the current buffer
-       autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
-
-       autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
-       autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
-       autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
-       autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
-
-       " " Navigate up and down by method/property/field
-       " autocmd FileType cs nnoremap <buffer> <C-k> :OmniSharpNavigateUp<CR>
-       " autocmd FileType cs nnoremap <buffer> <C-j> :OmniSharpNavigateDown<CR>
-
-       " Find all code errors/warnings for the current solution and populate the quickfix window
-       autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
-   augroup END
-
-   " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-   nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
-   " Run code actions with text selected in visual mode to extract method
-   xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
-
-   " Rename with dialog
-   nnoremap <Leader>nm :OmniSharpRename<CR>
-   nnoremap <F2> :OmniSharpRename<CR>
-   " Rename without dialog - with cursor on the symbol to rename: `:Rename newname`
-   command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
-
-   nnoremap <Leader>cf :OmniSharpCodeFormat<CR>
-
-   " Start the omnisharp server for the current solution
-   nnoremap <Leader>ss :OmniSharpStartServer<CR>
-   nnoremap <Leader>sp :OmniSharpStopServer<CR>
-
-   " Enable snippet completion
-   " let g:OmniSharp_want_snippet=1
-
-endif
-""""""""""""""""""" /OmniSharp Config """""""""""""""""""""
-
-
-""""""""""""""""" LanguageClient Config """""""""""""""""""
-silent if has('unix') && g:dein_exists && dein#check_install('LanguageClient-neovim') == 0
-   let g:LanguageClient_serverCommands = {
-      \ 'cpp': [
-         \ 'ccls',
-         \ '--log-file=/tmp/cq.log',
-         \ '-v=1'
-      \ ],
-      \ 'kotlin': [
-         \ "kotlin-language-server"
-      \ ]
-   \ }
-   let g:LanguageClient_loadSettings = 1
-   let g:LanguageClient_settingsPath = g:dotfiles . '/ccls_settings.json'
-   " Limits how often the LanguageClient talks to the
-   " server, so it reduces CPU load and flashing.
-   let g:LanguageClient_changeThrottle = 0.5
-   let g:LanguageClient_diagnosticsEnable = 0
-   nnoremap <leader>ty :call LanguageClient#textDocument_hover()<CR>
-   nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-   nnoremap <leader>rj :call LanguageClient#textDocument_definition()<CR>
-   nnoremap <leader>rT :call LanguageClient#textDocument_definition({'gotoCmd': 'tabe'})<CR>
-   nnoremap <leader>rS :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
-   nnoremap <leader>rX :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
-   nnoremap <leader>rV :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
-   nnoremap <leader>rw :call LanguageClient#textDocument_rename()<CR>
-endif
-""""""""""""""""" /LanguageClient Config """"""""""""""""""
 
 """""""""""""""""""" Ultisnips config """"""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
