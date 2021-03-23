@@ -95,6 +95,7 @@ augroup filetypes
    au BufNewFile,BufRead *.module            setlocal ft=php
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
    au BufNewFile,BufRead *.json              setlocal ft=json
+   au BufNewFile,BufRead *.kt                setlocal ft=kotlin
 
    " Ford
    au BufNewFile,BufRead *.fidl              setlocal ft=fidl
@@ -176,22 +177,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('tpope/vim-fugitive')
       set diffopt+=vertical
 
-      " if has('unix') && 0==is_winbash && 0==is_win
-      " If this doesn't work for c#, try
-      "  https://github.com/neoclide/coc.nvim
-      " if 0 && has('unix')
       if has('unix')
-         " For some reason I'm set to the 'auto' branch of YCM.. Not sure why
-            " \      'rev': 'auto'
-         call dein#add('Valloric/YouCompleteMe',
-            \ {
-            \     'build': 'bash ./install.py --clang-completer --clang-tidy'
-            \ },
-         \ )
-
-         " Not doing C# anymore..
-         " call dein#add('OmniSharp/omnisharp-vim', {'on_ft': ['cs', 'aspx']})
-
          call dein#add('SirVer/ultisnips')
          call dein#add('honza/vim-snippets')
       endif
@@ -257,6 +243,9 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       if !exists('g:gui_oni') && has('nvim') && is_termux==0
          call dein#add('vimlab/split-term.vim')
 
+         " Requires curl -sL install-node.now.sh/lts | bash
+         call dein#add('neoclide/coc.nvim', { 'branch': 'release' })
+
          " ccls
          call dein#add('autozimu/LanguageClient-neovim',
              \ {
@@ -264,8 +253,15 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
              \   'build': 'bash install.sh',
              \ }
          \ )
+
+         call dein#add('Valloric/YouCompleteMe',
+            \ {
+            \    'build': 'bash ./install.py --clang-completer --clang-tidy'
+            \ },
+         \ )
       endif
 
+      " Syntax highlighting for kotlin
       call dein#add('udalov/kotlin-vim')
 
       if has('unix') && !exists('g:gui_oni')
@@ -273,9 +269,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
          call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
          call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
       endif
-
-      " call dein#add('calincru/qml.vim', {'on_ft': ['qml']})
-      " call dein#add('tikhomirov/vim-glsl', {'on_ft': ['glsl']})
 
       call dein#add('PProvost/vim-ps1')
       call dein#add('rubberduck203/aosp-vim')
@@ -553,6 +546,9 @@ silent if has('unix') && g:dein_exists && dein#check_install('LanguageClient-neo
          \ 'ccls',
          \ '--log-file=/tmp/cq.log',
          \ '-v=1'
+      \ ],
+      \ 'kotlin': [
+         \ "kotlin-language-server"
       \ ]
    \ }
    let g:LanguageClient_loadSettings = 1

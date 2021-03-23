@@ -260,4 +260,41 @@ function dotfiles_install_dein()
   fi
 }
 
+function dotfiles_install_kotlin_language_server()
+{
+  local home=${1:-${HOME}};
+  local version=${2:-1.1.1};
+  local build_dir=${3:-"${home}/build"};
+
+  if [[ ! -e "${build_dir}" ]]; then
+    mkdir -p "${build_dir}"
+  fi
+
+  if [[ ! -e "${build_dir}/kotlin-language-server" ]]; then
+    git clone --branch "${version}" https://github.com/fwcd/kotlin-language-server.git "${build_dir}/kotlin-language-server"
+  else
+    pushd .
+    cd "${build_dir}/kotlin-language-server"
+    git fetch --tags
+    git reset --hard ${version}
+    popd
+  fi
+  pushd .
+  cd "${build_dir}/kotlin-language-server" && ./gradlew :server:installDist
+  popd
+
+  local b="${build_dir}/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"
+  if [[ ! -e "${b}" ]]; then
+    echo "Error: ${b} not installed" >&2
+  else
+    echo ${b}
+  fi
+}
+
+function dotfiles_install_coc()
+{
+  local home=${1:-${HOME}}
+  curl -sL install-node.now.sh/lts | sh -s -- --prefix=${home}
+}
+
 # vim: ts=2 sw=2 sts=0 ff=unix expandtab ft=sh :
