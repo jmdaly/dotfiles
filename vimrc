@@ -123,6 +123,7 @@ augroup whitespace
    autocmd FileType aidl            setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType lua             setlocal ts=2 sw=2 sts=2 expandtab
    autocmd FileType cs,cpp,c,sh,ps1,kotlin,java setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType bzl,javascript  setlocal ts=4 sw=4 sts=4 expandtab
 augroup END
@@ -244,8 +245,8 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
          call dein#add('vimlab/split-term.vim')
 
          call dein#add('neovim/nvim-lspconfig')
-         call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-         call dein#add('Shougo/deoplete-lsp') " deoplete source for the neovim language server
+         call dein#add('hrsh7th/nvim-compe') " Autocompletion plugin
+         call dein#add('kosayoda/nvim-lightbulb')
       endif
 
       " Syntax highlighting for kotlin
@@ -364,9 +365,8 @@ if 1 == vim.fn.executable("cmake-language-server") then
   lspconfig.cmake.setup{}
 end
 
-require'lspconfig'.kotlin_language_server.setup{}
 if 1 == vim.fn.executable("kotlin-language-server") then
-  lspconfig.kotlin.setup{}
+   require'lspconfig'.kotlin_language_server.setup{}
 end
 
 if 1 == vim.fn.executable("pyls") then
@@ -391,14 +391,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
+
 EOF
 
-augroup lsp
-  autocmd!
-  " Use LSP omni-completion in C and C++ files.
-  autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-  autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-augroup end
+if has('nvim-0.5')
+   augroup lsp
+     autocmd!
+     autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+     autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+     autocmd Filetype cpp lua require('compe_config')
+     autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+   augroup end
+endif
 
 nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
@@ -407,7 +411,7 @@ nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>k  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>c  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " Various mappings to open the corresponding header/source file in a new split
@@ -479,6 +483,13 @@ silent if g:dein_exists && dein#check_install('vim-rooter') == 0
 endif
 """"""""""""""""""" /rooter config """"""""""""""""""""""
 
+" """"""""""""""""" nvim-compe """""""""""""""""""
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+" """""""""""""""" /nvim-compe """""""""""""""""""
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
 "    let g:rainbow_conf = {
@@ -514,8 +525,6 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    noremap <c-k> :GitFiles<CR>
    noremap <leader><Tab> :Buffers<CR>
    noremap gsiw :GGrepIW<cr>
-   noremap <leader>s :Snippets<cr>
-   noremap <leader>c :Colors<cr>
 
    " Unmap center/<CR> from launching fzf which appears to be mapped by default.
    " unmap <CR>

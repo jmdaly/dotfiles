@@ -291,10 +291,9 @@ function dotfiles_install_kotlin_language_server()
   fi
 }
 
-function dotfiles_install_coc()
+function dotfiles_install_sdkman()
 {
-  local home=${1:-${HOME}}
-  curl -sL install-node.now.sh/lts | sh -s -- --prefix=${home}
+  curl -s "https://get.sdkman.io" | bash
 }
 
 # vim: ts=2 sw=2 sts=0 ff=unix expandtab ft=sh :

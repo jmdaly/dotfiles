@@ -1,16 +1,16 @@
 # Path functions
 # https://stackoverflow.com/q/370047/1861346
 path_append() {
-    path_remove $1;
-    if [[ -e "$1" ]]; then
-        export PATH="$PATH:$1";
-    fi
+	path_remove $1;
+	if [[ -e "$1" ]]; then
+		export PATH="$PATH:$1";
+	fi
 }
 path_prepend() {
-    path_remove $1;
-    if [[ -e "$1" ]]; then
-        export PATH="$1:$PATH";
-    fi
+	path_remove $1;
+	if [[ -e "$1" ]]; then
+		export PATH="$1:$PATH";
+	fi
 }
 path_remove() { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'); }
 
@@ -25,13 +25,15 @@ export PATH=$(echo -n "${PATH}" | awk -v RS=: -v ORS=: '/virtualenv/ {next} {pri
 if [[ -e ${HOME}/.linuxbrew ]]; then
 	export LINUXBREWHOME=${HOME}/.linuxbrew
 elif [[ "$(id linuxbrew 2>/dev/null)" && -e ~linuxbrew/.linuxbrew ]]; then
-        export LINUXBREWHOME=~linuxbrew/.linuxbrew
+	export LINUXBREWHOME=~linuxbrew/.linuxbrew
 fi
 
 local -a dirs;
 local -a rdirs=( \
 	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
 	.pyenv/bin utils/bin .cargo/bin \
+	build/kotlin-language-server/server/build/install/server/bin \
+	${HOME}/.sdkman/candidates/gradle/current/bin \
 );
 
 for d in $rdirs; dirs+="${HOME}/$d"
@@ -41,15 +43,15 @@ dirs+=( \
 )
 
 if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
-    dirs+=(                                           \
-        "${ANDROID_SDK_ROOT}/tools"                   \
-        "${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin" \
-        "${ANDROID_SDK_ROOT}/platform-tools"          \
-    )
+	dirs+=(                                           \
+		"${ANDROID_SDK_ROOT}/tools"                   \
+		"${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin" \
+		"${ANDROID_SDK_ROOT}/platform-tools"          \
+	)
 fi
 
 for d in $dirs; do
-    path_prepend "${d}"
+	path_prepend "${d}"
 done
 
 # If pyenv exists, initialise it

@@ -20,5 +20,17 @@ se:include:te,fc,pc,tem,rc
 --type-add
 bp:*.bp
 
+--type-add
+kt:*.kt
+
+--type-add
+apk:*.apk,*.apb
+
+--type-add
+aidl:*.aidl
+
+--type-add
+app:include:kt,java,apk,aidl
+
 # Using glob patterns to include/exclude files or folders
 --glob=!git/*
