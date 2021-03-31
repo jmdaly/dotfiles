@@ -37,6 +37,12 @@ Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
 Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
 Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
 
+if executable('black')
+  " Only load the plugin if the black executable is available, this is
+  " to prevent errors on startup
+  Plug 'psf/black', { 'branch': 'stable' } " A plugin to format Python code by calling black
+endif
+
 Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
 Plug 'hrsh7th/nvim-compe' " Autocompletion plugin
 
@@ -245,7 +251,13 @@ nmap <silent> ]w <Plug>(ale_next_wrap)
 " map <expr> allows expansion of the variable for the
 " clang path.
 let g:clang_format_path = g:clang_path . '/bin/clang-format'
-map <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
+
+" Mappings for formatting code
+augroup FILE_FORMATTING
+  autocmd FileType cpp    map <buffer> <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
+  autocmd FileType c      map <buffer> <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
+  autocmd FileType python nnoremap <buffer> <leader>f :Black<CR>
+augroup END
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
 nnoremap <leader>z :Files<CR>
