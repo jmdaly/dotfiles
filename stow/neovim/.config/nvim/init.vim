@@ -164,9 +164,11 @@ local lspconfig = require'lspconfig'
 -- Otherwise, we'll get errors when loading files.
 
 -- Set up clangd
-lspconfig.clangd.setup{
-  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
-}
+if 1 == vim.fn.executable(vim.g.clang_path .. "/bin/clangd") then
+  lspconfig.clangd.setup{
+    cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+  }
+end
 
 if 1 == vim.fn.executable("cmake-language-server") then
   lspconfig.cmake.setup{}
