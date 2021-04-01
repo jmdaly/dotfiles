@@ -136,8 +136,7 @@ cd "${h}"
 #
 # Declare the files that we always want to copy over.
 declare -a files;
-files=(.bash_aliases)
-files+=(.zshrc .pathrc .bashrc .bash_profile .profile .login .logout .modulefiles .vncrc .gdbinit .dircolors .vimrc .tmux.conf .gitconfig .p10k.zsh)
+stows+=(zsh bash vnc gdb dircolors neovim vim tmux git p10k env-modules procs)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	install_powerline_fonts
@@ -146,64 +145,24 @@ else
 fi
 
 if [[ "khea" == "$(hostname)" ]]; then
-	# Apple keyboard stuff.. Should detect keyboard rather than host, maybe later..
-	if [[ ! -e "${DOTFILES_DIR}/xinitrc" ]]; then
-		symlink "xinitrc" "${DOTFILES_DIR}/.xinitrc"
-	fi
+	stows!=('xinitrc')
 fi
-
-# Check if our environment supports these
 if [[ "1" != "${skip_tmux}" ]]; then
 	dotfiles_install_tpm "${h}"
 fi
 
 if [[ "$(which screen)" != "" ]]; then
-	files+=('.screenrc')
+	stows+=('screen')
 fi
 if [[ "$(which sqlite3)" != "" ]]; then
-	files+=('.sqliterc')
-fi
-if [[ "$(which ctags)" != "" ]]; then
-	files+=('.ctags')
+	stows+=('sqlite')
 fi
 if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
-	files+=('.vnc')
+	stows+=('vnc')
 fi
-
-# Rust "procs" tool (better ps)
-dotfiles_install_proc "${h}"
-
-# .config/autokey
 
 # Create a backup directory:
 mkdir -p "${h}/.dotfiles_backup"
-
-for f in ${files[@]}; do
-	# Local file in dotfile fir
-	if [[ $f =~ .* ]]; then
-		src="${f/.//}"
-	else
-		src="$f"
-	fi;
-	if [[ ! -h "${h}/$f" ]]; then
-		if [[ -e "${h}/$f" && -e "${DOTFILES_DIR}/${src}" && ! -h "${h}/${f}" ]]; then
-			echo "Backing up $f"
-			mv "${h}/$f" "${backup_dir}/$f"
-		fi
-		if [[ -e "${DOTFILES_DIR}/${src}" ]]; then
-			#echo "Installing $f"
-			if [[ "1" == "${copy}" ]]; then
-				# On cygwin, symlinks when used through gvim
-				# can be an issue.  Note, this hasn't been used in years
-				cp -r "${DOTFILES_DIR}/${src}" "$f";
-			else
-				if [[ ! -L "$f" ]]; then
-					symlink "$f" "${DOTFILES_DIR}/${src}"
-				fi
-			fi;
-		fi
-	fi
-done;
 
 cd $h
 
@@ -219,8 +178,9 @@ else
 fi
 
 if [[ "1" != "${skip_rofi}" ]]; then
-	dotfiles_install_rofi "${h}"
-	dotfiles_install_rofipass "${h}"
+	stows+=('rofi')
+	# dotfiles_install_rofi "${h}"
+	# dotfiles_install_rofipass "${h}"
 else
 	echo "Skipped installing rofi"
 fi
@@ -234,8 +194,6 @@ fi
 # Make sure config directory exists
 mkdir -p "${h}/.config"
 
-dotfiles_install_nvim "${h}"
-
 # Setup i3
 if [[ "1" != "${skip_i3}" ]]; then
 	dotfiles_install_i3 "${h}"
@@ -243,13 +201,7 @@ fi
 
 # Setup pwsh on linux
 if [[ "1" == "$(_exists pwsh)" ]]; then
-	mkdir -p "${h}/.config/powershell"
-	symlink "${h}/.config/powershell/Microsoft.PowerShell_profile.ps1" "${DOTFILES_DIR}/profile.ps1"
-fi
-
-# Setup module files
-if [[ -e "${DOTFILES_DIR}/.modulefiles" && ! -L "${h}/.modulerc" ]]; then
-	symlink "${h}/.modulerc" "${DOTFILES_DIR}/.modulefiles/.modulerc"
+	stows+=('pwsh')
 fi
 
 # Install fzf
@@ -298,5 +250,9 @@ if [[ ! -e "${h}/.ssh/tmp" ]]; then
 	mkdir -p "${h}/.ssh/tmp"
 	chmod 700 "${h}/.ssh"
 fi
+
+for s in ${stows[@]}; do
+	stow -d "${DOTFILES_DIR}/stow" -t "${h}" "$s"
+done
 
 # vim: ts=3 sw=3 sts=0 ff=unix noet :

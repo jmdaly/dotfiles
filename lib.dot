@@ -22,11 +22,10 @@ function symlink()
   fi
 }
 
-
 function install_powerline_fonts()
 {
-  local home=${1:-${HOME}}; shift
-  local DFTMP=${1:-"$(mktemp -d)"}
+  local home=${1:-${HOME}};
+  local DFTMP=${2:-"$(mktemp -d)"}
 
   if [[ $HOME != *com.termux* ]]; then
     # For now at least, don't install powerline fonts on termux
@@ -66,13 +65,6 @@ function dotfiles_install_cargo()
   fi
 }
 
-function dotfiles_install_proc()
-{
-  local home=${1:-${HOME}}
-
-  symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/config/procs" "${home}/.config/procs"
-}
-
 function dotfiles_install_netrc()
 {
   local home=${1:-${HOME}}
@@ -108,16 +100,6 @@ function dotfiles_install_docker_config()
   if [[ -e "${dotfiles_secret_dir}" && -e "${home}/.docker" && ! -e "${home}/.docker/config.json" ]]; then
     symlink "${dotfiles_secret_dir}/docker" "${home}/.docker"
   fi
-}
-
-function dotfiles_install_nvim()
-{
-  local home=${1:-${HOME}}
-
-  # Setup nvim config (symlink entire directory)
-  mkdir -p "${home}/.config/"
-  symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/config/nvim" "${home}/.config/nvim"
-  symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/vimrc" "${home}/.config/nvim/init.vim"
 }
 
 function dotfiles_install_tpm()
@@ -158,37 +140,6 @@ function dotfiles_install_zplug()
       fi
     fi
   fi
-}
-
-function dotfiles_install_zsh_autocomplete()
-{
-  local home=${1:-${HOME}}
-  local tmp=${2:-$(mktemp -d)}
-
-  local work_dir="${DOTFILES_DIR:-${HOME}/dotfiles}/zsh-autocomplete"
-  if [[ ! -e "${work_dir}" ]]; then
-    echo "zsh-autocomplete submodule not loaded ( ${work_dir} ).  Please update the submodule first" >2
-    return
-  else
-    pushd .
-    cd "${work_dir}"
-    git fetch; git pull;
-    popd
-  fi
-}
-
-function dotfiles_install_rofi()
-{
-  local home=${1:-${HOME}}
-
-  symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/config/rofi" "${home}/.config/rofi"
-}
-
-function dotfiles_install_rofipass()
-{
-  local home=${1:-${HOME}}
-
-  symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/config/rofi-pass" "${home}/.config/"
 }
 
 function assemble_i3_config()
