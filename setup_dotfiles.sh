@@ -145,7 +145,7 @@ else
 fi
 
 if [[ "khea" == "$(hostname)" ]]; then
-	stows!=('xinitrc')
+	stows+=('xinitrc')
 fi
 if [[ "1" != "${skip_tmux}" ]]; then
 	dotfiles_install_tpm "${h}"
