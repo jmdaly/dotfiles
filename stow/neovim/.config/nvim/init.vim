@@ -5,6 +5,7 @@ let mapleader = "\<Space>"
 lua require('plugins')
 lua require('completion')
 lua require('lsp')
+lua require('jmdaly.config')
 
 " Enable true colour support:
 set termguicolors

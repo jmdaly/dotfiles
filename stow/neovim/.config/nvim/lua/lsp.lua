@@ -1,5 +1,8 @@
 -- Set up the built-in language client
 
+-- Some colour schemes clear the LSP highlight groups, so we set them back up here:
+require('vim.lsp.diagnostic')._define_default_signs_and_highlights()
+
 -- Tell neovim where to find clangd
 vim.g.clang_path = "/opt/llvm"
 

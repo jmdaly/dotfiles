@@ -25,7 +25,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary' -- Plug to assist with commenting out blocks of text:
   use 'tpope/vim-surround' -- Plugin for working with surroundings of words:
   use 'tpope/vim-obsession' -- Plugin to help manage sessions
-  use 'itchyny/lightline.vim' -- Status line plugin
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
   use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
@@ -38,7 +37,7 @@ return require('packer').startup(function(use)
   -- an inline function. This is to get around an issue where the highlights
   -- get cleared by the colour scheme. I got this solution here:
   -- https://www.reddit.com/r/neovim/comments/m0gyip/nvim_initlua_not_respecting_highlight_commands/gqawq0h?utm_source=share&utm_medium=web2x&context=3
-  -- It wasn't an issue with vom-plug, but appears to be an issue when using
+  -- It wasn't an issue with vim-plug, but appears to be an issue when using
   -- packer.nvim
   use {
     'arcticicestudio/nord-vim',
@@ -52,7 +51,11 @@ return require('packer').startup(function(use)
   use 'christoomey/vim-tmux-navigator' -- A plugin to facilitate navigating between vim and tmux
   use 'wellle/targets.vim' -- A plugin for additional text objects
   use 'w0rp/ale' -- A plugin for asynchronous linting while you type
-  use 'maximbaz/lightline-ale' -- A plugin to show lint errors in lightline
+
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = 'kyazdani42/nvim-web-devicons'
+  }
 
   if fn.executable('black') then
     -- Only load the plugin if the black executable is available, this is
