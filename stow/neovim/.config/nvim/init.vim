@@ -257,10 +257,12 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       endif
 
       call dein#add('PProvost/vim-ps1')
-      call dein#add('rubberduck203/aosp-vim')
+
+      " syntax highlighting for *.hal, *.bp, and *.rc files.
+      call dein#add('https://github.ford.com/MRUSS100/aosp-vim-syntax.git')
+      " call dein#add('rubberduck203/aosp-vim')
 
       call dein#add('kheaactua/vim-fzf-repo')
-      call dein#add('https://github.ford.com/MRUSS100/aosp-vim-syntax.git')
 
       "
       " Colourschemes
