@@ -139,68 +139,6 @@ let g:UltiSnipsJumpBackwardTrigger='<c-n>'
 " Ensure the status line is always displayed:
 set laststatus=2
 
-let g:lightline = {}
-let g:lightline.colorscheme = 'nord'
-
-" Add linting info to the status line:
-let g:lightline.component_expand = {
-        \  'linter_checking': 'lightline#ale#checking',
-        \  'linter_warnings': 'lightline#ale#warnings',
-        \  'linter_errors': 'lightline#ale#errors',
-        \  'linter_ok': 'lightline#ale#ok',
-        \ }
-let g:lightline.component_type = {
-        \     'linter_checking': 'right',
-        \     'linter_warnings': 'warning',
-        \     'linter_errors': 'error',
-        \     'linter_ok': 'right',
-        \ }
-
-let g:lightline.active = {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-        \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-        \              [ 'lineinfo' ],
-        \            [ 'obsession', 'percent' ],
-        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] 
-        \ }
-let g:lightline.component = {
-        \   'lineinfo': ' %3l:%-2v'
-        \ }
-let g:lightline.component_function = {
-        \   'readonly': 'LightlineReadonly',
-        \   'gitbranch': 'LightlineFugitive',
-        \   'obsession': 'ObsessionStatus',
-        \ }
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-function! LightlineReadonly()
-        return &readonly ? '' : ''
-endfunction
-" This function is taken from vim-airline, to shorten
-" the branch name when appropriate.
-function! LightlineShorten(text, winwidth, minwidth, ...)
-  if winwidth(0) < a:winwidth && len(split(a:text, '\zs')) > a:minwidth
-    if get(a:000, 0, 0)
-      " shorten from tail
-      return '…'.matchstr(a:text, '.\{'.a:minwidth.'}$')
-    else
-      " shorten from beginning of string
-      return matchstr(a:text, '^.\{'.a:minwidth.'}').'…'
-    endif
-  else
-    return a:text
-  endif
-endfunction
-function! LightlineFugitive()
-        if exists('*FugitiveHead')
-                let branch = FugitiveHead(7)
-                let branch = branch !=# '' ? ' '.branch : ''
-                return LightlineShorten(branch, 120, 15)
-        endif
-        return ''
-endfunction
-
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):
 augroup FTOptions 
