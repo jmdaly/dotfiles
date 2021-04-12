@@ -31,3 +31,25 @@ function a2a() {
 	adb wait-for-device pull /sys/fs/selinux/policy
 	adb logcat -b all -d | audit2allow -p policy
 }
+
+function adb_back() {
+    adb wait-for-device shell input keyevent 4
+}
+
+function adb_logcat() {
+    # This is whatever I find useful at the time
+    local -a suppress=(
+        "LightsService" "PhoneInterfaceManager" "perfetto" "com.ford.vs.clock.ClockService"
+        "carwatchdogd" "healthd" "LocationManagerService" "ford.vhal@1.0-CarInputTranslator"
+        "Gralloc3" "BestClock" "FastPrintWriter" "ford.hardware.bluetooth.hci@1.0"
+        "BatteryStatsService" "BatteryExternalStatsWorker" "VoiceInteractionManager"
+        "MediaProvider" "TextServicesManagerService" "TextServicesManagerService" "VvmPkgInstalledRcvr"
+		"BufferQueueProducer" "CompositionEngine" "GraphicBufferAllocator" "display" "gralloc" "ion" "ionalloc" "cma" "ColorUtils" "Codec2Client" "FMQ" "Choreographer"
+    )
+    local suppress_str=""
+    for s in ${suppress[@]}; do
+        suppress_str+="${s}:S "
+    done
+    adb logcat ${suppress_str} \
+        | rg -i '(\s(E|W)\s|soa|listsort)'
+}
