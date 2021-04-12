@@ -590,8 +590,7 @@ inoremap <C-S> <Esc>:w<CR>
 nnoremap <leader>rt :silent! %s/\s\+$//e<CR>
 let @r='\rt'
 let @t=':try|silent! exe "norm! @r"|endtry|w|n'
-let trim_whitelist = ['php', 'js', 'cpp', 'h', 'vim', 'css', 'bzl']
-autocmd BufWritePre * if index(trim_whitelist, &ft) >= 0 | :%s/\s\+$//e
+autocmd FileType php,bp,c,cpp,h,hpp,aidl,javascript,python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " Ignore whitespace on vimdiff
 if &diff
