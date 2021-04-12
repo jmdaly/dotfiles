@@ -21,7 +21,9 @@ if [[ "$(_exists dust)" == 1 ]]; then
 fi
 if [[ "$(_exists fd)" == 0 && "$(_exists fdfind)" == 1 ]]; then
    alias fd=fdfind
+   export FD_CMD=fdfind
 fi
+export FZF_DEFAULT_COMMAND="${FD_CMD:-fd} --type f --exclude .git --exclude out"
 if [[ "$(_exists bat)" == 0 && $(_exists batcat) == 1 ]]; then
    alias cat=batcat
    alias less=batcat
