@@ -30,6 +30,15 @@ apk:*.apk,*.apb
 aidl:*.aidl
 
 --type-add
+hidl:*.hidl
+
+--type-add
+hal:*.hal
+
+--type-add
+idl:include:hal,hidl,aidl
+
+--type-add
 app:include:kt,java,apk,aidl
 
 # Using glob patterns to include/exclude files or folders
