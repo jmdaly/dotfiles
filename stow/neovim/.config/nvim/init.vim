@@ -7,6 +7,9 @@ lua require('completion')
 lua require('lsp')
 lua require('jmdaly.config')
 
+" Some colour schemes clear the LSP highlight groups, so we set them back up here:
+lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights()
+
 " Enable true colour support:
 set termguicolors
 
