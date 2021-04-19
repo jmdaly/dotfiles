@@ -18,8 +18,6 @@ return require('packer').startup(function(use)
 
   use 'justinmk/vim-dirvish' -- Path navigator for vim
   use 'octol/vim-cpp-enhanced-highlight' -- Better C++ Syntax Highlighting:
-  use 'SirVer/ultisnips' -- Track the ultisnips engine.
-  use 'honza/vim-snippets' -- Snippets are separated from the engine. Add this if you want them:
   use 'tpope/vim-sleuth' -- heuristically determine spacing to use when tabbing
   use 'tpope/vim-fugitive' -- git wrapper for vim
   use 'tpope/vim-unimpaired' -- A plugin containing handy pairs of bracket mapping:
@@ -29,7 +27,12 @@ return require('packer').startup(function(use)
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
 
-  if vim.fn.has("unix") == 1 or vim.fn.has("wsl") == 1 then
+  use {
+    'hrsh7th/vim-vsnip',
+    requires = 'rafamadriz/friendly-snippets'
+  }
+
+  if fn.has("unix") == 1 or fn.has("wsl") == 1 then
     -- The installation script only works in Linux and similar
     use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
   else
