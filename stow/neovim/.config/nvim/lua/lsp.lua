@@ -8,6 +8,7 @@ vim.g.clang_path = "/opt/llvm"
 
 if vim.fn.has("win32") == 1 then
   vim.g.clang_path = "C:/Program Files/LLVM"
+  vim.g.python3_host_prog = "python"
 end
 
 local lspconfig = require'lspconfig'

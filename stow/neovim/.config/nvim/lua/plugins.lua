@@ -27,7 +27,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-obsession' -- Plugin to help manage sessions
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
-  use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
+
+  if vim.fn.has("unix") == 1 or vim.fn.has("wsl") == 1 then
+    -- The installation script only works in Linux and similar
+    use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
+  end
+
   use 'junegunn/fzf.vim'
   use 'mhinz/vim-startify' -- Plugin to provide a useful start screen in vim:
   use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
