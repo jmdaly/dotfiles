@@ -31,6 +31,8 @@ return require('packer').startup(function(use)
   if vim.fn.has("unix") == 1 or vim.fn.has("wsl") == 1 then
     -- The installation script only works in Linux and similar
     use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
+  else
+    use 'junegunn/fzf' -- The fuzzy searcher
   end
 
   use 'junegunn/fzf.vim'
