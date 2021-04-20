@@ -51,5 +51,6 @@ function adb_logcat() {
         suppress_str+="${s}:S "
     done
     adb logcat ${suppress_str} \
+        | rg -v ' D soa.gateway' \
         | rg -i '(\s(E|W)\s|soa|listsort)'
 }
