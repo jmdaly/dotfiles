@@ -113,6 +113,7 @@ augroup whitespace
    autocmd!
    autocmd FileType cs              setlocal ff=dos
    autocmd FileType yaml,json       setlocal ts=2 sw=2 sts=2 expandtab ai
+   autocmd FileType markdown        setlocal spell
    autocmd FileType tex             setlocal spell
    autocmd FileType xml             setlocal ts=2 sw=2 sts=2 expandtab ai
    autocmd FileType cmake           setlocal ts=2 sw=2 sts=2 expandtab ai
@@ -153,6 +154,7 @@ endif
 "    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " endif
 
+" TODO try packer instead of dein: https://github.com/wbthomason/packer.nvim
 if g:dein_exists && (v:version >= 800 || has('nvim'))
    let &runtimepath.=',' . g:dein_plugin
 
@@ -254,6 +256,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
          " Install fzf, the fuzzy searcher (also loads Ultisnips)
          call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
          call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
+         call dein#add('ojroques/nvim-lspfuzzy', {'depends': 'fzf' })
       endif
 
       call dein#add('PProvost/vim-ps1')
@@ -347,6 +350,71 @@ endfunction
 
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
 
+"""""""""""""""""""""" nvim-compe """"""""""""""""""""""""
+set completeopt=menuone,noselect
+lua <<EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  source_timeout = 200;
+
+  source = {
+    path      = true;
+    buffer    = true;
+    spell     = true;
+    calc      = true;
+    nvim_lsp  = true;
+    nvim_lua  = true;
+    ultisnips = true;
+  };
+}
+
+-- The following code allows for traversing the completion
+-- list with Tab and Shift-Tab.
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
+
+-- Use (s-)tab to:
+--- move to prev/next item in completion menuone
+--- jump to prev/next snippet's placeholder
+_G.tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-n>"
+  elseif check_back_space() then
+    return t "<Tab>"
+  else
+    return vim.fn['compe#complete']()
+  end
+end
+_G.s_tab_complete = function()
+  if vim.fn.pumvisible() == 1 then
+    return t "<C-p>"
+  else
+    return t "<S-Tab>"
+  end
+end
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+EOF
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+"""""""""""""""""""""" /nvim-compe """"""""""""""""""""""""
 
 """""""""""""""""""""" LSP """"""""""""""""""""""""
 let g:clang_path = '/usr'
@@ -368,6 +436,21 @@ end
 
 if 1 == vim.fn.executable("kotlin-language-server") then
    require'lspconfig'.kotlin_language_server.setup{}
+   " Hack recommended at
+   " https://github.com/fwcd/kotlin-language-server/issues/284#issuecomment-817835261
+   " to get Kotlin to be able to find gradle when it's not at the root of the
+   " repo
+   lspconfig.kotlin_language_server.setup{
+     settings = {
+       kotlin = {
+         compiler = {
+           jvm = {
+             target = "1.8";
+           }
+         };
+       };
+     }
+   }
 end
 
 if 1 == vim.fn.executable("pyls") then
@@ -393,6 +476,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+--- Enable the lspfuzzy plugin
+require('lspfuzzy').setup {}
 EOF
 
 if has('nvim-0.5')
@@ -530,7 +615,15 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    " Unmap center/<CR> from launching fzf which appears to be mapped by default.
    " unmap <CR>
 
-   let g:search_tool='rg'
+   " This is the order of preference
+   if executable('rg')
+      let g:search_tool='rg'
+   elseif executable('ag')
+      let g:search_tool='ag'
+   else
+      let g:search_tool='grep'
+   endif
+
    if g:search_tool ==? 'rg'
       noremap <leader>g :Rg<cr>
       command! -nargs=* -bang GGrepIW
