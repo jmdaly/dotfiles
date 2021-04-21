@@ -12,6 +12,6 @@
 # gnome_do	slingshot		appdrawer			appfolder		column
 # row		row_center		screen				row_dock		row_dropdown
 
-declare style=${1:-blurry_full}
+declare style=${1:-row_dropdown}
 
 rofi -no-lazy-grab -show drun -theme launchers-git/${style}.rasi

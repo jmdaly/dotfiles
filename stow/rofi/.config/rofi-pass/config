@@ -12,7 +12,7 @@ _rofi () {
 # fields to be used
 URL_field='url'
 USERNAME_field='user'
-AUTOTYPE_field='autotype'
+AUTOTYPE_field='pass'
 
 # delay to be used for :delay keyword
 delay=2
