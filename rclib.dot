@@ -18,9 +18,9 @@ function _exists() {
     fi
 }
 
-if [ -n "${ZSH_VERSION}" ]; then
+if [[ -n "${ZSH_VERSION}" ]]; then
     # Helpful arm-ldd function
-    if [[ "1" == "$(which patchelf)" ]]; then
+    if [[ "1" == "$(_exists patchelf)" ]]; then
         function arm-ldd() { patchelf --print-needed $1 }
     else
         function arm-ldd() { readelf -d $1 | grep "\(NEEDED\)" | sed -r "s/.*\[(.*)\]/\1/" }
