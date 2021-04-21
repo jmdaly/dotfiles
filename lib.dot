@@ -81,6 +81,8 @@ function dotfiles_install_gnupg()
   local home=${1:-${HOME}}
   local dotfiles_secret_dir=${2:-${DOTFILES_DIR:-${HOME}/dotfiles}/dotfiles-secret}
 
+	stow -d "${DOTFILES_DIR}/stow" -t "${home}" gnupg
+
   if [[ -e "${dotfiles_secret_dir}" ]]; then
     symlink "${dotfiles_secret_dir}/global/gnupg/sshcontrol" "${home}/.gnupg/sshcontrol"
   fi
