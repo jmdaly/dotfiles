@@ -1,3 +1,6 @@
+" TODO Add default files ( see https://unix.stackexchange.com/a/597550/100689
+" ) if in vim8
+
 " Used for host detection
 let hostname = substitute(system('hostname'), '\n', '', '')
 let hostos   = substitute(system('uname -o'), '\n', '', '')
@@ -308,6 +311,12 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
    "End dein Scripts-------------------------
 endif
 
+if executable('black')
+  " Only load the plugin if the black executable is available, this is
+  " to prevent errors on startup
+  call dein#add('psf/black', { 'branch': 'stable' }) " A plugin to format Python code by calling black
+endif
+
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
    let g:colo_cache_file  = g:dotfiles . '/colos.json'
@@ -366,6 +375,7 @@ require'compe'.setup {
     nvim_lsp  = true;
     nvim_lua  = true;
     ultisnips = true;
+    vsnip     = true;
   };
 }
 
@@ -436,10 +446,10 @@ end
 
 if 1 == vim.fn.executable("kotlin-language-server") then
    require'lspconfig'.kotlin_language_server.setup{}
-   " Hack recommended at
-   " https://github.com/fwcd/kotlin-language-server/issues/284#issuecomment-817835261
-   " to get Kotlin to be able to find gradle when it's not at the root of the
-   " repo
+   -- Hack recommended at
+   -- https://github.com/fwcd/kotlin-language-server/issues/284#issuecomment-817835261
+   -- to get Kotlin to be able to find gradle when it's not at the root of the
+   -- repo
    lspconfig.kotlin_language_server.setup{
      settings = {
        kotlin = {
