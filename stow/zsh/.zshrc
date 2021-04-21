@@ -255,5 +255,6 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
