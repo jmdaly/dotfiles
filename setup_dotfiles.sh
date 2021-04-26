@@ -18,6 +18,7 @@ ARGUMENT_STR_LIST=(
 	"home"
 )
 ARGUMENT_FLAG_LIST=(
+	"skip-apt"
 	"skip-powerline"
 	"skip-fzf"
 	"skip-python-venv"
@@ -41,6 +42,7 @@ opts=$(getopt \
 )
 eval set --$opts
 
+declare skip_apt=0
 declare skip_powerline=0
 declare skip_python_venv=0
 declare skip_fzf=0
@@ -58,6 +60,9 @@ while [[ "" != $1 ]]; do
 	"--home")
 		shift
 		h=$1
+		;;
+	"--skip-apt")
+		skip_apt=1
 		;;
 	"--skip-powerline")
 		skip_powerline=1
@@ -93,6 +98,7 @@ while [[ "" != $1 ]]; do
 		skip_cargo=1
 		;;
 	"--small")
+		skip_apt=1
 		skip_tmux=1
 		skip_fzf=1
 		skip_python_venv=1
@@ -133,6 +139,10 @@ cd "${h}"
 # TODO Create a function to mkdir.. I do that a lot here.
 #
 
+if [[ "1" != "${skip_apt}" ]]; then
+	sudo apt-get install -qy curl stow git environment-modules
+fi
+
 #
 # Declare the files that we always want to copy over.
 declare -a stows;
@@ -145,7 +155,7 @@ else
 fi
 
 if [[ "khea" == "$(hostname)" ]]; then
-	stows+=('xinitrc')
+	stows+=('xinit')
 fi
 if [[ "1" != "${skip_tmux}" ]]; then
 	dotfiles_install_tpm "${h}"
