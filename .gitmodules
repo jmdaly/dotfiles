@@ -17,3 +17,6 @@
 	master = master
 [modulefiles "ford"]
 	master = master
+[submodule "stow/rofi/.config/rofi/rofi-themes"]
+	path = stow/rofi/.config/rofi/rofi-themes
+	url = https://github.com/davatorium/rofi-themes.git

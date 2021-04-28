@@ -257,4 +257,9 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
+# Dir colours
+if [[ -e ${HOME}/.dir_colors/dircolors ]]; then
+	eval $(dircolors ${HOME}/.dir_colors/dircolors)
+fi
+
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
