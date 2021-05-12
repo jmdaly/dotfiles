@@ -101,7 +101,8 @@ augroup filetypes
    au BufNewFile,BufRead *.kt                setlocal ft=kotlin
 
    " Ford
-   au BufNewFile,BufRead *.fidl              setlocal ft=fidl
+   au BufNewFile,BufRead *.fidl,*.fdepl      setlocal ft=fidl
+   au BufNewFile,BufRead api/current.txt     setlocal ft=java
    au BufNewFile,BufRead */Config.in         setlocal ft=make
    au BufNewFile,BufRead */Config.in.host    setlocal ft=make
 
@@ -110,6 +111,8 @@ augroup filetypes
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
    au BufNewFile,BufRead *.fs                setlocal ft=sh
    au BufNewFile,BufRead */aos/*.rc          setlocal ft=sh
+   au BufNewFile,BufRead *.envrc             setlocal ft=sh
+   au BufNewFile,BufRead .jdbrc              setlocal ft=jdb
 augroup end
 
 augroup whitespace
@@ -135,8 +138,7 @@ augroup END
 augroup FTOptions
     autocmd!
     autocmd FileType c,cpp,cs,java,bzl,javascript setlocal commentstring=//\ %s
-    autocmd FileType cmake                        setlocal commentstring=#\ %s
-    autocmd FileType sh                           setlocal commentstring=#\ %s
+    autocmd FileType sh,jdb,cmake                 setlocal commentstring=#\ %s
 augroup END
 
 augroup SHORTCUTS

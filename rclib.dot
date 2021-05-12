@@ -1,5 +1,5 @@
 function _exists() {
-	local bin=${1}
+    local bin=${1}
 
     if [ -n "${ZSH_VERSION}" ]; then
         local -r _not_found_pattern="not found$"
@@ -28,8 +28,8 @@ if [[ -n "${ZSH_VERSION}" ]]; then
 fi
 
 function a2a() {
-	adb wait-for-device pull /sys/fs/selinux/policy
-	adb logcat -b all -d | audit2allow -p policy
+    adb wait-for-device pull /sys/fs/selinux/policy
+    adb logcat -b all -d | audit2allow -p policy
 }
 
 function adb_back() {
@@ -44,7 +44,8 @@ function adb_logcat() {
         "Gralloc3" "BestClock" "FastPrintWriter" "ford.hardware.bluetooth.hci@1.0"
         "BatteryStatsService" "BatteryExternalStatsWorker" "VoiceInteractionManager"
         "MediaProvider" "TextServicesManagerService" "TextServicesManagerService" "VvmPkgInstalledRcvr"
-		"BufferQueueProducer" "CompositionEngine" "GraphicBufferAllocator" "display" "gralloc" "ion" "ionalloc" "cma" "ColorUtils" "Codec2Client" "FMQ" "Choreographer"
+        "BufferQueueProducer" "CompositionEngine" "GraphicBufferAllocator" "display" "gralloc" "ion" "ionalloc" "cma" "ColorUtils" "Codec2Client" "FMQ" "Choreographer"
+        "ford.vhal@1.0-CANRxMsgSetFilter"
     )
     local suppress_str=""
     for s in ${suppress[@]}; do
