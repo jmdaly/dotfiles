@@ -1,6 +1,3 @@
-# Assign windows to a Workspace
-assign [class="Stoken-gui"] $workspace9
-
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2

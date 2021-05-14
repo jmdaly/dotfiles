@@ -12,7 +12,9 @@ set $workspace10 "10"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
 # Assign windows to a Workspace
-# assign [class="Stoken-gui"] $workspace9
+assign [class="Stoken-gui"] $workspace9
+assign [class="Webex"] $workspace9
+assign [class="ZSTray"] $workspace9
 
 # Put Workspaces on specific monitors
 # DP-0 = Older Dell
