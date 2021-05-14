@@ -242,9 +242,15 @@ if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
 	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 fi
 
-if [[ "1" == "$(_exists fd)" || "1" == "$(_exists fdfind)" ]]; then
-	export FZF_DEFAULT_COMMAND='fd --type f'
+if [[ "1" == "$(_exists fd)" ]]; then
+	declare fzfcmd=fd
+elif [[ "1" == "$(_exists fdfind)" ]]; then
+	declare fzfcmd=fdfind
 fi
+if [[ "undefined" == "${fzfcmd:-undefined}" ]]; then
+	export FZF_DEFAULT_COMMAND="${fzfcmd} --type f"
+fi
+unset fzfcmd
 
 export RIPGREP_CONFIG_PATH="${DOTFILES_DIR}/ripgreprc"
 
