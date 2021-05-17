@@ -7,11 +7,12 @@ lua require('completion')
 lua require('lsp')
 lua require('jmdaly.config')
 
-" Some colour schemes clear the LSP highlight groups, so we set them back up here:
-lua require('vim.lsp.diagnostic')._define_default_signs_and_highlights()
-
 " Enable true colour support:
 set termguicolors
+
+let g:material_style = 'oceanic'
+lua vim.g.material_italic_comments = true
+colorscheme material
 
 " Add to the runtime path so that custom
 " snippets can be found:
@@ -142,12 +143,12 @@ smap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-j
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-n>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-n>'
 
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap        s   <Plug>(vsnip-select-text)
-xmap        s   <Plug>(vsnip-select-text)
-nmap        S   <Plug>(vsnip-cut-text)
-xmap        S   <Plug>(vsnip-cut-text)
+" " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" " See https://github.com/hrsh7th/vim-vsnip/pull/50
+" nmap        s   <Plug>(vsnip-select-text)
+" xmap        s   <Plug>(vsnip-select-text)
+" nmap        S   <Plug>(vsnip-cut-text)
+" xmap        S   <Plug>(vsnip-cut-text)
 
 " Ensure the status line is always displayed:
 set laststatus=2

@@ -2,7 +2,7 @@
 -- init.lua, most of this could be moved into init.lua.
 require('lualine').setup{
   options = {
-    theme = 'nord'
+    theme = 'material-nvim'
   },
   sections = {
     lualine_a = { {'mode', upper = true} },

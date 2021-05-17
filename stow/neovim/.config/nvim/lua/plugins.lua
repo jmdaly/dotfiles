@@ -44,20 +44,7 @@ return require('packer').startup(function(use)
   use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
   use 'justinmk/vim-sneak' -- Motion that takes two characters and jumps to occurences
 
-  -- Note that I set the colour scheme and my highlight info right here in
-  -- an inline function. This is to get around an issue where the highlights
-  -- get cleared by the colour scheme. I got this solution here:
-  -- https://www.reddit.com/r/neovim/comments/m0gyip/nvim_initlua_not_respecting_highlight_commands/gqawq0h?utm_source=share&utm_medium=web2x&context=3
-  -- It wasn't an issue with vim-plug, but appears to be an issue when using
-  -- packer.nvim
-  use {
-    'arcticicestudio/nord-vim',
-    config = function()
-      vim.cmd [[colorscheme nord]]
-      vim.g.background = 'dark'
-      vim.cmd [[highlight Comment cterm=italic gui=italic]]
-    end
-  } -- nord colour scheme
+  use 'marko-cerovac/material.nvim'
 
   use 'christoomey/vim-tmux-navigator' -- A plugin to facilitate navigating between vim and tmux
   use 'wellle/targets.vim' -- A plugin for additional text objects
