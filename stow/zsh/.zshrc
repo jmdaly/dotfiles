@@ -268,4 +268,11 @@ if [[ -e ${HOME}/.dir_colors/dircolors ]]; then
 	eval $(dircolors ${HOME}/.dir_colors/dircolors)
 fi
 
+declare DEVEL_ENV="${HOME}/workspace/system-setup-scripts/devel/activate.sh"
+if [[ -e "${DEVEL_ENV}" ]]; then
+	source "${DEVEL_ENV}"
+else
+	echo "No development environment available, please run \`conan install\` to create ${DEVEL_ENV}"
+fi
+
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
