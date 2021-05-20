@@ -453,6 +453,7 @@ nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>c  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>el <cmd>lua print(vim.lsp.get_log_path())<CR>
 
 " Various mappings to open the corresponding header/source file in a new split
 nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
@@ -482,7 +483,7 @@ silent if g:dein_exists && dein#check_install('ale') == 0
    nmap <silent> ]w <Plug>(ale_next_wrap)
 
    " Run clang-format
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>f :ALEFix<CR>
+   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fu :ALEFix<CR>
 endif
 """"""""""""""""""""""""""" /ALE """""""""""""""""""""""""
 
@@ -593,6 +594,7 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    endif
 
    noremap <leader>l :Lines<cr>
+   noremap <leader>f :Files<cr>
    noremap <leader>w :Windows<cr>
 
    silent if has('unix') && g:dein_exists && dein#check_install('vim-fzf-repo') == 0
