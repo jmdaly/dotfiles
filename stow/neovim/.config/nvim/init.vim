@@ -258,6 +258,10 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " Syntax highlighting for kotlin
       call dein#add('udalov/kotlin-vim')
 
+      call dein#add('tpope/vim-obsession')
+      call dein#add('mhinz/vim-startify')
+      call dein#add('szw/vim-maximizer')
+
       if has('unix') && !exists('g:gui_oni')
          " Install fzf, the fuzzy searcher (also loads Ultisnips)
          call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
@@ -335,6 +339,16 @@ nmap [h <Plug>GitGutterPrevHunk
 " stage the hunk with <Leader>hs or
 " revert it with <Leader>hr.
 """"""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
+
+""""""""""""""""""""" /vim-maximizer """"""""""""""""""""""""
+nnoremap <silent> <leader>z :MaximizerToggle<CR>
+vnoremap <silent> <leader>z :MaximizerToggle<CR>gv
+inoremap <silent> <leader>z <C-o>:MaximizerToggle<CR>
+
+nnoremap <silent> <C-w>z :MaximizerToggle<CR>
+vnoremap <silent> <C-w>z :MaximizerToggle<CR>gv
+inoremap <silent> <C-w>z <C-o>:MaximizerToggle<CR>
+""""""""""""""""""""" /vim-maximizer """"""""""""""""""""""""
 
 """"""""""""""""""""""" Lightline """"""""""""""""""""""""
 let g:lightline = {
