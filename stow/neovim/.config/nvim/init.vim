@@ -113,6 +113,7 @@ augroup filetypes
    au BufNewFile,BufRead */aos/*.rc          setlocal ft=sh
    au BufNewFile,BufRead *.envrc             setlocal ft=sh
    au BufNewFile,BufRead .jdbrc              setlocal ft=jdb
+   au BufNewFile,BufRead .clangd             setlocal ft=yaml
 augroup end
 
 augroup whitespace
@@ -356,7 +357,7 @@ let g:vimshell_force_overwrite_statusline = 0
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 function! LightlineReadonly()
-        return &readonly ? '' : ''
+   return &readonly ? '' : ''
 endfunction
 
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
@@ -381,11 +382,14 @@ local lspconfig = require'lspconfig'
 
 -- Set up clangd
 lspconfig.clangd.setup{
-  cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+   cmd = {
+      vim.g.clang_path .. "/bin/clangd",
+      "--background-index"
+   }
 }
 
 if 1 == vim.fn.executable("cmake-language-server") then
-  lspconfig.cmake.setup{}
+   lspconfig.cmake.setup{}
 end
 
 if 1 == vim.fn.executable("kotlin-language-server") then
@@ -395,39 +399,39 @@ if 1 == vim.fn.executable("kotlin-language-server") then
    -- to get Kotlin to be able to find gradle when it's not at the root of the
    -- repo
    lspconfig.kotlin_language_server.setup{
-     settings = {
-       kotlin = {
-         compiler = {
-           jvm = {
-             target = "1.8";
-           }
+      settings = {
+         kotlin = {
+            compiler = {
+               jvm = {
+                  target = "1.8";
+               }
+            };
          };
-       };
-     }
+      }
    }
 end
 
 if 1 == vim.fn.executable("pyls") then
-  lspconfig.pyls.setup{}
+   lspconfig.pyls.setup{}
 end
 
 -- Configure the way code diagnostics are displayed
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
+   vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- This will disable virtual text, like doing:
+      -- let g:diagnostic_enable_virtual_text = 0
+      virtual_text = false,
 
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
-    signs = true,
+      -- This is similar to:
+      -- let g:diagnostic_show_sign = 1
+      -- To configure sign display,
+      --  see: ":help vim.lsp.diagnostic.set_signs()"
+      signs = true,
 
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
-    update_in_insert = false,
-  }
+      -- This is similar to:
+      -- "let g:diagnostic_insert_delay = 1"
+      update_in_insert = false,
+   }
 )
 
 --- Enable the lspfuzzy plugin
@@ -603,11 +607,6 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
 endif
 """"""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
-
-"""""""""""""""""""""" prosession  """"""""""""""""""""""""
-" Options: https://github.com/dhruvasagar/vim-prosession/blob/master/doc/prosession.txt
-"""""""""""""""""""""" /prosession """"""""""""""""""""""""
-
 """"""""""""""""""""" Generate UUID """"""""""""""""""""""""
 if has('unix')
    silent! py import uuid
@@ -674,8 +673,13 @@ vnoremap > >gv
 set spelllang=en_gb,en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
-" Map // to search for highlighted text. Source http://vim.wikia.com/wiki/Search_for_visually_selected_text
+" Map // to search for highlighted text. Source
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
+" TODO learn how to get the selected text escaped
 vnoremap // y/<C-R>"<CR>
+
+" Use ESC to except insert mode in Nvim terminal
+:tnoremap <Esc> <C-\><C-n>
 
 " " Search of IP addresses
 " nnoremap /ip /\<\(\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\.\d\{1,3\}\\|localhost\)\><CR>

@@ -24,8 +24,8 @@ export PATH=$(echo -n "${PATH}" | awk -v RS=: -v ORS=: '/virtualenv/ {next} {pri
 #      They're finally being updated again.
 if [[ -e ${HOME}/.linuxbrew ]]; then
 	export LINUXBREWHOME=${HOME}/.linuxbrew
-elif [[ "$(id linuxbrew 2>/dev/null)" && -e ~linuxbrew/.linuxbrew ]]; then
-	export LINUXBREWHOME=~linuxbrew/.linuxbrew
+elif [[ -e /home/linuxbrew/.linuxbrew ]]; then
+	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
 fi
 
 local -a dirs;
@@ -42,6 +42,7 @@ dirs+=( \
 	${LINUXBREWHOME}/bin \
 )
 
+# This is not a great place for this.
 if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
 	dirs+=(                                           \
 		"${ANDROID_SDK_ROOT}/tools"                   \
