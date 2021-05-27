@@ -10,7 +10,7 @@ lua require('jmdaly.config')
 " Enable true colour support:
 set termguicolors
 
-let g:material_style = 'oceanic'
+let g:material_style = 'palenight'
 lua vim.g.material_italic_comments = true
 colorscheme material
 
