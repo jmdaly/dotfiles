@@ -15,8 +15,10 @@ if [[ ! -d ~/.zplug ]]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
+echo "Sourcing zplug"
 source ~/.zplug/init.zsh
 
+echo "Specifying packages"
 # Bundles from robbyrussell's oh-my-zsh.
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/gitfast", from:oh-my-zsh # Faster git command line completion
@@ -41,6 +43,7 @@ if ! zplug check --verbose; then
     echo; zplug install
 fi
 
+echo "Loading zplug"
 # Then, source plugins and add commands to $PATH
 zplug load
 
