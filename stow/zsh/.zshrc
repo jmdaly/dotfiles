@@ -50,13 +50,6 @@ zplug load
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 
-# Disable docker and node versions in prompt. This sends
-# unexpected characters that lead to my shell
-# getting closed.
-export SPACESHIP_DOCKER_SHOW=false
-export SPACESHIP_NODE_SHOW=false
-export SPACESHIP_PACKAGE_SHOW=false
-
 export EDITOR=nvim
 
 # Set the terminal to st, for i3wm:
