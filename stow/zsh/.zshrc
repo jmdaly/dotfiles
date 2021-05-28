@@ -32,7 +32,7 @@ zplug "lib/completion", from:oh-my-zsh # Provides completion of dot directories
 zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
 
 # Syntax highlighting bundle.
-# zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # Load the theme.
 zplug romkatv/powerlevel10k, as:theme, depth:1
