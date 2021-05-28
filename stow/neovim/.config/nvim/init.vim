@@ -2,132 +2,21 @@ scriptencoding utf-8
 " Use space as leader:
 let mapleader = "\<Space>"
 
-call plug#begin('~/.vim/plugged')
+lua require('plugins')
+lua require('completion')
+lua require('lsp')
+lua require('jmdaly.config')
 
-Plug 'justinmk/vim-dirvish' " Path navigator for vim
-Plug 'octol/vim-cpp-enhanced-highlight' " Better C++ Syntax Highlighting:
-Plug 'SirVer/ultisnips' " Track the ultisnips engine.
-Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
-Plug 'dawikur/algorithm-mnemonics.vim' " C++ algorithm snippets for Ultisnips
-Plug 'tpope/vim-sleuth' " heuristically determine spacing to use when tabbing
-Plug 'tpope/vim-fugitive' " git wrapper for vim
-Plug 'tpope/vim-unimpaired' " A plugin containing handy pairs of bracket mapping:
+" Enable true colour support:
+set termguicolors
 
-if !has('nvim')
-  " Neovim has these sensible defaults already
-  Plug 'tpope/vim-sensible' " Sensible defaults that everyone can agree on
-endif
-
-Plug 'tpope/vim-commentary' " Plug to assist with commenting out blocks of text:
-Plug 'tpope/vim-surround' " Plugin for working with surroundings of words:
-Plug 'tpope/vim-obsession' " Plugin to help manage sessions
-Plug 'itchyny/lightline.vim' " Status line plugin
-Plug 'RRethy/vim-illuminate' " Plugin to highlight the word under the cursor
-Plug 'mrtazz/DoxygenToolkit.vim' " Plug to generate doxygen documentation strings:
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " The fuzzy searcher
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-startify' " Plugin to provide a useful start screen in vim:
-Plug 'mhinz/vim-sayonara' " Plugin to make it easy to delete a buffer and close the file:
-Plug 'tommcdo/vim-lion' " Easily align around various symbols
-Plug 'justinmk/vim-sneak' " Motion that takes two characters and jumps to occurences
-Plug 'arcticicestudio/nord-vim' " nord colour scheme
-Plug 'christoomey/vim-tmux-navigator' " A plugin to facilitate navigating between vim and tmux
-Plug 'wellle/targets.vim' " A plugin for additional text objects
-Plug 'w0rp/ale' " A plugin for asynchronous linting while you type
-Plug 'maximbaz/lightline-ale' " A plugin to show lint errors in lightline
-Plug 'leafgarland/typescript-vim' " A plugin for typescript syntax highlighting
-
-if executable('black')
-  " Only load the plugin if the black executable is available, this is
-  " to prevent errors on startup
-  Plug 'psf/black', { 'branch': 'stable' } " A plugin to format Python code by calling black
-endif
-
-Plug 'neovim/nvim-lspconfig' " Configurations for neovim's language client
-Plug 'hrsh7th/nvim-compe' " Autocompletion plugin
-
-call plug#end()            " required
+let g:material_style = 'palenight'
+lua vim.g.material_italic_comments = true
+colorscheme material
 
 " Add to the runtime path so that custom
 " snippets can be found:
 set runtimepath+=~/dotfiles
-
-" nvim-compe setuo
-set completeopt=menuone,noselect
-lua <<EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  source_timeout = 200;
-
-  source = {
-    path = true;
-    buffer = true;
-    spell = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    ultisnips = true;
-  };
-}
-
--- The following code allows for traversing the completion
--- list with Tab and Shift-Tab.
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn['compe#complete']()
-  end
-end
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-EOF
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
-" Enable true colour support:
-if has('termguicolors')
-  set termguicolors
-endif
-
-" Set a colour scheme for vim:
-silent! colorscheme nord
-set background=dark
-
-" Make the comments Italics
-highlight Comment cterm=italic gui=italic
 
 " Turn line numbers on:
 set number
@@ -144,59 +33,8 @@ set smartcase
 " Make diffs appear in vertical splits:
 set diffopt+=vertical
 
-" If we are using neovim, add a mapping to escape out
-" of terminal mode:
-if exists(':tnoremap')
-   tnoremap <Leader>e <C-\><C-n>
-endif
-
-" Location of clang
-let g:clang_path = '/opt/llvm'
-
-if has('win32')
-  let g:clang_path = 'C:/Program Files/LLVM'
-endif
-
-" Set up the built-in language client
-lua <<EOF
-local lspconfig = require'lspconfig'
--- We check if a language server is available before setting it up.
--- Otherwise, we'll get errors when loading files.
-
--- Set up clangd
-if 1 == vim.fn.executable(vim.g.clang_path .. "/bin/clangd") then
-  lspconfig.clangd.setup{
-    cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
-  }
-end
-
-if 1 == vim.fn.executable("cmake-language-server") then
-  lspconfig.cmake.setup{}
-end
-
-if 1 == vim.fn.executable("pyls") then
-  lspconfig.pyls.setup{}
-end
-
--- Configure the way code diagnostics are displayed
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
-
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
-    signs = true,
-
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
-    update_in_insert = false,
-  }
-)
-EOF
+" Add a mapping to escape out of terminal mode:
+tnoremap <Leader>e <C-\><C-n>
 
 augroup lsp
   autocmd!
@@ -296,76 +134,24 @@ let g:cpp_class_scope_highlight = 1
 " And highlight member variables:
 let g:cpp_member_variable_highlight = 1
 
-" Ultisnips config:
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<c-j>'
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-let g:UltiSnipsJumpBackwardTrigger='<c-n>'
+" vim-vsnip key mappings
+" Expand or jump
+imap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-j>'
+smap <expr> <C-j>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-j>'
+
+" Jump backward
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-n>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-n>'
+
+" " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" " See https://github.com/hrsh7th/vim-vsnip/pull/50
+" nmap        s   <Plug>(vsnip-select-text)
+" xmap        s   <Plug>(vsnip-select-text)
+" nmap        S   <Plug>(vsnip-cut-text)
+" xmap        S   <Plug>(vsnip-cut-text)
 
 " Ensure the status line is always displayed:
 set laststatus=2
-
-let g:lightline = {}
-let g:lightline.colorscheme = 'nord'
-
-" Add linting info to the status line:
-let g:lightline.component_expand = {
-        \  'linter_checking': 'lightline#ale#checking',
-        \  'linter_warnings': 'lightline#ale#warnings',
-        \  'linter_errors': 'lightline#ale#errors',
-        \  'linter_ok': 'lightline#ale#ok',
-        \ }
-let g:lightline.component_type = {
-        \     'linter_checking': 'right',
-        \     'linter_warnings': 'warning',
-        \     'linter_errors': 'error',
-        \     'linter_ok': 'right',
-        \ }
-
-let g:lightline.active = {
-        \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-        \   'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-        \              [ 'lineinfo' ],
-        \            [ 'obsession', 'percent' ],
-        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] 
-        \ }
-let g:lightline.component = {
-        \   'lineinfo': ' %3l:%-2v'
-        \ }
-let g:lightline.component_function = {
-        \   'readonly': 'LightlineReadonly',
-        \   'gitbranch': 'LightlineFugitive',
-        \   'obsession': 'ObsessionStatus',
-        \ }
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
-function! LightlineReadonly()
-        return &readonly ? '' : ''
-endfunction
-" This function is taken from vim-airline, to shorten
-" the branch name when appropriate.
-function! LightlineShorten(text, winwidth, minwidth, ...)
-  if winwidth(0) < a:winwidth && len(split(a:text, '\zs')) > a:minwidth
-    if get(a:000, 0, 0)
-      " shorten from tail
-      return '…'.matchstr(a:text, '.\{'.a:minwidth.'}$')
-    else
-      " shorten from beginning of string
-      return matchstr(a:text, '^.\{'.a:minwidth.'}').'…'
-    endif
-  else
-    return a:text
-  endif
-endfunction
-function! LightlineFugitive()
-        if exists('*FugitiveHead')
-                let branch = FugitiveHead(7)
-                let branch = branch !=# '' ? ' '.branch : ''
-                return LightlineShorten(branch, 120, 15)
-        endif
-        return ''
-endfunction
 
 " Set the comment string for certain filetypes to
 " double slashes (used for vim-commentary):

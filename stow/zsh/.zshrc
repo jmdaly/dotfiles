@@ -69,7 +69,7 @@ fi
 
 # If bat is available, set the theme
 if type bat > /dev/null; then
-  export BAT_THEME="Nord"
+  export BAT_THEME="Material-Theme"
   export COLORTERM=24bit
   alias cat='bat'
 fi
@@ -79,8 +79,7 @@ if type ag > /dev/null; then
   export FZF_DEFAULT_COMMAND='ag -g ""'
 fi
 # Nord colour scheme for fzf
-export FZF_DEFAULT_OPTS='--color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C
---color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B'
+export FZF_DEFAULT_OPTS='--color dark'
 
 # If lsd is available, use it in place of ls
 if type lsd > /dev/null; then

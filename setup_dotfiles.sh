@@ -52,3 +52,10 @@ cd ${base}/stow
 for app in */; do
 	stow -t ${HOME} $app
 done;
+
+# If we have bat, update the theme cache in case new themes
+# have been added
+if [[ -a $(which bat) ]]; then
+  echo "Updating bat cache"
+  bat cache --build
+fi
