@@ -28,31 +28,15 @@ if [[ -z "$BASH_VERSION" && -n "${ZSH_VERSION}" ]]; then
     eval $func
 fi
 
-function a2a() {
-    adb wait-for-device pull /sys/fs/selinux/policy
-    adb logcat -b all -d | audit2allow -p policy
-}
+# This is done in an annoying way because once in a pipe, any sourceing or even
+# variable setting seems to be scope locked to that block
+declare -a files
+files=$(find "${HOME}/dotfiles/dotfiles-secret" -type f -name '*.dot' -print |
+while IFS= read -r file; do
+    echo $file
+done)
 
-function adb_back() {
-    adb wait-for-device shell input keyevent 4
-}
-
-function adb_logcat() {
-    # This is whatever I find useful at the time
-    local -a suppress=(
-        "LightsService" "PhoneInterfaceManager" "perfetto" "com.ford.vs.clock.ClockService"
-        "carwatchdogd" "healthd" "LocationManagerService" "ford.vhal@1.0-CarInputTranslator"
-        "Gralloc3" "BestClock" "FastPrintWriter" "ford.hardware.bluetooth.hci@1.0"
-        "BatteryStatsService" "BatteryExternalStatsWorker" "VoiceInteractionManager"
-        "MediaProvider" "TextServicesManagerService" "TextServicesManagerService" "VvmPkgInstalledRcvr"
-        "BufferQueueProducer" "CompositionEngine" "GraphicBufferAllocator" "display" "gralloc" "ion" "ionalloc" "cma" "ColorUtils" "Codec2Client" "FMQ" "Choreographer"
-        "ford.vhal@1.0-CANRxMsgSetFilter"
-    )
-    local suppress_str=""
-    for s in ${suppress[@]}; do
-        suppress_str+="${s}:S "
-    done
-    adb logcat ${suppress_str} \
-        | rg -v ' D soa.gateway' \
-        | rg -i '(\s(E|W)\s|soa|listsort)'
-}
+for file in ${files[@]}; do
+    source ${file}
+done;
+unset files
