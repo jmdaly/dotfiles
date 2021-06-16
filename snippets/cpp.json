@@ -11,5 +11,10 @@
       ""
     ],
     "description": "license"
+  },
+  "namespace": {
+    "prefix": "dns",
+    "body": ["namespace ${1:MyFirstNamespace}", "{", "namespace ${2:MySecondNamespace}", "{", "\t$3", "}", "}"],
+    "description": "double namespace"
   }
 }
