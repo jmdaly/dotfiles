@@ -1,0 +1,15 @@
+{
+  "license": {
+    "prefix": "lic",
+    "body": [
+      "/*******************************************************************",
+      " **                                                               **",
+      " **  Copyright(C) $CURRENT_YEAR Cepton Technologies. All Rights Reserved.  **",
+      " **  Contact: https://www.cepton.com                              **",
+      " **                                                               **",
+      " *******************************************************************/",
+      ""
+    ],
+    "description": "license"
+  }
+}
