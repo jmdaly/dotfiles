@@ -14,10 +14,6 @@ let g:material_style = 'palenight'
 lua vim.g.material_italic_comments = true
 colorscheme material
 
-" Add to the runtime path so that custom
-" snippets can be found:
-set runtimepath+=~/dotfiles
-
 " Turn line numbers on:
 set number
 
@@ -170,10 +166,6 @@ augroup end
 " Mapping to close the file in the current buffer:
 nnoremap <leader>q :Sayonara<cr>
 nnoremap <leader>Q :Sayonara!<cr>
-
-" vim-sneak options to use streak mode, to minimize the numbers
-" of steps to get to a location:
-let g:sneak#streak = 1
 
 " Startify options
 " Set startify to not switch directories when
