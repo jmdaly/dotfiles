@@ -12,26 +12,28 @@ function diff-dirs()
     local -a files=($(diff -q -w -x .git -r "${dir_a}" "${dir_b}" | sd '.*qnx-vsomeip.([^\s:]+).*' '$1'))
     # TODO also look for the "only" ones, can probably reuse the same diff result
 
-    local cmd;
+    local script=$(mktemp);
     local i=0
     for f in ${files[@]}; do
         if [[ ! -f "${dir_a}/${f}" || ! -f "${dir_b}/${f}" ]]; then
             continue
         fi
-        if [[ "$(($i % 2))" == "0" ]]; then
-            if [[ "0" == "$i" ]]; then
-                cmd="-p "
-            else
-                cmd="${cmd} -c tabn "
-            fi
-            cmd="${cmd}${dir_a}/${f} "
+
+        if [[ "0" == "$i" ]]; then
+            echo -n "e " >> "${script}"
         else
-            cmd="${cmd}-c 'vs ${dir_b}/${f}'"
+            echo -n "tabe " >> "${script}"
         fi
+        echo "${dir_a}/${f}" >> "${script}"
+        echo "vsp ${dir_b}/${f}" >> "${script}"
+        echo "diffthis" >> "${script}"
+        echo "wincmd w" >> "${script}"
+        echo "diffthis" >> "${script}"
+        echo "" >> "${script}"
 
         i=$(($i+1))
     done
-    echo vi $cmd
+    vi -S "${script}"
 }
 
 #  vim: set ts=2 sw=2 tw=0 et :
