@@ -2,6 +2,11 @@ scriptencoding utf-8
 " Use space as leader:
 let mapleader = "\<Space>"
 
+" Load filetype plugins. This has to come before any autocmds
+" that do things like change the commenstring, so we keep it near
+" the top of the file.
+filetype plugin on
+
 lua require('plugins')
 lua require('completion')
 lua require('lsp')
