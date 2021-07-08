@@ -85,7 +85,7 @@ augroup filetypes
    au BufNewFile,BufRead *.spi               setlocal ft=tcl
    au BufNewFile,BufRead .exper_cour         setlocal ft=sh
    au BufNewFile,BufRead Common_Compiler*    setlocal ft=sh
-   au BufNewFile,BufRead *.dot               setlocal ft=sh
+   au BufNewFile,BufRead *.dot               setlocal ft=zsh
 
    " NTC only-rules (so far)
    au BufNewFile,BufRead *.lcm               setlocal ft=c
@@ -98,6 +98,7 @@ augroup filetypes
    au BufNewFile,BufRead *.module            setlocal ft=php
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
    au BufNewFile,BufRead *.json              setlocal ft=json
+   au BufNewFile,BufRead *.json.in           setlocal ft=json
    au BufNewFile,BufRead *.kt                setlocal ft=kotlin
 
    " Ford
@@ -114,6 +115,7 @@ augroup filetypes
    au BufNewFile,BufRead *.envrc             setlocal ft=sh
    au BufNewFile,BufRead .jdbrc              setlocal ft=jdb
    au BufNewFile,BufRead .clangd             setlocal ft=yaml
+   au BufNewFile,BufRead .tmpl               setlocal ft=tmpl
 augroup end
 
 augroup whitespace
@@ -140,6 +142,7 @@ augroup FTOptions
     autocmd!
     autocmd FileType c,cpp,cs,java,bzl,javascript setlocal commentstring=//\ %s
     autocmd FileType sh,jdb,cmake                 setlocal commentstring=#\ %s
+    autocmd FileType tmpl                         setlocal commentstring=##\ %s
 augroup END
 
 augroup SHORTCUTS
