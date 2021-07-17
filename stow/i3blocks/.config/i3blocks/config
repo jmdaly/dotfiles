@@ -24,18 +24,23 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/local/libexec/i3blocks/$BLOCK_NAME
+command=/usr/share/i3blocks/$BLOCK_NAME
+full_text=|
 separator=false
-separator_block_width=5
-border_top=0
-border_left=0
-border_right=0
-border_bottom=4
+separator_block_width=9
+align=center
+# border_top=0
+# border_left=0
+# border_right=0
+# border_bottom=4
 
 [weather]
 command=~/dotfiles/status-blocks/weather
 interval=60
-border=#cc241d
+align=center
+# border=#cc241d
+
+[separator]
 
 # Volume indicator
 #
@@ -48,7 +53,10 @@ instance=Master
 #instance=PCM
 interval=once
 signal=10
-border=#98971a
+align=center
+# border=#98971a
+
+[separator]
 
 # Memory usage
 #
@@ -57,7 +65,10 @@ border=#98971a
 label= 
 # separator=false
 interval=30
-border=#d79921
+align=center
+# border=#d79921
+
+[separator]
 
 # Network interface monitoring
 #
@@ -67,8 +78,11 @@ border=#d79921
 #instance=wlan0
 label= 
 interval=10
+align=center
 separator=false
-border=#458588
+# border=#458588
+
+[separator]
 
 # CPU usage
 #
@@ -79,12 +93,14 @@ label= 
 interval=10
 min_width= 100.00%
 align=center
-border=#b16286
+# border=#b16286
 #separator=false
 
 # [load_average]
 # label=Load Avg
 # interval=10
+
+[separator]
 
 # Battery indicator
 #
@@ -94,7 +110,10 @@ label= 
 #label=⚡
 #instance=1
 interval=30
-border=#689d6a
+align=center
+# border=#689d6a
+
+[separator]
 
 # Date Time
 #
@@ -102,4 +121,5 @@ border=#689d6a
 label= 
 command=echo "`date +'%a %b %d'` `date +'%T'`"
 interval=5
-border=#a89984
+align=center
+# border=#a89984

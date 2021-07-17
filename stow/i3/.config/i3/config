@@ -53,7 +53,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-set $terminal st
+set $terminal alacritty
 bindsym $mod+Return exec $terminal
 
 # kill focused window
@@ -155,16 +155,21 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Program workspaces
-assign [class="google-chrome"] $workspace2
+assign [class="Google-chrome"] $workspace2
 # We want terminals to appear on specific workspaces,
 # so we will give them different classes, based on
 # the workspace we want them on:
-assign [class="st-256color" instance="term-ws1"] $workspace1
-assign [class="st-256color" instance="term-ws3"] $workspace3
+assign [class="Alacritty" title="term-ws1"] $workspace1
+assign [class="Alacritty" title="term-ws3"] $workspace3
 
 # Ensure certain programs always start floating:
 for_window [class="zoom"] floating enable
 for_window [title="Microsoft Teams Notification" class="Microsoft Teams - Preview"] floating enable, no_focus
+for_window [class="Matplotlib"] floating enable
+for_window [class="octave-gui"] floating enable
+
+# Size certain floating windows properly
+for_window [class="Matplotlib"] resize set 1263 1138
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -210,56 +215,56 @@ client.background       $black
 
 # Disable window titlebars. Necessary for i3-gaps:
 for_window [class="^.*"] border pixel 0
-# Set gaps:
-set $default_gaps_inner 5
-set $default_gaps_outer 0
-gaps inner $default_gaps_inner
-gaps outer $default_gaps_outer
+# # Set gaps:
+# set $default_gaps_inner 5
+# set $default_gaps_outer 0
+# gaps inner $default_gaps_inner
+# gaps outer $default_gaps_outer
 
-set $mode_gaps gaps
-set $mode_gaps_outer outer gaps
-set $mode_gaps_inner inner gaps
-bindsym $mod+Shift+g mode "$mode_gaps"
-mode "$mode_gaps" {
-    bindsym o      mode "$mode_gaps_outer"
-    bindsym i      mode "$mode_gaps_inner"
+# set $mode_gaps gaps
+# set $mode_gaps_outer outer gaps
+# set $mode_gaps_inner inner gaps
+# bindsym $mod+Shift+g mode "$mode_gaps"
+# mode "$mode_gaps" {
+#     bindsym o      mode "$mode_gaps_outer"
+#     bindsym i      mode "$mode_gaps_inner"
 
-    bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
-    bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
+#     bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
+#     bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
 
-mode "$mode_gaps_inner" {
-    bindsym plus  gaps inner current plus 5
-    bindsym minus gaps inner current minus 5
-    bindsym 0     mode "default", gaps inner current set 0
-    bindsym d     mode "default", gaps inner current set $default_gaps_inner
+# mode "$mode_gaps_inner" {
+#     bindsym plus  gaps inner current plus 5
+#     bindsym minus gaps inner current minus 5
+#     bindsym 0     mode "default", gaps inner current set 0
+#     bindsym d     mode "default", gaps inner current set $default_gaps_inner
 
-    bindsym Shift+plus  gaps inner all plus 5
-    bindsym Shift+minus gaps inner all minus 5
-    bindsym Shift+0     mode "default", gaps inner all set 0
-    bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
+#     bindsym Shift+plus  gaps inner all plus 5
+#     bindsym Shift+minus gaps inner all minus 5
+#     bindsym Shift+0     mode "default", gaps inner all set 0
+#     bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
 
-mode "$mode_gaps_outer" {
-    bindsym plus  gaps outer current plus 5
-    bindsym minus gaps outer current minus 5
-    bindsym 0     mode "default", gaps outer current set 0
-    bindsym d     mode "default", gaps outer current set $default_gaps_outer
+# mode "$mode_gaps_outer" {
+#     bindsym plus  gaps outer current plus 5
+#     bindsym minus gaps outer current minus 5
+#     bindsym 0     mode "default", gaps outer current set 0
+#     bindsym d     mode "default", gaps outer current set $default_gaps_outer
 
-    bindsym Shift+plus  gaps outer all plus 5
-    bindsym Shift+minus gaps outer all minus 5
-    bindsym Shift+0     mode "default", gaps outer all set 0
-    bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
+#     bindsym Shift+plus  gaps outer all plus 5
+#     bindsym Shift+minus gaps outer all minus 5
+#     bindsym Shift+0     mode "default", gaps outer all set 0
+#     bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -299,13 +304,12 @@ exec --no-startup-id compton
 # Start up terminals on multiple workspaces. We use classes
 # to control which terminal opens on which workspace, with
 # the -c flag
-exec $terminal -n term-ws1 
-exec $terminal -n term-ws3
-exec $terminal -n term-ws3
+exec $terminal --title term-ws1 
+exec $terminal --title term-ws3
 # Start up a terminal and move it to the scratchpad:
-exec $terminal -n term-scratchpad
-for_window [class="st-256color" instance="term-scratchpad"] move scratchpad
-for_window [class="st-256color" instance="term-scratchpad"] border pixel 1
+exec $terminal --title term-scratchpad
+for_window [class="Alacritty" title="term-scratchpad"] move scratchpad
+for_window [class="Alacritty" title="term-scratchpad"] border pixel 1
 
 # Set the screens to turn off after 600 seconds of inactivity:
 exec "xset dpms 600"
