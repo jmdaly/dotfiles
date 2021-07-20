@@ -79,6 +79,11 @@ if type lsd > /dev/null; then
   alias ls='lsd'
 fi
 
+# If keychain exists, use it to manage the ssh agent
+if type keychain > /dev/null; then
+  eval $(keychain --eval --agents ssh --quick --quiet)
+fi
+
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
 
