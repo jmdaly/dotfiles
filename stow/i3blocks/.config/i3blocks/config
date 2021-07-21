@@ -48,9 +48,9 @@ align=center
 # The second parameter overrides the mixer selection
 # See the script for details.
 [volume]
-label=
+command=~/i3blocks-contrib/volume/volume
+label=🎵︁
 instance=Master
-#instance=PCM
 interval=once
 signal=10
 align=center
