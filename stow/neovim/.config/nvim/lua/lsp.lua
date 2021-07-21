@@ -1,7 +1,7 @@
 -- Set up the built-in language client
 
 -- Tell neovim where to find clangd
-vim.g.clang_path = "/opt/llvm"
+vim.g.clang_path = "/usr"
 
 if vim.fn.has("win32") == 1 then
   vim.g.clang_path = "C:/Program Files/LLVM"
