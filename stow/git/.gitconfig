@@ -3,9 +3,7 @@
 	email = jmdaly@gmail.com
 
 [includeIf "gitdir:~/workspaces/*"]
-	path = ~/dotfiles/gitconfig/gitconfig.cepton.inc
-[includeIf "gitdir:~/cepton/*"]
-	path = ~/dotfiles/gitconfig/gitconfig.cepton.inc
+	path = ~/dotfiles/gitconfig/gitconfig.ouster.inc
 
 [merge]
 	tool = vimdiff
