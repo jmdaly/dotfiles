@@ -2,7 +2,7 @@
 	name = John M Daly
 	email = jmdaly@gmail.com
 
-[includeIf "gitdir:~/workspaces/*"]
+[includeIf "gitdir:~/workspaces/"]
 	path = ~/dotfiles/gitconfig/gitconfig.ouster.inc
 
 [merge]
