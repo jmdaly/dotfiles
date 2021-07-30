@@ -23,8 +23,8 @@ if 1 == vim.fn.executable("cmake-language-server") then
   lspconfig.cmake.setup{}
 end
 
-if 1 == vim.fn.executable("pyls") then
-  lspconfig.pyls.setup{}
+if 1 == vim.fn.executable("pylsp") then
+  lspconfig.pylsp.setup{}
 end
 
 -- Configure the way code diagnostics are displayed
