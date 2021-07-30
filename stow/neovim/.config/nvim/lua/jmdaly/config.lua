@@ -40,3 +40,21 @@ require('lightspeed').setup {
    limit_ft_matches = 5,
    full_inclusive_prefix_key = '<c-x>',
 }
+
+-- Lightspeed overrides the default f/F/t/T maps, but I prefer the default
+-- approach. As a result, I unmap those maps here.
+vim.api.nvim_del_keymap('n', 'f')
+vim.api.nvim_del_keymap('o', 'f')
+vim.api.nvim_del_keymap('x', 'f')
+
+vim.api.nvim_del_keymap('n', 'F')
+vim.api.nvim_del_keymap('o', 'F')
+vim.api.nvim_del_keymap('x', 'F')
+
+vim.api.nvim_del_keymap('n', 't')
+vim.api.nvim_del_keymap('o', 't')
+vim.api.nvim_del_keymap('x', 't')
+
+vim.api.nvim_del_keymap('n', 'T')
+vim.api.nvim_del_keymap('o', 'T')
+vim.api.nvim_del_keymap('x', 'T')
