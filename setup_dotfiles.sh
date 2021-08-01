@@ -32,16 +32,6 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# Get vim-plug, the plugin manager I use
-# for vim:
-if [ ! -f ~/.vim/autoload/plug.vim ]; then
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-
-if [ ! -f ~/.config/nvim/autoload/plug.vim ]; then
-	curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-
 # Set up all of the configs:
 cd ${base}/stow
 
