@@ -742,6 +742,10 @@ nnoremap <silent> <leader>wl :call AppendModeline()<CR>
 
 " Echo full file path
 command! Ep :echo expand('%:p')
-command! Bp :!/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt -w %
+if executable('/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt')
+   command! Bp :!/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt -w %
+elseif executable('/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt')
+   command! Bp :w | !/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt -w %
+endif
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
