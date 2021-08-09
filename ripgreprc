@@ -41,5 +41,14 @@ idl:include:hal,hidl,aidl
 --type-add
 app:include:kt,java,apk,aidl
 
+--type-add
+fidl:*.fidl
+
+--type-add
+fdepl:*.fdepl
+
+--type-add
+fd:include:fidl,fdepl
+
 # Using glob patterns to include/exclude files or folders
 --glob=!git/*
