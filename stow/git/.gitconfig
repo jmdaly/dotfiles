@@ -12,6 +12,10 @@
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/opt/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
+[url "https://gist.github.com"]
+	insteadOf = ssh://gist.github.com
+[url "https://github.com"]
+	insteadOf = ssh://github.com
 [commit]
         gpgsign = true
 [core]
