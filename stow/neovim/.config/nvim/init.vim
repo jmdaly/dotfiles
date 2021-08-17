@@ -83,7 +83,10 @@ let g:ale_linters = {
 \   'python': ['pyls', 'flake8'],
 \}
 let g:ale_cpp_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
+let g:ale_cpp_clangtidy_extra_options = '-header-filter=.*'
+
 let g:ale_c_clangtidy_executable = g:clang_path . '/bin/clang-tidy'
+let g:ale_c_clangtidy_extra_options = '-header-filter=.*'
 " Set up mapping to move between errors
 nmap <silent> [w <Plug>(ale_previous_wrap)
 nmap <silent> ]w <Plug>(ale_next_wrap)
