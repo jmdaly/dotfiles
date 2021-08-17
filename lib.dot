@@ -162,7 +162,7 @@ function dotfiles_install_i3()
     mkdir -p "${home}/.config/i3"
     assemble_i3_config "${DOTFILES_DIR:-${HOME}/dotfiles}/config/i3" "${home}/.config/i3/config"
     mkdir -p "${home}/.screenlayout"
-    symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/screenlayout/$(hostname).sh" "${home}/.screenlayout/host.sh" 1
+    symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/stow/screenlayout/.screenlayout/host.sh" "${home}/.screenlayout/$(hostname).sh" 1
   fi
 
   if [[ ! -e "${home}/bin" ]]; then
