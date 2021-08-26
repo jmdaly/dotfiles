@@ -110,4 +110,9 @@ if [[ -e ${HOME}/workspace/vcpkg/scripts/vcpkg_completion.bash ]]; then
     source ${HOME}/workspace/vcpkg/scripts/vcpkg_completion.bash
 fi
 
+# direnv
+if [[ "1" == "$(_exists direnv)" ]]; then
+	eval "$(direnv hook bash)"
+fi
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
