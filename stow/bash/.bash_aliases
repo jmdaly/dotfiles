@@ -73,6 +73,7 @@ if [[ $0 == *bash || "" != "${TRUE_HOST}" || "$(hostname)" == *siteground* ]]; t
    alias grb="git rebase"
    alias grbc="git rebase --continue"
    alias gmt="git mergetool"
+   alias grv="git remote -v"
 fi
 if [[ "${HOME}" == *com.termux* ]]; then
    alias vi="nvim"
@@ -80,7 +81,7 @@ if [[ "${HOME}" == *com.termux* ]]; then
 fi
 alias gst="git status -uno -sb"
 alias rst="repo status"
-alias gd="git diff -w --color --word-diff"
+alias gd="git diff -w --color"
 alias gdrm='git diff $(git_current_remote)/master'
 alias gdr='git diff $(git_current_remote)/$(git_current_branch)'
 alias rs="repo sync -j8 -q -c --no-tags"
