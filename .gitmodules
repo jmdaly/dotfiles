@@ -20,3 +20,6 @@
 [submodule "stow/rofi/.config/rofi/rofi-themes"]
 	path = stow/rofi/.config/rofi/rofi-themes
 	url = https://github.com/davatorium/rofi-themes.git
+[submodule "delta"]
+	path = delta
+	url = https://github.com/dandavison/delta
