@@ -63,7 +63,7 @@
 	; features = tangara-chilensis
 	features = woolly-mammoth
 	; features = calochortus-lyallii
-	side-by-side = true
+	; side-by-side = true
 	; commit-decoration-style = ol "#1136ff"
 
 [delta "interactive"]
@@ -79,6 +79,6 @@
 	hunk-header-style = file line-number syntax
 
 [diff]
-colorMoved = default
+	colorMoved = default
 
 ; vim: ts=2 sw=2 sts=0 noet :
