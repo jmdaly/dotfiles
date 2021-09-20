@@ -16,7 +16,6 @@ lua require('jmdaly.config')
 set termguicolors
 
 let g:material_style = 'palenight'
-lua vim.g.material_italic_comments = true
 colorscheme material
 
 " Turn line numbers on:
@@ -63,6 +62,15 @@ nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
 nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" DAP debug mappings
+nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>
+nnoremap <silent> <leader>do :lua require'dap'.step_over()<CR>
+nnoremap <silent> <leader>di :lua require'dap'.step_into()<CR>
+nnoremap <silent> <leader>br :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+nnoremap <silent> <leader>dh :lua require'dap.ui.variables'.hover()<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
