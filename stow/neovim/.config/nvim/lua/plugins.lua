@@ -41,6 +41,7 @@ return require('packer').startup(function(use)
 
   use 'junegunn/fzf.vim'
   use 'mhinz/vim-startify' -- Plugin to provide a useful start screen in vim:
+  use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
   use 'ggandor/lightspeed.nvim' -- Motion that takes two characters and jumps to occurences
 
   use 'marko-cerovac/material.nvim'
