@@ -1,13 +1,13 @@
 # Name the workspaces
 set $workspace1  "1: Social"
-set $workspace2  "2: Ford"
-set $workspace3  "3: Main"
+set $workspace2  "2: Main"
+set $workspace3  "3"
 set $workspace4  "4"
 set $workspace5  "5"
 set $workspace6  "6"
 set $workspace7  "7"
 set $workspace8  "8"
-set $workspace9  "9: VPN"
+set $workspace9  "9"
 set $workspace10 "10: Media"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
 
