@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
@@ -78,7 +78,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		fpath+=("${LINUXBREWHOME}/.linuxbrew/share/zsh/site-functions")
 	fi
 
-	if [[ "1" == "${WSL_VERSION}" ]]; then
+	if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop && "1" == "${WSL_VERSION}" ]]; then
 		# Pure Prompt https://github.com/sindresorhus/pure
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
