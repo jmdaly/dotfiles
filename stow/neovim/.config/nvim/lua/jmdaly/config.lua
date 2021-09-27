@@ -4,6 +4,35 @@
 -- Directory containing my user-defined snippets
 vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 
+-- Set up material theme
+require('material').setup({
+        contrast = true,
+        borders = false,
+        italics = {
+                comments = true,
+                strings = false,
+                keywords = false,
+                functions = false,
+                variables = false
+        },
+        contrast_windows = {
+                "terminal",
+                "packer",
+                "qf"
+        },
+        text_contrast = {
+                lighter = false,
+                darker = false
+        },
+        disable = {
+                background = false,
+                term_colors = false,
+                eob_lines = false
+        },
+        custom_highlights = {}
+})
+
+
 require('lualine').setup{
   options = {
     theme = 'material-nvim'
@@ -58,3 +87,50 @@ vim.api.nvim_del_keymap('x', 't')
 vim.api.nvim_del_keymap('n', 'T')
 vim.api.nvim_del_keymap('o', 'T')
 vim.api.nvim_del_keymap('x', 'T')
+
+-- Setup the debug adapter, for debugging in neovim
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode', -- adjust as needed
+  name = "lldb"
+}
+
+-- This function takes a string and splits it on the delimiter.
+-- It returns a table of substrings, split on the delimiter.
+function Split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
+dap.configurations.cpp = {
+  {
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = function()
+      return Split(vim.fn.input('Command line args: '), " ")
+    end,
+
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+    --
+    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    --
+    -- Otherwise you might get the following error:
+    --
+    --    Error on launch: Failed to attach to the target process
+    --
+    -- But you should be aware of the implications:
+    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+    runInTerminal = false,
+  },
+}
+

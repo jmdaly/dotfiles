@@ -16,7 +16,6 @@ lua require('jmdaly.config')
 set termguicolors
 
 let g:material_style = 'palenight'
-lua vim.g.material_italic_comments = true
 colorscheme material
 
 " Turn line numbers on:
@@ -63,6 +62,15 @@ nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
 nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+
+" DAP debug mappings
+nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>
+nnoremap <silent> <leader>do :lua require'dap'.step_over()<CR>
+nnoremap <silent> <leader>di :lua require'dap'.step_into()<CR>
+nnoremap <silent> <leader>br :lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
+nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
+nnoremap <silent> <leader>dh :lua require'dap.ui.variables'.hover()<CR>
 
 " pc-lint error format and make configuration.
 let g:pclint_path = $HOME.'/pclint/linux'
@@ -111,19 +119,14 @@ nnoremap <leader>/ :History/<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>bc :BCommits<CR>
 " A mapping to search using ag:
-nnoremap <leader>ag :Ag<space>
-" A command to enable case-sensitive search with Ag:
-command! -bang -nargs=* Ags
-  \ call fzf#vim#grep('ag --nogroup --column --color -s '.shellescape(<q-args>), 0, <bang>0)
-" A mapping to do case-insensitive search using ag:
-nnoremap <leader>as :Ags<space>
+nnoremap <leader>rg :Rg<space>
 " A command that will search for the word under the cursor:
-command! -nargs=* -bang AgIW
+command! -nargs=* -bang RgIW
   \ call fzf#vim#grep(
-  \   'ag --nogroup --column --color --smart-case '.shellescape(expand('<cword>')), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
   \   fzf#vim#with_preview(), <bang>0)
 " A mapping for the above command
-nnoremap <leader>w :AgIW<CR>
+nnoremap <leader>w :RgIW<CR>
 " Set the fzf popup layout
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 

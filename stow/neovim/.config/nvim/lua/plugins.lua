@@ -65,4 +65,6 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'ojroques/nvim-lspfuzzy' -- Integrates fzf with nvim-lsp results
 
+  use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
+
 end)
