@@ -119,19 +119,14 @@ nnoremap <leader>/ :History/<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>bc :BCommits<CR>
 " A mapping to search using ag:
-nnoremap <leader>ag :Ag<space>
-" A command to enable case-sensitive search with Ag:
-command! -bang -nargs=* Ags
-  \ call fzf#vim#grep('ag --nogroup --column --color -s '.shellescape(<q-args>), 0, <bang>0)
-" A mapping to do case-insensitive search using ag:
-nnoremap <leader>as :Ags<space>
+nnoremap <leader>rg :Rg<space>
 " A command that will search for the word under the cursor:
-command! -nargs=* -bang AgIW
+command! -nargs=* -bang RgIW
   \ call fzf#vim#grep(
-  \   'ag --nogroup --column --color --smart-case '.shellescape(expand('<cword>')), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')), 1,
   \   fzf#vim#with_preview(), <bang>0)
 " A mapping for the above command
-nnoremap <leader>w :AgIW<CR>
+nnoremap <leader>w :RgIW<CR>
 " Set the fzf popup layout
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
