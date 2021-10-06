@@ -13,7 +13,7 @@ set $workspace10 "10"
 
 # Assign windows to a Workspace
 assign [class="Stoken-gui"] $workspace9
-assign [class="Webex"] $workspace9
+assign [class="Webex"] $workspace3
 assign [class="ZSTray"] $workspace9
 
 # Put Workspaces on specific monitors
