@@ -170,6 +170,9 @@ fi
 if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
 	stows+=('vnc')
 fi
+if [[ "$(which wireshark)" != "" ]]; then
+	stows+=('wireshark')
+fi
 
 # Create a backup directory:
 mkdir -p "${h}/.dotfiles_backup"
