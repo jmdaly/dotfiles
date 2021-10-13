@@ -62,8 +62,12 @@ return require('packer').startup(function(use)
   end
 
   use 'neovim/nvim-lspconfig' -- Configurations for neovim's language client
-  use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'ojroques/nvim-lspfuzzy' -- Integrates fzf with nvim-lsp results
+
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-vsnip'
 
   use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
 
