@@ -27,11 +27,6 @@ return require('packer').startup(function(use)
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
 
-  use {
-    'hrsh7th/vim-vsnip',
-    requires = 'rafamadriz/friendly-snippets'
-  }
-
   if fn.has("unix") == 1 or fn.has("wsl") == 1 then
     -- The installation script only works in Linux and similar
     use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
@@ -67,7 +62,21 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-vsnip'
+
+  -- The order that the completion support plugins are loaded is important
+  -- in order to get friendly-snippets working. The following code comes from
+  -- this github issue: https://github.com/hrsh7th/vim-vsnip/issues/219#issuecomment-940031501
+  use {
+    'hrsh7th/cmp-vsnip',
+    after = 'nvim-cmp',
+    requires = {
+      'hrsh7th/vim-vsnip',
+      {
+        'rafamadriz/friendly-snippets',
+        after = 'cmp-vsnip'
+      }
+    }
+  }
 
   use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
 
