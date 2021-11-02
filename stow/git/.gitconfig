@@ -17,7 +17,7 @@
 [url "https://github.com"]
 	insteadOf = ssh://github.com
 [commit]
-        gpgsign = true
+  gpgsign = true
 [core]
 	quotepath = false
 	commitGraph = true
