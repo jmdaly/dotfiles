@@ -25,7 +25,7 @@ fi
 
 if [[ -e "${DOTFILES_DIR}/doupdate.sh" && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:
-	"${DOTFILES_DIR}/doupdate.sh"
+	"${DOTFILES_DIR}/doupdate.sh" > /dev/null
 fi
 
 # Uncomment if I want history shared across all terminals

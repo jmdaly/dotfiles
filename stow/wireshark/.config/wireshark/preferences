@@ -39,7 +39,7 @@
 
 # Ask to save unsaved capture files?
 # TRUE or FALSE (case-insensitive)
-#gui.ask_unsaved: TRUE
+gui.ask_unsaved: FALSE
 
 # Display an autocomplete suggestion for display and capture filter controls
 # TRUE or FALSE (case-insensitive)
@@ -288,7 +288,7 @@ gui.qt.font_name: Liberation Mono,9,-1,5,50,0,0,0,0,0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: eno1(1),enx000ec675741d(1),lo(1),any(113),docker0(1),enx0050b6eb5220(1),bluetooth-monitor(254),nflog(239),nfqueue(228),bluetooth0(201),bluetooth1(201),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
+capture.devices_linktypes: eth0(1),eno1(1),lo(1),any(113),docker0(1),bluetooth-monitor(254),nflog(239),nfqueue(228),bluetooth0(201),bluetooth1(201),android-logcat-text-crash-0x540ed97e(252),android-logcat-text-events-0x540ed97e(252),android-logcat-text-main-0x540ed97e(252),android-logcat-text-radio-0x540ed97e(252),android-logcat-text-system-0x540ed97e(252),android-tcpdump-any-0x540ed97e(1),android-tcpdump-dummy0-0x540ed97e(1),android-tcpdump-eth0-0x540ed97e(1),android-tcpdump-lo-0x540ed97e(1),ciscodump(147),dpauxmon(275),randpkt(147),sdjournal(147),sshdump(147),udpdump(252)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -304,15 +304,15 @@ capture.devices_linktypes: eno1(1),enx000ec675741d(1),lo(1),any(113),docker0(1),
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: eno1(2),enx000ec675741d(2),lo(2),any(2),docker0(2),enx0050b6eb5220(2),bluetooth-monitor(2),nflog(2),nfqueue(2),bluetooth0(2),wls1(2),bluetooth1(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
+capture.devices_buffersize: eth0(2),eno1(2),lo(2),any(2),docker0(2),bluetooth-monitor(2),nflog(2),nfqueue(2),bluetooth0(2),wls1(2),bluetooth1(2),android-logcat-text-crash-0x540ed97e(2),android-logcat-text-events-0x540ed97e(2),android-logcat-text-main-0x540ed97e(2),android-logcat-text-radio-0x540ed97e(2),android-logcat-text-system-0x540ed97e(2),android-tcpdump-any-0x540ed97e(2),android-tcpdump-dummy0-0x540ed97e(2),android-tcpdump-eth0-0x540ed97e(2),android-tcpdump-lo-0x540ed97e(2),ciscodump(2),dpauxmon(2),randpkt(2),sdjournal(2),sshdump(2),udpdump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: eno1:0(262144),enx000ec675741d:0(262144),lo:0(262144),any:0(262144),docker0:0(262144),enx0050b6eb5220:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),bluetooth0:0(262144),wls1:0(262144),bluetooth1:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
+capture.devices_snaplen: eth0:0(262144),eno1:0(262144),lo:0(262144),any:0(262144),docker0:0(262144),bluetooth-monitor:0(262144),nflog:0(262144),nfqueue:0(262144),bluetooth0:0(262144),wls1:0(262144),bluetooth1:0(262144),android-logcat-text-crash-0x540ed97e:0(262144),android-logcat-text-events-0x540ed97e:0(262144),android-logcat-text-main-0x540ed97e:0(262144),android-logcat-text-radio-0x540ed97e:0(262144),android-logcat-text-system-0x540ed97e:0(262144),android-tcpdump-any-0x540ed97e:0(262144),android-tcpdump-dummy0-0x540ed97e:0(262144),android-tcpdump-eth0-0x540ed97e:0(262144),android-tcpdump-lo-0x540ed97e:0(262144),ciscodump:0(262144),dpauxmon:0(262144),randpkt:0(262144),sdjournal:0(262144),sshdump:0(262144),udpdump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: eno1(1),enx000ec675741d(1),lo(1),any(1),docker0(1),enx0050b6eb5220(1),bluetooth-monitor(1),nflog(1),nfqueue(1),bluetooth0(1),wls1(1),bluetooth1(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
+capture.devices_pmode: eth0(1),eno1(1),lo(1),any(1),docker0(1),bluetooth-monitor(1),nflog(1),nfqueue(1),bluetooth0(1),wls1(1),bluetooth1(1),android-logcat-text-crash-0x540ed97e(1),android-logcat-text-events-0x540ed97e(1),android-logcat-text-main-0x540ed97e(1),android-logcat-text-radio-0x540ed97e(1),android-logcat-text-system-0x540ed97e(1),android-tcpdump-any-0x540ed97e(1),android-tcpdump-dummy0-0x540ed97e(1),android-tcpdump-eth0-0x540ed97e(1),android-tcpdump-lo-0x540ed97e(1),ciscodump(1),dpauxmon(1),randpkt(1),sdjournal(1),sshdump(1),udpdump(1)
 
 # Capture in promiscuous mode?
 # TRUE or FALSE (case-insensitive)
@@ -417,7 +417,7 @@ capture.devices_pmode: eno1(1),enx000ec675741d(1),lo(1),any(1),docker0(1),enx005
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host fe80::275:70f6:9cf4:af17 or host fe80::42:7cff:fe76:2f4a or host 100.64.0.1 or host 10.1.0.100 or host 172.17.0.1 or host 192.168.2.53) and port 22)
+#extcap.sshdump.remotefilter: not ((host fe80::e76d:719e:a0c0:e855 or host 100.64.0.1 or host 169.254.30.224 or host 10.1.0.100 or host 172.17.0.1 or host 192.168.2.53) and port 22)
 
 # Packets to capture
 # A string
@@ -442,190 +442,6 @@ capture.devices_pmode: eno1(1),enx000ec675741d(1),lo(1),any(1),docker0(1),enx005
 # Use a file for debug
 # A string
 #extcap.dpauxmon.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_tcpdump_eth0_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_tcpdump_eth0_0x540ed97e.adbservertcpport: 5037
-
-# Run in debug mode
-# A string
-#extcap.android_tcpdump_eth0_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_tcpdump_eth0_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_tcpdump_dummy0_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_tcpdump_dummy0_0x540ed97e.adbservertcpport: 5037
-
-# Run in debug mode
-# A string
-#extcap.android_tcpdump_dummy0_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_tcpdump_dummy0_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_tcpdump_any_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_tcpdump_any_0x540ed97e.adbservertcpport: 5037
-
-# Run in debug mode
-# A string
-#extcap.android_tcpdump_any_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_tcpdump_any_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_tcpdump_lo_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_tcpdump_lo_0x540ed97e.adbservertcpport: 5037
-
-# Run in debug mode
-# A string
-#extcap.android_tcpdump_lo_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_tcpdump_lo_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.adbservertcpport: 5037
-
-# Ignore log buffer
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.logcatignorelogbuffer: false
-
-# Custom logcat parameters
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.logcatcustomoptions: 
-
-# Run in debug mode
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_logcat_text_main_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.adbservertcpport: 5037
-
-# Ignore log buffer
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.logcatignorelogbuffer: false
-
-# Custom logcat parameters
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.logcatcustomoptions: 
-
-# Run in debug mode
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_logcat_text_system_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.adbservertcpport: 5037
-
-# Ignore log buffer
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.logcatignorelogbuffer: false
-
-# Custom logcat parameters
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.logcatcustomoptions: 
-
-# Run in debug mode
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_logcat_text_radio_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.adbservertcpport: 5037
-
-# Ignore log buffer
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.logcatignorelogbuffer: false
-
-# Custom logcat parameters
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.logcatcustomoptions: 
-
-# Run in debug mode
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_logcat_text_events_0x540ed97e.debugfile: 
-
-# ADB Server IP Address
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.adbserverip: 127.0.0.1
-
-# ADB Server TCP Port
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.adbservertcpport: 5037
-
-# Ignore log buffer
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.logcatignorelogbuffer: false
-
-# Custom logcat parameters
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.logcatcustomoptions: 
-
-# Run in debug mode
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.debug: false
-
-# Use a file for debug
-# A string
-#extcap.android_logcat_text_crash_0x540ed97e.debugfile: 
 
 # Listen port
 # A string
@@ -713,7 +529,7 @@ capture.devices_pmode: eno1(1),enx000ec675741d(1),lo(1),any(1),docker0(1),enx005
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host fe80::275:70f6:9cf4:af17 any eq 0, deny tcp any eq 0 host fe80::275:70f6:9cf4:af17, deny tcp host fe80::42:7cff:fe76:2f4a any eq 0, deny tcp any eq 0 host fe80::42:7cff:fe76:2f4a, deny tcp host 100.64.0.1 any eq 0, deny tcp any eq 0 host 100.64.0.1, deny tcp host 10.1.0.100 any eq 0, deny tcp any eq 0 host 10.1.0.100, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.2.53 any eq 0, deny tcp any eq 0 host 192.168.2.53, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host fe80::e76d:719e:a0c0:e855 any eq 0, deny tcp any eq 0 host fe80::e76d:719e:a0c0:e855, deny tcp host 100.64.0.1 any eq 0, deny tcp any eq 0 host 100.64.0.1, deny tcp host 169.254.30.224 any eq 0, deny tcp any eq 0 host 169.254.30.224, deny tcp host 10.1.0.100 any eq 0, deny tcp any eq 0 host 10.1.0.100, deny tcp host 172.17.0.1 any eq 0, deny tcp any eq 0 host 172.17.0.1, deny tcp host 192.168.2.53 any eq 0, deny tcp any eq 0 host 192.168.2.53, permit ip any any
 
 # Packets to capture
 # A string

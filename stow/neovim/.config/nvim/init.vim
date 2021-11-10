@@ -220,7 +220,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('kshenoy/vim-signature')
 
       " A plugin for asynchronous linting while you type
-      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c']})
+      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c', 'py']})
       call dein#add('itchyny/lightline.vim')
       call dein#add('maximbaz/lightline-ale')
 
@@ -647,7 +647,6 @@ set hlsearch
 " endif
 
 " Easy save
-noremap <leader>w :w<CR>
 inoremap <C-S> <Esc>:w<CR>
 " map alt/apple or something-S for khea
 

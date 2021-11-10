@@ -57,6 +57,10 @@ function git_current_remote() {
     echo $(git remote | head -n 1)
 }
 
+function gcr() {
+	git_current_remote
+}
+
 # A better test would be whether I'm running zsh..
 if [[ $0 == *bash || "" != "${TRUE_HOST}" || "$(hostname)" == *siteground* ]]; then
    alias ga="git add"
@@ -123,11 +127,11 @@ alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
 if [[ "undefined" == "${ANDROID_BUILD_TOP:-undefined}" ]]; then
-    export ANDROID_BUILD_TOP=/opt/android-src/aos
+    export ANDROID_BUILD_TOP=/opt/phoxnix/phx-aosp-workspace
 fi
-alias aos-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch alverstone-userdebug"
-alias aos-gas-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch alverstone_gas-userdebug"
-alias aos-em-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch aos_emulator_car_x86_64-userdebug"
+alias phx-aosp-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford-userdebug"
+alias phx-aosp-gas-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford_gas-userdebug"
+# alias aos-em-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch aos_emulator_car_x86_64-userdebug"
 
 alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
 

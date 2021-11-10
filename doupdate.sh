@@ -9,12 +9,13 @@ function abort_update() {
 function update_dotfiles()
 {
     cd $(dirname $(realpath $0))
+    local check_file=${DOTFILES_DIR:-$(dirname "$(realpath "$0")")}/.last_check
 
     local -r now=$(date +%s)
-    if [[ ! -e last_check ]]; then
-        echo 0 > last_check
+    if [[ ! -e "${check_file}" ]]; then
+        echo 0 > "${check_file}"
     fi
-    local last_update=$(cat last_check)
+    local last_update=$(cat ${check_file})
     if [[ "" == "${last_update}" ]]; then
         last_check=0
     fi;
@@ -24,7 +25,7 @@ function update_dotfiles()
     if [[ $now -gt $s ]]; then
         echo "Checking for update to dotfiles...."
         GIT_DIR=${DOTFILES_DIR:-~/dotfiles}/.git GIT_WORK_TREE=${DOTFILES_DIR:-~/dotfiles/} git pull
-        echo $now > last_check
+        echo $now > "${check_file}"
     else
         # echo "Not checking for update to dotfiles...."
     fi;
