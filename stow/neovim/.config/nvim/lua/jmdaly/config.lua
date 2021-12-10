@@ -41,7 +41,7 @@ require('lualine').setup{
     lualine_a = { {'mode', upper = true} },
     lualine_b = { {'branch', icon = ''} },
     lualine_c = { {'filename', file_status = true}, {'diagnostics',
-                                                      sources = { 'nvim_lsp', 'ale' },
+                                                      sources = { 'nvim_diagnostic', 'ale' },
                                                     }
                 },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
