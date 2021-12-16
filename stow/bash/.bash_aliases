@@ -50,11 +50,17 @@ if [[ -e "${HOME}/bin/yubioath-desktop-5.0.1-linux.AppImage" ]]; then
 fi
 
 function git_current_remote() {
-    # This is a hack for now, soon this should be changes to detect if we're in
-    # a repo workspace and use the python manifest tools to select the proper
-    # tool.
-    # Currently this returns this first remote
+	# This is a hack for now, soon this should be changes to detect if we're in
+	# a repo workspace and use the python manifest tools to select the proper
+	# tool.
+	# Currently this returns this first remote
+	grc=$(git config remotes.default)
+
+	if [[ "" != "${grc}" ]]; then
+		echo "${grc}"
+	else
     echo $(git remote | head -n 1)
+	fi
 }
 
 function gcr() {
@@ -99,9 +105,9 @@ function rebase_to_master() {
 }
 
 function vigd() {
-    local remote=${1:-$(git_current_remote)}; shift
-    local branch=${2:-$(git_current_branch)}
-    vi -p $(git diff --name-only "${branch}" "$(git merge-base "${branch}" "${remote}")")
+	local remote=${1:-$(git_current_remote)}; shift
+	local branch=${2:-$(git_current_branch)}
+	vi -p $(git diff --name-only "${branch}" "$(git merge-base "${branch}" "${remote}")")
 }
 
 function repo_init_aos() {
@@ -127,7 +133,7 @@ alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
 
 if [[ "undefined" == "${ANDROID_BUILD_TOP:-undefined}" ]]; then
-    export ANDROID_BUILD_TOP=/opt/phoxnix/phx-aosp-workspace
+	export ANDROID_BUILD_TOP=/opt/phoxnix/phx-aosp-workspace
 fi
 alias phx-aosp-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford-userdebug"
 alias phx-aosp-gas-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford_gas-userdebug"
