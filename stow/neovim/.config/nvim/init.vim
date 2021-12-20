@@ -60,8 +60,8 @@ nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
 nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
 nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
 
-nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> [z         <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> ]z         <cmd>lua vim.diagnostic.goto_next()<CR>
 
 " DAP debug mappings
 nnoremap <silent> <leader>dc :lua require'dap'.continue()<CR>
