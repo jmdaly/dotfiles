@@ -1,0 +1,141 @@
+# Attributes that can be used by many fsb components
+global:
+    git-clone-mode: full
+    git-mirror-root: /home/matt/.fsb_git_mirror
+    jobs: "1"
+    nexus-credential-source: netrc
+    qnx-jlevel: "8"
+    toolchain: toolchain
+    # git mirroring can be disabled by setting the above git-mirror-root to "", e.g.
+    #    git-mirror-root: ""
+    #
+    # FSB Designers running their own fsb (outside of a suite)
+    # May need to set these 3 parameters to point to alternative resources
+    #fsb-root: # Path to the root of the FSB suite installation: e.g. $HOME/.local/share/ford/fsb/fsb-suite-2020-06-3
+    #pbos-home: # Path to the directory containing bin/pbos: e.g. $HOME/.local/share/ford/fsb/fsb-suite-2020-06-3/services/pbos
+    #fsb-tools-home: # Path to the directory containing the tools, directories (bin, share...): e.g. $HOME/.local/share/ford/fsb/fsb-suite-2020-06-3/tools
+
+# Compiler cache configuration
+#     ccache-enable: true to enable, false to disable the ccache functionality
+#     ccache-dir: path of the compiler cache
+#     ccache-max-size: the maximum ccache size (in GB)
+#
+# (Optional) ccache-bin for the path of the ccache binary, for example,
+#     ccache-bin: ${HOME}/.local/bin/ccache
+# If ccache-bin is not specified, fsb will use the default ccache binary
+# which is tools/bin/ccache under the fsb suite dir
+ccache:
+    ccache-enable: true
+    ccache-dir: ${HOME}/.fsb-ccache
+    ccache-max-size: 50
+
+# Download cache configuration
+#     dl-cache-dir: path of the download cache
+#     max-size: the maximum cache size (in GB)
+#     size-management: the way to manage the cache size, valid values are "none", "start", "always"
+#       none: no cache size management
+#       start: will do a cache size check (and clean up if needed) when starting the build
+#       always: will do a cache size check (and clean up if needed) when starting the build, and every
+#               time before adding a new file to the cache
+dl-cache:
+    dl-cache-dir: /home/matt/.fsb_dl_cache
+    max-size: 50
+    size-management: start
+
+# PBOS configuration
+#     enable: true to enable, false to disable the PBOS functionality
+#     storage-type: the type of storage, currently gcs (Google Cloud Storage) and aws_s3 (Amazon S3 or compatible storage) are supported
+#     op-mode: the operation mode of PBOS client, valid values:
+#         "local": only use local PBOS (launch local PBOS service if needed). This is the default mode
+#         "remote": only use remote PBOS
+#         "remote-with-failover": use remote PBOS, if it is not accessible then use local PBOS (launch local PBOS service if needed)
+#
+#     gcs-remote-srv-address: the remote PBOS GCS storage service address
+#     gcs-local-srv-address: the local PBOS GCS storage service address
+#     gcs-pbos-project-id: the GCS project ID for PBOS
+#     gcs-pbos-bucket: the GCS bucket for PBOS
+#
+#     s3-accesskey: the access key (user name) to access the S3 storage
+#     s3-secretkey: the secret key (password) to access the S3 storage
+#     s3-region: the region of the S3 storage, e.g. "ca-central-1"
+#     s3-remote-srv-address: the remote PBOS S3 storage service address
+#     s3-local-srv-root: the root directory of local PBOS S3 server
+#     s3-local-srv-repo: the local PBOS S3 server repo path
+#     s3-local-srv-bin: the local PBOS S3 server binary path
+#     s3-local-srv-storage: the local PBOS S3 storage root path
+#     s3-local-srv-bucket: the local PBOS S3 storage bucket path
+#     s3-local-srv-address: the local PBOS S3 storage service address
+pbos-config:
+    enable: true
+    storage-type: gcs
+    op-mode: local
+    gcs-remote-srv-address: 127.0.0.1:50001
+    gcs-local-srv-address: 127.0.0.1:50001
+    gcs-pbos-project-id: gcs-pbos-test-project-id
+    gcs-pbos-bucket: pbos-bucket
+    gcs-local-srv-root: ${HOME}/.pbos_local_srv_root_gcs
+    gcs-local-srv-bin: bin/gcsemulator
+    gcs-local-srv-storage: pbos_storage
+    s3-accesskey: testakey
+    s3-secretkey: testskey
+    s3-region: ca-central-1
+    s3-remote-srv-address: 127.0.0.1:50002
+    s3-local-srv-root: ${HOME}/.pbos_local_srv_root_s3
+    s3-local-srv-repo: pbos
+    s3-local-srv-bin: bin/s3_server_emulator
+    s3-local-srv-storage: pbos_storage
+    s3-local-srv-bucket: pbos-bucket
+    s3-local-srv-address: 127.0.0.1:50002
+
+# FSB Engine configuration
+# engine: all parameters that affect an engine component
+#     By default the engine will abort the make if one builder fails to build
+#     If ContinueOnFail is set to true, FSB will build as much as possible, even after failures.
+#     continue-on-fail: true or false (default)
+#     worker: parameters that control the worker pool used for parallel execution
+#         pool-size-multiplier: (pool-size-multiplier * numCPUs) sets the maximum number of builders to be running at the same time.
+#         executor: In production ALWAYS set to "localExec". In designer's test to use noop builder set to "mockExec".
+engine:
+    continue-on-fail: false
+    worker:
+        pool-size-multiplier: 5
+        executor: localExec
+
+# log-streams: an array of streams (stdout, stderr, or a file) specifications.
+#     log-level: valid values are: "debug", "info", "warn", "error", "dpanic", "panic", "fatal" (full caps also accepted).
+#     output: stream name or path. valid values: "stdout", "stderr", file path (abs or rel).
+#             if path does not exists and path base has an extension, it is treated as a file to log to.
+#             if it has no extension, it is treated as a directory, and time-stamped files will be created within it.
+#             This is probably the easiest way to use the logging system.
+#     truncate: A boolean (true or false) that indicates that the file specified in output must be truncated.
+#               By default log files are not deleted or over-written.
+#               If truncate is set to true and output is a path to a specific file,
+#               then the file will be deleted and re-created.
+#     encoder: "fsb-text" (good for CLI output).
+#              "json" (good to be feed to a indexing engine, e.g. Elasticsearch).
+#              "console" (simplified text output, with json format for name/value pairs).
+#     time-format: the format to use for time stamps, valid values (case insensitive): 
+#              "ANSIC", "UNIXDATE", "RFC822", "RFC822Z", "RFC850", "RFC1123", "RFC1123Z", "RFC3339", "RFC3339NANO"
+#              or a format string acceptable to Go's time.Format (See: https://golang.org/pkg/time/#Time.Format)
+#              E.g "15:04:05.000"  hours in 24 format, minutes, seconds, milliseconds, no date
+#     caller: true to get the fsb code file and line where the log is created. This slows down logging.
+#             caller is not used by the fsb-text encoder.
+#     columns: Used only by the fsb-text encoder. It is a set of fields to outputs in the logs.
+#              The fields are output in the order they appear in the yaml columns array.
+#              Valid values for columns are:  "time-stamp", "level, caller", "name-space", "message", "fields" (case insensitive)
+#              The value "fields" represent the whole group of named fields present in the log (eg. a=b)
+log-config:
+    log-streams:
+      - log-level: info
+        output: stdout
+        truncate: false
+        encoder: fsb-text
+        time-format: "15:04:05.00000"
+        columns:
+          - time-stamp
+          - level
+          - activity
+          - name-space
+          - message
+          - fields
+

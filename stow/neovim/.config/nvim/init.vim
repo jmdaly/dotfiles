@@ -670,8 +670,6 @@ nmap <C-b> :above resize +5<cr>
 noremap <C-w>th <C-W>t<c-w>H
 noremap <C-w>tv <C-W>t<c-w>K
 
-" Remove search results
-noremap H :noh<cr>
 
 " Replace highlighted content with content of register 0
 noremap <C-p> ciw<Esc>"0p

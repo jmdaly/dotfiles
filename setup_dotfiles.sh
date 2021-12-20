@@ -217,6 +217,11 @@ if [[ "1" == "$(_exists pwsh)" ]]; then
 	stows+=('pwsh')
 fi
 
+# Setup pwsh on linux
+if [[ "1" == "$(_exists fsb)" ]]; then
+	stows+=('fsb')
+fi
+
 # Install fzf
 if [[ "1" != "${skip_fzf}" ]]; then
 	if [[ ! -e "${h}/.fzf" ]]; then

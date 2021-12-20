@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ "undefined" == "${DOTFILES_DIT:-undefined}" ]]; then
+if [[ "undefined" == "${DOTFILES_DIR:-undefined}" ]]; then
 	export DOTFILES_DIR="${HOME}/dotfiles"
 fi
 

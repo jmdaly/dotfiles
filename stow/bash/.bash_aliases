@@ -79,7 +79,6 @@ if [[ $0 == *bash || "" != "${TRUE_HOST}" || "$(hostname)" == *siteground* ]]; t
    alias gsta="git stash"
    alias gstp="git stash pop"
    alias grh="git reset HEAD"
-   alias gf="git fetch"
    alias grb="git rebase"
    alias grbc="git rebase --continue"
    alias gmt="git mergetool"
@@ -98,6 +97,17 @@ alias rs="repo sync -j8 -q -c --no-tags"
 alias rl="repo sync -j8 -q -c --no-tags"
 alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'
 alias ggsup='git branch --set-upstream-to=$(git_current_remote)/$(git_current_branch)'
+
+unalias gf
+function gf()
+{
+	local -r remote=${1:-$(git_current_remote)}
+	if [[ "" != "$1" ]]; then
+		shift
+	fi
+
+	git fetch "${remote}" $@
+}
 
 function rebase_to_master() {
 	git fetch $(git_current_remote) && \
