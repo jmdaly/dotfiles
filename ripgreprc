@@ -24,9 +24,6 @@ bp:*.bp
 kt:*.kt
 
 --type-add
-apk:*.apk,*.apb
-
---type-add
 aidl:*.aidl
 
 --type-add
@@ -39,7 +36,7 @@ hal:*.hal
 idl:include:hal,hidl,aidl
 
 --type-add
-app:include:kt,java,apk,aidl
+app:include:kt,java,aidl
 
 --type-add
 fidl:*.fidl
