@@ -1,7 +1,7 @@
 # Attributes that can be used by many fsb components
 global:
     git-clone-mode: full
-    git-mirror-root: /home/matt/.fsb_git_mirror
+    git-mirror-root: /opt/phoenix/.fsb/git_mirror
     jobs: "1"
     nexus-credential-source: netrc
     qnx-jlevel: "8"
@@ -26,7 +26,7 @@ global:
 # which is tools/bin/ccache under the fsb suite dir
 ccache:
     ccache-enable: true
-    ccache-dir: ${HOME}/.fsb-ccache
+    ccache-dir: /opt/phoenix/.fsb/ccache
     ccache-max-size: 50
 
 # Download cache configuration
@@ -38,7 +38,7 @@ ccache:
 #       always: will do a cache size check (and clean up if needed) when starting the build, and every
 #               time before adding a new file to the cache
 dl-cache:
-    dl-cache-dir: /home/matt/.fsb_dl_cache
+    dl-cache-dir: /opt/phoenix/.fsb/dl_cache
     max-size: 50
     size-management: start
 
@@ -114,7 +114,7 @@ engine:
 #     encoder: "fsb-text" (good for CLI output).
 #              "json" (good to be feed to a indexing engine, e.g. Elasticsearch).
 #              "console" (simplified text output, with json format for name/value pairs).
-#     time-format: the format to use for time stamps, valid values (case insensitive): 
+#     time-format: the format to use for time stamps, valid values (case insensitive):
 #              "ANSIC", "UNIXDATE", "RFC822", "RFC822Z", "RFC850", "RFC1123", "RFC1123Z", "RFC3339", "RFC3339NANO"
 #              or a format string acceptable to Go's time.Format (See: https://golang.org/pkg/time/#Time.Format)
 #              E.g "15:04:05.000"  hours in 24 format, minutes, seconds, milliseconds, no date
@@ -126,8 +126,20 @@ engine:
 #              The value "fields" represent the whole group of named fields present in the log (eg. a=b)
 log-config:
     log-streams:
-      - log-level: info
+      - log-level: warn
         output: stdout
+        truncate: false
+        encoder: fsb-text
+        time-format: "15:04:05.00000"
+        columns:
+          - time-stamp
+          - level
+          - activity
+          - name-space
+          - message
+          - fields
+      - log-level: info
+        output: /tmp/fsb.log
         truncate: false
         encoder: fsb-text
         time-format: "15:04:05.00000"
