@@ -633,6 +633,13 @@ if has('unix')
 endif
 """""""""""""""""""" /Generate UUID """"""""""""""""""""""""
 
+" Make W the same as w
+" https://stackoverflow.com/a/3878710/1861346
+command Q q
+command W w
+command Wqa wqa
+
+
 filetype on
 syntax on
 map <S-Insert> <MiddleMouse>
@@ -670,7 +677,6 @@ nmap <C-b> :above resize +5<cr>
 " Swap splits to vertical
 noremap <C-w>th <C-W>t<c-w>H
 noremap <C-w>tv <C-W>t<c-w>K
-
 
 " Replace highlighted content with content of register 0
 noremap <C-p> ciw<Esc>"0p
