@@ -234,7 +234,7 @@ fi
 
 # direnv
 if [[ "1" == "$(_exists direnv)" ]]; then
-	eval "$(direnv hook zsh)"
+	eval "$(direnv hook zsh)" 2> /dev/null
 fi
 
 # vcpkg
