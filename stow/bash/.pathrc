@@ -33,7 +33,8 @@ local -a rdirs=( \
 	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
 	.pyenv/bin utils/bin .cargo/bin \
 	build/kotlin-language-server/server/build/install/server/bin \
-	${HOME}/.sdkman/candidates/gradle/current/bin \
+	.sdkman/candidates/gradle/current/bin \
+	go/bin \
 );
 
 for d in $rdirs; dirs+="${HOME}/$d"

@@ -395,81 +395,16 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 """""""""""""""""""""" LSP """"""""""""""""""""""""
 let g:clang_path = '/usr'
 
-" Set up the built-in language client
-lua <<EOF
-local lspconfig = require'lspconfig'
--- We check if a language server is available before setting it up.
--- Otherwise, we'll get errors when loading files.
-
--- Set up clangd
-lspconfig.clangd.setup{
-   cmd = {
-      vim.g.clang_path .. "/bin/clangd",
-      "--background-index"
-   }
-}
-
-if 1 == vim.fn.executable("cmake-language-server") then
-   lspconfig.cmake.setup{}
-end
-
-if 1 == vim.fn.executable("kotlin-language-server") then
-   require'lspconfig'.kotlin_language_server.setup{}
-   -- Hack recommended at
-   -- https://github.com/fwcd/kotlin-language-server/issues/284#issuecomment-817835261
-   -- to get Kotlin to be able to find gradle when it's not at the root of the
-   -- repo
-   lspconfig.kotlin_language_server.setup{
-      settings = {
-         kotlin = {
-            compiler = {
-               jvm = {
-                  target = "1.8";
-               }
-            };
-         };
-      }
-   }
-end
-
-if 1 == vim.fn.executable("pyls") then
-   lspconfig.pyls.setup{}
-end
-
--- Configure the way code diagnostics are displayed
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-   vim.lsp.diagnostic.on_publish_diagnostics, {
-      -- This will disable virtual text, like doing:
-      -- let g:diagnostic_enable_virtual_text = 0
-      virtual_text = false,
-
-      -- This is similar to:
-      -- let g:diagnostic_show_sign = 1
-      -- To configure sign display,
-      --  see: ":help vim.lsp.diagnostic.set_signs()"
-      signs = true,
-
-      -- This is similar to:
-      -- "let g:diagnostic_insert_delay = 1"
-      update_in_insert = false,
-   }
-)
-
---- Enable the lspfuzzy plugin
-require('lspfuzzy').setup {}
-
--- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
-lspconfig.gopls.setup{}
-
-EOF
-
 if has('nvim-0.5')
+   lua require("lsp_config")
    augroup lsp
-     autocmd!
-     autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-     autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-     autocmd Filetype cpp lua require('compe_config')
-     autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+      autocmd!
+      autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+      autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+      autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+      autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+      autocmd BufWritePre *.go lua goimports(1000)
    augroup end
 endif
 
@@ -623,7 +558,6 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
    endif
 
    noremap <leader>l :Lines<cr>
-   noremap <leader>f :Files<cr>
    noremap <leader>w :Windows<cr>
 
    silent if has('unix') && g:dein_exists && dein#check_install('vim-fzf-repo') == 0
