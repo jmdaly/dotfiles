@@ -115,7 +115,8 @@ augroup filetypes
    au BufNewFile,BufRead *.envrc             setlocal ft=sh
    au BufNewFile,BufRead .jdbrc              setlocal ft=jdb
    au BufNewFile,BufRead .clangd             setlocal ft=yaml
-   au BufNewFile,BufRead .tmpl               setlocal ft=tmpl
+   au BufNewFile,BufRead *.tmpl              setlocal ft=tmpl
+   au BufNewFile,BufRead *.fsb               setlocal ft=python
 augroup end
 
 augroup whitespace
@@ -134,6 +135,8 @@ augroup whitespace
    autocmd FileType lua             setlocal ts=2 sw=2 sts=2 expandtab
    autocmd FileType cs,cpp,c,sh,ps1,kotlin,java setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType bzl,javascript  setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType go              setlocal ts=2 sw=2 sts=2 noexpandtab
+   au BufNewFile,BufRead *.fsb      setlocal expandtab
 augroup END
 
 " Set the comment string for certain filetypes to
@@ -454,6 +457,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 --- Enable the lspfuzzy plugin
 require('lspfuzzy').setup {}
+
+-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim-install
+lspconfig.gopls.setup{}
+
 EOF
 
 if has('nvim-0.5')
@@ -746,10 +753,12 @@ nnoremap <silent> <leader>wl :call AppendModeline()<CR>
 
 " Echo full file path
 command! Ep :echo expand('%:p')
-if executable('/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt')
-   command! Bp :!/opt/android-src/aos/out/soong/host/linux-x86/bin/bpfmt -w %
-elseif executable('/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt')
+
+" Run bpfmt, really gotta handle the path better
+if executable('/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt')
    command! Bp :w | !/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt -w %
 endif
+
+autocmd FileType bp nnoremap <buffer><Leader>fu :Bp<CR>
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
