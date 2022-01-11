@@ -693,6 +693,9 @@ if executable('/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfm
    command! Bp :w | !/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt -w %
 endif
 
-autocmd FileType bp nnoremap <buffer><Leader>fu :Bp<CR>
+augroup FILE_FORMATTING
+   " Formatters that aren't done _via_ the LSP
+   autocmd FileType bp nnoremap <buffer><Leader>fu :Bp<CR>
+augroup END
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
