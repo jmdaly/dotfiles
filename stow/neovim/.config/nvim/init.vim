@@ -275,7 +275,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
          call dein#add('ojroques/nvim-lspfuzzy', {'depends': 'fzf' })
       endif
 
-      call dein#add('PProvost/vim-ps1')
+      call dein#add('PProvost/vim-ps1', {'on_ft': ['ps1']})
 
       " syntax highlighting for *.hal, *.bp, and *.rc files.
       call dein#add('https://github.ford.com/MRUSS100/aosp-vim-syntax.git')
