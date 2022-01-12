@@ -6,8 +6,15 @@ vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 
 -- Set up material theme
 require('material').setup({
-        contrast = true,
-        borders = false,
+        contrast = {
+                sidebars = false,
+                floating_windows = false,
+                line_numbers = false,
+                sign_column = false,
+                cursor_line = false,
+                non_current_windows = false,
+                popup_menu = false
+        },
         italics = {
                 comments = true,
                 strings = false,
@@ -15,23 +22,19 @@ require('material').setup({
                 functions = false,
                 variables = false
         },
-        contrast_windows = {
-                "terminal",
-                "packer",
-                "qf"
-        },
-        text_contrast = {
+        contrast_filetypes = {},
+        high_visibility = {
                 lighter = false,
                 darker = false
         },
         disable = {
+                borders = false,
                 background = false,
                 term_colors = false,
                 eob_lines = false
         },
         custom_highlights = {}
 })
-
 
 require('lualine').setup{
   options = {
