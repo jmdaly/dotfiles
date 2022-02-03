@@ -16,7 +16,8 @@ lua require('jmdaly.config')
 set termguicolors
 
 let g:material_style = 'palenight'
-colorscheme material
+let g:gruvbox_material_palette = 'mix'
+colorscheme gruvbox-material
 
 " Turn line numbers on:
 set number

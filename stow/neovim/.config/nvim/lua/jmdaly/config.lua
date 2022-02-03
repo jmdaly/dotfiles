@@ -38,7 +38,7 @@ require('material').setup({
 
 require('lualine').setup{
   options = {
-    theme = 'material-nvim'
+    theme = 'gruvbox-material'
   },
   sections = {
     lualine_a = { {'mode', upper = true} },

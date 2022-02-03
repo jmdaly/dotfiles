@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
   use 'ggandor/lightspeed.nvim' -- Motion that takes two characters and jumps to occurences
 
   use 'marko-cerovac/material.nvim'
+  use 'sainnhe/gruvbox-material'
 
   use 'christoomey/vim-tmux-navigator' -- A plugin to facilitate navigating between vim and tmux
   use 'wellle/targets.vim' -- A plugin for additional text objects
