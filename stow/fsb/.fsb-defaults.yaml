@@ -26,7 +26,7 @@ global:
 # which is tools/bin/ccache under the fsb suite dir
 ccache:
     ccache-enable: true
-    ccache-dir: /opt/phoenix/.fsb/ccache
+    ccache-dir: /opt/ccache
     ccache-max-size: 50
 
 # Download cache configuration
@@ -126,7 +126,7 @@ engine:
 #              The value "fields" represent the whole group of named fields present in the log (eg. a=b)
 log-config:
     log-streams:
-      - log-level: warn
+      - log-level: error
         output: stdout
         truncate: false
         encoder: fsb-text
@@ -138,9 +138,9 @@ log-config:
           - name-space
           - message
           - fields
-      - log-level: info
+      - log-level: debug
         output: /tmp/fsb.log
-        truncate: false
+        truncate: true
         encoder: fsb-text
         time-format: "15:04:05.00000"
         columns:

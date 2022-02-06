@@ -8,4 +8,8 @@
 [url "https://gist.github.ford.com"]
 	insteadOf = ssh://gist.github.ford.com
 
+[url "file:///opt/phoenix/PHX-Codeaurora-LA.AU.0.3.1.r4-02600-plus-widevine-and-vms/"]
+	insteadOf = ssh://gerrit.ford.com:29418/CODEAURORA/external/private_LA_AU/
+	insteadOf = ssh://gerrit.ford.com:29418/AOSP/
+
 ; vim: ft=gitconfig :
