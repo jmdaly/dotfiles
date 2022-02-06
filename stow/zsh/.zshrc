@@ -13,7 +13,7 @@ if [[ -e "${DOTFILES_DIR}/rclib.dot" ]]; then
 	source "${DOTFILES_DIR}/rclib.dot"
 fi
 
-if [[ "$(_exists gpgconf)" != "1" ]]; then
+if [[ "$(_exists gpgconf)" == "1" ]]; then
 	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
 	# it'll prompt for the SSH passphrase rather than the keyring passphrase
 	# https://eklitzke.org/using-gpg-agent-effectively
