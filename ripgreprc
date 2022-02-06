@@ -45,6 +45,9 @@ fidl:*.fidl
 fdepl:*.fdepl
 
 --type-add
+fsb:*.fsb
+
+--type-add
 fd:include:fidl,fdepl
 
 # Using glob patterns to include/exclude files or folders
