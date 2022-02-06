@@ -111,12 +111,13 @@ augroup filetypes
    au BufNewFile,BufRead */modulefiles/**    setlocal ft=tcl
    au BufNewFile,BufRead */.conan/profiles/* setlocal ft=sh
    au BufNewFile,BufRead *.fs                setlocal ft=sh
-   au BufNewFile,BufRead */aos/*.rc          setlocal ft=sh
+   au BufNewFile,BufRead */aosp/*.rc          setlocal ft=sh
    au BufNewFile,BufRead *.envrc             setlocal ft=sh
    au BufNewFile,BufRead .jdbrc              setlocal ft=jdb
    au BufNewFile,BufRead .clangd             setlocal ft=yaml
    au BufNewFile,BufRead *.tmpl              setlocal ft=tmpl
-   au BufNewFile,BufRead *.fsb               setlocal ft=python
+   au BufNewFile,BufRead *.fsb               setlocal ft=fsb syntax=python
+   au BufNewFile,BufRead *.dot               setlocal ft=zsh
 augroup end
 
 augroup whitespace
@@ -133,10 +134,11 @@ augroup whitespace
    autocmd FileType gitcommit       setlocal ts=2 sw=2 sts=2 expandtab spell | syntax off
    autocmd FileType groovy          setlocal ts=4 sw=4 sts=4 expandtab
    autocmd FileType lua             setlocal ts=2 sw=2 sts=2 expandtab
-   autocmd FileType cs,cpp,c,sh,ps1,kotlin,java setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType cs,cpp,c,kotlin,java setlocal ts=4 sw=4 sts=4 expandtab
+   autocmd FileType sh,ps1,dot      setlocal ts=2 sw=2 sts=2 expandtab
    autocmd FileType bzl,javascript  setlocal ts=4 sw=4 sts=4 expandtab
-   autocmd FileType go              setlocal ts=2 sw=2 sts=2 noexpandtab
-   au BufNewFile,BufRead *.fsb      setlocal expandtab
+   autocmd FileType go              setlocal ts=2 sw=2 sts=2 expandtab
+   autocmd FileType fsb             setlocal ts=2 sw=2 sts=2 noexpandtab commentstring=#\ %s
 augroup END
 
 " Set the comment string for certain filetypes to
