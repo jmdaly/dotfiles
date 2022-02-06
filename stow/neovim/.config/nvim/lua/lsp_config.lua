@@ -119,9 +119,11 @@ end
 -- vim.lsp.set_log_level("debug")
 
 -- Import our local defs
-require('go')
-require('python')
-require('cmake')
-require('kotlin')
 require('clangd')
+require('go')
+require('cmake')
+require('python')
+-- require('kotlin')
+require('bashls')
+
 require('lspfuzzy').setup {}
