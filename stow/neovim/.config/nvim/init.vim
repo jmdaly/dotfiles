@@ -581,6 +581,7 @@ endif
 command Q q
 command W w
 command Wqa wqa
+command Tabe tabe
 
 
 filetype on
