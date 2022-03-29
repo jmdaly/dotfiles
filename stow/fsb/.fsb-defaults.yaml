@@ -73,14 +73,14 @@ pbos-config:
     gcs-local-srv-address: 127.0.0.1:50001
     gcs-pbos-project-id: gcs-pbos-test-project-id
     gcs-pbos-bucket: pbos-bucket
-    gcs-local-srv-root: ${HOME}/.pbos_local_srv_root_gcs
+    gcs-local-srv-root: /opt/phoenix/.fsb/pbos_local_srv_root_gcs
     gcs-local-srv-bin: bin/gcsemulator
     gcs-local-srv-storage: pbos_storage
     s3-accesskey: testakey
     s3-secretkey: testskey
     s3-region: ca-central-1
     s3-remote-srv-address: 127.0.0.1:50002
-    s3-local-srv-root: ${HOME}/.pbos_local_srv_root_s3
+    s3-local-srv-root: /opt/phoenix/.fsb/pbos_local_srv_root_s3
     s3-local-srv-repo: pbos
     s3-local-srv-bin: bin/s3_server_emulator
     s3-local-srv-storage: pbos_storage
