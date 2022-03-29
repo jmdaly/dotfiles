@@ -1,0 +1,217 @@
+# Common recent settings file for Wireshark 3.7.0.
+#
+# This file is regenerated each time Wireshark is quit
+# and when changing configuration profile.
+# So be careful, if you want to make manual changes here.
+
+######## Recent capture files (latest last), cannot be altered through command line ########
+
+recent.capture_file: /tmp/qnx.sgmii2.dump.pcap
+recent.capture_file: /tmp/sync.fec0.dump.pcap
+recent.capture_file: /tmp/capture_hello_client.pcac
+recent.capture_file: /tmp/linux_capture_hello_interaction.pcapng
+recent.capture_file: /tmp/capture_hello_interaction.pcac
+recent.capture_file: /tmp/e02_traffic.pcapng
+recent.capture_file: /tmp/tcpdump.1.pcap
+recent.capture_file: /tmp/tcpdump.2.pcap
+recent.capture_file: /tmp/tcpdump.3.pcap
+recent.capture_file: /opt/phoenix/phx-fsb/core_files/tcpdump.pcap
+
+######## Recent capture filters (latest last), cannot be altered through command line ########
+
+
+######## Recent display filters (latest last), cannot be altered through command line ########
+
+recent.display_filter: someip or someip
+recent.display_filter: (someip or someipsd)
+recent.display_filter: (someip or someipsd) and ip.src==10.1.0.10
+recent.display_filter: someip or someipsd 
+recent.display_filter: someip or someipsd or igmp 
+recent.display_filter: someip or someipsd
+recent.display_filter: someip 
+recent.display_filter: someip and not someipsd
+recent.display_filter: someip and (not someipsd)
+recent.display_filter: someip and not someip
+
+# Main window geometry.
+# Decimal numbers.
+gui.geometry_main_x: 1680
+gui.geometry_main_y: 738
+gui.geometry_main_width: 1920
+gui.geometry_main_height: 1163
+
+# Main window maximized.
+# TRUE or FALSE (case-insensitive).
+gui.geometry_main_maximized: FALSE
+
+# Leftalign Action Buttons.
+# TRUE or FALSE (case-insensitive).
+gui.geometry_leftalign_actions: FALSE
+
+# Statusbar left pane size.
+# Decimal number.
+gui.geometry_status_pane: 250
+
+# Statusbar middle pane size.
+# Decimal number.
+gui.geometry_status_pane_right: 250
+
+# Last used Configuration Profile.
+gui.last_used_profile: Default
+
+# WLAN statistics upper pane size.
+# Decimal number.
+gui.geometry_status_wlan_stats_pane: 200
+
+# Warn if running with elevated permissions (e.g. as root).
+# TRUE or FALSE (case-insensitive).
+privs.warn_if_elevated: TRUE
+
+# Warn if Wireshark is unable to capture.
+# TRUE or FALSE (case-insensitive).
+sys.warn_if_no_capture: TRUE
+
+# Find packet search in.
+# One of: PACKET_LIST, PACKET_DETAILS, PACKET_BYTES
+gui.search_in: PACKET_LIST
+
+# Find packet character set.
+# One of: NARROW_AND_WIDE, NARROW, WIDE
+gui.search_char_set: NARROW_AND_WIDE
+
+# Find packet case sensitive search.
+# TRUE or FALSE (case-insensitive).
+gui.search_case_sensitive: FALSE
+
+# Find packet search type.
+# One of: DISPLAY_FILTER, HEX_VALUE, STRING, REGEX
+gui.search_type: DISPLAY_FILTER
+
+# Geometry and maximized state of SOME/IP Parameter List window.
+# Decimal integers.
+gui.geom.SOME/IP Parameter List.x: 451
+gui.geom.SOME/IP Parameter List.y: 1003
+gui.geom.SOME/IP Parameter List.width: 1176
+gui.geom.SOME/IP Parameter List.height: 379
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Parameter List.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Parameter String List window.
+# Decimal integers.
+gui.geom.SOME/IP Parameter String List.x: 2428
+gui.geom.SOME/IP Parameter String List.y: 1064
+gui.geom.SOME/IP Parameter String List.width: 800
+gui.geom.SOME/IP Parameter String List.height: 256
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Parameter String List.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Parameter Typedef List window.
+# Decimal integers.
+gui.geom.SOME/IP Parameter Typedef List.x: 549
+gui.geom.SOME/IP Parameter Typedef List.y: 1079
+gui.geom.SOME/IP Parameter Typedef List.width: 566
+gui.geom.SOME/IP Parameter Typedef List.height: 403
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Parameter Typedef List.maximized: FALSE
+
+# Geometry and maximized state of PreferencesDialog window.
+# Decimal integers.
+gui.geom.PreferencesDialog.x: 2584
+gui.geom.PreferencesDialog.y: 1360
+gui.geom.PreferencesDialog.width: 778
+gui.geom.PreferencesDialog.height: 489
+# TRUE or FALSE (case-insensitive).
+gui.geom.PreferencesDialog.maximized: FALSE
+
+# Geometry and maximized state of DecodeAsDialog window.
+# Decimal integers.
+gui.geom.DecodeAsDialog.x: 461
+gui.geom.DecodeAsDialog.y: 1050
+gui.geom.DecodeAsDialog.width: 750
+gui.geom.DecodeAsDialog.height: 460
+# TRUE or FALSE (case-insensitive).
+gui.geom.DecodeAsDialog.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Eventgroups window.
+# Decimal integers.
+gui.geom.SOME/IP Eventgroups.x: 559
+gui.geom.SOME/IP Eventgroups.y: 1079
+gui.geom.SOME/IP Eventgroups.width: 566
+gui.geom.SOME/IP Eventgroups.height: 403
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Eventgroups.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Services window.
+# Decimal integers.
+gui.geom.SOME/IP Services.x: 592
+gui.geom.SOME/IP Services.y: 995
+gui.geom.SOME/IP Services.width: 566
+gui.geom.SOME/IP Services.height: 403
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Services.maximized: FALSE
+
+# Geometry and maximized state of ProtocolHierarchyDialog window.
+# Decimal integers.
+gui.geom.ProtocolHierarchyDialog.x: 1680
+gui.geom.ProtocolHierarchyDialog.y: 738
+gui.geom.ProtocolHierarchyDialog.width: 1920
+gui.geom.ProtocolHierarchyDialog.height: 1163
+# TRUE or FALSE (case-insensitive).
+gui.geom.ProtocolHierarchyDialog.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Methods/Events/Fields window.
+# Decimal integers.
+gui.geom.SOME/IP Methods/Events/Fields.x: 358
+gui.geom.SOME/IP Methods/Events/Fields.y: 1212
+gui.geom.SOME/IP Methods/Events/Fields.width: 683
+gui.geom.SOME/IP Methods/Events/Fields.height: 401
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Methods/Events/Fields.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Parameter Base Type List window.
+# Decimal integers.
+gui.geom.SOME/IP Parameter Base Type List.x: 2826
+gui.geom.SOME/IP Parameter Base Type List.y: 1056
+gui.geom.SOME/IP Parameter Base Type List.width: 566
+gui.geom.SOME/IP Parameter Base Type List.height: 403
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Parameter Base Type List.maximized: FALSE
+
+# Geometry and maximized state of CaptureFilePropertiesDialog window.
+# Decimal integers.
+gui.geom.CaptureFilePropertiesDialog.x: 0
+gui.geom.CaptureFilePropertiesDialog.y: 813
+gui.geom.CaptureFilePropertiesDialog.width: 1680
+gui.geom.CaptureFilePropertiesDialog.height: 1013
+# TRUE or FALSE (case-insensitive).
+gui.geom.CaptureFilePropertiesDialog.maximized: FALSE
+
+# Geometry and maximized state of ExpertInfoDialog window.
+# Decimal integers.
+gui.geom.ExpertInfoDialog.x: 0
+gui.geom.ExpertInfoDialog.y: 813
+gui.geom.ExpertInfoDialog.width: 1680
+gui.geom.ExpertInfoDialog.height: 1013
+# TRUE or FALSE (case-insensitive).
+gui.geom.ExpertInfoDialog.maximized: FALSE
+
+# Geometry and maximized state of SOME/IP Parameter Structs window.
+# Decimal integers.
+gui.geom.SOME/IP Parameter Structs.x: 1908
+gui.geom.SOME/IP Parameter Structs.y: 913
+gui.geom.SOME/IP Parameter Structs.width: 1045
+gui.geom.SOME/IP Parameter Structs.height: 435
+# TRUE or FALSE (case-insensitive).
+gui.geom.SOME/IP Parameter Structs.maximized: FALSE
+
+# Custom colors.
+# List of custom colors selected in Qt color picker.
+gui.custom_colors: 
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff",
+	"ffffffff", "ffffffff"
