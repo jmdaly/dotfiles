@@ -98,7 +98,9 @@ alias rl="repo sync -j8 -q -c --no-tags"
 alias gpsup='git push --set-upstream $(git_current_remote) $(git_current_branch)'
 alias ggsup='git branch --set-upstream-to=$(git_current_remote)/$(git_current_branch)'
 
-unalias gf
+if [[ "$(alias gf 2>/dev/null)" != "" ]]; then
+	unalias gf
+fi
 function gf()
 {
 	local -r remote=${1:-$(git_current_remote)}
