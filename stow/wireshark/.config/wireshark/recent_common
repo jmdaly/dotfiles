@@ -22,6 +22,8 @@ recent.capture_file: /opt/phoenix/phx-fsb/core_files/tcpdump.pcap
 
 ######## Recent display filters (latest last), cannot be altered through command line ########
 
+recent.display_filter: (someip or someipsd or igmp) and (ip.src == 10.1.0.10)
+recent.display_filter: (someip or someipsd or igmp) or (ip.src == 10.1.0.10)
 recent.display_filter: someip or someip
 recent.display_filter: (someip or someipsd)
 recent.display_filter: (someip or someipsd) and ip.src==10.1.0.10
@@ -30,15 +32,13 @@ recent.display_filter: someip or someipsd or igmp
 recent.display_filter: someip or someipsd
 recent.display_filter: someip 
 recent.display_filter: someip and not someipsd
-recent.display_filter: someip and (not someipsd)
-recent.display_filter: someip and not someip
 
 # Main window geometry.
 # Decimal numbers.
-gui.geometry_main_x: 1680
-gui.geometry_main_y: 738
-gui.geometry_main_width: 1920
-gui.geometry_main_height: 1163
+gui.geometry_main_x: 0
+gui.geometry_main_y: 813
+gui.geometry_main_width: 1680
+gui.geometry_main_height: 1013
 
 # Main window maximized.
 # TRUE or FALSE (case-insensitive).
@@ -116,8 +116,8 @@ gui.geom.SOME/IP Parameter Typedef List.maximized: FALSE
 
 # Geometry and maximized state of PreferencesDialog window.
 # Decimal integers.
-gui.geom.PreferencesDialog.x: 2584
-gui.geom.PreferencesDialog.y: 1360
+gui.geom.PreferencesDialog.x: 756
+gui.geom.PreferencesDialog.y: 1323
 gui.geom.PreferencesDialog.width: 778
 gui.geom.PreferencesDialog.height: 489
 # TRUE or FALSE (case-insensitive).
@@ -125,7 +125,7 @@ gui.geom.PreferencesDialog.maximized: FALSE
 
 # Geometry and maximized state of DecodeAsDialog window.
 # Decimal integers.
-gui.geom.DecodeAsDialog.x: 461
+gui.geom.DecodeAsDialog.x: 465
 gui.geom.DecodeAsDialog.y: 1050
 gui.geom.DecodeAsDialog.width: 750
 gui.geom.DecodeAsDialog.height: 460
@@ -143,10 +143,10 @@ gui.geom.SOME/IP Eventgroups.maximized: FALSE
 
 # Geometry and maximized state of SOME/IP Services window.
 # Decimal integers.
-gui.geom.SOME/IP Services.x: 592
+gui.geom.SOME/IP Services.x: 600
 gui.geom.SOME/IP Services.y: 995
-gui.geom.SOME/IP Services.width: 566
-gui.geom.SOME/IP Services.height: 403
+gui.geom.SOME/IP Services.width: 574
+gui.geom.SOME/IP Services.height: 502
 # TRUE or FALSE (case-insensitive).
 gui.geom.SOME/IP Services.maximized: FALSE
 
