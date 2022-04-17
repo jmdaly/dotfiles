@@ -1,15 +1,15 @@
-[submodule "antigen"]
-	path = antigen
-	url = https://github.com/zsh-users/antigen.git
 [submodule "dircolors-solarized"]
 	path = dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
+	branch = master
 [submodule "gdb-dashboard"]
 	path = gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard.git
+	branch = master
 [submodule "dotfiles-secret"]
 	path = dotfiles-secret
 	url = https://github.com/kheaactua/dotfiles-secret.git
+	branch = master
 [submodule "modulefiles/ford"]
 	path = stow/env-modules/.modulefiles/ford
 	url = git@github.ford.com:MRUSS100/modulefiles.git
@@ -20,6 +20,3 @@
 [submodule "stow/rofi/.config/rofi/rofi-themes"]
 	path = stow/rofi/.config/rofi/rofi-themes
 	url = https://github.com/davatorium/rofi-themes.git
-[submodule "delta"]
-	path = delta
-	url = https://github.com/dandavison/delta
