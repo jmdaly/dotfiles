@@ -13,15 +13,7 @@ if [[ -e "${DOTFILES_DIR}/rclib.dot" ]]; then
 	source "${DOTFILES_DIR}/rclib.dot"
 fi
 
-if [[ "$(_exists gpgconf)" == "1" ]]; then
-	# Attempting to use gpg-agent over ssh-agent.  Do this before doupdate or else
-	# it'll prompt for the SSH passphrase rather than the keyring passphrase
-	# https://eklitzke.org/using-gpg-agent-effectively
-	if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
-		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-	fi
-	export GPG_TTY=$(tty)
-fi
+source "${DOTFILES_DIR}/init_gpg_session.dot"
 
 if [[ -e "${DOTFILES_DIR}/doupdate.sh" && ! "$(hostname)" =~ sync* ]]; then
 	# Update the dotfiles repo to make sure we have all changes:

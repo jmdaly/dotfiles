@@ -5,7 +5,7 @@ if [[ "$(_exists gpgconf)" == "1" ]]; then
 	if [[ "undefined" == "${SSH_AUTH_SOCK:-undefined}" ]]; then
 		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 	fi
-	export GPG_TTY=$(tty)
+	export GPG_TTY=${TTY}
 fi
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :
