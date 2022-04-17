@@ -38,6 +38,9 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE="${HOME}/.zsh_history"
 
+export LANG=en_US.UTF-8
+export LC_TIME=en_GB.UTF-8
+
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
@@ -151,7 +154,11 @@ export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Beginning/end of line
 bindkey "^A" beginning-of-line
+bindkey "\033[1~" beginning-of-line
 bindkey "^E" end-of-line
+bindkey "\033[4~" end-of-line
+bindkey "\e[3~" delete-char
+bindkey "^[0M" "^M"
 
 # Aliases
 if [ -e "${DOTFILES_DIR}/bash_aliases" ]; then
@@ -272,7 +279,7 @@ declare DEVEL_ENV="${HOME}/workspace/system-setup-scripts/devel/activate.sh"
 if [[ -e "${DEVEL_ENV}" ]]; then
 	source "${DEVEL_ENV}"
 else
-	echo "No development environment available, please run \`conan install\` to create ${DEVEL_ENV}"
+	# echo "No development environment available, please run \`conan install\` to create ${DEVEL_ENV}"
 fi
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix :

@@ -1,14 +1,14 @@
 [user]
 	name = Matthew Russell
 	email = matthew.g.russell@gmail.com
-	signingkey = DF94887FB3F0726EE0606F2EDE8210182994327F
+	signingkey = A52DF6BD043AA61DF91F96A6EA845CAEEDBDDC72
 [includeIf "gitdir:~/workspace/capi/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:~/workspace/ford/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/src/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
-[includeIf "gitdir:/opt/phoenix/*"]
+[includeIf "gitdir:/opt/**/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/opt/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc

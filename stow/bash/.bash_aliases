@@ -38,9 +38,11 @@ fi
 if [[ "$(_exists ag)" == 1 ]]; then
    alias ag="ag -iU --color-line-number 34 --color-path 31"
 fi
-alias vi=vim
 if [[ $(_exists nvim) == 1 ]]; then
-    alias vimdiff="vim -d"
+	alias vi=nvim
+	alias vimdiff="vim -d"
+else
+	alias vi=vim
 fi
 
 alias grep="grep --color=always --exclude-dir={.git}"
@@ -60,7 +62,7 @@ function git_current_remote() {
 	if [[ "" != "${grc}" ]]; then
 		echo "${grc}"
 	else
-    echo $(git remote | head -n 1)
+		echo $(git remote | head -n 1)
 	fi
 }
 

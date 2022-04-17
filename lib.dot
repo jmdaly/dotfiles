@@ -158,7 +158,7 @@ function dotfiles_install_i3()
 {
   local home=${1:-${HOME}}
 
-  if [[ "$(which i3)" != "" ]]; then
+  if [[ "1" == "$(_exists)" ]]; then
     mkdir -p "${home}/.config/i3"
     assemble_i3_config "${DOTFILES_DIR:-${HOME}/dotfiles}/config/i3" "${home}/.config/i3/config"
     mkdir -p "${home}/.screenlayout"

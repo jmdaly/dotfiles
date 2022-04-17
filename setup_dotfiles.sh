@@ -161,16 +161,16 @@ if [[ "1" != "${skip_tmux}" ]]; then
 	dotfiles_install_tpm "${h}"
 fi
 
-if [[ "$(which screen)" != "" ]]; then
+if [[ "1" == "$(_exists screen)" ]]; then
 	stows+=('screen')
 fi
-if [[ "$(which sqlite3)" != "" ]]; then
+if [[ "1" == "$(_exists sqlite3)" ]]; then
 	stows+=('sqlite')
 fi
-if [[ "$(which vncserver)" != "" || "$(which tightvncserver)" != "" ]]; then
+if [[ "1" == "$(_exists vncserver)" || "1" == "$(_exists tightvncserver)" ]]; then
 	stows+=('vnc')
 fi
-if [[ "$(which wireshark)" != "" ]]; then
+if [[ "1" == "$(_exists wireshark)" ]]; then
 	stows+=('wireshark')
 fi
 
@@ -238,7 +238,7 @@ if [[ "1" != "${skip_python_venv}" ]]; then
 		DEFAULT_PYTHON_VENV="default"
 	fi
 
-	if [[ ! -e "${VENVS}/${DEFAULT_PYTHON_VENV}" && "" != "$(which virtualenv)" ]]; then
+	if [[ ! -e "${VENVS}/${DEFAULT_PYTHON_VENV}" && "1" != "$(_exists virtualenv)" ]]; then
 		mkdir -p "${VENVS}"
 		pushd .
 		cd "${VENVS}"
