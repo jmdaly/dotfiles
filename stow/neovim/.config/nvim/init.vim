@@ -690,8 +690,8 @@ nnoremap <silent> <leader>wl :call AppendModeline()<CR>
 command! Ep :echo expand('%:p')
 
 " Run bpfmt, really gotta handle the path better
-if executable('/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt')
-   command! Bp :w | !/opt/phoenix/phx-aosp-workspace/out/soong/host/linux-x86/bin/bpfmt -w %
+if executable('/opt/phoenix/aosp/out/soong/host/linux-x86/bin/bpfmt')
+   command! Bp :w | !/opt/phoenix/aosp/out/soong/host/linux-x86/bin/bpfmt -w %
 endif
 
 augroup FILE_FORMATTING
