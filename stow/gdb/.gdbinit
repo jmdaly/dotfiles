@@ -1,9 +1,3 @@
-set history save
-set history filename ~/.gdb_history
-
-set confirm off
-set breakpoint pending on
-
 python
 import sys
 import os
@@ -15,3 +9,13 @@ end
 
 set verbose off
 set print pretty on
+set history save
+set history filename ~/.gdb_history
+
+set pagination off
+set confirm off
+set breakpoint pending on
+
+set auto-load safe-path /opt/phoenix/phx-fsb
+
+# source ~matt/dotfiles/gdb-dashboard/.gdbinit
