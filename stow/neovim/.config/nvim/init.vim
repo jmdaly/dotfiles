@@ -191,6 +191,10 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " fugitive - a Git wrapper for vim. Also allows current
       call dein#add('tpope/vim-fugitive')
       set diffopt+=vertical
+      " Used for navigating the quickfix window better.  Recommended by fugitive
+      call dein#add('tpope/vim-unimpaired')
+      " This should improve Git Fugitive and Git Gutter
+      call dein#add('tmux-plugins/vim-tmux-focus-events')
 
       if has('unix')
          call dein#add('SirVer/ultisnips')
@@ -205,12 +209,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
 
       " Adding this so I can search/replace and preserve letter case
       call dein#add('tpope/vim-abolish')
-
-      " Used for navigating the quickfix window better.  Recommended by fugitive
-      call dein#add('tpope/vim-unimpaired')
-
-      " This should improve Git Fugitive and Git Gutter
-      call dein#add('tmux-plugins/vim-tmux-focus-events')
 
       " Highlighting for tmux
       call dein#add('tmux-plugins/vim-tmux')
