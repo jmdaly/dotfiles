@@ -94,7 +94,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		zplug "sindresorhus/pure," use:pure.zsh, from:github, as:theme
 	else
 		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
-		zplug "plugins/vi-mode", from:oh-my-zsh
+		zplug "jeffreytse/zsh-vi-mode"
 		zplug "akarzim/zsh-docker-aliases"
 
 		# Really fast theme, configured at the head and tail of zshrc
@@ -151,6 +151,10 @@ bindkey "^E" end-of-line
 bindkey "\033[4~" end-of-line
 bindkey "\e[3~" delete-char
 bindkey "^[0M" "^M"
+
+# Outside of tmux, thre are some issue.  See the script at https://wiki.archlinux.org/title/Zsh#Key_bindings
+bindkey -- "${${terminfo[khome]}}"       beginning-of-line
+bindkey -- "${${terminfo[kend]}}"       beginning-of-line
 
 # Aliases
 if [ -e "${DOTFILES_DIR}/bash_aliases" ]; then
