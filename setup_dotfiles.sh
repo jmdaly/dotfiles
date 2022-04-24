@@ -184,6 +184,8 @@ dotfiles_install_docker_config "${h}" "${DOTFILES_DIR}/dotfiles-secret"
 
 dotfiles_install_netrc "${h}" "${DOTFILES_DIR}/dotfiles-secret"
 
+dotfiles_setup_ssh_config "${h}"
+
 if [[ "1" != "${skip_zplug}" ]]; then
 	dotfiles_install_zplug "${h}" "${DFTMP}"
 else

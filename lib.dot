@@ -243,4 +243,26 @@ function dotfiles_install_sdkman()
   curl -s "https://get.sdkman.io" | bash
 }
 
+function dotfiles_setup_ssh_config()
+{
+  local home=${1:-${HOME}};
+  local -r ssh_dir="${home}/.ssh"
+  local -r ssh_config="${ssh_dir}/config"
+
+  if [[ ! -e "${ssh_dir}" ]]; then
+    mkdir "${ssh_dir}" && chmod 700 "${ssh_dir}"
+  fi
+
+  if [[ ! -e "${ssh_config}" ]]; then
+    cat <<TOHERE > "${ssh_config}"
+Include ~/dotfiles/dotfiles-secret/*/ssh/config
+# Include ~/dotfiles/dotfiles-secret/global/ssh/config
+# Include ~/dotfiles/dotfiles-secret/home/ssh/config
+# Include ~/dotfiles/dotfiles-secret/ford/ssh/config
+
+# vim: ts=4 sw=4 sts=0 expandtab ft=sshconfig
+TOHERE
+  fi
+}
+
 # vim: ts=2 sw=2 sts=0 ff=unix expandtab ft=sh :
