@@ -336,7 +336,8 @@ silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    " colo hydrangea
    " colo flatland
    " colo argonaut
-   colo ayu
+   " colo ayu
+   colo doorhinge
 endif
 
 
@@ -543,20 +544,15 @@ silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
       let g:search_tool='grep'
    endif
 
-   function s:search_dir()
-      if g:repo_dir == ""
-         return getcwd()
-      else
-         return g:repo_dir
-      endif
-   endfunction
-
    if g:search_tool ==? 'rg'
       noremap <leader>g :Rg<cr>
       command! -nargs=* -bang GGrepIW
          \ call fzf#vim#grep(
-         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')).' '.s:search_dir(), 1,
-         \   fzf#vim#with_preview(), <bang>0)
+         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')),
+         \   1,
+         \   fzf#vim#with_preview({'dir': getcwd()}),
+         \  <bang>1
+         \ )
    else
       noremap <leader>g :Ag<cr>
       command! -nargs=* -bang GGrepIW
