@@ -337,6 +337,7 @@ silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    " colo flatland
    " colo argonaut
    " colo ayu
+   " colo argonaut
    colo doorhinge
 endif
 
@@ -583,7 +584,7 @@ endif
 command Q q
 command W w
 command Wqa wqa
-command Tabe tabe
+" command Tabe tabe
 
 
 filetype on

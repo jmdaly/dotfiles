@@ -5,3 +5,8 @@ octave-workspace
 colourschemes.log
 .last_check
 cargo
+stow/gnupg/.gnupg/private-keys-v1.d/
+stow/gnupg/.gnupg/pubring.kbx
+stow/gnupg/.gnupg/pubring.kbx~
+stow/gnupg/.gnupg/sshcontrol
+stow/gnupg/.gnupg/trustdb.gpg

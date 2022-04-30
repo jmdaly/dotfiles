@@ -153,8 +153,8 @@ bindkey "\e[3~" delete-char
 bindkey "^[0M" "^M"
 
 # Outside of tmux, thre are some issue.  See the script at https://wiki.archlinux.org/title/Zsh#Key_bindings
-bindkey -- "${${terminfo[khome]}}"       beginning-of-line
-bindkey -- "${${terminfo[kend]}}"       beginning-of-line
+bindkey -- "${${terminfo[khome]}}"      beginning-of-line
+bindkey -- "${${terminfo[kend]}}"       end-of-line
 
 # Aliases
 if [ -e "${DOTFILES_DIR}/bash_aliases" ]; then
