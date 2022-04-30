@@ -30,7 +30,7 @@ fi
 
 # This is done in an annoying way because once in a pipe, any sourceing or even
 # variable setting seems to be scope locked to that block
-declare files_str=$(find "${HOME}/dotfiles/dotfiles-secret" "${HOME}/dotfiles/scripts" -type f -name '*.dot' -print |
+declare files_str=$(find "${DOTFILES_DIR}/dotfiles-secret" "${DOTFILES_DIR}/scripts" -type f -name '*.dot' -print |
 while IFS= read -r file; do
     echo $file
 done)

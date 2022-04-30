@@ -1,5 +1,9 @@
 if [[ "undefined" == "${DOTFILES_DIR:-undefined}" ]]; then
 	export DOTFILES_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+	if [[ ! -e "${DOTFILES_DIR}" ]]; then
+		# Just guess
+		export DOTFILES_DIR=$(realpath -- "~matt/dotfiles")
+	fi
 fi
 if ! typeset -f _exists > /dev/null ; then
 	if [[ -e "${DOTFILES_DIR}/rclib.dot" ]]; then
