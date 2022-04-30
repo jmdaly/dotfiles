@@ -1,18 +1,35 @@
 # Path functions
 # https://stackoverflow.com/q/370047/1861346
+# Modified to input which VAR.  To be bash/zsh agnostic I had to use evals
 path_append() {
-	path_remove $1;
+  local var=${2:-PATH}
+	path_remove "$1" "${var}";
 	if [[ -e "$1" ]]; then
-		export PATH="$PATH:$1";
+    export ${var}="$(eval echo \$${var}):$1";
 	fi
 }
 path_prepend() {
-	path_remove $1;
+  local var=${2:-PATH}
+	path_remove "$1" "${var}";
 	if [[ -e "$1" ]]; then
-		export PATH="$1:$PATH";
+    export ${var}="$1:$(eval echo \$${var})";
 	fi
 }
-path_remove() { export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'); }
+path_remove() {
+  local var=${2:-PATH}
+  export ${var}=$(echo -n $(eval echo \$${var}) | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//');
+}
+
+# Clean out path
+declare -a start_path;
+declare -a new_path;
+start_path=($(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? " " : "", $0)}'))
+for p in ${start_path[@]}; do
+  if [[ -e $p ]]; then
+    new_path+=($p)
+  fi
+done
+export PATH=$(echo -n ${new_path[@]} | awk -v RS=' ' '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
 
 # Remove python virtual env from path.  This will be added back later, but if
 # it's in now it'll corrupt tests and proper venv settings due to tmux copying
@@ -28,8 +45,15 @@ elif [[ -e /home/linuxbrew/.linuxbrew ]]; then
 	export LINUXBREWHOME=/home/linuxbrew/.linuxbrew
 fi
 
-local -a dirs;
-local -a rdirs=( \
+# Directories we'll prepend
+declare -a pdirs;
+
+# Directories to append
+declare -a adirs;
+
+# Relative direcoties to HOME that we'll prepend
+declare -a rdirs;
+rdirs=( \
 	bin utils .composer/vendor/bin .rvm/bin .local/bin .fzf/bin \
 	.pyenv/bin utils/bin .cargo/bin \
 	build/kotlin-language-server/server/build/install/server/bin \
@@ -37,24 +61,32 @@ local -a rdirs=( \
 	go/bin \
 );
 
-for d in $rdirs; dirs+="${HOME}/$d"
+for d in ${rdirs[@]}; do
+  if [[ -e "${HOME}/$d" ]]; then
+    dirs+=("${HOME}/$d");
+  fi
+done
 
-dirs+=( \
+pdirs+=( \
 	${LINUXBREWHOME}/bin \
+)
+
+adirs+=( \
+  /var/lib/snapd/bin \
 )
 
 # This is not a great place for this.
 if [[ "undefined" != "${ANDROID_SDK_ROOT:-undefined}" ]]; then
-	dirs+=(                                           \
+	dirs+=(                                         \
 		"${ANDROID_SDK_ROOT}/tools"                   \
 		"${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin" \
 		"${ANDROID_SDK_ROOT}/platform-tools"          \
 	)
 fi
 
-for d in $dirs; do
-	path_prepend "${d}"
-done
+for d in ${dirs[@]};  do path_prepend "${d}"; done
+for d in ${pdirs[@]}; do path_prepend "${d}"; done
+for d in ${adirs[@]}; do path_append "${d}"; done
 
 # If pyenv exists, initialise it
 if [[ -e "${HOME}/.pyenv/bin" ]]; then
@@ -65,22 +97,21 @@ fi
 # Build MAN path
 dirs=(${LINUXBREWHOME}/man ${HOME}/.rvm/man ${HOME}/.local/man);
 for d in $dirs; do
-	if [[ -e "${d}" ]]; then
-		export MANPATH=${d}:${MANPATH}
-	fi
+  path_append "${d}" MANPATH
 done
+path_prepend "${LINUXBREWHOME:-bad_path}/share/man" MANPATH
+path_prepend "${LINUXBREWHOME:-bad_path}/share/info" INFOPATH
 
-if [[ -e "${LINUXBREWHOME}" ]]; then
-# 	# Linux Brew specific settings (https://www.digitalocean.com/community/tutorials/how-to-install-and-use-linuxbrew-on-a-linux-vps)
-# 	# See: https://github.com/Homebrew/linuxbrew/issues/47
-# 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
-# 	# Setup linux brew
-	# export PKG_CONFIG_PATH=${LINUXBREWHOME}/lib64/pkgconfig:${LINUXBREWHOME}/lib/pkgconfig:$PKG_CONFIG_PATH
-	export MANPATH=${LINUXBREWHOME}/share/man:$MANPATH
-	export INFOPATH=${LINUXBREWHOME}/share/info:$INFOPATH
+if [ -n "$ZSH_VERSION" ]; then
+  # Remove duplicate paths https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
+  typeset -aU path dirs adirs pdirs
+else
+  unset path dirs adirs pdirs
 fi
 
-# Remove duplicate paths https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
-typeset -aU path
+# Clean up path (remove duplicates).  Don't need because path_* functions check
+# before adding, but I'm keeping this code here anyways
+# https://www.linuxjournal.com/content/removing-duplicate-path-entries
+export PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
 
 # vim: sw=4 sts=0 ts=4 noet ff=unix ft=sh :
