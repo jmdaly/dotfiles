@@ -10,3 +10,5 @@ stow/gnupg/.gnupg/pubring.kbx
 stow/gnupg/.gnupg/pubring.kbx~
 stow/gnupg/.gnupg/sshcontrol
 stow/gnupg/.gnupg/trustdb.gpg
+stow/wireshark/.config/wireshark/recent
+stow/wireshark/.config/wireshark/recent_common
