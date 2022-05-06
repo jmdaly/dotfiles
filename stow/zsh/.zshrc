@@ -87,7 +87,6 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		fpath+=('/usr/local/lib/node_modules/pure-prompt/functions')
 
 		zplug "lib/completion", from:oh-my-zsh           # Provides completion of dot directories
-		# zplug "plugins/vi-mode", from:oh-my-zsh
 
 		ZSH_THEME=""
 		zplug "mafredri/zsh-async", from:github
@@ -106,7 +105,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 
 	# Bookmarks in fzf
 	if [[ "1" == "$(_exists fzf)" ]]; then
-		zplug "uvaes/fzf-marks"
+		zplug "urbainvaes/fzf-marks"
 	fi
 
 	# Install plugins if there are plugins that have not been installed
@@ -156,12 +155,16 @@ bindkey "^[0M" "^M"
 bindkey -- "${${terminfo[khome]}}"      beginning-of-line
 bindkey -- "${${terminfo[kend]}}"       end-of-line
 
+# # "jeffreytse/zsh-vi-mode" "breaks" fzf history
+# https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+# Define an init function and append to zvm_after_init_commands
+function _fix_zsh_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+zvm_after_init_commands+=(_fix_zsh_init)
+
 # Aliases
-if [ -e "${DOTFILES_DIR}/bash_aliases" ]; then
-	source "${DOTFILES_DIR}/bash_aliases"
-elif [ -e "${HOME}/.bash_aliases" ]; then
-	source "${HOME}/.bash_aliases"
-fi
+[ -e "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
 
 declare modules_enabled=0
 declare -f module > /dev/null;
@@ -230,9 +233,7 @@ fi
 declare INVENV=$(python3 -c "import sys; sys.stdout.write('1') if (hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix)) else sys.stdout.write('0')")
 if [[ 0 == "${INVENV}" ]]; then
 	declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
-	if [[ -e "${python_venv}/bin" ]]; then
-		source "${python_venv}/bin/activate"
-	fi
+	[ -e "${python_venv}/bin" ] && source "${python_venv}/bin/activate"
 fi
 
 # direnv
@@ -241,9 +242,7 @@ if [[ "1" == "$(_exists direnv)" ]]; then
 fi
 
 # vcpkg
-if [[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ]]; then
-	source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
-fi
+[ -e "${VCPKG_ROOT}/scripts/vcpkg_completion.bash" ] && source "${VCPKG_ROOT}/scripts/vcpkg_completion.bash"
 
 if [[ "1" == "$(_exists fd)" ]]; then
 	declare fzfcmd=fd
@@ -267,9 +266,7 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # Dir colours
-if [[ -e ${HOME}/.dir_colors/dircolors ]]; then
-	eval $(dircolors ${HOME}/.dir_colors/dircolors)
-fi
+[ -e "${HOME}/.dir_colors/dircolors" ] && eval "$(dircolors ${HOME}/.dir_colors/dircolors)"
 
 declare DEVEL_ENV="${HOME}/workspace/system-setup-scripts/devel/activate.sh"
 if [[ -e "${DEVEL_ENV}" ]]; then
