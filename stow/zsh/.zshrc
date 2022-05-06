@@ -159,7 +159,9 @@ bindkey -- "${${terminfo[kend]}}"       end-of-line
 # https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
 # Define an init function and append to zvm_after_init_commands
 function _fix_zsh_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+	[[ "1" == "$(_exists direnv)" ]] && eval "$(direnv hook zsh)" 2> /dev/null
 }
 zvm_after_init_commands+=(_fix_zsh_init)
 
@@ -234,11 +236,6 @@ declare INVENV=$(python3 -c "import sys; sys.stdout.write('1') if (hasattr(sys, 
 if [[ 0 == "${INVENV}" ]]; then
 	declare python_venv="${HOME}/.virtualenvs/${DEFAULT_PYTHON_VENV}"
 	[ -e "${python_venv}/bin" ] && source "${python_venv}/bin/activate"
-fi
-
-# direnv
-if [[ "1" == "$(_exists direnv)" ]]; then
-	eval "$(direnv hook zsh)" 2> /dev/null
 fi
 
 # vcpkg
