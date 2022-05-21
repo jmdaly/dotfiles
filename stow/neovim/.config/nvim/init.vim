@@ -145,9 +145,9 @@ augroup END
 " double slashes (used for vim-commentary):
 augroup FTOptions
     autocmd!
-    autocmd FileType c,cpp,cs,java,bzl,javascript setlocal commentstring=//\ %s
-    autocmd FileType sh,jdb,cmake                 setlocal commentstring=#\ %s
-    autocmd FileType tmpl                         setlocal commentstring=##\ %s
+    autocmd FileType c,cpp,cs,java,bzl,javascript,php setlocal commentstring=//\ %s
+    autocmd FileType sh,jdb,cmake                     setlocal commentstring=#\ %s
+    autocmd FileType tmpl                             setlocal commentstring=##\ %s
 augroup END
 
 augroup SHORTCUTS
