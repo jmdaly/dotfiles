@@ -100,7 +100,7 @@ if [[ -e "${HOME}/.zplug" ]]; then
 		zplug romkatv/powerlevel10k, as:theme, depth:1
 
 		# Syntax highlighting bundle (syntax highlights commands as typing).
-		zplug "zsh-users/zsh-syntax-highlighting"
+		zplug "zsh-users/zsh-syntax-highlighting", defer:3
 	fi
 
 	# Bookmarks in fzf
@@ -126,9 +126,6 @@ if [[ "1" == $(_exists urxvt) ]]; then
 fi
 
 export EDITOR=vim
-
-# This doesn't seem to be applying when at the top
-setopt no_share_history
 
 # Autocompletion with an arrow-key driven interface
 zstyle ':completion:*' menu select
