@@ -88,13 +88,13 @@ if [[ $0 == *bash || "" != "${TRUE_HOST}" || "$(hostname)" == *siteground* ]]; t
    alias grh="git reset HEAD"
    alias grb="git rebase"
    alias grbc="git rebase --continue"
-   alias gmt="git mergetool"
    alias grv="git remote -v"
 fi
 if [[ "${HOME}" == *com.termux* ]]; then
    alias vi="nvim"
    alias vim="nvim"
 fi
+alias gmt="git mergetool"
 alias gst="git status -uno -sb"
 alias rst="repo status"
 alias gd="git diff -w --color"
