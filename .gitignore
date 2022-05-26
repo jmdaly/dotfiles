@@ -14,3 +14,4 @@ stow/wireshark/.config/wireshark/recent
 stow/wireshark/.config/wireshark/recent_common
 stow/neovim/.config/nvim/.netrwhist
 .nvimlog
+stow/neovim/.config/nvim/nvim_lsp/jdtls/
