@@ -12,6 +12,7 @@ stow/gnupg/.gnupg/sshcontrol
 stow/gnupg/.gnupg/trustdb.gpg
 stow/wireshark/.config/wireshark/recent
 stow/wireshark/.config/wireshark/recent_common
+stow/wireshark/.config/wireshark/preferences
 stow/neovim/.config/nvim/.netrwhist
 .nvimlog
 stow/neovim/.config/nvim/nvim_lsp/jdtls/
