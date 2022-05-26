@@ -129,15 +129,9 @@ function vigd() {
 	vi -p $(git diff --name-only "${branch}" "$(git merge-base "${branch}" "${remote}")")
 }
 
-function repo_init_aos() {
-	repo init -u ssh://git@github.ford.com/AOS/manifest -m aos-development.xml --config --partial-clone $@
-}
-
 # alias glog="git log --follow --name-status"
 
-if [[ -e ~/.bash_aliases.local ]]; then
-   source ~/.bash_aliases.local
-fi
+[[ -e ~/.bash_aliases.local ]] && source ~/.bash_aliases.local
 
 alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
@@ -150,13 +144,6 @@ alias gpg-reload="gpg-connect-agent reloadagent /bye"
 
 alias pwsh="pwsh -ExecutionPolicy ByPass"
 alias powershell.exe="powershell.exe -ExecutionPolicy ByPass"
-
-if [[ "undefined" == "${ANDROID_BUILD_TOP:-undefined}" ]]; then
-	export ANDROID_BUILD_TOP=/opt/phoxnix/phx-aosp-workspace
-fi
-alias phx-aosp-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford-userdebug"
-alias phx-aosp-gas-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch belford_gas-userdebug"
-# alias aos-em-setup="source ${ANDROID_BUILD_TOP}/build/envsetup.sh && lunch aos_emulator_car_x86_64-userdebug"
 
 alias apt-search="apt-cache search '' | sort | cut --delimiter ' ' --fields 1 | fzf --multi --cycle --reverse --preview 'apt-cache show {1}' | xargs -r sudo apt install -y"
 
