@@ -224,6 +224,13 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c', 'py']})
       call dein#add('itchyny/lightline.vim')
       call dein#add('maximbaz/lightline-ale')
+      " call dein#add('psf/black', {'on_ft': ['py', 'fsb']})
+
+      if executable('black')
+        " Only load the plugin if the black executable is available, this is
+        " to prevent errors on startup
+        call dein#add('psf/black', { 'branch': 'stable' }) " A plugin to format Python code by calling black
+      endif
 
       call dein#add('airblade/vim-gitgutter')
 
@@ -322,11 +329,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
    "End dein Scripts-------------------------
 endif
 
-if executable('black')
-  " Only load the plugin if the black executable is available, this is
-  " to prevent errors on startup
-  call dein#add('psf/black', { 'branch': 'stable' }) " A plugin to format Python code by calling black
-endif
 
 silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    let g:colo_search_path = g:dotfiles . '/bundles/dein'
@@ -700,6 +702,7 @@ endif
 augroup FILE_FORMATTING
    " Formatters that aren't done _via_ the LSP
    autocmd FileType bp nnoremap <buffer><Leader>fu :Bp<CR>
+   autocmd FileType python nnoremap <buffer><Leader>fu :Black<CR>
 augroup END
 
 " vim: ts=3 sts=3 sw=3 expandtab nowrap ff=unix :
