@@ -140,13 +140,13 @@ cd "${h}"
 #
 
 if [[ "1" != "${skip_apt}" ]]; then
-	sudo apt-get install -qy curl stow git environment-modules
+	sudo apt-get install -qy curl stow git environment-modules rlwrap
 fi
 
 #
 # Declare the files that we always want to copy over.
 declare -a stows;
-stows+=(zsh bash vnc gdb dircolors neovim vim tmux git p10k env-modules procs)
+stows+=(zsh bash vnc gdb dircolors neovim vim tmux git p10k env-modules procs rlwrap)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	install_powerline_fonts

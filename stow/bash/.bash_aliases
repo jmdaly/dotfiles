@@ -151,4 +151,7 @@ alias reboot="echo no........"
 
 alias plex-refresh="/usr/lib/plexmediaserver/Plex\ Media\ Scanner -s -v"
 
+# https://superuser.com/a/999132/184123
+alias sqlite="rlwrap -a -c -i sqlite3"
+
 # vim: ts=3 sts=0 sw=3 noet ft=sh ff=unix :
