@@ -179,8 +179,6 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       " Let dein manage dein
       call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
 
-      " Lazy-load on C++
-      call dein#add('vim-scripts/DoxygenToolkit.vim', {'on_ft': ['c', 'cpp', 'h', 'hpp']})
 
       " Lazy-load on PHP
       " call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
