@@ -1,15 +1,7 @@
-# Name the workspaces
-set $workspace1  "1: Social"
-set $workspace2  "2: Main"
-set $workspace3  "3"
-set $workspace4  "4"
-set $workspace5  "5"
-set $workspace6  "6"
-set $workspace7  "7"
-set $workspace8  "8"
-set $workspace9  "9"
-set $workspace10 "10: Media"
 # TODO how to rename without restarting https://faq.i3wm.org/question/1774/rename-workspace-with-i3-input-using-numbers-and-text.1.html
+
+# Assign windows to a Workspace
+assign [class="qBittorrent"] $ws10
 
 # Put Workspaces on specific monitors
 # DVI-D-2 = Wide Dell
@@ -17,12 +9,6 @@ set $workspace10 "10: Media"
 # HDMI-1 = ASUS
 # Position these with arandr, save the file, then paste the contents here:
 exec --no-startup-id xrandr --output VGA-0 --off --output DVI-D-0 --primary --mode 2560x1440 --pos 2560x0 --rotate normal --output DVI-D-1 --mode 2560x1080 --pos 0x160 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 5120x360 --rotate normal
-workspace $workspace1 output DVI-D-1
-workspace $workspace2 output DVI-D-2
-workspace $workspace3 output HDMI-1
-
-# Assign windows to a Workspace
-assign [class="qBittorrent"] $workspace10
-
-# I believe this is the alt-key switch I do for the Apple keyboard
-set $mod Mod4
+workspace $ws1 output DVI-D-1
+workspace $ws2 output DVI-D-2
+workspace $ws3 output HDMI-1

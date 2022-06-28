@@ -212,6 +212,7 @@ mkdir -p "${h}/.config"
 # Setup i3
 if [[ "1" != "${skip_i3}" ]]; then
 	dotfiles_install_i3 "${h}"
+	stows+=('i3')
 fi
 
 # Setup pwsh on linux

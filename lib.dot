@@ -138,29 +138,38 @@ function dotfiles_install_zplug()
   fi
 }
 
+function dotfiles_install_i3_config()
+{
+  local i3_dir=${1:-${DOTFILES_DIR:-${HOME}/dotfiles}/stow/i3/.config/i3}
+  ln -s ${i3_dir}/$(hostname).i3 ${i3_dir}/config
+  symlink "${i3_dir}/$(hostname).i3" "${i3_dir}/config" 1
+}
+
 function assemble_i3_config()
 {
-    local parts_dir=${1:-${DOTFILES_DIR:-${HOME}/dotfiles}/config/i3}
-    local dest=${2:-${HOME}/.config/i3/config}
+  # DEPRECATED
+  # This was used before i3 supported "include"
 
-    local files=($(find "${parts_dir}" -iname '*-common*.part' -or -iname \*$(hostname)\*.part | sort))
-    if [[ -e "${dest}" ]]; then
-        rm "${dest}"
-    fi
-    for f in ${files[@]}; do
-        echo -e "\n\n#\n# Include: ${f}\n#\n" >> "${dest}"
-        cat "${f}" >> "${dest}"
-        echo -e "\n#\n# /Include: ${f}\n#\n\n" >> "${dest}"
-    done
+  local parts_dir=${1:-${DOTFILES_DIR:-${HOME}/dotfiles}/config/i3}
+  local dest=${2:-${HOME}/.config/i3/config}
+
+  local files=($(find "${parts_dir}" -iname '*-common*.part' -or -iname \*$(hostname)\*.part | sort))
+  if [[ -e "${dest}" ]]; then
+    rm "${dest}"
+  fi
+  for f in ${files[@]}; do
+    echo -e "\n\n#\n# Include: ${f}\n#\n" >> "${dest}"
+    cat "${f}" >> "${dest}"
+    echo -e "\n#\n# /Include: ${f}\n#\n\n" >> "${dest}"
+  done
 }
 
 function dotfiles_install_i3()
 {
   local home=${1:-${HOME}}
-
-  if [[ "1" == "$(_exists)" ]]; then
+  if [[ "1" == "$(_exists i3)" ]]; then
     mkdir -p "${home}/.config/i3"
-    assemble_i3_config "${DOTFILES_DIR:-${HOME}/dotfiles}/config/i3" "${home}/.config/i3/config"
+    dotfiles_install_i3_config "${DOTFILES_DIR:-${HOME}/dotfiles}/stow/i3/.config/i3"
     mkdir -p "${home}/.screenlayout"
     symlink "${DOTFILES_DIR:-${HOME}/dotfiles}/stow/screenlayout/.screenlayout/host.sh" "${home}/.screenlayout/$(hostname).sh" 1
   fi

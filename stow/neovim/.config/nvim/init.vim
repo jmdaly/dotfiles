@@ -224,15 +224,17 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
       call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c', 'py']})
       call dein#add('itchyny/lightline.vim')
       call dein#add('maximbaz/lightline-ale')
-      " call dein#add('psf/black', {'on_ft': ['py', 'fsb']})
 
       if executable('black')
-        " Only load the plugin if the black executable is available, this is
-        " to prevent errors on startup
-        call dein#add('psf/black', { 'branch': 'stable' }) " A plugin to format Python code by calling black
+        " A plugin to format Python code by calling black
+        call dein#add('psf/black', { 'branch': 'stable', 'on_ft': ['py', 'fsb']})
       endif
 
       call dein#add('airblade/vim-gitgutter')
+
+      " https://www.youtube.com/watch?v=4jXGKmBrD5g&ab_channel=StefanGojan
+      call dein#add('nvim-lua/plenary.nvim')
+      " call dein#add('hoschi/yode-nvim')
 
       " Display trailing whitespace
       call dein#add('ntpeters/vim-better-whitespace')

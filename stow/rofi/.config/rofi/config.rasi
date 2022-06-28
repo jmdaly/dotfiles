@@ -1,6 +1,7 @@
 configuration {
  modi: "window,drun,ssh,combi";
- theme: "/home/matt/.config/rofi/rofi-themes/Official\ Themes/arthur.rasi";
  font: "hack 10";
  combi-modi: "window,drun,ssh";
 }
+
+@theme "/usr/share/rofi/themes/arthur.rasi"
