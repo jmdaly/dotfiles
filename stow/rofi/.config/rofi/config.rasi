@@ -1,7 +1,9 @@
+/** Basic config file **/
+
 configuration {
  modi: "window,drun,ssh,combi";
  font: "hack 10";
  combi-modi: "window,drun,ssh";
 }
 
-@theme "/usr/share/rofi/themes/arthur.rasi"
+@theme "/home/matt/.config/rofi/launchers/ribbon/styles/berry.rasi"
