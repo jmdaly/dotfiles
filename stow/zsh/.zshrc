@@ -158,6 +158,20 @@ bindkey -- "${${terminfo[kend]}}"       end-of-line
 function _fix_zsh_init() {
 	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+	# Testing https://unix.stackexchange.com/a/631933/100689
+	up-line-or-history() {
+	  zle .set-local-history -n ${#WIDGET:#*global*}  # 0 iff $WIDGET == *global*
+	  zle .up-line-or-history
+	}
+	zle -N up-line-or-history-local up-line-or-history
+	zle -N up-line-or-history-global up-line-or-history
+
+	# Up arrow
+	bindkey '^[[A' up-line-or-history-local
+
+	# # Alt + up arrow
+	# bindkey '^[^[[A' up-line-or-history-global
+
 	[[ "1" == "$(_exists direnv)" ]] && eval "$(direnv hook zsh)" 2> /dev/null
 }
 zvm_after_init_commands+=(_fix_zsh_init)
