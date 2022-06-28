@@ -230,7 +230,7 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
         call dein#add('psf/black', { 'branch': 'stable', 'on_ft': ['py', 'fsb']})
       endif
 
-      call dein#add('airblade/vim-gitgutter')
+      call dein#add('lewis6991/gitsigns.nvim')
 
       " https://www.youtube.com/watch?v=4jXGKmBrD5g&ab_channel=StefanGojan
       call dein#add('nvim-lua/plenary.nvim')
