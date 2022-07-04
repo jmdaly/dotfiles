@@ -79,6 +79,8 @@ return require('packer').startup(function(use)
     }
   }
 
+  use 'simrat39/rust-tools.nvim' -- Improved rust development
+
   use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
 
 end)
