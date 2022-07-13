@@ -37,7 +37,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
       -- This is similar to:
       -- let g:diagnostic_show_sign = 1
       -- To configure sign display,
-      --  see: ":help vim.lsp.diagnostic.set_signs()"
+      --  see: ":help vim.diagnostic.set_signs()"
       signs = true,
 
       -- This is similar to:
@@ -59,17 +59,17 @@ on_attach = function(client, bufnr)
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  buf_set_keymap('n',  '<leader>rD',  '<cmd>lua vim.lsp.buf.type_definition()<CR>',  opts)
-  buf_set_keymap('n',  '<leader>rd',  '<cmd>lua vim.lsp.buf.declaration()<CR>',      opts)
-  buf_set_keymap('n',  '<leader>rj',  '<cmd>lua vim.lsp.buf.definition()<CR>',       opts)
-  buf_set_keymap('n',  '<leader>ty',  '<cmd>lua vim.lsp.buf.hover()<CR>',            opts)
-  buf_set_keymap('n',  '<leader>rk',  '<cmd>lua vim.lsp.buf.signature_help()<CR>',   opts)
-  buf_set_keymap('n',  '<leader>rf',  '<cmd>lua vim.lsp.buf.references()<CR>',       opts)
-  buf_set_keymap('n',  '<leader>ds',  '<cmd>lua vim.lsp.buf.document_symbol()<CR>',  opts)
-  buf_set_keymap('n',  '<leader>rw',  '<cmd>lua vim.lsp.buf.rename()<CR>',           opts)
-  buf_set_keymap('n',  '<leader>c',   '<cmd>lua vim.lsp.buf.code_action()<CR>',      opts)
+  buf_set_keymap('n', '<leader>rD',  '<cmd>lua vim.lsp.buf.type_definition()<CR>',  opts)
+  buf_set_keymap('n', '<leader>rd',  '<cmd>lua vim.lsp.buf.declaration()<CR>',      opts)
+  buf_set_keymap('n', '<leader>rj',  '<cmd>lua vim.lsp.buf.definition()<CR>',       opts)
+  buf_set_keymap('n', '<leader>ty',  '<cmd>lua vim.lsp.buf.hover()<CR>',            opts)
+  buf_set_keymap('n', '<leader>rk',  '<cmd>lua vim.lsp.buf.signature_help()<CR>',   opts)
+  buf_set_keymap('n', '<leader>rf',  '<cmd>lua vim.lsp.buf.references()<CR>',       opts)
+  buf_set_keymap('n', '<leader>ds',  '<cmd>lua vim.lsp.buf.document_symbol()<CR>',  opts)
+  buf_set_keymap('n', '<leader>rw',  '<cmd>lua vim.lsp.buf.rename()<CR>',           opts)
+  buf_set_keymap('n', '<leader>c',   '<cmd>lua vim.lsp.buf.code_action()<CR>',      opts)
   buf_set_keymap('n', '<leader>el',   '<cmd>lua print(vim.lsp.get_log_path())<CR>',  opts)
-  buf_set_keymap('n', '<leader>m',    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<leader>m',    '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
   -- Various mappings to open the corresponding header/source file in a new split
   buf_set_keymap('n', '<leader>of', '<cmd>ClangdSwitchSourceHeader<CR>', opts)
@@ -78,15 +78,15 @@ on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>ok', '<cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>', opts)
   buf_set_keymap('n', '<leader>ol', '<cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>', opts)
 
-  buf_set_keymap('n', '[z', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']z', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[z', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']z', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
   -- New key mappings that came with go setup (but are general)
 
-  buf_set_keymap('n',  '<space>e',   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',  opts)
-  buf_set_keymap('n',  '[d',         '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',              opts)
-  buf_set_keymap('n',  ']d',         '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',              opts)
-  buf_set_keymap('n',  '<space>q',   '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',            opts)
+  buf_set_keymap('n',  '<space>e',   '<cmd>lua vim.diagnostic.open_float()<CR>',  opts)
+  buf_set_keymap('n',  '[d',         '<cmd>lua vim.diagnostic.goto_prev()<CR>',              opts)
+  buf_set_keymap('n',  ']d',         '<cmd>lua vim.diagnostic.goto_next()<CR>',              opts)
+  buf_set_keymap('n',  '<space>q',   '<cmd>lua vim.diagnostic.set_loclist()<CR>',            opts)
   buf_set_keymap('n',  '<space>wa',  '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',          opts)
   buf_set_keymap('n',  'gi',         '<cmd>lua vim.lsp.buf.implementation()<CR>',                opts)
   buf_set_keymap('n',  '<space>wr',  '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',       opts)

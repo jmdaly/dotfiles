@@ -233,11 +233,17 @@ if g:dein_exists && (v:version >= 800 || has('nvim'))
         call dein#add('psf/black', { 'branch': 'stable', 'on_ft': ['py', 'fsb']})
       endif
 
-      call dein#add('lewis6991/gitsigns.nvim')
+      if has('nvim') || has('patch-8.0.902')
+         call dein#add('mhinz/vim-signify')
+      else
+         call dein#add('mhinz/vim-signify', { 'branch': 'legacy' })
+      endif
 
       " https://www.youtube.com/watch?v=4jXGKmBrD5g&ab_channel=StefanGojan
       call dein#add('nvim-lua/plenary.nvim')
       " call dein#add('hoschi/yode-nvim')
+
+      call dein#add('mtth/scratch.vim')
 
       " Display trailing whitespace
       call dein#add('ntpeters/vim-better-whitespace')
@@ -347,12 +353,12 @@ silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
 endif
 
 
-""""""""""""""""""""" Git-Gutter """"""""""""""""""""""""
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+
+""""""""""""""""""""" Git-Signify """"""""""""""""""""""""
+set updatetime=100
 " stage the hunk with <Leader>hs or
 " revert it with <Leader>hr.
-""""""""""""""""""""" /Git-Gutter """"""""""""""""""""""""
+""""""""""""""""""""" /Git-Signify """"""""""""""""""""""""
 
 """"""""""""""""""""" /vim-maximizer """"""""""""""""""""""""
 nnoremap <silent> <leader>z :MaximizerToggle<CR>
