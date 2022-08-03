@@ -94,15 +94,15 @@ on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     -- Doesn't work with go
     buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec([[
       hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
       hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=LightYellow
