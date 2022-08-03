@@ -12,6 +12,8 @@ set $ws7  "7"
 set $ws8  "8"
 set $ws9  "9: VPN"
 set $ws10 "10"
+set $ws11 "T"
+set $ws12 "Y"
 
 include ~/.config/i3/0-common-base.i3
 include ~/.config/i3/1-host-ugc15x24r53.i3

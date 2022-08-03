@@ -9,6 +9,6 @@ assign [class="ZSTray"] $ws9
 # DP-4 = Portrait Dell
 # Position these with arandr, save the file, then paste the contents here:
 exec --no-startup-id ~/.screenlayout/host.sh
-workspace $ws1 output DP-0
-workspace $ws2 output DP-6
-workspace $ws3 output DP-4
+workspace $ws1 output DP-6
+workspace $ws2 output DP-4
+workspace $ws3 output DP-0
