@@ -43,7 +43,7 @@ case $chosen in
       flag="-s"
         ;;
 esac
-sleep 0.2; scrot ${flag} ${sname} -e 'mv $f /tmp ; ln -s /tmp/$f /tmp/latest.png'
+sleep 0.2; scrot ${flag} ${sname} -e 'mv $f /tmp ; ln -sf /tmp/$f /tmp/latest.png'
 
 if [[ -e /tmp/latest ]]; then
   viewnior /tmp/latest.png
