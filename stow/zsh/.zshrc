@@ -238,7 +238,7 @@ fi
 
 # Load default python virtual env.
 if [[ "undefined" == "${DEFAULT_PYTHON_VENV:-undefined}" ]]; then
-	DEFAULT_PYTHON_VENV="default"
+	DEFAULT_PYTHON_VENV="py38"
 fi
 
 # The issue is that tmux copies my path, which includes the python venv, so
