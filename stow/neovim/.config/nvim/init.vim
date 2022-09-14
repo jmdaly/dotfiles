@@ -416,7 +416,7 @@ if has('nvim-0.5')
       autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
       autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-      autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+      autocmd BufWritePre *.go lua vim.lsp.buf.format { async = true }
       autocmd BufWritePre *.go lua goimports(1000)
    augroup end
 endif
