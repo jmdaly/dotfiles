@@ -46,11 +46,12 @@ esac
 sleep 0.2; scrot ${flag} ${sname} -e 'mv $f /tmp ; ln -sf /tmp/$f /tmp/latest.png'
 
 if [[ -e /tmp/latest ]]; then
-  viewnior /tmp/latest.png
-
   # Makes this easier for WebEx
   ln -s $(readlink /tmp/latest.png) ${HOME}/Documents/
 
   # Put the image in the clip board (again, easier to deal with)
-  xclip -selection clipboard -t image/png -i /tmp/latest.png
+  kill -15 $(pgrep xclip) 2>&1 > /dev/null
+  xclip -selection clipboard -silent -t image/png -i /tmp/latest.png
+
+  viewnior /tmp/latest.png
 fi
