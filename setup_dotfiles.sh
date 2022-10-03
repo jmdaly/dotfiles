@@ -146,7 +146,7 @@ fi
 #
 # Declare the files that we always want to copy over.
 declare -a stows;
-stows+=(zsh bash vnc gdb dircolors neovim vim tmux git p10k env-modules procs rlwrap)
+stows+=(zsh bash bat vnc gdb dircolors neovim vim tmux git p10k env-modules procs rlwrap)
 
 if [[ "1" != "${skip_powerline}" ]]; then
 	install_powerline_fonts

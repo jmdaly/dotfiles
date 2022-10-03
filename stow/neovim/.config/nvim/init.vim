@@ -352,7 +352,11 @@ silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
    colo doorhinge
 endif
 
-
+""""""""""""""""""""" Black """"""""""""""""""""""""
+if !exists("g:black_linelength")
+  let g:black_linelength = 120
+endif
+""""""""""""""""""""" /Black """"""""""""""""""""""""
 
 """"""""""""""""""""" Git-Signify """"""""""""""""""""""""
 set updatetime=100

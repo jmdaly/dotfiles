@@ -8,9 +8,9 @@
 	path = ~/dotfiles/gitconfig.ford.inc
 [includeIf "gitdir:/src/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
-[includeIf "gitdir:/opt/**/*"]
+[includeIf "gitdir:/f/**/*"]
 	path = ~/dotfiles/gitconfig.ford.inc
-[includeIf "gitdir:/opt/**/"]
+[includeIf "gitdir:/f/**/"]
 	path = ~/dotfiles/gitconfig.ford.inc
 [url "https://gist.github.com"]
 	insteadOf = ssh://gist.github.com

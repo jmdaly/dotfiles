@@ -16,6 +16,6 @@ set pagination off
 set confirm off
 set breakpoint pending on
 
-set auto-load safe-path /opt/phoenix/phx-fsb
+set auto-load safe-path /f/phoenix/phx-fsb
 
 # source ~matt/dotfiles/gdb-dashboard/.gdbinit
