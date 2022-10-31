@@ -45,7 +45,7 @@ case $chosen in
 esac
 sleep 0.2; scrot ${flag} ${sname} -e 'mv $f /tmp ; ln -sf /tmp/$f /tmp/latest.png'
 
-if [[ -e /tmp/latest ]]; then
+if [[ -e /tmp/latest.png ]]; then
   # Makes this easier for WebEx
   ln -s $(readlink /tmp/latest.png) ${HOME}/Documents/
 
