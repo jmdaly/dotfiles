@@ -83,4 +83,6 @@ return require('packer').startup(function(use)
 
   use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
 
+  use 'github/copilot.vim'
+
 end)

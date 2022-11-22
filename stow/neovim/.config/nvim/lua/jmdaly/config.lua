@@ -4,6 +4,9 @@
 -- Directory containing my user-defined snippets
 vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 
+-- Copilot
+vim.g.copilot_assume_mapped = true
+
 -- Set up material theme
 require('material').setup({
         contrast = {
