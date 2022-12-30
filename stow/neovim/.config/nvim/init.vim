@@ -32,6 +32,7 @@ else
    let is_termux=0
 endif
 
+" TODO Remove winbash, conflating the dotfiles just makes things complicated
 let is_winbash=0
 let is_win=0
 if has('unix')
@@ -48,12 +49,6 @@ if has('win32')||has('win32unix')||1==is_winbash
    endif
 endif
 
-let g:dein_plugin = g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim'
-if isdirectory(g:dein_plugin)
-   let g:dein_exists = 1
-else
-   let g:dein_exists = 0
-endif
 
 if has('nvim') && isdirectory(g:env_folder)
    if has('win32')
@@ -171,208 +166,36 @@ endif
 "    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " endif
 
-" TODO try packer instead of dein: https://github.com/wbthomason/packer.nvim
-if g:dein_exists && (v:version >= 800 || has('nvim'))
-   let &runtimepath.=',' . g:dein_plugin
 
-   " Required:
-   if dein#load_state(string(g:dotfiles . '/bundles/dein'))
-      call dein#begin(g:dotfiles . '/bundles/dein')
+if has('nvim-0.5')
+   lua require('utils')
+   lua require('plugins')
+   lua require('completions')
 
-      " Let dein manage dein
-      call dein#add(g:dotfiles . '/bundles/dein/repos/github.com/Shougo/dein.vim')
+   lua require("lsp_config")
+    augroup lsp
+       autocmd!
+       autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
+       autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
+       autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-
-      " Lazy-load on PHP
-      " call dein#add('shawncplus/phpcomplete.vim', {'on_ft': ['php']})
-
-      " Lazy-load on python
-      call dein#add('Hdima/python-syntax', {'on_ft': ['py']})
-
-      " fugitive - a Git wrapper for vim. Also allows current
-      call dein#add('tpope/vim-fugitive')
-      set diffopt+=vertical
-      " Used for navigating the quickfix window better.  Recommended by fugitive
-      call dein#add('tpope/vim-unimpaired')
-      " This should improve Git Fugitive and Git Gutter
-      call dein#add('tmux-plugins/vim-tmux-focus-events')
-
-      if has('unix')
-         call dein#add('SirVer/ultisnips')
-         call dein#add('honza/vim-snippets')
-      endif
-
-      " call dein#add('majutsushi/tagbar')
-
-      " Plugin to change the current directory to a project's root (so, look for
-      " .git or something)
-      call dein#add('airblade/vim-rooter')
-
-      " Adding this so I can search/replace and preserve letter case
-      call dein#add('tpope/vim-abolish')
-
-      " Highlighting for tmux
-      call dein#add('tmux-plugins/vim-tmux')
-
-      " Plug to assist with commenting out blocks of text:
-      call dein#add('tpope/vim-commentary')
-
-      " Tabular, align equals
-      call dein#add('godlygeek/tabular')
-
-      " Show markers
-      call dein#add('kshenoy/vim-signature')
-
-      " A plugin for asynchronous linting while you type
-      call dein#add('w0rp/ale', {'on_ft': ['cpp', 'c', 'py']})
-      call dein#add('itchyny/lightline.vim')
-      call dein#add('maximbaz/lightline-ale')
-
-      if executable('black')
-        " A plugin to format Python code by calling black
-        call dein#add('psf/black', { 'branch': 'stable', 'on_ft': ['py', 'fsb']})
-      endif
-
-      if has('nvim') || has('patch-8.0.902')
-         call dein#add('mhinz/vim-signify')
-      else
-         call dein#add('mhinz/vim-signify', { 'branch': 'legacy' })
-      endif
-
-      " https://www.youtube.com/watch?v=4jXGKmBrD5g&ab_channel=StefanGojan
-      call dein#add('nvim-lua/plenary.nvim')
-      " call dein#add('hoschi/yode-nvim')
-
-      call dein#add('mtth/scratch.vim')
-
-      " Display trailing whitespace
-      call dein#add('ntpeters/vim-better-whitespace')
-
-      " call dein#add('editorconfig/editorconfig-vim')
-
-      " Vim sugar for the UNIX shell commands that need it the most. Features include:
-      " :Remove: Delete a buffer and the file on disk simultaneously.
-      " :Unlink: Like :Remove, but keeps the now empty buffer.
-      " :Move:   Rename a buffer and the file on disk simultaneously.
-      " :Rename: Like :Move, but relative to the current file's containing directory.
-      " :Chmod:  Change the permissions of the current file.
-      " :Mkdir:  Create a directory, defaulting to the parent of the current file.
-      " :Find:   Run find and load the results into the quickfix list.
-      " :Locate: Run locate and load the results into the quickfix list.
-      " :Wall:   Write every open window. Handy for kicking off tools like guard.
-      " :SudoWrite: Write a privileged file with sudo.
-      " :SudoEdit:  Edit a privileged file with sudo.
-      call dein#add('tpope/vim-eunuch')
-
-      if has('nvim')
-         " Have vim reload a file if it has changed outside of vim:
-         call dein#add('TheZoq2/neovim-auto-autoread')
-      endif
-
-      if !exists('g:gui_oni') && has('nvim') && is_termux==0
-         call dein#add('vimlab/split-term.vim')
-
-         call dein#add('neovim/nvim-lspconfig')
-         call dein#add('hrsh7th/nvim-compe') " Autocompletion plugin
-         call dein#add('kosayoda/nvim-lightbulb')
-      endif
-
-      " Syntax highlighting for kotlin
-      call dein#add('udalov/kotlin-vim')
-
-      call dein#add('tpope/vim-obsession')
-      call dein#add('mhinz/vim-startify')
-      call dein#add('szw/vim-maximizer')
-
-      if has('unix') && !exists('g:gui_oni')
-         " Install fzf, the fuzzy searcher (also loads Ultisnips)
-         call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-         call dein#add('junegunn/fzf.vim', {'depends': 'fzf' })
-         call dein#add('ojroques/nvim-lspfuzzy', {'depends': 'fzf' })
-      endif
-
-      call dein#add('PProvost/vim-ps1', {'on_ft': ['ps1']})
-
-      " syntax highlighting for *.hal, *.bp, and *.rc files.
-      call dein#add('https://github.ford.com/MRUSS100/aosp-vim-syntax.git')
-      " call dein#add('rubberduck203/aosp-vim')
-
-      call dein#add('kheaactua/vim-fzf-repo')
-
-      "
-      " Colourschemes
-      call dein#add('altercation/vim-colors-solarized')
-      call dein#add('kristijanhusak/vim-hybrid-material')
-      call dein#add('atelierbram/vim-colors_duotones')
-      call dein#add('atelierbram/vim-colors_atelier-schemes')
-
-      " Other..
-      call dein#add('rakr/vim-one')
-      call dein#add('arcticicestudio/nord-vim')
-      call dein#add('drewtempelmeyer/palenight.vim')
-      call dein#add('morhetz/gruvbox')
-      call dein#add('mhartington/oceanic-next')
-
-      call dein#add('ayu-theme/ayu-vim')
-      let ayucolor="mirage"
-
-      " A bunch more...
-      call dein#add('flazz/vim-colorschemes')
-
-      call dein#add('kheaactua/vim-managecolor')
-      "
-      " /Colourschemes
-
-     " Required:
-     call dein#end() " On Windows, outputting No matching autocommands"
-     call dein#save_state()
-   endif
-
-   " Required:
-   filetype plugin indent on
-   syntax enable
-
-   " If you want to install not installed plugins on startup.
-   if dein#check_install()
-      call dein#install()
-   endif
-
-   "End dein Scripts-------------------------
+       autocmd BufWritePre *.go lua vim.lsp.buf.format { async = true }
+       autocmd BufWritePre *.go lua goimports(1000)
+    augroup end
 endif
 
 
-silent if g:dein_exists && dein#check_install('vim-managecolor') == 0
-   let g:colo_search_path = g:dotfiles . '/bundles/dein'
-   let g:colo_cache_file  = g:dotfiles . '/colos.json'
-   " colo hydrangea
-   " colo flatland
-   " colo argonaut
-   " colo ayu
-   " colo argonaut
-   colo doorhinge
-endif
+" Colour schemes
+" colo hydrangea
+" colo flatland
+" colo argonaut
+" colo ayu
+" colo argonaut
+colo doorhinge
 
-""""""""""""""""""""" Black """"""""""""""""""""""""
-if !exists("g:black_linelength")
-  let g:black_linelength = 120
-endif
-""""""""""""""""""""" /Black """"""""""""""""""""""""
 
-""""""""""""""""""""" Git-Signify """"""""""""""""""""""""
-set updatetime=100
-" stage the hunk with <Leader>hs or
-" revert it with <Leader>hr.
-""""""""""""""""""""" /Git-Signify """"""""""""""""""""""""
 
-""""""""""""""""""""" /vim-maximizer """"""""""""""""""""""""
-nnoremap <silent> <leader>z :MaximizerToggle<CR>
-vnoremap <silent> <leader>z :MaximizerToggle<CR>gv
-inoremap <silent> <leader>z <C-o>:MaximizerToggle<CR>
 
-nnoremap <silent> <C-w>z :MaximizerToggle<CR>
-vnoremap <silent> <C-w>z :MaximizerToggle<CR>gv
-inoremap <silent> <C-w>z <C-o>:MaximizerToggle<CR>
-""""""""""""""""""""" /vim-maximizer """"""""""""""""""""""""
 
 """"""""""""""""""""""" Lightline """"""""""""""""""""""""
 let g:lightline = {
@@ -400,52 +223,6 @@ endfunction
 
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
 
-"""""""""""""""""""""" nvim-compe """"""""""""""""""""""""
-set completeopt=menuone,noselect
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-"""""""""""""""""""""" /nvim-compe """"""""""""""""""""""""
-
-"""""""""""""""""""""" LSP """"""""""""""""""""""""
-let g:clang_path = '/usr'
-
-if has('nvim-0.5')
-   lua require("lsp_config")
-   augroup lsp
-      autocmd!
-      autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-      autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-      autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-      autocmd BufWritePre *.go lua vim.lsp.buf.format { async = true }
-      autocmd BufWritePre *.go lua goimports(1000)
-   augroup end
-endif
-
-nnoremap <silent> <leader>rd <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <leader>rj <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <leader>ty <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <leader>rk <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <leader>rf <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <leader>ds <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> <leader>rw <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>c  <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>m  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <silent> <leader>el <cmd>lua print(vim.lsp.get_log_path())<CR>
-
-" Various mappings to open the corresponding header/source file in a new split
-nnoremap <silent> <leader>of <cmd>ClangdSwitchSourceHeader<CR>
-nnoremap <silent> <leader>oh <cmd>vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
-nnoremap <silent> <leader>oj <cmd>below sp<CR><cmd>ClangdSwitchSourceHeader<CR>
-nnoremap <silent> <leader>ok <cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>
-nnoremap <silent> <leader>ol <cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>
-
-nnoremap <silent> [z         <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> ]z         <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-"""""""""""""""""""""" /LSP """"""""""""""""""""""""
 
 
 """""""""""""""""""""""""""" ALE """""""""""""""""""""""""
@@ -479,39 +256,6 @@ if !has('nvim')
    set autoread
 endif
 
-
-"""""""""""""""""""" Ultisnips config """"""""""""""""""""""
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-silent if g:dein_exists && dein#check_install('ultisnips') == 0
-   let g:UltiSnipsExpandTrigger='<c-j>'
-   let g:UltiSnipsJumpForwardTrigger='<c-j>'
-   let g:UltiSnipsJumpBackwardTrigger='<c-n>'
-
-   " If you want :UltiSnipsEdit to split your window.
-   let g:UltiSnipsEditSplit='vertical'
-
-   " Add to the runtime path so that custom
-   " snippets can be found:
-   let &rtp .= ','.expand(g:dotfiles)
-endif
-""""""""""""""""""" /Ultisnips config """"""""""""""""""""""
-
-
-"""""""""""""""""""" rooter config """"""""""""""""""""""
-silent if g:dein_exists && dein#check_install('vim-rooter') == 0
-   " Stop printing the cwd on write
-   let rooter_silent_chdir=1
-   let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn']
-endif
-""""""""""""""""""" /rooter config """"""""""""""""""""""
-
-" """"""""""""""""" nvim-compe """""""""""""""""""
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-" """""""""""""""" /nvim-compe """""""""""""""""""
 
 " """""""""""""""" Rainbow (foldering) """""""""""""""""""
 "    let g:rainbow_conf = {
