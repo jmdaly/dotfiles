@@ -53,16 +53,7 @@ return packer.startup(function(use)
   -- Load on an autocommand event
   use {'andymass/vim-matchup', event = 'VimEnter'}
 
-  -- Load on a combination of conditions: specific filetypes or commands
-  -- Also run code after load (see the "config" key)
-  use {
-    'w0rp/ale',
-    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex'},
-    cmd = 'ALEEnable',
-    config = 'vim.cmd[[ALEEnable]]'
-  }
-
-  use {
+ use {
     'tpope/vim-fugitive',
     -- config = function()
     --   vim.api.nvim_set_var('diffopt', vim.api.nvim_set_var('diffopt') .. 'vertical')
@@ -155,12 +146,21 @@ return packer.startup(function(use)
     end,
   }
 
-
   use 'vimlab/split-term.vim'
 
   use {
     'udalov/kotlin-vim',
     ft = {'kt'},
+  }
+
+  -- Colour coding nests
+  use {
+    'luochen1990/rainbow',
+    config = function()
+      -- 0 if you want to enable it later via :RainbowToggle
+      vim.api.nvim_set_var('rainbow_active', 1)
+    end,
+    cond = false,
   }
 
   use 'tpope/vim-obsession'
@@ -221,6 +221,8 @@ return packer.startup(function(use)
   }
   use { 'ojroques/nvim-lspfuzzy', required = { 'fzf' } }
 
+  use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
+
   -- Autocompletion plugin
   use {
     'hrsh7th/nvim-cmp',
@@ -238,6 +240,53 @@ return packer.startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
 
+  -- Plugin for working with surroundings of words
+  use 'tpope/vim-surround'
+
+  -- A plugin for asynchronous linting while you type
+  use {
+    'w0rp/ale',
+    ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex'},
+    cmd = 'ALEEnable',
+    config = function()
+      vim.cmd[[ALEEnable]]
+
+      vim.api.nvim_set_var('ale_linters', {
+        cpp = {'clangtidy'},
+        c = {'clangtidy'},
+      })
+
+      vim.api.nvim_set_var('ale_fixers', {
+       cpp = {'clang-format'},
+       -- '*' = {'remove_trailing_lines', 'trim_whitespace'},
+      })
+
+      local map = require("utils").map
+      -- Set up mapping to move between errors
+      map('i', '[w', '<Plug>(ale_previous_wrap)', { silent = true })
+      map('i', ']w', '<Plug>(ale_next_wrap)', { silent = true} )
+    end,
+  }
+
+  use {
+    'itchyny/lightline.vim',
+    config = function()
+      vim.api.nvim_set_var('lightline', {
+        colorscheme = 'one',
+        component_function = {
+          filename = 'LightlineFilename',
+        }
+      })
+      vim.api.nvim_set_var('unite_force_overwrite_statusline', 0)
+      vim.api.nvim_set_var('vimfiler_force_overwrite_statusline', 0)
+      vim.api.nvim_set_var('vimshell_force_overwrite_statusline', 0)
+      vim.api.nvim_set_var('lightline.separator', { left = '', right = '' })
+      vim.api.nvim_set_var('lightline.subseparator', { left = '', right = '' })
+    end,
+    cond = false
+  }
+  -- use 'maximbaz/lightline-ale'
+  -- use 'kosayoda/nvim-lightbulb'
 
   use {
     'PProvost/vim-ps1',
@@ -263,7 +312,6 @@ return packer.startup(function(use)
   -- :SudoWrite: Write a privileged file with sudo.
   -- :SudoEdit:  Edit a privileged file with sudo.
   use 'tpope/vim-eunuch'
-
 
   -- Colourschemes
   use 'altercation/vim-colors-solarized'

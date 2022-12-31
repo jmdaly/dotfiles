@@ -160,13 +160,6 @@ if !exists('g:gui_oni') && has('termguicolors')
   set termguicolors
 endif
 
-" if
-"    " Colour coding nests
-"    Plug 'luochen1990/rainbow'
-"    let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-" endif
-
-
 if has('nvim-0.5')
    lua require('utils')
    lua require('plugins')
@@ -194,17 +187,7 @@ endif
 colo doorhinge
 
 
-
-
-
 """"""""""""""""""""""" Lightline """"""""""""""""""""""""
-let g:lightline = {
-   \ 'colorscheme': 'one',
-   \ 'component_function': {
-   \   'filename': 'LightlineFilename',
-   \ },
-\ }
-
 function! LightlineFilename()
    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
       \ &filetype ==# 'unite' ? unite#get_status_string() :
@@ -212,11 +195,6 @@ function! LightlineFilename()
       \ expand('%:t') !=# '' ? @% : '[No Name]'
 endfunction
 
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
-let g:lightline.separator = { 'left': '', 'right': '' }
-let g:lightline.subseparator = { 'left': '', 'right': '' }
 function! LightlineReadonly()
    return &readonly ? '' : ''
 endfunction
@@ -224,22 +202,8 @@ endfunction
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
 
 
-
 """""""""""""""""""""""""""" ALE """""""""""""""""""""""""
 silent if g:dein_exists && dein#check_install('ale') == 0
-   let g:ale_linters = {
-      \ 'cpp': ['clangtidy'],
-      \ 'c': ['clangtidy'],
-      \}
-   let g:ale_fixers={
-      \ 'cpp': ['clang-format'],
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \}
-
-   " Set up mapping to move between errors
-   nmap <silent> [w <Plug>(ale_previous_wrap)
-   nmap <silent> ]w <Plug>(ale_next_wrap)
-
    " Run clang-format
    autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fu :ALEFix<CR>
 endif
