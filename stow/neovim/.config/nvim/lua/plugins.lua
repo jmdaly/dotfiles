@@ -66,30 +66,34 @@ return packer.startup(function(use)
   -- This should improve Git Fugitive and Git Gutter
   use 'tmux-plugins/vim-tmux-focus-events'
 
-  use {
-    'SirVer/ultisnips',
-    config = function()
-      vim.api.nvim_set_var('UltiSnipsExpandTrigger', '<c-j>')
-      vim.api.nvim_set_var('UltiSnipsJumpForwardTrigger', '<c-j>')
-      vim.api.nvim_set_var('UltiSnipsJumpBackwardTrigger', '<c-n>')
+  -- use {
+  --   'SirVer/ultisnips',
+  --   config = function()
+  --     vim.api.nvim_set_var('UltiSnipsExpandTrigger', '<c-j>')
+  --     vim.api.nvim_set_var('UltiSnipsJumpForwardTrigger', '<c-j>')
+  --     vim.api.nvim_set_var('UltiSnipsJumpBackwardTrigger', '<c-n>')
 
-      -- If you want :UltiSnipsEdit to split your window.
-      vim.api.nvim_set_var('UltiSnipsEditSplit', 'vertical')
+  --     -- If you want :UltiSnipsEdit to split your window.
+  --     vim.api.nvim_set_var('UltiSnipsEditSplit', 'vertical')
 
-      -- Add to the runtime path so that custom
-      -- snippets can be found:
-      -- let &rtp .= ','.expand(g:dotfiles)
+  --     -- Add to the runtime path so that custom
+  --     -- snippets can be found:
+  --     dotfiles_dir=vim.api.nvim_get_var('dotfiles')
+  --     -- let &rtp .= ','.expand(g:dotfiles)
 
-      -- vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
-    end,
-  }
+  --     -- vim.api.nvim_set_var('vsnip_snippet_dir', dotfiles_dir .. '/dotfiles/snippets')
+  --   end,
+  -- }
 
-  use {
-    'honza/vim-snippets'
-    -- config = function()
-      -- vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
-    -- end,
-  }
+  -- use {
+  --   'honza/vim-snippets'
+  --   -- config = function()
+  --     -- vim.api.nvim_set_var('vsnip_snippet_dir', dotfiles_dir .. '/dotfiles/snippets')
+  --   -- end,
+  -- }
+
+  use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+
   use {
     'airblade/vim-rooter',
      config = function()
@@ -184,33 +188,26 @@ return packer.startup(function(use)
   use {
     'ibhagwan/fzf-lua',
     requires = {
-      'junegunn/fzf',
-      build = './install --all',
-      merged = 0
+      { 'nvim-tree/nvim-web-devicons' },
+      {
+        'junegunn/fzf',
+        run = './install --all',
+      }
     },
     config = function()
       local map = require("utils").map
 
       -- Set up keyboard shortbuts for fzf, the fuzzy finder
       -- This one searches all the files in the current git repo:
-      map('n', '<c-k>', ':GitFiles<CR>', { silent = true })
-      map('n', '<leader><Tab>', ':Buffers<CR>', { silent = true })
+      map('n', '<c-k>', '<cmd>lua require("fzf-lua").files()<CR>', { silent = true })
+      map('n', '<leader><Tab>', '<cmd>lua require("fzf-lua").buffers()<CR>', { silent = true })
       map('n', 'gsiw', ':GGrepIW<CR>', { silent = true })
 
       -- Unmap center/<CR> from launching fzf which appears to be mapped by default.
       -- unmap <CR>
 
-      -- This is the order of preference
+      map('n', '<leader>g', '<cmd>lua require("fzf-lua").grep_project()<CR>', { silent = true })
       if vim.fn.executable('rg') then
-        vim.api.nvim_set_var('search_tool', 'rg')
-      elseif vim.fn.executable('ag') then
-        vim.api.nvim_set_var('search_tool', 'ag')
-      else
-        vim.api.nvim_set_var('search_tool', 'grep')
-      end
-
-      if vim.api.nvim_get_var('search_tool') == 'rg' then
-        map('n', '<leader>g', ':Rg<cr>', { silent = true })
         vim.cmd([[
           command! -nargs=* -bang GGrepIW
              \ call fzf#vim#grep(
@@ -220,8 +217,7 @@ return packer.startup(function(use)
              \  <bang>1
              \ )
         ]])
-      else
-        map('n', '<leader>g', ':Ag<cr>', { silent = true })
+      elseif vim.fn.executable('ag') then
         vim.cmd([[
           command! -nargs=* -bang GGrepIW
             \ call fzf#vim#grep(
@@ -230,8 +226,8 @@ return packer.startup(function(use)
         ]])
       end
 
-      map('n', '<leader>l', ':Lines<cr>', { silent = true })
-      map('n', '<leader>w', ':Windows<cr>', { silent = true })
+      map('n', '<leader>l', '<cmd>lua require("fzf-lua").lines()<CR>', { silent = true })
+      map('n', '<leader>w', '<cmd>lua require("fzf-lua").Windows()<CR>', { silent = true })
 
    end,
 
@@ -274,6 +270,7 @@ return packer.startup(function(use)
   use {
     'hrsh7th/nvim-cmp',
     config = function()
+      -- TODO Maybe I can remove these commented lines
       -- vim.api.nvim_set_option('completeopt', 'menuone,noselect')
 
       -- local map = require("utils").map

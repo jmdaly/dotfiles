@@ -155,17 +155,6 @@ if has('nvim-0.5')
    lua require('utils')
    lua require('plugins')
    lua require('completions')
-
-   lua require("lsp_config")
-    augroup lsp
-       autocmd!
-       autocmd Filetype c setlocal omnifunc=v:lua.vim.lsp.omnifunc
-       autocmd Filetype cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
-       autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-       autocmd BufWritePre *.go lua vim.lsp.buf.format { async = true }
-       autocmd BufWritePre *.go lua goimports(1000)
-    augroup end
 endif
 
 
