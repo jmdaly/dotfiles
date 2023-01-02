@@ -55,9 +55,9 @@ return packer.startup(function(use)
 
  use {
     'tpope/vim-fugitive',
-    -- config = function()
-    --   vim.api.nvim_set_var('diffopt', vim.api.nvim_set_var('diffopt') .. 'vertical')
-    -- end,
+    config = function()
+      vim.opt.diffopt:append('vertical')
+    end,
   }
 
   -- Used for navigating the quickfix window better.  Recommended by fugitive
@@ -183,11 +183,58 @@ return packer.startup(function(use)
   -- Install fzf, the fuzzy searcher (also loads Ultisnips)
   use {
     'ibhagwan/fzf-lua',
-    -- requires = {
-    --   'junegunn/fzf',
-    --   'build' = './install --all',
-    --   'merged' = 0
-    -- }
+    requires = {
+      'junegunn/fzf',
+      build = './install --all',
+      merged = 0
+    },
+    config = function()
+      local map = require("utils").map
+
+      -- Set up keyboard shortbuts for fzf, the fuzzy finder
+      -- This one searches all the files in the current git repo:
+      map('n', '<c-k>', ':GitFiles<CR>', { silent = true })
+      map('n', '<leader><Tab>', ':Buffers<CR>', { silent = true })
+      map('n', 'gsiw', ':GGrepIW<CR>', { silent = true })
+
+      -- Unmap center/<CR> from launching fzf which appears to be mapped by default.
+      -- unmap <CR>
+
+      -- This is the order of preference
+      if vim.fn.executable('rg') then
+        vim.api.nvim_set_var('search_tool', 'rg')
+      elseif vim.fn.executable('ag') then
+        vim.api.nvim_set_var('search_tool', 'ag')
+      else
+        vim.api.nvim_set_var('search_tool', 'grep')
+      end
+
+      if vim.api.nvim_get_var('search_tool') == 'rg' then
+        map('n', '<leader>g', ':Rg<cr>', { silent = true })
+        vim.cmd([[
+          command! -nargs=* -bang GGrepIW
+             \ call fzf#vim#grep(
+             \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')),
+             \   1,
+             \   fzf#vim#with_preview({'dir': getcwd()}),
+             \  <bang>1
+             \ )
+        ]])
+      else
+        map('n', '<leader>g', ':Ag<cr>', { silent = true })
+        vim.cmd([[
+          command! -nargs=* -bang GGrepIW
+            \ call fzf#vim#grep(
+            \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')).' '.getcwd(), 1,
+            \    fzf#vim#with_preview(), <bang>0)
+        ]])
+      end
+
+      map('n', '<leader>l', ':Lines<cr>', { silent = true })
+      map('n', '<leader>w', ':Windows<cr>', { silent = true })
+
+   end,
+
   }
 
   -- Configurations for neovim's language client
@@ -265,6 +312,9 @@ return packer.startup(function(use)
       -- Set up mapping to move between errors
       map('i', '[w', '<Plug>(ale_previous_wrap)', { silent = true })
       map('i', ']w', '<Plug>(ale_next_wrap)', { silent = true} )
+
+      vim.cmd([[ autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fu :ALEFix<CR> ]])
+
     end,
   }
 
@@ -297,7 +347,13 @@ return packer.startup(function(use)
   use 'https://github.ford.com/MRUSS100/aosp-vim-syntax.git'
   use 'rubberduck203/aosp-vim'
 
-  use 'kheaactua/vim-fzf-repo'
+  use {
+    'kheaactua/vim-fzf-repo',
+     config = function()
+      local map = require("utils").map
+      map('n', '<leader>k', ':GRepoFiles<CR>', { silent = true })
+     end
+  }
 
   -- Vim sugar for the UNIX shell commands that need it the most. Features include:
   -- :Remove: Delete a buffer and the file on disk simultaneously.

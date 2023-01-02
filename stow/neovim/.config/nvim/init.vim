@@ -11,10 +11,7 @@ let hostkv   = substitute(system('uname -v'), '\n', '', '')
 let g:dotfiles   = $HOME . '/dotfiles'
 let g:env_folder = $HOME . '/.virtualenvs/default'
 
-if matchstr(hostname, 'dena') ==? 'dena' || hostname ==? 'sahand'
-   let domain='school'
-" Can probably get rid of this...
-elseif $TRUE_HOST !=? ''
+if $TRUE_HOST !=? ''
    let domain='ec'
 elseif match(hostname, 'siteground') >= 0
    " Siteground is an exception because it uses vim 7.0
@@ -25,12 +22,6 @@ else
    let domain='any'
 endif
 " echo 'Using domain ' . domain . ', hostname=' . hostname
-
-if match($HOME, 'com.termux') >= 0
-   let is_termux=1
-else
-   let is_termux=0
-endif
 
 " TODO Remove winbash, conflating the dotfiles just makes things complicated
 let is_winbash=0
@@ -202,17 +193,8 @@ endfunction
 """""""""""""""""""""" /Lightline """"""""""""""""""""""""
 
 
-"""""""""""""""""""""""""""" ALE """""""""""""""""""""""""
-silent if g:dein_exists && dein#check_install('ale') == 0
-   " Run clang-format
-   autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fu :ALEFix<CR>
-endif
-""""""""""""""""""""""""""" /ALE """""""""""""""""""""""""
-
-
 " For vim-cpp-enhanced-highlight, turn on highlighting of class scope:
 let g:cpp_class_scope_highlight = 1
-
 
 " Have vim reload a file if it has changed outside
 " of vim:
@@ -246,53 +228,6 @@ endif
 "    \}
 " """""""""""""""" /Rainbow (foldering) """""""""""""""""""
 
-
-
-"""""""""""""""""""""""""" fzf """""""""""""""""""""""""""
-silent if has('unix') && g:dein_exists && dein#check_install('fzf') == 0
-   " Set up keyboard shortbuts for fzf, the fuzzy finder
-   " This one searches all the files in the current git repo:
-   noremap <c-k> :GitFiles<CR>
-   noremap <leader><Tab> :Buffers<CR>
-   noremap gsiw :GGrepIW<cr>
-
-   " Unmap center/<CR> from launching fzf which appears to be mapped by default.
-   " unmap <CR>
-
-   " This is the order of preference
-   if executable('rg')
-      let g:search_tool='rg'
-   elseif executable('ag')
-      let g:search_tool='ag'
-   else
-      let g:search_tool='grep'
-   endif
-
-   if g:search_tool ==? 'rg'
-      noremap <leader>g :Rg<cr>
-      command! -nargs=* -bang GGrepIW
-         \ call fzf#vim#grep(
-         \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(expand('<cword>')),
-         \   1,
-         \   fzf#vim#with_preview({'dir': getcwd()}),
-         \  <bang>1
-         \ )
-   else
-      noremap <leader>g :Ag<cr>
-      command! -nargs=* -bang GGrepIW
-        \ call fzf#vim#grep(
-        \    'ag --nogroup --column --color -s '.shellescape(expand('<cword>')).' '.getcwd(), 1,
-        \    fzf#vim#with_preview(), <bang>0)
-   endif
-
-   noremap <leader>l :Lines<cr>
-   noremap <leader>w :Windows<cr>
-
-   silent if has('unix') && g:dein_exists && dein#check_install('vim-fzf-repo') == 0
-      noremap <leader>k :GRepoFiles<cr>
-   endif
-endif
-""""""""""""""""""""""""" /fzf """""""""""""""""""""""""""
 
 """"""""""""""""""""" Generate UUID """"""""""""""""""""""""
 if has('unix')
