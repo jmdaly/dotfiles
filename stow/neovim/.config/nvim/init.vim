@@ -65,22 +65,15 @@ endif
 
 " Configure some unconventional filetypes
 augroup filetypes
+   au BufNewFile,BufRead *.snippets          setlocal ft=snippet
+
    " EnvCan filetypes
-   au BufNewFile,BufRead *.ftn90,*.cdk*,.nml setlocal ft=fortran
-   au BufNewFile,BufRead *recettes,*cibles   setlocal ft=make
    au BufNewFile,BufRead *.spi               setlocal ft=tcl
-   au BufNewFile,BufRead .exper_cour         setlocal ft=sh
-   au BufNewFile,BufRead Common_Compiler*    setlocal ft=sh
    au BufNewFile,BufRead *.dot               setlocal ft=zsh
 
    " NTC only-rules (so far)
-   au BufNewFile,BufRead *.lcm               setlocal ft=c
-   au BufNewFile,BufRead */Wt/W*             setlocal ft=cpp
-   au BufNewFile,BufRead *.qml               setlocal ft=qml
-   au BufNewFile,BufRead *.qrc               setlocal ft=xml
    au BufNewFile,BufRead *.vert,*.geo,*.frag setlocal ft=glsl
 
-   au BufNewFile,BufRead *.html.base         setlocal ft=html
    au BufNewFile,BufRead *.module            setlocal ft=php
    au BufNewFile,BufRead *.gs                setlocal ft=javascript
    au BufNewFile,BufRead *.json              setlocal ft=json
@@ -256,7 +249,7 @@ inoremap <C-S> <Esc>:w<CR>
 nnoremap <leader>rt :silent! %s/\s\+$//e<CR>
 let @r='\rt'
 let @t=':try|silent! exe "norm! @r"|endtry|w|n'
-autocmd FileType php,bp,c,cpp,h,hpp,aidl,javascript,python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+" autocmd FileType php,bp,c,cpp,h,hpp,aidl,javascript,python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " Ignore whitespace on vimdiff
 if &diff

@@ -1,6 +1,7 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 local fn = vim.fn
+vim.api.nvim_set_var('dotfiles', '/home/matt/dotfiles')
 
 -- -- Automatically install packer
 -- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -13,7 +14,7 @@ local fn = vim.fn
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost /home/**/plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -35,7 +36,6 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
   use 'wbthomason/packer.nvim' -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
@@ -66,33 +66,18 @@ return packer.startup(function(use)
   -- This should improve Git Fugitive and Git Gutter
   use 'tmux-plugins/vim-tmux-focus-events'
 
-  -- use {
-  --   'SirVer/ultisnips',
-  --   config = function()
-  --     vim.api.nvim_set_var('UltiSnipsExpandTrigger', '<c-j>')
-  --     vim.api.nvim_set_var('UltiSnipsJumpForwardTrigger', '<c-j>')
-  --     vim.api.nvim_set_var('UltiSnipsJumpBackwardTrigger', '<c-n>')
+  use {
+    "L3MON4D3/LuaSnip",
+    tag = "v1.*",
+    config = function()
+      -- vim.keymap.set({ "i", "s" }, "<C-i>", function() require'luasnip'.jump(1)  end, { desc = "LuaSnip forward jump"  })
+      -- vim.keymap.set({ "i", "s" }, "<M-i>", function() require'luasnip'.jump(-1) end, { desc = "LuaSnip backward jump" })
 
-  --     -- If you want :UltiSnipsEdit to split your window.
-  --     vim.api.nvim_set_var('UltiSnipsEditSplit', 'vertical')
-
-  --     -- Add to the runtime path so that custom
-  --     -- snippets can be found:
-  --     dotfiles_dir=vim.api.nvim_get_var('dotfiles')
-  --     -- let &rtp .= ','.expand(g:dotfiles)
-
-  --     -- vim.api.nvim_set_var('vsnip_snippet_dir', dotfiles_dir .. '/dotfiles/snippets')
-  --   end,
-  -- }
-
-  -- use {
-  --   'honza/vim-snippets'
-  --   -- config = function()
-  --     -- vim.api.nvim_set_var('vsnip_snippet_dir', dotfiles_dir .. '/dotfiles/snippets')
-  --   -- end,
-  -- }
-
-  use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+      dotfiles_dir=vim.api.nvim_get_var('dotfiles')
+      -- require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_snipmate").lazy_load({ paths = { dotfiles_dir .. "/snippets"} })
+    end,
+  }
 
   use {
     'airblade/vim-rooter',
@@ -297,18 +282,17 @@ return packer.startup(function(use)
 
       vim.api.nvim_set_var('ale_linters', {
         cpp = {'clangtidy'},
-        c = {'clangtidy'},
+        c   = {'clangtidy'},
       })
 
-      vim.api.nvim_set_var('ale_fixers', {
-       cpp = {'clang-format'},
-       -- '*' = {'remove_trailing_lines', 'trim_whitespace'},
-      })
+      fixers = { cpp = {'clang-format'} }
+      fixers['*'] = {'remove_trailing_lines', 'trim_whitespace'}
+      vim.api.nvim_set_var('ale_fixers', fixers)
 
       local map = require("utils").map
       -- Set up mapping to move between errors
       map('i', '[w', '<Plug>(ale_previous_wrap)', { silent = true })
-      map('i', ']w', '<Plug>(ale_next_wrap)', { silent = true} )
+      map('i', ']w', '<Plug>(ale_next_wrap)',     { silent = true} )
 
       vim.cmd([[ autocmd FileType c,cpp,h,hpp nnoremap <buffer><Leader>fu :ALEFix<CR> ]])
 
@@ -395,7 +379,7 @@ return packer.startup(function(use)
     config = function()
       dotfiles_dir=vim.api.nvim_get_var('dotfiles')
       vim.api.nvim_set_var('colo_search_path', dotfiles_dir .. '/bundles/dein')
-      vim.api.nvim_set_var('colo_cache_file', dotfiles_dir .. '/colos.json')
+      vim.api.nvim_set_var('colo_cache_file',  dotfiles_dir .. '/colos.json')
     end,
   }
 

@@ -1,0 +1,8 @@
+snippet ml "vim modeline"
+  # vim: set ts=4 sw=4 sts=4 expandtab ff=unix,dos :
+
+snippet tid "CMake target setup"
+  set_property(TARGET $1 PROPERTY CXX_STANDARD 11)
+  target_include_directories($1 PUBLIC )
+  target_link_libraries($1 PUBLIC )
+  target_compile_definitions($1 PRIVATE )
