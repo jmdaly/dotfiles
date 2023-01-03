@@ -1,14 +1,25 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 local fn = vim.fn
+-- TODO At least use 'home' and 'username' or something here
 vim.api.nvim_set_var('dotfiles', '/home/matt/dotfiles')
 
--- -- Automatically install packer
--- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
--- if fn.empty(fn.glob(install_path)) > 0 then
---   PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
---   print("Installing packer close and reopen Neovim...")
--- end
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
@@ -17,12 +28,6 @@ vim.cmd([[
     autocmd BufWritePost /home/**/plugins.lua source <afile> | PackerSync
   augroup end
 ]])
-
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
 
 -- Have packer use a popup window
 packer.init({

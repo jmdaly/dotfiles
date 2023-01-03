@@ -200,20 +200,19 @@ TOHERE
   chmod u+x "${home}/bin/do_lock.sh"
 }
 
-function dotfiles_install_dein()
+function dotfiles_install_packer()
 {
   local home=${1:-${HOME}}
   local tmp=${2:-$(mktemp -d)}
 
-  if [[ ! -e "${DOTFILES_DIR:-${HOME}/dotfiles}/bundles/dein" ]]; then
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${tmp}/install_dein.sh"
-    if [[ $? == 0 ]]; then
-      sh "${tmp}/install_dein.sh" "${DOTFILES_DIR:-${HOME}/dotfiles}/bundles/dein"
-    else
-      echo "Couldn't download dein installer.  Is there a proxy blocking it?  Proxy env is:"
-      env | grep -i proxy
-    fi
-  fi
+  # local os_check=$(uname -r)
+  # if [[ "${os_check}" =~ *ARCH* ]]; then
+  #   sudo pacman -Syu nvim-packer-git
+  # else
+  #   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  # fi
+
+  # nvim should bootstrap it self
 }
 
 function dotfiles_install_kotlin_language_server()

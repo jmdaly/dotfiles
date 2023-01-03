@@ -24,7 +24,7 @@ ARGUMENT_FLAG_LIST=(
 	"skip-python-venv"
 	"skip-tmux"
 	"skip-submodules"
-	"skip-dein"
+	"skip-packer"
 	"skip-zplug"
 	"skip-rofi"
 	"skip-i3"
@@ -48,7 +48,7 @@ declare skip_python_venv=0
 declare skip_fzf=0
 declare skip_tmux=0
 declare skip_submodules=0
-declare skip_dein=0
+declare skip_packer=0
 declare skip_zplug=0
 declare skip_rofi=0
 declare skip_i3=0
@@ -79,8 +79,8 @@ while [[ "" != $1 ]]; do
 	"--skip-submodules")
 		skip_submodules=1
 		;;
-	"--skip-dein")
-		skip_dein=1
+	"--skip-packer")
+		skip_packer=1
 		;;
 	"--skip-zplug")
 		skip_zplug=1
@@ -104,7 +104,7 @@ while [[ "" != $1 ]]; do
 		skip_python_venv=1
 		skip_powerline=1
 		skip_submodules=1
-		skip_dein=1
+		skip_packer=1
 		skip_rofi=1
 		skip_i3=1
 		skip_gnupg=1
@@ -200,10 +200,10 @@ else
 	echo "Skipped installing rofi"
 fi
 
-if [[ "1" != "${skip_dein}" ]]; then
-	dotfiles_install_dein "${h}" "${DFTMP}"
+if [[ "1" != "${skip_packer}" ]]; then
+	dotfiles_install_packer "${h}" "${DFTMP}"
 else
-	echo "Skipped installing dein"
+	echo "Skipped installing packer"
 fi
 
 # Make sure config directory exists
