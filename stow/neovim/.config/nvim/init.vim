@@ -106,10 +106,10 @@ let g:clang_format_path = g:clang_path . '/bin/clang-format'
 
 " Mappings for formatting code
 augroup FILE_FORMATTING
-  autocmd FileType cpp    map <buffer> <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
-  autocmd FileType c      map <buffer> <expr> <leader>f ":py3f " . g:clang_path . "/share/clang/clang-format.py<CR>"
   autocmd FileType python nnoremap <buffer> <leader>f :Black<CR>
   autocmd FileType rust   nnoremap <buffer> <leader>f <cmd>lua vim.lsp.buf.format { async = true }<CR>
+  autocmd FileType cpp   nnoremap <buffer> <leader>f <cmd>lua vim.lsp.buf.format { async = true }<CR>
+  autocmd FileType c   nnoremap <buffer> <leader>f <cmd>lua vim.lsp.buf.format { async = true }<CR>
 augroup END
 
 " Set up keyboard shortbuts for fzf, the fuzzy finder
