@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Update the dotfiles repo to make sure we have all changes:
-~/dotfiles/doupdate.sh
-
 # Check if z-plug is installed or not. If not, install it:
 
 if [[ ! -d ~/.zplug ]]; then
@@ -83,6 +80,9 @@ fi
 if type keychain > /dev/null; then
   eval $(keychain --eval --agents ssh --quick --quiet)
 fi
+
+# Update the dotfiles repo to make sure we have all changes:
+~/dotfiles/doupdate.sh
 
 # Ensure Google Test tests always show colour output:
 export GTEST_COLOR=yes
