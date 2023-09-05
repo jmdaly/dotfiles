@@ -59,7 +59,7 @@ fi
 
 # If bat is available, set the theme
 if type bat > /dev/null; then
-  export BAT_THEME="Material-Theme"
+  export BAT_THEME="gruvbox-dark"
   export COLORTERM=24bit
   alias cat='bat'
 fi
