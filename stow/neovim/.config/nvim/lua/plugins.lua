@@ -35,7 +35,6 @@ return require('packer').startup(function(use)
   end
 
   use 'junegunn/fzf.vim'
-  use 'mhinz/vim-startify' -- Plugin to provide a useful start screen in vim:
   use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
   use 'ggandor/lightspeed.nvim' -- Motion that takes two characters and jumps to occurences
 
@@ -49,6 +48,118 @@ return require('packer').startup(function(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons'
+  }
+
+  use {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+      theme = 'doom',
+      config = {
+        header = {
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
+          '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+          '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
+          '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+          '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+          '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+          '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+          ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+          ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
+          '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+          '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+          '                                   ',
+        },
+        center = {
+          {
+            icon = '󰈞 ',
+            icon_hl = 'Title',
+            desc = 'Find file',
+            desc_hl = 'String',
+            key = 'f',
+            key_hl = 'Number',
+            action = ':Files',
+          },
+          {
+            icon = ' ',
+            icon_hl = 'Title',
+            desc = 'New file',
+            desc_hl = 'String',
+            key = 'e',
+            key_hl = 'Number',
+            action = ':ene',
+          },
+          {
+            icon = '󰄉 ',
+            icon_hl = 'Title',
+            desc = 'Recently used files                        ',
+            desc_hl = 'String',
+            key = 'r',
+            key_hl = 'Number',
+            action = ':History',
+          },
+          {
+            icon = '󰊄 ',
+            icon_hl = 'Title',
+            desc = 'Find text',
+            desc_hl = 'String',
+            key = 'w',
+            key_hl = 'Number',
+            action = ':RG',
+          },
+          {
+            icon = ' ',
+            icon_hl = 'Title',
+            desc = 'Configuration',
+            desc_hl = 'String',
+            key = 'c',
+            key_hl = 'Number',
+            action = ':cd ~/.config/nvim | e ~/.config/nvim/init.vim',
+          },
+          {
+            icon = ' ',
+            icon_hl = 'Title',
+            desc = 'Update plugins',
+            desc_hl = 'String',
+            key = 'u',
+            key_hl = 'Number',
+            action = ':lua require("lazy").update()',
+          },
+          {
+            icon = '󰦛 ',
+            icon_hl = 'Title',
+            desc = 'Restore last session',
+            desc_hl = 'String',
+            key = 'l',
+            key_hl = 'Number',
+            action = ':lua require("persistence").load({ last = true })',
+          },
+          {
+            icon = ' ',
+            icon_hl = 'Title',
+            desc = 'Quit Neovim',
+            desc_hl = 'String',
+            key = 'q',
+            key_hl = 'Number',
+            action = ':qa',
+          },
+        }
+      }
+    }
+    end,
+    requires = {'nvim-tree/nvim-web-devicons'}
   }
 
   if fn.executable('black') then
