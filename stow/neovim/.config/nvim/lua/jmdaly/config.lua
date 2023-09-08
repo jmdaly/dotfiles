@@ -64,6 +64,9 @@ require('lualine').setup{
   },
 }
 
+-- Set up leap default keybindings
+require('leap').add_default_mappings()
+
 -- Setup the debug adapter, for debugging in neovim
 local dap = require('dap')
 dap.adapters.lldb = {

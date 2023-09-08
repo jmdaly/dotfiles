@@ -36,7 +36,11 @@ return require('packer').startup(function(use)
 
   use 'junegunn/fzf.vim'
   use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
-  use 'ggandor/lightspeed.nvim' -- Motion that takes two characters and jumps to occurences
+
+  use {
+    'ggandor/leap.nvim', -- Motion that takes two characters and jumps to occurences
+    requires = 'tpope/vim-repeat'
+  }
 
   use 'marko-cerovac/material.nvim'
   use 'sainnhe/gruvbox-material'
@@ -109,6 +113,15 @@ return require('packer').startup(function(use)
             key = 'r',
             key_hl = 'Number',
             action = ':History',
+          },
+          {
+            icon = '󰄉 ',
+            icon_hl = 'Title',
+            desc = 'Command history                        ',
+            desc_hl = 'String',
+            key = 'h',
+            key_hl = 'Number',
+            action = ':History:',
           },
           {
             icon = '󰊄 ',
