@@ -148,7 +148,7 @@ return require('packer').startup(function(use)
             desc_hl = 'String',
             key = 'u',
             key_hl = 'Number',
-            action = ':lua require("lazy").update()',
+            action = ':PackerSync',
           },
           {
             icon = '󰦛 ',
