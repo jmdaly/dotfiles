@@ -81,17 +81,14 @@ if type keychain > /dev/null; then
   eval $(keychain --eval --agents ssh --quick --quiet)
 fi
 
+# Alias for dive, the docker image explorer
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
+
 # Update the dotfiles repo to make sure we have all changes:
 ~/dotfiles/doupdate.sh
 
-# Ensure Google Test tests always show colour output:
-export GTEST_COLOR=yes
-
 # Set up ninja tab completion:
 source ~/dotfiles/ninja/_ninja
-
-# Aliases
-alias nv='nvim'
 
 # When switching to normal mode for vi key bindings,
 # make the timeout small:
