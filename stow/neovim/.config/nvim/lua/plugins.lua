@@ -59,124 +59,43 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {
-      theme = 'doom',
-      config = {
-        header = {
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
-          '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
-          '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
-          '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
-          '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
-          '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
-          '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
-          ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
-          ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
-          '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
-          '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-          '                                   ',
-        },
-        center = {
-          {
-            icon = '󰈞 ',
-            icon_hl = 'Title',
-            desc = 'Find file',
-            desc_hl = 'String',
-            key = 'f',
-            key_hl = 'Number',
-            action = ':Files',
-          },
-          {
-            icon = ' ',
-            icon_hl = 'Title',
-            desc = 'New file',
-            desc_hl = 'String',
-            key = 'e',
-            key_hl = 'Number',
-            action = ':ene',
-          },
-          {
-            icon = '󰄉 ',
-            icon_hl = 'Title',
-            desc = 'Recently used files                        ',
-            desc_hl = 'String',
-            key = 'r',
-            key_hl = 'Number',
-            action = ':History',
-          },
-          {
-            icon = '󰄉 ',
-            icon_hl = 'Title',
-            desc = 'Command history                        ',
-            desc_hl = 'String',
-            key = 'h',
-            key_hl = 'Number',
-            action = ':History:',
-          },
-          {
-            icon = '󰊄 ',
-            icon_hl = 'Title',
-            desc = 'Find text',
-            desc_hl = 'String',
-            key = 'w',
-            key_hl = 'Number',
-            action = ':RG',
-          },
-          {
-            icon = ' ',
-            icon_hl = 'Title',
-            desc = 'Configuration',
-            desc_hl = 'String',
-            key = 'c',
-            key_hl = 'Number',
-            action = ':cd ~/.config/nvim | e ~/.config/nvim/init.vim',
-          },
-          {
-            icon = ' ',
-            icon_hl = 'Title',
-            desc = 'Update plugins',
-            desc_hl = 'String',
-            key = 'u',
-            key_hl = 'Number',
-            action = ':PackerSync',
-          },
-          {
-            icon = '󰦛 ',
-            icon_hl = 'Title',
-            desc = 'Restore last session',
-            desc_hl = 'String',
-            key = 'l',
-            key_hl = 'Number',
-            action = ':lua require("persistence").load({ last = true })',
-          },
-          {
-            icon = ' ',
-            icon_hl = 'Title',
-            desc = 'Quit Neovim',
-            desc_hl = 'String',
-            key = 'q',
-            key_hl = 'Number',
-            action = ':qa',
-          },
-        }
+    'goolord/alpha-nvim',
+    config = function ()
+      local dashboard = require("alpha.themes.dashboard")
+        dashboard.section.buttons.val = {
+        dashboard.button("f", " " .. " Find Files", ":Files<CR>"),
+        dashboard.button("e", " " .. " New Files", ":ene<CR>"),
+        dashboard.button("o", " " .. " Recent Files", ":History<CR>"),
+        dashboard.button("g", " " .. " Find Text", ":RG<CR>"),
+        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.vim<CR>"),
+        dashboard.button("z", "󰄉 " .. " Command History", ":History:<CR>"),
+        dashboard.button("u", "󰄉 " .. " Update Plugins", ":PackerSync<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        -- This function is for retrieving the list of Sessions from possession
+        (function()
+          local group = { type = "group", opts = { spacing = 0 } }
+          group.val = {
+            {
+              type = "text",
+              val = "Sessions",
+              opts = {
+                position = "center"
+              }
+            }
+          }
+          local path = vim.fn.stdpath("data") .. "/possession"
+          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
+          for i, file in pairs(files) do
+            local basename = vim.fs.basename(file):gsub("%.json", "")
+            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            table.insert(group.val, button)
+          end
+          return group
+        end)()
       }
-    }
-    end,
-    requires = {'nvim-tree/nvim-web-devicons'}
+      dashboard.opts.layout[1].val = 8
+      require'alpha'.setup(dashboard.config)
+    end
   }
 
   if fn.executable('black') then
