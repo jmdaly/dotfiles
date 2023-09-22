@@ -23,7 +23,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired' -- A plugin containing handy pairs of bracket mapping:
   use 'tpope/vim-commentary' -- Plug to assist with commenting out blocks of text:
   use 'tpope/vim-surround' -- Plugin for working with surroundings of words:
-  use 'tpope/vim-obsession' -- Plugin to help manage sessions
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
 
@@ -40,6 +39,11 @@ return require('packer').startup(function(use)
   use {
     'ggandor/leap.nvim', -- Motion that takes two characters and jumps to occurences
     requires = 'tpope/vim-repeat'
+  }
+
+  use {
+      'jedrzejboczar/possession.nvim', -- Session management
+      requires = { 'nvim-lua/plenary.nvim' },
   }
 
   use 'marko-cerovac/material.nvim'
