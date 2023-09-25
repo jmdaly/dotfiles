@@ -59,7 +59,7 @@ fi
 
 # If bat is available, set the theme
 if type bat > /dev/null; then
-  export BAT_THEME="Material-Theme"
+  export BAT_THEME="gruvbox-dark"
   export COLORTERM=24bit
   alias cat='bat'
 fi
@@ -104,9 +104,11 @@ export KEYTIMEOUT=1
 b() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+    branch=$(echo "$branches" | fzf)
+  # Remove the first two characters of the branch string, which are either space or *.
+  # Also, if the string "remotes/origin/" is there, remove it.
+  clean_branch=$(echo "$branch" | cut -c 3- | sed "s/remotes\/origin\///")
+  git checkout "$clean_branch"
 }
 
 # Create and switch to a directory in one command

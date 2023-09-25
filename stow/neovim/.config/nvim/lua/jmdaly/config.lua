@@ -39,6 +39,11 @@ require('material').setup({
         custom_highlights = {}
 })
 
+-- A function to help get the current session name for lualine
+local function session_name()
+    return '[$ ' .. require('possession.session').session_name .. ']' or ''
+end
+
 require('lualine').setup{
   options = {
     theme = 'gruvbox-material'
@@ -51,7 +56,7 @@ require('lualine').setup{
                                                     }
                 },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'ObsessionStatus', 'progress' },
+    lualine_y = { session_name },
     lualine_z = { 'location' },
   },
   inactive_sections = {
@@ -64,6 +69,9 @@ require('lualine').setup{
   },
 }
 
+-- Set up leap default keybindings
+require('leap').add_default_mappings()
+
 -- Setup the debug adapter, for debugging in neovim
 local dap = require('dap')
 dap.adapters.lldb = {
@@ -71,6 +79,9 @@ dap.adapters.lldb = {
   command = '/usr/bin/lldb-vscode', -- adjust as needed
   name = "lldb"
 }
+
+-- Set up possession.nvim
+require('possession').setup{}
 
 -- This function takes a string and splits it on the delimiter.
 -- It returns a table of substrings, split on the delimiter.

@@ -23,7 +23,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired' -- A plugin containing handy pairs of bracket mapping:
   use 'tpope/vim-commentary' -- Plug to assist with commenting out blocks of text:
   use 'tpope/vim-surround' -- Plugin for working with surroundings of words:
-  use 'tpope/vim-obsession' -- Plugin to help manage sessions
   use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
   use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
 
@@ -35,9 +34,17 @@ return require('packer').startup(function(use)
   end
 
   use 'junegunn/fzf.vim'
-  use 'mhinz/vim-startify' -- Plugin to provide a useful start screen in vim:
   use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
-  use 'ggandor/lightspeed.nvim' -- Motion that takes two characters and jumps to occurences
+
+  use {
+    'ggandor/leap.nvim', -- Motion that takes two characters and jumps to occurences
+    requires = 'tpope/vim-repeat'
+  }
+
+  use {
+      'jedrzejboczar/possession.nvim', -- Session management
+      requires = { 'nvim-lua/plenary.nvim' },
+  }
 
   use 'marko-cerovac/material.nvim'
   use 'sainnhe/gruvbox-material'
@@ -49,6 +56,46 @@ return require('packer').startup(function(use)
   use {
     'hoob3rt/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons'
+  }
+
+  use {
+    'goolord/alpha-nvim',
+    config = function ()
+      local dashboard = require("alpha.themes.dashboard")
+        dashboard.section.buttons.val = {
+        dashboard.button("f", " " .. " Find Files", ":Files<CR>"),
+        dashboard.button("e", " " .. " New Files", ":ene<CR>"),
+        dashboard.button("o", " " .. " Recent Files", ":History<CR>"),
+        dashboard.button("g", " " .. " Find Text", ":RG<CR>"),
+        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.vim<CR>"),
+        dashboard.button("z", "󰄉 " .. " Command History", ":History:<CR>"),
+        dashboard.button("u", "󰄉 " .. " Update Plugins", ":PackerSync<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        -- This function is for retrieving the list of Sessions from possession
+        (function()
+          local group = { type = "group", opts = { spacing = 0 } }
+          group.val = {
+            {
+              type = "text",
+              val = "Sessions",
+              opts = {
+                position = "center"
+              }
+            }
+          }
+          local path = vim.fn.stdpath("data") .. "/possession"
+          local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
+          for i, file in pairs(files) do
+            local basename = vim.fs.basename(file):gsub("%.json", "")
+            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            table.insert(group.val, button)
+          end
+          return group
+        end)()
+      }
+      dashboard.opts.layout[1].val = 8
+      require'alpha'.setup(dashboard.config)
+    end
   }
 
   if fn.executable('black') then
