@@ -49,6 +49,14 @@ return require('packer').startup(function(use)
   use 'marko-cerovac/material.nvim'
   use 'sainnhe/gruvbox-material'
 
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,
+  }
+
   use 'christoomey/vim-tmux-navigator' -- A plugin to facilitate navigating between vim and tmux
   use 'wellle/targets.vim' -- A plugin for additional text objects
   use 'w0rp/ale' -- A plugin for asynchronous linting while you type
