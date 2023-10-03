@@ -1,83 +1,94 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
--- If packer is not installed, we retrieve it
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-  execute 'packadd packer.nvim'
+-- Start by ensuring that lazy.nvim is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+-- Load lazy.nvim
+require("lazy").setup({
+  'justinmk/vim-dirvish', -- Path navigator for vim
+  'tpope/vim-sleuth', -- heuristically determine spacing to use when tabbing
+  'tpope/vim-fugitive', -- git wrapper for vim
+  'tpope/vim-unimpaired', -- A plugin containing handy pairs of bracket mapping:
+  'tpope/vim-commentary', -- Plug to assist with commenting out blocks of text:
+  'tpope/vim-surround', -- Plugin for working with surroundings of words:
+  'RRethy/vim-illuminate', -- Plugin to highlight the word under the cursor
+  'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
 
-  use 'justinmk/vim-dirvish' -- Path navigator for vim
-  use 'octol/vim-cpp-enhanced-highlight' -- Better C++ Syntax Highlighting:
-  use 'tpope/vim-sleuth' -- heuristically determine spacing to use when tabbing
-  use 'tpope/vim-fugitive' -- git wrapper for vim
-  use 'tpope/vim-unimpaired' -- A plugin containing handy pairs of bracket mapping:
-  use 'tpope/vim-commentary' -- Plug to assist with commenting out blocks of text:
-  use 'tpope/vim-surround' -- Plugin for working with surroundings of words:
-  use 'RRethy/vim-illuminate' -- Plugin to highlight the word under the cursor
-  use 'mrtazz/DoxygenToolkit.vim' -- Plug to generate doxygen documentation strings:
+  { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
+  { 'junegunn/fzf.vim', dependencies = 'junegunn/fzf'},
 
-  if fn.has("unix") == 1 or fn.has("wsl") == 1 then
-    -- The installation script only works in Linux and similar
-    use { 'junegunn/fzf', run = './install --all' } -- The fuzzy searcher
-  else
-    use 'junegunn/fzf' -- The fuzzy searcher
-  end
+  'mhinz/vim-sayonara', -- Plugin to make it easy to delete a buffer and close the file:
 
-  use 'junegunn/fzf.vim'
-  use 'mhinz/vim-sayonara' -- Plugin to make it easy to delete a buffer and close the file:
+  -- Motion that takes two characters and jumps to occurences
+  { 'ggandor/leap.nvim', dependencies = 'tpope/vim-repeat' },
 
-  use {
-    'ggandor/leap.nvim', -- Motion that takes two characters and jumps to occurences
-    requires = 'tpope/vim-repeat'
-  }
+  -- Session management
+  { 'jedrzejboczar/possession.nvim', dependencies = 'nvim-lua/plenary.nvim' },
 
-  use {
-      'jedrzejboczar/possession.nvim', -- Session management
-      requires = { 'nvim-lua/plenary.nvim' },
-  }
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  use 'marko-cerovac/material.nvim'
-  use 'sainnhe/gruvbox-material'
+  'christoomey/vim-tmux-navigator', -- A plugin to facilitate navigating between vim and tmux
+  'wellle/targets.vim', -- A plugin for additional text objects
+  'w0rp/ale', -- A plugin for asynchronous linting while you type
 
-  use {
-      'nvim-treesitter/nvim-treesitter',
-      run = function()
-          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-          ts_update()
-      end,
-  }
+  'marko-cerovac/material.nvim',
+  'sainnhe/gruvbox-material',
 
-  use 'christoomey/vim-tmux-navigator' -- A plugin to facilitate navigating between vim and tmux
-  use 'wellle/targets.vim' -- A plugin for additional text objects
-  use 'w0rp/ale' -- A plugin for asynchronous linting while you type
+  'psf/black', -- A plugin to format Python code by calling black
 
-  use {
-    'hoob3rt/lualine.nvim',
-    requires = 'kyazdani42/nvim-web-devicons'
-  }
+  'neovim/nvim-lspconfig', -- Configurations for neovim's language client
+  'ojroques/nvim-lspfuzzy', -- Integrates fzf with nvim-lsp results
 
-  use {
+  {
+    "hrsh7th/nvim-cmp", -- Autocompletion plugin
+    -- load cmp on InsertEnter
+    event = "InsertEnter",
+    -- these dependencies will only be loaded when cmp loads
+    -- dependencies are always lazy-loaded unless specified otherwise
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-vsnip",
+    },
+  },
+
+  -- Snippets plugin
+  { "hrsh7th/vim-vsnip",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
+  },
+
+  'simrat39/rust-tools.nvim', -- Improved rust development
+  'mfussenegger/nvim-dap', -- Debug Adapter Protocol plugin
+  'github/copilot.vim',
+
+  { 'hoob3rt/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
+
+  {
     'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
       local dashboard = require("alpha.themes.dashboard")
         dashboard.section.buttons.val = {
+        dashboard.button("e", " " .. " New File", ":ene<CR>"),
         dashboard.button("f", " " .. " Find Files", ":Files<CR>"),
-        dashboard.button("e", " " .. " New Files", ":ene<CR>"),
-        dashboard.button("o", " " .. " Recent Files", ":History<CR>"),
+        dashboard.button("r", " " .. " Recent Files", ":History<CR>"),
         dashboard.button("g", " " .. " Find Text", ":RG<CR>"),
         dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.vim<CR>"),
         dashboard.button("z", "󰄉 " .. " Command History", ":History:<CR>"),
-        dashboard.button("u", "󰄉 " .. " Update Plugins", ":PackerSync<CR>"),
+        dashboard.button("u", "󰄉 " .. " Update Plugins", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         -- This function is for retrieving the list of Sessions from possession
         (function()
@@ -104,40 +115,5 @@ return require('packer').startup(function(use)
       dashboard.opts.layout[1].val = 8
       require'alpha'.setup(dashboard.config)
     end
-  }
-
-  if fn.executable('black') then
-    -- Only load the plugin if the black executable is available, this is
-    -- to prevent errors on startup
-    use 'psf/black' -- A plugin to format Python code by calling black
-  end
-
-  use 'neovim/nvim-lspconfig' -- Configurations for neovim's language client
-  use 'ojroques/nvim-lspfuzzy' -- Integrates fzf with nvim-lsp results
-
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-
-  -- The order that the completion support plugins are loaded is important
-  -- in order to get friendly-snippets working. The following code comes from
-  -- this github issue: https://github.com/hrsh7th/vim-vsnip/issues/219#issuecomment-940031501
-  use {
-    'hrsh7th/cmp-vsnip',
-    after = 'nvim-cmp',
-    requires = {
-      'hrsh7th/vim-vsnip',
-      {
-        'rafamadriz/friendly-snippets',
-        after = 'cmp-vsnip'
-      }
-    }
-  }
-
-  use 'simrat39/rust-tools.nvim' -- Improved rust development
-
-  use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol plugin
-
-  use 'github/copilot.vim'
-
-end)
+  },
+})
