@@ -81,7 +81,11 @@ dap.adapters.lldb = {
 }
 
 -- Set up possession.nvim
-require('possession').setup{}
+require('possession').setup{
+  autosave = {
+    current = true,
+  }
+}
 
 -- Set up treesitter
 require'nvim-treesitter.configs'.setup {
