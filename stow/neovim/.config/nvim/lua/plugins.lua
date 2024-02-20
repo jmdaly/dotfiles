@@ -124,7 +124,7 @@ require("lazy").setup({
   {
       "David-Kunz/gen.nvim",
       opts = {
-          model = "deepseek-coder:6.7b", -- The default model to use.
+          model = "llama2", -- The default model to use.
           display_mode = "split", -- The display mode. Can be "float" or "split".
           show_prompt = true, -- Shows the Prompt submitted to Ollama.
           show_model = true, -- Displays which model you are using at the beginning of your chat session.
@@ -136,6 +136,17 @@ require("lazy").setup({
           -- This can also be a lua function returning a command string, with options as the input parameter.
           -- The executed command must return a JSON object with { response, context }
           -- (context property is optional).
+          list_models = function()
+              local response = vim.fn.systemlist(
+                                   "curl --silent --no-buffer http://localhost:11434/api/tags")
+              local list = vim.fn.json_decode(response)
+              local models = {}
+              for key, _ in pairs(list.models) do
+                  table.insert(models, list.models[key].name)
+              end
+              table.sort(models)
+              return models
+          end,
           debug = false -- Prints errors and the command which is run.
       }
   },
