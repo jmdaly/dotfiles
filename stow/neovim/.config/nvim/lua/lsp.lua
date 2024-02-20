@@ -14,8 +14,13 @@ local lspconfig = require'lspconfig'
 
 -- Set up clangd
 if 1 == vim.fn.executable(vim.g.clang_path .. "/bin/clangd") then
+  -- clangd seems to cause offset encoding issues with other plugins
+  -- We set the offset encoding here to try to fix it
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.offsetEncoding = 'utf-8'
   lspconfig.clangd.setup{
-    cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" }
+    cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" },
+    capabilities = capabilities,
   }
 end
 

@@ -87,6 +87,14 @@ require('possession').setup{
   }
 }
 
+-- Set up some custom prompts for the LLMs
+require('gen').prompts['Explain'] = {
+  prompt = "Explain the following code to me:\n```$filetype\n$text\n```",
+}
+require('gen').prompts['Code'] = {
+  prompt = "Generate code in the $filetype programming language that does the following:\n$text\n\nJust output the final code without additional quotes around it",
+}
+
 -- Set up treesitter
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
