@@ -96,7 +96,16 @@ require('gen').prompts['Explain'] = {
   prompt = "Explain the following code to me:\n```$filetype\n$text\n```",
 }
 require('gen').prompts['Code'] = {
-  prompt = "Generate code in the $filetype programming language that does the following:\n$text\n\nJust output the final code without additional quotes around it",
+  prompt = "Generate code in the $filetype programming language that does the following:\n$text\n",
+}
+require('gen').prompts['Test'] = {
+  prompt = "Write tests for the following code:\n```$filetype\n$text\n```",
+}
+require('gen').prompts['AskCode'] = {
+  prompt = "Regarding the following code, $input\n```$filetype\n$text\n```\n",
+}
+require('gen').prompts['Freestyle'] = {
+  prompt = "$text",
 }
 
 -- Set up treesitter
