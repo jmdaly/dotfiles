@@ -122,8 +122,7 @@ require("lazy").setup({
 
   -- Plugin to integrate with ollama models
   {
-      "jmdaly/gen.nvim",
-      branch = "feat-custom-host-port",
+      "David-Kunz/gen.nvim",
       opts = {
           model = "llama2", -- The default model to use.
           host = "localhost",
