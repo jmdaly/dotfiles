@@ -1,0 +1,18 @@
+# Bundles from robbyrussell's oh-my-zsh.
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/gitfast # Faster git command line completion
+ohmyzsh/ohmyzsh path:plugins/wd # Warp directory - easily switch to particular directories
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+ohmyzsh/ohmyzsh path:plugins/vi-mode
+ohmyzsh/ohmyzsh path:lib/completion # Better tab completion
+ohmyzsh/ohmyzsh path:lib/directories # Provides the directory stack
+ohmyzsh/ohmyzsh path:lib/history # Provides history management
+ohmyzsh/ohmyzsh path:lib/completion # Provides completion of dot directories
+ohmyzsh/ohmyzsh path:lib/theme-and-appearance # Provides auto cd, and some other appearance things
+
+# Syntax highlighting bundle.
+zsh-users/zsh-syntax-highlighting
+
+# Load the theme
+romkatv/powerlevel10k kind:fpath
+
