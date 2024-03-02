@@ -5,8 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# This is required for prompt plugins
-autoload -Uz promptinit && promptinit && prompt pure
+# This is required for some other plugins
+autoload -Uz compinit && compinit
 
 # Check if antidote is installed or not. If not, install it:
 
@@ -20,6 +20,9 @@ source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
+
+# This is required for prompt plugins
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
 # Increase history file sizes, so we can store all history
 export HISTSIZE=1000000000
