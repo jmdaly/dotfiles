@@ -1,0 +1,19 @@
+# Syntax highlighting bundle.
+zsh-users/zsh-syntax-highlighting
+
+# add even more completions
+zsh-users/zsh-completions
+
+# now, configure and run compinit to initialize completions
+belak/zsh-utils path:completion
+
+# Load the theme
+romkatv/powerlevel10k kind:fpath
+
+# Bundles from robbyrussell's oh-my-zsh.
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/gitfast # Faster git command line completion
+ohmyzsh/ohmyzsh path:plugins/wd # Warp directory - easily switch to particular directories
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+ohmyzsh/ohmyzsh path:plugins/vi-mode

@@ -5,43 +5,24 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Check if z-plug is installed or not. If not, install it:
+# This is required for some other plugins
+autoload -Uz compinit && compinit
 
-if [[ ! -d ~/.zplug ]]; then
-  echo "z-plug not installed. Installing it."
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+# Check if antidote is installed or not. If not, install it:
+
+if [[ ! -d ~/.antidote ]]; then
+  echo "Antidote not installed. Installing it."
+  git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 fi
 
-source ~/.zplug/init.zsh
+# source antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
-# Bundles from robbyrussell's oh-my-zsh.
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/gitfast", from:oh-my-zsh # Faster git command line completion
-zplug "plugins/wd", from:oh-my-zsh # Warp directory - easily switch to particular directories
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/vi-mode", from:oh-my-zsh
-zplug "lib/completion", from:oh-my-zsh # Better tab completion
-zplug "lib/directories", from:oh-my-zsh # Provides the directory stack
-zplug "lib/history", from:oh-my-zsh # Provides history management
-zplug "lib/completion", from:oh-my-zsh # Provides completion of dot directories
-zplug "lib/theme-and-appearance", from:oh-my-zsh # Provides auto cd, and some other appearance things
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
 
-# Syntax highlighting bundle.
-zplug "zsh-users/zsh-syntax-highlighting"
-
-# Load the theme.
-zplug romkatv/powerlevel10k, as:theme, depth:1
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
+# This is required for prompt plugins
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
 # Increase history file sizes, so we can store all history
 export HISTSIZE=1000000000
