@@ -1,6 +1,3 @@
-# Syntax highlighting bundle.
-zsh-users/zsh-syntax-highlighting
-
 # add even more completions
 zsh-users/zsh-completions
 
@@ -17,3 +14,6 @@ ohmyzsh/ohmyzsh path:plugins/gitfast # Faster git command line completion
 ohmyzsh/ohmyzsh path:plugins/wd # Warp directory - easily switch to particular directories
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/vi-mode
+
+# Syntax highlighting bundle.
+zsh-users/zsh-syntax-highlighting
