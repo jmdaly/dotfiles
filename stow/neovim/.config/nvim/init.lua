@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = {'rust', 'cpp', 'c'},
   group = fileformattinggroup,
   callback = function()
-    vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format, { async = true })
+    vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format)
   end,
 })
 
