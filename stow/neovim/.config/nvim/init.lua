@@ -38,7 +38,7 @@ vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 local lspgroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 -- Use LSP omni-completion in C and C++ files.
 vim.api.nvim_create_autocmd('Filetype', {
-  pattern = {'c', 'cpp'},
+  pattern = { 'c', 'cpp' },
   group = lspgroup,
   command = 'setlocal omnifunc=v:lua.vim.lsp.omnifunc',
 })
@@ -64,20 +64,20 @@ vim.keymap.set('n', '[z', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']z', vim.diagnostic.goto_next)
 
 -- DAP debug mappings
-vim.keymap.set('n', '<Leader>dc', require'dap'.continue)
-vim.keymap.set('n', '<Leader>do', require'dap'.step_over)
-vim.keymap.set('n', '<Leader>di', require'dap'.step_into)
-vim.keymap.set('n', '<Leader>br', require'dap'.toggle_breakpoint)
-vim.keymap.set('n', '<Leader>dr', require'dap'.repl.open)
-vim.keymap.set('n', '<Leader>dl', require'dap'.run_last)
-vim.keymap.set('n', '<Leader>dh', require'dap.ui.widgets'.hover)
+vim.keymap.set('n', '<Leader>dc', require 'dap'.continue)
+vim.keymap.set('n', '<Leader>do', require 'dap'.step_over)
+vim.keymap.set('n', '<Leader>di', require 'dap'.step_into)
+vim.keymap.set('n', '<Leader>br', require 'dap'.toggle_breakpoint)
+vim.keymap.set('n', '<Leader>dr', require 'dap'.repl.open)
+vim.keymap.set('n', '<Leader>dl', require 'dap'.run_last)
+vim.keymap.set('n', '<Leader>dh', require 'dap.ui.widgets'.hover)
 
 -- ALE configuration
 vim.g.ale_linters = {
-  cpp = {'clangtidy'},
-  c = {'clangtidy', 'pclint'},
-  python = {'pyls', 'flake8'},
-  rust = {'cargo', 'analyzer'},
+  cpp = { 'clangtidy' },
+  c = { 'clangtidy', 'pclint' },
+  python = { 'pyls', 'flake8' },
+  rust = { 'cargo', 'analyzer' },
 }
 
 vim.g.ale_cpp_clangtidy_executable = vim.g.clang_path .. '/bin/clang-tidy'
@@ -103,7 +103,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'rust', 'cpp', 'c'},
+  pattern = { 'rust', 'cpp', 'c', 'lua' },
   group = fileformattinggroup,
   callback = function()
     vim.keymap.set('n', '<Leader>f', vim.lsp.buf.format)
@@ -126,12 +126,12 @@ vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
 
 -- vim-vsnip key mappings
 -- Expand or jump
-vim.api.nvim_set_keymap('i', '<C-j>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-j>"', {expr = true})
-vim.api.nvim_set_keymap('s', '<C-j>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-j>"', {expr = true})
+vim.api.nvim_set_keymap('i', '<C-j>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-j>"', { expr = true })
+vim.api.nvim_set_keymap('s', '<C-j>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-j>"', { expr = true })
 
 -- Jump backward
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-n>"', {expr = true})
-vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-n>"', {expr = true})
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-n>"', { expr = true })
+vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<C-n>"', { expr = true })
 
 -- Ensure the status line is always displayed:
 vim.opt.laststatus = 2
@@ -140,7 +140,7 @@ vim.opt.laststatus = 2
 -- double slashes (used for vim-commentary):
 local ftoptionsgroup = vim.api.nvim_create_augroup('FTOptions', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'c', 'cpp', 'cs', 'java', 'rust'},
+  pattern = { 'c', 'cpp', 'cs', 'java', 'rust' },
   group = ftoptionsgroup,
   command = 'setlocal commentstring=//\\ %s',
 })
@@ -157,12 +157,12 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Configure some unconventional filetypes
 local filetypesgroup = vim.api.nvim_create_augroup('filetypes', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufNewFile' ,'BufRead' }, {
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = 'Jenkinsfile*',
   group = filetypesgroup,
   command = 'setlocal filetype=groovy',
 })
-vim.api.nvim_create_autocmd({ 'BufNewFile' ,'BufRead' }, {
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = 'Dockerfile*',
   group = filetypesgroup,
   command = 'setlocal filetype=dockerfile',
