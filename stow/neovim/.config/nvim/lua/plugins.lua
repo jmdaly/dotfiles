@@ -45,6 +45,12 @@ require("lazy").setup({
   'marko-cerovac/material.nvim',
   'sainnhe/gruvbox-material',
 
+  { 'ellisonleao/gruvbox.nvim',
+     opts = {
+       contrast = 'soft',
+     },
+  },
+
   'psf/black', -- A plugin to format Python code by calling black
 
   {
