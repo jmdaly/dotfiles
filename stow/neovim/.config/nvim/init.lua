@@ -15,7 +15,7 @@ require('jmdaly.config')
 -- Enable true colour support:
 vim.opt.termguicolors = true
 
-vim.cmd.colorscheme('gruvbox-material')
+vim.cmd.colorscheme('gruvbox')
 
 -- Turn line numbers on:
 vim.opt.number = true
