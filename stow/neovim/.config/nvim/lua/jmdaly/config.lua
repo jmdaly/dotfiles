@@ -10,6 +10,7 @@ vim.g.copilot_assume_mapped = true
 -- Set up some keybindings
 vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>') -- Open Gen menu
 vim.keymap.set('n', '<leader>[', require('gen').select_model) -- Select ollama model
+vim.keymap.set('v', '<leader>p', ':Gen Freestyle<CR>') -- Send selection to Gen as prompt
 
 -- Set up material theme
 require('material').setup({

@@ -45,6 +45,12 @@ require("lazy").setup({
   'marko-cerovac/material.nvim',
   'sainnhe/gruvbox-material',
 
+  { 'ellisonleao/gruvbox.nvim',
+     opts = {
+       contrast = 'soft',
+     },
+  },
+
   'psf/black', -- A plugin to format Python code by calling black
 
   {
@@ -89,7 +95,7 @@ require("lazy").setup({
         dashboard.button("f", " " .. " Find Files", ":Files<CR>"),
         dashboard.button("r", " " .. " Recent Files", ":History<CR>"),
         dashboard.button("g", " " .. " Find Text", ":RG<CR>"),
-        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.vim<CR>"),
+        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.lua<CR>"),
         dashboard.button("z", "󰄉 " .. " Command History", ":History:<CR>"),
         dashboard.button("u", "󰄉 " .. " Update Plugins", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
