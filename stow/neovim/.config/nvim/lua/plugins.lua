@@ -147,10 +147,26 @@ require("lazy").setup({
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
-      debug = true, -- Enable debugging
       -- See Configuration section for rest
+      context = 'buffers', -- Use all buffers as context
+      mappings = {
+        -- Use tab for completion
+        complete = {
+          detail = "Use @<C-n> or /<C-n> for options.",
+          insert = "<C-n>",
+        },
+        -- Close the chat
+        close = {
+          normal = "q",
+          insert = "<C-c>",
+        },
+        -- Reset the chat buffer
+        reset = {
+          normal = "<A-l>",
+          insert = "<A-l>",
+        },
+      },
     },
-    -- See Commands section for default commands if you want to lazy load on them
   },
 
 })

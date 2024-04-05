@@ -168,6 +168,15 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   command = 'setlocal filetype=dockerfile',
 })
 
+-- Set relative line numbers for copilot chat buffer
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = 'copilot-*',
+    callback = function()
+        vim.opt_local.relativenumber = true
+        vim.opt_local.number = true
+    end
+})
+
 -- Mapping to close the file in the current buffer:
 vim.keymap.set('n', '<Leader>q', ':Sayonara<CR>')
 vim.keymap.set('n', '<Leader>Q', ':Sayonara!<CR>')
