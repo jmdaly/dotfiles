@@ -51,7 +51,7 @@ end
 
 require('lualine').setup{
   options = {
-    theme = 'gruvbox-material'
+    theme = 'gruvbox'
   },
   sections = {
     lualine_a = { {'mode', upper = true} },
