@@ -136,8 +136,7 @@ vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump
 -- Ensure the status line is always displayed:
 vim.opt.laststatus = 2
 
--- Set the comment string for certain filetypes to
--- double slashes (used for vim-commentary):
+-- Set the comment string for certain filetypes
 local ftoptionsgroup = vim.api.nvim_create_augroup('FTOptions', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c', 'cpp', 'cs', 'java', 'rust' },

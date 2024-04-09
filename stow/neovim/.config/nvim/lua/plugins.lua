@@ -20,7 +20,6 @@ require("lazy").setup({
   'tpope/vim-sleuth', -- heuristically determine spacing to use when tabbing
   'tpope/vim-fugitive', -- git wrapper for vim
   'tpope/vim-unimpaired', -- A plugin containing handy pairs of bracket mapping:
-  'tpope/vim-commentary', -- Plug to assist with commenting out blocks of text:
   'tpope/vim-surround', -- Plugin for working with surroundings of words:
   'RRethy/vim-illuminate', -- Plugin to highlight the word under the cursor
   'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
