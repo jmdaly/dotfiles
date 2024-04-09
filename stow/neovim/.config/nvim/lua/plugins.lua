@@ -170,6 +170,30 @@ require("lazy").setup({
         },
       },
     },
+    keys = {
+      -- Show help actions with fzf-lua
+      {
+        "<leader>cc",
+        "<cmd>CopilotChatToggle<CR>",
+      },
+      {
+        "<leader>ch",
+        function()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.fzflua").pick(actions.help_actions())
+        end,
+        desc = "CopilotChat - Help actions",
+      },
+      -- Show prompts actions with fzf-lua
+      {
+        "<leader>cp",
+        function()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
+        end,
+        desc = "CopilotChat - Prompt actions",
+      },
+    },
   },
 
 })
