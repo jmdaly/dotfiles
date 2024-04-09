@@ -47,10 +47,11 @@ vim.keymap.set('n', '<Leader>rd', vim.lsp.buf.declaration)
 vim.keymap.set('n', '<Leader>rj', vim.lsp.buf.definition)
 vim.keymap.set('n', '<Leader>ty', vim.lsp.buf.hover)
 vim.keymap.set('n', '<Leader>rk', vim.lsp.buf.signature_help)
-vim.keymap.set('n', '<Leader>rf', vim.lsp.buf.references)
-vim.keymap.set('n', '<Leader>ds', vim.lsp.buf.document_symbol)
+vim.keymap.set('n', '<Leader>rf', '<cmd>FzfLua lsp_references<CR>')
+vim.keymap.set('n', '<Leader>ds', '<cmd>FzfLua lsp_document_symbols<CR>')
+vim.keymap.set('n', '<Leader>dg', '<cmd>FzfLua diagnostics_document<CR>')
 vim.keymap.set('n', '<Leader>rw', vim.lsp.buf.rename)
-vim.keymap.set('n', '<Leader>k', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<Leader>k', '<cmd>FzfLua lsp_code_actions<CR>')
 vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float)
 
 -- Various mappings to open the corresponding header/source file in a new split
@@ -111,18 +112,15 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Set up keyboard shortbuts for fzf, the fuzzy finder
-vim.keymap.set('n', '<Leader>z', ':Files<CR>')
-vim.keymap.set('n', '<Leader><Tab>', ':Buffers<CR>')
-vim.keymap.set('n', '<Leader>h', ':History:<CR>')
-vim.keymap.set('n', '<Leader>/', ':History/<CR>')
-vim.keymap.set('n', '<Leader>l', ':BLines<CR>')
-vim.keymap.set('n', '<Leader>bc', ':BCommits<CR>')
+vim.keymap.set('n', '<Leader>z', ':FzfLua files<CR>')
+vim.keymap.set('n', '<Leader><Tab>', ':FzfLua buffers<CR>')
+vim.keymap.set('n', '<Leader>h', ':FzfLua command_history<CR>')
+vim.keymap.set('n', '<Leader>/', ':FzfLua search_history<CR>')
+vim.keymap.set('n', '<Leader>l', ':FzfLua blines<CR>')
+vim.keymap.set('n', '<Leader>bc', ':FzfLua git_commits<CR>')
 
 -- A mapping to search using rg:
-vim.keymap.set('n', '<Leader>rg', ':Rg<space>')
-
--- Set the fzf popup layout
-vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
+vim.keymap.set('n', '<Leader>rg', ':FzfLua live_grep<CR>')
 
 -- vim-vsnip key mappings
 -- Expand or jump

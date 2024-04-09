@@ -25,7 +25,13 @@ require("lazy").setup({
   'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
 
   { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
-  { 'junegunn/fzf.vim', dependencies = 'junegunn/fzf'},
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "junegunn/fzf",
+    },
+  },
 
   'mhinz/vim-sayonara', -- Plugin to make it easy to delete a buffer and close the file:
 
@@ -55,8 +61,6 @@ require("lazy").setup({
   {
     'neovim/nvim-lspconfig', -- Configurations for neovim's language client
   },
-
-  'ojroques/nvim-lspfuzzy', -- Integrates fzf with nvim-lsp results
 
   {
     "hrsh7th/nvim-cmp", -- Autocompletion plugin
@@ -91,11 +95,11 @@ require("lazy").setup({
       local dashboard = require("alpha.themes.dashboard")
         dashboard.section.buttons.val = {
         dashboard.button("e", " " .. " New File", ":ene<CR>"),
-        dashboard.button("f", " " .. " Find Files", ":Files<CR>"),
-        dashboard.button("r", " " .. " Recent Files", ":History<CR>"),
-        dashboard.button("g", " " .. " Find Text", ":RG<CR>"),
+        dashboard.button("f", " " .. " Find Files", ":FzfLua files<CR>"),
+        dashboard.button("r", " " .. " Recent Files", ":FzfLua oldfiles<CR>"),
+        dashboard.button("g", " " .. " Find Text", ":FzfLua live_grep<CR>"),
         dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.lua<CR>"),
-        dashboard.button("z", "󰄉 " .. " Command History", ":History:<CR>"),
+        dashboard.button("z", "󰄉 " .. " Command History", ":FzfLua command_history<CR>"),
         dashboard.button("u", "󰄉 " .. " Update Plugins", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         -- This function is for retrieving the list of Sessions from possession
