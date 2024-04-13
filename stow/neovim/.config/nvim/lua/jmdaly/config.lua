@@ -46,7 +46,7 @@ require('material').setup({
 
 -- A function to help get the current session name for lualine
 local function session_name()
-    return '[$ ' .. require('possession.session').session_name .. ']' or ''
+    return '[$ ' .. (require('possession.session').session_name .. ']' or '')
 end
 
 require('lualine').setup{

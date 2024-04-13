@@ -1,4 +1,4 @@
-vim.o.completeopt = "menuone,noselect" 
+vim.o.completeopt = "menuone,noselect"
 
   -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -21,9 +21,7 @@ cmp.setup({
   sources = {
     -- For vsnip user.
     { name = 'vsnip' },
-
     { name = 'nvim_lsp' },
-
     { name = 'buffer' },
   }
 })
@@ -32,11 +30,9 @@ cmp.setup({
 require('lspconfig').clangd.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
-
 require('lspconfig').pylsp.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
-
 require('lspconfig').cmake.setup {
   capabilities = require('cmp_nvim_lsp').default_capabilities()
 }
