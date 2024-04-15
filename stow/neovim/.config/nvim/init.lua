@@ -42,6 +42,22 @@ vim.api.nvim_create_autocmd('Filetype', {
   group = lspgroup,
   command = 'setlocal omnifunc=v:lua.vim.lsp.omnifunc',
 })
+-- Set up inlay hints for the supported languages
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = lspgroup,
+  desc = 'Set up inlay hints',
+  callback = function(event)
+    local bufnr = event.buf
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if not client then return end
+
+    if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(bufnr, true)
+    end
+  end,
+})
+
 
 vim.keymap.set('n', '<Leader>rd', vim.lsp.buf.declaration)
 vim.keymap.set('n', '<Leader>rj', vim.lsp.buf.definition)

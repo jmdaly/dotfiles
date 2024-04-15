@@ -82,7 +82,13 @@ require("lazy").setup({
     },
   },
 
-  'simrat39/rust-tools.nvim', -- Improved rust development
+  -- Improved Rust development
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    ft = { 'rust' },
+  },
+
   'mfussenegger/nvim-dap', -- Debug Adapter Protocol plugin
   'github/copilot.vim',
 
