@@ -70,6 +70,11 @@ vim.keymap.set('n', '<Leader>rw', vim.lsp.buf.rename)
 vim.keymap.set('n', '<Leader>k', '<cmd>FzfLua lsp_code_actions<CR>')
 vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float)
 
+-- Toggle inlay hints
+vim.keymap.set('n', '<Leader>ih', function()
+  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+end)
+
 -- Various mappings to open the corresponding header/source file in a new split
 vim.keymap.set('n', '<Leader>of', '<cmd>ClangdSwitchSourceHeader<CR>')
 vim.keymap.set('n', '<Leader>oh', '<cmd>vsp<CR><cmd>ClangdSwitchSourceHeader<CR>')
