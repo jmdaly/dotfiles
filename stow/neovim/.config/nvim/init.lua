@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if not client then return end
 
     if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(bufnr, true)
+      vim.lsp.inlay_hint.enable(true)
     end
   end,
 })
@@ -72,7 +72,7 @@ vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float)
 
 -- Toggle inlay hints
 vim.keymap.set('n', '<Leader>ih', function()
-  vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
 
 -- Various mappings to open the corresponding header/source file in a new split
