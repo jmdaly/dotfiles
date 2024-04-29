@@ -1,9 +1,6 @@
 # add even more completions
 zsh-users/zsh-completions
 
-# now, configure and run compinit to initialize completions
-belak/zsh-utils path:completion
-
 # Load the theme
 romkatv/powerlevel10k kind:fpath
 
@@ -17,3 +14,6 @@ ohmyzsh/ohmyzsh path:plugins/vi-mode
 
 # Syntax highlighting bundle.
 zsh-users/zsh-syntax-highlighting
+
+# now, configure and run compinit to initialize completions
+belak/zsh-utils path:completion
