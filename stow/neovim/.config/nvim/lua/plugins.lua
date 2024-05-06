@@ -25,11 +25,15 @@ require("lazy").setup({
   'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
 
   { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
+
   {
     "ibhagwan/fzf-lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "junegunn/fzf",
+    },
+    opts = {
+      defaults = { formatter = "path.filename_first" }
     },
   },
 
