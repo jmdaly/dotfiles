@@ -12,14 +12,14 @@ if [[ ! -d ~/.antidote ]]; then
   git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 fi
 
+# This is required for some other plugins to get completions
+autoload -Uz compinit && compinit
+
 # source antidote
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
-
-# This is required for some other plugins to get completions
-autoload -Uz compinit && compinit
 
 # This is required for prompt plugins
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
