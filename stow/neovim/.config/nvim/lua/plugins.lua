@@ -175,7 +175,7 @@ require("lazy").setup({
         },
         -- Reset the chat buffer
         reset = {
-          normal = "<A-l>",
+          normal = "gb",
           insert = "<A-l>",
         },
       },
