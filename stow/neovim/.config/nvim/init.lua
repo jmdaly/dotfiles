@@ -39,6 +39,9 @@ vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 99 -- Start with all folds open
+-- Syntax highlight the fold line
+vim.opt.foldtext = ''
+
 
 local lspgroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 -- Use LSP omni-completion in C and C++ files.
