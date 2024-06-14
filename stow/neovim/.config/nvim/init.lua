@@ -90,9 +90,6 @@ vim.keymap.set('n', '<Leader>oj', '<cmd>below sp<CR><cmd>ClangdSwitchSourceHeade
 vim.keymap.set('n', '<Leader>ok', '<cmd>sp<CR><cmd>ClangdSwitchSourceHeader<CR>')
 vim.keymap.set('n', '<Leader>ol', '<cmd>below vsp<CR><cmd>ClangdSwitchSourceHeader<CR>')
 
-vim.keymap.set('n', '[z', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']z', vim.diagnostic.goto_next)
-
 -- DAP debug mappings
 vim.keymap.set('n', '<Leader>dc', require 'dap'.continue)
 vim.keymap.set('n', '<Leader>do', require 'dap'.step_over)
@@ -102,26 +99,25 @@ vim.keymap.set('n', '<Leader>dr', require 'dap'.repl.open)
 vim.keymap.set('n', '<Leader>dl', require 'dap'.run_last)
 vim.keymap.set('n', '<Leader>dh', require 'dap.ui.widgets'.hover)
 
--- ALE configuration
-vim.g.ale_linters = {
+-- nvim-lint configuration
+require('lint').linters_by_ft = {
+  c = { 'clangtidy' },
   cpp = { 'clangtidy' },
-  c = { 'clangtidy', 'pclint' },
-  python = { 'pyls', 'flake8' },
-  rust = { 'cargo', 'analyzer' },
+  cmake = { 'cmakelint' },
 }
 
-vim.g.ale_cpp_clangtidy_executable = vim.g.clang_path .. '/bin/clang-tidy'
-vim.g.ale_cpp_clangtidy_extra_options = '-header-filter=.*'
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    -- try_lint without arguments runs the linters defined in `linters_by_ft`
+    -- for the current filetype. ignore_errors is set to true to avoid
+    -- errors when a configured linter is not available.
+    require("lint").try_lint(nil, { ignore_errors = true })
 
-vim.g.ale_c_clangtidy_executable = vim.g.clang_path .. '/bin/clang-tidy'
-vim.g.ale_c_clangtidy_extra_options = '-header-filter=.*'
-
--- Set up mapping to move between errors
-vim.keymap.set('n', '[w', '<Plug>(ale_previous_wrap)')
-vim.keymap.set('n', ']w', '<Plug>(ale_next_wrap)')
-
--- Key mappings for clang-format, to format source code.
-vim.g.clang_format_path = vim.g.clang_path .. '/bin/clang-format'
+    -- You can call `try_lint` with a linter name or a list of names to always
+    -- run specific linters, independent of the `linters_by_ft` configuration
+    -- require("lint").try_lint("cspell")
+  end,
+})
 
 -- Mappings for formatting code
 local fileformattinggroup = vim.api.nvim_create_augroup('fileformatting', { clear = true })

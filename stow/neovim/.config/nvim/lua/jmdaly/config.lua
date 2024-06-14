@@ -49,6 +49,15 @@ local function session_name()
     return '[$ ' .. (require('possession.session').get_session_name() .. ']' or '')
 end
 
+-- A function to show which linters are running
+local lint_progress = function()
+  local linters = require("lint").get_running()
+  if #linters == 0 then
+      return "󰦕"
+  end
+  return "󱉶 " .. table.concat(linters, ", ")
+end
+
 require('lualine').setup{
   options = {
     theme = 'gruvbox'
@@ -57,11 +66,11 @@ require('lualine').setup{
     lualine_a = { {'mode', upper = true} },
     lualine_b = { {'branch', icon = ''} },
     lualine_c = { {'filename', file_status = true}, {'diagnostics',
-                                                      sources = { 'nvim_diagnostic', 'ale' },
+                                                      sources = { 'nvim_diagnostic' },
                                                     }
                 },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { session_name },
+    lualine_y = { session_name, lint_progress },
     lualine_z = { 'location' },
   },
   inactive_sections = {

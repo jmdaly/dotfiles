@@ -49,7 +49,6 @@ require("lazy").setup({
 
   'christoomey/vim-tmux-navigator', -- A plugin to facilitate navigating between vim and tmux
   'wellle/targets.vim', -- A plugin for additional text objects
-  'w0rp/ale', -- A plugin for asynchronous linting while you type
 
   'marko-cerovac/material.nvim',
   'sainnhe/gruvbox-material',
@@ -119,6 +118,7 @@ require("lazy").setup({
   },
 
   'mfussenegger/nvim-dap', -- Debug Adapter Protocol plugin
+  'mfussenegger/nvim-lint', -- Linting plugin for neovim
   'github/copilot.vim',
 
   { 'hoob3rt/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
