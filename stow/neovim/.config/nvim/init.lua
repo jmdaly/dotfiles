@@ -35,13 +35,20 @@ vim.opt.diffopt:append('vertical')
 -- Add a mapping to escape out of terminal mode:
 vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 
--- Set up code folding with treesitter
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldlevel = 99 -- Start with all folds open
--- Syntax highlight the fold line
-vim.opt.foldtext = ''
-
+-- Set up code folding with treesitter. We put these in an autocommand, since
+-- they are not global options.
+local treesittergroup = vim.api.nvim_create_augroup('treesitter', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'rust', 'python', 'lua' },
+  group = treesittergroup,
+  callback = function()
+    vim.opt_local.foldmethod = 'expr'
+    vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.opt_local.foldlevel = 99 -- Start with all folds open
+    -- Syntax highlight the fold line
+    vim.opt_local.foldtext = ''
+  end,
+})
 
 local lspgroup = vim.api.nvim_create_augroup('lsp', { clear = true })
 -- Use LSP omni-completion in C and C++ files.
