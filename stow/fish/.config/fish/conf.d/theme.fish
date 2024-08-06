@@ -1,1 +1,1 @@
-fish_config theme choose Lava
+fish_config theme choose fish_default
