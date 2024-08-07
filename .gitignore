@@ -2,3 +2,5 @@ last_check
 *.swp
 id_ed25519*
 known_hosts
+.cargo
+lazy-lock.json

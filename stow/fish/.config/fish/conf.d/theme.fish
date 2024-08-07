@@ -1,1 +1,1 @@
-fish_config theme choose fish_default
+fish_config theme choose fish\ default
