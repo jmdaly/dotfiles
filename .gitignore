@@ -4,3 +4,7 @@ id_ed25519*
 known_hosts
 .cargo
 lazy-lock.json
+stow/fish/.config/fish/functions
+stow/fish/.config/fish/completions
+stow/fish/.config/fish/conf.d
+stow/fish/.config/fish/fish_variables
