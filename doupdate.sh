@@ -17,7 +17,7 @@ if [[ $now -gt $s ]]; then
 	GIT_DIR=~/dotfiles/.git GIT_WORK_TREE=~/dotfiles git pull
 
 	# Re-run setup in case there are new files to handle:
-	~/dotfiles/setup_dotfiles.sh
+	~/dotfiles/setup.sh
 
 	# Update the secure setup for this system,
 	# if it exists:
