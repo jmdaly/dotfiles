@@ -39,7 +39,7 @@ vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 -- they are not global options.
 local treesittergroup = vim.api.nvim_create_augroup('treesitter', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'cpp', 'rust', 'python', 'lua' },
+  pattern = { 'c', 'cpp', 'rust', 'python', 'lua', 'cmake', 'groovy' },
   group = treesittergroup,
   callback = function()
     vim.opt_local.foldmethod = 'expr'
