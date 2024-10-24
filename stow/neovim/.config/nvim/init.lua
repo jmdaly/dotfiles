@@ -39,7 +39,7 @@ vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 -- they are not global options.
 local treesittergroup = vim.api.nvim_create_augroup('treesitter', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'cpp', 'rust', 'python', 'lua', 'cmake', 'groovy' },
+  pattern = { 'c', 'cpp', 'cmake', 'cuda', 'json', 'rust', 'python', 'lua', 'cmake', 'groovy' },
   group = treesittergroup,
   callback = function()
     vim.opt_local.foldmethod = 'expr'
@@ -153,6 +153,8 @@ vim.keymap.set('n', '<Leader>bc', ':FzfLua git_commits<CR>')
 
 -- A mapping to search using rg:
 vim.keymap.set('n', '<Leader>rg', ':FzfLua live_grep<CR>')
+-- A mapping to search for the word under the cursor using rg:
+vim.keymap.set('n', '<Leader>w', ':FzfLua grep_cword<CR>')
 
 -- vim-vsnip key mappings
 -- Expand or jump

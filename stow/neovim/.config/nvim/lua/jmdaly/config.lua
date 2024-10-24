@@ -118,7 +118,7 @@ require('gen').prompts['Freestyle'] = {
 -- Set up treesitter
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "cpp", "cmake", "groovy", "lua", "rust", "vim", "vimdoc", "markdown", "yaml", "json", "python", "bash", "dockerfile", "regex", "comment", "diff", "git_rebase", "toml" },
+  ensure_installed = { "c", "cpp", "cmake", "cuda", "groovy", "lua", "rust", "vim", "vimdoc", "markdown", "yaml", "json", "python", "bash", "dockerfile", "regex", "comment", "diff", "git_rebase", "toml" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
