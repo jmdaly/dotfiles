@@ -8,7 +8,6 @@ vim.g.maplocalleader = ' '
 vim.cmd('filetype plugin on')
 
 require('plugins')
-require('completion')
 require('lsp')
 require('jmdaly.config')
 
@@ -34,6 +33,8 @@ vim.opt.diffopt:append('vertical')
 
 -- Add a mapping to escape out of terminal mode:
 vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
+
+vim.o.completeopt = "menuone,noselect"
 
 -- Set up code folding with treesitter. We put these in an autocommand, since
 -- they are not global options.
