@@ -18,6 +18,7 @@ if 1 == vim.fn.executable(vim.g.clang_path .. "/bin/clangd") then
   -- We set the offset encoding here to try to fix it
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.offsetEncoding = 'utf-8'
+  capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
   lspconfig.clangd.setup{
     cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" },
     capabilities = capabilities,
@@ -26,12 +27,14 @@ end
 
 -- Setup cmake language server
 if 1 == vim.fn.executable("cmake-language-server") then
-  lspconfig.cmake.setup{}
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
+  lspconfig.cmake.setup({ capabilities = capabilities })
 end
 
 -- Setup Python language server
 if 1 == vim.fn.executable("pylsp") then
-  lspconfig.pylsp.setup{}
+  local capabilities = require('blink.cmp').get_lsp_capabilities()
+  lspconfig.pylsp.setup({ capabilities = capabilities })
 end
 
 -- Setup the lua language server
