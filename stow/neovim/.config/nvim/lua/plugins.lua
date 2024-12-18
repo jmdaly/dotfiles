@@ -79,26 +79,6 @@ require("lazy").setup({
     dependencies = { 'saghen/blink.cmp' },
   },
 
-  -- {
-  --   "hrsh7th/nvim-cmp", -- Autocompletion plugin
-  --   -- load cmp on InsertEnter
-  --   event = "InsertEnter",
-  --   -- these dependencies will only be loaded when cmp loads
-  --   -- dependencies are always lazy-loaded unless specified otherwise
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-vsnip",
-  --   },
-  -- },
-  --
-  -- -- Snippets plugin
-  -- { "hrsh7th/vim-vsnip",
-  --   dependencies = {
-  --     "rafamadriz/friendly-snippets",
-  --   },
-  -- },
-
   {
     'saghen/blink.cmp',
     lazy = false, -- lazy loading handled internally
