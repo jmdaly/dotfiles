@@ -76,25 +76,48 @@ require("lazy").setup({
 
   {
     'neovim/nvim-lspconfig', -- Configurations for neovim's language client
+    dependencies = { 'saghen/blink.cmp' },
   },
 
   {
-    "hrsh7th/nvim-cmp", -- Autocompletion plugin
-    -- load cmp on InsertEnter
-    event = "InsertEnter",
-    -- these dependencies will only be loaded when cmp loads
-    -- dependencies are always lazy-loaded unless specified otherwise
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-vsnip",
-    },
-  },
+    'saghen/blink.cmp',
+    lazy = false, -- lazy loading handled internally
+    -- optional: provides snippets for the snippet source
+    dependencies = 'rafamadriz/friendly-snippets',
+    -- use a release tag to download pre-built binaries
+    version = 'v0.*',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' for mappings similar to built-in completion
+      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+      -- see the "default configuration" section below for full documentation on how to define
+      -- your own keymap.
+      keymap = {
+        preset = 'default',
+        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+      },
 
-  -- Snippets plugin
-  { "hrsh7th/vim-vsnip",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
+      -- default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, via `opts_extend`
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+          snippets = {
+            opts = {
+              search_paths = { vim.fn.stdpath("config") .. "/snippets", vim.env.HOME .. '/dotfiles/snippets' },
+            },
+          },
+        },
+      },
+    },
+    -- allows extending the providers array elsewhere in your config
+    -- without having to redefine it
+    opts_extend = {
+      "sources.default"
     },
   },
 
