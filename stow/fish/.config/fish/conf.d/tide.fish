@@ -86,7 +86,6 @@ if status is-interactive
     set -U tide_node_icon \ue24f
     set -U tide_os_bg_color black
     set -U tide_os_color brwhite
-    set -U tide_os_icon \uf31b
     set -U tide_php_bg_color black
     set -U tide_php_color blue
     set -U tide_php_icon \ue608
