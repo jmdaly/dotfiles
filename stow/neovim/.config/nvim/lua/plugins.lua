@@ -100,6 +100,14 @@ require("lazy").setup({
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<CR>'] = { 'accept', 'fallback' },
       },
+      completion = {
+        -- Don't show completion in cmdline or search
+        menu = {
+          auto_show = function(ctx)
+            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?', ':' }, vim.fn.getcmdtype())
+          end,
+        },
+      },
 
       -- default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, via `opts_extend`
