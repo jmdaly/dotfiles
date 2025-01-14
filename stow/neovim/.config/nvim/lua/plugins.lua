@@ -188,15 +188,39 @@ require("lazy").setup({
 
   -- Plugin to integrate with ollama models
   {
-      "David-Kunz/gen.nvim",
-      opts = {
-          model = "llama2", -- The default model to use.
-          host = "localhost",
-          port = "11434",
-          display_mode = "split", -- The display mode. Can be "float" or "split".
-          show_prompt = true, -- Shows the Prompt submitted to Ollama.
-          show_model = true, -- Displays which model you are using at the beginning of your chat session.
-      }
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = true,
+    opts = {
+      adapters = {
+        ollama = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            schema = {
+              model = {
+                default = "qwen2.5-coder:14b",
+              },
+            },
+            env = {
+              url = "http://localhost:11434",
+            },
+            headers = {
+              ["Content-Type"] = "application/json",
+            },
+            parameters = {
+              sync = true,
+            },
+          })
+        end,
+      },
+      strategies = {
+        chat = {
+          adapter = "ollama",
+        },
+      },
+    },
   },
 
   {

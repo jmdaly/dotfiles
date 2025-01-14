@@ -8,9 +8,7 @@ vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 vim.g.copilot_assume_mapped = true
 
 -- Set up some keybindings
-vim.keymap.set({ 'n', 'v' }, '<leader>]', ':Gen<CR>') -- Open Gen menu
-vim.keymap.set('n', '<leader>[', require('gen').select_model) -- Select ollama model
-vim.keymap.set('v', '<leader>p', ':Gen Freestyle<CR>') -- Send selection to Gen as prompt
+vim.keymap.set({ 'n', 'v' }, '<leader>]', ':CodeCompanionChat<CR>') -- Open AI chat
 
 -- Set up material theme
 require('material').setup({
@@ -96,23 +94,6 @@ require('possession').setup{
   autosave = {
     current = true,
   }
-}
-
--- Set up some custom prompts for the LLMs
-require('gen').prompts['Explain'] = {
-  prompt = "Explain the following code to me:\n```$filetype\n$text\n```",
-}
-require('gen').prompts['Code'] = {
-  prompt = "Generate code in the $filetype programming language that does the following:\n$text\n",
-}
-require('gen').prompts['Test'] = {
-  prompt = "Write tests for the following code:\n```$filetype\n$text\n```",
-}
-require('gen').prompts['AskCode'] = {
-  prompt = "Regarding the following code, $input\n```$filetype\n$text\n```\n",
-}
-require('gen').prompts['Freestyle'] = {
-  prompt = "$text",
 }
 
 -- Set up treesitter
