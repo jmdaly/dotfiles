@@ -80,7 +80,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-
 vim.keymap.set('n', '<Leader>rd', vim.lsp.buf.declaration)
 vim.keymap.set('n', '<Leader>rj', vim.lsp.buf.definition)
 vim.keymap.set('n', '<Leader>ty', vim.lsp.buf.hover)
@@ -225,3 +224,8 @@ vim.keymap.set('n', '<Leader>gd', ':Gdiffsplit<CR>')
 vim.keymap.set('n', '<Leader>gg', ':Gdiffsplit<Space>')
 vim.keymap.set('n', '<Leader>gm', ':Gdiffsplit master<CR>')
 vim.keymap.set('n', '<Leader>gb', ':Git blame<CR>')
+
+-- Set up some keybindings for CodeCompanion
+vim.keymap.set({ 'n', 'v' }, '<leader>]', ':CodeCompanionChat<CR>') -- Open AI chat
+vim.keymap.set({ 'n', 'v' }, '<leader>[', ':CodeCompanionChat Toggle<CR>') -- Toggle AI chat
+vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<CR>')

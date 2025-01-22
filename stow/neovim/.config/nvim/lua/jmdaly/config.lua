@@ -7,9 +7,6 @@ vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 -- Copilot
 vim.g.copilot_assume_mapped = true
 
--- Set up some keybindings
-vim.keymap.set({ 'n', 'v' }, '<leader>]', ':CodeCompanionChat<CR>') -- Open AI chat
-
 -- Set up material theme
 require('material').setup({
         contrast = {
