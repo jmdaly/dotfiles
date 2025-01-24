@@ -216,6 +216,15 @@ require("lazy").setup({
             },
           })
         end,
+        openrouter = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            env = {
+              url = "https://openrouter.ai/api",
+              api_key = "cmd: echo $OPENROUTER_API_KEY",
+              chat_url = "/v1/chat/completions",
+            },
+          })
+        end,
       },
       strategies = {
         chat = {
