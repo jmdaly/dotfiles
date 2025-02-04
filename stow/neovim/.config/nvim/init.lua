@@ -91,6 +91,21 @@ vim.keymap.set('n', '<Leader>rw', vim.lsp.buf.rename)
 vim.keymap.set('n', '<Leader>k', '<cmd>FzfLua lsp_code_actions<CR>')
 vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float)
 
+-- Overwrite some keymaps when in Rust files, because the Rust language server offers
+-- some functionality that default language servers don't.
+local lspkeymaps = vim.api.nvim_create_augroup('LspKeyMaps', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = lspkeymaps,
+  pattern = 'rust',
+  callback = function()
+    -- Clear existing keymaps
+    vim.keymap.del('n', '<Leader>ty')
+
+    -- Set Rust-specific keymaps
+    vim.keymap.set('n', '<Leader>ty', '<cmd>RustLsp hover actions<CR>')
+  end
+})
+
 -- Toggle inlay hints
 vim.keymap.set('n', '<Leader>ih', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
