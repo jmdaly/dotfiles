@@ -22,8 +22,10 @@ $python\
 [](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
+$hostname\
 [](fg:color_bg3 bg:color_bg1)\
 $time\
+$cmd_duration\
 [ ](fg:color_bg1)\
 $line_break$character"""
 
@@ -73,6 +75,10 @@ show_always = true
 style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
 format = '[ $user ]($style)'
+
+[hostname]
+style = "bg:color_bg3"
+format = '[[ $hostname ](fg:#83a598 bg:color_bg3)]($style)'
 
 [directory]
 style = "fg:color_fg0 bg:color_yellow"
@@ -149,6 +155,10 @@ format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
 [conda]
 style = "bg:color_bg3"
 format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[cmd_duration]
+style = "bg:color_bg1"
+format = '[[took $duration](fg:color_fg0 bg:color_bg1)]($style)'
 
 [time]
 disabled = false
