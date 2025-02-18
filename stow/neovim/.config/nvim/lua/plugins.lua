@@ -96,8 +96,9 @@ require("lazy").setup({
       -- your own keymap.
       keymap = {
         preset = 'enter',
-        cmdline = {
-          preset = 'default',
+      },
+      cmdline = {
+        keymap = {
           ['<Tab>'] = { 'show', 'select_next' },
           ['<S-Tab>'] = { 'select_prev' },
           ['<CR>'] = { 'accept', 'fallback' },
