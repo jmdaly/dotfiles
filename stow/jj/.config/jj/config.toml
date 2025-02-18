@@ -1,0 +1,6 @@
+[user]
+name = "John M Daly"
+email = "jmdaly@gmail.com"
+
+[ui]
+default-command = "log"
