@@ -1,7 +1,8 @@
-.clang-format
 .ycm_extra_conf.*
 compile_commands.json
 *.autosave
 .gnupg
 __pycache__
 .cache
+output.txt
+prompt-plan.md
