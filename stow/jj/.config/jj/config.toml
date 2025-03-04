@@ -4,3 +4,4 @@ email = "jmdaly@gmail.com"
 
 [ui]
 default-command = "log"
+diff.tool = ["difft", "--color=always", "$left", "$right"]
