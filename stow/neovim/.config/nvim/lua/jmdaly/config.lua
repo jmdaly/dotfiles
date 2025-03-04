@@ -6,6 +6,10 @@ vim.api.nvim_set_var('vsnip_snippet_dir', vim.env.HOME .. '/dotfiles/snippets')
 
 -- Copilot
 vim.g.copilot_assume_mapped = true
+-- Disable copilot completion for Rust, so that I have to think for myself
+vim.g.copilot_filetypes = {
+  rust = false
+}
 
 -- Set up material theme
 require('material').setup({
