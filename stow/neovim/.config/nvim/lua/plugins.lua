@@ -261,6 +261,13 @@ require("lazy").setup({
           insert = "<A-l>",
         },
       },
+      prompts = {
+        DiffReview = {
+          prompt = "Please review the provided code. The diff is included for review, along with selected portions of the relevant code being modified.",
+          system_prompt = "You are a senior developer. Your job is to do a thorough code review of this code. You should write it up and output markdown. Include line numbers, and contextual info. Your code review will be passed to another teammate, so be thorough. Think deeply before writing the code review. Review every part, and don't hallucinate.",
+          description = "Code review based on diffs",
+        }
+      },
     },
     keys = {
       -- Show help actions with fzf-lua
