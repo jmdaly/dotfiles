@@ -31,9 +31,9 @@ cat <<EOF > code_review_request.md
 # Code Review Request for Branch: $BRANCH
 
 ## Git Diff (with 5 lines of context)
-\`\`\`diff
+\\`\\`\\`diff
 $(cat $TEMP_DIR/changes.diff)
-\`\`\`
+\\`\\`\\`
 
 ## Complete Files That Changed (Repomix Context)
 $(cat $TEMP_DIR/changed_files_context.md)
@@ -50,6 +50,7 @@ description = 'Generate LLM bundle output file using repomix'
 run = """
 #!/usr/bin/env bash
 find . -name "output.txt" -print -delete
+find . -name "code_review_request.md" -print -delete
 """
 
 [tasks."llm:generate_readme"]
@@ -74,6 +75,13 @@ description = 'Generate code review output from repository content stored in out
 run = """
 #!/usr/bin/env bash
 cat output.txt | llm -m claude-3.5-sonnet -t code-review-gen > code-review.md
+"""
+
+[tasks."llm:generate_diff_code_review"]
+description = 'Generate code review output from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat code_review_request.md | llm -m claude-3.7-sonnet -t code-review-gen | tee code-review.md
 """
 
 [tasks."llm:generate_missing_tests"]
