@@ -7,3 +7,4 @@ __pycache__
 output.txt
 prompt-plan.md
 bacon.toml
+*spec.md
