@@ -1,0 +1,101 @@
+[tasks."llm:generate_bundle"]
+description = 'Generate LLM bundle output file using repomix'
+run = """
+#!/usr/bin/env bash
+repomix --style xml --output-show-line-numbers --output output.txt --ignore "**/uv.lock,**/package-lock.json,**/.env,**/Cargo.lock,**/node_modules,**/target,**/dist,**/build,**/output.txt,**/yarn.lock"
+"""
+
+[tasks."llm::generate_diff_bundle"]
+description = 'Generate LLM bundle output file using repomix that contains only the diff and relevant changed files'
+run = """
+#!/usr/bin/env bash
+# Get current branch name
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Create a temporary directory
+TEMP_DIR=$(mktemp -d)
+# Get the repo's default branch
+DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d':' -f2 | xargs)
+# Generate git diff with context
+git diff $DEFAULT_BRANCH $BRANCH -U5 > $TEMP_DIR/changes.diff
+
+# Get list of changed files
+CHANGED_FILES=$(git diff --name-only $DEFAULT_BRANCH $BRANCH)
+CHANGED_FILES_COMMA=$(echo $CHANGED_FILES | tr ' ' ',')
+
+# Use Repomix to get context with changed files
+repomix --style xml --output-show-line-numbers --include "$CHANGED_FILES_COMMA" --output $TEMP_DIR/changed_files_context.md
+
+# Combine everything
+cat <<EOF > code_review_request.md
+# Code Review Request for Branch: $BRANCH
+
+## Git Diff (with 5 lines of context)
+\`\`\`diff
+$(cat $TEMP_DIR/changes.diff)
+\`\`\`
+
+## Complete Files That Changed (Repomix Context)
+$(cat $TEMP_DIR/changed_files_context.md)
+EOF
+
+# Clean up
+rm -rf $TEMP_DIR
+
+echo "Code review request file created: code_review_request.md"
+"""
+
+[tasks."llm:clean_bundles"]
+description = 'Generate LLM bundle output file using repomix'
+run = """
+#!/usr/bin/env bash
+find . -name "output.txt" -print -delete
+"""
+
+[tasks."llm:generate_readme"]
+depends = ["llm:generate_bundle"]
+description = 'Generate README.md from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -t readme-gen > README.md
+"""
+
+[tasks."llm:generate_github_issues"]
+depends = ["llm:generate_bundle"]
+description = 'Generate GitHub issues from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -m claude-3.5-sonnet -t github-issue-gen > issues.md
+"""
+
+[tasks."llm:generate_code_review"]
+depends = ["llm:generate_bundle"]
+description = 'Generate code review output from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -m claude-3.5-sonnet -t code-review-gen > code-review.md
+"""
+
+[tasks."llm:generate_missing_tests"]
+depends = ["llm:generate_bundle"]
+description = 'Generate missing tests for code in repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -m claude-3.5-sonnet -t missing-tests-gen > missing-tests.md
+"""
+
+[tasks."llm:generate_issue_prompts"]
+depends = ["llm:generate_bundle"]
+description = 'Generate issue prompts from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -m o3-mini -t issue-prompts-gen > issue-prompts.md
+"""
+
+[tasks."llm:generate_prompt_plan"]
+depends = ["llm:generate_bundle"]
+description = 'Generate prompt plan from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat output.txt | llm -m claude-3.5-sonnet -t prompt-plan-gen | tee prompt-plan.md
+"""

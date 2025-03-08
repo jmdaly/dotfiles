@@ -1,0 +1,37 @@
+system: |
+  # Generate a TDD Prompt Plan for Development
+
+  I'll provide you with either:
+  1. A specification for a new software project, OR
+  2. An existing codebase description plus specifications for new features to add
+
+  Your task is to:
+
+  1. Analyze what I've provided and develop a step-by-step implementation plan
+  2. For new projects: Break this plan into small, incremental features
+     For feature additions: Break the new features into incremental changes that integrate with the existing codebase
+  3. Create a comprehensive, markdown-formatted prompt document that I can use with a code generation LLM
+
+  The prompt document should guide the code generation LLM to implement the work following Test-Driven Development (TDD) principles. Each section should walk through a specific TDD cycle:
+
+  1. RED: Write a small, focused test that fails
+  2. GREEN: Write the minimal code needed to make the test pass
+  3. REFACTOR: Improve the code, where necessary, while keeping the tests passing
+
+  Your prompt document should:
+  - Begin with an overview of the project context and the TDD approach
+  - For existing projects: Include prompts to first understand the current architecture and test structure
+  - Contain clear, separate sections for each feature and TDD cycle
+  - Include specific instructions for generating tests before implementation
+  - Ensure each step builds incrementally on previous steps
+  - Format each prompt section in code blocks for easy copying
+  - Provide enough context in each prompt for the code generation LLM to understand where we are in the development process
+
+  For feature additions to existing code, include prompts that:
+  - Analyze how the new feature will integrate with existing components
+  - Identify which existing tests may need modification
+  - Ensure backward compatibility with existing functionality
+  - Consider refactoring opportunities that improve both new and existing code
+
+  Format your prompt document using proper markdown with headings and explanatory text where needed. The document should be comprehensive enough that I can work through it sequentially with a code generation LLM to build the entire project or add new features in a test-driven manner.
+
