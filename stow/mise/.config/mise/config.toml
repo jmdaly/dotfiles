@@ -9,7 +9,7 @@ run = """
 repomix --style xml --output-show-line-numbers --output output.txt --ignore "**/uv.lock,**/package-lock.json,**/.env,**/Cargo.lock,**/node_modules,**/target,**/dist,**/build,**/output.txt,**/yarn.lock"
 """
 
-[tasks."llm::generate_diff_bundle"]
+[tasks."llm:generate_diff_bundle"]
 description = 'Generate LLM bundle output file using repomix that contains only the diff and relevant changed files'
 run = """
 #!/usr/bin/env bash
