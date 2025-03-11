@@ -7,9 +7,3 @@ email = "jmdaly@gmail.com"
 [ui]
 default-command = "log"
 diff.tool = ["difft", "--color=always", "$left", "$right"]
-
-[merge-tools.mergiraf]
-program = "mergiraf"
-merge-args = ["merge", "$base", "$left", "$right", "-o", "$output", "--fast"]
-merge-conflict-exit-codes = [1]
-conflict-marker-style = "git"
