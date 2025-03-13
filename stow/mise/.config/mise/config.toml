@@ -78,7 +78,7 @@ depends = ["llm:generate_bundle"]
 description = 'Generate code review output from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | llm -m claude-3.5-sonnet -t code-review-gen > code-review.md
+cat output.txt | llm -m github-copilot/claude-3.7-sonnet -t code-review-gen | tee code-review.md
 """
 
 [tasks."llm:generate_diff_code_review"]

@@ -6,5 +6,6 @@ __pycache__
 .cache
 output.txt
 prompt-plan.md
+code-review.md
 bacon.toml
 *spec.md
