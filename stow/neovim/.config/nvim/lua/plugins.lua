@@ -244,6 +244,7 @@ require("lazy").setup({
     opts = {
       -- See Configuration section for rest
       context = 'buffers', -- Use all buffers as context
+      model = 'claude-3.7-sonnet-thought', -- Use the sonnet model by default
       mappings = {
         -- Use tab for completion
         complete = {
