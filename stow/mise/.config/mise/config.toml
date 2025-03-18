@@ -88,6 +88,13 @@ run = """
 cat code_review_request.md | llm -m github-copilot/claude-3.7-sonnet -t code-review-gen | tee code-review.md
 """
 
+[tasks."llm:generate_pr_description"]
+description = 'Generate code review output from repository content stored in output.txt using LLM generation'
+run = """
+#!/usr/bin/env bash
+cat code_review_request.md | llm -m github-copilot/claude-3.7-sonnet -t pr-description
+"""
+
 [tasks."llm:generate_missing_tests"]
 depends = ["llm:generate_bundle"]
 description = 'Generate missing tests for code in repository content stored in output.txt using LLM generation'
