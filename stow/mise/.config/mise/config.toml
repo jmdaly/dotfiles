@@ -18,13 +18,22 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 # Create a temporary directory
 TEMP_DIR=$(mktemp -d)
-# Get the repo's default branch
-DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d':' -f2 | xargs)
+
+# Determine target branch - use first argument if provided, otherwise detect default branch
+if [ -n "$1" ]; then
+  TARGET_BRANCH="$1"
+else
+  # Get the repo's default branch
+  TARGET_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d':' -f2 | xargs)
+fi
+
+# Find the common ancestor (merge-base) between the feature and default branch
+MERGE_BASE=$(git merge-base $TARGET_BRANCH $BRANCH)
 # Generate git diff with context
-git diff $DEFAULT_BRANCH $BRANCH -U5 > $TEMP_DIR/changes.diff
+git diff $MERGE_BASE $BRANCH -U5 > $TEMP_DIR/changes.diff
 
 # Get list of changed files
-CHANGED_FILES=$(git diff --name-only $DEFAULT_BRANCH $BRANCH)
+CHANGED_FILES=$(git diff --name-only $MERGE_BASE $BRANCH)
 CHANGED_FILES_COMMA=$(echo $CHANGED_FILES | tr ' ' ',')
 
 # Use Repomix to get context with changed files
@@ -32,7 +41,7 @@ repomix --style xml --output-show-line-numbers --include "$CHANGED_FILES_COMMA" 
 
 # Combine everything
 cat <<EOF > code_review_request.md
-# Code Review Request for Branch: $BRANCH
+# Code Review Request for Branch: $BRANCH (against $TARGET_BRANCH)
 
 ## Git Diff (with 5 lines of context)
 \\`\\`\\`diff
