@@ -1,5 +1,6 @@
 abbr md "mkdir"
 abbr rd "rmdir"
+abbr sd "cd (fd -t dir | fzf)"
 abbr groh "git reset origin/(__git.current_branch) --hard"
 abbr jab "jj abandon"
 abbr je "jj edit"
