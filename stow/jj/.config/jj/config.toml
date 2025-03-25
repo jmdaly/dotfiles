@@ -10,3 +10,9 @@ diff.tool = ["difft", "--color=always", "$left", "$right"]
 
 [git]
 private-commits = '''description(glob:'private:*')'''
+
+[[--scope]]
+--when.repositories = ["/workspaces", "~/workspaces"]
+[--scope.user]
+name = "John Daly"
+email = "john.daly@ouster.io"
