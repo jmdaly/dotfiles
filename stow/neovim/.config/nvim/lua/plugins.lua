@@ -149,8 +149,8 @@ require("lazy").setup({
             },
             -- Add clippy lints for Rust
             checkOnSave = {
+              allFeatures = true,
               command = "clippy",
-              extraArgs = {"--all-targets"},
             },
             procMacro = {
               enable = true,
