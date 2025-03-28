@@ -152,14 +152,6 @@ require("lazy").setup({
               allFeatures = true,
               command = "clippy",
             },
-            procMacro = {
-              enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["napi-derive"] = { "napi" },
-                ["async-recursion"] = { "async_recursion" },
-              },
-            },
           },
         },
       },
