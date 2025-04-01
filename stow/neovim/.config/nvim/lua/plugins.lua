@@ -208,7 +208,27 @@ require("lazy").setup({
     end
   },
 
-  -- Plugin to integrate with ollama models
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+    },
+    -- comment the following line to ensure hub will be ready at the earliest
+    cmd = "MCPHub",  -- lazy load by default
+    build = "npm install -g mcp-hub@latest",  -- Installs required mcp-hub npm module
+    opts = {
+      extensions = {
+        codecompanion = {
+          -- Show the mcp tool result in the chat buffer
+          show_result_in_chat = true,
+          -- Make chat #variables from MCP server resources
+          make_vars = true,
+        }
+      }
+    },
+  },
+
+  -- Plugin to integrate with LLMs for chat
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -223,6 +243,15 @@ require("lazy").setup({
         },
       },
       adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                default = "claude-3.7-sonnet-thought",
+              },
+            },
+          })
+        end,
         ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             schema = {
@@ -253,7 +282,7 @@ require("lazy").setup({
       },
       strategies = {
         chat = {
-          adapter = "ollama",
+          adapter = "copilot",
           slash_commands = {
             ["symbols"] = {
               opts = {
@@ -271,6 +300,18 @@ require("lazy").setup({
               },
             },
           },
+          tools = {
+            ["mcp"] = {
+              -- Prevent mcphub from loading before needed
+              callback = function() 
+                  return require("mcphub.extensions.codecompanion") 
+              end,
+              description = "Call tools and resources from the MCP Servers",
+              opts = {
+                  requires_approval = true,
+              }
+            }
+          }
         },
       },
     },
