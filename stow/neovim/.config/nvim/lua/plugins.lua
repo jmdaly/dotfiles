@@ -228,6 +228,12 @@ require("lazy").setup({
     },
   },
 
+  {
+    "Davidyz/VectorCode",
+    version = "0.5.4", -- optional, depending on whether you're on nightly or release
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
   -- Plugin to integrate with LLMs for chat
   {
     "olimorris/codecompanion.nvim",
@@ -310,8 +316,14 @@ require("lazy").setup({
               opts = {
                   requires_approval = true,
               }
-            }
-          }
+            },
+            vectorcode = {
+              callback = function()
+                return require("vectorcode.integrations").codecompanion.chat.make_tool()
+              end,
+              description = "Run VectorCode to retrieve the project context.",
+            },
+          },
         },
       },
     },
