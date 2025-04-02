@@ -9,6 +9,35 @@ run = """
 repomix --style xml --output-show-line-numbers --output output.txt --ignore "**/uv.lock,**/package-lock.json,**/.env,**/Cargo.lock,**/node_modules,**/target,**/dist,**/build,**/output.txt,**/yarn.lock"
 """
 
+[tasks."llm:generate_diff"]
+description = 'Generate a diff of the git branch we are currently on'
+run = """
+#!/usr/bin/env bash
+# Get current branch name
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Determine target branch - use first argument if provided, otherwise detect default branch
+if [ -n "$1" ]; then
+  TARGET_BRANCH="$1"
+else
+  # Get the repo's default branch
+  TARGET_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d':' -f2 | xargs)
+fi
+
+# Find the common ancestor (merge-base) between the feature and default branch
+MERGE_BASE=$(git merge-base $TARGET_BRANCH $BRANCH)
+# Generate git diff with context
+git diff $MERGE_BASE $BRANCH -U5 > changes.diff
+"""
+
+[tasks."llm:roast_my_code"]
+depends = ["llm:generate_diff"]
+description = 'Roast this code!'
+run = """
+#!/usr/bin/env bash
+cat changes.diff | llm -m claude-3.7-sonnet -t roast-review-gen | tee code-review.md
+"""
+
 [tasks."llm:generate_diff_bundle"]
 description = 'Generate LLM bundle output file using repomix that contains only the diff and relevant changed files'
 run = """
@@ -101,7 +130,7 @@ cat code_review_request.md | llm -m github-copilot/claude-3.7-sonnet -t code-rev
 description = 'Generate code review output from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat code_review_request.md | llm -m github-copilot/claude-3.7-sonnet -t pr-description
+cat changes.diff | llm -m github-copilot/claude-3.7-sonnet -t pr-description
 """
 
 [tasks."llm:generate_missing_tests"]
