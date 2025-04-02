@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "env": {
+        "API_KEY": "",
+        "SERVER_URL": null,
+        "DEBUG": "true"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/john.daly"
+      ]
+    },
+    "MCPunk": {
+      "command": "uvx",
+      "args": ["mcpunk"]
+    }
+  }
+}
