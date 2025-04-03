@@ -254,6 +254,23 @@ require("lazy").setup({
       strategies = {
         chat = {
           adapter = "ollama",
+          slash_commands = {
+            ["symbols"] = {
+              opts = {
+                provider = "fzf_lua",
+              },
+            },
+            ["file"] = {
+              opts = {
+                provider = "fzf_lua",
+              },
+            },
+            ["buffer"] = {
+              opts = {
+                provider = "fzf_lua",
+              },
+            },
+          },
         },
       },
     },
