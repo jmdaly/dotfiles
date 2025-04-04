@@ -1,25 +1,36 @@
 {
   "mcpServers": {
     "fetch": {
-      "command": "uvx",
-      "args": ["mcp-server-fetch"],
       "env": {
+        "DEBUG": "true",
         "API_KEY": "",
-        "SERVER_URL": null,
-        "DEBUG": "true"
-      }
+        "SERVER_URL": null
+      },
+      "disabled": true,
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
     },
-    "filesystem": {
-      "command": "npx",
+    "desktop-commander": {
+      "disabled": true,
       "args": [
         "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/john.daly"
-      ]
+        "@wonderwhy-er/desktop-commander"
+      ],
+      "command": "npx"
     },
     "MCPunk": {
-      "command": "uvx",
-      "args": ["mcpunk"]
+      "disabled": true,
+      "args": [
+        "mcpunk"
+      ],
+      "command": "uvx"
+    }
+  },
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled": true
     }
   }
 }
