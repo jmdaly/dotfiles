@@ -7,7 +7,9 @@ __pycache__
 output.txt
 prompt-plan.md
 code-review.md
+code_review_request.md
 bacon.toml
 *spec.md
 CLAUDE.md
 changes.diff
+codecompanion-workspace.json
