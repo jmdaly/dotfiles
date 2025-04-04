@@ -232,6 +232,7 @@ require("lazy").setup({
     "Davidyz/VectorCode",
     version = "0.5.4", -- optional, depending on whether you're on nightly or release
     dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "VectorCode",
   },
 
   -- Plugin to integrate with LLMs for chat
