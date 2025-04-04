@@ -177,6 +177,9 @@ vim.keymap.set('n', '<Leader>rg', ':FzfLua live_grep<CR>')
 -- A mapping to search for the word under the cursor using rg:
 vim.keymap.set('n', '<Leader>w', ':FzfLua grep_cword<CR>')
 
+-- Register fzf-lua as the default picker
+require('fzf-lua').register_ui_select()
+
 -- vim-vsnip key mappings
 -- Expand or jump
 vim.api.nvim_set_keymap('i', '<C-j>', 'vsnip#available(1) ? "<Plug>(vsnip-expand-or-jump)" : "<C-j>"', { expr = true })
