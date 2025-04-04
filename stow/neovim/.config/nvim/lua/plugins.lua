@@ -223,6 +223,8 @@ require("lazy").setup({
           show_result_in_chat = true,
           -- Make chat #variables from MCP server resources
           make_vars = true,
+          -- Make /slash commands from MCP server prompts
+          make_slash_commands = true,
         }
       }
     },
