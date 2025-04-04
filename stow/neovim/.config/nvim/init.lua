@@ -246,4 +246,5 @@ vim.keymap.set('n', '<Leader>gb', ':Git blame<CR>')
 -- Set up some keybindings for CodeCompanion
 vim.keymap.set({ 'n', 'v' }, '<leader>]', ':CodeCompanionChat<CR>') -- Open AI chat
 vim.keymap.set({ 'n', 'v' }, '<leader>[', ':CodeCompanionChat Toggle<CR>') -- Toggle AI chat
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', ':CodeCompanionActions<CR>') -- Toggle AI chat
 vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<CR>')

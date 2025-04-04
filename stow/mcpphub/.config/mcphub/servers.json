@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "env": {
+        "DEBUG": "true",
+        "API_KEY": "",
+        "SERVER_URL": null
+      },
+      "disabled": true,
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
+    },
+    "desktop-commander": {
+      "disabled": true,
+      "args": [
+        "-y",
+        "@wonderwhy-er/desktop-commander"
+      ],
+      "command": "npx"
+    },
+    "MCPunk": {
+      "disabled": true,
+      "args": [
+        "mcpunk"
+      ],
+      "command": "uvx"
+    }
+  },
+  "nativeMCPServers": {
+    "neovim": {
+      "disabled": true
+    }
+  }
+}
