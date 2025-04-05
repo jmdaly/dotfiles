@@ -1,18 +1,112 @@
 {
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/john.daly/dotfiles/stow/neovim/.config/nvim/init.lua",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/jmdaly/dotfiles/stow/neovim/.config/nvim/init.lua",
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
+    
+    // Editor settings that match Neovim preferences
+    "editor.lineNumbers": "relative",
+    "editor.cursorSurroundingLines": 5,
+    "editor.folding": true,
+    "editor.foldingStrategy": "indentation",
+    "editor.rulers": [80, 120],
+    "editor.wordWrap": "off",
+    "editor.scrollBeyondLastLine": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderControlCharacters": true,
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": false,
+    "editor.suggestSelection": "first",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.snippetSuggestions": "inline",
+    
+    // Workbench settings for a better experience
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.showTabs": true,
+    "workbench.activityBar.visible": true,
+    "workbench.list.automaticKeyboardNavigation": false,
+    "workbench.startupEditor": "none",
+    
+    // File settings that match common Neovim workflows
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/__pycache__": true,
+        "**/.pytest_cache": true
+    },
+    
+    // Search settings similar to your Neovim/fzf setup
+    "search.smartCase": true,
+    "search.useGlobalIgnoreFiles": true,
+    
+    // Terminal settings
     "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.copyOnSelection": true,
+    
+    // Git settings
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    
+    // Neovim plugin specific settings
+    "vscode-neovim.neovimClean": false,
+    "vscode-neovim.highlightGroups.highlights": {
+        "Directory": "asvetliakov.vscode-neovim",
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        },
+        "Conceal": {
+            "foreground": "theme.editor.foreground"
+        },
+        "CursorLine": {
+            "backgroundColor": "theme.editor.lineHighlightBackground"
+        }
+    },
+    
+    // Remote settings
     "remote.SSH.connectTimeout": 60,
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
         "thinkpad": "linux",
         "pineapple": "linux"
     },
-    "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+    
+    // Language-specific settings that reflect your Neovim configuration
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[cpp]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[c]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "[lua]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "sumneko.lua"
+    },
+    
+    // Terminal color customizations matching your Gruvbox theme
     "workbench.colorCustomizations": {
         "terminal.background":"#32302F",
         "terminal.foreground":"#D5C4A1",
