@@ -1,0 +1,198 @@
+[
+    // FZF-like functionality
+    {
+        "key": "space z",
+        "command": "workbench.action.quickOpen",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space tab",
+        "command": "workbench.action.showAllEditors",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space h",
+        "command": "workbench.action.openRecent",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space /",
+        "command": "search.action.openSearchHistory",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space l",
+        "command": "workbench.action.quickOpen",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space rg",
+        "command": "workbench.action.findInFiles",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space w",
+        "command": "workbench.action.findInFiles",
+        "args": {
+            "query": "${selectedText}"
+        },
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+
+    // LSP-like functionality
+    {
+        "key": "space rd",
+        "command": "editor.action.goToDeclaration",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space rj",
+        "command": "editor.action.goToDefinition",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space ty",
+        "command": "editor.action.showHover",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space rf",
+        "command": "references-view.find",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space ds",
+        "command": "workbench.action.gotoSymbol",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space dg",
+        "command": "workbench.action.showAllProblems",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space rw",
+        "command": "editor.action.rename",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space k",
+        "command": "editor.action.quickFix",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space m",
+        "command": "editor.action.showHover",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+
+    // Editor operations
+    {
+        "key": "space f",
+        "command": "editor.action.formatDocument",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space q",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space Q",
+        "command": "workbench.action.closeAllEditors",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+
+    // Git operations
+    {
+        "key": "space gs",
+        "command": "workbench.view.scm",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space gd",
+        "command": "git.openChange",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space gb",
+        "command": "git.blame",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+
+    // AI assistance
+    {
+        "key": "space ]",
+        "command": "github.copilot.chat.focus",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space [",
+        "command": "github.copilot.chat.toggleSidebar",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    
+    // Additional VS Code specific bindings that complement your workflow
+    {
+        "key": "space e",
+        "command": "workbench.view.explorer",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space x",
+        "command": "workbench.view.extensions",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+    {
+        "key": "space t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "!editorTextFocus && !neovim.mode"
+    },
+
+    // Additional Vim-style keybindings for when Neovim mode is disabled
+    {
+        "key": "j",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus && !neovim.mode"
+    },
+    {
+        "key": "k",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus && !neovim.mode"
+    },
+    {
+        "key": "h",
+        "command": "list.collapse",
+        "when": "listFocus && !inputFocus && !neovim.mode"
+    },
+    {
+        "key": "l",
+        "command": "list.select",
+        "when": "listFocus && !inputFocus && !neovim.mode"
+    },
+    
+    // Terminal escape binding similar to your Neovim config
+    {
+        "key": "escape",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus && !neovim.mode"
+    },
+    
+    // Header/source file navigation (similar to your ClangdSwitchSourceHeader mappings)
+    {
+        "key": "space of",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && !neovim.mode && (editorLangId == 'c' || editorLangId == 'cpp')"
+    },
+    {
+        "key": "space oh",
+        "command": "workbench.action.splitEditorRight",
+        "args": {},
+        "when": "editorTextFocus && !neovim.mode && (editorLangId == 'c' || editorLangId == 'cpp')"
+    },
+    {
+        "key": "space oh",
+        "command": "C_Cpp.SwitchHeaderSource",
+        "when": "editorTextFocus && !neovim.mode && (editorLangId == 'c' || editorLangId == 'cpp')"
+    }
+]

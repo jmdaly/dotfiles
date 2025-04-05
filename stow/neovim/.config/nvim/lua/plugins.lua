@@ -14,18 +14,35 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Load lazy.nvim
-require("lazy").setup({
-  'justinmk/vim-dirvish', -- Path navigator for vim
-  'tpope/vim-sleuth', -- heuristically determine spacing to use when tabbing
+-- Define all plugins
+local plugins = {
+  -- Core plugins that work in both vscode and standalone neovim
   'tpope/vim-fugitive', -- git wrapper for vim
-  'tpope/vim-unimpaired', -- A plugin containing handy pairs of bracket mapping:
-  'tpope/vim-surround', -- Plugin for working with surroundings of words:
-  'RRethy/vim-illuminate', -- Plugin to highlight the word under the cursor
-  'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
+  'tpope/vim-unimpaired', -- A plugin containing handy pairs of bracket mapping
+  'tpope/vim-surround', -- Plugin for working with surroundings of words
 
-  { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
-
+  -- Plugins that should only be loaded in standalone Neovim
+  {
+    'justinmk/vim-dirvish', -- Path navigator for vim
+    cond = not vim.g.vscode
+  },
+  {
+    'tpope/vim-sleuth', -- heuristically determine spacing to use when tabbing
+    cond = not vim.g.vscode
+  },
+  {
+    'RRethy/vim-illuminate', -- Plugin to highlight the word under the cursor
+    cond = not vim.g.vscode
+  },
+  {
+    'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings
+    cond = not vim.g.vscode
+  },
+  {
+    "junegunn/fzf",
+    build = "./install --all", -- The fuzzy searcher
+    cond = not vim.g.vscode
+  },
   {
     "ibhagwan/fzf-lua",
     dependencies = {
@@ -35,17 +52,16 @@ require("lazy").setup({
     opts = {
       defaults = { formatter = "path.filename_first" }
     },
+    cond = not vim.g.vscode
   },
-
-  'mhinz/vim-sayonara', -- Plugin to make it easy to delete a buffer and close the file:
-
-  -- Motion that takes two characters and jumps to occurences
+  {
+    'mhinz/vim-sayonara', -- Plugin to make it easy to delete a buffer and close the file
+    cond = not vim.g.vscode
+  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {},
-    -- stylua: ignore
     keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
@@ -53,32 +69,50 @@ require("lazy").setup({
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
+    cond = not vim.g.vscode
   },
-
-  -- Session management
-  { 'jedrzejboczar/possession.nvim', dependencies = 'nvim-lua/plenary.nvim' },
-
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-
-  'christoomey/vim-tmux-navigator', -- A plugin to facilitate navigating between vim and tmux
-  'wellle/targets.vim', -- A plugin for additional text objects
-
-  'marko-cerovac/material.nvim',
-  'sainnhe/gruvbox-material',
-
-  { 'ellisonleao/gruvbox.nvim',
-     opts = {
-       contrast = 'soft',
-     },
+  {
+    'jedrzejboczar/possession.nvim', -- Session management 
+    dependencies = 'nvim-lua/plenary.nvim',
+    cond = not vim.g.vscode
   },
-
-  'psf/black', -- A plugin to format Python code by calling black
-
+  {
+    "nvim-treesitter/nvim-treesitter", 
+    build = ":TSUpdate",
+    cond = not vim.g.vscode
+  },
+  {
+    'christoomey/vim-tmux-navigator', -- A plugin to facilitate navigating between vim and tmux
+    cond = not vim.g.vscode
+  },
+  {
+    'wellle/targets.vim', -- A plugin for additional text objects
+    cond = not vim.g.vscode
+  },
+  {
+    'marko-cerovac/material.nvim',
+    cond = not vim.g.vscode
+  },
+  {
+    'sainnhe/gruvbox-material',
+    cond = not vim.g.vscode
+  },
+  {
+    'ellisonleao/gruvbox.nvim',
+    opts = {
+      contrast = 'soft',
+    },
+    cond = not vim.g.vscode
+  },
+  {
+    'psf/black', -- A plugin to format Python code by calling black
+    cond = not vim.g.vscode
+  },
   {
     'neovim/nvim-lspconfig', -- Configurations for neovim's language client
     dependencies = { 'saghen/blink.cmp' },
+    cond = not vim.g.vscode
   },
-
   {
     'saghen/blink.cmp',
     lazy = false, -- lazy loading handled internally
@@ -86,8 +120,6 @@ require("lazy").setup({
     dependencies = 'rafamadriz/friendly-snippets',
     -- use a release tag to download pre-built binaries
     version = 'v0.*',
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -128,9 +160,8 @@ require("lazy").setup({
     opts_extend = {
       "sources.default"
     },
+    cond = not vim.g.vscode
   },
-
-  -- Improved Rust development
   {
     'mrcjkb/rustaceanvim',
     version = '^6', -- Recommended
@@ -159,28 +190,39 @@ require("lazy").setup({
     config = function(_, opts)
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts)
     end,
+    cond = not vim.g.vscode
   },
-
-  'mfussenegger/nvim-dap', -- Debug Adapter Protocol plugin
-  'mfussenegger/nvim-lint', -- Linting plugin for neovim
-  'github/copilot.vim',
-
-  { 'hoob3rt/lualine.nvim', dependencies = 'nvim-tree/nvim-web-devicons' },
-
+  {
+    'mfussenegger/nvim-dap', -- Debug Adapter Protocol plugin
+    cond = not vim.g.vscode
+  },
+  {
+    'mfussenegger/nvim-lint', -- Linting plugin for neovim
+    cond = not vim.g.vscode
+  },
+  {
+    'github/copilot.vim',
+    cond = not vim.g.vscode -- VSCode has its own Copilot
+  },
+  {
+    'hoob3rt/lualine.nvim', 
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    cond = not vim.g.vscode
+  },
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function ()
       local dashboard = require("alpha.themes.dashboard")
         dashboard.section.buttons.val = {
-        dashboard.button("e", " " .. " New File", ":ene<CR>"),
-        dashboard.button("f", " " .. " Find Files", ":FzfLua files<CR>"),
-        dashboard.button("r", " " .. " Recent Files", ":FzfLua oldfiles<CR>"),
-        dashboard.button("g", " " .. " Find Text", ":FzfLua live_grep<CR>"),
-        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.lua<CR>"),
+        dashboard.button("e", " " .. " New File", ":ene<CR>"),
+        dashboard.button("f", " " .. " Find Files", ":FzfLua files<CR>"),
+        dashboard.button("r", " " .. " Recent Files", ":FzfLua oldfiles<CR>"),
+        dashboard.button("g", " " .. " Find Text", ":FzfLua live_grep<CR>"),
+        dashboard.button("c", " " .. " Nvim Config", ":cd ~/.config/nvim | e ~/.config/nvim/init.lua<CR>"),
         dashboard.button("z", "󰄉 " .. " Command History", ":FzfLua command_history<CR>"),
         dashboard.button("u", "󰄉 " .. " Update Plugins", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
         -- This function is for retrieving the list of Sessions from possession
         (function()
           local group = { type = "group", opts = { spacing = 0 } }
@@ -197,7 +239,7 @@ require("lazy").setup({
           local files = vim.split(vim.fn.glob(path .. "/*.json"), "\n")
           for i, file in pairs(files) do
             local basename = vim.fs.basename(file):gsub("%.json", "")
-            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
+            local button = dashboard.button(tostring(i), "勒 " .. basename, "<cmd>PossessionLoad " .. basename .. "<cr>")
             table.insert(group.val, button)
           end
           return group
@@ -205,9 +247,9 @@ require("lazy").setup({
       }
       dashboard.opts.layout[1].val = 8
       require'alpha'.setup(dashboard.config)
-    end
+    end,
+    cond = not vim.g.vscode
   },
-
   {
     "ravitemer/mcphub.nvim",
     dependencies = {
@@ -228,16 +270,15 @@ require("lazy").setup({
         }
       }
     },
+    cond = not vim.g.vscode
   },
-
   {
     "Davidyz/VectorCode",
     version = "0.5.5", -- optional, depending on whether you're on nightly or release
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = "VectorCode",
+    cond = not vim.g.vscode
   },
-
-  -- Plugin to integrate with LLMs for chat
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -337,8 +378,8 @@ require("lazy").setup({
         },
       },
     },
+    cond = not vim.g.vscode
   },
-
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
@@ -398,6 +439,9 @@ require("lazy").setup({
         desc = "CopilotChat - Prompt actions",
       },
     },
+    cond = not vim.g.vscode
   },
+}
 
-})
+-- Load lazy.nvim
+require("lazy").setup(plugins)
