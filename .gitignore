@@ -8,3 +8,4 @@ stow/fish/.config/fish/functions
 stow/fish/.config/fish/completions
 stow/fish/.config/fish/conf.d
 stow/fish/.config/fish/fish_variables
+.aider*
