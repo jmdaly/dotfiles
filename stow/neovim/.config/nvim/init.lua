@@ -20,33 +20,33 @@ if vim.g.vscode then
     require('jmdaly.vscode')
 else
     -- Standalone Neovim setup
-    
+
     -- Load plugins
     require('plugins')
-    
+
     -- Load LSP configuration
     require('lsp')
-    
+
     -- Load Neovim-specific configuration
     require('jmdaly.config')
-    
+
     -- Load standalone-specific settings and keymaps
     require('jmdaly.standalone')
-    
+
     -- Enable true colour support:
     vim.opt.termguicolors = true
-    
+
     vim.cmd.colorscheme('gruvbox')
-    
+
     -- This is a workaround for an issue with lualine where the statusline
     -- now has inverted colours in neovim nightly. See the issue here:
     -- https://github.com/nvim-lualine/lualine.nvim/issues/1312#issuecomment-2439965065
     vim.api.nvim_set_hl(0, "StatusLine", {reverse = false})
     vim.api.nvim_set_hl(0, "StatusLineNC", {reverse = false})
-    
+
     -- Turn line numbers on:
     vim.opt.number = true
-    
+
     -- Turn relative line numbers on:
     vim.opt.relativenumber = true
 end
