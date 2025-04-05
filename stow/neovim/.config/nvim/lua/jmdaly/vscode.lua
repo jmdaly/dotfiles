@@ -2,7 +2,6 @@
 local vscode = require('vscode')
 
 -- These are some useful VSCode-specific keybindings
--- You can modify these to match your preferences
 
 -- Navigation
 vim.keymap.set('n', 'gh', function() vscode.action('editor.action.showHover') end)

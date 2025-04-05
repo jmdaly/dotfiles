@@ -11,38 +11,6 @@ vim.g.copilot_filetypes = {
   rust = false
 }
 
--- Set up material theme
-require('material').setup({
-        contrast = {
-                sidebars = false,
-                floating_windows = false,
-                line_numbers = false,
-                sign_column = false,
-                cursor_line = false,
-                non_current_windows = false,
-                popup_menu = false
-        },
-        italics = {
-                comments = true,
-                strings = false,
-                keywords = false,
-                functions = false,
-                variables = false
-        },
-        contrast_filetypes = {},
-        high_visibility = {
-                lighter = false,
-                darker = false
-        },
-        disable = {
-                borders = false,
-                background = false,
-                term_colors = false,
-                eob_lines = false
-        },
-        custom_highlights = {}
-})
-
 -- A function to help get the current session name for lualine
 local function session_name()
     return '[$ ' .. (require('possession.session').get_session_name() .. ']' or '')
@@ -157,4 +125,3 @@ dap.configurations.cpp = {
     runInTerminal = false,
   },
 }
-
