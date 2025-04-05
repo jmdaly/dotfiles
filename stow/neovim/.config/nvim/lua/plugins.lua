@@ -288,6 +288,13 @@ require("lazy").setup({
             },
           })
         end,
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            env = {
+              api_key = "cmd: echo $GEMINI_API_KEY",
+            },
+          })
+        end,
       },
       strategies = {
         chat = {
