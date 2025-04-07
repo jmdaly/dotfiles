@@ -133,7 +133,7 @@ require("lazy").setup({
   -- Improved Rust development
   {
     'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
+    version = '^6', -- Recommended
     lazy = false, -- This plugin is already lazy
     opts = {
       server = {
@@ -232,7 +232,7 @@ require("lazy").setup({
 
   {
     "Davidyz/VectorCode",
-    version = "0.5.4", -- optional, depending on whether you're on nightly or release
+    version = "0.5.5", -- optional, depending on whether you're on nightly or release
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = "VectorCode",
   },
