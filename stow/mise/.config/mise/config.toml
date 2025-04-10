@@ -38,6 +38,13 @@ run = """
 cat changes.diff | llm -m claude-3.7-sonnet -t roast-review-gen | tee code-review.md
 """
 
+[tasks."llm:generate_commit_message"]
+description = 'Generate commit message from repository content stored at current commit, and update commit message'
+run = """
+#!/usr/bin/env bash
+jj describe -m "$(jj show --git | llm -m claude-3.7-sonnet -t commit-message)"
+"""
+
 [tasks."llm:generate_diff_bundle"]
 description = 'Generate LLM bundle output file using repomix that contains only the diff and relevant changed files'
 run = """
