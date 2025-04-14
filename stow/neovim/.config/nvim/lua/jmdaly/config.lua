@@ -89,6 +89,10 @@ dap.adapters.lldb = {
   command = '/usr/bin/lldb-vscode', -- adjust as needed
   name = "lldb"
 }
+dap.adapters.codelldb = {
+  type = "executable",
+  command = "codelldb",
+}
 
 -- Set up possession.nvim
 require('possession').setup{
