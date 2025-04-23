@@ -1,6 +1,7 @@
 [tools]
 uv = "latest"
 python = "3.12"
+usage = "latest"
 
 [tasks."llm:generate_bundle"]
 description = 'Generate LLM bundle output file using repomix'
