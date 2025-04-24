@@ -32,9 +32,9 @@ if 1 == vim.fn.executable("cmake-language-server") then
 end
 
 -- Setup Python language server
-if 1 == vim.fn.executable("pylsp") then
+if 1 == vim.fn.executable("pyright") then
   local capabilities = require('blink.cmp').get_lsp_capabilities()
-  lspconfig.pylsp.setup({ capabilities = capabilities })
+  lspconfig.pyright.setup({ capabilities = capabilities })
 end
 
 -- Setup the lua language server
