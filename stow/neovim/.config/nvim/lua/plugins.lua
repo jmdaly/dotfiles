@@ -306,16 +306,6 @@ require("lazy").setup({
             },
           },
           tools = {
-            ["mcp"] = {
-              -- Prevent mcphub from loading before needed
-              callback = function() 
-                  return require("mcphub.extensions.codecompanion") 
-              end,
-              description = "Call tools and resources from the MCP Servers",
-              opts = {
-                  requires_approval = true,
-              }
-            },
             vectorcode = {
               callback = function()
                 return require("vectorcode.integrations").codecompanion.chat.make_tool()
