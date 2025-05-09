@@ -3,7 +3,7 @@
 if status is-interactive
     if string match -q '*fish' $SHELL
         if type -q keychain
-            keychain --quiet --agents ssh --quick --quiet --eval | source
+            keychain --quick --quiet --eval | source
         end
     end
 end
