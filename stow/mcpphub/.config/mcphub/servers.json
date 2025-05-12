@@ -20,13 +20,6 @@
       "disabled": true,
       "command": "uvx"
     },
-    "MCPunk": {
-      "args": [
-        "mcpunk"
-      ],
-      "disabled": true,
-      "command": "uvx"
-    },
     "serena": {
       "disabled": true,
       "args": [
@@ -36,6 +29,11 @@
         "serena-mcp-server"
       ],
       "command": "uv"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "disabled": true
     },
     "desktop-commander": {
       "args": [
