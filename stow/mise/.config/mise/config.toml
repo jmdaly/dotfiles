@@ -74,7 +74,7 @@ CHANGED_FILES=$(git diff --name-only $MERGE_BASE $BRANCH)
 CHANGED_FILES_COMMA=$(echo $CHANGED_FILES | tr ' ' ',')
 
 # Use Repomix to get context with changed files
-repomix --style xml --output-show-line-numbers --include "$CHANGED_FILES_COMMA" --output $TEMP_DIR/changed_files_context.md
+npx repomix --style xml --output-show-line-numbers --include "$CHANGED_FILES_COMMA" --output $TEMP_DIR/changed_files_context.md
 
 # Combine everything
 cat <<EOF > code_review_request.md
