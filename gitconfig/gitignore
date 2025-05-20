@@ -17,3 +17,4 @@ chroma.log
 .serena
 mise.local.toml
 test.json
+.env
