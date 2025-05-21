@@ -42,6 +42,10 @@
       ],
       "disabled": true,
       "command": "npx"
+    },
+    "atlassian": {
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "disabled": true
     }
   }
 }
