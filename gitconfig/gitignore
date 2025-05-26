@@ -18,3 +18,4 @@ chroma.log
 mise.local.toml
 test.json
 .env
+.claude
