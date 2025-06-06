@@ -36,14 +36,14 @@ depends = ["llm:generate_diff"]
 description = 'Roast this code!'
 run = """
 #!/usr/bin/env bash
-cat changes.diff | uvx llm -m claude-3.7-sonnet -t roast-review-gen | tee code-review.md
+cat changes.diff | llm -m claude-3.7-sonnet -t roast-review-gen | tee code-review.md
 """
 
 [tasks."llm:generate_commit_message"]
 description = 'Generate commit message from repository content stored at current commit, and update commit message'
 run = """
 #!/usr/bin/env bash
-jj describe -m "$(jj show --git | uvx llm -m claude-3.7-sonnet -t commit-message)"
+jj describe -m "$(jj show --git | llm -m claude-3.7-sonnet -t commit-message)"
 """
 
 [tasks."llm:generate_diff_bundle"]
@@ -108,7 +108,7 @@ depends = ["llm:generate_bundle"]
 description = 'Generate README.md from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/claude-3.5-sonnet -t readme-gen | tee README.md
+cat output.txt | llm -m github_copilot/claude-3.7-sonnet -t readme-gen | tee README.md
 """
 
 [tasks."llm:generate_github_issues"]
@@ -116,7 +116,7 @@ depends = ["llm:generate_bundle"]
 description = 'Generate GitHub issues from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/claude-3.5-sonnet -t github-issue-gen > issues.md
+cat output.txt | llm -m github_copilot/claude-3.7-sonnet -t github-issue-gen > issues.md
 """
 
 [tasks."llm:generate_code_review"]
@@ -124,21 +124,21 @@ depends = ["llm:generate_bundle"]
 description = 'Generate code review output from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/claude-3.7-sonnet -t code-review-gen | tee code-review.md
+cat output.txt | llm -m github_copilot/claude-sonnet-4 -t code-review-gen | tee code-review.md
 """
 
 [tasks."llm:generate_diff_code_review"]
 description = 'Generate code review output from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat code_review_request.md | uvx llm -m github-copilot/claude-3.7-sonnet -t code-review-gen | tee code-review.md
+cat code_review_request.md | llm -m github_copilot/claude-sonnet-4 -t code-review-gen | tee code-review.md
 """
 
 [tasks."llm:generate_pr_description"]
 description = 'Generate code review output from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat changes.diff | uvx llm -m github-copilot/claude-3.7-sonnet -t pr-description
+cat changes.diff | llm -m github_copilot/claude-sonnet-4 -t pr-description
 """
 
 [tasks."llm:generate_missing_tests"]
@@ -146,7 +146,7 @@ depends = ["llm:generate_bundle"]
 description = 'Generate missing tests for code in repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/claude-3.5-sonnet -t missing-tests-gen > missing-tests.md
+cat output.txt | llm -m github_copilot/claude-sonnet-4 -t missing-tests-gen > missing-tests.md
 """
 
 [tasks."llm:generate_issue_prompts"]
@@ -154,7 +154,7 @@ depends = ["llm:generate_bundle"]
 description = 'Generate issue prompts from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/o3-mini -t issue-prompts-gen > issue-prompts.md
+cat output.txt | llm -m github_copilot/o3-mini -t issue-prompts-gen > issue-prompts.md
 """
 
 [tasks."llm:generate_prompt_plan"]
@@ -162,5 +162,5 @@ depends = ["llm:generate_bundle"]
 description = 'Generate prompt plan from repository content stored in output.txt using LLM generation'
 run = """
 #!/usr/bin/env bash
-cat output.txt | uvx llm -m github-copilot/claude-3.5-sonnet -t prompt-plan-gen | tee prompt-plan.md
+cat output.txt | llm -m github_copilot/claude-sonnet-4 -t prompt-plan-gen | tee prompt-plan.md
 """
