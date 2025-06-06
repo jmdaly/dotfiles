@@ -19,3 +19,4 @@ mise.local.toml
 test.json
 .env
 .claude
+.goosehints
