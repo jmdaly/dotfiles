@@ -1,4 +1,5 @@
 brew "bat"
+brew "block-goose-cli"
 brew "node"
 brew "fd"
 brew "fish"
