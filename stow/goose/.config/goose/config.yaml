@@ -73,6 +73,20 @@ extensions:
     name: memory
     timeout: 300
     type: builtin
+  obsidian:
+    args:
+    - mcp-obsidian
+    bundled: null
+    cmd: uvx
+    description: null
+    enabled: false
+    env_keys:
+    - OBSIDIAN_API_KEY
+    - OBSIDIAN_HOST
+    envs: {}
+    name: obsidian
+    timeout: 300
+    type: stdio
   tutorial:
     bundled: true
     display_name: Tutorial
