@@ -158,7 +158,8 @@ require("lazy").setup({
               },
             },
             -- Add clippy lints for Rust
-            checkOnSave = {
+            checkOnSave = true,
+            check = {
               allFeatures = true,
               command = "clippy",
             },
