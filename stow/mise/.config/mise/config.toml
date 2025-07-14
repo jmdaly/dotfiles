@@ -42,7 +42,7 @@ cat changes.diff | llm -m claude-3.7-sonnet -t roast-review-gen | tee code-revie
 description = 'Generate commit message from repository content stored at current commit, and update commit message'
 run = """
 #!/usr/bin/env bash
-jj describe -m "$(jj show --git | llm -m claude-3.7-sonnet -t commit-message)"
+jj describe -m "$(jj show --git | llm -m claude-4-sonnet -t commit-message)"
 """
 
 [tasks."llm:generate_diff_bundle"]
