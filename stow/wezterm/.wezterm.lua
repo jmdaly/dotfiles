@@ -16,7 +16,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'Gruvbox dark, soft (base16)'
 
-config.font = wezterm.font 'Hack Nerd Font Mono'
+config.font = wezterm.font 'Maple Mono'
 config.font_size = 13.0
 
 -- Wezterm was grabbing CTRL-+ and CTRL-- for font size changes, but I
