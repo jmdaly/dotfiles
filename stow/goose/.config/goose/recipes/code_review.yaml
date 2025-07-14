@@ -1,0 +1,59 @@
+version: 1.0.0
+title: Perform Code Review on GitLab Merge Request
+description: a custom recipe instance from this chat session
+parameters:
+  - key: repository
+    input_type: string
+    requirement: required
+    description: The GitLab repository where the merge request is located, in the format `group/project`.
+  - key: mr
+    input_type: string
+    requirement: required
+    description: The merge request ID to review.
+prompt: Perform comprehensive code reviews on GitLab merge requests by fetching MR details, analyzing code changes, examining existing discussions, and providing structured feedback. The review should cover problem analysis, solution evaluation, architectural concerns, performance implications, and specific code issues. Output should be formatted in Markdown with clear sections for strengths, concerns, and recommendations prioritized by severity. Special attention should be paid to test coverage, edge cases, and maintainability trade-offs. Review merge request {{ mr }} in the repository {{ repository }}.
+extensions:
+- type: stdio
+  name: gitlab
+  cmd: npx
+  args:
+  - -y
+  - '@zereight/mcp-gitlab'
+  envs: {}
+  env_keys:
+  - GITLAB_API_URL
+  - GITLAB_PERSONAL_ACCESS_TOKEN
+  - GITLAB_READ_ONLY_MODE
+  - USE_GITLAB_WIKI
+  - USE_MILESTONE
+  - USE_PIPELINE
+  timeout: 300
+  description: ''
+  bundled: null
+- type: builtin
+  name: developer
+  display_name: Developer
+  timeout: 300
+  bundled: true
+- type: stdio
+  name: context7
+  cmd: npx
+  args:
+  - -y
+  - '@upstash/context7-mcp'
+  envs: {}
+  env_keys: []
+  timeout: 300
+  description: null
+  bundled: null
+settings:
+  goose_provider: anthropic
+  goose_model: claude-sonnet-4-20250514
+  temperature: 0.0
+activities:
+- Analyze merge request diffs
+- Review test coverage
+- Evaluate architectural decisions
+- Assess performance implications
+- Provide actionable feedback
+author:
+  contact: john.daly

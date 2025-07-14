@@ -1,0 +1,61 @@
+version: 1.0.0
+title: Cross-Reference GitLab MRs with JIRA Tickets and Update Status
+description: a custom recipe instance from this chat session
+parameters:
+  - key: repository
+    input_type: string
+    requirement: required
+    description: The GitLab repository where the merge requests are located, in the format `group/project`.
+  - key: jira_ticket
+    input_type: string
+    requirement: required
+    description: The JIRA ticket number to cross-reference with GitLab merge requests.
+prompt: This task involves cross-referencing development work between GitLab repositories and JIRA ticket management systems to provide comprehensive project status updates. The process requires searching GitLab for merge requests related to specific JIRA ticket numbers, analyzing the development progress across multiple merged and open MRs, and then posting detailed status updates as comments on the corresponding JIRA issues. The output should be formatted as structured markdown with clear sections for completed work, current progress, technical achievements, and next steps. Both GitLab and Atlassian tools are required for this workflow. In order to determine if a GitLab merge request is related to a JIRA ticket, you will search for the JIRA ticket number in the MR title, description, or in the name of the source branch in the MR. The task will also check if the MR is merged or still open, and analyze the progress of development work based on the MRs found. The final output should be a structured comment that summarizes the development work done, current status, and next steps, formatted in Markdown. The JIRA ticket number is {{ jira_ticket }} and the GitLab repository is {{ repository }}. The comment should be posted on the JIRA ticket associated with the provided JIRA ticket number.
+extensions:
+- type: stdio
+  name: gitlab
+  cmd: npx
+  args:
+  - -y
+  - '@zereight/mcp-gitlab'
+  envs: {}
+  env_keys:
+  - GITLAB_API_URL
+  - GITLAB_PERSONAL_ACCESS_TOKEN
+  - GITLAB_READ_ONLY_MODE
+  - USE_GITLAB_WIKI
+  - USE_MILESTONE
+  - USE_PIPELINE
+  timeout: 300
+  description: ''
+  bundled: null
+- type: stdio
+  name: atlassian
+  cmd: npx
+  args:
+  - -y
+  - mcp-remote
+  - https://mcp.atlassian.com/v1/sse
+  - --debug
+  envs: {}
+  env_keys: []
+  timeout: 300
+  description: null
+  bundled: null
+- type: builtin
+  name: developer
+  display_name: Developer
+  timeout: 300
+  bundled: true
+settings:
+  goose_provider: anthropic
+  goose_model: claude-sonnet-4-20250514
+  temperature: 0.0
+activities:
+- Search GitLab for ticket-related MRs
+- Analyze merge request progress
+- Update JIRA ticket status
+- Cross-reference development work
+- Post structured progress updates, only sharing new information since the last update
+author:
+  contact: john.daly
