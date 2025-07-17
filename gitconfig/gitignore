@@ -16,7 +16,9 @@ codecompanion-workspace.json
 chroma.log
 .serena
 mise.local.toml
+mise.toml
 test.json
 .env
 .claude
 .goosehints
+.taskmaster
