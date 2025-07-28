@@ -92,7 +92,7 @@ vim.keymap.set('n', '<Leader>rf', '<cmd>FzfLua lsp_references<CR>')
 vim.keymap.set('n', '<Leader>ds', '<cmd>FzfLua lsp_document_symbols<CR>')
 vim.keymap.set('n', '<Leader>dg', '<cmd>FzfLua diagnostics_document<CR>')
 vim.keymap.set('n', '<Leader>rw', vim.lsp.buf.rename)
-vim.keymap.set('n', '<Leader>k', '<cmd>FzfLua lsp_code_actions<CR>')
+vim.keymap.set({'v', 'n'}, '<Leader>k', '<cmd>FzfLua lsp_code_actions<CR>')
 vim.keymap.set('n', '<Leader>m', vim.diagnostic.open_float)
 
 -- Overwrite some keymaps when in Rust files, because the Rust language server offers
