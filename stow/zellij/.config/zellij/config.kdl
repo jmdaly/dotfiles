@@ -145,7 +145,7 @@ keybinds clear-defaults=true {
         bind "z" { ToggleFocusFullscreen; SwitchToMode "locked"; }
         bind "c" { NewTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
-        bind "l" { GoToPreviousTab; SwitchToMode "locked"; }
+        bind "l" { ToggleTab; SwitchToMode "locked"; }
         bind "[" { SwitchToMode "entersearch"; SearchInput 0; }
         bind "," { SwitchToMode "renametab"; TabNameInput 0; }
         bind "%" { NewPane "right"; SwitchToMode "locked"; }
