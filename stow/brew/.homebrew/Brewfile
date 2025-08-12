@@ -1,6 +1,7 @@
 brew "bat"
 brew "block-goose-cli"
 brew "difftastic"
+brew "mergiraf"
 brew "node"
 brew "fd"
 brew "fish"
