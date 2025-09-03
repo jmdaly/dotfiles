@@ -252,49 +252,51 @@ require("lazy").setup({
         },
       },
       adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                default = "claude-3.7-sonnet-thought",
+          http = {
+          copilot = function()
+            return require("codecompanion.adapters").extend("copilot", {
+              schema = {
+                model = {
+                  default = "claude-3.7-sonnet-thought",
+                },
               },
-            },
-          })
-        end,
-        ollama = function()
-          return require("codecompanion.adapters").extend("ollama", {
-            schema = {
-              model = {
-                default = "qwen2.5-coder:14b",
+            })
+          end,
+          ollama = function()
+            return require("codecompanion.adapters").extend("ollama", {
+              schema = {
+                model = {
+                  default = "qwen2.5-coder:14b",
+                },
               },
-            },
-            env = {
-              url = "http://localhost:11434",
-            },
-            headers = {
-              ["Content-Type"] = "application/json",
-            },
-            parameters = {
-              sync = true,
-            },
-          })
-        end,
-        openrouter = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            env = {
-              url = "https://openrouter.ai/api",
-              api_key = "cmd: echo $OPENROUTER_API_KEY",
-              chat_url = "/v1/chat/completions",
-            },
-          })
-        end,
-        gemini = function()
-          return require("codecompanion.adapters").extend("gemini", {
-            env = {
-              api_key = "cmd: echo $GEMINI_API_KEY",
-            },
-          })
-        end,
+              env = {
+                url = "http://localhost:11434",
+              },
+              headers = {
+                ["Content-Type"] = "application/json",
+              },
+              parameters = {
+                sync = true,
+              },
+            })
+          end,
+          openrouter = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              env = {
+                url = "https://openrouter.ai/api",
+                api_key = "cmd: echo $OPENROUTER_API_KEY",
+                chat_url = "/v1/chat/completions",
+              },
+            })
+          end,
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              env = {
+                api_key = "cmd: echo $GEMINI_API_KEY",
+              },
+            })
+          end,
+        }
       },
       strategies = {
         chat = {
