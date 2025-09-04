@@ -4,17 +4,29 @@ extensions:
     - -y
     - mcp-remote
     - https://mcp.atlassian.com/v1/sse
+    available_tools: []
     bundled: null
     cmd: npx
     description: null
-    enabled: true
+    enabled: false
     env_keys: []
     envs: {}
     name: atlassian
     timeout: 300
     type: stdio
-  computercontroller:
+  autovisualiser:
+    available_tools: []
     bundled: true
+    description: null
+    display_name: Auto Visualiser
+    enabled: false
+    name: autovisualiser
+    timeout: 300
+    type: builtin
+  computercontroller:
+    available_tools: []
+    bundled: true
+    description: null
     display_name: Computer Controller
     enabled: false
     name: computercontroller
@@ -24,17 +36,20 @@ extensions:
     args:
     - -y
     - '@upstash/context7-mcp'
+    available_tools: []
     bundled: null
     cmd: npx
     description: null
-    enabled: true
+    enabled: false
     env_keys: []
     envs: {}
     name: context7
     timeout: 300
     type: stdio
   developer:
+    available_tools: []
     bundled: true
+    description: null
     display_name: Developer
     enabled: true
     name: developer
@@ -43,14 +58,15 @@ extensions:
   gitlab:
     args:
     - -y
-    - '@zereight/mcp-gitlab'
+    - '@zereight/mcp-gitlab@v1.0.77'
+    available_tools: []
     bundled: null
     cmd: npx
     description: null
-    enabled: true
+    enabled: false
     env_keys:
-    - GITLAB_API_URL
     - GITLAB_PERSONAL_ACCESS_TOKEN
+    - GITLAB_API_URL
     - GITLAB_READ_ONLY_MODE
     - USE_GITLAB_WIKI
     - USE_MILESTONE
@@ -60,14 +76,18 @@ extensions:
     timeout: 300
     type: stdio
   jetbrains:
+    available_tools: []
     bundled: true
+    description: null
     display_name: Jetbrains
     enabled: false
     name: jetbrains
     timeout: 300
     type: builtin
   memory:
+    available_tools: []
     bundled: true
+    description: null
     display_name: Memory
     enabled: false
     name: memory
@@ -76,6 +96,7 @@ extensions:
   obsidian:
     args:
     - mcp-obsidian
+    available_tools: []
     bundled: null
     cmd: uvx
     description: null
@@ -87,14 +108,66 @@ extensions:
     name: obsidian
     timeout: 300
     type: stdio
+  playwright:
+    args:
+    - '@playwright/mcp'
+    available_tools: []
+    bundled: null
+    cmd: npx
+    description: null
+    enabled: false
+    env_keys: []
+    envs: {}
+    name: playwright
+    timeout: 300
+    type: stdio
+  serena:
+    args:
+    - --from
+    - git+https://github.com/oraios/serena
+    - serena
+    - start-mcp-server
+    available_tools: []
+    bundled: null
+    cmd: uvx
+    description: null
+    enabled: false
+    env_keys: []
+    envs: {}
+    name: serena
+    timeout: 300
+    type: stdio
+  taskmaster:
+    args:
+    - -y
+    - --package=task-master-ai
+    - task-master-ai
+    available_tools: []
+    bundled: null
+    cmd: npx
+    description: null
+    enabled: false
+    env_keys:
+    - ANTHROPIC_API_KEY
+    envs: {}
+    name: taskmaster
+    timeout: 300
+    type: stdio
   tutorial:
+    available_tools: []
     bundled: true
+    description: null
     display_name: Tutorial
     enabled: false
     name: tutorial
     timeout: 300
     type: builtin
-ANTHROPIC_HOST: https://api.anthropic.com
-GOOSE_MODE: approve
-GOOSE_MODEL: claude-3.7-sonnet
+OPENAI_HOST: http://localhost:1234
+GOOSE_MODEL: gpt-5-mini
 GOOSE_PROVIDER: github_copilot
+# GOOSE_LEAD_PROVIDER: anthropic
+ANTHROPIC_HOST: https://api.anthropic.com
+# GOOSE_LEAD_MODEL: claude-opus-4-1-20250805
+OLLAMA_HOST: http://127.0.0.1:1234
+OPENAI_BASE_PATH: v1/chat/completions
+GOOSE_MODE: auto
