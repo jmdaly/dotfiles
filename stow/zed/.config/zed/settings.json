@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "icon_theme": "Zed (Default)",
   "ssh_connections": [
     {
       "host": "pineapple",
@@ -19,17 +20,27 @@
       ]
     }
   ],
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-20240620"
     },
-    "version": "2"
+  },
+  "agent_servers": {
+    "Goose 🪿": {
+      "command": "goose",
+      "args": ["acp"],
+      "env": {}
+    }
   },
   "vim_mode": true,
   "relative_line_numbers": true,
   "use_autoclose": false,
-  "theme": "Gruvbox Dark Soft",
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Dark Soft",
+    "dark": "Gruvbox Dark Soft"
+  },
   "ui_font_size": 13,
   "buffer_font_size": 13
 }
