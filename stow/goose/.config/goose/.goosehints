@@ -1,0 +1,22 @@
+# Global Goose Hints (Minimal TDD + Incremental Focus)
+
+Purpose: Enforce disciplined, small, test-first, reviewable steps.
+
+## Core Principles
+- TDD is the default workflow: RED → GREEN → REFACTOR
+- Keep changes small: ≤200 lines per task (pause at ~150 to decompose)
+- Always PAUSE for human approval after each TDD stage
+
+## TDD Workflow
+1. **PLAN**: Clarify goal + list micro-steps → PAUSE
+2. **RED**: Write smallest failing test, run tests → PAUSE
+3. **GREEN**: Minimal code to pass test → PAUSE
+4. **REFACTOR**: Small chunks (≤75 lines), propose before applying → PAUSE per chunk
+
+## Exception Handling
+- If test-first impossible: explain why, propose seam/characterization tests → PAUSE
+- If scope creeps or touches unexpected files: warn → PAUSE
+
+## Test Guidelines
+- One clear behavior per test
+- Mark edge cases as TODO if not implementing yet
