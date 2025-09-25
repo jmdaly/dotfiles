@@ -8,7 +8,6 @@ if vim.fn.has("win32") == 1 then
   vim.g.python3_host_prog = "python"
 end
 
-local lspconfig = require'lspconfig'
 -- We check if a language server is available before setting it up.
 -- Otherwise, we'll get errors when loading files.
 
@@ -19,27 +18,30 @@ if 1 == vim.fn.executable(vim.g.clang_path .. "/bin/clangd") then
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.offsetEncoding = 'utf-8'
   capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-  lspconfig.clangd.setup{
+  vim.lsp.config("clangd", {
     cmd = { vim.g.clang_path .. "/bin/clangd", "--background-index" },
     capabilities = capabilities,
-  }
+  })
+  vim.lsp.enable({"clangd"})
 end
 
 -- Setup cmake language server
 if 1 == vim.fn.executable("cmake-language-server") then
   local capabilities = require('blink.cmp').get_lsp_capabilities()
-  lspconfig.cmake.setup({ capabilities = capabilities })
+  vim.lsp.config("cmake", { capabilities = capabilities })
+  vim.lsp.enable({"cmake"})
 end
 
 -- Setup Python language server
 if 1 == vim.fn.executable("pyright") then
   local capabilities = require('blink.cmp').get_lsp_capabilities()
-  lspconfig.pyright.setup({ capabilities = capabilities })
+  vim.lsp.config("pyright", { capabilities = capabilities })
+  vim.lsp.enable({"pyright"})
 end
 
 -- Setup the lua language server
 if 1 == vim.fn.executable("lua-language-server") then
-  lspconfig.lua_ls.setup{
+  vim.lsp.config("lua_ls", {
     on_init = function(client)
       local path = client.workspace_folders[1].name
       if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
@@ -68,7 +70,8 @@ if 1 == vim.fn.executable("lua-language-server") then
       end
       return true
     end
-  }
+  })
+  vim.lsp.enable({"lua_ls"})
 end
 
 -- Configure the way code diagnostics are displayed
