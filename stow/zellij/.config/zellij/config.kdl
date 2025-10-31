@@ -142,6 +142,8 @@ keybinds clear-defaults=true {
         bind "2" { GoToTab 2; SwitchToMode "locked"; }
         bind "3" { GoToTab 3; SwitchToMode "locked"; }
         bind "4" { GoToTab 4; SwitchToMode "locked"; }
+        bind "n" { GoToNextTab; SwitchToMode "locked"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "locked"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "locked"; }
         bind "c" { NewTab; SwitchToMode "locked"; }
         bind "d" { Detach; }
