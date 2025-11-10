@@ -1,69 +1,66 @@
+OPENAI_BASE_PATH: v1/chat/completions
 extensions:
   atlassian:
+    enabled: false
+    type: stdio
+    name: atlassian
+    description: ''
+    cmd: npx
     args:
     - -y
     - mcp-remote
     - https://mcp.atlassian.com/v1/sse
-    available_tools: []
-    bundled: null
-    cmd: npx
-    description: null
-    enabled: false
-    env_keys: []
     envs: {}
-    name: atlassian
+    env_keys: []
     timeout: 300
-    type: stdio
-  autovisualiser:
+    bundled: null
     available_tools: []
-    bundled: true
-    description: null
-    display_name: Auto Visualiser
+  tutorial:
     enabled: false
-    name: autovisualiser
-    timeout: 300
     type: builtin
+    name: tutorial
+    description: ''
+    display_name: Tutorial
+    timeout: 300
+    bundled: true
+    available_tools: []
+  memory:
+    enabled: false
+    type: builtin
+    name: memory
+    description: ''
+    display_name: Memory
+    timeout: 300
+    bundled: true
+    available_tools: []
+  jetbrains:
+    enabled: false
+    type: builtin
+    name: jetbrains
+    description: ''
+    display_name: Jetbrains
+    timeout: 300
+    bundled: true
+    available_tools: []
   computercontroller:
-    available_tools: []
-    bundled: true
-    description: null
-    display_name: Computer Controller
     enabled: false
+    type: builtin
     name: computercontroller
+    description: ''
+    display_name: Computer Controller
     timeout: 300
-    type: builtin
-  context7:
-    args:
-    - -y
-    - '@upstash/context7-mcp'
-    available_tools: []
-    bundled: null
-    cmd: npx
-    description: null
-    enabled: false
-    env_keys: []
-    envs: {}
-    name: context7
-    timeout: 300
-    type: stdio
-  developer:
-    available_tools: []
     bundled: true
-    description: null
-    display_name: Developer
-    enabled: true
-    name: developer
-    timeout: 300
-    type: builtin
+    available_tools: []
   gitlab:
+    enabled: true
+    type: stdio
+    name: gitlab
+    description: ''
+    cmd: npx
     args:
     - -y
-    - '@zereight/mcp-gitlab@v1.0.77'
-    available_tools: []
-    bundled: null
-    cmd: npx
-    description: null
-    enabled: false
+    - '@zereight/mcp-gitlab@latest'
+    envs: {}
     env_keys:
     - GITLAB_PERSONAL_ACCESS_TOKEN
     - GITLAB_API_URL
@@ -71,103 +68,146 @@ extensions:
     - USE_GITLAB_WIKI
     - USE_MILESTONE
     - USE_PIPELINE
-    envs: {}
-    name: gitlab
     timeout: 300
-    type: stdio
-  jetbrains:
-    available_tools: []
-    bundled: true
-    description: null
-    display_name: Jetbrains
-    enabled: false
-    name: jetbrains
-    timeout: 300
-    type: builtin
-  memory:
-    available_tools: []
-    bundled: true
-    description: null
-    display_name: Memory
-    enabled: false
-    name: memory
-    timeout: 300
-    type: builtin
-  obsidian:
-    args:
-    - mcp-obsidian
-    available_tools: []
     bundled: null
-    cmd: uvx
-    description: null
-    enabled: false
-    env_keys:
-    - OBSIDIAN_API_KEY
-    - OBSIDIAN_HOST
-    envs: {}
-    name: obsidian
-    timeout: 300
-    type: stdio
-  playwright:
-    args:
-    - '@playwright/mcp'
     available_tools: []
-    bundled: null
+  taskmaster:
+    enabled: false
+    type: stdio
+    name: taskmaster
+    description: ''
     cmd: npx
-    description: null
-    enabled: false
-    env_keys: []
+    args:
+    - -y
+    - --package=task-master-ai
+    - task-master-ai
     envs: {}
-    name: playwright
+    env_keys:
+    - ANTHROPIC_API_KEY
     timeout: 300
+    bundled: null
+    available_tools: []
+  fetch:
+    enabled: true
     type: stdio
+    name: Fetch
+    description: Web content fetching and processing capabilities
+    cmd: uvx
+    args:
+    - mcp-server-fetch
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
   serena:
+    enabled: false
+    type: stdio
+    name: serena
+    description: ''
+    cmd: uvx
     args:
     - --from
     - git+https://github.com/oraios/serena
     - serena
     - start-mcp-server
-    available_tools: []
-    bundled: null
-    cmd: uvx
-    description: null
-    enabled: false
-    env_keys: []
     envs: {}
-    name: serena
+    env_keys: []
     timeout: 300
+    bundled: null
+    available_tools: []
+  playwright:
+    enabled: false
     type: stdio
-  taskmaster:
+    name: playwright
+    description: ''
+    cmd: npx
+    args:
+    - '@playwright/mcp'
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  claudeskills:
+    enabled: true
+    type: stdio
+    name: claudeskills
+    description: Access Claude Skills over MCP
+    cmd: uvx
+    args:
+    - claude-skills-mcp
+    - --config
+    - /Users/john.daly/tmp/goose/config.json
+    envs: {}
+    env_keys: []
+    timeout: 300
+    bundled: null
+    available_tools: []
+  todo:
+    enabled: true
+    type: platform
+    name: todo
+    description: Enable a todo list for Goose so it can keep track of what it is doing
+    bundled: true
+    available_tools: []
+  context7:
+    enabled: false
+    type: stdio
+    name: context7
+    description: ''
+    cmd: npx
     args:
     - -y
-    - --package=task-master-ai
-    - task-master-ai
-    available_tools: []
-    bundled: null
-    cmd: npx
-    description: null
-    enabled: false
-    env_keys:
-    - ANTHROPIC_API_KEY
+    - '@upstash/context7-mcp'
     envs: {}
-    name: taskmaster
+    env_keys: []
     timeout: 300
-    type: stdio
-  tutorial:
+    bundled: null
     available_tools: []
-    bundled: true
-    description: null
-    display_name: Tutorial
+  extensionmanager:
     enabled: false
-    name: tutorial
-    timeout: 300
+    type: platform
+    name: extensionmanager
+    description: Enable extension management tools for discovering, enabling, and disabling extensions
+    bundled: true
+    available_tools: []
+  developer:
+    enabled: true
     type: builtin
-OPENAI_HOST: http://localhost:1234
-GOOSE_MODEL: gpt-5-mini
-GOOSE_PROVIDER: github_copilot
-# GOOSE_LEAD_PROVIDER: anthropic
-ANTHROPIC_HOST: https://api.anthropic.com
-# GOOSE_LEAD_MODEL: claude-opus-4-1-20250805
+    name: developer
+    description: ''
+    display_name: Developer
+    timeout: 300
+    bundled: true
+    available_tools: []
+  autovisualiser:
+    enabled: false
+    type: builtin
+    name: autovisualiser
+    description: ''
+    display_name: Auto Visualiser
+    timeout: 300
+    bundled: true
+    available_tools: []
+  obsidian:
+    enabled: false
+    type: stdio
+    name: obsidian
+    description: ''
+    cmd: uvx
+    args:
+    - mcp-obsidian
+    envs: {}
+    env_keys:
+    - OBSIDIAN_API_KEY
+    - OBSIDIAN_HOST
+    timeout: 300
+    bundled: null
+    available_tools: []
 OLLAMA_HOST: http://127.0.0.1:1234
-OPENAI_BASE_PATH: v1/chat/completions
+OPENAI_HOST: http://localhost:1234
 GOOSE_MODE: auto
+GOOSE_PROVIDER: anthropic
+GOOSE_MODEL: claude-sonnet-4-5-20250929
+ANTHROPIC_HOST: https://api.anthropic.com
