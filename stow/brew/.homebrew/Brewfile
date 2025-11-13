@@ -24,6 +24,7 @@ brew "starship"
 brew "stow"
 brew "viddy"
 brew "zellij"
+brew "zoxide"
 
 cask "font-hack-nerd-font"
 cask "wezterm"
