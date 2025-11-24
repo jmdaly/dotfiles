@@ -161,6 +161,7 @@ require("lazy").setup({
             checkOnSave = true,
             check = {
               allFeatures = true,
+              allTargets = true,
               command = "clippy",
             },
           },
