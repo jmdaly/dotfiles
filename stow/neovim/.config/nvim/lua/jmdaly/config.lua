@@ -137,7 +137,7 @@ end
 dap.configurations.cpp = {
   {
     name = "Launch",
-    type = "lldb",
+    type = "codelldb",
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
@@ -161,4 +161,4 @@ dap.configurations.cpp = {
     runInTerminal = false,
   },
 }
-
+dap.configurations.rust = dap.configurations.cpp
