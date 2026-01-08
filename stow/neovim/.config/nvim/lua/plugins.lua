@@ -59,7 +59,17 @@ require("lazy").setup({
   -- Session management
   { 'jedrzejboczar/possession.nvim', dependencies = 'nvim-lua/plenary.nvim' },
 
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      local treesitter = require('nvim-treesitter')
+      treesitter.install({
+        "c", "cpp", "cmake", "cuda", "groovy", "lua", "rust", "vim", "vimdoc", "markdown", "yaml", "json", "python", "bash", "dockerfile", "regex", "comment", "diff", "git_rebase", "toml",
+      })
+    end,
+  },
 
   'christoomey/vim-tmux-navigator', -- A plugin to facilitate navigating between vim and tmux
   'wellle/targets.vim', -- A plugin for additional text objects
