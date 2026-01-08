@@ -46,18 +46,24 @@ vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
 
 vim.o.completeopt = "menuone,noselect"
 
--- Set up code folding with treesitter. We put these in an autocommand, since
+-- Set up treesitter features. We put these in an autocommand, since
 -- they are not global options.
 local treesittergroup = vim.api.nvim_create_augroup('treesitter', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c', 'cpp', 'cmake', 'cuda', 'json', 'rust', 'python', 'lua', 'cmake', 'groovy' },
   group = treesittergroup,
   callback = function()
-    vim.opt_local.foldmethod = 'expr'
-    vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.opt_local.foldlevel = 99 -- Start with all folds open
+    -- syntax highlighting, provided by Neovim
+    vim.treesitter.start()
+
+    -- folds, provided by Neovim
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldlevel = 99 -- Start with all folds open
     -- Syntax highlight the fold line
-    vim.opt_local.foldtext = ''
+    vim.wo.foldtext = ''
+    -- indentation, provided by nvim-treesitter
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
