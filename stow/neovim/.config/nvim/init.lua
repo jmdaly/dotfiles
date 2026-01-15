@@ -50,7 +50,7 @@ vim.o.completeopt = "menuone,noselect"
 -- they are not global options.
 local treesittergroup = vim.api.nvim_create_augroup('treesitter', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'c', 'cpp', 'cmake', 'cuda', 'json', 'rust', 'python', 'lua', 'cmake', 'groovy' },
+  pattern = { 'c', 'cpp', 'cmake', 'cuda', 'json', 'rust', 'python', 'lua', 'cmake', 'groovy', 'markdown' },
   group = treesittergroup,
   callback = function()
     -- syntax highlighting, provided by Neovim

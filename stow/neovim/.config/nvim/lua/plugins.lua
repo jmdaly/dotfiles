@@ -154,7 +154,7 @@ require("lazy").setup({
   -- Improved Rust development
   {
     'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
+    version = '^7', -- Recommended
     lazy = false, -- This plugin is already lazy
     opts = {
       server = {
