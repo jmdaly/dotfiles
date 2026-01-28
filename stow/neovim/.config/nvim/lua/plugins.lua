@@ -324,6 +324,7 @@ require("lazy").setup({
               default = {
                 "copilot",
                 "--acp",
+                "--yolo",
               },
             },
             defaults = {
