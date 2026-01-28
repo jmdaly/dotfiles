@@ -310,6 +310,17 @@ require("lazy").setup({
           end,
         },
         acp = {
+          gemini_cli = function()
+            return require("codecompanion.adapters").extend("gemini_cli", {
+              commands = {
+                default = {
+                  "gemini",
+                  "--experimental-acp",
+                  "--yolo",
+                },
+              },
+            })
+          end,
           copilot = {
             name = "copilot_cli",
             formatted_name = "Copilot",
