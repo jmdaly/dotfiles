@@ -310,9 +310,9 @@ require("lazy").setup({
           end,
         },
         acp = {
-          goose = {
-            name = "goose",
-            formatted_name = "Goose 🪿",
+          copilot = {
+            name = "copilot_cli",
+            formatted_name = "Copilot",
             type = "acp",
             roles = {
               llm = "assistant",
@@ -322,8 +322,8 @@ require("lazy").setup({
             },
             commands = {
               default = {
-                "goose",
-                "acp",
+                "copilot",
+                "--acp",
               },
             },
             defaults = {
@@ -336,6 +336,7 @@ require("lazy").setup({
               protocolVersion = 1,
               clientCapabilities = {
                 fs = { readTextFile = true, writeTextFile = true },
+                terminal = false,
               },
               clientInfo = {
                 name = "CodeCompanion.nvim",
