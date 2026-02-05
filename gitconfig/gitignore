@@ -23,3 +23,5 @@ test.json
 .goosehints
 .taskmaster
 .github
+AGENTS.md
+GEMINI.md
