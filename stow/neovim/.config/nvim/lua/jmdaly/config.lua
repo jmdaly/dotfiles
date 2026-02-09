@@ -139,3 +139,62 @@ dap.configurations.cpp = {
   },
 }
 dap.configurations.rust = dap.configurations.cpp
+
+-- Custom diff mode colors for better readability with gruvbox
+-- These override the default gruvbox diff colors to be more vibrant and easier to read
+local function setup_diff_colors()
+  -- Gruvbox color palette (using the actual hex values from gruvbox)
+  local colors = {
+    dark0 = '#282828',
+    dark1 = '#3c3836',
+    dark2 = '#504945',
+    light0 = '#fbf1c7',
+    light1 = '#ebdbb2',
+    light4 = '#a89984',
+    bright_red = '#fb4934',
+    bright_green = '#b8bb26',
+    bright_yellow = '#fabd2f',
+    bright_blue = '#83a598',
+    bright_orange = '#fe8019',
+    neutral_red = '#cc241d',
+    neutral_green = '#98971a',
+    neutral_yellow = '#d79921',
+    faded_red = '#9d0006',
+    faded_green = '#79740e',
+  }
+
+  -- Set diff colors with balanced approach: 
+  -- Subtle but visible backgrounds + enhanced syntax via different strategy
+  vim.api.nvim_set_hl(0, 'DiffAdd', { 
+    bg = '#2d4a2d',  -- Slightly brighter dark green (was #2a3a2a)
+    bold = false 
+  })
+  
+  vim.api.nvim_set_hl(0, 'DiffDelete', { 
+    bg = '#4a2d2d',  -- Slightly brighter dark red (was #3a2a2a)
+    fg = colors.light4,  -- Keep fg for delete as it's often just markers
+    bold = false 
+  })
+  
+  vim.api.nvim_set_hl(0, 'DiffChange', { 
+    bg = colors.dark1,  -- Slightly lighter gray (#3c3836)
+    bold = false 
+  })
+  
+  vim.api.nvim_set_hl(0, 'DiffText', { 
+    bg = '#6a5a1f',  -- Slightly brighter golden brown (was #5a4a1a)
+    fg = colors.light1,  -- Light text for contrast
+    bold = true 
+  })
+end
+
+-- Apply diff colors after colorscheme loads
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = 'gruvbox',
+  callback = setup_diff_colors,
+})
+
+-- Also apply immediately if gruvbox is already loaded
+if vim.g.colors_name == 'gruvbox' then
+  setup_diff_colors()
+end
