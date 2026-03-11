@@ -232,17 +232,6 @@ require("lazy").setup({
   },
 
   {
-    "ravitemer/mcphub.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
-    },
-    -- comment the following line to ensure hub will be ready at the earliest
-    cmd = "MCPHub",  -- lazy load by default
-    build = "npm install -g mcp-hub@latest",  -- Installs required mcp-hub npm module
-    opts = { },
-  },
-
-  {
     "Davidyz/VectorCode",
     version = "0.5.5", -- optional, depending on whether you're on nightly or release
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -255,7 +244,6 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "ravitemer/mcphub.nvim",
     },
     opts = {
       display = {
@@ -416,16 +404,6 @@ require("lazy").setup({
             },
           },
         },
-      },
-      extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {
-            show_result_in_chat = true, -- Show the mcp tool result in the chat buffer
-            make_vars = true, -- make chat #variables from MCP server resources
-            make_slash_commands = true, -- make /slash_commands from MCP server prompts
-          },
-        }
       },
     },
   },
