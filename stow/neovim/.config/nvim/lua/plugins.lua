@@ -257,7 +257,7 @@ require("lazy").setup({
             return require("codecompanion.adapters").extend("copilot", {
               schema = {
                 model = {
-                  default = "claude-3.7-sonnet-thought",
+                  default = "claude-sonnet-4.6",
                 },
               },
             })
@@ -309,75 +309,23 @@ require("lazy").setup({
               },
             })
           end,
-          copilot = {
-            name = "copilot_cli",
-            formatted_name = "Copilot",
-            type = "acp",
-            roles = {
-              llm = "assistant",
-              user = "user",
-            },
-            opts = {
-            },
-            commands = {
-              default = {
-                "copilot",
-                "--acp",
-                "--yolo",
+          copilot_acp = function()
+            return require("codecompanion.adapters").extend("copilot_acp", {
+              commands = {
+                default = {
+                  "copilot",
+                  "--acp",
+                  "--yolo",
+                  "--experimental",
+                },
               },
-            },
-            defaults = {
-              mcpServers = {},
-              timeout = 20000, -- 20 seconds
-            },
-            env = {
-            },
-            parameters = {
-              protocolVersion = 1,
-              clientCapabilities = {
-                fs = { readTextFile = true, writeTextFile = true },
-                terminal = false,
-              },
-              clientInfo = {
-                name = "CodeCompanion.nvim",
-                version = "1.0.0",
-              },
-            },
-            handlers = {
-              ---@param self CodeCompanion.ACPAdapter
-              ---@return boolean
-              setup = function(self)
-                return true
-              end,
-
-              ---Manually handle authentication
-              ---@param self CodeCompanion.ACPAdapter
-              ---@return boolean
-              auth = function(self)
-                return true
-              end,
-
-              ---@param self CodeCompanion.ACPAdapter
-              ---@param messages table
-              ---@param capabilities table
-              ---@return table
-              form_messages = function(self, messages, capabilities)
-                local helpers = require("codecompanion.adapters.acp.helpers")
-                return helpers.form_messages(self, messages, capabilities)
-              end,
-
-              ---Function to run when the request has completed. Useful to catch errors
-              ---@param self CodeCompanion.ACPAdapter
-              ---@param code number
-              ---@return nil
-              on_exit = function(self, code) end,
-            },
-          },
+            })
+          end,
         },
       },
       strategies = {
         chat = {
-          adapter = "copilot",
+          adapter = "copilot_acp",
           slash_commands = {
             ["symbols"] = {
               opts = {
