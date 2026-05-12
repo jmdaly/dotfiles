@@ -75,20 +75,22 @@ if 1 == vim.fn.executable("lua-language-server") then
 end
 
 -- Configure the way code diagnostics are displayed
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- This will disable virtual text, like doing:
-    -- let g:diagnostic_enable_virtual_text = 0
-    virtual_text = false,
+vim.diagnostic.config({
+  -- This will disable virtual text (the text at the end of the line)
+  virtual_text = false,
 
-    -- This is similar to:
-    -- let g:diagnostic_show_sign = 1
-    -- To configure sign display,
-    --  see: ":help vim.lsp.diagnostic.set_signs()"
-    signs = true,
+  -- This enables signs in the gutter (beside line numbers)
+  signs = true,
 
-    -- This is similar to:
-    -- "let g:diagnostic_insert_delay = 1"
-    update_in_insert = false,
-  }
-)
+  -- This controls whether diagnostics update while you are in Insert mode
+  -- Setting to false means they only update when you leave Insert mode
+  update_in_insert = false,
+
+  -- You can also add other common settings here:
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+  },
+})
