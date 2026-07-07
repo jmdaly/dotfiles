@@ -354,6 +354,18 @@ require("lazy").setup({
         },
       },
     },
+    config = function(_, opts)
+      require("codecompanion").setup(opts)
+
+      -- Default every new chat buffer to YOLO mode (auto-approve tool calls)
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "CodeCompanionChatCreated",
+        callback = function(args)
+          local approvals = require("codecompanion.interactions.chat.tools.approvals")
+          approvals:toggle_yolo_mode(args.data.bufnr)
+        end,
+      })
+    end,
   },
 
   {
