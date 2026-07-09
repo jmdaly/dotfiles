@@ -56,6 +56,54 @@ require("lazy").setup({
     },
   },
 
+  {
+    "folke/sidekick.nvim",
+    opts = {
+      -- 1. Correctly disable Copilot Next Edit Suggestions
+      nes = {
+        enabled = false,
+      },
+      
+      -- 2. Route all context prompts and search menus through fzf-lua
+      picker = "fzf-lua",
+      
+      cli = {
+        -- 3. File Watcher: Highly recommended for pair programming!
+        -- When Claude Code edits a file in the terminal pane, Neovim 
+        -- automatically hot-reloads your active code buffer.
+        watch = true,
+        
+        -- All window mechanics are wrapped inside the 'win' table
+        win = {
+          layout = "left", -- Can be "float", "left", "bottom", "top", or "right"
+          split = {
+            width = 0,    -- Exact column width for sidepane layout
+            height = 0,    -- Set to 0 to use fallback default height
+          },
+        },
+        
+        -- If you want to customize the raw command Claude runs, you can tweak it here:
+        tools = {
+          claude = {}, -- Uses default system 'claude' command natively
+        },
+      },
+    },
+    keys = {
+      -- Toggles the active Claude Code instance inside your right split pane
+      { "<leader>ac", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Claude Code" },
+      
+      -- Pick a specific context prompt (e.g., /explain, /fix, /tests) to send to Claude
+      { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Prompt Menu" },
+      
+      -- Instant context strings sent straight to the active terminal
+      { "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send Active File to Claude" },
+      { "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "n", "x" }, desc = "Send Current Block/Selection" },
+      
+      -- Seamless focus shifting using the default plugin key binds
+      { "<c-.>", function() require("sidekick.cli").focus() end, mode = { "n", "t", "i", "x" }, desc = "Jump Focus to Sidekick" },
+    },
+  },
+
   -- Session management
   { 'jedrzejboczar/possession.nvim', dependencies = 'nvim-lua/plenary.nvim' },
 

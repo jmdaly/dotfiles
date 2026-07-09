@@ -41,9 +41,6 @@ vim.opt.smartcase = true
 -- Make diffs appear in vertical splits:
 vim.opt.diffopt:append('vertical')
 
--- Add a mapping to escape out of terminal mode:
-vim.keymap.set('t', '<Leader>e', '<C-\\><C-n>')
-
 vim.o.completeopt = "menuone,noselect"
 
 -- Set up treesitter features. We put these in an autocommand, since
