@@ -45,6 +45,14 @@ commands inside a repo.
   large stack gap rebases descendants and can silently leave `@` attached to the
   wrong point in the graph.
 
+## Jira tickets
+
+Work should be tracked by a Jira ticket. If the current task has no associated
+Jira ticket, **prompt me before starting** and offer to create one. If I
+accept, create the issue via the Jira/Atlassian tooling, assign it to me, and
+fill in a useful description (what the work is, why, and acceptance criteria
+where they're clear). Then use that ticket in the bookmark name.
+
 ## Small, stacked changesets
 
 Split work into small changesets, each building on the previous. Aim for
