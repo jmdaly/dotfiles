@@ -9,8 +9,7 @@ I use **Jujutsu (`jj`)** for version control across all my repos. Always read
 and follow the `use-jujutsu` skill for command references. Never run raw `git`
 commands inside a repo.
 
-- **Changeset descriptions** use Conventional Commits (see below) and always
-  include the `Co-authored-by: Copilot` trailer.
+- **Changeset descriptions** use Conventional Commits (see below).
 - **Bookmark naming:**
   - With a Jira ticket: `<initials>/<TICKET>-N-<short-description>`, e.g.
     `jd/BCT-2169-2-configure-modes-api`. `N` increments for each changeset in a
