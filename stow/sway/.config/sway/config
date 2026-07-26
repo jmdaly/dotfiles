@@ -1,0 +1,333 @@
+# sway config, migrated from my old i3 config.
+#
+# Reference: man 5 sway, man 5 sway-input, man 5 sway-output, man 5 sway-bar
+#
+# Notes on the i3 -> sway differences that mattered here:
+#   * Wayland-native windows have no WM_CLASS; they are matched with app_id
+#     instead of class. class=... still works, but only for Xwayland windows.
+#   * There is no `restart` command (sway has no in-place restart), only `reload`.
+#   * A compositor is built in, so compton/picom is gone.
+#   * xset/xbacklight/feh/i3lock are replaced by swayidle/brightnessctl/swaybg/swaylock.
+
+### Output ##################################################################
+
+# Run `swaymsg -t get_outputs` to get the real names on a given machine.
+output Virtual-1 {
+    mode 3840x2160@60Hz
+}
+
+# Wallpaper (was: feh --bg-fill). sway starts and manages swaybg itself and
+# expands $HOME here; the trailing colour is the fallback if the image is
+# missing.
+output * bg $HOME/.config/wallpapers/wall.png fill #282828
+
+### Variables ###############################################################
+
+set $mod Mod4
+
+# gruvbox dark
+set $background  #282828
+set $foreground  #ebdbb2
+set $black       #282828
+set $darkgrey    #928374
+set $darkred     #cc241d
+set $red         #fb4934
+set $darkgreen   #98971a
+set $green       #b8bb26
+set $darkyellow  #d79921
+set $yellow      #fabd2f
+set $darkblue    #458588
+set $blue        #83a598
+set $darkmagenta #b16286
+set $magenta     #d3869b
+set $darkcyan    #689d6a
+set $cyan        #8ec07c
+set $lightgrey   #a89984
+set $white       #ebdbb2
+# Use custom colors for black
+set $darkblack   #1d2021
+
+set $terminal wezterm
+
+# rofi is X11-only, so it can neither draw properly nor enumerate Wayland
+# windows under sway. fuzzel is the native replacement; the two helper
+# scripts below reimplement `rofi -show window` and rofi-pass on top of it.
+set $menu_theme --font="Hack Nerd Font:size=11" \
+    --background=282828f0 --text-color=ebdbb2ff --match-color=fabd2fff \
+    --selection-color=3c3836ff --selection-match-color=fabd2fff \
+    --selection-text-color=ebdbb2ff --border-color=458588ff --border-width=2
+set $menu fuzzel $menu_theme
+set $window_switcher $HOME/.config/sway/scripts/window-menu
+set $pass_menu $HOME/.config/sway/scripts/pass-menu
+
+# Font for window titles. Also used by swaybar and swaynag unless overridden.
+# The old "System San Francisco Display" has no Nerd Font glyphs, which the
+# workspace names and i3blocks labels need.
+font pango:Hack Nerd Font 10
+
+### Input ###################################################################
+
+# input * settings live here; `swaymsg -t get_inputs` lists device identifiers.
+# input type:keyboard {
+#     xkb_layout us
+#     repeat_delay 250
+#     repeat_rate 40
+# }
+# input type:touchpad {
+#     tap enabled
+#     natural_scroll enabled
+# }
+
+### Key bindings ############################################################
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod normal
+
+# start a terminal
+bindsym $mod+t exec $terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start a program launcher (was: rofi -show run)
+bindsym $mod+d exec $menu
+
+# window switcher (was: rofi -show window)
+bindsym $mod+Tab exec $window_switcher $menu_theme
+
+# pass-based password manager (was: rofi-pass). Copies to the clipboard; pass
+# --type as the first argument to type it into the focused window instead.
+bindsym $mod+p exec $pass_menu $menu_theme
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+o splith
+
+# split in vertical orientation
+bindsym $mod+v splitv
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# shortcut to move a workspace to a monitor to the right
+bindsym $mod+m move workspace to output right
+
+# lock the screen (was: i3lock)
+bindsym $mod+Shift+x exec swaylock -f -c 282828
+
+### Workspaces ##############################################################
+
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+### Window rules ############################################################
+
+# Program workspaces. Chrome uses app_id when run with the Wayland backend and
+# class under Xwayland, so match both.
+assign [app_id="google-chrome"] $workspace2
+assign [class="Google-chrome"] $workspace2
+
+# We want terminals to appear on specific workspaces, so we give them
+# different app_ids (wezterm --class) based on the workspace we want them on.
+assign [app_id="term-ws1"] $workspace1
+assign [app_id="term-ws3"] $workspace3
+
+# Ensure certain programs always start floating:
+for_window [class="zoom"] floating enable
+for_window [app_id="zoom"] floating enable
+# In sway no_focus is a top-level directive, not a for_window command.
+for_window [title="Microsoft Teams Notification"] floating enable
+no_focus [title="Microsoft Teams Notification"]
+for_window [class="Matplotlib"] floating enable
+for_window [class="octave-gui"] floating enable
+
+# Size certain floating windows properly
+for_window [class="Matplotlib"] resize set 1263 1138
+
+### Layout / appearance #####################################################
+
+# Disable window titlebars and borders (was the `for_window [class="^.*"]
+# border pixel 0` hack).
+default_border none
+default_floating_border none
+titlebar_border_thickness 0
+
+# Sway has gaps built in; no i3-gaps needed. Uncomment to enable.
+# gaps inner 5
+# gaps outer 0
+
+# Window Colours
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $black      $black      $lightgrey  $darkblack  $darkblue
+client.unfocused        $black      $black      $white      $darkblack  $darkblue
+client.focused_inactive $black      $black      $white      $darkblack  $darkblue
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+# client.background has no effect in sway; the wallpaper covers it instead.
+
+### Session control #########################################################
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# sway cannot restart in place, so this reloads too
+bindsym $mod+Shift+r reload
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning \
+    -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    -B 'Yes, exit sway' 'swaymsg exit'
+
+### Resize mode #############################################################
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+### Media keys ##############################################################
+
+# Pulse Audio controls. The pkill signals here are to tell i3blocks to update
+# the volume blocklet. amixer talks to pipewire-pulse; `wpctl set-volume
+# @DEFAULT_AUDIO_SINK@ 5%+` is the native alternative.
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+
+# Screen brightness controls (was: xbacklight)
+bindsym XF86MonBrightnessUp exec brightnessctl set +20%
+bindsym XF86MonBrightnessDown exec brightnessctl set 20%-
+
+### Bar ####################################################################
+
+# swaybar speaks the i3bar protocol, so the existing i3blocks config works
+# unchanged. It also has SNI tray support, which nm-applet needs.
+bar {
+        status_command i3blocks
+        position top
+        colors {
+          background $background
+          statusline $foreground
+          separator $darkgrey
+
+#                            BORDER      BACKGROUND  TEXT
+          focused_workspace  $background $background $foreground
+          active_workspace   $background $background $foreground
+          inactive_workspace $background $background $darkgrey
+          urgent_workspace   $background $background $darkred
+         }
+}
+
+### Startup #################################################################
+
+exec google-chrome-stable
+exec nm-applet --indicator
+
+# Start up terminals on multiple workspaces. --class sets the Wayland app_id
+# that the assign rules above match on. --always-new-process is required:
+# without it wezterm hands off to the already-running GUI process and the
+# --class is ignored, so every window would share the first app_id.
+exec $terminal start --always-new-process --class term-ws1
+exec $terminal start --always-new-process --class term-ws3
+# Start up a terminal and move it to the scratchpad:
+exec $terminal start --always-new-process --class term-scratchpad
+for_window [app_id="term-scratchpad"] move scratchpad
+for_window [app_id="term-scratchpad"] border pixel 1
+
+# Blank the screens after 600 seconds of inactivity (was: xset dpms 600).
+# Add `timeout 1200 'swaylock -f -c 282828'` to auto-lock as well. This is
+# `exec`, not `exec_always`, so a reload does not stack up swayidle instances.
+# Note: sway splits config lines on `;`, so a `pkill x; x ...` idiom here
+# would be parsed as two commands and fail.
+exec swayidle -w \
+    timeout 600 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f -c 282828'
+
+# Distro drop-ins: imports DISPLAY/WAYLAND_DISPLAY/SWAYSOCK into the systemd
+# user session and dbus activation environment (needed by tray apps, portals).
+include /etc/sway/config.d/*

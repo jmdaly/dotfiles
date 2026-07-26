@@ -1,0 +1,28 @@
+#!/bin/sh
+# Wayland replacement for rofi-pass: pick a pass(1) entry and copy its
+# password to the clipboard (pass uses wl-clipboard under Wayland).
+#
+# With --type as the first argument, type the password into the focused window
+# instead of copying it (requires wtype). Any remaining arguments are passed
+# through to fuzzel, which is how the sway config hands it the colour theme.
+set -eu
+
+mode=copy
+if [ "${1:-}" = "--type" ]; then
+    mode=type
+    shift
+fi
+
+store=${PASSWORD_STORE_DIR:-$HOME/.password-store}
+[ -d "$store" ] || { swaynag -m "pass-menu: no password store at $store"; exit 1; }
+
+entry=$(find "$store" -name '*.gpg' -type f \
+    | sed -e "s|^$store/||" -e 's|\.gpg$||' \
+    | sort \
+    | fuzzel --dmenu --prompt='pass: ' "$@")
+[ -n "$entry" ] || exit 0
+
+case $mode in
+    copy) pass show -c "$entry" ;;
+    type) pass show "$entry" | head -n 1 | tr -d '\n' | wtype - ;;
+esac

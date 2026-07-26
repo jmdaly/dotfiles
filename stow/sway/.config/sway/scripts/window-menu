@@ -1,0 +1,28 @@
+#!/bin/sh
+# Wayland replacement for `rofi -show window`: pick a window from all
+# workspaces and focus it. Any arguments are passed through to fuzzel, which
+# is how the sway config hands it the colour theme.
+set -eu
+
+# One line per leaf container: "<con_id>\t[workspace] app_id: title"
+list=$(swaymsg -t get_tree | jq -r '
+  [.. | objects | select(.type == "workspace")]
+  | .[]
+  | .name as $ws
+  | [recurse(.nodes[]?, .floating_nodes[]?)
+     | select((.type == "con" or .type == "floating_con")
+              and .name != null
+              and (.nodes | length) == 0
+              and (.floating_nodes | length) == 0)]
+  | .[]
+  | "\(.id)\t[\($ws)] \(.app_id // .window_properties.class // "?"): \(.name)"')
+
+[ -n "$list" ] || exit 0
+
+choice=$(printf '%s\n' "$list" | cut -f2- | fuzzel --dmenu --prompt='window: ' "$@")
+[ -n "$choice" ] || exit 0
+
+id=$(printf '%s\n' "$list" | awk -F'\t' -v c="$choice" '$2 == c { print $1; exit }')
+[ -n "$id" ] || exit 0
+
+swaymsg "[con_id=$id]" focus
