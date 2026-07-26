@@ -159,9 +159,9 @@ bindsym $mod+Shift+x exec swaylock -f -c 282828
 
 ### Workspaces ##############################################################
 
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace3 "3: "
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -271,12 +271,12 @@ bindsym $mod+r mode "resize"
 
 ### Media keys ##############################################################
 
-# Pulse Audio controls. The pkill signals here are to tell i3blocks to update
-# the volume blocklet. amixer talks to pipewire-pulse; `wpctl set-volume
-# @DEFAULT_AUDIO_SINK@ 5%+` is the native alternative.
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+# Volume, via PipeWire's own tool. waybar's wireplumber module picks up device
+# events by itself, so the old `pkill -RTMIN+10 i3blocks` refresh signal is no
+# longer needed. -l 1.5 caps boosting at 150%, matching waybar's max-volume.
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
 # Screen brightness controls (was: xbacklight)
 bindsym XF86MonBrightnessUp exec brightnessctl set +20%
@@ -284,22 +284,15 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 20%-
 
 ### Bar ####################################################################
 
-# swaybar speaks the i3bar protocol, so the existing i3blocks config works
-# unchanged. It also has SNI tray support, which nm-applet needs.
+# waybar replaces swaybar + i3blocks entirely: it draws its own bar, and CPU /
+# memory / network / battery / volume / tray are built-in modules rather than
+# blocklet scripts. Configured in ~/.config/waybar/{config.jsonc,style.css}.
+#
+# Launching it via swaybar_command means sway owns the process, so `swaymsg
+# reload` restarts the bar too. The distro's waybar.service is disabled to
+# avoid a second bar starting from systemd.
 bar {
-        status_command i3blocks
-        position top
-        colors {
-          background $background
-          statusline $foreground
-          separator $darkgrey
-
-#                            BORDER      BACKGROUND  TEXT
-          focused_workspace  $background $background $foreground
-          active_workspace   $background $background $foreground
-          inactive_workspace $background $background $darkgrey
-          urgent_workspace   $background $background $darkred
-         }
+        swaybar_command waybar
 }
 
 ### Startup #################################################################

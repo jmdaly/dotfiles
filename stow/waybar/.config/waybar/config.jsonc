@@ -1,0 +1,104 @@
+// waybar — replaces swaybar + i3blocks.
+//
+// Module order mirrors the old i3blocks bar: weather, volume, memory, network,
+// cpu, battery, tray, clock. Everything except the weather block is now a
+// built-in waybar module, so there are no external blocklet scripts to install.
+//
+// Reference: man 5 waybar, man 5 waybar-<module>
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 0,
+    "reload_style_on_change": true,
+
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": [],
+    "modules-right": [
+        "custom/weather",
+        "wireplumber",
+        "memory",
+        "network",
+        "cpu",
+        "battery",
+        "tray",
+        "clock"
+    ],
+
+    // Workspace names already contain their Nerd Font icons (set in the sway
+    // config), so {value} — the raw name as sway defines it — reproduces the
+    // old look exactly. Note {name} is NOT the full name: it strips the
+    // leading "N:" prefix, which drops the workspace numbers.
+    "sway/workspaces": {
+        "format": "{value}",
+        "disable-scroll": false,
+        "all-outputs": false
+    },
+
+    // Shows "resize" while $mod+r resize mode is active.
+    "sway/mode": {
+        "format": "<span style=\"italic\"> {} </span>"
+    },
+
+    // The one carry-over from i3blocks: ~/dotfiles/status-blocks/weather.
+    // It prints text on line 1 and tooltip on line 2, which is exactly
+    // waybar's plain-text custom module contract.
+    "custom/weather": {
+        "exec": "$HOME/dotfiles/status-blocks/weather",
+        "interval": 60,
+        "tooltip": true
+    },
+
+    // PipeWire volume via WirePlumber. Updates on device events, so no manual
+    // refresh signal is needed the way i3blocks required pkill -RTMIN+10.
+    "wireplumber": {
+        "format": " {volume}%",
+        "format-muted": " muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "max-volume": 150,
+        "tooltip-format": "{node_name}"
+    },
+
+    "memory": {
+        "format": " {percentage}%",
+        "interval": 30,
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G used"
+    },
+
+    "network": {
+        "format-ethernet": " {ifname}",
+        "format-wifi": " {essid} {signalStrength}%",
+        "format-linked": " {ifname} (no IP)",
+        "format-disconnected": " down",
+        "interval": 10,
+        "tooltip-format": "{ipaddr}/{cidr} via {gwaddr}"
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 10
+    },
+
+    // Hidden automatically on machines with no battery (e.g. this VM).
+    "battery": {
+        "format": " {capacity}%",
+        "format-charging": " {capacity}%+",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 30
+    },
+
+    // StatusNotifierItem tray — this is where nm-applet lives.
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": " {:%a %b %d %T}",
+        "interval": 1,
+        "tooltip-format": "<tt>{calendar}</tt>"
+    }
+}

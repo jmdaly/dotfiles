@@ -1,0 +1,96 @@
+/* waybar — gruvbox dark, matching the colours the old swaybar/i3bar used.
+ *
+ * background #282828   statusline #ebdbb2   separator #928374
+ * inactive   #928374   urgent     #cc241d   accent    #458588
+ */
+
+* {
+    /* Hack Nerd Font is the only installed font covering the Font Awesome
+     * codepoints used by the workspace names and module icons. */
+    font-family: "Hack Nerd Font", "Noto Color Emoji";
+    font-size: 13px;
+    /* Kill GTK's default min-height so the bar honours `height` above. */
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: #282828;
+    color: #ebdbb2;
+}
+
+/* ---- workspaces ------------------------------------------------------- */
+
+#workspaces button {
+    padding: 0 10px;
+    background-color: transparent;
+    color: #928374;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.visible,
+#workspaces button.focused {
+    color: #ebdbb2;
+    border-bottom: 2px solid #458588;
+}
+
+#workspaces button.urgent {
+    color: #cc241d;
+}
+
+/* Suppress GTK's hover highlight, which looks out of place on a flat bar. */
+#workspaces button:hover {
+    background-color: #3c3836;
+    color: #ebdbb2;
+}
+
+#mode {
+    color: #fabd2f;
+    padding: 0 10px;
+}
+
+/* ---- right-hand modules ---------------------------------------------- */
+
+#custom-weather,
+#wireplumber,
+#memory,
+#network,
+#cpu,
+#battery,
+#clock {
+    padding: 0 12px;
+    /* Stands in for the "|" separator blocks the i3blocks config used. */
+    border-left: 1px solid #3c3836;
+}
+
+#clock {
+    padding-right: 14px;
+}
+
+#tray {
+    padding: 0 8px;
+    border-left: 1px solid #3c3836;
+}
+
+#tray > .needs-attention {
+    background-color: #cc241d;
+}
+
+/* ---- states ---------------------------------------------------------- */
+
+#battery.warning {
+    color: #fabd2f;
+}
+
+#battery.critical {
+    color: #fb4934;
+}
+
+#network.disconnected {
+    color: #fb4934;
+}
+
+#wireplumber.muted {
+    color: #928374;
+}
