@@ -23,7 +23,9 @@ require("lazy").setup({
   'tpope/vim-surround', -- Plugin for working with surroundings of words:
   'RRethy/vim-illuminate', -- Plugin to highlight the word under the cursor
   'mrtazz/DoxygenToolkit.vim', -- Plug to generate doxygen documentation strings:
-  'sindrets/diffview.nvim', -- A git diff viewer for neovim
+  -- A git diff viewer for neovim. This is the maintained fork of
+  -- sindrets/diffview.nvim; same `diffview` module and same :Diffview* commands.
+  { 'dlyongemallo/diffview-plus.nvim', version = '*' },
 
   { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
 
