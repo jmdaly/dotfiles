@@ -1,4 +1,5 @@
 [tools]
+go = "latest"
 uv = "latest"
 usage = "latest"
 

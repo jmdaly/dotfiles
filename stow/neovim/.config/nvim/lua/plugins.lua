@@ -27,6 +27,23 @@ require("lazy").setup({
   -- sindrets/diffview.nvim; same `diffview` module and same :Diffview* commands.
   { 'dlyongemallo/diffview-plus.nvim', version = '*' },
 
+  -- Review and comment on GitLab merge requests from inside neovim
+  {
+    'harrisoncramer/gitlab.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'dlyongemallo/diffview-plus.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    -- The plugin is a thin wrapper around a Go server it compiles itself, so
+    -- it is useless (and warns on every startup) without a Go toolchain.
+    -- Skip loading it entirely on machines that haven't got one.
+    cond = function() return vim.fn.executable('go') == 1 end,
+    build = function() require('gitlab.server').build(true) end,
+    config = function() require('gitlab').setup() end,
+  },
+
   { "junegunn/fzf", build = "./install --all" }, -- The fuzzy searcher
 
   {
