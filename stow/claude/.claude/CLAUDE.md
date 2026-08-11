@@ -114,3 +114,17 @@ language's doc-comment convention (Rustdoc, JSDoc, docstrings, etc.).
   cross-references where appropriate.
 - Private items: at least a brief summary of what it is for and why it exists.
 - Module-level docs describe the module's purpose and key types.
+
+## Outward-facing prose
+
+Load the `orwell-writing` skill before writing any Jira description or comment,
+MR/PR description, Slack message, or Confluence page — including when the writing
+is incidental to a coding task and I never asked for prose.
+
+Keep these short: **Jira and MR descriptions are ~10 lines** — the problem, the
+fix, acceptance criteria. Cut blame archaeology, "why it matters" essays, and
+design-alternative weighing; one sentence suffices when a decision genuinely needs
+recording. Keep reproduction steps, acceptance criteria, and cross-links.
+
+This does **not** apply to doc comments, which stay thorough per the section
+above.
