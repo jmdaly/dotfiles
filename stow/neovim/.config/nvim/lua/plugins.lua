@@ -61,18 +61,23 @@ require("lazy").setup({
 
   -- Motion that takes two characters and jumps to occurences
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
+    url = "https://codeberg.org/andyg/leap.nvim",
+    dependencies = { "tpope/vim-repeat" }, -- dot-repeat for leap operations
+    -- Leap lazy-loads itself; lazy.nvim's `keys` feature is documented to
+    -- cause problems with it, so load eagerly and map in `config`.
+    lazy = false,
+    config = function()
+      -- Jump
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+
+      -- Visit (remote operations)
+      vim.keymap.set({ "n", "o" }, "gs", "<Plug>(leap-visit)")
+      vim.keymap.set({ "n", "o" }, "gS", "<Plug>(leap-visit-linewise)")
+      vim.keymap.set({ "x", "o" }, "ar", "<Plug>(leap-visit-text-object)")
+      vim.keymap.set({ "x", "o" }, "ir", "<Plug>(leap-visit-inner-text-object)")
+      vim.keymap.set("o", "rr", "<Plug>(leap-visit-line)")
+    end,
   },
 
   {
