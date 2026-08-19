@@ -3,6 +3,21 @@
 These are my default working expectations across all projects. A repo's own
 `CLAUDE.md` overrides anything here.
 
+## Dev containers and host commands
+
+Repos with `.devcontainer/devcontainer.json` have a PreToolUse hook that blocks
+Bash on the host. Run all project work - builds, tests, tooling, `jj` - in the
+container via `devcontainer_exec`.
+
+The hook allowlists `git` and `gh` on the host; everything else is denied, and
+the deny message does not mention the escape hatch:
+
+- When I have explicitly asked for a host command (`glab`, an interactive
+  login), re-run it with `USER_CONFIRMED_HOST_OPERATION=1` prefixed. That
+  string anywhere in the command bypasses the hook.
+- Never use the bypass on your own initiative - ask me first.
+- Never use it to move builds, tests, or installs onto the host.
+
 ## Version control — Jujutsu (jj)
 
 I use **Jujutsu (`jj`)** for version control across all my repos. Always read
