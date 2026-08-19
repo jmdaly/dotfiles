@@ -5,6 +5,10 @@ These are my default working expectations across all projects. A repo's own
 
 ## Dev containers and host commands
 
+**Only applies when the `devcontainer_exec` tool is available.** If it is not,
+you are already running inside the container: use Bash directly, and ignore the
+rest of this section.
+
 Repos with `.devcontainer/devcontainer.json` have a PreToolUse hook that blocks
 Bash on the host. Run all project work - builds, tests, tooling, `jj` - in the
 container via `devcontainer_exec`.
