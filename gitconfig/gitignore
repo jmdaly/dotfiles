@@ -27,6 +27,8 @@ AGENTS.md
 GEMINI.md
 vendor
 specs
+.vale/
+.vale.ini
 
 # Beads / Dolt files (added by bd init)
 .dolt/
