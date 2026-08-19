@@ -129,6 +129,9 @@ language's doc-comment convention (Rustdoc, JSDoc, docstrings, etc.).
   cross-references where appropriate.
 - Private items: at least a brief summary of what it is for and why it exists.
 - Module-level docs describe the module's purpose and key types.
+- Complete *and* concise: cover every item, and say each thing once. A one-line
+  summary plus a short paragraph of rationale beats three restatements of it.
+  Document what the code does now, not what a planned change will make it do.
 
 ## Outward-facing prose
 
@@ -141,5 +144,7 @@ fix, acceptance criteria. Cut blame archaeology, "why it matters" essays, and
 design-alternative weighing; one sentence suffices when a decision genuinely needs
 recording. Keep reproduction steps, acceptance criteria, and cross-links.
 
-This does **not** apply to doc comments, which stay thorough per the section
-above.
+The ~10-line limit does **not** apply to doc comments — but the plain-English
+discipline does. *Thorough* above means every item is covered, not that comments
+run long. Apply the cut-what-adds-nothing rule from memory; loading the skill
+before each doc comment is not worth the interruption.
