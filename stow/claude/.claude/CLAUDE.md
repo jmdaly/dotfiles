@@ -117,6 +117,14 @@ review of the diff before considering it complete — it surfaces bugs, security
 issues, and correctness problems rather than style. Exercise judgment on each
 finding and address what matters before presenting the changeset.
 
+## Repo agent docs
+
+Some repos carry private notes for agents in `docs/agents/`. Read them before you
+explore the codebase. `issue-tracker.md` says where issues live and how to write
+one. `domain.md` says where the glossary and the ADRs are. These files are
+gitignored, so they are often absent. If they are absent, proceed silently and do
+not offer to create them.
+
 ## Plan validation
 
 For any non-trivial task (multiple files, architectural decisions, unfamiliar
@@ -139,12 +147,14 @@ language's doc-comment convention (Rustdoc, JSDoc, docstrings, etc.).
 
 ## Outward-facing prose
 
-Load the `orwell-writing` skill before writing any Jira description or comment,
-MR/PR description, Slack message, or Confluence page — including when the writing
-is incidental to a coding task and I never asked for prose.
+Load the `simple-english:simple-english` skill before writing any Jira
+description or comment, MR/PR description, Slack message, or Confluence page —
+including when the writing is incidental to a coding task and I never asked for
+prose.
 
 Keep these short: **Jira and MR descriptions are ~10 lines** — the problem, the
-fix, acceptance criteria. Cut blame archaeology, "why it matters" essays, and
+fix, acceptance criteria. A longer description already in the repo is not a
+licence to match it. Cut blame archaeology, "why it matters" essays, and
 design-alternative weighing; one sentence suffices when a decision genuinely needs
 recording. Keep reproduction steps, acceptance criteria, and cross-links.
 
