@@ -25,6 +25,7 @@ test.json
 .github
 AGENTS.md
 GEMINI.md
+/docs/agents/
 vendor
 specs
 .vale/
