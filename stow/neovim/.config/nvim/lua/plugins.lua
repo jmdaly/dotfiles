@@ -88,9 +88,6 @@ require("lazy").setup({
         enabled = false,
       },
       
-      -- 2. Route all context prompts and search menus through fzf-lua
-      picker = "fzf-lua",
-      
       cli = {
         -- 3. File Watcher: Highly recommended for pair programming!
         -- When Claude Code edits a file in the terminal pane, Neovim 
@@ -104,17 +101,33 @@ require("lazy").setup({
             width = 0,    -- Exact column width for sidepane layout
             height = 0,    -- Set to 0 to use fallback default height
           },
+          -- sidekick paints the terminal with SidekickChat (gruvbox bg1, #3c3836).
+          -- CLI themes assume the real terminal background, so use Normal instead.
+          wo = { winhighlight = "" },
         },
         
-        -- If you want to customize the raw command Claude runs, you can tweak it here:
+        -- Route prompt/tool pickers through fzf-lua (must live under `cli`)
+        picker = "fzf-lua",
+
         tools = {
           claude = {}, -- Uses default system 'claude' command natively
+          -- oh-my-pi: not shipped with sidekick, so the full tool config lives here.
+          omp = {
+            cmd = { "omp" },
+            is_proc = "\\<omp\\>",
+            url = "https://github.com/can1357/oh-my-pi",
+            resume = { "--resume" },
+            continue = { "--continue" },
+            -- omp repaints its own transcript; let sidekick own the scrollback.
+            native_scroll = false,
+          },
         },
       },
     },
     keys = {
       -- Toggles the active Claude Code instance inside your right split pane
       { "<leader>ac", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Claude Code" },
+      { "<leader>ao", function() require("sidekick.cli").toggle({ name = "omp", focus = true }) end, desc = "Sidekick omp (oh-my-pi)" },
       
       -- Pick a specific context prompt (e.g., /explain, /fix, /tests) to send to Claude
       { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Prompt Menu" },
