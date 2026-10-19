@@ -1,0 +1,73 @@
+modelRoles:
+  web: anthropic/claude-opus-5-5
+  smol: anthropic/claude-opus-5-5:high
+  slow: anthropic/claude-opus-5-5:xhigh
+  tiny: anthropic/claude-sonnet-5
+  default: anthropic/claude-opus-5-5:high
+symbolPreset: nerd
+composer:
+  shape: claude
+theme:
+  dark: dark-gruvbox
+  light: dark-gruvbox
+setupVersion: 2
+astGrep:
+  enabled: true
+commands:
+  enableClaudeUser: true
+enabledProviders:
+  - claude
+statusLine:
+  segmentOptions: {}
+  preset: custom
+  leftSegments:
+    - vim
+    - model
+    - mode
+    - path
+    - git
+    - pr
+  rightSegments:
+    - session_name
+    - token_total
+    - cost
+    - context_pct
+    - usage
+    - status
+  showHookStatus: false
+memory:
+  backend: mnemopi
+display:
+  hideToolActivity: false
+retry:
+  fallbackChains:
+    web:
+      - web/perplexity
+      - google/gemini-2.5-flash
+      - openai-codex/gpt-5.6-luna
+      - xai/grok-4.5
+      - web/zai
+      - web/exa
+      - web/tinyfish
+      - web/jina
+      - web/kagi
+      - web/tavily
+      - web/firecrawl
+      - web/brave
+      - web/kimi
+      - web/parallel
+      - web/synthetic
+      - web/searxng
+      - web/startpage
+      - web/duckduckgo
+      - web/ecosia
+      - web/google
+      - web/mojeek
+      - web/public
+      - google-antigravity/gemini-2.5-flash
+      - openai-codex/gpt-5.6
+      - openai-codex/gpt-5.5
+      - xai-oauth/grok-4.5
+      - web/ollama
+dev:
+  autoqaConsent: granted

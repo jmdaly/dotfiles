@@ -19,6 +19,9 @@ config.color_scheme = 'Gruvbox dark, soft (base16)'
 config.font = wezterm.font 'Maple Mono'
 config.font_size = 13.0
 
+-- omp draws inline images with the Kitty graphics protocol.
+config.enable_kitty_graphics = true
+
 -- Wezterm was grabbing CTRL-+ and CTRL-- for font size changes, but I
 -- use those in tmux, so I'm disabling them here.
 config.keys = {

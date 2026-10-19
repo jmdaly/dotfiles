@@ -1,0 +1,10 @@
+{
+  "adapters": {
+    "gdb-devcontainer": {
+      "command": "sh",
+      "args": ["-c", "exec \"$HOME/.omp/agent/devcontainer-gdb-dap.sh\""],
+      "languages": ["rust", "c", "cpp"],
+      "launchDefaults": { "stopAtBeginningOfMainSubprogram": true }
+    }
+  }
+}

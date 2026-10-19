@@ -22,6 +22,10 @@ if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Pre-create omp's agent dir so stow links single files instead of
+# folding ~/.omp into the repo (omp keeps sessions and DBs there):
+mkdir -p ~/.omp/agent/extensions
+
 # Set up all of the configs:
 cd ${base}/stow
 
